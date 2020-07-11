@@ -1,7 +1,8 @@
 on:
-    push:
+    pull_request:
         branches:
             - ja
+        types: [closed]
 
 name: CD
 
@@ -11,7 +12,7 @@ jobs:
 
         runs-on: ubuntu-latest
 
-        if: "!contains(github.event.head_commit.message, 'auto rebuilding site')"
+        if: "!contains(github.event.head_commit.message, 'auto rebuilding site') && github.event.pull_request.merged == true"
 
         steps:
             -   name: "Checkout"
