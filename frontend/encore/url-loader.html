@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Inlining files in CSS with Webpack URL Loader &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Asset Versioning" href="versioning.html" />
+    <link rel="prev" title="Enabling TypeScript (ts-loader)" href="typescript.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../forms.html">Forms</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../frontend.html">Managing CSS and JavaScript</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../frontend.html#webpack-encore">Webpack Encore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../frontend.html#encore-documentation">Encore Documentation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../frontend.html#other-front-end-articles">Other Front-End Articles</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../assetic/index.html">Assetic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html">Installing Encore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simple-example.html">Encore: Setting up your Project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced-config.html">Advanced Webpack Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="babel.html">Configuring Babel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootstrap.html">Using Bootstrap CSS &amp; JS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cdn.html">Using a CDN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code-splitting.html">Async Code Splitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="copy-files.html">Copying &amp; Referencing Images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="css-preprocessors.html">CSS Preprocessors: Sass, LESS, Stylus, etc.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom-loaders-plugins.html">Adding Custom Loaders &amp; Plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dev-server.html">Using webpack-dev-server and HMR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq.html">FAQ and Common Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="legacy-applications.html">jQuery Plugins and Legacy Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="page-specific-assets.html">Creating Page-Specific CSS/JS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="postcss.html">PostCSS and autoprefixing (postcss-loader)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactjs.html">Enabling React.js</a></li>
+<li class="toctree-l3"><a class="reference internal" href="server-data.html">Passing Information from Twig to JavaScript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shared-entry.html">Creating a Shared Commons Entry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sourcemaps.html">Enabling Source Maps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="split-chunks.html">Preventing Duplication by “Splitting” Shared Code into Separate Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="typescript.html">Enabling TypeScript (ts-loader)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Inlining files in CSS with Webpack URL Loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="versioning.html">Asset Versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtual-machine.html">Using Encore in a Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vuejs.html">Enabling Vue.js (<code class="docutils literal notranslate"><span class="pre">vue-loader</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../custom_version_strategy.html">How to Use a Custom Version Strategy for Assets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../frontend.html">Managing CSS and JavaScript</a> &raquo;</li>
+        
+      <li>Inlining files in CSS with Webpack URL Loader</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/frontend/encore/url-loader.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="inlining-files-in-css-with-webpack-url-loader">
+<h1>Inlining files in CSS with Webpack URL Loader<a class="headerlink" href="#inlining-files-in-css-with-webpack-url-loader" title="Permalink to this headline">¶</a></h1>
+<p>A simple technique to improve the performance of web applications is to reduce
+the number of HTTP requests inlining small files as base64 encoded URLs in the
+generated CSS files.</p>
+<p>Webpack Encore provides this feature via Webpack’s <a class="reference external" href="https://github.com/webpack-contrib/url-loader">URL Loader</a> plugin, but
+it’s disabled by default. First, add the URL loader to your project:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> yarn add url-loader --dev
+</pre></div>
+</td></tr></table></div>
+<p>Then enable it in your <code class="docutils literal notranslate"><span class="pre">webpack.config.js</span></code>:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// webpack.config.js</span>
+<span class="c1">// ...</span>
+
+<span class="nx">Encore</span>
+    <span class="c1">// ...</span>
+    <span class="p">.</span><span class="nx">configureUrlLoader</span><span class="p">({</span>
+        <span class="nx">fonts</span><span class="o">:</span> <span class="p">{</span> <span class="nx">limit</span><span class="o">:</span> <span class="mi">4096</span> <span class="p">},</span>
+        <span class="nx">images</span><span class="o">:</span> <span class="p">{</span> <span class="nx">limit</span><span class="o">:</span> <span class="mi">4096</span> <span class="p">}</span>
+    <span class="p">})</span>
+<span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+<p>The <code class="docutils literal notranslate"><span class="pre">limit</span></code> option defines the maximum size in bytes of the inlined files. In
+the previous example, font and image files having a size below or equal to 4 KB
+will be inlined and the rest of files will be processed as usual.</p>
+<p>You can also use all the other options supported by the <a class="reference external" href="https://github.com/webpack-contrib/url-loader">URL Loader</a>. If you
+want to disable this loader for either images or fonts, remove the corresponding
+key from the object that is passed to the <code class="docutils literal notranslate"><span class="pre">configureUrlLoader()</span></code> method:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// webpack.config.js</span>
+<span class="c1">// ...</span>
+
+<span class="nx">Encore</span>
+    <span class="c1">// ...</span>
+    <span class="p">.</span><span class="nx">configureUrlLoader</span><span class="p">({</span>
+        <span class="c1">// &#39;fonts&#39; is not defined, so only images will be inlined</span>
+        <span class="nx">images</span><span class="o">:</span> <span class="p">{</span> <span class="nx">limit</span><span class="o">:</span> <span class="mi">4096</span> <span class="p">}</span>
+    <span class="p">})</span>
+<span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

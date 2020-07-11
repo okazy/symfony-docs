@@ -1,0 +1,820 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuring a Web Server &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Upgrading a Third-Party Bundle for a Major Symfony Version" href="bundles.html" />
+    <link rel="prev" title="Using Symfony with Homestead/Vagrant" href="homestead.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#technical-requirements">Technical Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#creating-symfony-applications">Creating Symfony Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#running-symfony-applications">Running Symfony Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#setting-up-an-existing-symfony-project">Setting up an Existing Symfony Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#installing-packages">Installing Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#checking-security-vulnerabilities">Checking Security Vulnerabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#symfony-lts-versions">Symfony LTS Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#the-symfony-demo-application">The Symfony Demo application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#start-coding">Start Coding!</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../setup.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../page_creation.html">Create your First Page in Symfony</a></li>
+<li class="toctree-l3"><a class="reference internal" href="homestead.html">Using Symfony with Homestead/Vagrant</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Configuring a Web Server</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#adding-rewrite-rules">Adding Rewrite Rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apache-with-mod-php-php-cgi">Apache with mod_php/PHP-CGI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apache-with-php-fpm">Apache with PHP-FPM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nginx">Nginx</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bundles.html">Upgrading a Third-Party Bundle for a Major Symfony Version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_permissions.html">Setting up or Fixing File Permissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flex.html">Upgrading Existing Applications to Symfony Flex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="symfony_server.html">Symfony Local Web Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unstable_versions.html">How to Install or Upgrade to the Latest, Unreleased Symfony Version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrade_major.html">Upgrading a Major Version (e.g. 4.4.0 to 5.0.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrade_minor.html">Upgrading a Minor Version (e.g. 4.0.0 to 4.1.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrade_patch.html">Upgrading a Patch Version (e.g. 5.0.0 to 5.0.1)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../getting_started/index.html">Getting Started</a> &raquo;</li>
+        
+          <li><a href="../setup.html">Installing &amp; Setting up the Symfony Framework</a> &raquo;</li>
+        
+      <li>Configuring a Web Server</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/setup/web_server_configuration.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuring-a-web-server">
+<span id="index-0"></span><h1>Configuring a Web Server<a class="headerlink" href="#configuring-a-web-server" title="Permalink to this headline">¶</a></h1>
+<p>The preferred way to develop your Symfony application is to use
+<a class="reference internal" href="symfony_server.html"><span class="doc">Symfony Local Web Server</span></a>.</p>
+<p>However, when running the application in the production environment, you’ll need
+to use a fully-featured web server. This article describes several ways to use
+Symfony with Apache or Nginx.</p>
+<p>When using Apache, you can configure PHP as an
+<a class="reference internal" href="#web-server-apache-mod-php"><span class="std std-ref">Apache module</span></a> or with FastCGI using
+<a class="reference internal" href="#web-server-apache-fpm"><span class="std std-ref">PHP FPM</span></a>. FastCGI also is the preferred way
+to use PHP <a class="reference internal" href="#web-server-nginx"><span class="std std-ref">with Nginx</span></a>.</p>
+<div class="sidebar">
+<p class="first sidebar-title">The public directory</p>
+<p>The public directory is the home of all of your application’s public and
+static files, including images, stylesheets and JavaScript files. It is
+also where the front controller (<code class="docutils literal notranslate"><span class="pre">index.php</span></code>) lives.</p>
+<p>The public directory serves as the document root when configuring your
+web server. In the examples below, the <code class="docutils literal notranslate"><span class="pre">public/</span></code> directory will be the
+document root. This directory is <code class="docutils literal notranslate"><span class="pre">/var/www/project/public/</span></code>.</p>
+<p class="last">If your hosting provider requires you to change the <code class="docutils literal notranslate"><span class="pre">public/</span></code> directory to
+another location (e.g. <code class="docutils literal notranslate"><span class="pre">public_html/</span></code>) make sure you
+<a class="reference internal" href="../configuration/override_dir_structure.html#override-web-dir"><span class="std std-ref">override the location of the public/ directory</span></a>.</p>
+</div>
+<div class="section" id="adding-rewrite-rules">
+<span id="web-server-apache-mod-php"></span><h2>Adding Rewrite Rules<a class="headerlink" href="#adding-rewrite-rules" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way is to install the <code class="docutils literal notranslate"><span class="pre">apache</span></code> <a class="reference internal" href="../setup.html#symfony-packs"><span class="std std-ref">Symfony pack</span></a>
+by executing the following command:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/apache-pack
+</pre></div>
+</td></tr></table></div>
+<p>This pack installs a <code class="docutils literal notranslate"><span class="pre">.htaccess</span></code> file in the <code class="docutils literal notranslate"><span class="pre">public/</span></code> directory that contains
+the rewrite rules needed to serve the Symfony application.</p>
+<p>In production servers, you should move the <code class="docutils literal notranslate"><span class="pre">.htaccess</span></code> rules into the main
+Apache configuration file to improve performance. To do so, copy the
+<code class="docutils literal notranslate"><span class="pre">.htaccess</span></code> contents inside the <code class="docutils literal notranslate"><span class="pre">&lt;Directory&gt;</span></code> configuration associated to
+the Symfony application <code class="docutils literal notranslate"><span class="pre">public/</span></code> directory (and replace <code class="docutils literal notranslate"><span class="pre">AllowOverride</span> <span class="pre">All</span></code>
+by <code class="docutils literal notranslate"><span class="pre">AllowOverride</span> <span class="pre">None</span></code>):</p>
+<div class="highlight-apache notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nt">&lt;VirtualHost</span> <span class="s">*:80</span><span class="nt">&gt;</span>
+    <span class="c"># ...</span>
+    <span class="nb">DocumentRoot</span> <span class="sx">/var/www/project/public</span>
+
+    <span class="nt">&lt;Directory</span> <span class="s">/var/www/project/public</span><span class="nt">&gt;</span>
+        <span class="nb">AllowOverride</span> <span class="k">None</span>
+
+        <span class="c"># Copy .htaccess contents here</span>
+    <span class="nt">&lt;/Directory&gt;</span>
+<span class="nt">&lt;/VirtualHost&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="apache-with-mod-php-php-cgi">
+<h2>Apache with mod_php/PHP-CGI<a class="headerlink" href="#apache-with-mod-php-php-cgi" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>minimum configuration</strong> to get your application running under Apache is:</p>
+<div class="highlight-apache notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nt">&lt;VirtualHost</span> <span class="s">*:80</span><span class="nt">&gt;</span>
+    <span class="nb">ServerName</span> domain.tld
+    <span class="nb">ServerAlias</span> www.domain.tld
+
+    <span class="nb">DocumentRoot</span> <span class="sx">/var/www/project/public</span>
+    <span class="nt">&lt;Directory</span> <span class="s">/var/www/project/public</span><span class="nt">&gt;</span>
+        <span class="nb">AllowOverride</span> <span class="k">All</span>
+        <span class="nb">Order</span> Allow,Deny
+        <span class="nb">Allow</span> from <span class="k">All</span>
+    <span class="nt">&lt;/Directory&gt;</span>
+
+    <span class="c"># uncomment the following lines if you install assets as symlinks</span>
+    <span class="c"># or run into problems when compiling LESS/Sass/CoffeeScript assets</span>
+    <span class="c"># &lt;Directory /var/www/project&gt;</span>
+    <span class="c">#     Options FollowSymlinks</span>
+    <span class="c"># &lt;/Directory&gt;</span>
+
+    <span class="nb">ErrorLog</span> <span class="sx">/var/log/apache2/project_error.log</span>
+    <span class="nb">CustomLog</span> <span class="sx">/var/log/apache2/project_access.log</span> combined
+<span class="nt">&lt;/VirtualHost&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If your system supports the <code class="docutils literal notranslate"><span class="pre">APACHE_LOG_DIR</span></code> variable, you may want
+to use <code class="docutils literal notranslate"><span class="pre">${APACHE_LOG_DIR}/</span></code> instead of hardcoding <code class="docutils literal notranslate"><span class="pre">/var/log/apache2/</span></code>.</p>
+</div>
+<p>Use the following <strong>optimized configuration</strong> to disable <code class="docutils literal notranslate"><span class="pre">.htaccess</span></code> support
+and increase web server performance:</p>
+<div class="highlight-apache notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nt">&lt;VirtualHost</span> <span class="s">*:80</span><span class="nt">&gt;</span>
+    <span class="nb">ServerName</span> domain.tld
+    <span class="nb">ServerAlias</span> www.domain.tld
+
+    <span class="nb">DocumentRoot</span> <span class="sx">/var/www/project/public</span>
+    <span class="nb">DirectoryIndex</span> <span class="sx">/index.php</span>
+
+    <span class="nt">&lt;Directory</span> <span class="s">/var/www/project/public</span><span class="nt">&gt;</span>
+        <span class="nb">AllowOverride</span> <span class="k">None</span>
+        <span class="nb">Order</span> Allow,Deny
+        <span class="nb">Allow</span> from <span class="k">All</span>
+
+        <span class="nb">FallbackResource</span> <span class="sx">/index.php</span>
+    <span class="nt">&lt;/Directory&gt;</span>
+
+    <span class="c"># uncomment the following lines if you install assets as symlinks</span>
+    <span class="c"># or run into problems when compiling LESS/Sass/CoffeeScript assets</span>
+    <span class="c"># &lt;Directory /var/www/project&gt;</span>
+    <span class="c">#     Options FollowSymlinks</span>
+    <span class="c"># &lt;/Directory&gt;</span>
+
+    <span class="c"># optionally disable the fallback resource for the asset directories</span>
+    <span class="c"># which will allow Apache to return a 404 error when files are</span>
+    <span class="c"># not found instead of passing the request to Symfony</span>
+    <span class="nt">&lt;Directory</span> <span class="s">/var/www/project/public/bundles</span><span class="nt">&gt;</span>
+        <span class="nb">FallbackResource</span> disabled
+    <span class="nt">&lt;/Directory&gt;</span>
+    <span class="nb">ErrorLog</span> <span class="sx">/var/log/apache2/project_error.log</span>
+    <span class="nb">CustomLog</span> <span class="sx">/var/log/apache2/project_access.log</span> combined
+
+    <span class="c"># optionally set the value of the environment variables used in the application</span>
+    <span class="c">#SetEnv APP_ENV prod</span>
+    <span class="c">#SetEnv APP_SECRET &lt;app-secret-id&gt;</span>
+    <span class="c">#SetEnv DATABASE_URL &quot;mysql://db_user:db_pass@host:3306/db_name&quot;</span>
+<span class="nt">&lt;/VirtualHost&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Use <code class="docutils literal notranslate"><span class="pre">FallbackResource</span></code> on Apache 2.4.25 or higher, due to a bug which was
+fixed on that release causing the root <code class="docutils literal notranslate"><span class="pre">/</span></code> to hang.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>If you are using <strong>php-cgi</strong>, Apache does not pass HTTP basic username and
+password to PHP by default. To work around this limitation, you should use
+the following configuration snippet:</p>
+<div class="last highlight-apache notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">RewriteRule</span> .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="using-mod-php-php-cgi-with-apache-2-4">
+<h3>Using mod_php/PHP-CGI with Apache 2.4<a class="headerlink" href="#using-mod-php-php-cgi-with-apache-2-4" title="Permalink to this headline">¶</a></h3>
+<p>In Apache 2.4, <code class="docutils literal notranslate"><span class="pre">Order</span> <span class="pre">Allow,Deny</span></code> has been replaced by <code class="docutils literal notranslate"><span class="pre">Require</span> <span class="pre">all</span> <span class="pre">granted</span></code>.
+Hence, you need to modify your <code class="docutils literal notranslate"><span class="pre">Directory</span></code> permission settings as follows:</p>
+<div class="highlight-apache notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nt">&lt;Directory</span> <span class="s">/var/www/project/public</span><span class="nt">&gt;</span>
+    <span class="nb">Require</span> <span class="k">all</span> granted
+    <span class="c"># ...</span>
+<span class="nt">&lt;/Directory&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>For advanced Apache configuration options, read the official <a class="reference external" href="https://httpd.apache.org/docs/">Apache documentation</a>.</p>
+</div>
+</div>
+<div class="section" id="apache-with-php-fpm">
+<span id="web-server-apache-fpm"></span><h2>Apache with PHP-FPM<a class="headerlink" href="#apache-with-php-fpm" title="Permalink to this headline">¶</a></h2>
+<p>To make use of PHP-FPM with Apache, you first have to ensure that you have
+the FastCGI process manager <code class="docutils literal notranslate"><span class="pre">php-fpm</span></code> binary and Apache’s FastCGI module
+installed (for example, on a Debian based system you have to install the
+<code class="docutils literal notranslate"><span class="pre">libapache2-mod-fastcgi</span></code> and <code class="docutils literal notranslate"><span class="pre">php7.1-fpm</span></code> packages).</p>
+<p>PHP-FPM uses so-called <em>pools</em> to handle incoming FastCGI requests. You can
+configure an arbitrary number of pools in the FPM configuration. In a pool
+you configure either a TCP socket (IP and port) or a Unix domain socket to
+listen on. Each pool can also be run under a different UID and GID:</p>
+<div class="highlight-ini notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">; a pool called www</span>
+<span class="k">[www]</span>
+<span class="na">user</span> <span class="o">=</span> <span class="s">www-data</span>
+<span class="na">group</span> <span class="o">=</span> <span class="s">www-data</span>
+
+<span class="c1">; use a unix domain socket</span>
+<span class="na">listen</span> <span class="o">=</span> <span class="s">/var/run/php/php7.1-fpm.sock</span>
+
+<span class="c1">; or listen on a TCP socket</span>
+<span class="na">listen</span> <span class="o">=</span> <span class="s">127.0.0.1:9000</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="using-mod-proxy-fcgi-with-apache-2-4">
+<h3>Using mod_proxy_fcgi with Apache 2.4<a class="headerlink" href="#using-mod-proxy-fcgi-with-apache-2-4" title="Permalink to this headline">¶</a></h3>
+<p>If you are running Apache 2.4, you can use <code class="docutils literal notranslate"><span class="pre">mod_proxy_fcgi</span></code> to pass incoming
+requests to PHP-FPM. Configure PHP-FPM to listen on a TCP or Unix socket, enable
+<code class="docutils literal notranslate"><span class="pre">mod_proxy</span></code> and <code class="docutils literal notranslate"><span class="pre">mod_proxy_fcgi</span></code> in your Apache configuration, and use the
+<code class="docutils literal notranslate"><span class="pre">SetHandler</span></code> directive to pass requests for PHP files to PHP FPM:</p>
+<div class="highlight-apache notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nt">&lt;VirtualHost</span> <span class="s">*:80</span><span class="nt">&gt;</span>
+    <span class="nb">ServerName</span> domain.tld
+    <span class="nb">ServerAlias</span> www.domain.tld
+
+    <span class="c"># Uncomment the following line to force Apache to pass the Authorization</span>
+    <span class="c"># header to PHP: required for &quot;basic_auth&quot; under PHP-FPM and FastCGI</span>
+    <span class="c">#</span>
+    <span class="c"># SetEnvIfNoCase ^Authorization$ &quot;(.+)&quot; HTTP_AUTHORIZATION=$1</span>
+
+    <span class="c"># For Apache 2.4.9 or higher</span>
+    <span class="c"># Using SetHandler avoids issues with using ProxyPassMatch in combination</span>
+    <span class="c"># with mod_rewrite or mod_autoindex</span>
+    <span class="nt">&lt;FilesMatch</span> <span class="s">\.php$</span><span class="nt">&gt;</span>
+        <span class="nb">SetHandler</span> proxy:fcgi://127.0.0.1:9000
+        <span class="c"># for Unix sockets, Apache 2.4.10 or higher</span>
+        <span class="c"># SetHandler proxy:unix:/path/to/fpm.sock|fcgi://dummy</span>
+    <span class="nt">&lt;/FilesMatch&gt;</span>
+
+    <span class="c"># If you use Apache version below 2.4.9 you must consider update or use this instead</span>
+    <span class="c"># ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/var/www/project/public/$1</span>
+
+    <span class="c"># If you run your Symfony application on a subpath of your document root, the</span>
+    <span class="c"># regular expression must be changed accordingly:</span>
+    <span class="c"># ProxyPassMatch ^/path-to-app/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/var/www/project/public/$1</span>
+
+    <span class="nb">DocumentRoot</span> <span class="sx">/var/www/project/public</span>
+    <span class="nt">&lt;Directory</span> <span class="s">/var/www/project/public</span><span class="nt">&gt;</span>
+        <span class="c"># enable the .htaccess rewrites</span>
+        <span class="nb">AllowOverride</span> <span class="k">All</span>
+        <span class="nb">Require</span> <span class="k">all</span> granted
+    <span class="nt">&lt;/Directory&gt;</span>
+
+    <span class="c"># uncomment the following lines if you install assets as symlinks</span>
+    <span class="c"># or run into problems when compiling LESS/Sass/CoffeeScript assets</span>
+    <span class="c"># &lt;Directory /var/www/project&gt;</span>
+    <span class="c">#     Options FollowSymlinks</span>
+    <span class="c"># &lt;/Directory&gt;</span>
+
+    <span class="nb">ErrorLog</span> <span class="sx">/var/log/apache2/project_error.log</span>
+    <span class="nb">CustomLog</span> <span class="sx">/var/log/apache2/project_access.log</span> combined
+<span class="nt">&lt;/VirtualHost&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="php-fpm-with-apache-2-2">
+<h3>PHP-FPM with Apache 2.2<a class="headerlink" href="#php-fpm-with-apache-2-2" title="Permalink to this headline">¶</a></h3>
+<p>On Apache 2.2 or lower, you cannot use <code class="docutils literal notranslate"><span class="pre">mod_proxy_fcgi</span></code>. You have to use
+the <a class="reference external" href="https://docs.oracle.com/cd/B31017_01/web.1013/q20204/mod_fastcgi.html#FastCgiExternalServer">FastCgiExternalServer</a> directive instead. Therefore, your Apache configuration
+should look something like this:</p>
+<div class="highlight-apache notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nt">&lt;VirtualHost</span> <span class="s">*:80</span><span class="nt">&gt;</span>
+    <span class="nb">ServerName</span> domain.tld
+    <span class="nb">ServerAlias</span> www.domain.tld
+
+    <span class="nb">AddHandler</span> php7-fcgi .php
+    <span class="nb">Action</span> php7-fcgi <span class="sx">/php7-fcgi</span>
+    <span class="nb">Alias</span> <span class="sx">/php7-fcgi</span> <span class="sx">/usr/lib/cgi-bin/php7-fcgi</span>
+    <span class="nb">FastCgiExternalServer</span> <span class="sx">/usr/lib/cgi-bin/php7-fcgi</span> -host <span class="m">127.0.0.1</span>:9000 -pass-header Authorization
+
+    <span class="nb">DocumentRoot</span> <span class="sx">/var/www/project/public</span>
+    <span class="nt">&lt;Directory</span> <span class="s">/var/www/project/public</span><span class="nt">&gt;</span>
+        <span class="c"># enable the .htaccess rewrites</span>
+        <span class="nb">AllowOverride</span> <span class="k">All</span>
+        <span class="nb">Order</span> Allow,Deny
+        <span class="nb">Allow</span> from <span class="k">all</span>
+    <span class="nt">&lt;/Directory&gt;</span>
+
+    <span class="c"># uncomment the following lines if you install assets as symlinks</span>
+    <span class="c"># or run into problems when compiling LESS/Sass/CoffeeScript assets</span>
+    <span class="c"># &lt;Directory /var/www/project&gt;</span>
+    <span class="c">#     Options FollowSymlinks</span>
+    <span class="c"># &lt;/Directory&gt;</span>
+
+    <span class="nb">ErrorLog</span> <span class="sx">/var/log/apache2/project_error.log</span>
+    <span class="nb">CustomLog</span> <span class="sx">/var/log/apache2/project_access.log</span> combined
+<span class="nt">&lt;/VirtualHost&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>If you prefer to use a Unix socket, you have to use the <code class="docutils literal notranslate"><span class="pre">-socket</span></code> option
+instead:</p>
+<div class="highlight-apache notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">FastCgiExternalServer</span> <span class="sx">/usr/lib/cgi-bin/php7-fcgi</span> -socket <span class="sx">/var/run/php/php7.1-fpm.sock</span> -pass-header Authorization
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="nginx">
+<span id="web-server-nginx"></span><h2>Nginx<a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>minimum configuration</strong> to get your application running under Nginx is:</p>
+<div class="highlight-nginx notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">server_name</span> <span class="s">domain.tld</span> <span class="s">www.domain.tld</span><span class="p">;</span>
+    <span class="kn">root</span> <span class="s">/var/www/project/public</span><span class="p">;</span>
+
+    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+        <span class="c1"># try to serve file directly, fallback to index.php</span>
+        <span class="kn">try_files</span> <span class="nv">$uri</span> <span class="s">/index.php</span><span class="nv">$is_args$args</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1"># optionally disable falling back to PHP script for the asset directories;</span>
+    <span class="c1"># nginx will return a 404 error when files are not found instead of passing the</span>
+    <span class="c1"># request to Symfony (improves performance but Symfony&#39;s 404 page is not displayed)</span>
+    <span class="c1"># location /bundles {</span>
+    <span class="c1">#     try_files $uri =404;</span>
+    <span class="c1"># }</span>
+
+    <span class="kn">location</span> <span class="p">~</span> <span class="sr">^/index\.php(/|$)</span> <span class="p">{</span>
+        <span class="kn">fastcgi_pass</span> <span class="s">unix:/var/run/php/php7.2-fpm.sock</span><span class="p">;</span>
+        <span class="kn">fastcgi_split_path_info</span> <span class="s">^(.+\.php)(/.*)</span>$<span class="p">;</span>
+        <span class="kn">include</span> <span class="s">fastcgi_params</span><span class="p">;</span>
+
+        <span class="c1"># optionally set the value of the environment variables used in the application</span>
+        <span class="c1"># fastcgi_param APP_ENV prod;</span>
+        <span class="c1"># fastcgi_param APP_SECRET &lt;app-secret-id&gt;;</span>
+        <span class="c1"># fastcgi_param DATABASE_URL &quot;mysql://db_user:db_pass@host:3306/db_name&quot;;</span>
+
+        <span class="c1"># When you are using symlinks to link the document root to the</span>
+        <span class="c1"># current version of your application, you should pass the real</span>
+        <span class="c1"># application path instead of the path to the symlink to PHP</span>
+        <span class="c1"># FPM.</span>
+        <span class="c1"># Otherwise, PHP&#39;s OPcache may not properly detect changes to</span>
+        <span class="c1"># your PHP files (see https://github.com/zendtech/ZendOptimizerPlus/issues/126</span>
+        <span class="c1"># for more information).</span>
+        <span class="kn">fastcgi_param</span> <span class="s">SCRIPT_FILENAME</span> <span class="nv">$realpath_root$fastcgi_script_name</span><span class="p">;</span>
+        <span class="kn">fastcgi_param</span> <span class="s">DOCUMENT_ROOT</span> <span class="nv">$realpath_root</span><span class="p">;</span>
+        <span class="c1"># Prevents URIs that include the front controller. This will 404:</span>
+        <span class="c1"># http://domain.tld/index.php/some-path</span>
+        <span class="c1"># Remove the internal directive to allow URIs like this</span>
+        <span class="kn">internal</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1"># return 404 for all other php files not matching the front controller</span>
+    <span class="c1"># this prevents access to other php files you don&#39;t want to be accessible.</span>
+    <span class="kn">location</span> <span class="p">~</span> <span class="sr">\.php$</span> <span class="p">{</span>
+        <span class="kn">return</span> <span class="mi">404</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">error_log</span> <span class="s">/var/log/nginx/project_error.log</span><span class="p">;</span>
+    <span class="kn">access_log</span> <span class="s">/var/log/nginx/project_access.log</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you use NGINX Unit, check out the official article about
+<a class="reference external" href="https://unit.nginx.org/howto/symfony/">How to run Symfony applications using NGINX Unit</a>.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Depending on your PHP-FPM config, the <code class="docutils literal notranslate"><span class="pre">fastcgi_pass</span></code> can also be
+<code class="docutils literal notranslate"><span class="pre">fastcgi_pass</span> <span class="pre">127.0.0.1:9000</span></code>.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>This executes <strong>only</strong> <code class="docutils literal notranslate"><span class="pre">index.php</span></code> in the public directory. All other files
+ending in “.php” will be denied.</p>
+<p class="last">If you have other PHP files in your public directory that need to be executed,
+be sure to include them in the <code class="docutils literal notranslate"><span class="pre">location</span></code> block above.</p>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">After you deploy to production, make sure that you <strong>cannot</strong> access the <code class="docutils literal notranslate"><span class="pre">index.php</span></code>
+script (i.e. <code class="docutils literal notranslate"><span class="pre">http://example.com/index.php</span></code>).</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, Symfony applications include several <code class="docutils literal notranslate"><span class="pre">.htaccess</span></code> files to
+configure redirections and to prevent unauthorized access to some sensitive
+directories. Those files are only useful when using Apache, so you can
+safely remove them when using Nginx.</p>
+</div>
+<p>For advanced Nginx configuration options, read the official <a class="reference external" href="https://www.nginx.com/resources/wiki/start/topics/recipes/symfony/">Nginx documentation</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

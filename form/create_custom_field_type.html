@@ -1,0 +1,805 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Create a Custom Form Field Type &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Use Data Transformers" href="data_transformers.html" />
+    <link rel="prev" title="How to Access Services or Config from Inside a Form" href="form_dependencies.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../forms.html">Forms</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#building-forms">Building Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#rendering-forms">Rendering Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#processing-forms">Processing Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#validating-forms">Validating Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#other-common-form-features">Other Common Form Features</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../forms.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../reference/forms/types.html">Form Types Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller/upload_file.html">How to Upload Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../security/csrf.html">How to Implement CSRF Protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_dependencies.html">How to Access Services or Config from Inside a Form</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Create a Custom Form Field Type</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#creating-form-types-based-on-symfony-built-in-types">Creating Form Types Based on Symfony Built-in Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-form-types-created-from-scratch">Creating Form Types Created From Scratch</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="data_transformers.html">How to Use Data Transformers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_mappers.html">When and How to Use Data Mappers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_form_type_extension.html">How to Create a Form Type Extension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="type_guesser.html">Creating a custom Type Guesser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootstrap4.html">Bootstrap 4 Form Theme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_customization.html">How to Customize Form Rendering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_themes.html">How to Work with Form Themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="events.html">Form Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dynamic_form_modification.html">How to Dynamically Modify Forms Using Form Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validation_groups.html">How to Define the Validation Groups to Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validation_group_service_resolver.html">How to Dynamically Configure Form Validation Groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="button_based_validation.html">How to Choose Validation Groups Based on the Clicked Button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="disabling_validation.html">How to Disable the Validation of Submitted Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="direct_submit.html">How to Use the submit() Function to Handle Form Submissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="embedded.html">How to Embed Forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_collections.html">How to Embed a Collection of Forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="inherit_data_option.html">How to Reduce Code Duplication with “inherit_data”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multiple_buttons.html">How to Submit a Form with Multiple Buttons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_testing.html">How to Unit Test your Forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="use_empty_data.html">How to Configure empty Data for a Form Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="without_class.html">How to Use a Form without a Data Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../forms.html">Forms</a> &raquo;</li>
+        
+      <li>How to Create a Custom Form Field Type</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/form/create_custom_field_type.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-create-a-custom-form-field-type">
+<span id="index-0"></span><h1>How to Create a Custom Form Field Type<a class="headerlink" href="#how-to-create-a-custom-form-field-type" title="Permalink to this headline">¶</a></h1>
+<p>Symfony comes with <a class="reference internal" href="../reference/forms/types.html"><span class="doc">tens of form types</span></a> (called
+“form fields” in other projects) ready to use in your applications. However,
+it’s common to create custom form types to solve specific purposes in your
+projects.</p>
+<div class="section" id="creating-form-types-based-on-symfony-built-in-types">
+<h2>Creating Form Types Based on Symfony Built-in Types<a class="headerlink" href="#creating-form-types-based-on-symfony-built-in-types" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way to create a form type is to base it on one of the
+<a class="reference internal" href="../reference/forms/types.html"><span class="doc">existing form types</span></a>. Imagine that your project
+displays a list of “shipping options” as a <code class="docutils literal notranslate"><span class="pre">&lt;select&gt;</span></code> HTML element. This can
+be implemented with a <a class="reference internal" href="../reference/forms/types/choice.html"><span class="doc">ChoiceType</span></a> where the
+<code class="docutils literal notranslate"><span class="pre">choices</span></code> option is set to the list of available shipping options.</p>
+<p>However, if you use the same form type in several forms, repeating the list of
+<code class="docutils literal notranslate"><span class="pre">choices</span></code> every time you use it quickly becomes boring. In this example, a
+better solution is to create a custom form type based on <code class="docutils literal notranslate"><span class="pre">ChoiceType</span></code>. The
+custom type looks and behaves like a <code class="docutils literal notranslate"><span class="pre">ChoiceType</span></code> but the list of choices is
+already populated with the shipping options so you don’t need to define them.</p>
+<p>Form types are PHP classes that implement <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/FormTypeInterface.php" title="Symfony\Component\Form\FormTypeInterface"><span class="pre">FormTypeInterface</span></a></code>,
+but you should instead extend from <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/AbstractType.php" title="Symfony\Component\Form\AbstractType"><span class="pre">AbstractType</span></a></code>,
+which already implements that interface and provides some utilities.
+By convention they are stored in the <code class="docutils literal notranslate"><span class="pre">src/Form/Type/</span></code> directory:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/ShippingType.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form\Type</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\AbstractType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\ChoiceType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\OptionsResolver\OptionsResolver</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ShippingType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefaults</span><span class="p">([</span>
+            <span class="s1">&#39;choices&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;Standard Shipping&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;standard&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Expedited Shipping&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;expedited&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Priority Shipping&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;priority&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getParent</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">configureOptions()</span></code> method, which is explained later in this article,
+defines the options that can be configured for the form type and sets the
+default value of those options.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">getParent()</span></code> method defines which is the form type used as the base of
+this type. In this case, the type extends from <code class="docutils literal notranslate"><span class="pre">ChoiceType</span></code> to reuse all of
+the logic and rendering of that field type.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The PHP class extension mechanism and the Symfony form field extension
+mechanism are not the same. The parent type returned in <code class="docutils literal notranslate"><span class="pre">getParent()</span></code> is
+what Symfony uses to build and manage the field type. Making the PHP class
+extend from <code class="docutils literal notranslate"><span class="pre">AbstractType</span></code> is only a convenience way of implementing the
+required <code class="docutils literal notranslate"><span class="pre">FormTypeInterface</span></code>.</p>
+</div>
+<p>Now you can add this form type when <a class="reference internal" href="../forms.html"><span class="doc">creating Symfony forms</span></a>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/OrderType.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form\Type</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Form\Type\ShippingType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\AbstractType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormBuilderInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">OrderType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">buildForm</span><span class="p">(</span><span class="nx">FormBuilderInterface</span> <span class="nv">$builder</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$builder</span>
+            <span class="c1">// ...</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;shipping&#39;</span><span class="p">,</span> <span class="nx">ShippingType</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That’s all. The <code class="docutils literal notranslate"><span class="pre">shipping</span></code> form field will be rendered correctly in any
+template because it reuses the templating logic defined by its parent type
+<code class="docutils literal notranslate"><span class="pre">ChoiceType</span></code>. If you prefer, you can also define a template for your custom
+types, as explained later in this article.</p>
+</div>
+<div class="section" id="creating-form-types-created-from-scratch">
+<h2>Creating Form Types Created From Scratch<a class="headerlink" href="#creating-form-types-created-from-scratch" title="Permalink to this headline">¶</a></h2>
+<p>Some form types are so specific to your projects that they cannot be based on
+any <a class="reference internal" href="../reference/forms/types.html"><span class="doc">existing form types</span></a> because they are too
+different. Consider an application that wants to reuse in different forms the
+following set of fields as the “postal address”:</p>
+<object data="../_images/form/form-custom-type-postal-address.svg" type="image/svg+xml"></object><p>As explained above, form types are PHP classes that implement
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/FormTypeInterface.php" title="Symfony\Component\Form\FormTypeInterface"><span class="pre">FormTypeInterface</span></a></code>, although it’s more
+convenient to extend instead from <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/AbstractType.php" title="Symfony\Component\Form\AbstractType"><span class="pre">AbstractType</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/PostalAddressType.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form\Type</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\AbstractType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\FormType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\OptionsResolver\OptionsResolver</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">PostalAddressType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When a form type doesn’t extend from another specific type, there’s no need to
+implement the <code class="docutils literal notranslate"><span class="pre">getParent()</span></code> method (Symfony will make the type extend from the
+generic <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/Extension/Core/Type/FormType.php" title="Symfony\Component\Form\Extension\Core\Type\FormType"><span class="pre">FormType</span></a></code>,
+which is the parent of all the other types).</p>
+<p>These are the most important methods that a form type class can define:</p>
+<dl class="docutils" id="form-type-methods-explanation">
+<dt><code class="docutils literal notranslate"><span class="pre">buildForm()</span></code></dt>
+<dd>It adds and configures other types into this type. It’s the same method used
+when <a class="reference internal" href="../forms.html#creating-forms-in-classes"><span class="std std-ref">creating Symfony form classes</span></a>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">buildView()</span></code></dt>
+<dd>It sets any extra variables you’ll need when rendering the field in a template.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">configureOptions()</span></code></dt>
+<dd>It defines the options configurable when using the form type, which are also
+the options that can be used in <code class="docutils literal notranslate"><span class="pre">buildForm()</span></code> and <code class="docutils literal notranslate"><span class="pre">buildView()</span></code> methods.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">finishView()</span></code></dt>
+<dd>When creating a form type that consists of many fields, this method allows
+to modify the “view” of any of those fields. For any other use case, it’s
+recommended to use instead the <code class="docutils literal notranslate"><span class="pre">buildView()</span></code> method.</dd>
+</dl>
+<div class="section" id="defining-the-form-type">
+<h3>Defining the Form Type<a class="headerlink" href="#defining-the-form-type" title="Permalink to this headline">¶</a></h3>
+<p>Start by adding the <code class="docutils literal notranslate"><span class="pre">buildForm()</span></code> method to configure all the types included
+in the postal address. For the moment, all fields are of type <code class="docutils literal notranslate"><span class="pre">TextType</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/PostalAddressType.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form\Type</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\AbstractType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\TextType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormBuilderInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">PostalAddressType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">buildForm</span><span class="p">(</span><span class="nx">FormBuilderInterface</span> <span class="nv">$builder</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$builder</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;addressLine1&#39;</span><span class="p">,</span> <span class="nx">TextType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+                <span class="s1">&#39;help&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Street address, P.O. box, company name&#39;</span><span class="p">,</span>
+            <span class="p">])</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;addressLine2&#39;</span><span class="p">,</span> <span class="nx">TextType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+                <span class="s1">&#39;help&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Apartment, suite, unit, building, floor&#39;</span><span class="p">,</span>
+            <span class="p">])</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;city&#39;</span><span class="p">,</span> <span class="nx">TextType</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="nx">TextType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+                <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;State&#39;</span><span class="p">,</span>
+            <span class="p">])</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;zipCode&#39;</span><span class="p">,</span> <span class="nx">TextType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+                <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ZIP Code&#39;</span><span class="p">,</span>
+            <span class="p">])</span>
+        <span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>Run the following command to verify that the form type was successfully
+registered in the application:</p>
+<div class="last highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console debug:form
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>This form type is ready to use it inside other forms and all its fields will be
+correctly rendered in any template:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/OrderType.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form\Type</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Form\Type\PostalAddressType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\AbstractType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormBuilderInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">OrderType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">buildForm</span><span class="p">(</span><span class="nx">FormBuilderInterface</span> <span class="nv">$builder</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$builder</span>
+            <span class="c1">// ...</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;address&#39;</span><span class="p">,</span> <span class="nx">PostalAddressType</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>However, the real power of custom form types is achieved with custom form
+options (to make them flexible) and with custom templates (to make them look
+better).</p>
+</div>
+<div class="section" id="adding-configuration-options-for-the-form-type">
+<span id="form-type-config-options"></span><h3>Adding Configuration Options for the Form Type<a class="headerlink" href="#adding-configuration-options-for-the-form-type" title="Permalink to this headline">¶</a></h3>
+<p>Imagine that your project requires to make the <code class="docutils literal notranslate"><span class="pre">PostalAddressType</span></code>
+configurable in two ways:</p>
+<ul class="simple">
+<li>In addition to “address line 1” and “address line 2”, some addresses should be
+allowed to display an “address line 3” to store extended address information;</li>
+<li>Instead of displaying a free text input, some addresses should be able to
+restrict the possible states to a given list.</li>
+</ul>
+<p>This is solved with “form type options”, which allow to configure the behavior
+of the form types. The options are defined in the <code class="docutils literal notranslate"><span class="pre">configureOptions()</span></code> method
+and you can use all the <a class="reference internal" href="../components/options_resolver.html"><span class="doc">OptionsResolver component features</span></a>
+to define, validate and process their values:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/PostalAddressType.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form\Type</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\AbstractType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\TextType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\OptionsResolver\Options</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\OptionsResolver\OptionsResolver</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">PostalAddressType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// this defines the available options and their default values when</span>
+        <span class="c1">// they are not configured explicitly when using the form type</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefaults</span><span class="p">([</span>
+            <span class="s1">&#39;allowed_states&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+            <span class="s1">&#39;is_extended_address&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+        <span class="p">]);</span>
+
+        <span class="c1">// optionally you can also restrict the options type or types (to get</span>
+        <span class="c1">// automatic type validation and useful error messages for end users)</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setAllowedTypes</span><span class="p">(</span><span class="s1">&#39;allowed_states&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;null&#39;</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;array&#39;</span><span class="p">]);</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setAllowedTypes</span><span class="p">(</span><span class="s1">&#39;is_extended_address&#39;</span><span class="p">,</span> <span class="s1">&#39;bool&#39;</span><span class="p">);</span>
+
+        <span class="c1">// optionally you can transform the given values for the options to</span>
+        <span class="c1">// simplify the further processing of those options</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setNormalizer</span><span class="p">(</span><span class="s1">&#39;allowed_states&#39;</span><span class="p">,</span> <span class="k">static</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Options</span> <span class="nv">$options</span><span class="p">,</span> <span class="nv">$states</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">null</span> <span class="o">===</span> <span class="nv">$states</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nv">$states</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nb">is_string</span><span class="p">(</span><span class="nv">$states</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nv">$states</span> <span class="o">=</span> <span class="p">(</span><span class="k">array</span><span class="p">)</span> <span class="nv">$states</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="nb">array_combine</span><span class="p">(</span><span class="nb">array_values</span><span class="p">(</span><span class="nv">$states</span><span class="p">),</span> <span class="nb">array_values</span><span class="p">(</span><span class="nv">$states</span><span class="p">));</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now you can configure these options when using the form type:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/OrderType.php</span>
+<span class="c1">// ...</span>
+
+<span class="k">class</span> <span class="nc">OrderType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">buildForm</span><span class="p">(</span><span class="nx">FormBuilderInterface</span> <span class="nv">$builder</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$builder</span>
+            <span class="c1">// ...</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;address&#39;</span><span class="p">,</span> <span class="nx">PostalAddressType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+                <span class="s1">&#39;is_extended_address&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+                <span class="s1">&#39;allowed_states&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;CA&#39;</span><span class="p">,</span> <span class="s1">&#39;FL&#39;</span><span class="p">,</span> <span class="s1">&#39;TX&#39;</span><span class="p">],</span>
+                <span class="c1">// in this example, this config would also be valid:</span>
+                <span class="c1">// &#39;allowed_states&#39; =&gt; &#39;CA&#39;,</span>
+            <span class="p">])</span>
+        <span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The last step is to use these options when building the form:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/PostalAddressType.php</span>
+<span class="c1">// ...</span>
+
+<span class="k">class</span> <span class="nc">PostalAddressType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">buildForm</span><span class="p">(</span><span class="nx">FormBuilderInterface</span> <span class="nv">$builder</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="k">true</span> <span class="o">===</span> <span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;is_extended_address&#39;</span><span class="p">])</span> <span class="p">{</span>
+            <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;addressLine3&#39;</span><span class="p">,</span> <span class="nx">TextType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+                <span class="s1">&#39;help&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Extended address info&#39;</span><span class="p">,</span>
+            <span class="p">]);</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="k">null</span> <span class="o">!==</span> <span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;allowed_states&#39;</span><span class="p">])</span> <span class="p">{</span>
+            <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+                <span class="s1">&#39;choices&#39;</span> <span class="o">=&gt;</span> <span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;allowed_states&#39;</span><span class="p">],</span>
+            <span class="p">]);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="nx">TextType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+                <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;State/Province/Region&#39;</span><span class="p">,</span>
+            <span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-the-form-type-template">
+<h3>Creating the Form Type Template<a class="headerlink" href="#creating-the-form-type-template" title="Permalink to this headline">¶</a></h3>
+<p>By default, custom form types will be rendered using the
+<a class="reference internal" href="form_themes.html"><span class="doc">form themes</span></a> configured in the application. However,
+for some types you may prefer to create a custom template in order to customize
+how they look or their HTML structure.</p>
+<p>First, create a new Twig template anywhere in the application to store the
+fragments used to render the types:</p>
+<div class="highlight-twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">{# templates/form/custom_types.html.twig #}</span><span class="x"></span>
+
+<span class="c">{# ... here you will add the Twig code ... #}</span><span class="x"></span>
+</pre></div>
+</td></tr></table></div>
+<p>Then, update the <a class="reference internal" href="../reference/twig_reference.html#reference-twig-tag-form-theme"><span class="std std-ref">form_themes option</span></a> to
+add this new template at the beginning of the list (the first one overrides the
+rest of files):</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/twig.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">twig</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">form_themes</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="s">&#39;form/custom_types.html.twig&#39;</span>
+        <span class="p p-Indicator">-</span> <span class="s">&#39;...&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/twig.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:twig=</span><span class="s">&quot;http://symfony.com/schema/dic/twig&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/twig</span>
+<span class="s">        https://symfony.com/schema/dic/twig/twig-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;twig:config&gt;</span>
+        <span class="nt">&lt;twig:form-theme&gt;</span>form/custom_types.html.twig<span class="nt">&lt;/twig:form-theme&gt;</span>
+        <span class="nt">&lt;twig:form-theme&gt;</span>...<span class="nt">&lt;/twig:form-theme&gt;</span>
+    <span class="nt">&lt;/twig:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/twig.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;twig&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;form_themes&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;form/custom_types.html.twig&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>The last step is to create the actual Twig template that will render the type.
+The template contents depend on which HTML, CSS and JavaScript frameworks and
+libraries are used in your application:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">{# templates/form/custom_types.html.twig #}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">postal_address_row</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">for</span> <span class="nv">child</span> <span class="k">in</span> <span class="nv">form.children</span><span class="o">|</span><span class="nf">filter</span><span class="o">(</span><span class="nv">child</span> <span class="o">=&gt;</span> <span class="k">not</span> <span class="nv">child.rendered</span><span class="o">)</span> <span class="cp">%}</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="p">&gt;</span>
+            <span class="cp">{{</span> <span class="nv">form_label</span><span class="o">(</span><span class="nv">child</span><span class="o">)</span> <span class="cp">}}</span>
+            <span class="cp">{{</span> <span class="nv">form_widget</span><span class="o">(</span><span class="nv">child</span><span class="o">)</span> <span class="cp">}}</span>
+            <span class="cp">{{</span> <span class="nv">form_help</span><span class="o">(</span><span class="nv">child</span><span class="o">)</span> <span class="cp">}}</span>
+            <span class="cp">{{</span> <span class="nv">form_errors</span><span class="o">(</span><span class="nv">child</span><span class="o">)</span> <span class="cp">}}</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</td></tr></table></div>
+<p>The first part of the Twig block name (e.g. <code class="docutils literal notranslate"><span class="pre">postal_address</span></code>) comes from the
+class name (<code class="docutils literal notranslate"><span class="pre">PostalAddressType</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">postal_address</span></code>). This can be controlled
+by overriding the <code class="docutils literal notranslate"><span class="pre">getBlockPrefix()</span></code> method in <code class="docutils literal notranslate"><span class="pre">PostalAddressType</span></code>. The
+second part of the Twig block name (e.g. <code class="docutils literal notranslate"><span class="pre">_row</span></code>) defines which form type part
+is being rendered (row, widget, help, errors, etc.)</p>
+<p>The article about form themes explains the
+<a class="reference internal" href="form_themes.html#form-fragment-naming"><span class="std std-ref">form fragment naming rules</span></a> in detail. The
+following diagram shows some of the Twig block names defined in this example:</p>
+<object data="../_images/form/form-custom-type-postal-address-fragment-names.svg" type="image/svg+xml"></object><div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">When the name of your form class matches any of the built-in field types,
+your form might not be rendered correctly. A form type named
+<code class="docutils literal notranslate"><span class="pre">App\Form\PasswordType</span></code> will have the same block name as the built-in
+<code class="docutils literal notranslate"><span class="pre">PasswordType</span></code> and won’t be rendered correctly. Override the
+<code class="docutils literal notranslate"><span class="pre">getBlockPrefix()</span></code> method to return a unique block prefix (e.g.
+<code class="docutils literal notranslate"><span class="pre">app_password</span></code>) to avoid collisions.</p>
+</div>
+</div>
+<div class="section" id="passing-variables-to-the-form-type-template">
+<h3>Passing Variables to the Form Type Template<a class="headerlink" href="#passing-variables-to-the-form-type-template" title="Permalink to this headline">¶</a></h3>
+<p>Symfony passes a series of variables to the template used to render the form
+type. You can also pass your own variables, which can be based on the options
+defined by the form or be completely independent:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/PostalAddressType.php</span>
+<span class="k">use</span> <span class="nx">Doctrine\ORM\EntityManagerInterface</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">class</span> <span class="nc">PostalAddressType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$entityManager</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">EntityManagerInterface</span> <span class="nv">$entityManager</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">entityManager</span> <span class="o">=</span> <span class="nv">$entityManager</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">buildView</span><span class="p">(</span><span class="nx">FormView</span> <span class="nv">$view</span><span class="p">,</span> <span class="nx">FormInterface</span> <span class="nv">$form</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// pass the form type option directly to the template</span>
+        <span class="nv">$view</span><span class="o">-&gt;</span><span class="na">vars</span><span class="p">[</span><span class="s1">&#39;isExtendedAddress&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;is_extended_address&#39;</span><span class="p">];</span>
+
+        <span class="c1">// make a database query to find possible notifications related to postal addresses (e.g. to</span>
+        <span class="c1">// display dynamic messages such as &#39;Delivery to XX and YY states will be added next week!&#39;)</span>
+        <span class="nv">$view</span><span class="o">-&gt;</span><span class="na">vars</span><span class="p">[</span><span class="s1">&#39;notification&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">entityManager</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you’re using the <a class="reference internal" href="../service_container.html#service-container-services-load-example"><span class="std std-ref">default services.yaml configuration</span></a>,
+this example will already work! Otherwise, <a class="reference internal" href="../service_container.html#service-container-creating-service"><span class="std std-ref">create a service</span></a>
+for this form class and <a class="reference internal" href="../service_container/tags.html"><span class="doc">tag it</span></a> with <code class="docutils literal notranslate"><span class="pre">form.type</span></code>.</p>
+<p>The variables added in <code class="docutils literal notranslate"><span class="pre">buildView()</span></code> are available in the form type template
+as any other regular Twig variable:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">{# templates/form/custom_types.html.twig #}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">postal_address_row</span> <span class="cp">%}</span>
+    <span class="c">{# ... #}</span>
+
+    <span class="cp">{%</span> <span class="k">if</span> <span class="nv">isExtendedAddress</span> <span class="cp">%}</span>
+        <span class="c">{# ... #}</span>
+    <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+
+    <span class="cp">{%</span> <span class="k">if</span> <span class="nv">notification</span> <span class="k">is</span> <span class="k">not</span> <span class="nf">empty</span> <span class="cp">%}</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-primary&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;alert&quot;</span><span class="p">&gt;</span>
+            <span class="cp">{{</span> <span class="nv">notification</span> <span class="cp">}}</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

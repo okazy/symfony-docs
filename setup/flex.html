@@ -1,0 +1,496 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Upgrading Existing Applications to Symfony Flex &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Symfony Local Web Server" href="symfony_server.html" />
+    <link rel="prev" title="Setting up or Fixing File Permissions" href="file_permissions.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#technical-requirements">Technical Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#creating-symfony-applications">Creating Symfony Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#running-symfony-applications">Running Symfony Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#setting-up-an-existing-symfony-project">Setting up an Existing Symfony Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#installing-packages">Installing Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#checking-security-vulnerabilities">Checking Security Vulnerabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#symfony-lts-versions">Symfony LTS Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#the-symfony-demo-application">The Symfony Demo application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#start-coding">Start Coding!</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../setup.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../page_creation.html">Create your First Page in Symfony</a></li>
+<li class="toctree-l3"><a class="reference internal" href="homestead.html">Using Symfony with Homestead/Vagrant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web_server_configuration.html">Configuring a Web Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bundles.html">Upgrading a Third-Party Bundle for a Major Symfony Version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_permissions.html">Setting up or Fixing File Permissions</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Upgrading Existing Applications to Symfony Flex</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#customizing-flex-paths">Customizing Flex Paths</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="symfony_server.html">Symfony Local Web Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unstable_versions.html">How to Install or Upgrade to the Latest, Unreleased Symfony Version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrade_major.html">Upgrading a Major Version (e.g. 4.4.0 to 5.0.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrade_minor.html">Upgrading a Minor Version (e.g. 4.0.0 to 4.1.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrade_patch.html">Upgrading a Patch Version (e.g. 5.0.0 to 5.0.1)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../getting_started/index.html">Getting Started</a> &raquo;</li>
+        
+          <li><a href="../setup.html">Installing &amp; Setting up the Symfony Framework</a> &raquo;</li>
+        
+      <li>Upgrading Existing Applications to Symfony Flex</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/setup/flex.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="upgrading-existing-applications-to-symfony-flex">
+<span id="index-0"></span><h1>Upgrading Existing Applications to Symfony Flex<a class="headerlink" href="#upgrading-existing-applications-to-symfony-flex" title="Permalink to this headline">¶</a></h1>
+<p>Using Symfony Flex is optional, even in Symfony 4, where Flex is used by
+default. However, Flex is so convenient and improves your productivity so much
+that it’s strongly recommended to upgrade your existing applications to it.</p>
+<p>Symfony Flex recommends that applications use the following directory structure,
+which is the same used by default in Symfony 4, but you can
+<a class="reference internal" href="#flex-customize-paths"><span class="std std-ref">customize some directories</span></a>:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span>your-project/
+├── assets/
+├── bin/
+│   └── console
+├── config/
+│   ├── bundles.php
+│   ├── packages/
+│   ├── routes.yaml
+│   └── services.yaml
+├── public/
+│   └── index.php
+├── src/
+│   ├── ...
+│   └── Kernel.php
+├── templates/
+├── tests/
+├── translations/
+├── var/
+└── vendor/
+</pre></div>
+</td></tr></table></div>
+<p>This means that installing the <code class="docutils literal notranslate"><span class="pre">symfony/flex</span></code> dependency in your application
+is not enough. You must also upgrade the directory structure to the one shown
+above. There’s no automatic tool to make this upgrade, so you must follow these
+manual steps:</p>
+<ol class="arabic">
+<li><p class="first">Install Flex as a dependency of your project:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/flex
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><p class="first">If the project’s <code class="docutils literal notranslate"><span class="pre">composer.json</span></code> file contains <code class="docutils literal notranslate"><span class="pre">symfony/symfony</span></code> dependency,
+it still depends on the Symfony Standard Edition, which is no longer available
+in Symfony 4. First, remove this dependency:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer remove symfony/symfony
+</pre></div>
+</td></tr></table></div>
+<p>Now add the <code class="docutils literal notranslate"><span class="pre">symfony/symfony</span></code> package to the <code class="docutils literal notranslate"><span class="pre">conflict</span></code> section of the project’s
+<code class="docutils literal notranslate"><span class="pre">composer.json</span></code> file as <a class="reference external" href="https://github.com/symfony/skeleton/blob/8e33fe617629f283a12bbe0a6578bd6e6af417af/composer.json#L44-L46">shown in this example of the skeleton-project</a> so that
+it will not be installed again:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span>{
+    &quot;require&quot;: {
+        &quot;symfony/flex&quot;: &quot;^1.0&quot;,
+<span class="gi">+     },</span>
+<span class="gi">+     &quot;conflict&quot;: {</span>
+<span class="gi">+         &quot;symfony/symfony&quot;: &quot;*&quot;</span>
+    }
+}
+</pre></div>
+</td></tr></table></div>
+<p>Now you must add in <code class="docutils literal notranslate"><span class="pre">composer.json</span></code> all the Symfony dependencies required
+by your project. A quick way to do that is to add all the components that
+were included in the previous <code class="docutils literal notranslate"><span class="pre">symfony/symfony</span></code> dependency and later you
+can remove anything you don’t really need:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require annotations asset orm-pack twig <span class="err">\</span>
+<span class="go">  logger mailer form security translation validator</span>
+<span class="gp">$</span> composer require --dev dotenv maker-bundle orm-fixtures profiler
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><p class="first">If the project’s <code class="docutils literal notranslate"><span class="pre">composer.json</span></code> file doesn’t contain the <code class="docutils literal notranslate"><span class="pre">symfony/symfony</span></code>
+dependency, it already defines its dependencies explicitly, as required by
+Flex. Reinstall all dependencies to force Flex to generate the
+configuration files in <code class="docutils literal notranslate"><span class="pre">config/</span></code>, which is the most tedious part of the upgrade
+process:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> rm -rf vendor/*
+<span class="gp">$</span> composer install
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><p class="first">No matter which of the previous steps you followed. At this point, you’ll have
+lots of new config files in <code class="docutils literal notranslate"><span class="pre">config/</span></code>. They contain the default config
+defined by Symfony, so you must check your original files in <code class="docutils literal notranslate"><span class="pre">app/config/</span></code>
+and make the needed changes in the new files. Flex config doesn’t use suffixes
+in config files, so the old <code class="docutils literal notranslate"><span class="pre">app/config/config_dev.yml</span></code> goes to
+<code class="docutils literal notranslate"><span class="pre">config/packages/dev/*.yaml</span></code>, etc.</p>
+</li>
+<li><p class="first">The most important config file is <code class="docutils literal notranslate"><span class="pre">app/config/services.yml</span></code>, which now is
+located at <code class="docutils literal notranslate"><span class="pre">config/services.yaml</span></code>. Copy the contents of the
+<a class="reference external" href="https://github.com/symfony/recipes/blob/master/symfony/framework-bundle/4.2/config/services.yaml">default services.yaml file</a> and then add your own service configuration.
+Later you can revisit this file because thanks to Symfony’s
+<a class="reference internal" href="../service_container/3.3-di-changes.html"><span class="doc">autowiring feature</span></a> you can remove
+most of the service configuration.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Make sure that your previous configuration files don’t have <code class="docutils literal notranslate"><span class="pre">imports</span></code>
+declarations pointing to resources already loaded by <code class="docutils literal notranslate"><span class="pre">Kernel::configureContainer()</span></code>
+or <code class="docutils literal notranslate"><span class="pre">Kernel::configureRoutes()</span></code> methods.</p>
+</div>
+</li>
+<li><p class="first">Move the rest of the <code class="docutils literal notranslate"><span class="pre">app/</span></code> contents as follows (and after that, remove the
+<code class="docutils literal notranslate"><span class="pre">app/</span></code> directory):</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">app/Resources/views/</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">templates/</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">app/Resources/translations/</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">translations/</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">app/Resources/&lt;BundleName&gt;/views/</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">templates/bundles/&lt;BundleName&gt;/</span></code></li>
+<li>rest of <code class="docutils literal notranslate"><span class="pre">app/Resources/</span></code> files -&gt; <code class="docutils literal notranslate"><span class="pre">src/Resources/</span></code></li>
+</ul>
+</li>
+<li><p class="first">Move the original PHP source code from <code class="docutils literal notranslate"><span class="pre">src/AppBundle/*</span></code>, except bundle
+specific files (like <code class="docutils literal notranslate"><span class="pre">AppBundle.php</span></code> and <code class="docutils literal notranslate"><span class="pre">DependencyInjection/</span></code>), to
+<code class="docutils literal notranslate"><span class="pre">src/</span></code>.</p>
+<p>In addition to moving the files, update the <code class="docutils literal notranslate"><span class="pre">autoload</span></code> and <code class="docutils literal notranslate"><span class="pre">autoload-dev</span></code>
+values of the <code class="docutils literal notranslate"><span class="pre">composer.json</span></code> file as <a class="reference external" href="https://github.com/symfony/skeleton/blob/8e33fe617629f283a12bbe0a6578bd6e6af417af/composer.json#L24-L33">shown in this example</a> to use
+<code class="docutils literal notranslate"><span class="pre">App\</span></code> and <code class="docutils literal notranslate"><span class="pre">App\Tests\</span></code> as the application namespaces (advanced IDEs can
+do this automatically).</p>
+<p>If you used multiple bundles to organize your code, you must reorganize your
+code into <code class="docutils literal notranslate"><span class="pre">src/</span></code>. For example, if you had <code class="docutils literal notranslate"><span class="pre">src/UserBundle/Controller/DefaultController.php</span></code>
+and <code class="docutils literal notranslate"><span class="pre">src/ProductBundle/Controller/DefaultController.php</span></code>, you could move
+them to <code class="docutils literal notranslate"><span class="pre">src/Controller/UserController.php</span></code> and <code class="docutils literal notranslate"><span class="pre">src/Controller/ProductController.php</span></code>.</p>
+</li>
+<li><p class="first">Move the public assets, such as images or compiled CSS/JS files, from
+<code class="docutils literal notranslate"><span class="pre">src/AppBundle/Resources/public/</span></code> to <code class="docutils literal notranslate"><span class="pre">public/</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">public/images/</span></code>).</p>
+</li>
+<li><p class="first">Move the source of the assets (e.g. the SCSS files) to <code class="docutils literal notranslate"><span class="pre">assets/</span></code> and use
+<a class="reference internal" href="../frontend.html"><span class="doc">Webpack Encore</span></a> to manage and compile them.</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">SYMFONY_DEBUG</span></code> and <code class="docutils literal notranslate"><span class="pre">SYMFONY_ENV</span></code> environment variables were replaced by
+<code class="docutils literal notranslate"><span class="pre">APP_DEBUG</span></code> and <code class="docutils literal notranslate"><span class="pre">APP_ENV</span></code>. Copy their values to the new vars and then remove
+the former ones.</p>
+</li>
+<li><p class="first">Create the new <code class="docutils literal notranslate"><span class="pre">public/index.php</span></code> front controller
+<a class="reference external" href="https://github.com/symfony/recipes/blob/master/symfony/framework-bundle/5.1/public/index.php">copying Symfony’s index.php source</a> and, if you made any customization in
+your <code class="docutils literal notranslate"><span class="pre">web/app.php</span></code> and <code class="docutils literal notranslate"><span class="pre">web/app_dev.php</span></code> files, copy those changes into
+the new file. You can now remove the old <code class="docutils literal notranslate"><span class="pre">web/</span></code> dir.</p>
+</li>
+<li><p class="first">Update the <code class="docutils literal notranslate"><span class="pre">bin/console</span></code> script <a class="reference external" href="https://github.com/symfony/recipes/blob/master/symfony/console/5.1/bin/console">copying Symfony’s bin/console source</a>
+and changing anything according to your original console script.</p>
+</li>
+<li><p class="first">Remove <code class="docutils literal notranslate"><span class="pre">src/AppBundle/</span></code>.</p>
+</li>
+<li><p class="first">Move the original source code from <code class="docutils literal notranslate"><span class="pre">src/{App,...}Bundle/</span></code> to <code class="docutils literal notranslate"><span class="pre">src/</span></code> and
+update the namespaces of every PHP file to be <code class="docutils literal notranslate"><span class="pre">App\...</span></code> (advanced IDEs can do
+this automatically).</p>
+</li>
+<li><p class="first">Remove the <code class="docutils literal notranslate"><span class="pre">bin/symfony_requirements</span></code> script and if you need a replacement
+for it, use the new <a class="reference external" href="https://github.com/symfony/requirements-checker">Symfony Requirements Checker</a>.</p>
+</li>
+<li><p class="first">Update the <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file to replace the existing <code class="docutils literal notranslate"><span class="pre">var/logs/</span></code> entry
+by <code class="docutils literal notranslate"><span class="pre">var/log/</span></code>, which is the new name for the log directory.</p>
+</li>
+</ol>
+<div class="section" id="customizing-flex-paths">
+<span id="flex-customize-paths"></span><h2>Customizing Flex Paths<a class="headerlink" href="#customizing-flex-paths" title="Permalink to this headline">¶</a></h2>
+<p>The Flex recipes make a few assumptions about your project’s directory structure.
+Some of these assumptions can be customized by adding a key under the <code class="docutils literal notranslate"><span class="pre">extra</span></code>
+section of your <code class="docutils literal notranslate"><span class="pre">composer.json</span></code> file. For example, to tell Flex to copy any
+PHP classes into <code class="docutils literal notranslate"><span class="pre">src/App</span></code> instead of <code class="docutils literal notranslate"><span class="pre">src</span></code>:</p>
+<div class="highlight-json notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;...&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+
+    <span class="nt">&quot;extra&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;src-dir&quot;</span><span class="p">:</span> <span class="s2">&quot;src/App&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>The configurable paths are:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">bin-dir</span></code>: defaults to <code class="docutils literal notranslate"><span class="pre">bin/</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">config-dir</span></code>: defaults to <code class="docutils literal notranslate"><span class="pre">config/</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">src-dir</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">src/</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">var-dir</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">var/</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">public-dir</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">public/</span></code></li>
+</ul>
+<p>If you customize these paths, some files copied from a recipe still may contain
+references to the original path. In other words: you may need to update some things
+manually after a recipe is installed.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

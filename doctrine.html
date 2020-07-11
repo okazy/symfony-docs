@@ -1,0 +1,1144 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Databases and the Doctrine ORM &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to Work with Doctrine Associations / Relations" href="doctrine/associations.html" />
+    <link rel="prev" title="Verbosity Levels" href="console/verbosity.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Console Commands</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Databases and the Doctrine ORM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-doctrine">Installing Doctrine</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-the-database">Configuring the Database</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-an-entity-class">Creating an Entity Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#migrations-creating-the-database-tables-schema">Migrations: Creating the Database Tables/Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#migrations-adding-more-fields">Migrations &amp; Adding more Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#persisting-objects-to-the-database">Persisting Objects to the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#validating-objects">Validating Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fetching-objects-from-the-database">Fetching Objects from the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#automatically-fetching-objects-paramconverter">Automatically Fetching Objects (ParamConverter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#updating-an-object">Updating an Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deleting-an-object">Deleting an Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#querying-for-objects-the-repository">Querying for Objects: The Repository</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#querying-with-the-query-builder">Querying with the Query Builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#querying-with-sql">Querying with SQL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#relationships-and-associations">Relationships and Associations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#database-testing">Database Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#doctrine-extensions-timestampable-translatable-etc">Doctrine Extensions (Timestampable, Translatable, etc.)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#learn-more">Learn more</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="doctrine/associations.html">How to Work with Doctrine Associations / Relations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="doctrine/events.html">Doctrine Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="doctrine/registration_form.html">How to Implement a Registration Form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="doctrine/custom_dql_functions.html">How to Register custom DQL Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="doctrine/dbal.html">How to Use Doctrine DBAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="doctrine/multiple_entity_managers.html">How to Work with multiple Entity Managers and Connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="doctrine/resolve_target_entity.html">How to Define Relationships with Abstract Classes and Interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="doctrine/reverse_engineering.html">How to Generate Entities from an Existing Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session/database.html">Store Sessions in a Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/database.html">How to Test Code that Interacts with the Database</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Databases and the Doctrine ORM</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/doctrine.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="databases-and-the-doctrine-orm">
+<span id="index-0"></span><h1>Databases and the Doctrine ORM<a class="headerlink" href="#databases-and-the-doctrine-orm" title="Permalink to this headline">¶</a></h1>
+<div class="screencast admonition">
+<p class="first admonition-title">Screencast</p>
+<p class="last">Do you prefer video tutorials? Check out the <a class="reference external" href="https://symfonycasts.com/screencast/symfony-doctrine">Doctrine screencast series</a>.</p>
+</div>
+<p>Symfony provides all the tools you need to use databases in your applications
+thanks to <a class="reference external" href="https://www.doctrine-project.org/">Doctrine</a>, the best set of PHP libraries to work with databases.
+These tools support relational databases like MySQL and PostgreSQL and also
+NoSQL databases like MongoDB.</p>
+<p>Databases are a broad topic, so the documentation is divided in three articles:</p>
+<ul class="simple">
+<li>This article explains the recommended way to work with <strong>relational databases</strong>
+in Symfony applications;</li>
+<li>Read <a class="reference internal" href="doctrine/dbal.html"><span class="doc">this other article</span></a> if you need <strong>low-level access</strong>
+to perform raw SQL queries to relational databases (similar to PHP’s <a class="reference external" href="https://www.php.net/pdo">PDO</a>);</li>
+<li>Read <a class="reference external" href="https://symfony.com/doc/current/bundles/DoctrineMongoDBBundle/index.html">DoctrineMongoDBBundle docs</a> if you are working with <strong>MongoDB databases</strong>.</li>
+</ul>
+<div class="section" id="installing-doctrine">
+<h2>Installing Doctrine<a class="headerlink" href="#installing-doctrine" title="Permalink to this headline">¶</a></h2>
+<p>First, install Doctrine support via the <code class="docutils literal notranslate"><span class="pre">orm</span></code> <a class="reference internal" href="setup.html#symfony-packs"><span class="std std-ref">Symfony pack</span></a>,
+as well as the MakerBundle, which will help generate some code:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/orm-pack
+<span class="gp">$</span> composer require --dev symfony/maker-bundle
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="configuring-the-database">
+<h3>Configuring the Database<a class="headerlink" href="#configuring-the-database" title="Permalink to this headline">¶</a></h3>
+<p>The database connection information is stored as an environment variable called
+<code class="docutils literal notranslate"><span class="pre">DATABASE_URL</span></code>. For development, you can find and customize this inside <code class="docutils literal notranslate"><span class="pre">.env</span></code>:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span># .env (or override DATABASE_URL in .env.local to avoid committing your changes)
+
+# customize this line!
+DATABASE_URL=&quot;mysql://db_user:db_password@127.0.0.1:3306/db_name&quot;
+
+# to use sqlite:
+# DATABASE_URL=&quot;sqlite:///%kernel.project_dir%/var/app.db&quot;
+</pre></div>
+</td></tr></table></div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">If the username, password, host or database name contain any character considered
+special in a URI (such as <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>, <code class="docutils literal notranslate"><span class="pre">$</span></code>, <code class="docutils literal notranslate"><span class="pre">#</span></code>, <code class="docutils literal notranslate"><span class="pre">/</span></code>, <code class="docutils literal notranslate"><span class="pre">:</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">!</span></code>),
+you must encode them. See <a class="reference external" href="https://www.ietf.org/rfc/rfc3986.txt">RFC 3986</a> for the full list of reserved characters or
+use the <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.urlencode.php" title="urlencode"><span class="pre">urlencode</span></a></code> function to encode them. In this case you need to
+remove the <code class="docutils literal notranslate"><span class="pre">resolve:</span></code> prefix in <code class="docutils literal notranslate"><span class="pre">config/packages/doctrine.yaml</span></code> to avoid errors:
+<code class="docutils literal notranslate"><span class="pre">url:</span> <span class="pre">'%env(resolve:DATABASE_URL)%'</span></code></p>
+</div>
+<p>Now that your connection parameters are setup, Doctrine can create the <code class="docutils literal notranslate"><span class="pre">db_name</span></code>
+database for you:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console doctrine:database:create
+</pre></div>
+</td></tr></table></div>
+<p>There are more options in <code class="docutils literal notranslate"><span class="pre">config/packages/doctrine.yaml</span></code> that you can configure,
+including your <code class="docutils literal notranslate"><span class="pre">server_version</span></code> (e.g. 5.7 if you’re using MySQL 5.7), which may
+affect how Doctrine functions.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">There are many other Doctrine commands. Run <code class="docutils literal notranslate"><span class="pre">php</span> <span class="pre">bin/console</span> <span class="pre">list</span> <span class="pre">doctrine</span></code>
+to see a full list.</p>
+</div>
+</div>
+</div>
+<div class="section" id="creating-an-entity-class">
+<h2>Creating an Entity Class<a class="headerlink" href="#creating-an-entity-class" title="Permalink to this headline">¶</a></h2>
+<p>Suppose you’re building an application where products need to be displayed.
+Without even thinking about Doctrine or databases, you already know that
+you need a <code class="docutils literal notranslate"><span class="pre">Product</span></code> object to represent those products.</p>
+<p id="doctrine-adding-mapping">You can use the <code class="docutils literal notranslate"><span class="pre">make:entity</span></code> command to create this class and any fields you
+need. The command will ask you some questions - answer them like done below:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></div></td><td class="code"><div class="highlight"><pre><span></span>$ php bin/console make:entity
+
+Class name of the entity to create or update:
+&gt; Product
+
+New property name <span class="o">(</span>press &lt;<span class="k">return</span>&gt; to stop adding fields<span class="o">)</span>:
+&gt; name
+
+Field <span class="nb">type</span> <span class="o">(</span>enter ? to see all types<span class="o">)</span> <span class="o">[</span>string<span class="o">]</span>:
+&gt; string
+
+Field length <span class="o">[</span><span class="m">255</span><span class="o">]</span>:
+&gt; <span class="m">255</span>
+
+Can this field be null in the database <span class="o">(</span>nullable<span class="o">)</span> <span class="o">(</span>yes/no<span class="o">)</span> <span class="o">[</span>no<span class="o">]</span>:
+&gt; no
+
+New property name <span class="o">(</span>press &lt;<span class="k">return</span>&gt; to stop adding fields<span class="o">)</span>:
+&gt; price
+
+Field <span class="nb">type</span> <span class="o">(</span>enter ? to see all types<span class="o">)</span> <span class="o">[</span>string<span class="o">]</span>:
+&gt; integer
+
+Can this field be null in the database <span class="o">(</span>nullable<span class="o">)</span> <span class="o">(</span>yes/no<span class="o">)</span> <span class="o">[</span>no<span class="o">]</span>:
+&gt; no
+
+New property name <span class="o">(</span>press &lt;<span class="k">return</span>&gt; to stop adding fields<span class="o">)</span>:
+&gt;
+<span class="o">(</span>press enter again to finish<span class="o">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.3: </span>The interactive behavior of the <code class="docutils literal notranslate"><span class="pre">make:entity</span></code> command was introduced
+in MakerBundle 1.3.</p>
+</div>
+<p>Woh! You now have a new <code class="docutils literal notranslate"><span class="pre">src/Entity/Product.php</span></code> file:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Entity/Product.php</span>
+<span class="k">namespace</span> <span class="nx">App\Entity</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Doctrine\ORM\Mapping</span> <span class="k">as</span> <span class="nx">ORM</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * @ORM\Entity(repositoryClass=&quot;App\Repository\ProductRepository&quot;)</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">Product</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @ORM\Id</span>
+<span class="sd">     * @ORM\GeneratedValue</span>
+<span class="sd">     * @ORM\Column(type=&quot;integer&quot;)</span>
+<span class="sd">     */</span>
+    <span class="k">private</span> <span class="nv">$id</span><span class="p">;</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @ORM\Column(type=&quot;string&quot;, length=255)</span>
+<span class="sd">     */</span>
+    <span class="k">private</span> <span class="nv">$name</span><span class="p">;</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @ORM\Column(type=&quot;integer&quot;)</span>
+<span class="sd">     */</span>
+    <span class="k">private</span> <span class="nv">$price</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getId</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ... getter and setter methods</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Confused why the price is an integer? Don’t worry: this is just an example.
+But, storing prices as integers (e.g. 100 = $1 USD) can avoid rounding issues.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are using an SQLite database, you’ll see the following error:
+<em>PDOException: SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL
+column with default value NULL</em>. Add a <code class="docutils literal notranslate"><span class="pre">nullable=true</span></code> option to the
+<code class="docutils literal notranslate"><span class="pre">description</span></code> property to fix the problem.</p>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">There is a <a class="reference external" href="https://dev.mysql.com/doc/refman/5.6/en/innodb-limits.html">limit of 767 bytes for the index key prefix</a> when using
+InnoDB tables in MySQL 5.6 and earlier versions. String columns with 255
+character length and <code class="docutils literal notranslate"><span class="pre">utf8mb4</span></code> encoding surpass that limit. This means
+that any column of type <code class="docutils literal notranslate"><span class="pre">string</span></code> and <code class="docutils literal notranslate"><span class="pre">unique=true</span></code> must set its
+maximum <code class="docutils literal notranslate"><span class="pre">length</span></code> to <code class="docutils literal notranslate"><span class="pre">190</span></code>. Otherwise, you’ll see this error:
+<em>“[PDOException] SQLSTATE[42000]: Syntax error or access violation:
+1071 Specified key was too long; max key length is 767 bytes”</em>.</p>
+</div>
+<p>This class is called an “entity”. And soon, you’ll be able to save and query Product
+objects to a <code class="docutils literal notranslate"><span class="pre">product</span></code> table in your database. Each property in the <code class="docutils literal notranslate"><span class="pre">Product</span></code>
+entity can be mapped to a column in that table. This is usually done with annotations:
+the <code class="docutils literal notranslate"><span class="pre">&#64;ORM\...</span></code> comments that you see above each property:</p>
+<img alt="_images/mapping_single_entity.png" class="align-center" src="_images/mapping_single_entity.png" />
+<p>The <code class="docutils literal notranslate"><span class="pre">make:entity</span></code> command is a tool to make life easier. But this is <em>your</em> code:
+add/remove fields, add/remove methods or update configuration.</p>
+<p>Doctrine supports a wide variety of field types, each with their own options.
+To see a full list, check out <a class="reference external" href="https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/basic-mapping.html">Doctrine’s Mapping Types documentation</a>.
+If you want to use XML instead of annotations, add <code class="docutils literal notranslate"><span class="pre">type:</span> <span class="pre">xml</span></code> and
+<code class="docutils literal notranslate"><span class="pre">dir:</span> <span class="pre">'%kernel.project_dir%/config/doctrine'</span></code> to the entity mappings in your
+<code class="docutils literal notranslate"><span class="pre">config/packages/doctrine.yaml</span></code> file.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Be careful not to use reserved SQL keywords as your table or column names
+(e.g. <code class="docutils literal notranslate"><span class="pre">GROUP</span></code> or <code class="docutils literal notranslate"><span class="pre">USER</span></code>). See Doctrine’s <a class="reference external" href="https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/basic-mapping.html#quoting-reserved-words">Reserved SQL keywords documentation</a>
+for details on how to escape these. Or, change the table name with
+<code class="docutils literal notranslate"><span class="pre">&#64;ORM\Table(name=&quot;groups&quot;)</span></code> above the class or configure the column name with
+the <code class="docutils literal notranslate"><span class="pre">name=&quot;group_name&quot;</span></code> option.</p>
+</div>
+</div>
+<div class="section" id="migrations-creating-the-database-tables-schema">
+<span id="doctrine-creating-the-database-tables-schema"></span><h2>Migrations: Creating the Database Tables/Schema<a class="headerlink" href="#migrations-creating-the-database-tables-schema" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Product</span></code> class is fully-configured and ready to save to a <code class="docutils literal notranslate"><span class="pre">product</span></code> table.
+If you just defined this class, your database doesn’t actually have the <code class="docutils literal notranslate"><span class="pre">product</span></code>
+table yet. To add it, you can leverage the <a class="reference external" href="https://github.com/doctrine/DoctrineMigrationsBundle">DoctrineMigrationsBundle</a>, which is
+already installed:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console make:migration
+</pre></div>
+</td></tr></table></div>
+<p>If everything worked, you should see something like this:</p>
+<blockquote>
+<div><p>SUCCESS!</p>
+<p>Next: Review the new migration “src/Migrations/Version20180207231217.php”
+Then: Run the migration with php bin/console doctrine:migrations:migrate</p>
+</div></blockquote>
+<p>If you open this file, it contains the SQL needed to update your database! To run
+that SQL, execute your migrations:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console doctrine:migrations:migrate
+</pre></div>
+</td></tr></table></div>
+<p>This command executes all migration files that have not already been run against
+your database. You should run this command on production when you deploy to keep
+your production database up-to-date.</p>
+</div>
+<div class="section" id="migrations-adding-more-fields">
+<span id="doctrine-add-more-fields"></span><h2>Migrations &amp; Adding more Fields<a class="headerlink" href="#migrations-adding-more-fields" title="Permalink to this headline">¶</a></h2>
+<p>But what if you need to add a new field property to <code class="docutils literal notranslate"><span class="pre">Product</span></code>, like a
+<code class="docutils literal notranslate"><span class="pre">description</span></code>? You can edit the class to add the new property. But, you can
+also use <code class="docutils literal notranslate"><span class="pre">make:entity</span></code> again:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span>$ php bin/console make:entity
+
+Class name of the entity to create or update
+&gt; Product
+
+New property name <span class="o">(</span>press &lt;<span class="k">return</span>&gt; to stop adding fields<span class="o">)</span>:
+&gt; description
+
+Field <span class="nb">type</span> <span class="o">(</span>enter ? to see all types<span class="o">)</span> <span class="o">[</span>string<span class="o">]</span>:
+&gt; text
+
+Can this field be null in the database <span class="o">(</span>nullable<span class="o">)</span> <span class="o">(</span>yes/no<span class="o">)</span> <span class="o">[</span>no<span class="o">]</span>:
+&gt; no
+
+New property name <span class="o">(</span>press &lt;<span class="k">return</span>&gt; to stop adding fields<span class="o">)</span>:
+&gt;
+<span class="o">(</span>press enter again to finish<span class="o">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>This adds the new <code class="docutils literal notranslate"><span class="pre">description</span></code> property and <code class="docutils literal notranslate"><span class="pre">getDescription()</span></code> and <code class="docutils literal notranslate"><span class="pre">setDescription()</span></code>
+methods:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span>// src/Entity/Product.php
+// ...
+
+class Product
+{
+    // ...
+
+<span class="gi">+     /**</span>
+<span class="gi">+      * @ORM\Column(type=&quot;text&quot;)</span>
+<span class="gi">+      */</span>
+<span class="gi">+     private $description;</span>
+
+    // getDescription() &amp; setDescription() were also added
+}
+</pre></div>
+</td></tr></table></div>
+<p>The new property is mapped, but it doesn’t exist yet in the <code class="docutils literal notranslate"><span class="pre">product</span></code> table. No
+problem! Generate a new migration:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console make:migration
+</pre></div>
+</td></tr></table></div>
+<p>This time, the SQL in the generated file will look like this:</p>
+<div class="highlight-sql notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">product</span> <span class="k">ADD</span> <span class="n">description</span> <span class="n">LONGTEXT</span> <span class="k">NOT</span> <span class="k">NULL</span>
+</pre></div>
+</td></tr></table></div>
+<p>The migration system is <em>smart</em>. It compares all of your entities with the current
+state of the database and generates the SQL needed to synchronize them! Like
+before, execute your migrations:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console doctrine:migrations:migrate
+</pre></div>
+</td></tr></table></div>
+<p>This will only execute the <em>one</em> new migration file, because DoctrineMigrationsBundle
+knows that the first migration was already executed earlier. Behind the scenes, it
+manages a <code class="docutils literal notranslate"><span class="pre">migration_versions</span></code> table to track this.</p>
+<p>Each time you make a change to your schema, run these two commands to generate the
+migration and then execute it. Be sure to commit the migration files and execute
+them when you deploy.</p>
+<div class="admonition tip" id="doctrine-generating-getters-and-setters">
+<p class="first admonition-title">Tip</p>
+<p>If you prefer to add new properties manually, the <code class="docutils literal notranslate"><span class="pre">make:entity</span></code> command can
+generate the getter &amp; setter methods for you:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console make:entity --regenerate
+</pre></div>
+</td></tr></table></div>
+<p class="last">If you make some changes and want to regenerate <em>all</em> getter/setter methods,
+also pass <code class="docutils literal notranslate"><span class="pre">--overwrite</span></code>.</p>
+</div>
+</div>
+<div class="section" id="persisting-objects-to-the-database">
+<h2>Persisting Objects to the Database<a class="headerlink" href="#persisting-objects-to-the-database" title="Permalink to this headline">¶</a></h2>
+<p>It’s time to save a <code class="docutils literal notranslate"><span class="pre">Product</span></code> object to the database! Let’s create a new controller
+to experiment:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console make:controller ProductController
+</pre></div>
+</td></tr></table></div>
+<p>Inside the controller, you can create a new <code class="docutils literal notranslate"><span class="pre">Product</span></code> object, set data on it,
+and save it:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/ProductController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="k">use</span> <span class="nx">App\Entity\Product</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\ORM\EntityManagerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ProductController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @Route(&quot;/product&quot;, name=&quot;create_product&quot;)</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">createProduct</span><span class="p">()</span><span class="o">:</span> <span class="nx">Response</span>
+    <span class="p">{</span>
+        <span class="c1">// you can fetch the EntityManager via $this-&gt;getDoctrine()</span>
+        <span class="c1">// or you can add an argument to the action: createProduct(EntityManagerInterface $entityManager)</span>
+        <span class="nv">$entityManager</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDoctrine</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getManager</span><span class="p">();</span>
+
+        <span class="nv">$product</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Product</span><span class="p">();</span>
+        <span class="nv">$product</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">&#39;Keyboard&#39;</span><span class="p">);</span>
+        <span class="nv">$product</span><span class="o">-&gt;</span><span class="na">setPrice</span><span class="p">(</span><span class="mi">1999</span><span class="p">);</span>
+        <span class="nv">$product</span><span class="o">-&gt;</span><span class="na">setDescription</span><span class="p">(</span><span class="s1">&#39;Ergonomic and stylish!&#39;</span><span class="p">);</span>
+
+        <span class="c1">// tell Doctrine you want to (eventually) save the Product (no queries yet)</span>
+        <span class="nv">$entityManager</span><span class="o">-&gt;</span><span class="na">persist</span><span class="p">(</span><span class="nv">$product</span><span class="p">);</span>
+
+        <span class="c1">// actually executes the queries (i.e. the INSERT query)</span>
+        <span class="nv">$entityManager</span><span class="o">-&gt;</span><span class="na">flush</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Saved new product with id &#39;</span><span class="o">.</span><span class="nv">$product</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Try it out!</p>
+<blockquote>
+<div><a class="reference external" href="http://localhost:8000/product">http://localhost:8000/product</a></div></blockquote>
+<p>Congratulations! You just created your first row in the <code class="docutils literal notranslate"><span class="pre">product</span></code> table. To prove it,
+you can query the database directly:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console doctrine:query:sql <span class="s1">&#39;SELECT * FROM product&#39;</span>
+
+<span class="c1"># on Windows systems not using Powershell, run this command instead:</span>
+<span class="c1"># php bin/console doctrine:query:sql &quot;SELECT * FROM product&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Take a look at the previous example in more detail:</p>
+<ul class="simple" id="doctrine-entity-manager">
+<li><strong>line 18</strong> The <code class="docutils literal notranslate"><span class="pre">$this-&gt;getDoctrine()-&gt;getManager()</span></code> method gets Doctrine’s
+<em>entity manager</em> object, which is the most important object in Doctrine. It’s
+responsible for saving objects to, and fetching objects from, the database.</li>
+<li><strong>lines 20-23</strong> In this section, you instantiate and work with the <code class="docutils literal notranslate"><span class="pre">$product</span></code>
+object like any other normal PHP object.</li>
+<li><strong>line 26</strong> The <code class="docutils literal notranslate"><span class="pre">persist($product)</span></code> call tells Doctrine to “manage” the
+<code class="docutils literal notranslate"><span class="pre">$product</span></code> object. This does <strong>not</strong> cause a query to be made to the database.</li>
+<li><strong>line 29</strong> When the <code class="docutils literal notranslate"><span class="pre">flush()</span></code> method is called, Doctrine looks through
+all of the objects that it’s managing to see if they need to be persisted
+to the database. In this example, the <code class="docutils literal notranslate"><span class="pre">$product</span></code> object’s data doesn’t
+exist in the database, so the entity manager executes an <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> query,
+creating a new row in the <code class="docutils literal notranslate"><span class="pre">product</span></code> table.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the <code class="docutils literal notranslate"><span class="pre">flush()</span></code> call fails, a <code class="docutils literal notranslate"><span class="pre">Doctrine\ORM\ORMException</span></code> exception
+is thrown. See <a class="reference external" href="https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/transactions-and-concurrency.html">Transactions and Concurrency</a>.</p>
+</div>
+<p>Whether you’re creating or updating objects, the workflow is always the same: Doctrine
+is smart enough to know if it should INSERT or UPDATE your entity.</p>
+</div>
+<div class="section" id="validating-objects">
+<span id="automatic-object-validation"></span><h2>Validating Objects<a class="headerlink" href="#validating-objects" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="validation.html"><span class="doc">The Symfony validator</span></a> reuses Doctrine metadata to perform
+some basic validation tasks:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/ProductController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Entity\Product</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Validator\Validator\ValidatorInterface</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">class</span> <span class="nc">ProductController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @Route(&quot;/product&quot;, name=&quot;create_product&quot;)</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">createProduct</span><span class="p">(</span><span class="nx">ValidatorInterface</span> <span class="nv">$validator</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span>
+    <span class="p">{</span>
+        <span class="nv">$product</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Product</span><span class="p">();</span>
+        <span class="c1">// This will trigger an error: the column isn&#39;t nullable in the database</span>
+        <span class="nv">$product</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="k">null</span><span class="p">);</span>
+        <span class="c1">// This will trigger a type mismatch error: an integer is expected</span>
+        <span class="nv">$product</span><span class="o">-&gt;</span><span class="na">setPrice</span><span class="p">(</span><span class="s1">&#39;1999&#39;</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
+
+        <span class="nv">$errors</span> <span class="o">=</span> <span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="nv">$product</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nv">$errors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">((</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$errors</span><span class="p">,</span> <span class="mi">400</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Although the <code class="docutils literal notranslate"><span class="pre">Product</span></code> entity doesn’t define any explicit
+<a class="reference internal" href="validation.html"><span class="doc">validation configuration</span></a>, Symfony introspects the Doctrine
+mapping configuration to infer some validation rules. For example, given that
+the <code class="docutils literal notranslate"><span class="pre">name</span></code> property can’t be <code class="docutils literal notranslate"><span class="pre">null</span></code> in the database, a
+<a class="reference internal" href="reference/constraints/NotNull.html"><span class="doc">NotNull constraint</span></a> is added automatically
+to the property (if it doesn’t contain that constraint already).</p>
+<p>The following table summarizes the mapping between Doctrine metadata and
+the corresponding validation constraints added automatically by Symfony:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="37%" />
+<col width="52%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Doctrine attribute</th>
+<th class="head">Validation constraint</th>
+<th class="head">Notes</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">nullable=false</span></code></td>
+<td><a class="reference internal" href="reference/constraints/NotNull.html"><span class="doc">NotNull</span></a></td>
+<td>Requires installing the <a class="reference internal" href="components/property_info.html"><span class="doc">PropertyInfo component</span></a></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">type</span></code></td>
+<td><a class="reference internal" href="reference/constraints/Type.html"><span class="doc">Type</span></a></td>
+<td>Requires installing the <a class="reference internal" href="components/property_info.html"><span class="doc">PropertyInfo component</span></a></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">unique=true</span></code></td>
+<td><a class="reference internal" href="reference/constraints/UniqueEntity.html"><span class="doc">UniqueEntity</span></a></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">length</span></code></td>
+<td><a class="reference internal" href="reference/constraints/Length.html"><span class="doc">Length</span></a></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p>Because <a class="reference internal" href="forms.html"><span class="doc">the Form component</span></a> as well as <a class="reference external" href="https://api-platform.com/docs/core/validation/">API Platform</a> internally
+use the Validator component, all your forms and web APIs will also automatically
+benefit from these automatic validation constraints.</p>
+<p>This automatic validation is a nice feature to improve your productivity, but it
+doesn’t replace the validation configuration entirely. You still need to add
+some <a class="reference internal" href="reference/constraints.html"><span class="doc">validation constraints</span></a> to ensure that data
+provided by the user is correct.</p>
+</div>
+<div class="section" id="fetching-objects-from-the-database">
+<h2>Fetching Objects from the Database<a class="headerlink" href="#fetching-objects-from-the-database" title="Permalink to this headline">¶</a></h2>
+<p>Fetching an object back out of the database is even easier. Suppose you want to
+be able to go to <code class="docutils literal notranslate"><span class="pre">/product/1</span></code> to see your new product:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/ProductController.php</span>
+<span class="c1">// ...</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * @Route(&quot;/product/{id}&quot;, name=&quot;product_show&quot;)</span>
+<span class="sd"> */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">show</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$product</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDoctrine</span><span class="p">()</span>
+        <span class="o">-&gt;</span><span class="na">getRepository</span><span class="p">(</span><span class="nx">Product</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$product</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createNotFoundException</span><span class="p">(</span>
+            <span class="s1">&#39;No product found for id &#39;</span><span class="o">.</span><span class="nv">$id</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Check out this great product: &#39;</span><span class="o">.</span><span class="nv">$product</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">());</span>
+
+    <span class="c1">// or render a template</span>
+    <span class="c1">// in the template, print things with {{ product.name }}</span>
+    <span class="c1">// return $this-&gt;render(&#39;product/show.html.twig&#39;, [&#39;product&#39; =&gt; $product]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Another possibility is to use the <code class="docutils literal notranslate"><span class="pre">ProductRepository</span></code> using Symfony’s autowiring
+and injected by the dependency injection container:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/ProductController.php</span>
+<span class="c1">// ...</span>
+<span class="k">use</span> <span class="nx">App\Repository\ProductRepository</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * @Route(&quot;/product/{id}&quot;, name=&quot;product_show&quot;)</span>
+<span class="sd"> */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">show</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nx">ProductRepository</span> <span class="nv">$productRepository</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$product</span> <span class="o">=</span> <span class="nv">$productRepository</span>
+        <span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Try it out!</p>
+<blockquote>
+<div><a class="reference external" href="http://localhost:8000/product/1">http://localhost:8000/product/1</a></div></blockquote>
+<p>When you query for a particular type of object, you always use what’s known
+as its “repository”. You can think of a repository as a PHP class whose only
+job is to help you fetch entities of a certain class.</p>
+<p>Once you have a repository object, you have many helper methods:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$repository</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDoctrine</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getRepository</span><span class="p">(</span><span class="nx">Product</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+<span class="c1">// look for a single Product by its primary key (usually &quot;id&quot;)</span>
+<span class="nv">$product</span> <span class="o">=</span> <span class="nv">$repository</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+
+<span class="c1">// look for a single Product by name</span>
+<span class="nv">$product</span> <span class="o">=</span> <span class="nv">$repository</span><span class="o">-&gt;</span><span class="na">findOneBy</span><span class="p">([</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Keyboard&#39;</span><span class="p">]);</span>
+<span class="c1">// or find by name and price</span>
+<span class="nv">$product</span> <span class="o">=</span> <span class="nv">$repository</span><span class="o">-&gt;</span><span class="na">findOneBy</span><span class="p">([</span>
+    <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Keyboard&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;price&#39;</span> <span class="o">=&gt;</span> <span class="mi">1999</span><span class="p">,</span>
+<span class="p">]);</span>
+
+<span class="c1">// look for multiple Product objects matching the name, ordered by price</span>
+<span class="nv">$products</span> <span class="o">=</span> <span class="nv">$repository</span><span class="o">-&gt;</span><span class="na">findBy</span><span class="p">(</span>
+    <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Keyboard&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;price&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ASC&#39;</span><span class="p">]</span>
+<span class="p">);</span>
+
+<span class="c1">// look for *all* Product objects</span>
+<span class="nv">$products</span> <span class="o">=</span> <span class="nv">$repository</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>You can also add <em>custom</em> methods for more complex queries! More on that later in
+the <a class="reference internal" href="#doctrine-queries"><span class="std std-ref">Querying for Objects: The Repository</span></a> section.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>When rendering an HTML page, the web debug toolbar at the bottom of the page
+will display the number of queries and the time it took to execute them:</p>
+<img alt="_images/doctrine_web_debug_toolbar.png" class="with-browser align-center" src="_images/doctrine_web_debug_toolbar.png" />
+<p class="last">If the number of database queries is too high, the icon will turn yellow to
+indicate that something may not be correct. Click on the icon to open the
+Symfony Profiler and see the exact queries that were executed. If you don’t
+see the web debug toolbar, install the <code class="docutils literal notranslate"><span class="pre">profiler</span></code> <a class="reference internal" href="setup.html#symfony-packs"><span class="std std-ref">Symfony pack</span></a>
+by running this command: <code class="docutils literal notranslate"><span class="pre">composer</span> <span class="pre">require</span> <span class="pre">--dev</span> <span class="pre">symfony/profiler-pack</span></code>.</p>
+</div>
+</div>
+<div class="section" id="automatically-fetching-objects-paramconverter">
+<h2>Automatically Fetching Objects (ParamConverter)<a class="headerlink" href="#automatically-fetching-objects-paramconverter" title="Permalink to this headline">¶</a></h2>
+<p>In many cases, you can use the <a class="reference external" href="https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html">SensioFrameworkExtraBundle</a> to do the query
+for you automatically! First, install the bundle in case you don’t have it:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require sensio/framework-extra-bundle
+</pre></div>
+</td></tr></table></div>
+<p>Now, simplify your controller:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/ProductController.php</span>
+<span class="k">use</span> <span class="nx">App\Entity\Product</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * @Route(&quot;/product/{id}&quot;, name=&quot;product_show&quot;)</span>
+<span class="sd"> */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">show</span><span class="p">(</span><span class="nx">Product</span> <span class="nv">$product</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// use the Product!</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That’s it! The bundle uses the <code class="docutils literal notranslate"><span class="pre">{id}</span></code> from the route to query for the <code class="docutils literal notranslate"><span class="pre">Product</span></code>
+by the <code class="docutils literal notranslate"><span class="pre">id</span></code> column. If it’s not found, a 404 page is generated.</p>
+<p>There are many more options you can use. Read more about the <a class="reference external" href="https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html">ParamConverter</a>.</p>
+</div>
+<div class="section" id="updating-an-object">
+<h2>Updating an Object<a class="headerlink" href="#updating-an-object" title="Permalink to this headline">¶</a></h2>
+<p>Once you’ve fetched an object from Doctrine, you interact with it the same as
+with any PHP model:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="sd">/**</span>
+<span class="sd"> * @Route(&quot;/product/edit/{id}&quot;)</span>
+<span class="sd"> */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">update</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$entityManager</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDoctrine</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getManager</span><span class="p">();</span>
+    <span class="nv">$product</span> <span class="o">=</span> <span class="nv">$entityManager</span><span class="o">-&gt;</span><span class="na">getRepository</span><span class="p">(</span><span class="nx">Product</span><span class="o">::</span><span class="na">class</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$product</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createNotFoundException</span><span class="p">(</span>
+            <span class="s1">&#39;No product found for id &#39;</span><span class="o">.</span><span class="nv">$id</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nv">$product</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">&#39;New product name!&#39;</span><span class="p">);</span>
+    <span class="nv">$entityManager</span><span class="o">-&gt;</span><span class="na">flush</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirectToRoute</span><span class="p">(</span><span class="s1">&#39;product_show&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$product</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">()</span>
+    <span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Using Doctrine to edit an existing product consists of three steps:</p>
+<ol class="arabic simple">
+<li>fetching the object from Doctrine;</li>
+<li>modifying the object;</li>
+<li>calling <code class="docutils literal notranslate"><span class="pre">flush()</span></code> on the entity manager.</li>
+</ol>
+<p>You <em>can</em> call <code class="docutils literal notranslate"><span class="pre">$entityManager-&gt;persist($product)</span></code>, but it isn’t necessary:
+Doctrine is already “watching” your object for changes.</p>
+</div>
+<div class="section" id="deleting-an-object">
+<h2>Deleting an Object<a class="headerlink" href="#deleting-an-object" title="Permalink to this headline">¶</a></h2>
+<p>Deleting an object is very similar, but requires a call to the <code class="docutils literal notranslate"><span class="pre">remove()</span></code>
+method of the entity manager:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$entityManager</span><span class="o">-&gt;</span><span class="na">remove</span><span class="p">(</span><span class="nv">$product</span><span class="p">);</span>
+<span class="nv">$entityManager</span><span class="o">-&gt;</span><span class="na">flush</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>As you might expect, the <code class="docutils literal notranslate"><span class="pre">remove()</span></code> method notifies Doctrine that you’d
+like to remove the given object from the database. The <code class="docutils literal notranslate"><span class="pre">DELETE</span></code> query isn’t
+actually executed until the <code class="docutils literal notranslate"><span class="pre">flush()</span></code> method is called.</p>
+</div>
+<div class="section" id="querying-for-objects-the-repository">
+<span id="doctrine-queries"></span><h2>Querying for Objects: The Repository<a class="headerlink" href="#querying-for-objects-the-repository" title="Permalink to this headline">¶</a></h2>
+<p>You’ve already seen how the repository object allows you to run basic queries
+without any work:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// from inside a controller</span>
+<span class="nv">$repository</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDoctrine</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getRepository</span><span class="p">(</span><span class="nx">Product</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+<span class="nv">$product</span> <span class="o">=</span> <span class="nv">$repository</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>But what if you need a more complex query? When you generated your entity with
+<code class="docutils literal notranslate"><span class="pre">make:entity</span></code>, the command <em>also</em> generated a <code class="docutils literal notranslate"><span class="pre">ProductRepository</span></code> class:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Repository/ProductRepository.php</span>
+<span class="k">namespace</span> <span class="nx">App\Repository</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Entity\Product</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\Persistence\ManagerRegistry</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ProductRepository</span> <span class="k">extends</span> <span class="nx">ServiceEntityRepository</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">ManagerRegistry</span> <span class="nv">$registry</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">(</span><span class="nv">$registry</span><span class="p">,</span> <span class="nx">Product</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When you fetch your repository (i.e. <code class="docutils literal notranslate"><span class="pre">-&gt;getRepository(Product::class)</span></code>), it is
+<em>actually</em> an instance of <em>this</em> object! This is because of the <code class="docutils literal notranslate"><span class="pre">repositoryClass</span></code>
+config that was generated at the top of your <code class="docutils literal notranslate"><span class="pre">Product</span></code> entity class.</p>
+<p>Suppose you want to query for all Product objects greater than a certain price. Add
+a new method for this to your repository:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Repository/ProductRepository.php</span>
+
+<span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">ProductRepository</span> <span class="k">extends</span> <span class="nx">ServiceEntityRepository</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">ManagerRegistry</span> <span class="nv">$registry</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">(</span><span class="nv">$registry</span><span class="p">,</span> <span class="nx">Product</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @return Product[]</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">findAllGreaterThanPrice</span><span class="p">(</span><span class="nv">$price</span><span class="p">)</span><span class="o">:</span> <span class="k">array</span>
+    <span class="p">{</span>
+        <span class="nv">$entityManager</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getEntityManager</span><span class="p">();</span>
+
+        <span class="nv">$query</span> <span class="o">=</span> <span class="nv">$entityManager</span><span class="o">-&gt;</span><span class="na">createQuery</span><span class="p">(</span>
+            <span class="s1">&#39;SELECT p</span>
+<span class="s1">            FROM App\Entity\Product p</span>
+<span class="s1">            WHERE p.price &gt; :price</span>
+<span class="s1">            ORDER BY p.price ASC&#39;</span>
+        <span class="p">)</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="nv">$price</span><span class="p">);</span>
+
+        <span class="c1">// returns an array of Product objects</span>
+        <span class="k">return</span> <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">getResult</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The string passed to <code class="docutils literal notranslate"><span class="pre">createQuery()</span></code> might look like SQL, but it is
+<a class="reference external" href="https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/dql-doctrine-query-language.html">Doctrine Query Language</a>. This allows you to type queries using commonly
+known query language, but referencing PHP objects instead (i.e. in the <code class="docutils literal notranslate"><span class="pre">FROM</span></code>
+statement).</p>
+<p>Now, you can call this method on the repository:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// from inside a controller</span>
+<span class="nv">$minPrice</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+
+<span class="nv">$products</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDoctrine</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">getRepository</span><span class="p">(</span><span class="nx">Product</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">findAllGreaterThanPrice</span><span class="p">(</span><span class="nv">$minPrice</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="service_container.html#services-constructor-injection"><span class="std std-ref">Injecting Services/Config into a Service</span></a> for how to inject the repository into
+any service.</p>
+<div class="section" id="querying-with-the-query-builder">
+<h3>Querying with the Query Builder<a class="headerlink" href="#querying-with-the-query-builder" title="Permalink to this headline">¶</a></h3>
+<p>Doctrine also provides a <a class="reference external" href="https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/query-builder.html">Query Builder</a>, an object-oriented way to write
+queries. It is recommended to use this when queries are built dynamically (i.e.
+based on PHP conditions):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Repository/ProductRepository.php</span>
+
+<span class="c1">// ...</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">findAllGreaterThanPrice</span><span class="p">(</span><span class="nv">$price</span><span class="p">,</span> <span class="nv">$includeUnavailableProducts</span> <span class="o">=</span> <span class="k">false</span><span class="p">)</span><span class="o">:</span> <span class="k">array</span>
+<span class="p">{</span>
+    <span class="c1">// automatically knows to select Products</span>
+    <span class="c1">// the &quot;p&quot; is an alias you&#39;ll use in the rest of the query</span>
+    <span class="nv">$qb</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createQueryBuilder</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;p.price &gt; :price&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="nv">$price</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">orderBy</span><span class="p">(</span><span class="s1">&#39;p.price&#39;</span><span class="p">,</span> <span class="s1">&#39;ASC&#39;</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$includeUnavailableProducts</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">andWhere</span><span class="p">(</span><span class="s1">&#39;p.available = TRUE&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="nv">$query</span> <span class="o">=</span> <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">getQuery</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
+
+    <span class="c1">// to get just one result:</span>
+    <span class="c1">// $product = $query-&gt;setMaxResults(1)-&gt;getOneOrNullResult();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="querying-with-sql">
+<h3>Querying with SQL<a class="headerlink" href="#querying-with-sql" title="Permalink to this headline">¶</a></h3>
+<p>In addition, you can query directly with SQL if you need to:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Repository/ProductRepository.php</span>
+
+<span class="c1">// ...</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">findAllGreaterThanPrice</span><span class="p">(</span><span class="nv">$price</span><span class="p">)</span><span class="o">:</span> <span class="k">array</span>
+<span class="p">{</span>
+    <span class="nv">$conn</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getEntityManager</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">();</span>
+
+    <span class="nv">$sql</span> <span class="o">=</span> <span class="s1">&#39;</span>
+<span class="s1">        SELECT * FROM product p</span>
+<span class="s1">        WHERE p.price &gt; :price</span>
+<span class="s1">        ORDER BY p.price ASC</span>
+<span class="s1">        &#39;</span><span class="p">;</span>
+    <span class="nv">$stmt</span> <span class="o">=</span> <span class="nv">$conn</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="nv">$sql</span><span class="p">);</span>
+    <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">([</span><span class="s1">&#39;price&#39;</span> <span class="o">=&gt;</span> <span class="nv">$price</span><span class="p">]);</span>
+
+    <span class="c1">// returns an array of arrays (i.e. a raw data set)</span>
+    <span class="k">return</span> <span class="nv">$stmt</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>With SQL, you will get back raw data, not objects (unless you use the <a class="reference external" href="https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/native-sql.html">NativeQuery</a>
+functionality).</p>
+</div>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>See the <a class="reference internal" href="reference/configuration/doctrine.html"><span class="doc">Doctrine config reference</span></a>.</p>
+</div>
+<div class="section" id="relationships-and-associations">
+<h2>Relationships and Associations<a class="headerlink" href="#relationships-and-associations" title="Permalink to this headline">¶</a></h2>
+<p>Doctrine provides all the functionality you need to manage database relationships
+(also known as associations), including ManyToOne, OneToMany, OneToOne and ManyToMany
+relationships.</p>
+<p>For info, see <a class="reference internal" href="doctrine/associations.html"><span class="doc">How to Work with Doctrine Associations / Relations</span></a>.</p>
+</div>
+<div class="section" id="database-testing">
+<h2>Database Testing<a class="headerlink" href="#database-testing" title="Permalink to this headline">¶</a></h2>
+<p>Read the article about <a class="reference internal" href="testing/database.html"><span class="doc">testing code that interacts with the database</span></a>.</p>
+</div>
+<div class="section" id="doctrine-extensions-timestampable-translatable-etc">
+<h2>Doctrine Extensions (Timestampable, Translatable, etc.)<a class="headerlink" href="#doctrine-extensions-timestampable-translatable-etc" title="Permalink to this headline">¶</a></h2>
+<p>Doctrine community has created some extensions to implement common needs such as
+<em>“set the value of the createdAt property automatically when creating an entity”</em>.
+Read more about the <a class="reference external" href="https://github.com/Atlantic18/DoctrineExtensions">available Doctrine extensions</a> and use the
+<a class="reference external" href="https://github.com/antishov/StofDoctrineExtensionsBundle">StofDoctrineExtensionsBundle</a> to integrate them in your application.</p>
+</div>
+<div class="section" id="learn-more">
+<h2>Learn more<a class="headerlink" href="#learn-more" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="doctrine/associations.html">How to Work with Doctrine Associations / Relations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine/events.html">Doctrine Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine/registration_form.html">How to Implement a Registration Form</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine/custom_dql_functions.html">How to Register custom DQL Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine/dbal.html">How to Use Doctrine DBAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine/multiple_entity_managers.html">How to Work with multiple Entity Managers and Connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine/resolve_target_entity.html">How to Define Relationships with Abstract Classes and Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine/reverse_engineering.html">How to Generate Entities from an Existing Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session/database.html">Store Sessions in a Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing/database.html">How to Test Code that Interacts with the Database</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

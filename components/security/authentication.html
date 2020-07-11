@@ -1,0 +1,673 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Authentication &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Authorization" href="authorization.html" />
+    <link rel="prev" title="The Security Component" href="../security.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cache.html">The Cache Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dependency_injection.html">The DependencyInjection Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../form.html">The Form Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../process.html">The Process Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../security.html">The Security Component</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../security.html#installation">Installation</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../security.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Authentication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="authorization.html">Authorization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="firewall.html">The Firewall and Authorization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="secure_tools.html">Securely Generating Random Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/access_control.html">How Does the Security access_control Work?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/access_denied_handler.html">How to Create a Custom Access Denied Handler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/acl.html">How to Use Access Control Lists (ACLs)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/auth_providers.html">Built-in Authentication Providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/csrf.html">How to Implement CSRF Protection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/custom_authentication_provider.html">How to Create a custom Authentication Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/experimental_authenticators.html">Using the new Authenticator-based Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/expressions.html">Security: Complex Access Controls with Expressions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/firewall_restriction.html">How to Restrict Firewalls to a Request</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/force_https.html">How to Force HTTPS or HTTP for different URLs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/form_login.html">Using the form_login Authentication Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/form_login_setup.html">How to Build a Login Form</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/guard_authentication.html">Custom Authentication System with Guard (API Token Example)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/impersonating_user.html">How to Impersonate a User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/json_login_setup.html">How to Build a JSON Authentication Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/ldap.html">Authenticating against an LDAP server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/multiple_guard_authenticators.html">How to Use Multiple Guard Authenticators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/named_encoders.html">How to Use A Different Password Encoder Algorithm Per User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/password_migration.html">How to Migrate a Password Hash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/remember_me.html">How to Add “Remember Me” Login Functionality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/reset_password.html">How to Add a Reset Password Feature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/securing_services.html">How to Secure any Service or Method in your Application</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/user_checkers.html">How to Create and Enable Custom User Checkers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/user_provider.html">Security User Providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/voters.html">How to Use Voters to Check User Permissions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/configuration/security.html">Security Configuration Reference (SecurityBundle)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/constraints/UserPassword.html">UserPassword</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">The Components</a> &raquo;</li>
+        
+          <li><a href="../security.html">The Security Component</a> &raquo;</li>
+        
+      <li>Authentication</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/components/security/authentication.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="authentication">
+<span id="index-0"></span><h1>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h1>
+<p>When a request points to a secured area, and one of the listeners from the
+firewall map is able to extract the user’s credentials from the current
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request"><span class="pre">Request</span></a></code> object, it should create
+a token, containing these credentials. The next thing the listener should
+do is ask the authentication manager to validate the given token, and return
+an <em>authenticated</em> token if the supplied credentials were found to be valid.
+The listener should then store the authenticated token using
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Authentication/Token/Storage/TokenStorageInterface.php" title="Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface"><span class="pre">the</span> <span class="pre">token</span> <span class="pre">storage</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\RequestEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">SomeAuthenticationListener</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @var TokenStorageInterface</span>
+<span class="sd">     */</span>
+    <span class="k">private</span> <span class="nv">$tokenStorage</span><span class="p">;</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @var AuthenticationManagerInterface</span>
+<span class="sd">     */</span>
+    <span class="k">private</span> <span class="nv">$authenticationManager</span><span class="p">;</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @var string Uniquely identifies the secured area</span>
+<span class="sd">     */</span>
+    <span class="k">private</span> <span class="nv">$providerKey</span><span class="p">;</span>
+
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">(</span><span class="nx">RequestEvent</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">();</span>
+
+        <span class="nv">$username</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span>
+        <span class="nv">$password</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span>
+
+        <span class="nv">$unauthenticatedToken</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UsernamePasswordToken</span><span class="p">(</span>
+            <span class="nv">$username</span><span class="p">,</span>
+            <span class="nv">$password</span><span class="p">,</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">providerKey</span>
+        <span class="p">);</span>
+
+        <span class="nv">$authenticatedToken</span> <span class="o">=</span> <span class="nv">$this</span>
+            <span class="o">-&gt;</span><span class="na">authenticationManager</span>
+            <span class="o">-&gt;</span><span class="na">authenticate</span><span class="p">(</span><span class="nv">$unauthenticatedToken</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">tokenStorage</span><span class="o">-&gt;</span><span class="na">setToken</span><span class="p">(</span><span class="nv">$authenticatedToken</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A token can be of any class, as long as it implements
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Authentication/Token/TokenInterface.php" title="Symfony\Component\Security\Core\Authentication\Token\TokenInterface"><span class="pre">TokenInterface</span></a></code>.</p>
+</div>
+<div class="section" id="the-authentication-manager">
+<h2>The Authentication Manager<a class="headerlink" href="#the-authentication-manager" title="Permalink to this headline">¶</a></h2>
+<p>The default authentication manager is an instance of
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Authentication/AuthenticationProviderManager.php" title="Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager"><span class="pre">AuthenticationProviderManager</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Exception\AuthenticationException</span><span class="p">;</span>
+
+<span class="c1">// instances of Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface</span>
+<span class="nv">$providers</span> <span class="o">=</span> <span class="p">[</span><span class="o">...</span><span class="p">];</span>
+
+<span class="nv">$authenticationManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AuthenticationProviderManager</span><span class="p">(</span><span class="nv">$providers</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nv">$authenticatedToken</span> <span class="o">=</span> <span class="nv">$authenticationManager</span>
+        <span class="o">-&gt;</span><span class="na">authenticate</span><span class="p">(</span><span class="nv">$unauthenticatedToken</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">AuthenticationException</span> <span class="nv">$exception</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// authentication failed</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">AuthenticationProviderManager</span></code>, when instantiated, receives several
+authentication providers, each supporting a different type of token.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You may write your own authentication manager, the only requirement is that
+it implements <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Authentication/AuthenticationManagerInterface.php" title="Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface"><span class="pre">AuthenticationManagerInterface</span></a></code>.</p>
+</div>
+</div>
+<div class="section" id="authentication-providers">
+<span id="id1"></span><h2>Authentication Providers<a class="headerlink" href="#authentication-providers" title="Permalink to this headline">¶</a></h2>
+<p>Each provider (since it implements
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Authentication/Provider/AuthenticationProviderInterface.php" title="Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface"><span class="pre">AuthenticationProviderInterface</span></a></code>)
+has a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Authentication/Provider/AuthenticationProviderInterface.php" title="Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface::supports()"><span class="pre">supports()</span></a></code> method
+by which the <code class="docutils literal notranslate"><span class="pre">AuthenticationProviderManager</span></code>
+can determine if it supports the given token. If this is the case, the
+manager then calls the provider’s <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Authentication/Provider/AuthenticationProviderInterface.php" title="Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface::authenticate()"><span class="pre">authenticate()</span></a></code> method.
+This method should return an authenticated token or throw an
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Exception/AuthenticationException.php" title="Symfony\Component\Security\Core\Exception\AuthenticationException"><span class="pre">AuthenticationException</span></a></code>
+(or any other exception extending it).</p>
+<div class="section" id="authenticating-users-by-their-username-and-password">
+<h3>Authenticating Users by their Username and Password<a class="headerlink" href="#authenticating-users-by-their-username-and-password" title="Permalink to this headline">¶</a></h3>
+<p>An authentication provider will attempt to authenticate a user based on
+the credentials they provided. Usually these are a username and a password.
+Most web applications store their user’s username and a hash of the user’s
+password combined with a randomly generated salt. This means that the average
+authentication would consist of fetching the salt and the hashed password
+from the user data storage, hash the password the user has just provided
+(e.g. using a login form) with the salt and compare both to determine if
+the given password is valid.</p>
+<p>This functionality is offered by the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Authentication/Provider/DaoAuthenticationProvider.php" title="Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider"><span class="pre">DaoAuthenticationProvider</span></a></code>.
+It fetches the user’s data from a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/User/UserProviderInterface.php" title="Symfony\Component\Security\Core\User\UserProviderInterface"><span class="pre">UserProviderInterface</span></a></code>,
+uses a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Encoder/PasswordEncoderInterface.php" title="Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface"><span class="pre">PasswordEncoderInterface</span></a></code>
+to create a hash of the password and returns an authenticated token if the
+password was valid:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Encoder\EncoderFactory</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\User\InMemoryUserProvider</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\User\UserChecker</span><span class="p">;</span>
+
+<span class="nv">$userProvider</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">InMemoryUserProvider</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;admin&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// password is &quot;foo&quot;</span>
+            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg==&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;roles&#39;</span>    <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;ROLE_ADMIN&#39;</span><span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">]</span>
+<span class="p">);</span>
+
+<span class="c1">// for some extra checks: is account enabled, locked, expired, etc.</span>
+<span class="nv">$userChecker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UserChecker</span><span class="p">();</span>
+
+<span class="c1">// an array of password encoders (see below)</span>
+<span class="nv">$encoderFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EncoderFactory</span><span class="p">(</span><span class="o">...</span><span class="p">);</span>
+
+<span class="nv">$daoProvider</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DaoAuthenticationProvider</span><span class="p">(</span>
+    <span class="nv">$userProvider</span><span class="p">,</span>
+    <span class="nv">$userChecker</span><span class="p">,</span>
+    <span class="s1">&#39;secured_area&#39;</span><span class="p">,</span>
+    <span class="nv">$encoderFactory</span>
+<span class="p">);</span>
+
+<span class="nv">$daoProvider</span><span class="o">-&gt;</span><span class="na">authenticate</span><span class="p">(</span><span class="nv">$unauthenticatedToken</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The example above demonstrates the use of the “in-memory” user provider,
+but you may use any user provider, as long as it implements
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/User/UserProviderInterface.php" title="Symfony\Component\Security\Core\User\UserProviderInterface"><span class="pre">UserProviderInterface</span></a></code>.
+It is also possible to let multiple user providers try to find the user’s
+data, using the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/User/ChainUserProvider.php" title="Symfony\Component\Security\Core\User\ChainUserProvider"><span class="pre">ChainUserProvider</span></a></code>.</p>
+</div>
+</div>
+<div class="section" id="the-password-encoder-factory">
+<h3>The Password Encoder Factory<a class="headerlink" href="#the-password-encoder-factory" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Authentication/Provider/DaoAuthenticationProvider.php" title="Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider"><span class="pre">DaoAuthenticationProvider</span></a></code>
+uses an encoder factory to create a password encoder for a given type of
+user. This allows you to use different encoding strategies for different
+types of users. The default <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Encoder/EncoderFactory.php" title="Symfony\Component\Security\Core\Encoder\EncoderFactory"><span class="pre">EncoderFactory</span></a></code>
+receives an array of encoders:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Acme\Entity\LegacyUser</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Encoder\EncoderFactory</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\User\User</span><span class="p">;</span>
+
+<span class="nv">$defaultEncoder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MessageDigestPasswordEncoder</span><span class="p">(</span><span class="s1">&#39;sha512&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="mi">5000</span><span class="p">);</span>
+<span class="nv">$weakEncoder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MessageDigestPasswordEncoder</span><span class="p">(</span><span class="s1">&#39;md5&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="nv">$encoders</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nx">User</span><span class="o">::</span><span class="na">class</span>       <span class="o">=&gt;</span> <span class="nv">$defaultEncoder</span><span class="p">,</span>
+    <span class="nx">LegacyUser</span><span class="o">::</span><span class="na">class</span> <span class="o">=&gt;</span> <span class="nv">$weakEncoder</span><span class="p">,</span>
+    <span class="c1">// ...</span>
+<span class="p">];</span>
+<span class="nv">$encoderFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EncoderFactory</span><span class="p">(</span><span class="nv">$encoders</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Each encoder should implement <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Encoder/PasswordEncoderInterface.php" title="Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface"><span class="pre">PasswordEncoderInterface</span></a></code>
+or be an array with a <code class="docutils literal notranslate"><span class="pre">class</span></code> and an <code class="docutils literal notranslate"><span class="pre">arguments</span></code> key, which allows the
+encoder factory to construct the encoder only when it is needed.</p>
+</div>
+<div class="section" id="creating-a-custom-password-encoder">
+<h3>Creating a custom Password Encoder<a class="headerlink" href="#creating-a-custom-password-encoder" title="Permalink to this headline">¶</a></h3>
+<p>There are many built-in password encoders. But if you need to create your
+own, it needs to follow these rules:</p>
+<ol class="arabic">
+<li><p class="first">The class must implement <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Encoder/PasswordEncoderInterface.php" title="Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface"><span class="pre">PasswordEncoderInterface</span></a></code>;</p>
+</li>
+<li><p class="first">The implementations of
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Encoder/PasswordEncoderInterface.php" title="Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface::encodePassword()"><span class="pre">encodePassword()</span></a></code>
+and
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Encoder/PasswordEncoderInterface.php" title="Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface::isPasswordValid()"><span class="pre">isPasswordValid()</span></a></code>
+must first of all make sure the password is not too long, i.e. the password length is no longer
+than 4096 characters. This is for security reasons (see <a class="reference external" href="https://symfony.com/blog/cve-2013-5750-security-issue-in-fosuserbundle-login-form">CVE-2013-5750</a>), and you can use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Encoder/BasePasswordEncoder.php" title="Symfony\Component\Security\Core\Encoder\BasePasswordEncoder::isPasswordTooLong()"><span class="pre">isPasswordTooLong()</span></a></code>
+method for this check:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Encoder\BasePasswordEncoder</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Exception\BadCredentialsException</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">FoobarEncoder</span> <span class="k">extends</span> <span class="nx">BasePasswordEncoder</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">encodePassword</span><span class="p">(</span><span class="nv">$raw</span><span class="p">,</span> <span class="nv">$salt</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isPasswordTooLong</span><span class="p">(</span><span class="nv">$raw</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">BadCredentialsException</span><span class="p">(</span><span class="s1">&#39;Invalid password.&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">isPasswordValid</span><span class="p">(</span><span class="nv">$encoded</span><span class="p">,</span> <span class="nv">$raw</span><span class="p">,</span> <span class="nv">$salt</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isPasswordTooLong</span><span class="p">(</span><span class="nv">$raw</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="using-password-encoders">
+<h3>Using Password Encoders<a class="headerlink" href="#using-password-encoders" title="Permalink to this headline">¶</a></h3>
+<p>When the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Encoder/EncoderFactory.php" title="Symfony\Component\Security\Core\Encoder\EncoderFactory::getEncoder()"><span class="pre">getEncoder()</span></a></code>
+method of the password encoder factory is called with the user object as
+its first argument, it will return an encoder of type <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Encoder/PasswordEncoderInterface.php" title="Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface"><span class="pre">PasswordEncoderInterface</span></a></code>
+which should be used to encode this user’s password:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// a Acme\Entity\LegacyUser instance</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span>
+
+<span class="c1">// the password that was submitted, e.g. when registering</span>
+<span class="nv">$plainPassword</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span>
+
+<span class="nv">$encoder</span> <span class="o">=</span> <span class="nv">$encoderFactory</span><span class="o">-&gt;</span><span class="na">getEncoder</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+
+<span class="c1">// returns $weakEncoder (see above)</span>
+<span class="nv">$encodedPassword</span> <span class="o">=</span> <span class="nv">$encoder</span><span class="o">-&gt;</span><span class="na">encodePassword</span><span class="p">(</span><span class="nv">$plainPassword</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getSalt</span><span class="p">());</span>
+
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">setPassword</span><span class="p">(</span><span class="nv">$encodedPassword</span><span class="p">);</span>
+
+<span class="c1">// ... save the user</span>
+</pre></div>
+</div>
+<p>Now, when you want to check if the submitted password (e.g. when trying to log
+in) is correct, you can use:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// fetch the Acme\Entity\LegacyUser</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span>
+
+<span class="c1">// the submitted password, e.g. from the login form</span>
+<span class="nv">$plainPassword</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span>
+
+<span class="nv">$validPassword</span> <span class="o">=</span> <span class="nv">$encoder</span><span class="o">-&gt;</span><span class="na">isPasswordValid</span><span class="p">(</span>
+    <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getPassword</span><span class="p">(),</span> <span class="c1">// the encoded password</span>
+    <span class="nv">$plainPassword</span><span class="p">,</span>       <span class="c1">// the submitted password</span>
+    <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getSalt</span><span class="p">()</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="authentication-events">
+<h2>Authentication Events<a class="headerlink" href="#authentication-events" title="Permalink to this headline">¶</a></h2>
+<p>The security component provides the following authentication events:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="37%" />
+<col width="45%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Event Constant</th>
+<th class="head">Argument Passed to the Listener</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>security.authentication.success</td>
+<td><code class="docutils literal notranslate"><span class="pre">AuthenticationEvents::AUTHENTICATION_SUCCESS</span></code></td>
+<td><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Event/AuthenticationSuccessEvent.php" title="Symfony\Component\Security\Core\Event\AuthenticationSuccessEvent"><span class="pre">AuthenticationSuccessEvent</span></a></code></td>
+</tr>
+<tr class="row-odd"><td>security.authentication.failure</td>
+<td><code class="docutils literal notranslate"><span class="pre">AuthenticationEvents::AUTHENTICATION_FAILURE</span></code></td>
+<td><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Event/AuthenticationFailureEvent.php" title="Symfony\Component\Security\Core\Event\AuthenticationFailureEvent"><span class="pre">AuthenticationFailureEvent</span></a></code></td>
+</tr>
+<tr class="row-even"><td>security.interactive_login</td>
+<td><code class="docutils literal notranslate"><span class="pre">SecurityEvents::INTERACTIVE_LOGIN</span></code></td>
+<td><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Http/Event/InteractiveLoginEvent.php" title="Symfony\Component\Security\Http\Event\InteractiveLoginEvent"><span class="pre">InteractiveLoginEvent</span></a></code></td>
+</tr>
+<tr class="row-odd"><td>security.switch_user</td>
+<td><code class="docutils literal notranslate"><span class="pre">SecurityEvents::SWITCH_USER</span></code></td>
+<td><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Http/Event/SwitchUserEvent.php" title="Symfony\Component\Security\Http\Event\SwitchUserEvent"><span class="pre">SwitchUserEvent</span></a></code></td>
+</tr>
+<tr class="row-even"><td>security.logout_on_change</td>
+<td><code class="docutils literal notranslate"><span class="pre">Symfony\Component\Security\Http\Event\DeauthenticatedEvent</span></code></td>
+<td><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Http/Event/DeauthenticatedEvent.php" title="Symfony\Component\Security\Http\Event\DeauthenticatedEvent"><span class="pre">DeauthenticatedEvent</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="authentication-success-and-failure-events">
+<h3>Authentication Success and Failure Events<a class="headerlink" href="#authentication-success-and-failure-events" title="Permalink to this headline">¶</a></h3>
+<p>When a provider authenticates the user, a <code class="docutils literal notranslate"><span class="pre">security.authentication.success</span></code>
+event is dispatched. But beware - this event may fire, for example, on <em>every</em>
+request if you have session-based authentication, if <code class="docutils literal notranslate"><span class="pre">always_authenticate_before_granting</span></code>
+is enabled or if token is not authenticated before AccessListener is invoked.
+See <code class="docutils literal notranslate"><span class="pre">security.interactive_login</span></code> below if you need to do something when a user <em>actually</em> logs in.</p>
+<p>When a provider attempts authentication but fails (i.e. throws an <code class="docutils literal notranslate"><span class="pre">AuthenticationException</span></code>),
+a <code class="docutils literal notranslate"><span class="pre">security.authentication.failure</span></code> event is dispatched. You could listen on
+the <code class="docutils literal notranslate"><span class="pre">security.authentication.failure</span></code> event, for example, in order to log
+failed login attempts.</p>
+</div>
+<div class="section" id="security-events">
+<h3>Security Events<a class="headerlink" href="#security-events" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">security.interactive_login</span></code> event is triggered after a user has actively
+logged into your website.  It is important to distinguish this action from
+non-interactive authentication methods, such as:</p>
+<ul class="simple">
+<li>authentication based on your session.</li>
+<li>authentication using a HTTP basic header.</li>
+</ul>
+<p>You could listen on the <code class="docutils literal notranslate"><span class="pre">security.interactive_login</span></code> event, for example, in
+order to give your user a welcome flash message every time they log in.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">security.switch_user</span></code> event is triggered every time you activate
+the <code class="docutils literal notranslate"><span class="pre">switch_user</span></code> firewall listener.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Symfony\Component\Security\Http\Event\DeauthenticatedEvent</span></code> event is triggered when a token has been deauthenticated
+because of a user change, it can help you doing some clean-up task when a logout has been triggered.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">For more information on switching users, see
+<a class="reference internal" href="../../security/impersonating_user.html"><span class="doc">How to Impersonate a User</span></a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

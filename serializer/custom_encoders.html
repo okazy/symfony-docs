@@ -1,0 +1,336 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Create your Custom Encoder &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Create your Custom Normalizer" href="custom_normalizer.html" />
+    <link rel="prev" title="Normalizers" href="normalizers.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../serializer.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../serializer.html#using-the-serializer-service">Using the Serializer Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../serializer.html#adding-normalizers-and-encoders">Adding Normalizers and Encoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../serializer.html#using-serialization-groups-annotations">Using Serialization Groups Annotations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../serializer.html#configuring-the-metadata-cache">Configuring the Metadata Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../serializer.html#enabling-a-name-converter">Enabling a Name Converter</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../serializer.html#going-further-with-the-serializer">Going Further with the Serializer</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="normalizers.html">Normalizers</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Create your Custom Encoder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#creating-a-new-encoder">Creating a new encoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#registering-it-in-your-app">Registering it in your app</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="custom_normalizer.html">How to Create your Custom Normalizer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../serializer.html">How to Use the Serializer</a> &raquo;</li>
+        
+      <li>How to Create your Custom Encoder</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/serializer/custom_encoders.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-create-your-custom-encoder">
+<span id="index-0"></span><h1>How to Create your Custom Encoder<a class="headerlink" href="#how-to-create-your-custom-encoder" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="../components/serializer.html"><span class="doc">Serializer Component</span></a> uses Normalizers
+to transform any data to an array. Then, by leveraging <em>Encoders</em>, that data can
+be converted into any data-structure (e.g. JSON).</p>
+<p>The Component provides several built-in encoders that are described
+<a class="reference internal" href="../components/serializer.html"><span class="doc">in the serializer component</span></a> but you may want
+to use another structure that’s not supported.</p>
+<div class="section" id="creating-a-new-encoder">
+<h2>Creating a new encoder<a class="headerlink" href="#creating-a-new-encoder" title="Permalink to this headline">¶</a></h2>
+<p>Imagine you want to serialize and deserialize YAML. For that you’ll have to
+create your own encoder that uses the
+<a class="reference internal" href="../components/yaml.html"><span class="doc">Yaml Component</span></a>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nx">App\Serializer</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Serializer\Encoder\DecoderInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Serializer\Encoder\EncoderInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Yaml\Yaml</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">YamlEncoder</span> <span class="k">implements</span> <span class="nx">EncoderInterface</span><span class="p">,</span> <span class="nx">DecoderInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">encode</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nv">$format</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$context</span> <span class="o">=</span> <span class="p">[])</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">Yaml</span><span class="o">::</span><span class="na">dump</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">supportsEncoding</span><span class="p">(</span><span class="nv">$format</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;yaml&#39;</span> <span class="o">===</span> <span class="nv">$format</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">decode</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nv">$format</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$context</span> <span class="o">=</span> <span class="p">[])</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">Yaml</span><span class="o">::</span><span class="na">parse</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">supportsDecoding</span><span class="p">(</span><span class="nv">$format</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;yaml&#39;</span> <span class="o">===</span> <span class="nv">$format</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you need access to <code class="docutils literal notranslate"><span class="pre">$context</span></code> in your <code class="docutils literal notranslate"><span class="pre">supportsDecoding</span></code> or
+<code class="docutils literal notranslate"><span class="pre">supportsEncoding</span></code> method, make sure to implement
+<code class="docutils literal notranslate"><span class="pre">Symfony\Component\Serializer\Encoder\ContextAwareDecoderInterface</span></code>
+or <code class="docutils literal notranslate"><span class="pre">Symfony\Component\Serializer\Encoder\ContextAwareEncoderInterface</span></code> accordingly.</p>
+</div>
+</div>
+<div class="section" id="registering-it-in-your-app">
+<h2>Registering it in your app<a class="headerlink" href="#registering-it-in-your-app" title="Permalink to this headline">¶</a></h2>
+<p>If you use the Symfony Framework. then you probably want to register this encoder
+as a service in your app. If you’re using the <a class="reference internal" href="../service_container.html#service-container-services-load-example"><span class="std std-ref">default services.yaml configuration</span></a>,
+that’s done automatically!</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you’re not using <a class="reference internal" href="../service_container/3.3-di-changes.html#service-autoconfigure"><span class="std std-ref">autoconfigure</span></a>, make sure
+to register your class as a service and tag it with <code class="docutils literal notranslate"><span class="pre">serializer.encoder</span></code>.</p>
+</div>
+<p>Now you’ll be able to serialize and deserialize YAML!</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

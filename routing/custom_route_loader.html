@@ -1,0 +1,842 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Create a custom Route Loader &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Looking up Routes from a Database: Symfony CMF DynamicRouter" href="routing_from_database.html" />
+    <link rel="prev" title="How to Upload Files" href="../controller/upload_file.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../routing.html">Routing</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#creating-routes">Creating Routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#route-parameters">Route Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#route-groups-and-prefixes">Route Groups and Prefixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#getting-the-route-name-and-parameters">Getting the Route Name and Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#special-routes">Special Routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#sub-domain-routing">Sub-Domain Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#localized-routes-i18n">Localized Routes (i18n)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#stateless-routes">Stateless Routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#generating-urls">Generating URLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../routing.html#learn-more-about-routing">Learn more about Routing</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../controller.html">Controller</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Create a custom Route Loader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#built-in-route-loaders">Built-in Route Loaders</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-a-custom-route-loader">What is a Custom Route Loader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#loading-routes">Loading Routes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#loading-routes-with-a-custom-service">Loading Routes with a Custom Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-a-custom-loader">Creating a custom Loader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#more-advanced-loaders">More Advanced Loaders</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="routing_from_database.html">Looking up Routes from a Database: Symfony CMF DynamicRouter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../getting_started/index.html">Getting Started</a> &raquo;</li>
+        
+          <li><a href="../setup.html">Installing &amp; Setting up the Symfony Framework</a> &raquo;</li>
+        
+          <li><a href="../page_creation.html">Create your First Page in Symfony</a> &raquo;</li>
+        
+          <li><a href="../routing.html">Routing</a> &raquo;</li>
+        
+      <li>How to Create a custom Route Loader</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/routing/custom_route_loader.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-create-a-custom-route-loader">
+<span id="index-0"></span><h1>How to Create a custom Route Loader<a class="headerlink" href="#how-to-create-a-custom-route-loader" title="Permalink to this headline">¶</a></h1>
+<p>Simple applications can define all their routes in a single configuration file -
+usually <code class="docutils literal notranslate"><span class="pre">config/routes.yaml</span></code> (see <a class="reference internal" href="../routing.html#routing-creating-routes"><span class="std std-ref">Creating Routes</span></a>).
+However, in most applications it’s common to import routes definitions from
+different resources: PHP annotations in controller files, YAML, XML or PHP
+files stored in some directory, etc.</p>
+<div class="section" id="built-in-route-loaders">
+<h2>Built-in Route Loaders<a class="headerlink" href="#built-in-route-loaders" title="Permalink to this headline">¶</a></h2>
+<p>Symfony provides several route loaders for the most common needs:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/routes.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">app_file</span><span class="p p-Indicator">:</span>
+    <span class="c1"># loads routes from the given routing file stored in some bundle</span>
+    <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="s">&#39;@AcmeBundle/Resources/config/routing.yaml&#39;</span>
+
+<span class="l l-Scalar l-Scalar-Plain">app_annotations</span><span class="p p-Indicator">:</span>
+    <span class="c1"># loads routes from the PHP annotations of the controllers found in that directory</span>
+    <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="s">&#39;../src/Controller/&#39;</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span>     <span class="l l-Scalar l-Scalar-Plain">annotation</span>
+
+<span class="l l-Scalar l-Scalar-Plain">app_directory</span><span class="p p-Indicator">:</span>
+    <span class="c1"># loads routes from the YAML, XML or PHP files found in that directory</span>
+    <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="s">&#39;../legacy/routing/&#39;</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span>     <span class="l l-Scalar l-Scalar-Plain">directory</span>
+
+<span class="l l-Scalar l-Scalar-Plain">app_bundle</span><span class="p p-Indicator">:</span>
+    <span class="c1"># loads routes from the YAML, XML or PHP files found in some bundle directory</span>
+    <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="s">&#39;@AcmeOtherBundle/Resources/config/routing/&#39;</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span>     <span class="l l-Scalar l-Scalar-Plain">directory</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/routes.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;routes</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/routing&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/routing</span>
+<span class="s">        https://symfony.com/schema/routing/routing-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="c">&lt;!-- loads routes from the given routing file stored in some bundle --&gt;</span>
+    <span class="nt">&lt;import</span> <span class="na">resource=</span><span class="s">&quot;@AcmeBundle/Resources/config/routing.yaml&quot;</span><span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- loads routes from the PHP annotations of the controllers found in that directory --&gt;</span>
+    <span class="nt">&lt;import</span> <span class="na">resource=</span><span class="s">&quot;../src/Controller/&quot;</span> <span class="na">type=</span><span class="s">&quot;annotation&quot;</span><span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- loads routes from the YAML or XML files found in that directory --&gt;</span>
+    <span class="nt">&lt;import</span> <span class="na">resource=</span><span class="s">&quot;../legacy/routing/&quot;</span> <span class="na">type=</span><span class="s">&quot;directory&quot;</span><span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- loads routes from the YAML or XML files found in some bundle directory --&gt;</span>
+    <span class="nt">&lt;import</span> <span class="na">resource=</span><span class="s">&quot;@AcmeOtherBundle/Resources/config/routing/&quot;</span> <span class="na">type=</span><span class="s">&quot;directory&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/routes&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/routes.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RoutingConfigurator</span> <span class="nv">$routes</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// loads routes from the given routing file stored in some bundle</span>
+    <span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;@AcmeBundle/Resources/config/routing.yaml&#39;</span><span class="p">);</span>
+
+    <span class="c1">// loads routes from the PHP annotations of the controllers found in that directory</span>
+    <span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;../src/Controller/&#39;</span><span class="p">,</span> <span class="s1">&#39;annotation&#39;</span><span class="p">);</span>
+
+    <span class="c1">// loads routes from the YAML or XML files found in that directory</span>
+    <span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;../legacy/routing/&#39;</span><span class="p">,</span> <span class="s1">&#39;directory&#39;</span><span class="p">);</span>
+
+    <span class="c1">// loads routes from the YAML or XML files found in some bundle directory</span>
+    <span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;@AcmeOtherBundle/Resources/config/routing/&#39;</span><span class="p">,</span> <span class="s1">&#39;directory&#39;</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When importing resources, the key (e.g. <code class="docutils literal notranslate"><span class="pre">app_file</span></code>) is the name of collection.
+Just be sure that it’s unique per file so no other lines override it.</p>
+</div>
+<p>If your application needs are different, you can create your own custom route
+loader as explained in the next section.</p>
+</div>
+<div class="section" id="what-is-a-custom-route-loader">
+<h2>What is a Custom Route Loader<a class="headerlink" href="#what-is-a-custom-route-loader" title="Permalink to this headline">¶</a></h2>
+<p>A custom route loader enables you to generate routes based on some
+conventions, patterns or integrations. An example for this use-case is the
+<a class="reference external" href="https://github.com/Tobion/OpenAPI-Symfony-Routing">OpenAPI-Symfony-Routing</a> library where routes are generated based on
+OpenAPI/Swagger annotations. Another example is the <a class="reference external" href="https://github.com/sonata-project/SonataAdminBundle">SonataAdminBundle</a> that
+creates routes based on CRUD conventions.</p>
+</div>
+<div class="section" id="loading-routes">
+<h2>Loading Routes<a class="headerlink" href="#loading-routes" title="Permalink to this headline">¶</a></h2>
+<p>The routes in a Symfony application are loaded by the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/FrameworkBundle/Routing/DelegatingLoader.php" title="Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader"><span class="pre">DelegatingLoader</span></a></code>.
+This loader uses several other loaders (delegates) to load resources of
+different types, for instance YAML files or <code class="docutils literal notranslate"><span class="pre">&#64;Route</span></code> annotations in controller
+files. The specialized loaders implement
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Config/Loader/LoaderInterface.php" title="Symfony\Component\Config\Loader\LoaderInterface"><span class="pre">LoaderInterface</span></a></code>
+and therefore have two important methods:
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Config/Loader/LoaderInterface.php" title="Symfony\Component\Config\Loader\LoaderInterface::supports()"><span class="pre">supports()</span></a></code>
+and <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Config/Loader/LoaderInterface.php" title="Symfony\Component\Config\Loader\LoaderInterface::load()"><span class="pre">load()</span></a></code>.</p>
+<p>Take these lines from the <code class="docutils literal notranslate"><span class="pre">routes.yaml</span></code>:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/routes.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">controllers</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">../src/Controller/</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">annotation</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/routes.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;routes</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/routing&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/routing</span>
+<span class="s">        https://symfony.com/schema/routing/routing-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;import</span> <span class="na">resource=</span><span class="s">&quot;../src/Controller&quot;</span> <span class="na">type=</span><span class="s">&quot;annotation&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/routes&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/routes.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RoutingConfigurator</span> <span class="nv">$routes</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;../src/Controller&#39;</span><span class="p">,</span> <span class="s1">&#39;annotation&#39;</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>When the main loader parses this, it tries all registered delegate loaders and calls
+their <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Config/Loader/LoaderInterface.php" title="Symfony\Component\Config\Loader\LoaderInterface::supports()"><span class="pre">supports()</span></a></code>
+method with the given resource (<code class="docutils literal notranslate"><span class="pre">../src/Controller/</span></code>)
+and type (<code class="docutils literal notranslate"><span class="pre">annotation</span></code>) as arguments. When one of the loader returns <code class="docutils literal notranslate"><span class="pre">true</span></code>,
+its <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Config/Loader/LoaderInterface.php" title="Symfony\Component\Config\Loader\LoaderInterface::load()"><span class="pre">load()</span></a></code> method
+will be called, which should return a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Routing/RouteCollection.php" title="Symfony\Component\Routing\RouteCollection"><span class="pre">RouteCollection</span></a></code>
+containing <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Routing/Route.php" title="Symfony\Component\Routing\Route"><span class="pre">Route</span></a></code> objects.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Routes loaded this way will be cached by the Router the same way as
+when they are defined in one of the default formats (e.g. XML, YAML,
+PHP file).</p>
+</div>
+</div>
+<div class="section" id="loading-routes-with-a-custom-service">
+<h2>Loading Routes with a Custom Service<a class="headerlink" href="#loading-routes-with-a-custom-service" title="Permalink to this headline">¶</a></h2>
+<p>Using a regular Symfony service is the simplest way to load routes in a
+customized way. It’s much easier than creating a full custom route loader, so
+you should always consider this option first.</p>
+<p>To do so, define <code class="docutils literal notranslate"><span class="pre">type:</span> <span class="pre">service</span></code> as the type of the loaded routing resource
+and configure the service and method to call:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/routes.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">admin_routes</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="s">&#39;admin_route_loader::loadRoutes&#39;</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">service</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/routes.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;routes</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/routing&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/routing</span>
+<span class="s">        https://symfony.com/schema/routing/routing-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;import</span> <span class="na">resource=</span><span class="s">&quot;admin_route_loader::loadRoutes&quot;</span> <span class="na">type=</span><span class="s">&quot;service&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/routes&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/routes.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RoutingConfigurator</span> <span class="nv">$routes</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;admin_route_loader::loadRoutes&#39;</span><span class="p">,</span> <span class="s1">&#39;service&#39;</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>In this example, the routes are loaded by calling the <code class="docutils literal notranslate"><span class="pre">loadRoutes()</span></code> method
+of the service whose ID is <code class="docutils literal notranslate"><span class="pre">admin_route_loader</span></code>. Your service doesn’t have to
+extend or implement any special class, but the called method must return a
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Routing/RouteCollection.php" title="Symfony\Component\Routing\RouteCollection"><span class="pre">RouteCollection</span></a></code> object.</p>
+<p>If you’re using <a class="reference internal" href="../service_container.html#services-autoconfigure"><span class="std std-ref">autoconfigure</span></a>, your class should
+implement the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/FrameworkBundle/Routing/RouteLoaderInterface.php" title="Symfony\Bundle\FrameworkBundle\Routing\RouteLoaderInterface"><span class="pre">RouteLoaderInterface</span></a></code>
+interface to be tagged automatically. If you’re <strong>not using autoconfigure</strong>,
+tag it manually with <code class="docutils literal notranslate"><span class="pre">routing.route_loader</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The routes defined using service route loaders will be automatically
+cached by the framework. So whenever your service should load new routes,
+don’t forget to clear the cache.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If your service is invokable, you don’t need to precise the method to use.</p>
+</div>
+</div>
+<div class="section" id="creating-a-custom-loader">
+<h2>Creating a custom Loader<a class="headerlink" href="#creating-a-custom-loader" title="Permalink to this headline">¶</a></h2>
+<p>To load routes from some custom source (i.e. from something other than annotations,
+YAML or XML files), you need to create a custom route loader. This loader
+has to implement <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Config/Loader/LoaderInterface.php" title="Symfony\Component\Config\Loader\LoaderInterface"><span class="pre">LoaderInterface</span></a></code>.</p>
+<p>In most cases it is easier to extend from
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Config/Loader/Loader.php" title="Symfony\Component\Config\Loader\Loader"><span class="pre">Loader</span></a></code> instead of implementing
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Config/Loader/LoaderInterface.php" title="Symfony\Component\Config\Loader\LoaderInterface"><span class="pre">LoaderInterface</span></a></code> yourself.</p>
+<p>The sample loader below supports loading routing resources with a type of
+<code class="docutils literal notranslate"><span class="pre">extra</span></code>. The type name should not clash with other loaders that might
+support the same type of resource. Make up any name specific to what
+you do. The resource name itself is not actually used in the example:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Routing/ExtraLoader.php</span>
+<span class="k">namespace</span> <span class="nx">App\Routing</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Config\Loader\Loader</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\Route</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\RouteCollection</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ExtraLoader</span> <span class="k">extends</span> <span class="nx">Loader</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$isLoaded</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">load</span><span class="p">(</span><span class="nv">$resource</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$type</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">true</span> <span class="o">===</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isLoaded</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">\RuntimeException</span><span class="p">(</span><span class="s1">&#39;Do not add the &quot;extra&quot; loader twice&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="nv">$routes</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RouteCollection</span><span class="p">();</span>
+
+        <span class="c1">// prepare a new route</span>
+        <span class="nv">$path</span> <span class="o">=</span> <span class="s1">&#39;/extra/{parameter}&#39;</span><span class="p">;</span>
+        <span class="nv">$defaults</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;_controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;App\Controller\ExtraController::extra&#39;</span><span class="p">,</span>
+        <span class="p">];</span>
+        <span class="nv">$requirements</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;parameter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;\d+&#39;</span><span class="p">,</span>
+        <span class="p">];</span>
+        <span class="nv">$route</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Route</span><span class="p">(</span><span class="nv">$path</span><span class="p">,</span> <span class="nv">$defaults</span><span class="p">,</span> <span class="nv">$requirements</span><span class="p">);</span>
+
+        <span class="c1">// add the new route to the route collection</span>
+        <span class="nv">$routeName</span> <span class="o">=</span> <span class="s1">&#39;extraRoute&#39;</span><span class="p">;</span>
+        <span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$routeName</span><span class="p">,</span> <span class="nv">$route</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isLoaded</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$routes</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">supports</span><span class="p">(</span><span class="nv">$resource</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$type</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;extra&#39;</span> <span class="o">===</span> <span class="nv">$type</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Make sure the controller you specify really exists. In this case you
+have to create an <code class="docutils literal notranslate"><span class="pre">extra()</span></code> method in the <code class="docutils literal notranslate"><span class="pre">ExtraController</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/ExtraController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ExtraController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">extra</span><span class="p">(</span><span class="nv">$parameter</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="nv">$parameter</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now define a service for the <code class="docutils literal notranslate"><span class="pre">ExtraLoader</span></code>:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\Routing\ExtraLoader</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="nv">routing.loader</span><span class="p p-Indicator">]</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\Routing\ExtraLoader&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;routing.loader&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">App\Routing\ExtraLoader</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">autowire</span><span class="p">(</span><span class="nx">ExtraLoader</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addTag</span><span class="p">(</span><span class="s1">&#39;routing.loader&#39;</span><span class="p">)</span>
+<span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Notice the tag <code class="docutils literal notranslate"><span class="pre">routing.loader</span></code>. All services with this <em>tag</em> will be marked
+as potential route loaders and added as specialized route loaders to the
+<code class="docutils literal notranslate"><span class="pre">routing.loader</span></code> <em>service</em>, which is an instance of
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/FrameworkBundle/Routing/DelegatingLoader.php" title="Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader"><span class="pre">DelegatingLoader</span></a></code>.</p>
+<div class="section" id="using-the-custom-loader">
+<h3>Using the Custom Loader<a class="headerlink" href="#using-the-custom-loader" title="Permalink to this headline">¶</a></h3>
+<p>If you did nothing else, your custom routing loader would <em>not</em> be called.
+What remains to do is adding a few lines to the routing configuration:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/routes.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">app_extra</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">.</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">extra</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/routes.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;routes</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/routing&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/routing</span>
+<span class="s">        https://symfony.com/schema/routing/routing-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;import</span> <span class="na">resource=</span><span class="s">&quot;.&quot;</span> <span class="na">type=</span><span class="s">&quot;extra&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/routes&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/routes.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RoutingConfigurator</span> <span class="nv">$routes</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;extra&#39;</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>The important part here is the <code class="docutils literal notranslate"><span class="pre">type</span></code> key. Its value should be <code class="docutils literal notranslate"><span class="pre">extra</span></code> as
+this is the type which the <code class="docutils literal notranslate"><span class="pre">ExtraLoader</span></code> supports and this will make sure
+its <code class="docutils literal notranslate"><span class="pre">load()</span></code> method gets called. The <code class="docutils literal notranslate"><span class="pre">resource</span></code> key is insignificant
+for the <code class="docutils literal notranslate"><span class="pre">ExtraLoader</span></code>, so it is set to <code class="docutils literal notranslate"><span class="pre">.</span></code> (a single dot).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The routes defined using custom route loaders will be automatically
+cached by the framework. So whenever you change something in the loader
+class itself, don’t forget to clear the cache.</p>
+</div>
+</div>
+</div>
+<div class="section" id="more-advanced-loaders">
+<h2>More Advanced Loaders<a class="headerlink" href="#more-advanced-loaders" title="Permalink to this headline">¶</a></h2>
+<p>If your custom route loader extends from
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Config/Loader/Loader.php" title="Symfony\Component\Config\Loader\Loader"><span class="pre">Loader</span></a></code> as shown above, you
+can also make use of the provided resolver, an instance of
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Config/Loader/LoaderResolver.php" title="Symfony\Component\Config\Loader\LoaderResolver"><span class="pre">LoaderResolver</span></a></code>, to load secondary
+routing resources.</p>
+<p>You still need to implement
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Config/Loader/LoaderInterface.php" title="Symfony\Component\Config\Loader\LoaderInterface::supports()"><span class="pre">supports()</span></a></code>
+and <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Config/Loader/LoaderInterface.php" title="Symfony\Component\Config\Loader\LoaderInterface::load()"><span class="pre">load()</span></a></code>.
+Whenever you want to load another resource - for instance a YAML routing
+configuration file - you can call the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Config/Loader/Loader.php" title="Symfony\Component\Config\Loader\Loader::import()"><span class="pre">import()</span></a></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Routing/AdvancedLoader.php</span>
+<span class="k">namespace</span> <span class="nx">App\Routing</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Config\Loader\Loader</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\RouteCollection</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">AdvancedLoader</span> <span class="k">extends</span> <span class="nx">Loader</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">load</span><span class="p">(</span><span class="nv">$resource</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$type</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$routes</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RouteCollection</span><span class="p">();</span>
+
+        <span class="nv">$resource</span> <span class="o">=</span> <span class="s1">&#39;@ThirdPartyBundle/Resources/config/routes.yaml&#39;</span><span class="p">;</span>
+        <span class="nv">$type</span> <span class="o">=</span> <span class="s1">&#39;yaml&#39;</span><span class="p">;</span>
+
+        <span class="nv">$importedRoutes</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="nv">$resource</span><span class="p">,</span> <span class="nv">$type</span><span class="p">);</span>
+
+        <span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">addCollection</span><span class="p">(</span><span class="nv">$importedRoutes</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$routes</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">supports</span><span class="p">(</span><span class="nv">$resource</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$type</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;advanced_extra&#39;</span> <span class="o">===</span> <span class="nv">$type</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The resource name and type of the imported routing configuration can
+be anything that would normally be supported by the routing configuration
+loader (YAML, XML, PHP, annotation, etc.).</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For more advanced uses, check out the <a class="reference external" href="https://symfony.com/doc/current/cmf/components/routing/chain.html">ChainRouter</a> provided by the Symfony
+CMF project. This router allows applications to use two or more routers
+combined, for example to keep using the default Symfony routing system when
+writing a custom router.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

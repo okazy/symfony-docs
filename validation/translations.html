@@ -1,0 +1,447 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Translate Validation Constraint Messages &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Asset Preloading and Resource Hints with HTTP/2 and WebLink" href="../web_link.html" />
+    <link rel="prev" title="How to Handle Different Error Levels" href="severity.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../validation.html">Validation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../validation.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validation.html#the-basics-of-validation">The Basics of Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validation.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validation.html#constraints">Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validation.html#constraints-in-form-classes">Constraints in Form Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validation.html#constraint-targets">Constraint Targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validation.html#final-thoughts">Final Thoughts</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../validation.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="custom_constraint.html">How to Create a custom Validation Constraint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="groups.html">How to Apply only a Subset of all Your Validation Constraints (Validation Groups)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raw_values.html">How to Validate Raw Values (Scalar Values and Arrays)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sequence_provider.html">How to Sequentially Apply Validation Groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="severity.html">How to Handle Different Error Levels</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Translate Validation Constraint Messages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../validation.html">Validation</a> &raquo;</li>
+        
+      <li>How to Translate Validation Constraint Messages</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/validation/translations.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-translate-validation-constraint-messages">
+<span id="index-0"></span><h1>How to Translate Validation Constraint Messages<a class="headerlink" href="#how-to-translate-validation-constraint-messages" title="Permalink to this headline">¶</a></h1>
+<p>If you’re using validation constraints with the Form component, you can translate
+the error messages by creating a translation resource for the
+<code class="docutils literal notranslate"><span class="pre">validators</span></code> <a class="reference internal" href="../translation.html#translation-resource-locations"><span class="std std-ref">domain</span></a>.</p>
+<p>To start, suppose you’ve created a plain-old-PHP object that you need to
+use somewhere in your application:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Entity/Author.php</span>
+<span class="k">namespace</span> <span class="nx">App\Entity</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Author</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$name</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Add constraints through any of the supported methods. Set the message option
+to the translation source text. For example, to guarantee that the <code class="docutils literal notranslate"><span class="pre">$name</span></code>
+property is not empty, add the following:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>Annotations</em><div class="highlight-php-annotations notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// src/Entity/Author.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Validator\Constraints</span> <span class="k">as</span> <span class="nx">Assert</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Author</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @Assert\NotBlank(message=&quot;author.name.not_blank&quot;)</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="nv">$name</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/validator/validation.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">App\Entity\Author</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">properties</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">NotBlank</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{</span> <span class="nv">message</span><span class="p p-Indicator">:</span> <span class="s">&#39;author.name.not_blank&#39;</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/validator/validation.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;constraint-mapping</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/constraint-mapping&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/constraint-mapping</span>
+<span class="s">        https://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">&quot;App\Entity\Author&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;constraint</span> <span class="na">name=</span><span class="s">&quot;NotBlank&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;option</span> <span class="na">name=</span><span class="s">&quot;message&quot;</span><span class="nt">&gt;</span>author.name.not_blank<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;/constraint&gt;</span>
+        <span class="nt">&lt;/property&gt;</span>
+    <span class="nt">&lt;/class&gt;</span>
+<span class="nt">&lt;/constraint-mapping&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// src/Entity/Author.php</span>
+
+<span class="c1">// ...</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Validator\Constraints\NotBlank</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Validator\Mapping\ClassMetadata</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Author</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$name</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">loadValidatorMetadata</span><span class="p">(</span><span class="nx">ClassMetadata</span> <span class="nv">$metadata</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$metadata</span><span class="o">-&gt;</span><span class="na">addPropertyConstraint</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="k">new</span> <span class="nx">NotBlank</span><span class="p">([</span>
+            <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;author.name.not_blank&#39;</span><span class="p">,</span>
+        <span class="p">]));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Now, create a <code class="docutils literal notranslate"><span class="pre">validators</span></code> catalog file in the <code class="docutils literal notranslate"><span class="pre">translations/</span></code> directory:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- translations/validators.en.xlf --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;xliff</span> <span class="na">version=</span><span class="s">&quot;1.2&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;urn:oasis:names:tc:xliff:document:1.2&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">source-language=</span><span class="s">&quot;en&quot;</span> <span class="na">datatype=</span><span class="s">&quot;plaintext&quot;</span> <span class="na">original=</span><span class="s">&quot;file.ext&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;body&gt;</span>
+            <span class="nt">&lt;trans-unit</span> <span class="na">id=</span><span class="s">&quot;author.name.not_blank&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;source&gt;</span>author.name.not_blank<span class="nt">&lt;/source&gt;</span>
+                <span class="nt">&lt;target&gt;</span>Please enter an author name.<span class="nt">&lt;/target&gt;</span>
+            <span class="nt">&lt;/trans-unit&gt;</span>
+        <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;/file&gt;</span>
+<span class="nt">&lt;/xliff&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># translations/validators.en.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">author.name.not_blank</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Please enter an author name.</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// translations/validators.en.php</span>
+<span class="k">return</span> <span class="p">[</span>
+    <span class="s1">&#39;author.name.not_blank&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Please enter an author name.&#39;</span><span class="p">,</span>
+<span class="p">];</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>You may need to clear your cache (even in the dev environment) after creating this
+file for the first time.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

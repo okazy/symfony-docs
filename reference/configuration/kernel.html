@@ -1,0 +1,446 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuring in the Kernel &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Validation Constraints Reference" href="../constraints.html" />
+    <link rel="prev" title="Debug Configuration Reference (DebugBundle)" href="debug.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="framework.html">Framework Configuration Reference (FrameworkBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doctrine.html">Doctrine Configuration Reference (DoctrineBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security Configuration Reference (SecurityBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swiftmailer.html">Mailer Configuration Reference (SwiftmailerBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twig.html">Twig Configuration Reference (TwigBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monolog.html">Logging Configuration Reference (MonologBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web_profiler.html">Profiler Configuration Reference (WebProfilerBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html">Debug Configuration Reference (DebugBundle)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Configuring in the Kernel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#charset">Charset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#project-directory">Project Directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cache-directory">Cache Directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#log-directory">Log Directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#container-build-time">Container Build Time</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../forms/types.html">Form Types Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constraints.html">Validation Constraints Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../twig_reference.html">Twig Extensions Defined by Symfony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dic_tags.html">Built-in Symfony Service Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../events.html">Built-in Symfony Events</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Reference Documents</a> &raquo;</li>
+        
+      <li>Configuring in the Kernel</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reference/configuration/kernel.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuring-in-the-kernel">
+<span id="index-0"></span><h1>Configuring in the Kernel<a class="headerlink" href="#configuring-in-the-kernel" title="Permalink to this headline">¶</a></h1>
+<p>Some configuration can be done on the kernel class itself (located by default at
+<code class="docutils literal notranslate"><span class="pre">src/Kernel.php</span></code>). You can do this by overriding specific methods in
+the parent <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Kernel.php" title="Symfony\Component\HttpKernel\Kernel"><span class="pre">Kernel</span></a></code> class.</p>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="#charset">Charset</a></li>
+<li><a class="reference internal" href="#project-directory">Project Directory</a></li>
+<li><a class="reference internal" href="#cache-directory">Cache Directory</a></li>
+<li><a class="reference internal" href="#log-directory">Log Directory</a></li>
+<li><a class="reference internal" href="#container-build-time">Container Build Time</a></li>
+</ul>
+<p>In previous Symfony versions there was another configuration option to define
+the “kernel name”, which is only important when
+<a class="reference internal" href="../../configuration/multiple_kernels.html"><span class="doc">using applications with multiple kernels</span></a>.
+If you need a unique ID for your kernels use the <code class="docutils literal notranslate"><span class="pre">kernel.container_class</span></code>
+parameter or the <code class="docutils literal notranslate"><span class="pre">Kernel::getContainerClass()</span></code> method.</p>
+<div class="section" id="charset">
+<span id="configuration-kernel-charset"></span><h3>Charset<a class="headerlink" href="#charset" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">UTF-8</span></code></p>
+<p>This option defines the charset that is used in the application. This value is
+exposed via the <code class="docutils literal notranslate"><span class="pre">kernel.charset</span></code> configuration parameter and the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Kernel.php" title="Symfony\Component\HttpKernel\Kernel::getCharset()"><span class="pre">getCharset()</span></a></code> method.</p>
+<p>To change this value, override the <code class="docutils literal notranslate"><span class="pre">getCharset()</span></code> method and return another
+charset:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Kernel.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Kernel</span> <span class="k">as</span> <span class="nx">BaseKernel</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">class</span> <span class="nc">Kernel</span> <span class="k">extends</span> <span class="nx">BaseKernel</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getCharset</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;ISO-8859-1&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="project-directory">
+<span id="configuration-kernel-project-directory"></span><h3>Project Directory<a class="headerlink" href="#project-directory" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: the directory of the project <code class="docutils literal notranslate"><span class="pre">composer.json</span></code></p>
+<p>This returns the absolute path of the root directory of your Symfony project,
+which is used by applications to perform operations with file paths relative to
+the project’s root directory.</p>
+<p>By default, its value is calculated automatically as the directory where the
+main <code class="docutils literal notranslate"><span class="pre">composer.json</span></code> file is stored. This value is exposed via the
+<code class="docutils literal notranslate"><span class="pre">kernel.project_dir</span></code> configuration parameter and the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Kernel.php" title="Symfony\Component\HttpKernel\Kernel::getProjectDir()"><span class="pre">getProjectDir()</span></a></code> method.</p>
+<p>If you don’t use Composer, or have moved the <code class="docutils literal notranslate"><span class="pre">composer.json</span></code> file location or
+have deleted it entirely (for example in the production servers), you can
+override the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Kernel.php" title="Symfony\Component\HttpKernel\Kernel::getProjectDir()"><span class="pre">getProjectDir()</span></a></code>
+method to return the right project directory:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Kernel.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Kernel</span> <span class="k">as</span> <span class="nx">BaseKernel</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">class</span> <span class="nc">Kernel</span> <span class="k">extends</span> <span class="nx">BaseKernel</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getProjectDir</span><span class="p">()</span><span class="o">:</span> <span class="nx">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">\dirname</span><span class="p">(</span><span class="no">__DIR__</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cache-directory">
+<h3>Cache Directory<a class="headerlink" href="#cache-directory" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">$this-&gt;getProjectDir()/var/cache/$this-&gt;environment</span></code></p>
+<p>This returns the absolute path of the cache directory of your Symfony project.
+It’s calculated automatically based on the current
+<a class="reference internal" href="../../configuration.html#configuration-environments"><span class="std std-ref">environment</span></a>.</p>
+<p>This value is exposed via the <code class="docutils literal notranslate"><span class="pre">kernel.cache_dir</span></code> configuration parameter and
+the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Kernel.php" title="Symfony\Component\HttpKernel\Kernel::getCacheDir()"><span class="pre">getCacheDir()</span></a></code> method. To
+change this setting, override the <code class="docutils literal notranslate"><span class="pre">getCacheDir()</span></code> method to return the right
+cache directory.</p>
+</div>
+<div class="section" id="log-directory">
+<h3>Log Directory<a class="headerlink" href="#log-directory" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">$this-&gt;getProjectDir()/var/log</span></code></p>
+<p>This returns the absolute path of the log directory of your Symfony project.
+It’s calculated automatically based on the current
+<a class="reference internal" href="../../configuration.html#configuration-environments"><span class="std std-ref">environment</span></a>.</p>
+<p>This value is exposed via the <code class="docutils literal notranslate"><span class="pre">kernel.logs_dir</span></code> configuration parameter and
+the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Kernel.php" title="Symfony\Component\HttpKernel\Kernel::getLogDir()"><span class="pre">getLogDir()</span></a></code> method. To
+change this setting, override the <code class="docutils literal notranslate"><span class="pre">getLogDir()</span></code> method to return the right
+log directory.</p>
+</div>
+<div class="section" id="container-build-time">
+<h3>Container Build Time<a class="headerlink" href="#container-build-time" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: the result of executing <code class="docutils literal notranslate"><span class="pre">time()</span></code></p>
+<p>Symfony follows the <a class="reference external" href="https://en.wikipedia.org/wiki/Reproducible_builds">reproducible builds</a> philosophy, which ensures that the
+result of compiling the exact same source code doesn’t produce different
+results. This helps checking that a given binary or executable code was compiled
+from some trusted source code.</p>
+<p>In practice, the compiled <a class="reference internal" href="../../service_container.html"><span class="doc">service container</span></a> of your
+application will always be the same if you don’t change its source code. This is
+exposed via these configuration parameters:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">container.build_hash</span></code>, a hash of the contents of all your source files;</li>
+<li><code class="docutils literal notranslate"><span class="pre">container.build_time</span></code>, a timestamp of the moment when the container was
+built (the result of executing PHP’s <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.time.php" title="time"><span class="pre">time</span></a></code> function);</li>
+<li><code class="docutils literal notranslate"><span class="pre">container.build_id</span></code>, the result of merging the two previous parameters and
+encoding the result using CRC32.</li>
+</ul>
+<p>Since the <code class="docutils literal notranslate"><span class="pre">container.build_time</span></code> value will change every time you compile the
+application, the build will not be strictly reproducible. If you care about
+this, the solution is to use another configuration parameter called
+<code class="docutils literal notranslate"><span class="pre">kernel.container_build_time</span></code> and set it to a non-changing build time to
+achieve a strict reproducible build:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">kernel.container_build_time</span><span class="p p-Indicator">:</span> <span class="s">&#39;1234567890&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;parameters&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;kernel.container_build_time&quot;</span><span class="nt">&gt;</span>1234567890<span class="nt">&lt;/parameter&gt;</span>
+    <span class="nt">&lt;/parameters&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;kernel.container_build_time&#39;</span><span class="p">,</span> <span class="s1">&#39;1234567890&#39;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

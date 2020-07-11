@@ -1,0 +1,776 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Add “Remember Me” Login Functionality &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Impersonate a User" href="impersonating_user.html" />
+    <link rel="prev" title="Authenticating against an LDAP server" href="ldap.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../security.html">Security</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../security.html#installation">1) Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#a-create-your-user-class">2a) Create your User Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#b-the-user-provider">2b) The “User Provider”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#c-encoding-passwords">2c) Encoding Passwords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#a-authentication-firewalls">3a) Authentication &amp; Firewalls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#b-authenticating-your-users">3b) Authenticating your Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#denying-access-roles-and-other-authorization">4) Denying Access, Roles and other Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#a-fetching-the-user-object">5a) Fetching the User Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#b-fetching-the-user-from-a-service">5b) Fetching the User from a Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#logging-out">Logging Out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#hierarchical-roles">Hierarchical Roles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#frequently-asked-questions">Frequently Asked Questions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../security.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../security.html#authentication-identifying-logging-in-the-user">Authentication (Identifying/Logging in the User)</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="experimental_authenticators.html">Using the new Authenticator-based Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="form_login_setup.html">How to Build a Login Form</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reset_password.html">How to Add a Reset Password Feature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="json_login_setup.html">How to Build a JSON Authentication Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="guard_authentication.html">Custom Authentication System with Guard (API Token Example)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="password_migration.html">How to Migrate a Password Hash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auth_providers.html">Built-in Authentication Providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_provider.html">Security User Providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ldap.html">Authenticating against an LDAP server</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">How to Add “Remember Me” Login Functionality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="impersonating_user.html">How to Impersonate a User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_checkers.html">How to Create and Enable Custom User Checkers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="named_encoders.html">How to Use A Different Password Encoder Algorithm Per User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multiple_guard_authenticators.html">How to Use Multiple Guard Authenticators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="firewall_restriction.html">How to Restrict Firewalls to a Request</a></li>
+<li class="toctree-l4"><a class="reference internal" href="csrf.html">How to Implement CSRF Protection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="custom_authentication_provider.html">How to Create a custom Authentication Provider</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../security.html#authorization-denying-access">Authorization (Denying Access)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../security.html">Security</a> &raquo;</li>
+        
+      <li>How to Add “Remember Me” Login Functionality</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/security/remember_me.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-add-remember-me-login-functionality">
+<span id="index-0"></span><h1>How to Add “Remember Me” Login Functionality<a class="headerlink" href="#how-to-add-remember-me-login-functionality" title="Permalink to this headline">¶</a></h1>
+<p>Once a user is authenticated, their credentials are typically stored in the
+session. This means that when the session ends they will be logged out and
+have to provide their login details again next time they wish to access the
+application. You can allow users to choose to stay logged in for longer than
+the session lasts using a cookie with the <code class="docutils literal notranslate"><span class="pre">remember_me</span></code> firewall option:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">firewalls</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+            <span class="l l-Scalar l-Scalar-Plain">remember_me</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">secret</span><span class="p p-Indicator">:</span>   <span class="s">&#39;%kernel.secret%&#39;</span>
+                <span class="l l-Scalar l-Scalar-Plain">lifetime</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">604800</span> <span class="c1"># 1 week in seconds</span>
+                <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span>     <span class="l l-Scalar l-Scalar-Plain">/</span>
+                <span class="c1"># by default, the feature is enabled by checking a</span>
+                <span class="c1"># checkbox in the login form (see below), uncomment the</span>
+                <span class="c1"># following line to always enable it.</span>
+                <span class="c1">#always_remember_me: true</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/security.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;srv:container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/security&quot;</span>
+    <span class="na">xmlns:srv=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/security</span>
+<span class="s">        https://symfony.com/schema/dic/security/security-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;config&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="nt">&lt;firewall</span> <span class="na">name=</span><span class="s">&quot;main&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- ... --&gt;</span>
+
+            <span class="c">&lt;!-- 604800 is 1 week in seconds --&gt;</span>
+            <span class="nt">&lt;remember-me</span>
+                <span class="na">secret=</span><span class="s">&quot;%kernel.secret%&quot;</span>
+                <span class="na">lifetime=</span><span class="s">&quot;604800&quot;</span>
+                <span class="na">path=</span><span class="s">&quot;/&quot;</span><span class="nt">/&gt;</span>
+            <span class="c">&lt;!-- by default, the feature is enabled by checking a checkbox</span>
+<span class="c">                 in the login form (see below), add always-remember-me=&quot;true&quot;</span>
+<span class="c">                 to always enable it. --&gt;</span>
+        <span class="nt">&lt;/firewall&gt;</span>
+    <span class="nt">&lt;/config&gt;</span>
+<span class="nt">&lt;/srv:container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/security.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+
+    <span class="s1">&#39;firewalls&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;main&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// ...</span>
+            <span class="s1">&#39;remember_me&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;secret&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;%kernel.secret%&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;lifetime&#39;</span> <span class="o">=&gt;</span> <span class="mi">604800</span><span class="p">,</span> <span class="c1">// 1 week in seconds</span>
+                <span class="s1">&#39;path&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+                <span class="c1">// by default, the feature is enabled by checking a</span>
+                <span class="c1">// checkbox in the login form (see below), uncomment</span>
+                <span class="c1">// the following line to always enable it.</span>
+                <span class="c1">//&#39;always_remember_me&#39; =&gt; true,</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">remember_me</span></code> firewall defines the following configuration options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">secret</span></code> (<strong>required</strong>)</dt>
+<dd>The value used to encrypt the cookie’s content. It’s common to use the
+<code class="docutils literal notranslate"><span class="pre">secret</span></code> value defined in the <code class="docutils literal notranslate"><span class="pre">APP_SECRET</span></code> environment variable.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code> (default value: <code class="docutils literal notranslate"><span class="pre">REMEMBERME</span></code>)</dt>
+<dd>The name of the cookie used to keep the user logged in. If you enable the
+<code class="docutils literal notranslate"><span class="pre">remember_me</span></code> feature in several firewalls of the same application, make sure
+to choose a different name for the cookie of each firewall. Otherwise, you’ll
+face lots of security related problems.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">lifetime</span></code> (default value: <code class="docutils literal notranslate"><span class="pre">31536000</span></code>)</dt>
+<dd>The number of seconds during which the user will remain logged in. By default
+users are logged in for one year.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">path</span></code> (default value: <code class="docutils literal notranslate"><span class="pre">/</span></code>)</dt>
+<dd>The path where the cookie associated with this feature is used. By default
+the cookie will be applied to the entire website but you can restrict to a
+specific section (e.g. <code class="docutils literal notranslate"><span class="pre">/forum</span></code>, <code class="docutils literal notranslate"><span class="pre">/admin</span></code>).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">domain</span></code> (default value: <code class="docutils literal notranslate"><span class="pre">null</span></code>)</dt>
+<dd>The domain where the cookie associated with this feature is used. By default
+cookies use the current domain obtained from <code class="docutils literal notranslate"><span class="pre">$_SERVER</span></code>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">secure</span></code> (default value: <code class="docutils literal notranslate"><span class="pre">false</span></code>)</dt>
+<dd>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the cookie associated with this feature is sent to the user
+through an HTTPS secure connection.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">httponly</span></code> (default value: <code class="docutils literal notranslate"><span class="pre">true</span></code>)</dt>
+<dd>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the cookie associated with this feature is accessible only
+through the HTTP protocol. This means that the cookie won’t be accessible
+by scripting languages, such as JavaScript.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">samesite</span></code> (default value: <code class="docutils literal notranslate"><span class="pre">null</span></code>)</dt>
+<dd>If set to <code class="docutils literal notranslate"><span class="pre">strict</span></code>, the cookie associated with this feature will not
+be sent along with cross-site requests, even when following a regular link.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">remember_me_parameter</span></code> (default value: <code class="docutils literal notranslate"><span class="pre">_remember_me</span></code>)</dt>
+<dd>The name of the form field checked to decide if the “Remember Me” feature
+should be enabled or not. Keep reading this article to know how to enable
+this feature conditionally.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">always_remember_me</span></code> (default value: <code class="docutils literal notranslate"><span class="pre">false</span></code>)</dt>
+<dd>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the value of the <code class="docutils literal notranslate"><span class="pre">remember_me_parameter</span></code> is ignored and the
+“Remember Me” feature is always enabled, regardless of the desire of the
+end user.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">token_provider</span></code> (default value: <code class="docutils literal notranslate"><span class="pre">null</span></code>)</dt>
+<dd>Defines the service id of a token provider to use. If you want to store tokens
+in the database, see <a class="reference internal" href="#remember-me-token-in-database"><span class="std std-ref">Storing Remember Me Tokens in the Database</span></a>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">service</span></code> (default value: <code class="docutils literal notranslate"><span class="pre">null</span></code>)</dt>
+<dd><p class="first">Defines the ID of the service used to handle the Remember Me feature. It’s
+useful if you need to overwrite the current behavior entirely.</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The <code class="docutils literal notranslate"><span class="pre">service</span></code> option was introduced in Symfony 5.1.</p>
+</div>
+</dd>
+</dl>
+<div class="section" id="forcing-the-user-to-opt-out-of-the-remember-me-feature">
+<h2>Forcing the User to Opt-Out of the Remember Me Feature<a class="headerlink" href="#forcing-the-user-to-opt-out-of-the-remember-me-feature" title="Permalink to this headline">¶</a></h2>
+<p>It’s a good idea to provide the user with the option to use or not use the
+remember me functionality, as it will not always be appropriate. The usual
+way of doing this is to add a checkbox to the login form. By giving the checkbox
+the name <code class="docutils literal notranslate"><span class="pre">_remember_me</span></code> (or the name you configured using <code class="docutils literal notranslate"><span class="pre">remember_me_parameter</span></code>),
+the cookie will automatically be set when the checkbox is checked and the user
+successfully logs in. So, your specific login form might ultimately look like
+this:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">{# templates/security/login.html.twig #}</span>
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="p">&gt;</span>
+    <span class="c">{# ... your form fields #}</span>
+
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;remember_me&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;_remember_me&quot;</span> <span class="na">checked</span><span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;remember_me&quot;</span><span class="p">&gt;</span>Keep me logged in<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+
+    <span class="c">{# ... #}</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>The user will then automatically be logged in on subsequent visits while
+the cookie remains valid.</p>
+</div>
+<div class="section" id="forcing-the-user-to-re-authenticate-before-accessing-certain-resources">
+<h2>Forcing the User to Re-Authenticate before Accessing certain Resources<a class="headerlink" href="#forcing-the-user-to-re-authenticate-before-accessing-certain-resources" title="Permalink to this headline">¶</a></h2>
+<p>When the user returns to your site, they are authenticated automatically based
+on the information stored in the remember me cookie. This allows the user
+to access protected resources as if the user had actually authenticated upon
+visiting the site.</p>
+<p>In some cases, however, you may want to force the user to actually re-authenticate
+before accessing certain resources. For example, you might not allow “remember me”
+users to change their password. You can do this by leveraging a few special
+“attributes”:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/AccountController.php</span>
+<span class="c1">// ...</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">accountInfo</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// allow any authenticated user - we don&#39;t care if they just</span>
+    <span class="c1">// logged in, or are logged in via a remember me cookie</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">denyAccessUnlessGranted</span><span class="p">(</span><span class="s1">&#39;IS_AUTHENTICATED_REMEMBERED&#39;</span><span class="p">);</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">resetPassword</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// require the user to log in during *this* session</span>
+    <span class="c1">// if they were only logged in via a remember me cookie, they</span>
+    <span class="c1">// will be redirected to the login page</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">denyAccessUnlessGranted</span><span class="p">(</span><span class="s1">&#39;IS_AUTHENTICATED_FULLY&#39;</span><span class="p">);</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">There is also a <code class="docutils literal notranslate"><span class="pre">IS_REMEMBERED</span></code> attribute that grants <em>only</em> when the
+user is authenticated via the remember me mechanism.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The <code class="docutils literal notranslate"><span class="pre">IS_REMEMBERED</span></code> attribute was introduced in Symfony 5.1.</p>
+</div>
+</div>
+<div class="section" id="storing-remember-me-tokens-in-the-database">
+<span id="remember-me-token-in-database"></span><h2>Storing Remember Me Tokens in the Database<a class="headerlink" href="#storing-remember-me-tokens-in-the-database" title="Permalink to this headline">¶</a></h2>
+<p>The token contents, including the hashed version of the user password, are
+stored by default in cookies. If you prefer to store them in a database, use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Doctrine/Security/RememberMe/DoctrineTokenProvider.php" title="Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider"><span class="pre">DoctrineTokenProvider</span></a></code>
+class provided by the Doctrine Bridge.</p>
+<p>First, you need to register <code class="docutils literal notranslate"><span class="pre">DoctrineTokenProvider</span></code> as a service:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">~</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="nx">DoctrineTokenProvider</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Then you need to create a table with the following structure in your database
+so <code class="docutils literal notranslate"><span class="pre">DoctrineTokenProvider</span></code> can store the tokens:</p>
+<div class="highlight-sql notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">rememberme_token</span><span class="o">`</span> <span class="p">(</span>
+    <span class="o">`</span><span class="n">series</span><span class="o">`</span>   <span class="nb">char</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>     <span class="k">UNIQUE</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="o">`</span><span class="n">value</span><span class="o">`</span>    <span class="nb">char</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>     <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="o">`</span><span class="n">lastUsed</span><span class="o">`</span> <span class="n">datetime</span>     <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="o">`</span><span class="k">class</span><span class="o">`</span>    <span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="o">`</span><span class="n">username</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span>
+<span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you use DoctrineMigrationsBundle to manage your database migrations, you
+will need to tell Doctrine to ignore this new <code class="docutils literal notranslate"><span class="pre">rememberme_token</span></code> table:</p>
+<div class="last configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/doctrine.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">doctrine</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">dbal</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">schema_filter</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">~^(?!rememberme_token)~</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span># config/packages/doctrine.xml
+<span class="nt">&lt;doctrine:dbal</span> <span class="na">schema-filter=</span><span class="s">&quot;~^(?!rememberme_token)~&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/doctrine.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;doctrine&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;dbal&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;schema_filter&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;~^(?!rememberme_token)~&#39;</span><span class="p">,</span>
+        <span class="c1">// ...</span>
+    <span class="p">],</span>
+    <span class="c1">// ...</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<p>Finally, set the <code class="docutils literal notranslate"><span class="pre">token_provider</span></code> option of the <code class="docutils literal notranslate"><span class="pre">remember_me</span></code> config to the
+service you just created:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">firewalls</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+            <span class="l l-Scalar l-Scalar-Plain">remember_me</span><span class="p p-Indicator">:</span>
+                <span class="c1"># ...</span>
+                <span class="l l-Scalar l-Scalar-Plain">token_provider</span><span class="p p-Indicator">:</span> <span class="s">&#39;Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/security.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;srv:container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/security&quot;</span>
+    <span class="na">xmlns:srv=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/security</span>
+<span class="s">        https://symfony.com/schema/dic/security/security-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;config&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="nt">&lt;firewall</span> <span class="na">name=</span><span class="s">&quot;main&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- ... --&gt;</span>
+
+            <span class="nt">&lt;remember-me</span>
+                <span class="na">token-provider=</span><span class="s">&quot;Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider&quot;</span>
+                <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/firewall&gt;</span>
+    <span class="nt">&lt;/config&gt;</span>
+<span class="nt">&lt;/srv:container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/security.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider</span><span class="p">;</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+
+    <span class="s1">&#39;firewalls&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;main&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// ...</span>
+            <span class="s1">&#39;remember_me&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="c1">// ...</span>
+                <span class="s1">&#39;token_provider&#39;</span> <span class="o">=&gt;</span> <span class="nx">DoctrineTokenProvider</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

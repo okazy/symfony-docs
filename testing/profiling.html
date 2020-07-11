@@ -1,0 +1,426 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Use the Profiler in a Functional Test &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The DomCrawler Component" href="../components/dom_crawler.html" />
+    <link rel="prev" title="How to Test the Interaction of several Clients" href="insulating_clients.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../testing.html">Testing</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../testing.html#the-phpunit-testing-framework">The PHPUnit Testing Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html#unit-tests">Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html#functional-tests">Functional Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html#testing-against-different-sets-of-data">Testing against Different Sets of Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html#working-with-the-test-client">Working with the Test Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html#the-crawler">The Crawler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html#testing-configuration">Testing Configuration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../testing.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="bootstrap.html">How to Customize the Bootstrap Process before Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html">How to Test Code that Interacts with the Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functional_tests_assertions.html">Functional Test specific Assertions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_authentication.html">How to Simulate HTTP Authentication in a Functional Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="insulating_clients.html">How to Test the Interaction of several Clients</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Use the Profiler in a Functional Test</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enabling-the-profiler-in-tests">Enabling the Profiler in Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing-the-profiler-information">Testing the Profiler Information</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../components/dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../components/css_selector.html">The CssSelector Component</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../testing.html">Testing</a> &raquo;</li>
+        
+      <li>How to Use the Profiler in a Functional Test</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/testing/profiling.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-use-the-profiler-in-a-functional-test">
+<span id="index-0"></span><h1>How to Use the Profiler in a Functional Test<a class="headerlink" href="#how-to-use-the-profiler-in-a-functional-test" title="Permalink to this headline">¶</a></h1>
+<p>It’s highly recommended that a functional test only tests the Response. But if
+you write functional tests that monitor your production servers, you might
+want to write tests on the profiling data as it gives you a great way to check
+various things and enforce some metrics.</p>
+<div class="section" id="enabling-the-profiler-in-tests">
+<span id="speeding-up-tests-by-not-collecting-profiler-data"></span><h2>Enabling the Profiler in Tests<a class="headerlink" href="#enabling-the-profiler-in-tests" title="Permalink to this headline">¶</a></h2>
+<p>Collecting data with <a class="reference internal" href="../profiler.html"><span class="doc">the Symfony Profiler</span></a> can slow down your
+tests significantly. That’s why Symfony disables it by default:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/test/web_profiler.yaml</span>
+
+<span class="c1"># ...</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">profiler</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{</span> <span class="nv">enabled</span><span class="p p-Indicator">:</span> <span class="nv">true</span><span class="p p-Indicator">,</span> <span class="nv">collect</span><span class="p p-Indicator">:</span> <span class="nv">false</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/test/web_profiler.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">                http://symfony.com/schema/dic/symfony https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="c">&lt;!-- ... --&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:profiler</span> <span class="na">enabled=</span><span class="s">&quot;true&quot;</span> <span class="na">collect=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/test/web_profiler.php</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+    <span class="s1">&#39;profiler&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;enabled&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="s1">&#39;collect&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">collect</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code> enables the profiler for all tests. However, if
+you need the profiler just in a few tests, you can keep it disabled globally and
+enable the profiler individually on each test by calling
+<code class="docutils literal notranslate"><span class="pre">$client-&gt;enableProfiler()</span></code>.</p>
+</div>
+<div class="section" id="testing-the-profiler-information">
+<h2>Testing the Profiler Information<a class="headerlink" href="#testing-the-profiler-information" title="Permalink to this headline">¶</a></h2>
+<p>The data collected by the Symfony Profiler can be used to check the number of
+database calls, the time spent in the framework, etc. All this information is
+provided by the collectors obtained through the <code class="docutils literal notranslate"><span class="pre">$client-&gt;getProfile()</span></code> call:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Test\WebTestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">LuckyControllerTest</span> <span class="k">extends</span> <span class="nx">WebTestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testRandomNumber</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$client</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="na">createClient</span><span class="p">();</span>
+
+        <span class="c1">// enable the profiler only for the next request (if you make</span>
+        <span class="c1">// new requests, you must call this method again)</span>
+        <span class="c1">// (it does nothing if the profiler is not available)</span>
+        <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">enableProfiler</span><span class="p">();</span>
+
+        <span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;/lucky/number&#39;</span><span class="p">);</span>
+
+        <span class="c1">// ... write some assertions about the Response</span>
+
+        <span class="c1">// check that the profiler is enabled</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$profile</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getProfile</span><span class="p">())</span> <span class="p">{</span>
+            <span class="c1">// check the number of requests</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertLessThan</span><span class="p">(</span>
+                <span class="mi">10</span><span class="p">,</span>
+                <span class="nv">$profile</span><span class="o">-&gt;</span><span class="na">getCollector</span><span class="p">(</span><span class="s1">&#39;db&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getQueryCount</span><span class="p">()</span>
+            <span class="p">);</span>
+
+            <span class="c1">// check the time spent in the framework</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertLessThan</span><span class="p">(</span>
+                <span class="mi">500</span><span class="p">,</span>
+                <span class="nv">$profile</span><span class="o">-&gt;</span><span class="na">getCollector</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getDuration</span><span class="p">()</span>
+            <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If a test fails because of profiling data (too many DB queries for instance),
+you might want to use the Web Profiler to analyze the request after the tests
+finish. It can be achieved by embedding the token in the error message:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertLessThan</span><span class="p">(</span>
+    <span class="mi">30</span><span class="p">,</span>
+    <span class="nv">$profile</span><span class="o">-&gt;</span><span class="na">getCollector</span><span class="p">(</span><span class="s1">&#39;db&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getQueryCount</span><span class="p">(),</span>
+    <span class="nb">sprintf</span><span class="p">(</span>
+        <span class="s1">&#39;Checks that query count is less than 30 (token %s)&#39;</span><span class="p">,</span>
+        <span class="nv">$profile</span><span class="o">-&gt;</span><span class="na">getToken</span><span class="p">()</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The profiler information is available even if you <a class="reference internal" href="insulating_clients.html"><span class="doc">insulate the client</span></a>
+or if you use an HTTP layer for your tests.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Read the API for built-in <a class="reference internal" href="../profiler/data_collector.html"><span class="doc">data collectors</span></a>
+to learn more about their interfaces.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

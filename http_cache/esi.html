@@ -1,0 +1,564 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Working with Edge Side Includes &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="HTTP Cache Expiration" href="expiration.html" />
+    <link rel="prev" title="Varying the Response for HTTP Cache" href="cache_vary.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../http_cache.html">HTTP Cache</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#caching-on-the-shoulders-of-giants">Caching on the Shoulders of Giants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#caching-with-a-gateway-cache">Caching with a Gateway Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#making-your-responses-http-cacheable">Making your Responses HTTP Cacheable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#cache-invalidation">Cache Invalidation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#using-edge-side-includes">Using Edge Side Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#http-caching-and-user-sessions">HTTP Caching and User Sessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#summary">Summary</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../http_cache.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cache_invalidation.html">Cache Invalidation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cache_vary.html">Varying the Response for HTTP Cache</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Working with Edge Side Includes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-esi-in-symfony">Using ESI in Symfony</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="expiration.html">HTTP Cache Expiration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ssi.html">Working with Server Side Includes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validation.html">HTTP Cache Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varnish.html">How to Use Varnish to Speed up my Website</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../http_cache.html">HTTP Cache</a> &raquo;</li>
+        
+      <li>Working with Edge Side Includes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/http_cache/esi.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="working-with-edge-side-includes">
+<span id="edge-side-includes"></span><span id="index-0"></span><h1>Working with Edge Side Includes<a class="headerlink" href="#working-with-edge-side-includes" title="Permalink to this headline">¶</a></h1>
+<p>Gateway caches are a great way to make your website perform better. But they
+have one limitation: they can only cache whole pages. If your pages contain
+dynamic sections, such as the user name or a shopping cart, you are out of
+luck. Fortunately, Symfony provides a solution for these cases, based on a
+technology called <a class="reference external" href="http://www.w3.org/TR/esi-lang">ESI</a>, or Edge Side Includes. Akamai wrote this specification
+in 2001 and it allows specific parts of a page to have a different
+caching strategy than the main page.</p>
+<p>The ESI specification describes tags you can embed in your pages to communicate
+with the gateway cache. Only one tag is implemented in Symfony, <code class="docutils literal notranslate"><span class="pre">include</span></code>,
+as this is the only useful one outside of Akamai context:</p>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="c">&lt;!-- ... some content --&gt;</span>
+
+        <span class="c">&lt;!-- Embed the content of another page here --&gt;</span>
+        <span class="p">&lt;</span><span class="nt">esi:include</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;http://...&quot;</span><span class="p">/&gt;</span>
+
+        <span class="c">&lt;!-- ... more content --&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Notice from the example that each ESI tag requires a fully-qualified URL.
+An ESI tag represents a page fragment that can be fetched via the given
+URL.</p>
+</div>
+<p>When a request is handled, the gateway cache fetches the entire page from
+its cache or requests it from the backend application. If the response contains
+one or more ESI tags, these are processed in the same way. In other words,
+the gateway cache either retrieves the included page fragment from its cache
+or requests the page fragment from the backend application again. When all
+the ESI tags have been resolved, the gateway cache merges each into the main
+page and sends the final content to the client.</p>
+<p>All of this happens transparently at the gateway cache level (i.e. outside
+of your application). As you’ll see, if you choose to take advantage of ESI
+tags, Symfony makes the process of including them almost effortless.</p>
+<div class="section" id="using-esi-in-symfony">
+<span id="using-esi-in-symfony2"></span><h2>Using ESI in Symfony<a class="headerlink" href="#using-esi-in-symfony" title="Permalink to this headline">¶</a></h2>
+<p>First, to use ESI, be sure to enable it in your application configuration:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">esi</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{</span> <span class="nv">enabled</span><span class="p p-Indicator">:</span> <span class="nv">true</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/framework.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+        <span class="nt">&lt;framework:esi</span> <span class="na">enabled=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/framework.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+    <span class="s1">&#39;esi&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;enabled&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Now, suppose you have a page that is relatively static, except for a news
+ticker at the bottom of the content. With ESI, you can cache the news ticker
+independently of the rest of the page:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/DefaultController.php</span>
+
+<span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">DefaultController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">about</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;static/about.html.twig&#39;</span><span class="p">);</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setPublic</span><span class="p">();</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setMaxAge</span><span class="p">(</span><span class="mi">600</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this example, the response is marked as public to make the full page
+cacheable for all requests with a lifetime of ten minutes.
+Next, include the news ticker in the template by embedding an action.
+This is done via the <code class="docutils literal notranslate"><span class="pre">render()</span></code> helper (for more details, see how to
+<a class="reference internal" href="../templates.html#templates-embed-controllers"><span class="std std-ref">embed controllers in templates</span></a>).</p>
+<p>As the embedded content comes from another page (or controller for that
+matter), Symfony uses the standard <code class="docutils literal notranslate"><span class="pre">render</span></code> helper to configure ESI tags:</p>
+<div class="highlight-twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">{# templates/static/about.html.twig #}</span><span class="x"></span>
+
+<span class="c">{# you can use a controller reference #}</span><span class="x"></span>
+<span class="cp">{{</span> <span class="nv">render_esi</span><span class="o">(</span><span class="nv">controller</span><span class="o">(</span><span class="s1">&#39;App\\Controller\\NewsController::latest&#39;</span><span class="o">,</span> <span class="o">{</span> <span class="s1">&#39;maxPerPage&#39;</span><span class="o">:</span> <span class="m">5</span> <span class="o">}))</span> <span class="cp">}}</span><span class="x"></span>
+
+<span class="c">{# ... or a URL #}</span><span class="x"></span>
+<span class="cp">{{</span> <span class="nv">render_esi</span><span class="o">(</span><span class="nv">url</span><span class="o">(</span><span class="s1">&#39;latest_news&#39;</span><span class="o">,</span> <span class="o">{</span> <span class="s1">&#39;maxPerPage&#39;</span><span class="o">:</span> <span class="m">5</span> <span class="o">}))</span> <span class="cp">}}</span><span class="x"></span>
+</pre></div>
+</td></tr></table></div>
+<p>By using the <code class="docutils literal notranslate"><span class="pre">esi</span></code> renderer (via the <code class="docutils literal notranslate"><span class="pre">render_esi()</span></code> Twig function), you
+tell Symfony that the action should be rendered as an ESI tag. You might be
+wondering why you would want to use a helper instead of just writing the ESI
+tag yourself. That’s because using a helper makes your application work even
+if there is no gateway cache installed.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">As you’ll see below, the <code class="docutils literal notranslate"><span class="pre">maxPerPage</span></code> variable you pass is available
+as an argument to your controller (i.e. <code class="docutils literal notranslate"><span class="pre">$maxPerPage</span></code>). The variables
+passed through <code class="docutils literal notranslate"><span class="pre">render_esi</span></code> also become part of the cache key so that
+you have unique caches for each combination of variables and values.</p>
+</div>
+<p>When using the default <code class="docutils literal notranslate"><span class="pre">render()</span></code> function (or setting the renderer to
+<code class="docutils literal notranslate"><span class="pre">inline</span></code>), Symfony merges the included page content into the main one
+before sending the response to the client. But if you use the <code class="docutils literal notranslate"><span class="pre">esi</span></code> renderer
+(i.e. call <code class="docutils literal notranslate"><span class="pre">render_esi()</span></code>) <em>and</em> if Symfony detects that it’s talking to a
+gateway cache that supports ESI, it generates an ESI include tag. But if there
+is no gateway cache or if it does not support ESI, Symfony will just merge
+the included page content within the main one as it would have done if you had
+used <code class="docutils literal notranslate"><span class="pre">render()</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Symfony detects if a gateway cache supports ESI via another Akamai
+specification that is supported out of the box by the Symfony reverse
+proxy.</p>
+</div>
+<p>The embedded action can now specify its own caching rules entirely independently
+of the master page:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/NewsController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">NewsController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">latest</span><span class="p">(</span><span class="nv">$maxPerPage</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setPublic</span><span class="p">();</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setMaxAge</span><span class="p">(</span><span class="mi">60</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this example, the embedded action is cached publicly too because the contents
+are the same for all requests. However, in other cases you may need to make this
+response non-public and even non-cacheable, depending on your needs.</p>
+<p>Putting all the above code together, with ESI the full page cache will be valid
+for 600 seconds, but the news component cache will only last for 60 seconds.</p>
+<p id="http-cache-fragments">When using a controller reference, the ESI tag should reference the embedded
+action as an accessible URL so the gateway cache can fetch it independently of
+the rest of the page. Symfony takes care of generating a unique URL for any
+controller reference and it is able to route them properly thanks to the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/EventListener/FragmentListener.php" title="Symfony\Component\HttpKernel\EventListener\FragmentListener"><span class="pre">FragmentListener</span></a></code>
+that must be enabled in your configuration:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">fragments</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{</span> <span class="nv">path</span><span class="p p-Indicator">:</span> <span class="nv">/_fragment</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/framework.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:fragment</span> <span class="na">path=</span><span class="s">&quot;/_fragment&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/framework.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+    <span class="s1">&#39;fragments&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;path&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/_fragment&#39;</span><span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>One great advantage of the ESI renderer is that you can make your application
+as dynamic as needed and at the same time, hit the application as little as
+possible.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">The fragment listener only responds to signed requests. Requests are only
+signed when using the fragment renderer and the <code class="docutils literal notranslate"><span class="pre">render_esi</span></code> Twig
+function.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">render_esi</span></code> helper supports two other useful options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">alt</span></code></dt>
+<dd>Used as the <code class="docutils literal notranslate"><span class="pre">alt</span></code> attribute on the ESI tag, which allows you to specify an
+alternative URL to be used if the <code class="docutils literal notranslate"><span class="pre">src</span></code> cannot be found.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ignore_errors</span></code></dt>
+<dd>If set to true, an <code class="docutils literal notranslate"><span class="pre">onerror</span></code> attribute will be added to the ESI with a value
+of <code class="docutils literal notranslate"><span class="pre">continue</span></code> indicating that, in the event of a failure, the gateway cache
+will remove the ESI tag silently.</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

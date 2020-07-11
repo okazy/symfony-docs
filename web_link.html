@@ -1,0 +1,443 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Asset Preloading and Resource Hints with HTTP/2 and WebLink &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Workflow" href="workflow.html" />
+    <link rel="prev" title="How to Translate Validation Constraint Messages" href="validation/translations.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#preloading-assets">Preloading Assets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-does-it-work">How does it work?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#resource-hints">Resource Hints</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Asset Preloading and Resource Hints with HTTP/2 and WebLink</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/web_link.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="asset-preloading-and-resource-hints-with-http-2-and-weblink">
+<span id="index-0"></span><h1>Asset Preloading and Resource Hints with HTTP/2 and WebLink<a class="headerlink" href="#asset-preloading-and-resource-hints-with-http-2-and-weblink" title="Permalink to this headline">¶</a></h1>
+<p>Symfony provides native support (via the <a class="reference external" href="https://github.com/symfony/web-link">WebLink</a> component)
+for managing <code class="docutils literal notranslate"><span class="pre">Link</span></code> HTTP headers, which are the key to improve the application
+performance when using HTTP/2 and preloading capabilities of modern web browsers.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Link</span></code> headers are used in <a class="reference external" href="https://tools.ietf.org/html/rfc7540#section-8.2">HTTP/2 Server Push</a> and W3C’s <a class="reference external" href="https://www.w3.org/TR/resource-hints/">Resource Hints</a>
+to push resources (e.g. CSS and JavaScript files) to clients before they even
+know that they need them. WebLink also enables other optimizations that work
+with HTTP 1.x:</p>
+<ul class="simple">
+<li>Asking the browser to fetch or to render another web page in the background;</li>
+<li>Making early DNS lookups, TCP handshakes or TLS negotiations.</li>
+</ul>
+<p>Something important to consider is that all these HTTP/2 features require a
+secure HTTPS connection, even when working on your local machine. The main web
+servers (Apache, nginx, Caddy, etc.) support this, but you can also use the
+<a class="reference external" href="https://github.com/dunglas/symfony-docker">Docker installer and runtime for Symfony</a> created by Kévin Dunglas, from the
+Symfony community.</p>
+<div class="section" id="preloading-assets">
+<h2>Preloading Assets<a class="headerlink" href="#preloading-assets" title="Permalink to this headline">¶</a></h2>
+<p>Imagine that your application includes a web page like this:</p>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>My Application<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/app.css&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">main</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;main&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Following the traditional HTTP workflow, when this page is served browsers will
+make one request for the HTML page and another request for the linked CSS file.
+However, thanks to HTTP/2 your application can start sending the CSS file
+contents even before browsers request them.</p>
+<p>To do that, first install the WebLink component:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/web-link
+</pre></div>
+</td></tr></table></div>
+<p>Now, update the template to use the <code class="docutils literal notranslate"><span class="pre">preload()</span></code> Twig function provided by
+WebLink. The <a class="reference external" href="https://w3c.github.io/preload/#as-attribute">“as” attribute</a> is mandatory because browsers need it to apply
+correct prioritization and the content security policy:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">preload</span><span class="o">(</span><span class="s1">&#39;/app.css&#39;</span><span class="o">,</span> <span class="o">{</span> <span class="nv">as</span><span class="o">:</span> <span class="s1">&#39;style&#39;</span> <span class="o">})</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>If you reload the page, the perceived performance will improve because the
+server responded with both the HTML page and the CSS file when the browser only
+requested the HTML page.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>You can preload an asset by wrapping it with the <code class="docutils literal notranslate"><span class="pre">preload()</span></code> function:</p>
+<div class="last highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">preload</span><span class="o">(</span><span class="nv">asset</span><span class="o">(</span><span class="s1">&#39;build/app.css&#39;</span><span class="o">))</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Additionally, according to <a class="reference external" href="https://wicg.github.io/priority-hints/">the Priority Hints specification</a>, you can signal
+the priority of the resource to download using the <code class="docutils literal notranslate"><span class="pre">importance</span></code> attribute:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">preload</span><span class="o">(</span><span class="s1">&#39;/app.css&#39;</span><span class="o">,</span> <span class="o">{</span> <span class="nv">as</span><span class="o">:</span> <span class="s1">&#39;style&#39;</span><span class="o">,</span> <span class="nv">importance</span><span class="o">:</span> <span class="s1">&#39;low&#39;</span> <span class="o">})</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="how-does-it-work">
+<h3>How does it work?<a class="headerlink" href="#how-does-it-work" title="Permalink to this headline">¶</a></h3>
+<p>The WebLink component manages the <code class="docutils literal notranslate"><span class="pre">Link</span></code> HTTP headers added to the response.
+When using the <code class="docutils literal notranslate"><span class="pre">preload()</span></code> function in the previous example, the following
+header was added to the response: <code class="docutils literal notranslate"><span class="pre">Link</span> <span class="pre">&lt;/app.css&gt;;</span> <span class="pre">rel=&quot;preload&quot;;</span> <span class="pre">as=&quot;style&quot;</span></code>
+According to <a class="reference external" href="https://www.w3.org/TR/preload/#server-push-http-2">the Preload specification</a>, when an HTTP/2 server detects that
+the original (HTTP 1.x) response contains this HTTP header, it will
+automatically trigger a push for the related file in the same HTTP/2 connection.</p>
+<p>Popular proxy services and CDNs including <a class="reference external" href="https://blog.cloudflare.com/announcing-support-for-http-2-server-push-2/">Cloudflare</a>, <a class="reference external" href="https://docs.fastly.com/en/guides/http2-server-push">Fastly</a> and <a class="reference external" href="https://blogs.akamai.com/2017/03/http2-server-push-the-what-how-and-why.html">Akamai</a>
+also leverage this feature. It means that you can push resources to clients and
+improve performance of your applications in production right now.</p>
+<p>If you want to prevent the push but let the browser preload the resource by
+issuing an early separate HTTP request, use the <code class="docutils literal notranslate"><span class="pre">nopush</span></code> option:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">preload</span><span class="o">(</span><span class="s1">&#39;/app.css&#39;</span><span class="o">,</span> <span class="o">{</span> <span class="nv">as</span><span class="o">:</span> <span class="s1">&#39;style&#39;</span><span class="o">,</span> <span class="nv">nopush</span><span class="o">:</span> <span class="kp">true</span> <span class="o">})</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="resource-hints">
+<h2>Resource Hints<a class="headerlink" href="#resource-hints" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.w3.org/TR/resource-hints/">Resource Hints</a> are used by applications to help browsers when deciding which
+resources should be downloaded, preprocessed or connected to first.</p>
+<p>The WebLink component provides the following Twig functions to send those hints:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">dns_prefetch()</span></code>: “indicates an origin (e.g. <code class="docutils literal notranslate"><span class="pre">https://foo.cloudfront.net</span></code>)
+that will be used to fetch required resources, and that the user agent should
+resolve as early as possible”.</li>
+<li><code class="docutils literal notranslate"><span class="pre">preconnect()</span></code>: “indicates an origin (e.g. <code class="docutils literal notranslate"><span class="pre">https://www.google-analytics.com</span></code>)
+that will be used to fetch required resources. Initiating an early connection,
+which includes the DNS lookup, TCP handshake, and optional TLS negotiation, allows
+the user agent to mask the high latency costs of establishing a connection”.</li>
+<li><code class="docutils literal notranslate"><span class="pre">prefetch()</span></code>: “identifies a resource that might be required by the next
+navigation, and that the user agent <em>should</em> fetch, such that the user agent
+can deliver a faster response once the resource is requested in the future”.</li>
+<li><code class="docutils literal notranslate"><span class="pre">prerender()</span></code>: “identifies a resource that might be required by the next
+navigation, and that the user agent <em>should</em> fetch and execute, such that the
+user agent can deliver a faster response once the resource is requested later”.</li>
+</ul>
+<p>The component also supports sending HTTP links not related to performance and
+any link implementing the <a class="reference external" href="https://www.php-fig.org/psr/psr-13/">PSR-13</a> standard. For instance, any
+<a class="reference external" href="https://html.spec.whatwg.org/dev/links.html#linkTypes">link defined in the HTML specification</a>:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;alternate&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">link</span><span class="o">(</span><span class="s1">&#39;/index.jsonld&#39;</span><span class="o">,</span> <span class="s1">&#39;alternate&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">preload</span><span class="o">(</span><span class="s1">&#39;/app.css&#39;</span><span class="o">,</span> <span class="o">{</span> <span class="nv">as</span><span class="o">:</span> <span class="s1">&#39;style&#39;</span><span class="o">,</span> <span class="nv">nopush</span><span class="o">:</span> <span class="kp">true</span> <span class="o">})</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>The previous snippet will result in this HTTP header being sent to the client:
+<code class="docutils literal notranslate"><span class="pre">Link:</span> <span class="pre">&lt;/index.jsonld&gt;;</span> <span class="pre">rel=&quot;alternate&quot;,&lt;/app.css&gt;;</span> <span class="pre">rel=&quot;preload&quot;;</span> <span class="pre">nopush</span></code></p>
+<p>You can also add links to the HTTP response directly from controllers and services:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/BlogController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\WebLink\GenericLinkProvider</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\WebLink\Link</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">BlogController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// using the addLink() shortcut provided by AbstractController</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addLink</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Link</span><span class="p">(</span><span class="s1">&#39;preload&#39;</span><span class="p">,</span> <span class="s1">&#39;/app.css&#39;</span><span class="p">));</span>
+
+        <span class="c1">// alternative if you don&#39;t want to use the addLink() shortcut</span>
+        <span class="nv">$linkProvider</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;_links&#39;</span><span class="p">,</span> <span class="k">new</span> <span class="nx">GenericLinkProvider</span><span class="p">());</span>
+        <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;_links&#39;</span><span class="p">,</span> <span class="nv">$linkProvider</span><span class="o">-&gt;</span><span class="na">withLink</span><span class="p">(</span>
+            <span class="p">(</span><span class="k">new</span> <span class="nx">Link</span><span class="p">(</span><span class="s1">&#39;preload&#39;</span><span class="p">,</span> <span class="s1">&#39;/app.css&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">withAttribute</span><span class="p">(</span><span class="s1">&#39;as&#39;</span><span class="p">,</span> <span class="s1">&#39;style&#39;</span><span class="p">)</span>
+        <span class="p">));</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

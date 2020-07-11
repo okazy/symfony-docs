@@ -1,0 +1,574 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Memcached Cache Adapter &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="PDO &amp; Doctrine DBAL Cache Adapter" href="pdo_doctrine_dbal_adapter.html" />
+    <link rel="prev" title="Filesystem Cache Adapter" href="filesystem_adapter.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../cache.html">The Cache Component</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../cache.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cache.html#cache-contracts-versus-psr-6">Cache Contracts versus PSR-6</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../cache.html#cache-contracts">Cache Contracts</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../../cache.html#available-cache-adapters">Available Cache Adapters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../cache.html#generic-caching-psr-6">Generic Caching (PSR-6)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cache.html#basic-usage-psr-6">Basic Usage (PSR-6)</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../cache.html#advanced-usage">Advanced Usage</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../cache_invalidation.html">Cache Invalidation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cache_items.html">Cache Items</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../cache_pools.html">Cache Pools and Supported Adapters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../psr6_psr16_adapters.html">Adapters For Interoperability between PSR-6 and PSR-16 Cache</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dependency_injection.html">The DependencyInjection Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../form.html">The Form Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../process.html">The Process Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../security.html">The Security Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">The Components</a> &raquo;</li>
+        
+          <li><a href="../../cache.html">The Cache Component</a> &raquo;</li>
+        
+      <li>Memcached Cache Adapter</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/components/cache/adapters/memcached_adapter.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="memcached-cache-adapter">
+<span id="memcached-adapter"></span><span id="index-0"></span><h1>Memcached Cache Adapter<a class="headerlink" href="#memcached-cache-adapter" title="Permalink to this headline">¶</a></h1>
+<p>This adapter stores the values in-memory using one (or more) <a class="reference external" href="https://memcached.org/">Memcached server</a>
+instances. Unlike the <a class="reference internal" href="apcu_adapter.html#apcu-adapter"><span class="std std-ref">APCu adapter</span></a>, and similarly to the
+<a class="reference internal" href="redis_adapter.html#redis-adapter"><span class="std std-ref">Redis adapter</span></a>, it is not limited to the current server’s
+shared memory; you can store contents independent of your PHP environment.
+The ability to utilize a cluster of servers to provide redundancy and/or fail-over
+is also available.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last"><strong>Requirements:</strong> The <a class="reference external" href="https://www.php.net/manual/en/book.memcached.php">Memcached PHP extension</a> as well as a <a class="reference external" href="https://memcached.org/">Memcached server</a>
+must be installed, active, and running to use this adapter. Version <code class="docutils literal notranslate"><span class="pre">2.2</span></code> or
+greater of the <a class="reference external" href="https://www.php.net/manual/en/book.memcached.php">Memcached PHP extension</a> is required for this adapter.</p>
+</div>
+<p>This adapter expects a <a class="reference external" href="https://www.php.net/manual/en/class.memcached.php">Memcached</a> instance to be passed as the first
+parameter. A namespace and default cache lifetime can optionally be passed as
+the second and third parameters:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Cache\Adapter\MemcachedAdapter</span><span class="p">;</span>
+
+<span class="nv">$cache</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MemcachedAdapter</span><span class="p">(</span>
+    <span class="c1">// the client object that sets options and adds the server instance(s)</span>
+    <span class="nx">\Memcached</span> <span class="nv">$client</span><span class="p">,</span>
+
+    <span class="c1">// a string prefixed to the keys of the items stored in this cache</span>
+    <span class="nv">$namespace</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+
+    <span class="c1">// the default lifetime (in seconds) for cache items that do not define their</span>
+    <span class="c1">// own lifetime, with a value 0 causing items to be stored indefinitely (i.e.</span>
+    <span class="c1">// until MemcachedAdapter::clear() is invoked or the server(s) are restarted)</span>
+    <span class="nv">$defaultLifetime</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="section" id="configure-the-connection">
+<h2>Configure the Connection<a class="headerlink" href="#configure-the-connection" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Cache/Adapter/MemcachedAdapter.php" title="Symfony\Component\Cache\Adapter\MemcachedAdapter::createConnection()"><span class="pre">createConnection()</span></a></code>
+helper method allows creating and configuring a <a class="reference external" href="https://www.php.net/manual/en/class.memcached.php">Memcached</a> class instance using a
+<a class="reference external" href="https://en.wikipedia.org/wiki/Data_source_name">Data Source Name (DSN)</a> or an array of DSNs:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Cache\Adapter\MemcachedAdapter</span><span class="p">;</span>
+
+<span class="c1">// pass a single DSN string to register a single server with the client</span>
+<span class="nv">$client</span> <span class="o">=</span> <span class="nx">MemcachedAdapter</span><span class="o">::</span><span class="na">createConnection</span><span class="p">(</span>
+    <span class="s1">&#39;memcached://localhost&#39;</span>
+    <span class="c1">// the DSN can include config options (pass them as a query string):</span>
+    <span class="c1">// &#39;memcached://localhost:11222?retry_timeout=10&#39;</span>
+    <span class="c1">// &#39;memcached://localhost:11222?socket_recv_size=1&amp;socket_send_size=2&#39;</span>
+<span class="p">);</span>
+
+<span class="c1">// pass an array of DSN strings to register multiple servers with the client</span>
+<span class="nv">$client</span> <span class="o">=</span> <span class="nx">MemcachedAdapter</span><span class="o">::</span><span class="na">createConnection</span><span class="p">([</span>
+    <span class="s1">&#39;memcached://10.0.0.100&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;memcached://10.0.0.101&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;memcached://10.0.0.102&#39;</span><span class="p">,</span>
+    <span class="c1">// etc...</span>
+<span class="p">]);</span>
+
+<span class="c1">// a single DSN can define multiple servers using the following syntax:</span>
+<span class="c1">// host[hostname-or-IP:port] (where port is optional). Sockets must include a trailing &#39;:&#39;</span>
+<span class="nv">$client</span> <span class="o">=</span> <span class="nx">MemcachedAdapter</span><span class="o">::</span><span class="na">createConnection</span><span class="p">(</span>
+    <span class="s1">&#39;memcached:?host[localhost]&amp;host[localhost:12345]&amp;host[/some/memcached.sock:]=3&#39;</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Data_source_name">Data Source Name (DSN)</a> for this adapter must use the following format:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>memcached://[user:pass@][ip|host|socket[:port]][?weight=int]
+</pre></div>
+</td></tr></table></div>
+<p>The DSN must include a IP/host (and an optional port) or a socket path, an
+optional username and password (for SASL authentication; it requires that the
+memcached extension was compiled with <code class="docutils literal notranslate"><span class="pre">--enable-memcached-sasl</span></code>) and an
+optional weight (for prioritizing servers in a cluster; its value is an integer
+between <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">100</span></code> which defaults to <code class="docutils literal notranslate"><span class="pre">null</span></code>; a higher value means more
+priority).</p>
+<p>Below are common examples of valid DSNs showing a combination of available values:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Cache\Adapter\MemcachedAdapter</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="nx">MemcachedAdapter</span><span class="o">::</span><span class="na">createConnection</span><span class="p">([</span>
+    <span class="c1">// hostname + port</span>
+    <span class="s1">&#39;memcached://my.server.com:11211&#39;</span>
+
+    <span class="c1">// hostname without port + SASL username and password</span>
+    <span class="s1">&#39;memcached://rmf:abcdef@localhost&#39;</span>
+
+    <span class="c1">// IP address instead of hostname + weight</span>
+    <span class="s1">&#39;memcached://127.0.0.1?weight=50&#39;</span>
+
+    <span class="c1">// socket instead of hostname/IP + SASL username and password</span>
+    <span class="s1">&#39;memcached://janesmith:mypassword@/var/run/memcached.sock&#39;</span>
+
+    <span class="c1">// socket instead of hostname/IP + weight</span>
+    <span class="s1">&#39;memcached:///var/run/memcached.sock?weight=20&#39;</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configure-the-options">
+<h2>Configure the Options<a class="headerlink" href="#configure-the-options" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Cache/Adapter/MemcachedAdapter.php" title="Symfony\Component\Cache\Adapter\MemcachedAdapter::createConnection()"><span class="pre">createConnection()</span></a></code>
+helper method also accepts an array of options as its second argument. The
+expected format is an associative array of <code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">=&gt;</span> <span class="pre">value</span></code> pairs representing
+option names and their respective values:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Cache\Adapter\MemcachedAdapter</span><span class="p">;</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="nx">MemcachedAdapter</span><span class="o">::</span><span class="na">createConnection</span><span class="p">(</span>
+    <span class="c1">// a DSN string or an array of DSN strings</span>
+    <span class="p">[],</span>
+
+    <span class="c1">// associative array of configuration options</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;compression&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="s1">&#39;libketama_compatible&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="s1">&#39;serializer&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;igbinary&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="section" id="available-options">
+<h3>Available Options<a class="headerlink" href="#available-options" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">auto_eject_hosts</span></code> (type: <code class="docutils literal notranslate"><span class="pre">bool</span></code>, default: <code class="docutils literal notranslate"><span class="pre">false</span></code>)</dt>
+<dd>Enables or disables a constant, automatic, re-balancing of the cluster by
+auto-ejecting hosts that have exceeded the configured <code class="docutils literal notranslate"><span class="pre">server_failure_limit</span></code>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">buffer_writes</span></code> (type: <code class="docutils literal notranslate"><span class="pre">bool</span></code>, default: <code class="docutils literal notranslate"><span class="pre">false</span></code>)</dt>
+<dd>Enables or disables buffered input/output operations, causing storage
+commands to buffer instead of being immediately sent to the remote
+server(s). Any action that retrieves data, quits the connection, or closes
+down the connection will cause the buffer to be committed.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">compression</span></code> (type: <code class="docutils literal notranslate"><span class="pre">bool</span></code>, default: <code class="docutils literal notranslate"><span class="pre">true</span></code>)</dt>
+<dd>Enables or disables payload compression, where item values longer than 100
+bytes are compressed during storage and decompressed during retrieval.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">compression_type</span></code> (type: <code class="docutils literal notranslate"><span class="pre">string</span></code>)</dt>
+<dd><p class="first">Specifies the compression method used on value payloads. when the
+<strong>compression</strong> option is enabled.</p>
+<p class="last">Valid option values include <code class="docutils literal notranslate"><span class="pre">fastlz</span></code> and <code class="docutils literal notranslate"><span class="pre">zlib</span></code>, with a default value
+that <em>varies based on flags used at compilation</em>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">connect_timeout</span></code> (type: <code class="docutils literal notranslate"><span class="pre">int</span></code>, default: <code class="docutils literal notranslate"><span class="pre">1000</span></code>)</dt>
+<dd><p class="first">Specifies the timeout (in milliseconds) of socket connection operations when
+the <code class="docutils literal notranslate"><span class="pre">no_block</span></code> option is enabled.</p>
+<p class="last">Valid option values include <em>any positive integer</em>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">distribution</span></code> (type: <code class="docutils literal notranslate"><span class="pre">string</span></code>, default: <code class="docutils literal notranslate"><span class="pre">consistent</span></code>)</dt>
+<dd><p class="first">Specifies the item key distribution method among the servers. Consistent
+hashing delivers better distribution and allows servers to be added to the
+cluster with minimal cache losses.</p>
+<p class="last">Valid option values include <code class="docutils literal notranslate"><span class="pre">modula</span></code>, <code class="docutils literal notranslate"><span class="pre">consistent</span></code>, and <code class="docutils literal notranslate"><span class="pre">virtual_bucket</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">hash</span></code> (type: <code class="docutils literal notranslate"><span class="pre">string</span></code>, default: <code class="docutils literal notranslate"><span class="pre">md5</span></code>)</dt>
+<dd><p class="first">Specifies the hashing algorithm used for item keys. Each hash algorithm has
+its advantages and its disadvantages. The default is suggested for compatibility
+with other clients.</p>
+<p class="last">Valid option values include <code class="docutils literal notranslate"><span class="pre">default</span></code>, <code class="docutils literal notranslate"><span class="pre">md5</span></code>, <code class="docutils literal notranslate"><span class="pre">crc</span></code>, <code class="docutils literal notranslate"><span class="pre">fnv1_64</span></code>,
+<code class="docutils literal notranslate"><span class="pre">fnv1a_64</span></code>, <code class="docutils literal notranslate"><span class="pre">fnv1_32</span></code>, <code class="docutils literal notranslate"><span class="pre">fnv1a_32</span></code>, <code class="docutils literal notranslate"><span class="pre">hsieh</span></code>, and <code class="docutils literal notranslate"><span class="pre">murmur</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">libketama_compatible</span></code> (type: <code class="docutils literal notranslate"><span class="pre">bool</span></code>, default: <code class="docutils literal notranslate"><span class="pre">true</span></code>)</dt>
+<dd>Enables or disables “libketama” compatible behavior, enabling other
+libketama-based clients to access the keys stored by client instance
+transparently (like Python and Ruby). Enabling this option sets the <code class="docutils literal notranslate"><span class="pre">hash</span></code>
+option to <code class="docutils literal notranslate"><span class="pre">md5</span></code> and the <code class="docutils literal notranslate"><span class="pre">distribution</span></code> option to <code class="docutils literal notranslate"><span class="pre">consistent</span></code>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">no_block</span></code> (type: <code class="docutils literal notranslate"><span class="pre">bool</span></code>, default: <code class="docutils literal notranslate"><span class="pre">true</span></code>)</dt>
+<dd>Enables or disables asynchronous input and output operations. This is the
+fastest transport option available for storage functions.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">number_of_replicas</span></code> (type: <code class="docutils literal notranslate"><span class="pre">int</span></code>, default: <code class="docutils literal notranslate"><span class="pre">0</span></code>)</dt>
+<dd><p class="first">Specifies the number of replicas that should be stored for each item (on
+different servers). This does not dedicate certain memcached servers to
+store the replicas in, but instead stores the replicas together with all of
+the other objects (on the “n” next servers registered).</p>
+<p class="last">Valid option values include <em>any positive integer</em>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">prefix_key</span></code> (type: <code class="docutils literal notranslate"><span class="pre">string</span></code>, default: an empty string)</dt>
+<dd><p class="first">Specifies a “domain” (or “namespace”) prepended to your keys. It cannot be
+longer than 128 characters and reduces the maximum key size.</p>
+<p class="last">Valid option values include <em>any alphanumeric string</em>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">poll_timeout</span></code> (type: <code class="docutils literal notranslate"><span class="pre">int</span></code>, default: <code class="docutils literal notranslate"><span class="pre">1000</span></code>)</dt>
+<dd><p class="first">Specifies the amount of time (in seconds) before timing out during a socket
+polling operation.</p>
+<p class="last">Valid option values include <em>any positive integer</em>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">randomize_replica_read</span></code> (type: <code class="docutils literal notranslate"><span class="pre">bool</span></code>, type: <code class="docutils literal notranslate"><span class="pre">false</span></code>)</dt>
+<dd>Enables or disables randomization of the replica reads starting point.
+Normally the read is done from primary server and in case of a miss the read
+is done from “primary+1”, then “primary+2”, all the way to “n” replicas.
+This option sets the replica reads as randomized between all available
+servers; it allows distributing read load to multiple servers with the
+expense of more write traffic.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">recv_timeout</span></code> (type: <code class="docutils literal notranslate"><span class="pre">int</span></code>, default: <code class="docutils literal notranslate"><span class="pre">0</span></code>)</dt>
+<dd><p class="first">Specifies the amount of time (in microseconds) before timing out during an outgoing socket (read) operation.
+When the <code class="docutils literal notranslate"><span class="pre">no_block</span></code> option isn’t enabled, this will allow you to still have timeouts on the reading of data.</p>
+<p class="last">Valid option values include <code class="docutils literal notranslate"><span class="pre">0</span></code> or <em>any positive integer</em>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">retry_timeout</span></code> (type: <code class="docutils literal notranslate"><span class="pre">int</span></code>, default: <code class="docutils literal notranslate"><span class="pre">0</span></code>)</dt>
+<dd><p class="first">Specifies the amount of time (in seconds) before timing out and retrying a
+connection attempt.</p>
+<p class="last">Valid option values include <em>any positive integer</em>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">send_timeout</span></code> (type: <code class="docutils literal notranslate"><span class="pre">int</span></code>, default: <code class="docutils literal notranslate"><span class="pre">0</span></code>)</dt>
+<dd><p class="first">Specifies the amount of time (in microseconds) before timing out during an
+incoming socket (send) operation. When the <code class="docutils literal notranslate"><span class="pre">no_block</span></code> option isn’t enabled,
+this will allow you to still have timeouts on the sending of data.</p>
+<p class="last">Valid option values include <code class="docutils literal notranslate"><span class="pre">0</span></code> or <em>any positive integer</em>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">serializer</span></code> (type: <code class="docutils literal notranslate"><span class="pre">string</span></code>, default: <code class="docutils literal notranslate"><span class="pre">php</span></code>)</dt>
+<dd><p class="first">Specifies the serializer to use for serializing non-scalar values. The
+<code class="docutils literal notranslate"><span class="pre">igbinary</span></code> options requires the igbinary PHP extension to be enabled, as
+well as the memcached extension to have been compiled with support for it.</p>
+<p class="last">Valid option values include <code class="docutils literal notranslate"><span class="pre">php</span></code> and <code class="docutils literal notranslate"><span class="pre">igbinary</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">server_failure_limit</span></code> (type: <code class="docutils literal notranslate"><span class="pre">int</span></code>, default: <code class="docutils literal notranslate"><span class="pre">0</span></code>)</dt>
+<dd><p class="first">Specifies the failure limit for server connection attempts before marking
+the server as “dead”. The server will remain in the server pool unless
+<code class="docutils literal notranslate"><span class="pre">auto_eject_hosts</span></code> is enabled.</p>
+<p class="last">Valid option values include <em>any positive integer</em>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">socket_recv_size</span></code> (type: <code class="docutils literal notranslate"><span class="pre">int</span></code>)</dt>
+<dd><p class="first">Specified the maximum buffer size (in bytes) in the context of incoming
+(receive) socket connection data.</p>
+<p class="last">Valid option values include <em>any positive integer</em>, with a default value
+that <em>varies by platform and kernel configuration</em>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">socket_send_size</span></code> (type: <code class="docutils literal notranslate"><span class="pre">int</span></code>)</dt>
+<dd><p class="first">Specified the maximum buffer size (in bytes) in the context of outgoing (send)
+socket connection data.</p>
+<p class="last">Valid option values include <em>any positive integer</em>, with a default value
+that <em>varies by platform and kernel configuration</em>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">tcp_keepalive</span></code> (type: <code class="docutils literal notranslate"><span class="pre">bool</span></code>, default: <code class="docutils literal notranslate"><span class="pre">false</span></code>)</dt>
+<dd>Enables or disables the “<a class="reference external" href="https://en.wikipedia.org/wiki/Keepalive">keep-alive</a>” <a class="reference external" href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">Transmission Control Protocol (TCP)</a>
+feature, which is a feature that helps to determine whether the other end
+has stopped responding by sending probes to the network peer after an idle
+period and closing or persisting the socket based on the response (or lack thereof).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">tcp_nodelay</span></code> (type: <code class="docutils literal notranslate"><span class="pre">bool</span></code>, default: <code class="docutils literal notranslate"><span class="pre">false</span></code>)</dt>
+<dd>Enables or disables the “<a class="reference external" href="https://en.wikipedia.org/wiki/TCP_NODELAY">no-delay</a>” (Nagle’s algorithm) <a class="reference external" href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">Transmission Control Protocol (TCP)</a>
+algorithm, which is a mechanism intended to improve the efficiency of
+networks by reducing the overhead of TCP headers by combining a number of
+small outgoing messages and sending them all at once.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">use_udp</span></code> (type: <code class="docutils literal notranslate"><span class="pre">bool</span></code>, default: <code class="docutils literal notranslate"><span class="pre">false</span></code>)</dt>
+<dd><p class="first">Enables or disables the use of <a class="reference external" href="https://en.wikipedia.org/wiki/User_Datagram_Protocol">User Datagram Protocol (UDP)</a> mode (instead
+of <a class="reference external" href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">Transmission Control Protocol (TCP)</a> mode), where all operations are
+executed in a “fire-and-forget” manner; no attempt to ensure the operation
+has been received or acted on will be made once the client has executed it.</p>
+<div class="last admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Not all library operations are tested in this mode. Mixed TCP and UDP
+servers are not allowed.</p>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">verify_key</span></code> (type: <code class="docutils literal notranslate"><span class="pre">bool</span></code>, default: <code class="docutils literal notranslate"><span class="pre">false</span></code>)</dt>
+<dd>Enables or disables testing and verifying of all keys used to ensure they
+are valid and fit within the design of the protocol being used.</dd>
+</dl>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Reference the <a class="reference external" href="https://www.php.net/manual/en/class.memcached.php">Memcached</a> extension’s <a class="reference external" href="https://www.php.net/manual/en/memcached.constants.php">predefined constants</a> documentation
+for additional information about the available options.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

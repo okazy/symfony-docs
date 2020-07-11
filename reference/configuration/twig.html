@@ -1,0 +1,654 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Twig Configuration Reference (TwigBundle) &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Logging Configuration Reference (MonologBundle)" href="monolog.html" />
+    <link rel="prev" title="Mailer Configuration Reference (SwiftmailerBundle)" href="swiftmailer.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="framework.html">Framework Configuration Reference (FrameworkBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doctrine.html">Doctrine Configuration Reference (DoctrineBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security Configuration Reference (SecurityBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swiftmailer.html">Mailer Configuration Reference (SwiftmailerBundle)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Twig Configuration Reference (TwigBundle)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#auto-reload">auto_reload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoescape">autoescape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoescape-service">autoescape_service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autoescape-service-method">autoescape_service_method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#base-template-class">base_template_class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cache">cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#charset">charset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#date">date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debug">debug</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#default-path">default_path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#form-themes">form_themes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#globals">globals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#number-format">number_format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#optimizations">optimizations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#paths">paths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#strict-variables">strict_variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="monolog.html">Logging Configuration Reference (MonologBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web_profiler.html">Profiler Configuration Reference (WebProfilerBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html">Debug Configuration Reference (DebugBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel.html">Configuring in the Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms/types.html">Form Types Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constraints.html">Validation Constraints Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../twig_reference.html">Twig Extensions Defined by Symfony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dic_tags.html">Built-in Symfony Service Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../events.html">Built-in Symfony Events</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Reference Documents</a> &raquo;</li>
+        
+      <li>Twig Configuration Reference (TwigBundle)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reference/configuration/twig.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="twig-configuration-reference-twigbundle">
+<span id="index-0"></span><h1>Twig Configuration Reference (TwigBundle)<a class="headerlink" href="#twig-configuration-reference-twigbundle" title="Permalink to this headline">¶</a></h1>
+<p>The TwigBundle integrates the Twig library in Symfony applications to
+<a class="reference internal" href="../../templates.html#templates-rendering"><span class="std std-ref">render templates</span></a>. All these options are configured
+under the <code class="docutils literal notranslate"><span class="pre">twig</span></code> key in your application configuration.</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># displays the default config values defined by Symfony</span>
+<span class="gp">$</span> php bin/console config:dump-reference twig
+
+<span class="c1"># displays the actual config values used by your application</span>
+<span class="gp">$</span> php bin/console debug:config twig
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When using XML, you must use the <code class="docutils literal notranslate"><span class="pre">http://symfony.com/schema/dic/twig</span></code>
+namespace and the related XSD schema is available at:
+<code class="docutils literal notranslate"><span class="pre">https://symfony.com/schema/dic/twig/twig-1.0.xsd</span></code></p>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<ul class="list-config-options list-config-options-complex simple">
+<li><a class="reference internal" href="#auto-reload">auto_reload</a></li>
+<li><a class="reference internal" href="#autoescape">autoescape</a></li>
+<li><a class="reference internal" href="#autoescape-service">autoescape_service</a></li>
+<li><a class="reference internal" href="#autoescape-service-method">autoescape_service_method</a></li>
+<li><a class="reference internal" href="#base-template-class">base_template_class</a></li>
+<li><a class="reference internal" href="#cache">cache</a></li>
+<li><a class="reference internal" href="#charset">charset</a></li>
+<li><a class="reference internal" href="#date">date</a><ul>
+<li><a class="reference internal" href="#format">format</a></li>
+<li><a class="reference internal" href="#interval-format">interval_format</a></li>
+<li><a class="reference internal" href="#timezone">timezone</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#debug">debug</a></li>
+<li><a class="reference internal" href="#default-path">default_path</a></li>
+<li><a class="reference internal" href="#form-themes">form_themes</a></li>
+<li><a class="reference internal" href="#globals">globals</a></li>
+<li><a class="reference internal" href="#number-format">number_format</a><ul>
+<li><a class="reference internal" href="#decimals">decimals</a></li>
+<li><a class="reference internal" href="#decimal-point">decimal_point</a></li>
+<li><a class="reference internal" href="#thousands-separator">thousands_separator</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#optimizations">optimizations</a></li>
+<li><a class="reference internal" href="#paths">paths</a></li>
+<li><a class="reference internal" href="#strict-variables">strict_variables</a></li>
+</ul>
+<div class="section" id="auto-reload">
+<h3>auto_reload<a class="headerlink" href="#auto-reload" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">%kernel.debug%</span></code></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, whenever a template is rendered, Symfony checks first if its source
+code has changed since it was compiled. If it has changed, the template is
+compiled again automatically.</p>
+</div>
+<div class="section" id="autoescape">
+<span id="config-twig-autoescape"></span><h3>autoescape<a class="headerlink" href="#autoescape" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> or <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">'name'</span></code></p>
+<p>If set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, automatic escaping is disabled (you can still escape each content
+individually in the templates).</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Setting this option to <code class="docutils literal notranslate"><span class="pre">false</span></code> is dangerous and it will make your
+application vulnerable to <a class="reference external" href="https://en.wikipedia.org/wiki/Cross-site_scripting">XSS attacks</a> because most third-party bundles
+assume that auto-escaping is enabled and they don’t escape contents
+themselves.</p>
+</div>
+<p>If set to a string, the template contents are escaped using the strategy with
+that name. Allowed values are <code class="docutils literal notranslate"><span class="pre">html</span></code>, <code class="docutils literal notranslate"><span class="pre">js</span></code>, <code class="docutils literal notranslate"><span class="pre">css</span></code>, <code class="docutils literal notranslate"><span class="pre">url</span></code>, <code class="docutils literal notranslate"><span class="pre">html_attr</span></code>
+and <code class="docutils literal notranslate"><span class="pre">name</span></code>. The default value is <code class="docutils literal notranslate"><span class="pre">name</span></code>. This strategy escapes contents
+according to the template name extension (e.g. it uses <code class="docutils literal notranslate"><span class="pre">html</span></code> for <code class="docutils literal notranslate"><span class="pre">*.html.twig</span></code>
+templates and <code class="docutils literal notranslate"><span class="pre">js</span></code> for <code class="docutils literal notranslate"><span class="pre">*.js.twig</span></code> templates).</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">See <a class="reference internal" href="#autoescape-service">autoescape_service</a> and <a class="reference internal" href="#autoescape-service-method">autoescape_service_method</a> to define your
+own escaping strategy.</p>
+</div>
+</div>
+<div class="section" id="autoescape-service">
+<h3>autoescape_service<a class="headerlink" href="#autoescape-service" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">null</span></code></p>
+<p>As of Twig 1.17, the escaping strategy applied by default to the template is
+determined during compilation time based on the filename of the template. This
+means for example that the contents of a <code class="docutils literal notranslate"><span class="pre">*.html.twig</span></code> template are escaped
+for HTML and the contents of <code class="docutils literal notranslate"><span class="pre">*.js.twig</span></code> are escaped for JavaScript.</p>
+<p>This option allows to define the Symfony service which will be used to determine
+the default escaping applied to the template.</p>
+</div>
+<div class="section" id="autoescape-service-method">
+<h3>autoescape_service_method<a class="headerlink" href="#autoescape-service-method" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">null</span></code></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">autoescape_service</span></code> option is defined, then this option defines the method
+called to determine the default escaping applied to the template.</p>
+</div>
+<div class="section" id="base-template-class">
+<h3>base_template_class<a class="headerlink" href="#base-template-class" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">'Twig\Template'</span></code></p>
+<p>Twig templates are compiled into PHP classes before using them to render
+contents. This option defines the base class from which all the template classes
+extend. Using a custom base template is discouraged because it will make your
+application harder to maintain.</p>
+</div>
+<div class="section" id="cache">
+<h3>cache<a class="headerlink" href="#cache" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> | <code class="docutils literal notranslate"><span class="pre">false</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">'%kernel.cache_dir%/twig'</span></code></p>
+<p>Before using the Twig templates to render some contents, they are compiled into
+regular PHP code. Compilation is a costly process, so the result is cached in
+the directory defined by this configuration option.</p>
+<p>Set this option to <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable Twig template compilation. However, this
+is not recommended; not even in the <code class="docutils literal notranslate"><span class="pre">dev</span></code> environment, because the
+<code class="docutils literal notranslate"><span class="pre">auto_reload</span></code> option ensures that cached templates which have changed get
+compiled again.</p>
+</div>
+<div class="section" id="charset">
+<h3>charset<a class="headerlink" href="#charset" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">'%kernel.charset%'</span></code></p>
+<p>The charset used by the template files. By default it’s the same as the value of
+the <a class="reference internal" href="kernel.html#configuration-kernel-charset"><span class="std std-ref">kernel.charset container parameter</span></a>,
+which is <code class="docutils literal notranslate"><span class="pre">UTF-8</span></code> by default in Symfony applications.</p>
+</div>
+<div class="section" id="date">
+<h3>date<a class="headerlink" href="#date" title="Permalink to this headline">¶</a></h3>
+<p>These options define the default values used by the <code class="docutils literal notranslate"><span class="pre">date</span></code> filter to format
+date and time values. They are useful to avoid passing the same arguments on
+every <code class="docutils literal notranslate"><span class="pre">date</span></code> filter call.</p>
+<div class="section" id="format">
+<h4>format<a class="headerlink" href="#format" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">F</span> <span class="pre">j,</span> <span class="pre">Y</span> <span class="pre">H:i</span></code></p>
+<p>The format used by the <code class="docutils literal notranslate"><span class="pre">date</span></code> filter to display values when no specific format
+is passed as argument.</p>
+</div>
+<div class="section" id="interval-format">
+<h4>interval_format<a class="headerlink" href="#interval-format" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">%d</span> <span class="pre">days</span></code></p>
+<p>The format used by the <code class="docutils literal notranslate"><span class="pre">date</span></code> filter to display <code class="docutils literal notranslate"><span class="pre">DateInterval</span></code> instances
+when no specific format is passed as argument.</p>
+</div>
+<div class="section" id="timezone">
+<h4>timezone<a class="headerlink" href="#timezone" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: (the value returned by <code class="docutils literal notranslate"><span class="pre">date_default_timezone_get()</span></code>)</p>
+<p>The timezone used when formatting date values with the <code class="docutils literal notranslate"><span class="pre">date</span></code> filter and no
+specific timezone is passed as argument.</p>
+</div>
+</div>
+<div class="section" id="debug">
+<h3>debug<a class="headerlink" href="#debug" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">%kernel.debug%</span></code></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the compiled templates include a <code class="docutils literal notranslate"><span class="pre">__toString()</span></code> method that can
+be used to display their nodes.</p>
+</div>
+<div class="section" id="default-path">
+<span id="config-twig-default-path"></span><h3>default_path<a class="headerlink" href="#default-path" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">'%kernel.project_dir%/templates'</span></code></p>
+<p>The path to the directory where Symfony will look for the application Twig
+templates by default. If you store the templates in more than one directory, use
+the <a class="reference internal" href="#config-twig-paths"><span class="std std-ref">paths</span></a>  option too.</p>
+</div>
+<div class="section" id="form-themes">
+<span id="config-twig-form-themes"></span><h3>form_themes<a class="headerlink" href="#form-themes" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">array</span></code> of <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">['form_div_layout.html.twig']</span></code></p>
+<p>Defines one or more <a class="reference internal" href="../../form/form_themes.html"><span class="doc">form themes</span></a> which are applied to
+all the forms of the application:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/twig.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">twig</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">form_themes</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;bootstrap_4_layout.html.twig&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;form/my_theme.html.twig&#39;</span><span class="p p-Indicator">]</span>
+    <span class="c1"># ...</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/twig.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:twig=</span><span class="s">&quot;http://symfony.com/schema/dic/twig&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/twig https://symfony.com/schema/dic/twig/twig-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;twig:config&gt;</span>
+        <span class="nt">&lt;twig:form-theme&gt;</span>bootstrap_4_layout.html.twig<span class="nt">&lt;/twig:form-theme&gt;</span>
+        <span class="nt">&lt;twig:form-theme&gt;</span>form/my_theme.html.twig<span class="nt">&lt;/twig:form-theme&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;/twig:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/twig.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;twig&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;form_themes&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;bootstrap_4_layout.html.twig&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;form/my_theme.html.twig&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="c1">// ...</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>The order in which themes are defined is important because each theme overrides
+all the previous one. When rendering a form field whose block is not defined in
+the form theme, Symfony falls back to the previous themes until the first one.</p>
+<p>These global themes are applied to all forms, even those which use the
+<a class="reference internal" href="../twig_reference.html#reference-twig-tag-form-theme"><span class="std std-ref">form_theme Twig tag</span></a>, but you can
+<a class="reference internal" href="../../form/form_themes.html#disabling-global-themes-for-single-forms"><span class="std std-ref">disable global themes for specific forms</span></a>.</p>
+</div>
+<div class="section" id="globals">
+<h3>globals<a class="headerlink" href="#globals" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">array</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">[]</span></code></p>
+<p>It defines the global variables injected automatically into all Twig templates.
+Learn more about <a class="reference internal" href="../../templating/global_variables.html"><span class="doc">Twig global variables</span></a>.</p>
+</div>
+<div class="section" id="number-format">
+<h3>number_format<a class="headerlink" href="#number-format" title="Permalink to this headline">¶</a></h3>
+<p>These options define the default values used by the <code class="docutils literal notranslate"><span class="pre">number_format</span></code> filter to
+format numeric values. They are useful to avoid passing the same arguments on
+every <code class="docutils literal notranslate"><span class="pre">number_format</span></code> filter call.</p>
+<div class="section" id="decimals">
+<h4>decimals<a class="headerlink" href="#decimals" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">integer</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">0</span></code></p>
+<p>The number of decimals used to format numeric values when no specific number is
+passed as argument to the <code class="docutils literal notranslate"><span class="pre">number_format</span></code> filter.</p>
+</div>
+<div class="section" id="decimal-point">
+<h4>decimal_point<a class="headerlink" href="#decimal-point" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">.</span></code></p>
+<p>The character used to separate the decimals from the integer part of numeric
+values when no specific character is passed as argument to the <code class="docutils literal notranslate"><span class="pre">number_format</span></code>
+filter.</p>
+</div>
+<div class="section" id="thousands-separator">
+<h4>thousands_separator<a class="headerlink" href="#thousands-separator" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">,</span></code></p>
+<p>The character used to separate every group of thousands in numeric values when
+no specific character is passed as argument to the <code class="docutils literal notranslate"><span class="pre">number_format</span></code> filter.</p>
+</div>
+</div>
+<div class="section" id="optimizations">
+<h3>optimizations<a class="headerlink" href="#optimizations" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">int</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">-1</span></code></p>
+<p>Twig includes an extension called <code class="docutils literal notranslate"><span class="pre">optimizer</span></code> which is enabled by default in
+Symfony applications. This extension analyzes the templates to optimize them
+when being compiled. For example, if your template doesn’t use the special
+<code class="docutils literal notranslate"><span class="pre">loop</span></code> variable inside a <code class="docutils literal notranslate"><span class="pre">for</span></code> tag, this extension removes the initialization
+of that unused variable.</p>
+<p>By default, this option is <code class="docutils literal notranslate"><span class="pre">-1</span></code>, which means that all optimizations are turned
+on. Set it to <code class="docutils literal notranslate"><span class="pre">0</span></code> to disable all the optimizations. You can even enable or
+disable these optimizations selectively, as explained in the Twig documentation
+about <a class="reference external" href="https://twig.symfony.com/doc/2.x/api.html#optimizer-extension">the optimizer extension</a>.</p>
+</div>
+<div class="section" id="paths">
+<span id="config-twig-paths"></span><h3>paths<a class="headerlink" href="#paths" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">array</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">null</span></code></p>
+<p>Defines the directories where application templates are stored in addition to
+the directory defined in the <a class="reference internal" href="#config-twig-default-path"><span class="std std-ref">default_path option</span></a>:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/twig.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">twig</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">paths</span><span class="p p-Indicator">:</span>
+        <span class="s">&#39;email/default/templates&#39;</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">~</span>
+        <span class="s">&#39;backend/templates&#39;</span><span class="p p-Indicator">:</span> <span class="s">&#39;admin&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/twig.xml --&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:twig=</span><span class="s">&quot;http://symfony.com/schema/dic/twig&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/twig https://symfony.com/schema/dic/twig/twig-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;twig:config&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+        <span class="nt">&lt;twig:path&gt;</span>email/default/templates<span class="nt">&lt;/twig:path&gt;</span>
+        <span class="nt">&lt;twig:path</span> <span class="na">namespace=</span><span class="s">&quot;admin&quot;</span><span class="nt">&gt;</span>backend/templates<span class="nt">&lt;/twig:path&gt;</span>
+    <span class="nt">&lt;/twig:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/twig.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;twig&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+    <span class="s1">&#39;paths&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;email/default/templates&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+        <span class="s1">&#39;backend/templates&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;admin&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Read more about <a class="reference internal" href="../../templates.html#templates-namespaces"><span class="std std-ref">template directories and namespaces</span></a>.</p>
+</div>
+<div class="section" id="strict-variables">
+<h3>strict_variables<a class="headerlink" href="#strict-variables" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<p>If set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, Symfony shows an exception whenever a Twig variable,
+attribute or method doesn’t exist. If set to <code class="docutils literal notranslate"><span class="pre">false</span></code> these errors are ignored
+and the non-existing values are replaced by <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

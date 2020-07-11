@@ -1,0 +1,821 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Logging &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to Configure Monolog to Email Errors" href="logging/monolog_email.html" />
+    <link rel="prev" title="HTTP Client" href="http_client.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Logging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#logging-a-message">Logging a Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#monolog">Monolog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#where-logs-are-stored">Where Logs are Stored</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#handlers-writing-logs-to-different-locations">Handlers: Writing Logs to different Locations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#handlers-that-modify-log-entries">Handlers that Modify Log Entries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#all-built-in-handlers">All Built-in Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-rotate-your-log-files">How to Rotate your Log Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-a-logger-inside-a-service">Using a Logger inside a Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-extra-data-to-each-log-e-g-a-unique-request-token">Adding extra Data to each Log (e.g. a unique request token)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#learn-more">Learn more</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="logging/monolog_email.html">How to Configure Monolog to Email Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging/channels_handlers.html">How to Log Messages to different Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging/formatter.html">How to Define a Custom Logging Formatter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging/processors.html">How to Add extra Data to Log Messages via a Processor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging/handlers.html">Handlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging/monolog_exclude_http_codes.html">How to Configure Monolog to Exclude Specific HTTP Codes from the Log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging/monolog_console.html">How to Configure Monolog to Display Console Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging/monolog_regex_based_excludes.html">How to Configure Monolog to Exclude 404 Errors from the Log</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Logging</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/logging.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="logging">
+<h1>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h1>
+<p>Symfony comes with a minimalist <a class="reference external" href="https://www.php-fig.org/psr/psr-3/">PSR-3</a> logger: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Log/Logger.php" title="Symfony\Component\HttpKernel\Log\Logger"><span class="pre">Logger</span></a></code>.
+In conformance with <a class="reference external" href="https://12factor.net/logs">the twelve-factor app methodology</a>, it sends messages starting from the
+<code class="docutils literal notranslate"><span class="pre">WARNING</span></code> level to <a class="reference external" href="https://en.wikipedia.org/wiki/Standard_streams#Standard_error_(stderr)">stderr</a>.</p>
+<p>The minimal log level can be changed by setting the <code class="docutils literal notranslate"><span class="pre">SHELL_VERBOSITY</span></code> environment variable:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="60%" />
+<col width="40%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><code class="docutils literal notranslate"><span class="pre">SHELL_VERBOSITY</span></code> value</th>
+<th class="head">Minimum log level</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">-1</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">ERROR</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">1</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">NOTICE</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">INFO</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">3</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">DEBUG</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>The minimum log level, the default output and the log format can also be changed by
+passing the appropriate arguments to the constructor of <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Log/Logger.php" title="Symfony\Component\HttpKernel\Log\Logger"><span class="pre">Logger</span></a></code>.
+To do so, <a class="reference internal" href="service_container.html#service-psr4-loader"><span class="std std-ref">override the “logger” service definition</span></a>.</p>
+<div class="section" id="logging-a-message">
+<h2>Logging a Message<a class="headerlink" href="#logging-a-message" title="Permalink to this headline">¶</a></h2>
+<p>To log a message, inject the default logger in your controller:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Psr\Log\LoggerInterface</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nx">LoggerInterface</span> <span class="nv">$logger</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$logger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;I just got the logger&#39;</span><span class="p">);</span>
+    <span class="nv">$logger</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s1">&#39;An error occurred&#39;</span><span class="p">);</span>
+
+    <span class="nv">$logger</span><span class="o">-&gt;</span><span class="na">critical</span><span class="p">(</span><span class="s1">&#39;I left the oven on!&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="c1">// include extra &quot;context&quot; info in your logs</span>
+        <span class="s1">&#39;cause&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;in_hurry&#39;</span><span class="p">,</span>
+    <span class="p">]);</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">logger</span></code> service has different methods for different logging levels/priorities.
+See <a class="reference external" href="https://github.com/php-fig/log/blob/master/Psr/Log/LoggerInterface.php">LoggerInterface</a> for a list of all of the methods on the logger.</p>
+</div>
+<div class="section" id="monolog">
+<h2>Monolog<a class="headerlink" href="#monolog" title="Permalink to this headline">¶</a></h2>
+<p>Symfony integrates seamlessly with <a class="reference external" href="https://github.com/Seldaek/monolog">Monolog</a>, the most popular PHP logging
+library, to create and store log messages in a variety of different places
+and trigger various actions.</p>
+<p>For instance, using Monolog you can configure the logger to do different things based on the
+<em>level</em> of a message (e.g. <a class="reference internal" href="logging/monolog_email.html"><span class="doc">send an email when an error occurs</span></a>).</p>
+<p>Run this command to install the Monolog based logger before using it:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/monolog-bundle
+</pre></div>
+</td></tr></table></div>
+<p>The following sections assume that Monolog is installed.</p>
+</div>
+<div class="section" id="where-logs-are-stored">
+<h2>Where Logs are Stored<a class="headerlink" href="#where-logs-are-stored" title="Permalink to this headline">¶</a></h2>
+<p>By default, log entries are written to the <code class="docutils literal notranslate"><span class="pre">var/log/dev.log</span></code> file when you’re in
+the <code class="docutils literal notranslate"><span class="pre">dev</span></code> environment. In the <code class="docutils literal notranslate"><span class="pre">prod</span></code> environment, logs are written to <code class="docutils literal notranslate"><span class="pre">var/log/prod.log</span></code>,
+but <em>only</em> during a request where an error or high-priority log entry was made
+(i.e. <code class="docutils literal notranslate"><span class="pre">error()</span></code> , <code class="docutils literal notranslate"><span class="pre">critical()</span></code>, <code class="docutils literal notranslate"><span class="pre">alert()</span></code> or <code class="docutils literal notranslate"><span class="pre">emergency()</span></code>).</p>
+<p>To control this, you’ll configure different <em>handlers</em> that handle log entries, sometimes
+modify them, and ultimately store them.</p>
+</div>
+<div class="section" id="handlers-writing-logs-to-different-locations">
+<h2>Handlers: Writing Logs to different Locations<a class="headerlink" href="#handlers-writing-logs-to-different-locations" title="Permalink to this headline">¶</a></h2>
+<p>The logger has a stack of <em>handlers</em>, and each can be used to write the log entries
+to different locations (e.g. files, database, Slack, etc).</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can <em>also</em> configure logging “channels”, which are like categories. Each
+channel can have its <em>own</em> handlers, which means you can store different log
+messages in different places. See <a class="reference internal" href="logging/channels_handlers.html"><span class="doc">How to Log Messages to different Files</span></a>.</p>
+</div>
+<p>Symfony pre-configures some basic handlers in the default <code class="docutils literal notranslate"><span class="pre">monolog.yaml</span></code>
+config files. Check these out for some real-world examples.</p>
+<p>This example uses <em>two</em> handlers: <code class="docutils literal notranslate"><span class="pre">stream</span></code> (to write to a file) and <code class="docutils literal notranslate"><span class="pre">syslog</span></code>
+to write logs using the <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.syslog.php" title="syslog"><span class="pre">syslog</span></a></code> function:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/prod/monolog.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">monolog</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">handlers</span><span class="p p-Indicator">:</span>
+        <span class="c1"># this &quot;file_log&quot; key could be anything</span>
+        <span class="l l-Scalar l-Scalar-Plain">file_log</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">stream</span>
+            <span class="c1"># log to var/log/(environment).log</span>
+            <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="s">&quot;%kernel.logs_dir%/%kernel.environment%.log&quot;</span>
+            <span class="c1"># log *all* messages (debug is lowest level)</span>
+            <span class="l l-Scalar l-Scalar-Plain">level</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">debug</span>
+
+        <span class="l l-Scalar l-Scalar-Plain">syslog_handler</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">syslog</span>
+            <span class="c1"># log error-level messages and higher</span>
+            <span class="l l-Scalar l-Scalar-Plain">level</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">error</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/prod/monolog.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:monolog=</span><span class="s">&quot;http://symfony.com/schema/dic/monolog&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/monolog</span>
+<span class="s">        https://symfony.com/schema/dic/monolog/monolog-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;monolog:config&gt;</span>
+        <span class="c">&lt;!-- this &quot;file_log&quot; key could be anything --&gt;</span>
+        <span class="nt">&lt;monolog:handler</span> <span class="na">name=</span><span class="s">&quot;file_log&quot;</span>
+            <span class="na">type=</span><span class="s">&quot;stream&quot;</span>
+            <span class="na">path=</span><span class="s">&quot;%kernel.logs_dir%/%kernel.environment%.log&quot;</span>
+            <span class="na">level=</span><span class="s">&quot;debug&quot;</span><span class="nt">/&gt;</span><span class="c">&lt;!-- log *all* messages (debug is lowest level) --&gt;</span>
+
+        <span class="nt">&lt;monolog:handler</span> <span class="na">name=</span><span class="s">&quot;syslog_handler&quot;</span>
+            <span class="na">type=</span><span class="s">&quot;syslog&quot;</span>
+            <span class="na">level=</span><span class="s">&quot;error&quot;</span><span class="nt">/&gt;</span><span class="c">&lt;!-- log error-level messages and higher --&gt;</span>
+    <span class="nt">&lt;/monolog:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/prod/monolog.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;monolog&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;handlers&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="c1">// this &quot;file_log&quot; key could be anything</span>
+        <span class="s1">&#39;file_log&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;type&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;stream&#39;</span><span class="p">,</span>
+            <span class="c1">// log to var/logs/(environment).log</span>
+            <span class="s1">&#39;path&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;%kernel.logs_dir%/%kernel.environment%.log&#39;</span><span class="p">,</span>
+            <span class="c1">// log *all* messages (debug is lowest level)</span>
+            <span class="s1">&#39;level&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;syslog_handler&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;type&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;syslog&#39;</span><span class="p">,</span>
+            <span class="c1">// log error-level messages and higher</span>
+            <span class="s1">&#39;level&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>This defines a <em>stack</em> of handlers and each handler is called in the order that it’s
+defined.</p>
+<div class="section" id="handlers-that-modify-log-entries">
+<h3>Handlers that Modify Log Entries<a class="headerlink" href="#handlers-that-modify-log-entries" title="Permalink to this headline">¶</a></h3>
+<p>Instead of writing log files somewhere, <em>some</em> handlers are used to filter or modify
+log entries before sending them to <em>other</em> handlers. One powerful, built-in handler
+called <code class="docutils literal notranslate"><span class="pre">fingers_crossed</span></code> is used in the <code class="docutils literal notranslate"><span class="pre">prod</span></code> environment by default. It stores
+<em>all</em> log messages during a request but <em>only</em> passes them to a second handler if
+one of the messages reaches an <code class="docutils literal notranslate"><span class="pre">action_level</span></code>. Take this example:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/prod/monolog.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">monolog</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">handlers</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">filter_for_errors</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fingers_crossed</span>
+            <span class="c1"># if *one* log is error or higher, pass *all* to file_log</span>
+            <span class="l l-Scalar l-Scalar-Plain">action_level</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">error</span>
+            <span class="l l-Scalar l-Scalar-Plain">handler</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">file_log</span>
+
+        <span class="c1"># now passed *all* logs, but only if one log is error or higher</span>
+        <span class="l l-Scalar l-Scalar-Plain">file_log</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">stream</span>
+            <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="s">&quot;%kernel.logs_dir%/%kernel.environment%.log&quot;</span>
+
+        <span class="c1"># still passed *all* logs, and still only logs error or higher</span>
+        <span class="l l-Scalar l-Scalar-Plain">syslog_handler</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">syslog</span>
+            <span class="l l-Scalar l-Scalar-Plain">level</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">error</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/prod/monolog.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:monolog=</span><span class="s">&quot;http://symfony.com/schema/dic/monolog&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/monolog</span>
+<span class="s">        https://symfony.com/schema/dic/monolog/monolog-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;monolog:config&gt;</span>
+        <span class="c">&lt;!-- if *one* log is error or higher, pass *all* to file_log --&gt;</span>
+        <span class="nt">&lt;monolog:handler</span> <span class="na">name=</span><span class="s">&quot;filter_for_errors&quot;</span>
+            <span class="na">type=</span><span class="s">&quot;fingers_crossed&quot;</span>
+            <span class="na">action-level=</span><span class="s">&quot;error&quot;</span>
+            <span class="na">handler=</span><span class="s">&quot;file_log&quot;</span>
+        <span class="nt">/&gt;</span>
+
+        <span class="c">&lt;!-- now passed *all* logs, but only if one log is error or higher --&gt;</span>
+        <span class="nt">&lt;monolog:handler</span> <span class="na">name=</span><span class="s">&quot;file_log&quot;</span>
+            <span class="na">type=</span><span class="s">&quot;stream&quot;</span>
+            <span class="na">path=</span><span class="s">&quot;%kernel.logs_dir%/%kernel.environment%.log&quot;</span>
+            <span class="na">level=</span><span class="s">&quot;debug&quot;</span>
+        <span class="nt">/&gt;</span>
+
+        <span class="c">&lt;!-- still passed *all* logs, and still only logs error or higher --&gt;</span>
+        <span class="nt">&lt;monolog:handler</span> <span class="na">name=</span><span class="s">&quot;syslog_handler&quot;</span>
+            <span class="na">type=</span><span class="s">&quot;syslog&quot;</span>
+            <span class="na">level=</span><span class="s">&quot;error&quot;</span>
+        <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/monolog:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/prod/monolog.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;monolog&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;handlers&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;filter_for_errors&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;type&#39;</span>         <span class="o">=&gt;</span> <span class="s1">&#39;fingers_crossed&#39;</span><span class="p">,</span>
+            <span class="c1">// if *one* log is error or higher, pass *all* to file_log</span>
+            <span class="s1">&#39;action_level&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;handler&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;file_log&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+
+        <span class="c1">// now passed *all* logs, but only if one log is error or higher</span>
+        <span class="s1">&#39;file_log&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;type&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;stream&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;path&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;%kernel.logs_dir%/%kernel.environment%.log&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;level&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+
+        <span class="c1">// still passed *all* logs, and still only logs error or higher</span>
+        <span class="s1">&#39;syslog_handler&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;type&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;syslog&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;level&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Now, if even one log entry has an <code class="docutils literal notranslate"><span class="pre">error</span></code> level or higher, then <em>all</em> log entries
+for that request are saved to a file via the <code class="docutils literal notranslate"><span class="pre">file_log</span></code> handler. That means that
+your log file will contain <em>all</em> the details about the problematic request - making
+debugging much easier!</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The handler named “file_log” will not be included in the stack itself as
+it is used as a nested handler of the <code class="docutils literal notranslate"><span class="pre">fingers_crossed</span></code> handler.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you want to override the <code class="docutils literal notranslate"><span class="pre">monolog</span></code> configuration via another config
+file, you will need to redefine the entire <code class="docutils literal notranslate"><span class="pre">handlers</span></code> stack. The configuration
+from the two files cannot be merged because the order matters and a merge does
+not allow to control the order.</p>
+</div>
+</div>
+</div>
+<div class="section" id="all-built-in-handlers">
+<h2>All Built-in Handlers<a class="headerlink" href="#all-built-in-handlers" title="Permalink to this headline">¶</a></h2>
+<p>Monolog comes with <em>many</em> built-in handlers for emailing logs, sending them to Loggly,
+or notifying you in Slack. These are documented inside of MonologBundle itself. For
+a full list, see <a class="reference external" href="https://github.com/symfony/monolog-bundle/blob/master/DependencyInjection/Configuration.php#L25">Monolog Configuration</a>.</p>
+</div>
+<div class="section" id="how-to-rotate-your-log-files">
+<h2>How to Rotate your Log Files<a class="headerlink" href="#how-to-rotate-your-log-files" title="Permalink to this headline">¶</a></h2>
+<p>Over time, log files can grow to be <em>huge</em>, both while developing and on
+production. One best-practice solution is to use a tool like the <a class="reference external" href="https://github.com/logrotate/logrotate">logrotate</a>
+Linux command to rotate log files before they become too large.</p>
+<p>Another option is to have Monolog rotate the files for you by using the
+<code class="docutils literal notranslate"><span class="pre">rotating_file</span></code> handler. This handler creates a new log file every day
+and can also remove old files automatically. To use it, set the <code class="docutils literal notranslate"><span class="pre">type</span></code>
+option of your handler to <code class="docutils literal notranslate"><span class="pre">rotating_file</span></code>:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/prod/monolog.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">monolog</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">handlers</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span>  <span class="l l-Scalar l-Scalar-Plain">rotating_file</span>
+            <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span>  <span class="s">&#39;%kernel.logs_dir%/%kernel.environment%.log&#39;</span>
+            <span class="l l-Scalar l-Scalar-Plain">level</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">debug</span>
+            <span class="c1"># max number of log files to keep</span>
+            <span class="c1"># defaults to zero, which means infinite files</span>
+            <span class="l l-Scalar l-Scalar-Plain">max_files</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/prod/monolog.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:monolog=</span><span class="s">&quot;http://symfony.com/schema/dic/monolog&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/monolog</span>
+<span class="s">        https://symfony.com/schema/dic/monolog/monolog-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;monolog:config&gt;</span>
+        <span class="c">&lt;!-- &quot;max-files&quot;: max number of log files to keep</span>
+<span class="c">             defaults to zero, which means infinite files --&gt;</span>
+        <span class="nt">&lt;monolog:handler</span> <span class="na">name=</span><span class="s">&quot;main&quot;</span>
+            <span class="na">type=</span><span class="s">&quot;rotating_file&quot;</span>
+            <span class="na">path=</span><span class="s">&quot;%kernel.logs_dir%/%kernel.environment%.log&quot;</span>
+            <span class="na">level=</span><span class="s">&quot;debug&quot;</span>
+            <span class="na">max-files=</span><span class="s">&quot;10&quot;</span>
+        <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/monolog:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/prod/monolog.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;monolog&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;handlers&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;main&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;type&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;rotating_file&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;path&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;%kernel.logs_dir%/%kernel.environment%.log&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;level&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span>
+            <span class="c1">// max number of log files to keep</span>
+            <span class="c1">// defaults to zero, which means infinite files</span>
+            <span class="s1">&#39;max_files&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="using-a-logger-inside-a-service">
+<h2>Using a Logger inside a Service<a class="headerlink" href="#using-a-logger-inside-a-service" title="Permalink to this headline">¶</a></h2>
+<p>If your application uses <a class="reference internal" href="service_container.html#services-autoconfigure"><span class="std std-ref">service autoconfiguration</span></a>,
+any service whose class implements <code class="docutils literal notranslate"><span class="pre">Psr\Log\LoggerAwareInterface</span></code> will
+receive a call to its method <code class="docutils literal notranslate"><span class="pre">setLogger()</span></code> with the default logger service
+passed as a service.</p>
+<p>If you want to use in your own services a pre-configured logger which uses a
+specific channel (<code class="docutils literal notranslate"><span class="pre">app</span></code> by default), you can either <a class="reference internal" href="logging/channels_handlers.html#monolog-autowire-channels"><span class="std std-ref">autowire monolog channels</span></a>
+or use the <code class="docutils literal notranslate"><span class="pre">monolog.logger</span></code> tag  with the <code class="docutils literal notranslate"><span class="pre">channel</span></code> property as explained in the
+<a class="reference internal" href="reference/dic_tags.html#dic-tags-monolog"><span class="std std-ref">Dependency Injection reference</span></a>.</p>
+</div>
+<div class="section" id="adding-extra-data-to-each-log-e-g-a-unique-request-token">
+<h2>Adding extra Data to each Log (e.g. a unique request token)<a class="headerlink" href="#adding-extra-data-to-each-log-e-g-a-unique-request-token" title="Permalink to this headline">¶</a></h2>
+<p>Monolog also supports <em>processors</em>: functions that can dynamically add extra
+information to your log entries.</p>
+<p>See <a class="reference internal" href="logging/processors.html"><span class="doc">How to Add extra Data to Log Messages via a Processor</span></a> for details.</p>
+</div>
+<div class="section" id="learn-more">
+<h2>Learn more<a class="headerlink" href="#learn-more" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="logging/monolog_email.html">How to Configure Monolog to Email Errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging/channels_handlers.html">How to Log Messages to different Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging/formatter.html">How to Define a Custom Logging Formatter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging/processors.html">How to Add extra Data to Log Messages via a Processor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging/handlers.html">Handlers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging/monolog_exclude_http_codes.html">How to Configure Monolog to Exclude Specific HTTP Codes from the Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging/monolog_console.html">How to Configure Monolog to Display Console Messages</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

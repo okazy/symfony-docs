@@ -1,0 +1,399 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Cache Invalidation &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Cache Items" href="cache_items.html" />
+    <link rel="prev" title="Redis Cache Adapter" href="adapters/redis_adapter.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../cache.html">The Cache Component</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../cache.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cache.html#cache-contracts-versus-psr-6">Cache Contracts versus PSR-6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cache.html#cache-contracts">Cache Contracts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cache.html#generic-caching-psr-6">Generic Caching (PSR-6)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cache.html#basic-usage-psr-6">Basic Usage (PSR-6)</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../cache.html#advanced-usage">Advanced Usage</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Cache Invalidation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cache_items.html">Cache Items</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cache_pools.html">Cache Pools and Supported Adapters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="psr6_psr16_adapters.html">Adapters For Interoperability between PSR-6 and PSR-16 Cache</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dependency_injection.html">The DependencyInjection Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../form.html">The Form Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../process.html">The Process Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html">The Security Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">The Components</a> &raquo;</li>
+        
+          <li><a href="../cache.html">The Cache Component</a> &raquo;</li>
+        
+      <li>Cache Invalidation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/components/cache/cache_invalidation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cache-invalidation">
+<span id="index-0"></span><h1>Cache Invalidation<a class="headerlink" href="#cache-invalidation" title="Permalink to this headline">¶</a></h1>
+<p>Cache invalidation is the process of removing all cached items related to a
+change in the state of your model. The most basic kind of invalidation is direct
+items deletion. But when the state of a primary resource has spread across
+several cached items, keeping them in sync can be difficult.</p>
+<p>The Symfony Cache component provides two mechanisms to help solve this problem:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#cache-component-tags"><span class="std std-ref">Tags-based invalidation</span></a> for managing data dependencies;</li>
+<li><a class="reference internal" href="#cache-component-expiration"><span class="std std-ref">Expiration based invalidation</span></a> for time-related dependencies.</li>
+</ul>
+<div class="section" id="using-cache-tags">
+<span id="cache-component-tags"></span><h2>Using Cache Tags<a class="headerlink" href="#using-cache-tags" title="Permalink to this headline">¶</a></h2>
+<p>To benefit from tags-based invalidation, you need to attach the proper tags to
+each cached item. Each tag is a plain string identifier that you can use at any
+time to trigger the removal of all items associated with this tag.</p>
+<p>To attach tags to cached items, you need to use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Contracts/Cache/ItemInterface.php" title="Symfony\Contracts\Cache\ItemInterface::tag()"><span class="pre">tag()</span></a></code> method that is implemented by
+cache items:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$item</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;cache_key&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">ItemInterface</span> <span class="nv">$item</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// [...]</span>
+    <span class="c1">// add one or more tags</span>
+    <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">tag</span><span class="p">(</span><span class="s1">&#39;tag_1&#39;</span><span class="p">);</span>
+    <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">tag</span><span class="p">([</span><span class="s1">&#39;tag_2&#39;</span><span class="p">,</span> <span class="s1">&#39;tag_3&#39;</span><span class="p">]);</span>
+
+    <span class="k">return</span> <span class="nv">$cachedValue</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">$cache</span></code> implements <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Contracts/Cache/TagAwareCacheInterface.php" title="Symfony\Contracts\Cache\TagAwareCacheInterface"><span class="pre">TagAwareCacheInterface</span></a></code>,
+you can invalidate the cached items by calling
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Contracts/Cache/TagAwareCacheInterface.php" title="Symfony\Contracts\Cache\TagAwareCacheInterface::invalidateTags()"><span class="pre">invalidateTags()</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// invalidate all items related to `tag_1` or `tag_3`</span>
+<span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">invalidateTags</span><span class="p">([</span><span class="s1">&#39;tag_1&#39;</span><span class="p">,</span> <span class="s1">&#39;tag_3&#39;</span><span class="p">]);</span>
+
+<span class="c1">// if you know the cache key, you can also delete the item directly</span>
+<span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;cache_key&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Using tags invalidation is very useful when tracking cache keys becomes difficult.</p>
+<div class="section" id="tag-aware-adapters">
+<h3>Tag Aware Adapters<a class="headerlink" href="#tag-aware-adapters" title="Permalink to this headline">¶</a></h3>
+<p>To store tags, you need to wrap a cache adapter with the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Cache/Adapter/TagAwareAdapter.php" title="Symfony\Component\Cache\Adapter\TagAwareAdapter"><span class="pre">TagAwareAdapter</span></a></code> class or implement
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Contracts/Cache/TagAwareCacheInterface.php" title="Symfony\Contracts\Cache\TagAwareCacheInterface"><span class="pre">TagAwareCacheInterface</span></a></code> and its
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Cache/Adapter/TagAwareAdapterInterface.php" title="Symfony\Component\Cache\Adapter\TagAwareAdapterInterface::invalidateTags()"><span class="pre">invalidateTags()</span></a></code>
+method.</p>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Cache/Adapter/TagAwareAdapter.php" title="Symfony\Component\Cache\Adapter\TagAwareAdapter"><span class="pre">TagAwareAdapter</span></a></code> class implements
+instantaneous invalidation (time complexity is <code class="docutils literal notranslate"><span class="pre">O(N)</span></code> where <code class="docutils literal notranslate"><span class="pre">N</span></code> is the number
+of invalidated tags). It needs one or two cache adapters: the first required
+one is used to store cached items; the second optional one is used to store tags
+and their invalidation version number (conceptually similar to their latest
+invalidation date). When only one adapter is used, items and tags are all stored
+in the same place. By using two adapters, you can e.g. store some big cached items
+on the filesystem or in the database and keep tags in a Redis database to sync all
+your fronts and have very fast invalidation checks:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Cache\Adapter\FilesystemAdapter</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Cache\Adapter\RedisAdapter</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Cache\Adapter\TagAwareAdapter</span><span class="p">;</span>
+
+<span class="nv">$cache</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TagAwareAdapter</span><span class="p">(</span>
+    <span class="c1">// Adapter for cached items</span>
+    <span class="k">new</span> <span class="nx">FilesystemAdapter</span><span class="p">(),</span>
+    <span class="c1">// Adapter for tags</span>
+    <span class="k">new</span> <span class="nx">RedisAdapter</span><span class="p">(</span><span class="s1">&#39;redis://localhost&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since Symfony 3.4, <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Cache/Adapter/TagAwareAdapter.php" title="Symfony\Component\Cache\Adapter\TagAwareAdapter"><span class="pre">TagAwareAdapter</span></a></code>
+implements <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Cache/PruneableInterface.php" title="Symfony\Component\Cache\PruneableInterface"><span class="pre">PruneableInterface</span></a></code>,
+enabling manual
+<a class="reference internal" href="cache_pools.html#component-cache-cache-pool-prune"><span class="std std-ref">pruning of expired cache entries</span></a> by
+calling its <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Cache/Adapter/TagAwareAdapter.php" title="Symfony\Component\Cache\Adapter\TagAwareAdapter::prune()"><span class="pre">prune()</span></a></code>
+method (assuming the wrapped adapter itself implements
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Cache/PruneableInterface.php" title="Symfony\Component\Cache\PruneableInterface"><span class="pre">PruneableInterface</span></a></code>).</p>
+</div>
+</div>
+</div>
+<div class="section" id="using-cache-expiration">
+<span id="cache-component-expiration"></span><h2>Using Cache Expiration<a class="headerlink" href="#using-cache-expiration" title="Permalink to this headline">¶</a></h2>
+<p>If your data is valid only for a limited period of time, you can specify their
+lifetime or their expiration date with the PSR-6 interface, as explained in the
+<a class="reference internal" href="cache_items.html"><span class="doc">Cache Items</span></a> article.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,352 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Use the submit() Function to Handle Form Submissions &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Embed Forms" href="embedded.html" />
+    <link rel="prev" title="How to Disable the Validation of Submitted Data" href="disabling_validation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../forms.html">Forms</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#building-forms">Building Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#rendering-forms">Rendering Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#processing-forms">Processing Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#validating-forms">Validating Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#other-common-form-features">Other Common Form Features</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../forms.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../reference/forms/types.html">Form Types Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller/upload_file.html">How to Upload Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../security/csrf.html">How to Implement CSRF Protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_dependencies.html">How to Access Services or Config from Inside a Form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_custom_field_type.html">How to Create a Custom Form Field Type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_transformers.html">How to Use Data Transformers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_mappers.html">When and How to Use Data Mappers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_form_type_extension.html">How to Create a Form Type Extension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="type_guesser.html">Creating a custom Type Guesser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootstrap4.html">Bootstrap 4 Form Theme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_customization.html">How to Customize Form Rendering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_themes.html">How to Work with Form Themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="events.html">Form Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dynamic_form_modification.html">How to Dynamically Modify Forms Using Form Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validation_groups.html">How to Define the Validation Groups to Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validation_group_service_resolver.html">How to Dynamically Configure Form Validation Groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="button_based_validation.html">How to Choose Validation Groups Based on the Clicked Button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="disabling_validation.html">How to Disable the Validation of Submitted Data</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Use the submit() Function to Handle Form Submissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="embedded.html">How to Embed Forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_collections.html">How to Embed a Collection of Forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="inherit_data_option.html">How to Reduce Code Duplication with “inherit_data”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multiple_buttons.html">How to Submit a Form with Multiple Buttons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_testing.html">How to Unit Test your Forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="use_empty_data.html">How to Configure empty Data for a Form Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="without_class.html">How to Use a Form without a Data Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../forms.html">Forms</a> &raquo;</li>
+        
+      <li>How to Use the submit() Function to Handle Form Submissions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/form/direct_submit.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-use-the-submit-function-to-handle-form-submissions">
+<span id="index-0"></span><h1>How to Use the submit() Function to Handle Form Submissions<a class="headerlink" href="#how-to-use-the-submit-function-to-handle-form-submissions" title="Permalink to this headline">¶</a></h1>
+<p>The recommended way of <a class="reference internal" href="../forms.html#processing-forms"><span class="std std-ref">processing Symfony forms</span></a> is to
+use the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/FormInterface.php" title="Symfony\Component\Form\FormInterface::handleRequest()"><span class="pre">handleRequest()</span></a></code> method
+to detect when the form has been submitted. However, you can also use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/FormInterface.php" title="Symfony\Component\Form\FormInterface::submit()"><span class="pre">submit()</span></a></code> method to have better
+control over when exactly your form is submitted and what data is passed to it:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">new</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$task</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Task</span><span class="p">();</span>
+    <span class="nv">$form</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createForm</span><span class="p">(</span><span class="nx">TaskType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nv">$task</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">isMethod</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">submit</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">()));</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$form</span><span class="o">-&gt;</span><span class="na">isSubmitted</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">isValid</span><span class="p">())</span> <span class="p">{</span>
+            <span class="c1">// perform some action...</span>
+
+            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirectToRoute</span><span class="p">(</span><span class="s1">&#39;task_success&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;task/new.html.twig&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="s1">&#39;form&#39;</span> <span class="o">=&gt;</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">createView</span><span class="p">(),</span>
+    <span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>Forms consisting of nested fields expect an array in
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/FormInterface.php" title="Symfony\Component\Form\FormInterface::submit()"><span class="pre">submit()</span></a></code>. You can also submit
+individual fields by calling <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/FormInterface.php" title="Symfony\Component\Form\FormInterface::submit()"><span class="pre">submit()</span></a></code>
+directly on the field:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$form</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;firstName&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">submit</span><span class="p">(</span><span class="s1">&#39;Fabien&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">When submitting a form via a “PATCH” request, you may want to update only a few
+submitted fields. To achieve this, you may pass an optional second boolean
+argument to <code class="docutils literal notranslate"><span class="pre">submit()</span></code>. Passing <code class="docutils literal notranslate"><span class="pre">false</span></code> will remove any missing fields
+within the form object. Otherwise, the missing fields will be set to <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p>When the second parameter <code class="docutils literal notranslate"><span class="pre">$clearMissing</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code>, like with the
+“PATCH” method, the validation will only apply to the submitted fields. If
+you need to validate all the underlying data, add the required fields
+manually so that they are validated:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// &#39;email&#39; and &#39;username&#39; are added manually to force their validation</span>
+<span class="nv">$form</span><span class="o">-&gt;</span><span class="na">submit</span><span class="p">(</span><span class="nb">array_merge</span><span class="p">([</span><span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">],</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">all</span><span class="p">()),</span> <span class="k">false</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Configure Symfony to Work behind a Load Balancer or a Reverse Proxy &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Swift Mailer" href="../email.html" />
+    <link rel="prev" title="How to Deploy a Symfony Application" href="../deployment.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../deployment.html#symfony-deployment-basics">Symfony Deployment Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment.html#id1">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment.html#common-post-deployment-tasks">Common Post-Deployment Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment.html#application-lifecycle-continuous-integration-qa-etc">Application Lifecycle: Continuous Integration, QA, etc.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../deployment.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Configure Symfony to Work behind a Load Balancer or a Reverse Proxy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#solution-settrustedproxies">Solution: <code class="docutils literal notranslate"><span class="pre">setTrustedProxies()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#but-what-if-the-ip-of-my-reverse-proxy-changes-constantly">But what if the IP of my Reverse Proxy Changes Constantly!</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-headers-when-using-a-reverse-proxy">Custom Headers When Using a Reverse Proxy</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../deployment.html">How to Deploy a Symfony Application</a> &raquo;</li>
+        
+      <li>How to Configure Symfony to Work behind a Load Balancer or a Reverse Proxy</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/deployment/proxies.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-configure-symfony-to-work-behind-a-load-balancer-or-a-reverse-proxy">
+<h1>How to Configure Symfony to Work behind a Load Balancer or a Reverse Proxy<a class="headerlink" href="#how-to-configure-symfony-to-work-behind-a-load-balancer-or-a-reverse-proxy" title="Permalink to this headline">¶</a></h1>
+<p>When you deploy your application, you may be behind a load balancer (e.g.
+an AWS Elastic Load Balancing) or a reverse proxy (e.g. Varnish for
+<a class="reference internal" href="../http_cache.html"><span class="doc">caching</span></a>).</p>
+<p>For the most part, this doesn’t cause any problems with Symfony. But, when
+a request passes through a proxy, certain request information is sent using
+either the standard <code class="docutils literal notranslate"><span class="pre">Forwarded</span></code> header or <code class="docutils literal notranslate"><span class="pre">X-Forwarded-*</span></code> headers. For example,
+instead of reading the <code class="docutils literal notranslate"><span class="pre">REMOTE_ADDR</span></code> header (which will now be the IP address of
+your reverse proxy), the user’s true IP will be stored in a standard <code class="docutils literal notranslate"><span class="pre">Forwarded:</span> <span class="pre">for=&quot;...&quot;</span></code>
+header or a <code class="docutils literal notranslate"><span class="pre">X-Forwarded-For</span></code> header.</p>
+<p>If you don’t configure Symfony to look for these headers, you’ll get incorrect
+information about the client’s IP address, whether or not the client is connecting
+via HTTPS, the client’s port and the hostname being requested.</p>
+<div class="section" id="solution-settrustedproxies">
+<span id="request-set-trusted-proxies"></span><h2>Solution: <code class="docutils literal notranslate"><span class="pre">setTrustedProxies()</span></code><a class="headerlink" href="#solution-settrustedproxies" title="Permalink to this headline">¶</a></h2>
+<p>To fix this, you need to tell Symfony which reverse proxy IP addresses to trust
+and what headers your reverse proxy uses to send information:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// public/index.php</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+
+<span class="c1">// tell Symfony about your reverse proxy</span>
+<span class="nx">Request</span><span class="o">::</span><span class="na">setTrustedProxies</span><span class="p">(</span>
+    <span class="c1">// the IP address (or range) of your proxy</span>
+    <span class="p">[</span><span class="s1">&#39;192.0.0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;10.0.0.0/8&#39;</span><span class="p">],</span>
+
+    <span class="c1">// trust *all* &quot;X-Forwarded-*&quot; headers</span>
+    <span class="nx">Request</span><span class="o">::</span><span class="na">HEADER_X_FORWARDED_ALL</span>
+
+    <span class="c1">// or, if your proxy instead uses the &quot;Forwarded&quot; header</span>
+    <span class="c1">// Request::HEADER_FORWARDED</span>
+
+    <span class="c1">// or, if you&#39;re using AWS ELB</span>
+    <span class="c1">// Request::HEADER_X_FORWARDED_AWS_ELB</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>The Request object has several <code class="docutils literal notranslate"><span class="pre">Request::HEADER_*</span></code> constants that control exactly
+<em>which</em> headers from your reverse proxy are trusted. The argument is a bit field,
+so you can also pass your own value (e.g. <code class="docutils literal notranslate"><span class="pre">0b00110</span></code>).</p>
+</div>
+<div class="section" id="but-what-if-the-ip-of-my-reverse-proxy-changes-constantly">
+<h2>But what if the IP of my Reverse Proxy Changes Constantly!<a class="headerlink" href="#but-what-if-the-ip-of-my-reverse-proxy-changes-constantly" title="Permalink to this headline">¶</a></h2>
+<p>Some reverse proxies (like AWS Elastic Load Balancing) don’t have a
+static IP address or even a range that you can target with the CIDR notation.
+In this case, you’ll need to - <em>very carefully</em> - trust <em>all</em> proxies.</p>
+<ol class="arabic">
+<li><p class="first">Configure your web server(s) to <em>not</em> respond to traffic from <em>any</em> clients
+other than your load balancers. For AWS, this can be done with <a class="reference external" href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html">security groups</a>.</p>
+</li>
+<li><p class="first">Once you’ve guaranteed that traffic will only come from your trusted reverse
+proxies, configure Symfony to <em>always</em> trust incoming request:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// public/index.php</span>
+
+<span class="c1">// ...</span>
+<span class="nx">Request</span><span class="o">::</span><span class="na">setTrustedProxies</span><span class="p">(</span>
+    <span class="c1">// trust *all* requests (the &#39;REMOTE_ADDR&#39; string is replaced at</span>
+    <span class="c1">// run time by $_SERVER[&#39;REMOTE_ADDR&#39;])</span>
+    <span class="p">[</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;REMOTE_ADDR&#39;</span><span class="p">],</span>
+
+    <span class="c1">// if you&#39;re using ELB, otherwise use a constant from above</span>
+    <span class="nx">Request</span><span class="o">::</span><span class="na">HEADER_X_FORWARDED_AWS_ELB</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>That’s it! It’s critical that you prevent traffic from all non-trusted sources.
+If you allow outside traffic, they could “spoof” their true IP address and
+other information.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>In applications using <a class="reference internal" href="../setup.html#symfony-flex"><span class="std std-ref">Symfony Flex</span></a> you can set the
+<code class="docutils literal notranslate"><span class="pre">TRUSTED_PROXIES</span></code> env var:</p>
+<div class="last highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># .env</span>
+<span class="nv">TRUSTED_PROXIES</span><span class="o">=</span><span class="m">127</span>.0.0.1,REMOTE_ADDR
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>If you are also using a reverse proxy on top of your load balancer (e.g.
+<a class="reference external" href="https://en.wikipedia.org/wiki/Amazon_CloudFront">CloudFront</a>), calling <code class="docutils literal notranslate"><span class="pre">$request-&gt;server-&gt;get('REMOTE_ADDR')</span></code> won’t be
+enough, as it will only trust the node sitting directly above your application
+(in this case your load balancer). You also need to append the IP addresses or
+ranges of any additional proxy (e.g. <a class="reference external" href="https://ip-ranges.amazonaws.com/ip-ranges.json">CloudFront IP ranges</a>) to the array of
+trusted proxies.</p>
+</div>
+<div class="section" id="custom-headers-when-using-a-reverse-proxy">
+<h2>Custom Headers When Using a Reverse Proxy<a class="headerlink" href="#custom-headers-when-using-a-reverse-proxy" title="Permalink to this headline">¶</a></h2>
+<p>Some reverse proxies (like <a class="reference external" href="https://en.wikipedia.org/wiki/Amazon_CloudFront">CloudFront</a> with <code class="docutils literal notranslate"><span class="pre">CloudFront-Forwarded-Proto</span></code>) may force you to use a custom header.
+For instance you have <code class="docutils literal notranslate"><span class="pre">Custom-Forwarded-Proto</span></code> instead of <code class="docutils literal notranslate"><span class="pre">X-Forwarded-Proto</span></code>.</p>
+<p>In this case, you’ll need to set the header <code class="docutils literal notranslate"><span class="pre">X-Forwarded-Proto</span></code> with the value of
+<code class="docutils literal notranslate"><span class="pre">Custom-Forwarded-Proto</span></code> early enough in your application, i.e. before handling the request:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// public/index.php</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;HTTP_X_FORWARDED_PROTO&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;HTTP_CUSTOM_FORWARDED_PROTO&#39;</span><span class="p">];</span>
+<span class="c1">// ...</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$kernel</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

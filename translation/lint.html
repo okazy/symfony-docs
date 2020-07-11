@@ -1,0 +1,326 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Find Errors in Translation Files &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The XLIFF format" href="xliff.html" />
+    <link rel="prev" title="How to Find Missing or Unused Translation Messages" href="debug.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../translation.html">Translations</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#basic-translation">Basic Translation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#message-format">Message Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#translations-in-templates">Translations in Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#forcing-the-translator-locale">Forcing the Translator Locale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#extracting-translation-contents-and-updating-catalogs-automatically">Extracting Translation Contents and Updating Catalogs Automatically</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#translation-resource-file-names-and-locations">Translation Resource/File Names and Locations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#handling-the-user-s-locale">Handling the User’s Locale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#fallback-translation-locales">Fallback Translation Locales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#translating-database-content">Translating Database Content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#debugging-translations">Debugging Translations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#summary">Summary</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../translation.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="message_format.html">How to Translate Messages using the ICU MessageFormat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="templates.html">Using Translation in Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locale.html">How to Work with the User’s Locale</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug.html">How to Find Missing or Unused Translation Messages</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Find Errors in Translation Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xliff.html">The XLIFF format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../translation.html">Translations</a> &raquo;</li>
+        
+      <li>How to Find Errors in Translation Files</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/translation/lint.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-find-errors-in-translation-files">
+<span id="index-0"></span><h1>How to Find Errors in Translation Files<a class="headerlink" href="#how-to-find-errors-in-translation-files" title="Permalink to this headline">¶</a></h1>
+<p>Symfony processes all the application translation files as part of the process
+that compiles the application code before executing it. If there’s an error in
+any translation file, you’ll see an error message explaining the problem.</p>
+<p>If you prefer, you can also validate the contents of any YAML and XLIFF
+translation file using the <code class="docutils literal notranslate"><span class="pre">lint:yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">lint:xliff</span></code> commands:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># lint a single file</span>
+<span class="gp">$</span> php bin/console lint:yaml translations/messages.en.yaml
+<span class="gp">$</span> php bin/console lint:xliff translations/messages.en.xlf
+
+<span class="c1"># lint a whole directory</span>
+<span class="gp">$</span> php bin/console lint:yaml translations
+<span class="gp">$</span> php bin/console lint:xliff translations
+
+<span class="c1"># lint multiple files or directories</span>
+<span class="gp">$</span> php bin/console lint:yaml translations path/to/trans
+<span class="gp">$</span> php bin/console lint:xliff translations/messages.en.xlf translations/messages.es.xlf
+</pre></div>
+</td></tr></table></div>
+<p>The linter results can be exported to JSON using the <code class="docutils literal notranslate"><span class="pre">--format</span></code> option:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console lint:yaml translations/ --format<span class="o">=</span>json
+<span class="gp">$</span> php bin/console lint:xliff translations/ --format<span class="o">=</span>json
+</pre></div>
+</td></tr></table></div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>The Yaml component provides a stand-alone <code class="docutils literal notranslate"><span class="pre">yaml-lint</span></code> binary allowing
+you to lint YAML files without having to create a console application:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php vendor/bin/yaml-lint translations/
+</pre></div>
+</td></tr></table></div>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The <code class="docutils literal notranslate"><span class="pre">yaml-lint</span></code> binary was introduced in Symfony 5.1.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

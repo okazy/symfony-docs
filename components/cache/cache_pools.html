@@ -1,0 +1,560 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Cache Pools and Supported Adapters &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Adapters For Interoperability between PSR-6 and PSR-16 Cache" href="psr6_psr16_adapters.html" />
+    <link rel="prev" title="Cache Items" href="cache_items.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../cache.html">The Cache Component</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../cache.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cache.html#cache-contracts-versus-psr-6">Cache Contracts versus PSR-6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cache.html#cache-contracts">Cache Contracts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cache.html#generic-caching-psr-6">Generic Caching (PSR-6)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cache.html#basic-usage-psr-6">Basic Usage (PSR-6)</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../cache.html#advanced-usage">Advanced Usage</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="cache_invalidation.html">Cache Invalidation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cache_items.html">Cache Items</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Cache Pools and Supported Adapters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="psr6_psr16_adapters.html">Adapters For Interoperability between PSR-6 and PSR-16 Cache</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dependency_injection.html">The DependencyInjection Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../form.html">The Form Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../process.html">The Process Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html">The Security Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">The Components</a> &raquo;</li>
+        
+          <li><a href="../cache.html">The Cache Component</a> &raquo;</li>
+        
+      <li>Cache Pools and Supported Adapters</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/components/cache/cache_pools.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cache-pools-and-supported-adapters">
+<span id="component-cache-cache-pools"></span><span id="index-0"></span><h1>Cache Pools and Supported Adapters<a class="headerlink" href="#cache-pools-and-supported-adapters" title="Permalink to this headline">¶</a></h1>
+<p>Cache Pools are the logical repositories of cache items. They perform all the
+common operations on items, such as saving them or looking for them. Cache pools
+are independent of the actual cache implementation. Therefore, applications
+can keep using the same cache pool even if the underlying cache mechanism
+changes from a file system based cache to a Redis or database based cache.</p>
+<div class="section" id="creating-cache-pools">
+<span id="component-cache-creating-cache-pools"></span><h2>Creating Cache Pools<a class="headerlink" href="#creating-cache-pools" title="Permalink to this headline">¶</a></h2>
+<p>Cache Pools are created through the <strong>cache adapters</strong>, which are classes that
+implement both <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Contracts/Cache/CacheInterface.php" title="Symfony\Contracts\Cache\CacheInterface"><span class="pre">CacheInterface</span></a></code> and
+<code class="docutils literal notranslate"><span class="pre">Psr\Cache\CacheItemPoolInterface</span></code>. This component provides several adapters
+ready to use in your applications.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adapters/apcu_adapter.html">APCu Cache Adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adapters/array_cache_adapter.html">Array Cache Adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adapters/chain_adapter.html">Chain Cache Adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adapters/couchbasebucket_adapter.html">Couchbase Cache Adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adapters/doctrine_adapter.html">Doctrine Cache Adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adapters/filesystem_adapter.html">Filesystem Cache Adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adapters/memcached_adapter.html">Memcached Cache Adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adapters/pdo_doctrine_dbal_adapter.html">PDO &amp; Doctrine DBAL Cache Adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adapters/php_array_cache_adapter.html">PHP Array Cache Adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adapters/php_files_adapter.html">PHP Files Cache Adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adapters/proxy_adapter.html">Proxy Cache Adapter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adapters/redis_adapter.html">Redis Cache Adapter</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="using-the-cache-contracts">
+<h2>Using the Cache Contracts<a class="headerlink" href="#using-the-cache-contracts" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Contracts/Cache/CacheInterface.php" title="Symfony\Contracts\Cache\CacheInterface"><span class="pre">CacheInterface</span></a></code> allows fetching, storing
+and deleting cache items using only two methods and a callback:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Cache\Adapter\FilesystemAdapter</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Contracts\Cache\ItemInterface</span><span class="p">;</span>
+
+<span class="nv">$cache</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FilesystemAdapter</span><span class="p">();</span>
+
+<span class="c1">// The callable will only be executed on a cache miss.</span>
+<span class="nv">$value</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;my_cache_key&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">ItemInterface</span> <span class="nv">$item</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">expiresAfter</span><span class="p">(</span><span class="mi">3600</span><span class="p">);</span>
+
+    <span class="c1">// ... do some HTTP request or heavy computations</span>
+    <span class="nv">$computedValue</span> <span class="o">=</span> <span class="s1">&#39;foobar&#39;</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="nv">$computedValue</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="k">echo</span> <span class="nv">$value</span><span class="p">;</span> <span class="c1">// &#39;foobar&#39;</span>
+
+<span class="c1">// ... and to remove the cache key</span>
+<span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;my_cache_key&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Out of the box, using this interface provides stampede protection via locking
+and early expiration. Early expiration can be controlled via the third “beta”
+argument of the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Contracts/Cache/CacheInterface.php" title="Symfony\Contracts\Cache\CacheInterface::get()"><span class="pre">get()</span></a></code> method.
+See the <a class="reference internal" href="../cache.html"><span class="doc">The Cache Component</span></a> article for more information.</p>
+<p>Early expiration can be detected inside the callback by calling the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Contracts/Cache/ItemInterface.php" title="Symfony\Contracts\Cache\ItemInterface::isHit()"><span class="pre">isHit()</span></a></code> method: if this
+returns <code class="docutils literal notranslate"><span class="pre">true</span></code>, it means we are currently recomputing a value ahead of its
+expiration date.</p>
+<p>For advanced use cases, the callback can accept a second <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">&amp;$save</span></code>
+argument passed by reference. By setting <code class="docutils literal notranslate"><span class="pre">$save</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code> inside the
+callback, you can instruct the cache pool that the returned value <em>should not</em>
+be stored in the backend.</p>
+</div>
+<div class="section" id="using-psr-6">
+<h2>Using PSR-6<a class="headerlink" href="#using-psr-6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="looking-for-cache-items">
+<h3>Looking for Cache Items<a class="headerlink" href="#looking-for-cache-items" title="Permalink to this headline">¶</a></h3>
+<p>Cache Pools define three methods to look for cache items. The most common method
+is <code class="docutils literal notranslate"><span class="pre">getItem($key)</span></code>, which returns the cache item identified by the given key:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Cache\Adapter\FilesystemAdapter</span><span class="p">;</span>
+
+<span class="nv">$cache</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FilesystemAdapter</span><span class="p">(</span><span class="s1">&#39;app.cache&#39;</span><span class="p">);</span>
+<span class="nv">$latestNews</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">getItem</span><span class="p">(</span><span class="s1">&#39;latest_news&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If no item is defined for the given key, the method doesn’t return a <code class="docutils literal notranslate"><span class="pre">null</span></code>
+value but an empty object which implements the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Cache/CacheItem.php" title="Symfony\Component\Cache\CacheItem"><span class="pre">CacheItem</span></a></code>
+class.</p>
+<p>If you need to fetch several cache items simultaneously, use instead the
+<code class="docutils literal notranslate"><span class="pre">getItems([$key1,</span> <span class="pre">$key2,</span> <span class="pre">...])</span></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$stocks</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">getItems</span><span class="p">([</span><span class="s1">&#39;AAPL&#39;</span><span class="p">,</span> <span class="s1">&#39;FB&#39;</span><span class="p">,</span> <span class="s1">&#39;GOOGL&#39;</span><span class="p">,</span> <span class="s1">&#39;MSFT&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p>Again, if any of the keys doesn’t represent a valid cache item, you won’t get
+a <code class="docutils literal notranslate"><span class="pre">null</span></code> value but an empty <code class="docutils literal notranslate"><span class="pre">CacheItem</span></code> object.</p>
+<p>The last method related to fetching cache items is <code class="docutils literal notranslate"><span class="pre">hasItem($key)</span></code>, which
+returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if there is a cache item identified by the given key:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$hasBadges</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">hasItem</span><span class="p">(</span><span class="s1">&#39;user_&#39;</span><span class="o">.</span><span class="nv">$userId</span><span class="o">.</span><span class="s1">&#39;_badges&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="saving-cache-items">
+<h3>Saving Cache Items<a class="headerlink" href="#saving-cache-items" title="Permalink to this headline">¶</a></h3>
+<p>The most common method to save cache items is
+<code class="docutils literal notranslate"><span class="pre">Psr\Cache\CacheItemPoolInterface::save</span></code>, which stores the
+item in the cache immediately (it returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the item was saved or
+<code class="docutils literal notranslate"><span class="pre">false</span></code> if some error occurred):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$userFriends</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">getItem</span><span class="p">(</span><span class="s1">&#39;user_&#39;</span><span class="o">.</span><span class="nv">$userId</span><span class="o">.</span><span class="s1">&#39;_friends&#39;</span><span class="p">);</span>
+<span class="nv">$userFriends</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getFriends</span><span class="p">());</span>
+<span class="nv">$isSaved</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$userFriends</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Sometimes you may prefer to not save the objects immediately in order to
+increase the application performance. In those cases, use the
+<code class="docutils literal notranslate"><span class="pre">Psr\Cache\CacheItemPoolInterface::saveDeferred</span></code> method to mark cache
+items as “ready to be persisted” and then call to
+<code class="docutils literal notranslate"><span class="pre">Psr\Cache\CacheItemPoolInterface::commit</span></code> method when you are ready
+to persist them all:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$isQueued</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">saveDeferred</span><span class="p">(</span><span class="nv">$userFriends</span><span class="p">);</span>
+<span class="c1">// ...</span>
+<span class="nv">$isQueued</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">saveDeferred</span><span class="p">(</span><span class="nv">$userPreferences</span><span class="p">);</span>
+<span class="c1">// ...</span>
+<span class="nv">$isQueued</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">saveDeferred</span><span class="p">(</span><span class="nv">$userRecentProducts</span><span class="p">);</span>
+<span class="c1">// ...</span>
+<span class="nv">$isSaved</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">commit</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">saveDeferred()</span></code> method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> when the cache item has been
+successfully added to the “persist queue” and <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise. The <code class="docutils literal notranslate"><span class="pre">commit()</span></code>
+method returns <code class="docutils literal notranslate"><span class="pre">true</span></code> when all the pending items are successfully saved or
+<code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.</p>
+</div>
+<div class="section" id="removing-cache-items">
+<h3>Removing Cache Items<a class="headerlink" href="#removing-cache-items" title="Permalink to this headline">¶</a></h3>
+<p>Cache Pools include methods to delete a cache item, some of them or all of them.
+The most common is <code class="docutils literal notranslate"><span class="pre">Psr\Cache\CacheItemPoolInterface::deleteItem</span></code>,
+which deletes the cache item identified by the given key (it returns <code class="docutils literal notranslate"><span class="pre">true</span></code>
+when the item is successfully deleted or doesn’t exist and <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$isDeleted</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">deleteItem</span><span class="p">(</span><span class="s1">&#39;user_&#39;</span><span class="o">.</span><span class="nv">$userId</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">Psr\Cache\CacheItemPoolInterface::deleteItems</span></code> method to
+delete several cache items simultaneously (it returns <code class="docutils literal notranslate"><span class="pre">true</span></code> only if all the
+items have been deleted, even when any or some of them don’t exist):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$areDeleted</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">deleteItems</span><span class="p">([</span><span class="s1">&#39;category1&#39;</span><span class="p">,</span> <span class="s1">&#39;category2&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p>Finally, to remove all the cache items stored in the pool, use the
+<code class="docutils literal notranslate"><span class="pre">Psr\Cache\CacheItemPoolInterface::clear</span></code> method (which returns <code class="docutils literal notranslate"><span class="pre">true</span></code>
+when all items are successfully deleted):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$cacheIsEmpty</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">clear</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>If the cache component is used inside a Symfony application, you can remove
+items from cache pools using the following commands (which reside within
+the <a class="reference internal" href="../../reference/configuration/framework.html#framework-bundle-configuration"><span class="std std-ref">framework bundle</span></a>):</p>
+<p>To remove <em>one specific item</em> from the <em>given pool</em>:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console cache:pool:delete &lt;cache-pool-name&gt; &lt;cache-key-name&gt;
+
+<span class="c1"># deletes the &quot;cache_key&quot; item from the &quot;cache.app&quot; pool</span>
+<span class="gp">$</span> php bin/console cache:pool:delete cache.app cache_key
+</pre></div>
+</td></tr></table></div>
+<p>You can also remove <em>all items</em> from the <em>given pool(s)</em>:</p>
+<div class="last highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console cache:pool:clear &lt;cache-pool-name&gt;
+
+<span class="c1"># clears the &quot;cache.app&quot; pool</span>
+<span class="gp">$</span> php bin/console cache:pool:clear cache.app
+
+<span class="c1"># clears the &quot;cache.validation&quot; and &quot;cache.app&quot; pool</span>
+<span class="gp">$</span> php bin/console cache:pool:clear cache.validation cache.app
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+</div>
+<div class="section" id="pruning-cache-items">
+<span id="component-cache-cache-pool-prune"></span><h2>Pruning Cache Items<a class="headerlink" href="#pruning-cache-items" title="Permalink to this headline">¶</a></h2>
+<p>Some cache pools do not include an automated mechanism for pruning expired cache items.
+For example, the <a class="reference internal" href="adapters/filesystem_adapter.html#component-cache-filesystem-adapter"><span class="std std-ref">FilesystemAdapter</span></a> cache
+does not remove expired cache items <em>until an item is explicitly requested and determined to
+be expired</em>, for example, via a call to <code class="docutils literal notranslate"><span class="pre">Psr\Cache\CacheItemPoolInterface::getItem</span></code>.
+Under certain workloads, this can cause stale cache entries to persist well past their
+expiration, resulting in a sizable consumption of wasted disk or memory space from excess,
+expired cache items.</p>
+<p>This shortcoming has been solved through the introduction of
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Cache/PruneableInterface.php" title="Symfony\Component\Cache\PruneableInterface"><span class="pre">PruneableInterface</span></a></code>, which defines the abstract method
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Cache/PruneableInterface.php" title="Symfony\Component\Cache\PruneableInterface::prune()"><span class="pre">prune()</span></a></code>. The
+<a class="reference internal" href="adapters/chain_adapter.html#component-cache-chain-adapter"><span class="std std-ref">ChainAdapter</span></a>,
+<a class="reference internal" href="adapters/filesystem_adapter.html#component-cache-filesystem-adapter"><span class="std std-ref">FilesystemAdapter</span></a>,
+<a class="reference internal" href="adapters/pdo_doctrine_dbal_adapter.html#pdo-doctrine-adapter"><span class="std std-ref">PdoAdapter</span></a>, and
+<a class="reference internal" href="adapters/php_files_adapter.html#component-cache-files-adapter"><span class="std std-ref">PhpFilesAdapter</span></a> all implement this new interface,
+allowing manual removal of stale cache items:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Cache\Adapter\FilesystemAdapter</span><span class="p">;</span>
+
+<span class="nv">$cache</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FilesystemAdapter</span><span class="p">(</span><span class="s1">&#39;app.cache&#39;</span><span class="p">);</span>
+<span class="c1">// ... do some set and get operations</span>
+<span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">prune</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="adapters/chain_adapter.html#component-cache-chain-adapter"><span class="std std-ref">ChainAdapter</span></a> implementation does not directly
+contain any pruning logic itself. Instead, when calling the chain adapter’s
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Cache/Adapter/ChainAdapter.php" title="Symfony\Component\Cache\Adapter\ChainAdapter::prune()"><span class="pre">prune()</span></a></code> method, the call is delegated to all
+its compatible cache adapters (and those that do not implement <code class="docutils literal notranslate"><span class="pre">PruneableInterface</span></code> are
+silently ignored):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Cache\Adapter\ApcuAdapter</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Cache\Adapter\ChainAdapter</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Cache\Adapter\FilesystemAdapter</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Cache\Adapter\PdoAdapter</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Cache\Adapter\PhpFilesAdapter</span><span class="p">;</span>
+
+<span class="nv">$cache</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ChainAdapter</span><span class="p">([</span>
+    <span class="k">new</span> <span class="nx">ApcuAdapter</span><span class="p">(),</span>       <span class="c1">// does NOT implement PruneableInterface</span>
+    <span class="k">new</span> <span class="nx">FilesystemAdapter</span><span class="p">(),</span> <span class="c1">// DOES implement PruneableInterface</span>
+    <span class="k">new</span> <span class="nx">PdoAdapter</span><span class="p">(),</span>        <span class="c1">// DOES implement PruneableInterface</span>
+    <span class="k">new</span> <span class="nx">PhpFilesAdapter</span><span class="p">(),</span>   <span class="c1">// DOES implement PruneableInterface</span>
+    <span class="c1">// ...</span>
+<span class="p">]);</span>
+
+<span class="c1">// prune will proxy the call to PdoAdapter, FilesystemAdapter and PhpFilesAdapter,</span>
+<span class="c1">// while silently skipping ApcuAdapter</span>
+<span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">prune</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>If the cache component is used inside a Symfony application, you can prune
+<em>all items</em> from <em>all pools</em> using the following command (which resides within
+the <a class="reference internal" href="../../reference/configuration/framework.html#framework-bundle-configuration"><span class="std std-ref">framework bundle</span></a>):</p>
+<div class="last highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console cache:pool:prune
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

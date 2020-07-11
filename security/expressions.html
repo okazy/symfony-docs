@@ -1,0 +1,434 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Security: Complex Access Controls with Expressions &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Security Configuration Reference (SecurityBundle)" href="../reference/configuration/security.html" />
+    <link rel="prev" title="Securely Generating Random Values" href="../components/security/secure_tools.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../components/index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../components/using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/cache.html">The Cache Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/dependency_injection.html">The DependencyInjection Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/form.html">The Form Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/process.html">The Process Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../components/security.html">The Security Component</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../components/security.html#installation">Installation</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../components/security.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../components/security/authentication.html">Authentication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/security/authorization.html">Authorization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/security/firewall.html">The Firewall and Authorization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/security/secure_tools.html">Securely Generating Random Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="access_control.html">How Does the Security access_control Work?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="access_denied_handler.html">How to Create a Custom Access Denied Handler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="acl.html">How to Use Access Control Lists (ACLs)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auth_providers.html">Built-in Authentication Providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="csrf.html">How to Implement CSRF Protection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="custom_authentication_provider.html">How to Create a custom Authentication Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimental_authenticators.html">Using the new Authenticator-based Security</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Security: Complex Access Controls with Expressions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="firewall_restriction.html">How to Restrict Firewalls to a Request</a></li>
+<li class="toctree-l4"><a class="reference internal" href="force_https.html">How to Force HTTPS or HTTP for different URLs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="form_login.html">Using the form_login Authentication Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="form_login_setup.html">How to Build a Login Form</a></li>
+<li class="toctree-l4"><a class="reference internal" href="guard_authentication.html">Custom Authentication System with Guard (API Token Example)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="impersonating_user.html">How to Impersonate a User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="json_login_setup.html">How to Build a JSON Authentication Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ldap.html">Authenticating against an LDAP server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multiple_guard_authenticators.html">How to Use Multiple Guard Authenticators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="named_encoders.html">How to Use A Different Password Encoder Algorithm Per User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="password_migration.html">How to Migrate a Password Hash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="remember_me.html">How to Add “Remember Me” Login Functionality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reset_password.html">How to Add a Reset Password Feature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="securing_services.html">How to Secure any Service or Method in your Application</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_checkers.html">How to Create and Enable Custom User Checkers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_provider.html">Security User Providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="voters.html">How to Use Voters to Check User Permissions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/configuration/security.html">Security Configuration Reference (SecurityBundle)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/constraints/UserPassword.html">UserPassword</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../components/index.html">The Components</a> &raquo;</li>
+        
+          <li><a href="../components/security.html">The Security Component</a> &raquo;</li>
+        
+      <li>Security: Complex Access Controls with Expressions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/security/expressions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="security-complex-access-controls-with-expressions">
+<span id="index-0"></span><h1>Security: Complex Access Controls with Expressions<a class="headerlink" href="#security-complex-access-controls-with-expressions" title="Permalink to this headline">¶</a></h1>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">The best solution for handling complex authorization rules is to use
+the <a class="reference internal" href="voters.html"><span class="doc">Voter System</span></a>.</p>
+</div>
+<p>In addition to a role like <code class="docutils literal notranslate"><span class="pre">ROLE_ADMIN</span></code>, the <code class="docutils literal notranslate"><span class="pre">isGranted()</span></code> method also
+accepts an <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/ExpressionLanguage/Expression.php" title="Symfony\Component\ExpressionLanguage\Expression"><span class="pre">Expression</span></a></code> object:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\ExpressionLanguage\Expression</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">denyAccessUnlessGranted</span><span class="p">(</span><span class="k">new</span> <span class="nx">Expression</span><span class="p">(</span>
+        <span class="s1">&#39;&quot;ROLE_ADMIN&quot; in role_names or (not is_anonymous() and user.isSuperAdmin())&#39;</span>
+    <span class="p">));</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this example, if the current user has <code class="docutils literal notranslate"><span class="pre">ROLE_ADMIN</span></code> or if the current
+user object’s <code class="docutils literal notranslate"><span class="pre">isSuperAdmin()</span></code> method returns <code class="docutils literal notranslate"><span class="pre">true</span></code>, then access will
+be granted (note: your User object may not have an <code class="docutils literal notranslate"><span class="pre">isSuperAdmin()</span></code> method,
+that method is invented for this example).</p>
+<p>This uses an expression and you can learn more about the expression language
+syntax, see <a class="reference internal" href="../components/expression_language/syntax.html"><span class="doc">The Expression Syntax</span></a>.</p>
+<p id="security-expression-variables">Inside the expression, you have access to a number of variables:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">user</span></code></dt>
+<dd>The user object (or the string <code class="docutils literal notranslate"><span class="pre">anon</span></code> if you’re not authenticated).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">roles</span></code></dt>
+<dd>The array of roles the user has. This array includes any roles granted
+indirectly via the <a class="reference internal" href="../security.html#security-role-hierarchy"><span class="std std-ref">role hierarchy</span></a> but it
+does not include the <code class="docutils literal notranslate"><span class="pre">IS_AUTHENTICATED_*</span></code> attributes (see the functions below).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">object</span></code></dt>
+<dd>The object (if any) that’s passed as the second argument to <code class="docutils literal notranslate"><span class="pre">isGranted()</span></code>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">token</span></code></dt>
+<dd>The token object.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">trust_resolver</span></code></dt>
+<dd>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Authentication/AuthenticationTrustResolverInterface.php" title="Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface"><span class="pre">AuthenticationTrustResolverInterface</span></a></code>,
+object: you’ll probably use the <code class="docutils literal notranslate"><span class="pre">is_*()</span></code> functions below instead.</dd>
+</dl>
+<p>Additionally, you have access to a number of functions inside the expression:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">is_authenticated()</span></code></dt>
+<dd>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the user is authenticated via “remember-me” or authenticated
+“fully” - i.e. returns true if the user is “logged in”.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">is_anonymous()</span></code></dt>
+<dd>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the user is anonymous. That is, the firewall confirms that it
+does not know this user’s identity. This is different from <code class="docutils literal notranslate"><span class="pre">IS_AUTHENTICATED_ANONYMOUSLY</span></code>,
+which is granted to <em>all</em> users, including authenticated ones.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">is_remember_me()</span></code></dt>
+<dd>Similar, but not equal to <code class="docutils literal notranslate"><span class="pre">IS_AUTHENTICATED_REMEMBERED</span></code>, see below.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">is_fully_authenticated()</span></code></dt>
+<dd>Equal to checking if the user has the <code class="docutils literal notranslate"><span class="pre">IS_AUTHENTICATED_FULLY</span></code> role.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">is_granted()</span></code></dt>
+<dd>Checks if the user has the given permission. Optionally accepts a second argument
+with the object where permission is checked on. It’s equivalent to using
+the <a class="reference internal" href="securing_services.html"><span class="doc">isGranted() method</span></a> from the authorization
+checker service.</dd>
+</dl>
+<div class="sidebar">
+<p class="first sidebar-title"><code class="docutils literal notranslate"><span class="pre">is_remember_me()</span></code> is different than checking <code class="docutils literal notranslate"><span class="pre">IS_AUTHENTICATED_REMEMBERED</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">is_remember_me()</span></code> and <code class="docutils literal notranslate"><span class="pre">is_fully_authenticated()</span></code> functions are <em>similar</em>
+to using <code class="docutils literal notranslate"><span class="pre">IS_AUTHENTICATED_REMEMBERED</span></code> and <code class="docutils literal notranslate"><span class="pre">IS_AUTHENTICATED_FULLY</span></code>
+with the <code class="docutils literal notranslate"><span class="pre">isGranted()</span></code> function - but they are <strong>not</strong> the same. The
+following controller snippet shows the difference:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\ExpressionLanguage\Expression</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nx">AuthorizationCheckerInterface</span> <span class="nv">$authorizationChecker</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$access1</span> <span class="o">=</span> <span class="nv">$authorizationChecker</span><span class="o">-&gt;</span><span class="na">isGranted</span><span class="p">(</span><span class="s1">&#39;IS_AUTHENTICATED_REMEMBERED&#39;</span><span class="p">);</span>
+
+    <span class="nv">$access2</span> <span class="o">=</span> <span class="nv">$authorizationChecker</span><span class="o">-&gt;</span><span class="na">isGranted</span><span class="p">(</span><span class="k">new</span> <span class="nx">Expression</span><span class="p">(</span>
+        <span class="s1">&#39;is_remember_me() or is_fully_authenticated()&#39;</span>
+    <span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="last">Here, <code class="docutils literal notranslate"><span class="pre">$access1</span></code> and <code class="docutils literal notranslate"><span class="pre">$access2</span></code> will be the same value. Unlike the
+behavior of <code class="docutils literal notranslate"><span class="pre">IS_AUTHENTICATED_REMEMBERED</span></code> and <code class="docutils literal notranslate"><span class="pre">IS_AUTHENTICATED_FULLY</span></code>,
+the <code class="docutils literal notranslate"><span class="pre">is_remember_me()</span></code> function <em>only</em> returns true if the user is authenticated
+via a remember-me cookie and <code class="docutils literal notranslate"><span class="pre">is_fully_authenticated()</span></code> <em>only</em> returns
+true if the user has actually logged in during this session (i.e. is
+full-fledged).</p>
+</div>
+<div class="section" id="learn-more">
+<h2>Learn more<a class="headerlink" href="#learn-more" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="../service_container/expression_language.html"><span class="doc">How to Inject Values Based on Complex Expressions</span></a></li>
+<li><a class="reference internal" href="../reference/constraints/Expression.html"><span class="doc">Expression</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,700 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Manage Common Dependencies with Parent Services &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Retrieve the Request from the Service Container" href="request.html" />
+    <link rel="prev" title="How to Make Service Arguments/References Optional" href="optional_dependencies.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../service_container.html">Service Container</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#fetching-and-using-services">Fetching and using Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#creating-configuring-services-in-the-container">Creating/Configuring Services in the Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#injecting-services-config-into-a-service">Injecting Services/Config into a Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#service-parameters">Service Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#choose-a-specific-service">Choose a Specific Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#binding-arguments-by-name-or-type">Binding Arguments by Name or Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#the-autowire-option">The autowire Option</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#the-autoconfigure-option">The autoconfigure Option</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#linting-service-definitions">Linting Service Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#public-versus-private-services">Public Versus Private Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#importing-many-services-at-once-with-resource">Importing Many Services at once with resource</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#explicitly-configuring-services-and-arguments">Explicitly Configuring Services and Arguments</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../service_container.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="3.3-di-changes.html">The Symfony 3.3 DI Container Changes Explained (autowiring, _defaults, etc)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alias_private.html">How to Create Service Aliases and Mark Services as Private</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autowiring.html">Defining Services Dependencies Automatically (Autowiring)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calls.html">Service Method Calls and Setter Injection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compiler_passes.html">How to Work with Compiler Passes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configurators.html">How to Configure a Service with a Configurator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug.html">How to Debug the Service Container &amp; List Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="definitions.html">How to work with Service Definition Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expression_language.html">How to Inject Values Based on Complex Expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="factories.html">Using a Factory to Create Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="import.html">How to Import Configuration Files/Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="injection_types.html">Types of Injection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lazy_services.html">Lazy Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_dependencies.html">How to Make Service Arguments/References Optional</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Manage Common Dependencies with Parent Services</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overriding-parent-dependencies">Overriding Parent Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="request.html">How to Retrieve the Request from the Service Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service_decoration.html">How to Decorate Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service_subscribers_locators.html">Service Subscribers &amp; Locators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shared.html">How to Define Non Shared Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synthetic_services.html">How to Inject Instances into the Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tags.html">How to Work with Service Tags</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../service_container.html">Service Container</a> &raquo;</li>
+        
+      <li>How to Manage Common Dependencies with Parent Services</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/service_container/parent_services.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-manage-common-dependencies-with-parent-services">
+<span id="index-0"></span><h1>How to Manage Common Dependencies with Parent Services<a class="headerlink" href="#how-to-manage-common-dependencies-with-parent-services" title="Permalink to this headline">¶</a></h1>
+<p>As you add more functionality to your application, you may well start to
+have related classes that share some of the same dependencies. For example,
+you may have multiple repository classes which need the
+<code class="docutils literal notranslate"><span class="pre">doctrine.orm.entity_manager</span></code> service and an optional <code class="docutils literal notranslate"><span class="pre">logger</span></code> service:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Repository/BaseDoctrineRepository.php</span>
+<span class="k">namespace</span> <span class="nx">App\Repository</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Doctrine\Persistence\ObjectManager</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Log\LoggerInterface</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="k">abstract</span> <span class="k">class</span> <span class="nc">BaseDoctrineRepository</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$objectManager</span><span class="p">;</span>
+    <span class="k">protected</span> <span class="nv">$logger</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">ObjectManager</span> <span class="nv">$objectManager</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">objectManager</span> <span class="o">=</span> <span class="nv">$objectManager</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setLogger</span><span class="p">(</span><span class="nx">LoggerInterface</span> <span class="nv">$logger</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span> <span class="o">=</span> <span class="nv">$logger</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Your child service classes may look like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Repository/DoctrineUserRepository.php</span>
+<span class="k">namespace</span> <span class="nx">App\Repository</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Repository\BaseDoctrineRepository</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">DoctrineUserRepository</span> <span class="k">extends</span> <span class="nx">BaseDoctrineRepository</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// src/Repository/DoctrinePostRepository.php</span>
+<span class="k">namespace</span> <span class="nx">App\Repository</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Repository\BaseDoctrineRepository</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">DoctrinePostRepository</span> <span class="k">extends</span> <span class="nx">BaseDoctrineRepository</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Just as you use PHP inheritance to avoid duplication in your PHP code, the
+service container allows you to extend parent services in order to avoid
+duplicated service definitions:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">App\Repository\BaseDoctrineRepository</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">abstract</span><span class="p p-Indicator">:</span>  <span class="l l-Scalar l-Scalar-Plain">true</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;@doctrine.orm.entity_manager&#39;</span><span class="p p-Indicator">]</span>
+        <span class="l l-Scalar l-Scalar-Plain">calls</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">setLogger</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="s">&#39;@logger&#39;</span><span class="p p-Indicator">]]</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\Repository\DoctrineUserRepository</span><span class="p p-Indicator">:</span>
+        <span class="c1"># extend the App\Repository\BaseDoctrineRepository service</span>
+        <span class="l l-Scalar l-Scalar-Plain">parent</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Repository\BaseDoctrineRepository</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\Repository\DoctrinePostRepository</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">parent</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Repository\BaseDoctrineRepository</span>
+
+    <span class="c1"># ...</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\Repository\BaseDoctrineRepository&quot;</span> <span class="na">abstract=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;argument</span> <span class="na">type=</span><span class="s">&quot;service&quot;</span> <span class="na">id=</span><span class="s">&quot;doctrine.orm.entity_manager&quot;</span><span class="nt">/&gt;</span>
+
+            <span class="nt">&lt;call</span> <span class="na">method=</span><span class="s">&quot;setLogger&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;argument</span> <span class="na">type=</span><span class="s">&quot;service&quot;</span> <span class="na">id=</span><span class="s">&quot;logger&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/call&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+
+        <span class="c">&lt;!-- extends the App\Repository\BaseDoctrineRepository service --&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\Repository\DoctrineUserRepository&quot;</span>
+            <span class="na">parent=</span><span class="s">&quot;App\Repository\BaseDoctrineRepository&quot;</span>
+        <span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\Repository\DoctrinePostRepository&quot;</span>
+            <span class="na">parent=</span><span class="s">&quot;App\Repository\BaseDoctrineRepository&quot;</span>
+        <span class="nt">/&gt;</span>
+
+        <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Repository\BaseDoctrineRepository</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Repository\DoctrinePostRepository</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Repository\DoctrineUserRepository</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$services</span> <span class="o">=</span> <span class="nv">$configurator</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">();</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">BaseDoctrineRepository</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">abstract</span><span class="p">()</span>
+        <span class="o">-&gt;</span><span class="na">args</span><span class="p">([</span><span class="nx">service</span><span class="p">(</span><span class="s1">&#39;doctrine.orm.entity_manager&#39;</span><span class="p">)])</span>
+        <span class="c1">// In versions earlier to Symfony 5.1 the service() function was called ref()</span>
+        <span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="s1">&#39;setLogger&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">service</span><span class="p">(</span><span class="s1">&#39;logger&#39;</span><span class="p">)])</span>
+    <span class="p">;</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">DoctrineUserRepository</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="c1">// extend the App\Repository\BaseDoctrineRepository service</span>
+        <span class="o">-&gt;</span><span class="na">parent</span><span class="p">(</span><span class="nx">BaseDoctrineRepository</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="p">;</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">DoctrinePostRepository</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">parent</span><span class="p">(</span><span class="nx">BaseDoctrineRepository</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>In this context, having a <code class="docutils literal notranslate"><span class="pre">parent</span></code> service implies that the arguments
+and method calls of the parent service should be used for the child services.
+Specifically, the <code class="docutils literal notranslate"><span class="pre">EntityManager</span></code> will be injected and <code class="docutils literal notranslate"><span class="pre">setLogger()</span></code> will
+be called when <code class="docutils literal notranslate"><span class="pre">App\Repository\DoctrineUserRepository</span></code> is instantiated.</p>
+<p>All attributes on the parent service are shared with the child <strong>except</strong> for
+<code class="docutils literal notranslate"><span class="pre">shared</span></code>, <code class="docutils literal notranslate"><span class="pre">abstract</span></code> and <code class="docutils literal notranslate"><span class="pre">tags</span></code>. These are <em>not</em> inherited from the parent.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">In the examples shown, the classes sharing the same configuration also
+extend from the same parent class in PHP. This isn’t necessary at all.
+You can also extract common parts of similar service definitions into
+a parent service without also extending a parent class in PHP.</p>
+</div>
+<div class="section" id="overriding-parent-dependencies">
+<h2>Overriding Parent Dependencies<a class="headerlink" href="#overriding-parent-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>There may be times where you want to override what service is injected for
+one child service only. You can override most settings by specifying it in
+the child class:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\Repository\DoctrineUserRepository</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">parent</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Repository\BaseDoctrineRepository</span>
+
+        <span class="c1"># overrides the private setting of the parent service</span>
+        <span class="l l-Scalar l-Scalar-Plain">public</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+
+        <span class="c1"># appends the &#39;@app.username_checker&#39; argument to the parent</span>
+        <span class="c1"># argument list</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;@app.username_checker&#39;</span><span class="p p-Indicator">]</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\Repository\DoctrinePostRepository</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">parent</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Repository\BaseDoctrineRepository</span>
+
+        <span class="c1"># overrides the first argument (using the special index_N key)</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">index_0</span><span class="p p-Indicator">:</span> <span class="s">&#39;@doctrine.custom_entity_manager&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="c">&lt;!-- overrides the private setting of the parent service --&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\Repository\DoctrineUserRepository&quot;</span>
+            <span class="na">parent=</span><span class="s">&quot;App\Repository\BaseDoctrineRepository&quot;</span>
+            <span class="na">public=</span><span class="s">&quot;true&quot;</span>
+        <span class="nt">&gt;</span>
+            <span class="c">&lt;!-- appends the &#39;@app.username_checker&#39; argument to the parent</span>
+<span class="c">                 argument list --&gt;</span>
+            <span class="nt">&lt;argument</span> <span class="na">type=</span><span class="s">&quot;service&quot;</span> <span class="na">id=</span><span class="s">&quot;app.username_checker&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\Repository\DoctrinePostRepository&quot;</span>
+            <span class="na">parent=</span><span class="s">&quot;App\Repository\BaseDoctrineRepository&quot;</span>
+        <span class="nt">&gt;</span>
+            <span class="c">&lt;!-- overrides the first argument (using the index attribute) --&gt;</span>
+            <span class="nt">&lt;argument</span> <span class="na">index=</span><span class="s">&quot;0&quot;</span> <span class="na">type=</span><span class="s">&quot;service&quot;</span> <span class="na">id=</span><span class="s">&quot;doctrine.custom_entity_manager&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+
+        <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Repository\BaseDoctrineRepository</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Repository\DoctrinePostRepository</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Repository\DoctrineUserRepository</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$services</span> <span class="o">=</span> <span class="nv">$configurator</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">();</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">BaseDoctrineRepository</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="c1">// ...</span>
+    <span class="p">;</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">DoctrineUserRepository</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">parent</span><span class="p">(</span><span class="nx">BaseDoctrineRepository</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+
+        <span class="c1">// overrides the private setting of the parent service</span>
+        <span class="o">-&gt;</span><span class="na">public</span><span class="p">()</span>
+
+        <span class="c1">// appends the &#39;@app.username_checker&#39; argument to the parent</span>
+        <span class="c1">// argument list</span>
+        <span class="o">-&gt;</span><span class="na">args</span><span class="p">([</span><span class="nx">service</span><span class="p">(</span><span class="s1">&#39;app.username_checker&#39;</span><span class="p">)])</span>
+    <span class="p">;</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">DoctrinePostRepository</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">parent</span><span class="p">(</span><span class="nx">BaseDoctrineRepository</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+
+        <span class="c1"># overrides the first argument</span>
+        <span class="o">-&gt;</span><span class="na">arg</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">service</span><span class="p">(</span><span class="s1">&#39;doctrine.custom_entity_manager&#39;</span><span class="p">))</span>
+    <span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,490 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The Routing Component &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Templating" href="templating.html" />
+    <link rel="prev" title="The Front Controller" href="front_controller.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Create your own PHP Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="front_controller.html">The Front Controller</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The Routing Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templating.html">Templating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel_controller_resolver.html">The HttpKernel Component: the Controller Resolver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="separation_of_concerns.html">The Separation of Concerns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit_testing.html">Unit Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel_httpkernelinterface.html">The HttpKernel Component: HttpKernelInterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel_httpkernel_class.html">The HttpKernel Component: The HttpKernel Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependency_injection.html">The DependencyInjection Component</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Create your own PHP Framework</a> &raquo;</li>
+        
+      <li>The Routing Component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/create_framework/routing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-routing-component">
+<h1>The Routing Component<a class="headerlink" href="#the-routing-component" title="Permalink to this headline">¶</a></h1>
+<p>Before we start diving into the Routing component, let’s refactor our current
+framework just a little to make templates even more readable:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/web/front.php</span>
+<span class="k">require_once</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+
+<span class="nv">$map</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;/hello&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;hello&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/bye&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;bye&#39;</span><span class="p">,</span>
+<span class="p">];</span>
+
+<span class="nv">$path</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPathInfo</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$map</span><span class="p">[</span><span class="nv">$path</span><span class="p">]))</span> <span class="p">{</span>
+    <span class="nb">ob_start</span><span class="p">();</span>
+    <span class="nb">extract</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">all</span><span class="p">(),</span> <span class="nx">EXTR_SKIP</span><span class="p">);</span>
+    <span class="k">include</span> <span class="nb">sprintf</span><span class="p">(</span><span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../src/pages/%s.php&#39;</span><span class="p">,</span> <span class="nv">$map</span><span class="p">[</span><span class="nv">$path</span><span class="p">]);</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="nb">ob_get_clean</span><span class="p">());</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Not Found&#39;</span><span class="p">,</span> <span class="mi">404</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>As we now extract the request query parameters, simplify the <code class="docutils literal notranslate"><span class="pre">hello.php</span></code>
+template as follows:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;!--</span> <span class="nx">example</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">src</span><span class="o">/</span><span class="nx">pages</span><span class="o">/</span><span class="nx">hello</span><span class="o">.</span><span class="nx">php</span> <span class="o">--&gt;</span>
+<span class="nx">Hello</span> <span class="o">&lt;?=</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$name</span> <span class="o">:</span> <span class="s1">&#39;World&#39;</span><span class="p">,</span> <span class="nx">ENT_QUOTES</span><span class="p">,</span> <span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Now, we are in good shape to add new features.</p>
+<p>One very important aspect of any website is the form of its URLs. Thanks to
+the URL map, we have decoupled the URL from the code that generates the
+associated response, but it is not yet flexible enough. For instance, we might
+want to support dynamic paths to allow embedding data directly into the URL
+(e.g. <code class="docutils literal notranslate"><span class="pre">/hello/Fabien</span></code>) instead of relying on a query string (e.g. <code class="docutils literal notranslate"><span class="pre">/hello?name=Fabien</span></code>).</p>
+<p>To support this feature, add the Symfony Routing component as a dependency:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/routing
+</pre></div>
+</td></tr></table></div>
+<p>Instead of an array for the URL map, the Routing component relies on a
+<code class="docutils literal notranslate"><span class="pre">RouteCollection</span></code> instance:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Routing\RouteCollection</span><span class="p">;</span>
+
+<span class="nv">$routes</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RouteCollection</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Let’s add a route that describes the <code class="docutils literal notranslate"><span class="pre">/hello/SOMETHING</span></code> URL and add another
+one for the simple <code class="docutils literal notranslate"><span class="pre">/bye</span></code> one:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Routing\Route</span><span class="p">;</span>
+
+<span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Route</span><span class="p">(</span><span class="s1">&#39;/hello/{name}&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;World&#39;</span><span class="p">]));</span>
+<span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Route</span><span class="p">(</span><span class="s1">&#39;/bye&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Each entry in the collection is defined by a name (<code class="docutils literal notranslate"><span class="pre">hello</span></code>) and a <code class="docutils literal notranslate"><span class="pre">Route</span></code>
+instance, which is defined by a route pattern (<code class="docutils literal notranslate"><span class="pre">/hello/{name}</span></code>) and an array
+of default values for route attributes (<code class="docutils literal notranslate"><span class="pre">['name'</span> <span class="pre">=&gt;</span> <span class="pre">'World']</span></code>).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Read the <a class="reference internal" href="../routing.html"><span class="doc">Routing documentation</span></a> to learn more about
+its many features like URL generation, attribute requirements, HTTP
+method enforcement, loaders for YAML or XML files, dumpers to PHP or
+Apache rewrite rules for enhanced performance and much more.</p>
+</div>
+<p>Based on the information stored in the <code class="docutils literal notranslate"><span class="pre">RouteCollection</span></code> instance, a
+<code class="docutils literal notranslate"><span class="pre">UrlMatcher</span></code> instance can match URL paths:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Routing\Matcher\UrlMatcher</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\RequestContext</span><span class="p">;</span>
+
+<span class="nv">$context</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RequestContext</span><span class="p">();</span>
+<span class="nv">$context</span><span class="o">-&gt;</span><span class="na">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="nv">$matcher</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UrlMatcher</span><span class="p">(</span><span class="nv">$routes</span><span class="p">,</span> <span class="nv">$context</span><span class="p">);</span>
+
+<span class="nv">$attributes</span> <span class="o">=</span> <span class="nv">$matcher</span><span class="o">-&gt;</span><span class="na">match</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPathInfo</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">match()</span></code> method takes a request path and returns an array of attributes
+(notice that the matched route is automatically stored under the special
+<code class="docutils literal notranslate"><span class="pre">_route</span></code> attribute):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$matcher</span><span class="o">-&gt;</span><span class="na">match</span><span class="p">(</span><span class="s1">&#39;/bye&#39;</span><span class="p">);</span>
+<span class="cm">/* Result:</span>
+<span class="cm">[</span>
+<span class="cm">    &#39;_route&#39; =&gt; &#39;bye&#39;,</span>
+<span class="cm">];</span>
+<span class="cm">*/</span>
+
+<span class="nv">$matcher</span><span class="o">-&gt;</span><span class="na">match</span><span class="p">(</span><span class="s1">&#39;/hello/Fabien&#39;</span><span class="p">);</span>
+<span class="cm">/* Result:</span>
+<span class="cm">[</span>
+<span class="cm">    &#39;name&#39; =&gt; &#39;Fabien&#39;,</span>
+<span class="cm">    &#39;_route&#39; =&gt; &#39;hello&#39;,</span>
+<span class="cm">];</span>
+<span class="cm">*/</span>
+
+<span class="nv">$matcher</span><span class="o">-&gt;</span><span class="na">match</span><span class="p">(</span><span class="s1">&#39;/hello&#39;</span><span class="p">);</span>
+<span class="cm">/* Result:</span>
+<span class="cm">[</span>
+<span class="cm">    &#39;name&#39; =&gt; &#39;World&#39;,</span>
+<span class="cm">    &#39;_route&#39; =&gt; &#39;hello&#39;,</span>
+<span class="cm">];</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Even if we don’t strictly need the request context in our examples, it is
+used in real-world applications to enforce method requirements and more.</p>
+</div>
+<p>The URL matcher throws an exception when none of the routes match:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$matcher</span><span class="o">-&gt;</span><span class="na">match</span><span class="p">(</span><span class="s1">&#39;/not-found&#39;</span><span class="p">);</span>
+
+<span class="c1">// throws a Symfony\Component\Routing\Exception\ResourceNotFoundException</span>
+</pre></div>
+</div>
+<p>With this knowledge in mind, let’s write the new version of our framework:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/web/front.php</span>
+<span class="k">require_once</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing</span><span class="p">;</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+<span class="nv">$routes</span> <span class="o">=</span> <span class="k">include</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../src/app.php&#39;</span><span class="p">;</span>
+
+<span class="nv">$context</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Routing\RequestContext</span><span class="p">();</span>
+<span class="nv">$context</span><span class="o">-&gt;</span><span class="na">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="nv">$matcher</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Routing\Matcher\UrlMatcher</span><span class="p">(</span><span class="nv">$routes</span><span class="p">,</span> <span class="nv">$context</span><span class="p">);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nb">extract</span><span class="p">(</span><span class="nv">$matcher</span><span class="o">-&gt;</span><span class="na">match</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPathInfo</span><span class="p">()),</span> <span class="nx">EXTR_SKIP</span><span class="p">);</span>
+    <span class="nb">ob_start</span><span class="p">();</span>
+    <span class="k">include</span> <span class="nb">sprintf</span><span class="p">(</span><span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../src/pages/%s.php&#39;</span><span class="p">,</span> <span class="nv">$_route</span><span class="p">);</span>
+
+    <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="nb">ob_get_clean</span><span class="p">());</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Routing\Exception\ResourceNotFoundException</span> <span class="nv">$exception</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Not Found&#39;</span><span class="p">,</span> <span class="mi">404</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$exception</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;An error occurred&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>There are a few new things in the code:</p>
+<ul>
+<li><p class="first">Route names are used for template names;</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">500</span></code> errors are now managed correctly;</p>
+</li>
+<li><p class="first">Request attributes are extracted to keep our templates simple:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/src/pages/hello.php</span>
+<span class="nx">Hello</span> <span class="o">&lt;?=</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nx">ENT_QUOTES</span><span class="p">,</span> <span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Route configuration has been moved to its own file:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/src/app.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing</span><span class="p">;</span>
+
+<span class="nv">$routes</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Routing\RouteCollection</span><span class="p">();</span>
+<span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Routing\Route</span><span class="p">(</span><span class="s1">&#39;/hello/{name}&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;World&#39;</span><span class="p">]));</span>
+<span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Routing\Route</span><span class="p">(</span><span class="s1">&#39;/bye&#39;</span><span class="p">));</span>
+
+<span class="k">return</span> <span class="nv">$routes</span><span class="p">;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>We now have a clear separation between the configuration (everything
+specific to our application in <code class="docutils literal notranslate"><span class="pre">app.php</span></code>) and the framework (the generic
+code that powers our application in <code class="docutils literal notranslate"><span class="pre">front.php</span></code>).</p>
+<p>With less than 30 lines of code, we have a new framework, more powerful and
+more flexible than the previous one. Enjoy!</p>
+<p>Using the Routing component has one big additional benefit: the ability to
+generate URLs based on Route definitions. When using both URL matching and URL
+generation in your code, changing the URL patterns should have no other
+impact. You can use the generator this way:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Routing</span><span class="p">;</span>
+
+<span class="nv">$generator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Routing\Generator\UrlGenerator</span><span class="p">(</span><span class="nv">$routes</span><span class="p">,</span> <span class="nv">$context</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="nv">$generator</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Fabien&#39;</span><span class="p">]);</span>
+<span class="c1">// outputs /hello/Fabien</span>
+</pre></div>
+</div>
+<p>The code should be self-explanatory; and thanks to the context, you can even
+generate absolute URLs:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Routing\Generator\UrlGeneratorInterface</span><span class="p">;</span>
+
+<span class="k">echo</span> <span class="nv">$generator</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">(</span>
+    <span class="s1">&#39;hello&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Fabien&#39;</span><span class="p">],</span>
+    <span class="nx">UrlGeneratorInterface</span><span class="o">::</span><span class="na">ABSOLUTE_URL</span>
+<span class="p">);</span>
+<span class="c1">// outputs something like http://example.com/somewhere/hello/Fabien</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>Concerned about performance? Based on your route definitions, create a
+highly optimized URL matcher class that can replace the default
+<code class="docutils literal notranslate"><span class="pre">UrlMatcher</span></code>:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Routing\Matcher\CompiledUrlMatcher</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\Matcher\Dumper\CompiledUrlMatcherDumper</span><span class="p">;</span>
+
+<span class="c1">// $compiledRoutes is a plain PHP array that describes all routes in a performant data format</span>
+<span class="c1">// you can (and should) cache it, typically by exporting it to a PHP file</span>
+<span class="nv">$compiledRoutes</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">CompiledUrlMatcherDumper</span><span class="p">(</span><span class="nv">$routes</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">getCompiledRoutes</span><span class="p">();</span>
+
+<span class="nv">$matcher</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CompiledUrlMatcher</span><span class="p">(</span><span class="nv">$compiledRoutes</span><span class="p">,</span> <span class="nv">$context</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

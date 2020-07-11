@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Work with the User’s Locale &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Find Missing or Unused Translation Messages" href="debug.html" />
+    <link rel="prev" title="Using Translation in Templates" href="templates.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../translation.html">Translations</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#basic-translation">Basic Translation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#message-format">Message Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#translations-in-templates">Translations in Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#forcing-the-translator-locale">Forcing the Translator Locale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#extracting-translation-contents-and-updating-catalogs-automatically">Extracting Translation Contents and Updating Catalogs Automatically</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#translation-resource-file-names-and-locations">Translation Resource/File Names and Locations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#handling-the-user-s-locale">Handling the User’s Locale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#fallback-translation-locales">Fallback Translation Locales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#translating-database-content">Translating Database Content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#debugging-translations">Debugging Translations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#summary">Summary</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../translation.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="message_format.html">How to Translate Messages using the ICU MessageFormat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="templates.html">Using Translation in Templates</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Work with the User’s Locale</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-locale-and-the-url">The Locale and the URL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-a-default-locale">Setting a Default Locale</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="debug.html">How to Find Missing or Unused Translation Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lint.html">How to Find Errors in Translation Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xliff.html">The XLIFF format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../translation.html">Translations</a> &raquo;</li>
+        
+      <li>How to Work with the User’s Locale</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/translation/locale.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-work-with-the-user-s-locale">
+<span id="index-0"></span><h1>How to Work with the User’s Locale<a class="headerlink" href="#how-to-work-with-the-user-s-locale" title="Permalink to this headline">¶</a></h1>
+<p>The locale of the current user is stored in the request and is accessible
+via the <code class="docutils literal notranslate"><span class="pre">Request</span></code> object:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$locale</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getLocale</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To set the user’s locale, you may want to create a custom event listener so
+that it’s set before any other parts of the system (i.e. the translator) need
+it:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">onKernelRequest</span><span class="p">(</span><span class="nx">RequestEvent</span> <span class="nv">$event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">();</span>
+
+    <span class="c1">// some logic to determine the $locale</span>
+    <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setLocale</span><span class="p">(</span><span class="nv">$locale</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The custom listener must be called <strong>before</strong> <code class="docutils literal notranslate"><span class="pre">LocaleListener</span></code>, which
+initializes the locale based on the current request. To do so, set your
+listener priority to a higher value than <code class="docutils literal notranslate"><span class="pre">LocaleListener</span></code> priority (which
+you can obtain running the <code class="docutils literal notranslate"><span class="pre">debug:event</span> <span class="pre">kernel.request</span></code> command).</p>
+</div>
+<p>Read <a class="reference internal" href="../session/locale_sticky_session.html"><span class="doc">Making the Locale “Sticky” during a User’s Session</span></a> for more information on making
+the user’s locale “sticky” to their session.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Setting the locale using <code class="docutils literal notranslate"><span class="pre">$request-&gt;setLocale()</span></code> in the controller is
+too late to affect the translator. Either set the locale via a listener
+(like above), the URL (see next) or call <code class="docutils literal notranslate"><span class="pre">setLocale()</span></code> directly on the
+<code class="docutils literal notranslate"><span class="pre">translator</span></code> service.</p>
+</div>
+<p>See the <a class="reference internal" href="#translation-locale-url"><span class="std std-ref">The Locale and the URL</span></a> section below about setting the
+locale via routing.</p>
+<div class="section" id="the-locale-and-the-url">
+<span id="translation-locale-url"></span><h2>The Locale and the URL<a class="headerlink" href="#the-locale-and-the-url" title="Permalink to this headline">¶</a></h2>
+<p>Since you can store the locale of the user in the session, it may be tempting
+to use the same URL to display a resource in different languages based on
+the user’s locale. For example, <code class="docutils literal notranslate"><span class="pre">http://www.example.com/contact</span></code> could show
+content in English for one user and French for another user. Unfortunately,
+this violates a fundamental rule of the Web: that a particular URL returns
+the same resource regardless of the user. To further muddy the problem, which
+version of the content would be indexed by search engines?</p>
+<p>A better policy is to include the locale in the URL using the
+<a class="reference internal" href="../routing.html#routing-locale-parameter"><span class="std std-ref">special _locale parameter</span></a>:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/routes.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">contact</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span>       <span class="l l-Scalar l-Scalar-Plain">/{_locale}/contact</span>
+    <span class="l l-Scalar l-Scalar-Plain">controller</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Controller\ContactController::index</span>
+    <span class="l l-Scalar l-Scalar-Plain">requirements</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">_locale</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">en|fr|de</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/routes.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;routes</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/routing&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/routing</span>
+<span class="s">        https://symfony.com/schema/routing/routing-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;route</span> <span class="na">id=</span><span class="s">&quot;contact&quot;</span> <span class="na">path=</span><span class="s">&quot;/{_locale}/contact&quot;</span><span class="nt">&gt;</span>
+        controller=&quot;App\Controller\ContactController::index&quot;&gt;
+        <span class="nt">&lt;requirement</span> <span class="na">key=</span><span class="s">&quot;_locale&quot;</span><span class="nt">&gt;</span>en|fr|de<span class="nt">&lt;/requirement&gt;</span>
+    <span class="nt">&lt;/route&gt;</span>
+<span class="nt">&lt;/routes&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/routes.php</span>
+<span class="k">use</span> <span class="nx">App\Controller\ContactController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RoutingConfigurator</span> <span class="nv">$routes</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;contact&#39;</span><span class="p">,</span> <span class="s1">&#39;/{_locale}/contact&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">controller</span><span class="p">([</span><span class="nx">ContactController</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="s1">&#39;index&#39;</span><span class="p">])</span>
+        <span class="o">-&gt;</span><span class="na">requirements</span><span class="p">([</span>
+            <span class="s1">&#39;_locale&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;en|fr|de&#39;</span><span class="p">,</span>
+        <span class="p">])</span>
+    <span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>When using the special <code class="docutils literal notranslate"><span class="pre">_locale</span></code> parameter in a route, the matched locale
+is <em>automatically set on the Request</em> and can be retrieved via the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request::getLocale()"><span class="pre">getLocale()</span></a></code> method. In
+other words, if a user visits the URI <code class="docutils literal notranslate"><span class="pre">/fr/contact</span></code>, the locale <code class="docutils literal notranslate"><span class="pre">fr</span></code> will
+automatically be set as the locale for the current request.</p>
+<p>You can now use the locale to create routes to other translated pages in your
+application.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Define the locale requirement as a <a class="reference internal" href="../configuration.html#configuration-parameters"><span class="std std-ref">container parameter</span></a>
+to avoid hardcoding its value in all your routes.</p>
+</div>
+</div>
+<div class="section" id="setting-a-default-locale">
+<span id="translation-default-locale"></span><span id="index-1"></span><h2>Setting a Default Locale<a class="headerlink" href="#setting-a-default-locale" title="Permalink to this headline">¶</a></h2>
+<p>What if the user’s locale hasn’t been determined? You can guarantee that a
+locale is set on each user’s request by defining a <code class="docutils literal notranslate"><span class="pre">default_locale</span></code> for
+the framework:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/translation.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">default_locale</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">en</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/translation.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config</span> <span class="na">default-locale=</span><span class="s">&quot;en&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/translation.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;default_locale&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

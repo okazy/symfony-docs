@@ -1,0 +1,518 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Upgrading a Third-Party Bundle for a Major Symfony Version &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Setting up or Fixing File Permissions" href="file_permissions.html" />
+    <link rel="prev" title="Configuring a Web Server" href="web_server_configuration.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#technical-requirements">Technical Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#creating-symfony-applications">Creating Symfony Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#running-symfony-applications">Running Symfony Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#setting-up-an-existing-symfony-project">Setting up an Existing Symfony Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#installing-packages">Installing Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#checking-security-vulnerabilities">Checking Security Vulnerabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#symfony-lts-versions">Symfony LTS Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#the-symfony-demo-application">The Symfony Demo application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#start-coding">Start Coding!</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../setup.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../page_creation.html">Create your First Page in Symfony</a></li>
+<li class="toctree-l3"><a class="reference internal" href="homestead.html">Using Symfony with Homestead/Vagrant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web_server_configuration.html">Configuring a Web Server</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Upgrading a Third-Party Bundle for a Major Symfony Version</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#allowing-to-install-symfony-3-components">Allowing to Install Symfony 3 Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#look-for-deprecations-and-fix-them">Look for Deprecations and Fix Them</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing-your-bundle-in-symfony-3">Testing your Bundle in Symfony 3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#updating-your-code-to-support-symfony-2-x-and-3-x-at-the-same-time">Updating your Code to Support Symfony 2.x and 3.x at the Same Time</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="file_permissions.html">Setting up or Fixing File Permissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flex.html">Upgrading Existing Applications to Symfony Flex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="symfony_server.html">Symfony Local Web Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unstable_versions.html">How to Install or Upgrade to the Latest, Unreleased Symfony Version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrade_major.html">Upgrading a Major Version (e.g. 4.4.0 to 5.0.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrade_minor.html">Upgrading a Minor Version (e.g. 4.0.0 to 4.1.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrade_patch.html">Upgrading a Patch Version (e.g. 5.0.0 to 5.0.1)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../getting_started/index.html">Getting Started</a> &raquo;</li>
+        
+          <li><a href="../setup.html">Installing &amp; Setting up the Symfony Framework</a> &raquo;</li>
+        
+      <li>Upgrading a Third-Party Bundle for a Major Symfony Version</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/setup/bundles.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="upgrading-a-third-party-bundle-for-a-major-symfony-version">
+<span id="index-0"></span><h1>Upgrading a Third-Party Bundle for a Major Symfony Version<a class="headerlink" href="#upgrading-a-third-party-bundle-for-a-major-symfony-version" title="Permalink to this headline">¶</a></h1>
+<p>Symfony 3 was released on November 2015. Although this version doesn’t contain
+any new features, it removes all the backward compatibility layers included in
+the previous 2.8 version. If your bundle uses any deprecated feature and it’s
+published as a third-party bundle, applications upgrading to Symfony 3 will no
+longer be able to use it.</p>
+<div class="section" id="allowing-to-install-symfony-3-components">
+<h2>Allowing to Install Symfony 3 Components<a class="headerlink" href="#allowing-to-install-symfony-3-components" title="Permalink to this headline">¶</a></h2>
+<p>Most third-party bundles define their Symfony dependencies using the <code class="docutils literal notranslate"><span class="pre">~2.N</span></code> or
+<code class="docutils literal notranslate"><span class="pre">^2.N</span></code> constraints in the <code class="docutils literal notranslate"><span class="pre">composer.json</span></code> file. For example:</p>
+<div class="highlight-json notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;require&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;symfony/framework-bundle&quot;</span><span class="p">:</span> <span class="s2">&quot;~2.7&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;symfony/finder&quot;</span><span class="p">:</span> <span class="s2">&quot;~2.7&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;symfony/validator&quot;</span><span class="p">:</span> <span class="s2">&quot;~2.7&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>These constraints prevent the bundle from using Symfony 3 components, so it makes
+it impossible to install it in a Symfony 3 based application. Thanks to the
+flexibility of Composer dependencies constraints, you can specify more than one
+major version by replacing <code class="docutils literal notranslate"><span class="pre">~2.N</span></code> by <code class="docutils literal notranslate"><span class="pre">~2.N|~3.0</span></code> (or <code class="docutils literal notranslate"><span class="pre">^2.N</span></code> by <code class="docutils literal notranslate"><span class="pre">^2.N|~3.0</span></code>).</p>
+<p>The above example can be updated to work with Symfony 3 as follows:</p>
+<div class="highlight-json notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;require&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;symfony/framework-bundle&quot;</span><span class="p">:</span> <span class="s2">&quot;~2.7|~3.0&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;symfony/finder&quot;</span><span class="p">:</span> <span class="s2">&quot;~2.7|~3.0&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;symfony/validator&quot;</span><span class="p">:</span> <span class="s2">&quot;~2.7|~3.0&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Another common version constraint found on third-party bundles is <code class="docutils literal notranslate"><span class="pre">&gt;=2.N</span></code>.
+You should avoid using that constraint because it’s too generic (it means
+that your bundle is compatible with any future Symfony version). Use instead
+<code class="docutils literal notranslate"><span class="pre">~2.N|~3.0</span></code> or <code class="docutils literal notranslate"><span class="pre">^2.N|~3.0</span></code> to make your bundle future-proof.</p>
+</div>
+</div>
+<div class="section" id="look-for-deprecations-and-fix-them">
+<h2>Look for Deprecations and Fix Them<a class="headerlink" href="#look-for-deprecations-and-fix-them" title="Permalink to this headline">¶</a></h2>
+<p>Besides allowing users to use your bundle with Symfony 3, your bundle must stop using
+any feature deprecated by the 2.8 version because they are removed in 3.0 (you’ll get
+exceptions or PHP errors). The easiest way to detect deprecations is to install
+the <a class="reference external" href="https://github.com/symfony/phpunit-bridge">symfony/phpunit-bridge package</a> and then run the test suite.</p>
+<p>First, install the component as a <code class="docutils literal notranslate"><span class="pre">dev</span></code> dependency of your bundle:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require --dev symfony/phpunit-bridge
+</pre></div>
+</td></tr></table></div>
+<p>Then, run your test suite and look for the deprecation list displayed after the
+PHPUnit test report:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># this command is available after running &quot;composer require --dev symfony/phpunit-bridge&quot;</span>
+<span class="gp">$</span> ./bin/phpunit
+
+<span class="c1"># ... PHPUnit output</span>
+
+<span class="go">Remaining deprecation notices (3)</span>
+
+<span class="go">The &quot;pattern&quot; option in file ... is deprecated since version 2.2 and will be</span>
+<span class="go">removed in 3.0. Use the &quot;path&quot; option in the route definition instead ...</span>
+
+<span class="go">Twig Function &quot;form_enctype&quot; is deprecated. Use &quot;form_start&quot; instead in ...</span>
+
+<span class="go">The Symfony\Component\Security\Core\SecurityContext class is deprecated since</span>
+<span class="go">version 2.6 and will be removed in 3.0. Use ...</span>
+</pre></div>
+</td></tr></table></div>
+<p>Fix the reported deprecations, run the test suite again and repeat the process
+until no deprecation usage is reported.</p>
+<div class="section" id="useful-resources">
+<h3>Useful Resources<a class="headerlink" href="#useful-resources" title="Permalink to this headline">¶</a></h3>
+<p>There are several resources that can help you detect, understand and fix the use
+of deprecated features:</p>
+<dl class="docutils">
+<dt><a class="reference external" href="https://github.com/symfony/symfony/blob/2.8/UPGRADE-3.0.md">Official Symfony Guide to Upgrade from 2.x to 3.0</a></dt>
+<dd>The full list of changes required to upgrade to Symfony 3.0 and grouped
+by component.</dd>
+<dt><a class="reference external" href="https://github.com/sensiolabs-de/deprecation-detector">SensioLabs DeprecationDetector</a></dt>
+<dd>It runs a static code analysis against your project’s source code to find
+usages of deprecated methods, classes and interfaces. It works for any PHP
+application, but it includes special detectors for Symfony applications,
+where it can also detect usages of deprecated services.</dd>
+<dt><a class="reference external" href="https://github.com/umpirsky/Symfony-Upgrade-Fixer">Symfony Upgrade Fixer</a></dt>
+<dd>It analyzes Symfony projects to find deprecations. In addition it solves
+automatically some of them thanks to the growing list of supported “fixers”.</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="testing-your-bundle-in-symfony-3">
+<h2>Testing your Bundle in Symfony 3<a class="headerlink" href="#testing-your-bundle-in-symfony-3" title="Permalink to this headline">¶</a></h2>
+<p>Now that your bundle has removed all deprecations, it’s time to test it for real
+in a Symfony 3 application. Assuming that you already have a Symfony 3 application,
+you can test the updated bundle locally without having to install it through
+Composer.</p>
+<p>If your operating system supports symbolic links, instead point the appropriate
+vendor directory to your local bundle root directory:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> ln -s /path/to/your/local/bundle/ vendor/you-vendor-name/your-bundle-name
+</pre></div>
+</td></tr></table></div>
+<p>If your operating system doesn’t support symbolic links, you’ll need to copy
+your local bundle directory into the appropriate directory inside <code class="docutils literal notranslate"><span class="pre">vendor/</span></code>.</p>
+<div class="section" id="update-the-travis-ci-configuration">
+<h3>Update the Travis CI Configuration<a class="headerlink" href="#update-the-travis-ci-configuration" title="Permalink to this headline">¶</a></h3>
+<p>In addition to running tools locally, it’s recommended to set-up Travis CI service
+to run the tests of your bundle using different Symfony configurations. Use the
+following recommended configuration as the starting point of your own configuration:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">language</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">php</span>
+<span class="l l-Scalar l-Scalar-Plain">php</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">5.3</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">5.6</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">7.0</span>
+
+<span class="l l-Scalar l-Scalar-Plain">matrix</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">include</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">php</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">5.3.3</span>
+          <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">COMPOSER_FLAGS=&#39;--prefer-lowest --prefer-stable&#39; SYMFONY_DEPRECATIONS_HELPER=max[total]=999999</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">php</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">5.6</span>
+          <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">SYMFONY_VERSION=&#39;2.7.*&#39;</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">php</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">5.6</span>
+          <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">SYMFONY_VERSION=&#39;2.8.*&#39;</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">php</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">5.6</span>
+          <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">SYMFONY_VERSION=&#39;3.0.*&#39;</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">php</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">5.6</span>
+          <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">SYMFONY_VERSION=&#39;3.1.*&#39;</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">php</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">5.6</span>
+          <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">DEPENDENCIES=&#39;dev&#39; SYMFONY_VERSION=&#39;3.2.*@dev&#39;</span>
+
+<span class="l l-Scalar l-Scalar-Plain">before_install</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">composer self-update</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">if [ &quot;$DEPENDENCIES&quot; == &quot;dev&quot; ]; then perl -pi -e &#39;s/^}$/,&quot;minimum-stability&quot;:&quot;dev&quot;}/&#39; composer.json; fi;</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">if [ &quot;$SYMFONY_VERSION&quot; != &quot;&quot; ]; then composer --no-update require symfony/symfony:${SYMFONY_VERSION}; fi;</span>
+
+<span class="l l-Scalar l-Scalar-Plain">install</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">composer update $COMPOSER_FLAGS</span>
+
+<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">phpunit</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="updating-your-code-to-support-symfony-2-x-and-3-x-at-the-same-time">
+<h2>Updating your Code to Support Symfony 2.x and 3.x at the Same Time<a class="headerlink" href="#updating-your-code-to-support-symfony-2-x-and-3-x-at-the-same-time" title="Permalink to this headline">¶</a></h2>
+<p>The real challenge of adding Symfony 3 support for your bundles is when you want
+to support both Symfony 2.x and 3.x simultaneously using the same code. There
+are some edge cases where you’ll need to deal with the API differences.</p>
+<p>Before diving into the specifics of the most common edge cases, the general
+recommendation is to <strong>not rely on the Symfony Kernel version</strong> to decide which
+code to use:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">Kernel</span><span class="o">::</span><span class="na">VERSION_ID</span> <span class="o">&lt;</span> <span class="mi">20800</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// code for Symfony 2.x</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// code for Symfony 3.x</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Instead of checking the Symfony Kernel version, check the version of the specific
+component. For example, the OptionsResolver API changed in its 2.6 version by
+adding a <code class="docutils literal notranslate"><span class="pre">setDefined()</span></code> method. The recommended check in this case would be:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\OptionsResolver\OptionsResolver</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">method_exists</span><span class="p">(</span><span class="nx">OptionsResolver</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="s1">&#39;setDefined&#39;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// code for the old OptionsResolver API</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// code for the new OptionsResolver API</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">There is one case when you actually can rely on the
+<code class="docutils literal notranslate"><span class="pre">Symfony\Component\HttpKernel\Kernel::VERSION_ID</span></code> constant: when trying
+to detect the version of the <code class="docutils literal notranslate"><span class="pre">symfony/http-kernel</span></code> component, because it
+is the component where this constant is defined.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

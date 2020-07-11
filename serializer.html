@@ -1,0 +1,529 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Use the Serializer &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Normalizers" href="serializer/normalizers.html" />
+    <link rel="prev" title="Session Proxy Examples" href="session/proxy_examples.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to Use the Serializer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-serializer-service">Using the Serializer Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-normalizers-and-encoders">Adding Normalizers and Encoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-serialization-groups-annotations">Using Serialization Groups Annotations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-the-metadata-cache">Configuring the Metadata Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enabling-a-name-converter">Enabling a Name Converter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#going-further-with-the-serializer">Going Further with the Serializer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="serializer/normalizers.html">Normalizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serializer/custom_encoders.html">How to Create your Custom Encoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serializer/custom_normalizer.html">How to Create your Custom Normalizer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>How to Use the Serializer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/serializer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-use-the-serializer">
+<span id="index-0"></span><h1>How to Use the Serializer<a class="headerlink" href="#how-to-use-the-serializer" title="Permalink to this headline">¶</a></h1>
+<p>Symfony provides a serializer to serialize/deserialize to and from objects and
+different formats (e.g. JSON or XML). Before using it, read the
+<a class="reference internal" href="components/serializer.html"><span class="doc">Serializer component docs</span></a> to get familiar with
+its philosophy and the normalizers and encoders terminology.</p>
+<div class="section" id="installation">
+<span id="activating-the-serializer"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>In applications using <a class="reference internal" href="setup.html#symfony-flex"><span class="std std-ref">Symfony Flex</span></a>, run this command to
+install the <code class="docutils literal notranslate"><span class="pre">serializer</span></code> <a class="reference internal" href="setup.html#symfony-packs"><span class="std std-ref">Symfony pack</span></a> before using it:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/serializer-pack
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="using-the-serializer-service">
+<h2>Using the Serializer Service<a class="headerlink" href="#using-the-serializer-service" title="Permalink to this headline">¶</a></h2>
+<p>Once enabled, the serializer service can be injected in any service where
+you need it or it can be used in a controller:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/DefaultController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Serializer\SerializerInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">DefaultController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nx">SerializerInterface</span> <span class="nv">$serializer</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// keep reading for usage examples</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-normalizers-and-encoders">
+<h2>Adding Normalizers and Encoders<a class="headerlink" href="#adding-normalizers-and-encoders" title="Permalink to this headline">¶</a></h2>
+<p>Once enabled, the <code class="docutils literal notranslate"><span class="pre">serializer</span></code> service will be available in the container.
+It comes with a set of useful <a class="reference internal" href="components/serializer.html#component-serializer-encoders"><span class="std std-ref">encoders</span></a>
+and <a class="reference internal" href="components/serializer.html#component-serializer-normalizers"><span class="std std-ref">normalizers</span></a>.</p>
+<p>Encoders supporting the following formats are enabled:</p>
+<ul class="simple">
+<li>JSON: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Serializer/Encoder/JsonEncoder.php" title="Symfony\Component\Serializer\Encoder\JsonEncoder"><span class="pre">JsonEncoder</span></a></code></li>
+<li>XML: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Serializer/Encoder/XmlEncoder.php" title="Symfony\Component\Serializer\Encoder\XmlEncoder"><span class="pre">XmlEncoder</span></a></code></li>
+<li>CSV: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Serializer/Encoder/CsvEncoder.php" title="Symfony\Component\Serializer\Encoder\CsvEncoder"><span class="pre">CsvEncoder</span></a></code></li>
+<li>YAML: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Serializer/Encoder/YamlEncoder.php" title="Symfony\Component\Serializer\Encoder\YamlEncoder"><span class="pre">YamlEncoder</span></a></code></li>
+</ul>
+<p>As well as the following normalizers:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Serializer/Normalizer/ObjectNormalizer.php" title="Symfony\Component\Serializer\Normalizer\ObjectNormalizer"><span class="pre">ObjectNormalizer</span></a></code> to
+handle typical data objects</li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Serializer/Normalizer/DateTimeNormalizer.php" title="Symfony\Component\Serializer\Normalizer\DateTimeNormalizer"><span class="pre">DateTimeNormalizer</span></a></code> for
+objects implementing the <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.datetimeinterface.php" title="DateTimeInterface"><span class="pre">DateTimeInterface</span></a></code> interface</li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Serializer/Normalizer/DateTimeZoneNormalizer.php" title="Symfony\Component\Serializer\Normalizer\DateTimeZoneNormalizer"><span class="pre">DateTimeZoneNormalizer</span></a></code> for
+<code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.datetimezone.php" title="DateTimeZone"><span class="pre">DateTimeZone</span></a></code> objects</li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Serializer/Normalizer/DateIntervalNormalizer.php" title="Symfony\Component\Serializer\Normalizer\DateIntervalNormalizer"><span class="pre">DateIntervalNormalizer</span></a></code>
+for <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.dateinterval.php" title="DateInterval"><span class="pre">DateInterval</span></a></code> objects</li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Serializer/Normalizer/DataUriNormalizer.php" title="Symfony\Component\Serializer\Normalizer\DataUriNormalizer"><span class="pre">DataUriNormalizer</span></a></code> to
+transform <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.splfileinfo.php" title="SplFileInfo"><span class="pre">SplFileInfo</span></a></code> objects in <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs">Data URIs</a></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Serializer/Normalizer/JsonSerializableNormalizer.php" title="Symfony\Component\Serializer\Normalizer\JsonSerializableNormalizer"><span class="pre">JsonSerializableNormalizer</span></a></code>
+to deal with objects implementing the <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.jsonserializable.php" title="JsonSerializable"><span class="pre">JsonSerializable</span></a></code> interface</li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Serializer/Normalizer/ArrayDenormalizer.php" title="Symfony\Component\Serializer\Normalizer\ArrayDenormalizer"><span class="pre">ArrayDenormalizer</span></a></code> to
+denormalize arrays of objects using a format like <cite>MyObject[]</cite> (note the <cite>[]</cite> suffix)</li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Serializer/Normalizer/ConstraintViolationListNormalizer.php" title="Symfony\Component\Serializer\Normalizer\ConstraintViolationListNormalizer"><span class="pre">ConstraintViolationListNormalizer</span></a></code> for objects implementing the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Validator/ConstraintViolationListInterface.php" title="Symfony\Component\Validator\ConstraintViolationListInterface"><span class="pre">ConstraintViolationListInterface</span></a></code> interface</li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Serializer/Normalizer/ProblemNormalizer.php" title="Symfony\Component\Serializer\Normalizer\ProblemNormalizer"><span class="pre">ProblemNormalizer</span></a></code> for <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/ErrorHandler/Exception/FlattenException.php" title="Symfony\Component\ErrorHandler\Exception\FlattenException"><span class="pre">FlattenException</span></a></code> objects</li>
+</ul>
+<p>Custom normalizers and/or encoders can also be loaded by tagging them as
+<a class="reference internal" href="reference/dic_tags.html#reference-dic-tags-serializer-normalizer"><span class="std std-ref">serializer.normalizer</span></a> and
+<a class="reference internal" href="reference/dic_tags.html#reference-dic-tags-serializer-encoder"><span class="std std-ref">serializer.encoder</span></a>. It’s also
+possible to set the priority of the tag in order to decide the matching order.</p>
+<p>Here is an example on how to load the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Serializer/Normalizer/GetSetMethodNormalizer.php" title="Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer"><span class="pre">GetSetMethodNormalizer</span></a></code>, a
+faster alternative to the <cite>ObjectNormalizer</cite> when data objects always use
+getters (<code class="docutils literal notranslate"><span class="pre">getXxx()</span></code>), issers (<code class="docutils literal notranslate"><span class="pre">isXxx()</span></code>) or hassers (<code class="docutils literal notranslate"><span class="pre">hasXxx()</span></code>) to read
+properties and setters (<code class="docutils literal notranslate"><span class="pre">setXxx()</span></code>) to change properties:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">get_set_method_normalizer</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="nv">serializer.normalizer</span><span class="p p-Indicator">]</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;get_set_method_normalizer&quot;</span> <span class="na">class=</span><span class="s">&quot;Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;serializer.normalizer&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$services</span> <span class="o">=</span> <span class="nv">$configurator</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">();</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;get_set_method_normalizer&#39;</span><span class="p">,</span> <span class="nx">GetSetMethodNormalizer</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">tag</span><span class="p">(</span><span class="s1">&#39;serializer.normalizer&#39;</span><span class="p">)</span>
+    <span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="using-serialization-groups-annotations">
+<span id="serializer-using-serialization-groups-annotations"></span><h2>Using Serialization Groups Annotations<a class="headerlink" href="#using-serialization-groups-annotations" title="Permalink to this headline">¶</a></h2>
+<p>To use annotations, first add support for them via the SensioFrameworkExtraBundle:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require sensio/framework-extra-bundle
+</pre></div>
+</td></tr></table></div>
+<p>Next, add the <a class="reference internal" href="components/serializer.html#component-serializer-attributes-groups-annotations"><span class="std std-ref">&#64;Groups annotations</span></a>
+to your class and choose which groups to use when serializing:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$json</span> <span class="o">=</span> <span class="nv">$serializer</span><span class="o">-&gt;</span><span class="na">serialize</span><span class="p">(</span>
+    <span class="nv">$someObject</span><span class="p">,</span>
+    <span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;groups&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;group1&#39;</span><span class="p">]</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The value of the <code class="docutils literal notranslate"><span class="pre">groups</span></code> key can be a single string, or an array of strings.</p>
+</div>
+<p>In addition to the <code class="docutils literal notranslate"><span class="pre">&#64;Groups</span></code> annotation, the Serializer component also
+supports YAML or XML files. These files are automatically loaded when being
+stored in one of the following locations:</p>
+<ul class="simple">
+<li>All <code class="docutils literal notranslate"><span class="pre">*.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files in the <code class="docutils literal notranslate"><span class="pre">config/serializer/</span></code>
+directory.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">serialization.yaml</span></code> or <code class="docutils literal notranslate"><span class="pre">serialization.xml</span></code> file in
+the <code class="docutils literal notranslate"><span class="pre">Resources/config/</span></code> directory of a bundle;</li>
+<li>All <code class="docutils literal notranslate"><span class="pre">*.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> files in the <code class="docutils literal notranslate"><span class="pre">Resources/config/serialization/</span></code>
+directory of a bundle.</li>
+</ul>
+</div>
+<div class="section" id="configuring-the-metadata-cache">
+<span id="serializer-enabling-metadata-cache"></span><h2>Configuring the Metadata Cache<a class="headerlink" href="#configuring-the-metadata-cache" title="Permalink to this headline">¶</a></h2>
+<p>The metadata for the serializer is automatically cached to enhance application
+performance. By default, the serializer uses the <code class="docutils literal notranslate"><span class="pre">cache.system</span></code> cache pool
+which is configured using the <a class="reference internal" href="reference/configuration/framework.html#reference-cache-system"><span class="std std-ref">cache.system</span></a>
+option.</p>
+</div>
+<div class="section" id="enabling-a-name-converter">
+<h2>Enabling a Name Converter<a class="headerlink" href="#enabling-a-name-converter" title="Permalink to this headline">¶</a></h2>
+<p>The use of a <a class="reference internal" href="components/serializer.html#component-serializer-converting-property-names-when-serializing-and-deserializing"><span class="std std-ref">name converter</span></a>
+service can be defined in the configuration using the <a class="reference internal" href="reference/configuration/framework.html#reference-serializer-name-converter"><span class="std std-ref">name_converter</span></a>
+option.</p>
+<p>The built-in <a class="reference internal" href="components/serializer.html#using-camelized-method-names-for-underscored-attributes"><span class="std std-ref">CamelCase to snake_case name converter</span></a>
+can be enabled by using the <code class="docutils literal notranslate"><span class="pre">serializer.name_converter.camel_case_to_snake_case</span></code>
+value:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">serializer</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">name_converter</span><span class="p p-Indicator">:</span> <span class="s">&#39;serializer.name_converter.camel_case_to_snake_case&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/framework.xml --&gt;</span>
+<span class="nt">&lt;framework:config&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;framework:serializer</span> <span class="na">name-converter=</span><span class="s">&quot;serializer.name_converter.camel_case_to_snake_case&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/framework:config&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/framework.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+    <span class="s1">&#39;serializer&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;name_converter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;serializer.name_converter.camel_case_to_snake_case&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="going-further-with-the-serializer">
+<h2>Going Further with the Serializer<a class="headerlink" href="#going-further-with-the-serializer" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://api-platform.com">API Platform</a> provides an API system supporting the following formats:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://json-ld.org">JSON-LD</a> along with the <a class="reference external" href="http://www.hydra-cg.com">Hydra Core Vocabulary</a></li>
+<li><a class="reference external" href="https://www.openapis.org">OpenAPI</a> v2 (formerly Swagger) and v3</li>
+<li><a class="reference external" href="https://graphql.org">GraphQL</a></li>
+<li><a class="reference external" href="https://jsonapi.org">JSON:API</a></li>
+<li><a class="reference external" href="http://stateless.co/hal_specification.html">HAL</a></li>
+<li>JSON</li>
+<li>XML</li>
+<li>YAML</li>
+<li>CSV</li>
+</ul>
+<p>It is built on top of the Symfony Framework and its Serializer
+component. It provides custom normalizers and a custom encoder, custom metadata
+and a caching system.</p>
+<p>If you want to leverage the full power of the Symfony Serializer component,
+take a look at how this bundle works.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="serializer/normalizers.html">Normalizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer/custom_encoders.html">How to Create your Custom Encoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer/custom_normalizer.html">How to Create your Custom Normalizer</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

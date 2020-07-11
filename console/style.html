@@ -1,0 +1,746 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Style a Console Command &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Verbosity Levels" href="verbosity.html" />
+    <link rel="prev" title="Prevent Multiple Executions of a Console Command" href="lockable_trait.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../console.html">Console Commands</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../console.html#the-console-app-env-app-debug">The Console: APP_ENV &amp; APP_DEBUG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#creating-a-command">Creating a Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#configuring-the-command">Configuring the Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#registering-the-command">Registering the Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#executing-the-command">Executing the Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#console-output">Console Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#console-input">Console Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#getting-services-from-the-service-container">Getting Services from the Service Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#command-lifecycle">Command Lifecycle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#testing-commands">Testing Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#logging-command-errors">Logging Command Errors</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../console.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="calling_commands.html">How to Call Other Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coloring.html">How to Color and Style the Console Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command_in_controller.html">How to Call a Command from a Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands_as_services.html">How to Define Commands as Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hide_commands.html">How to Hide Console Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="input.html">Console Input (Arguments &amp; Options)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lazy_commands.html">How to Make Commands Lazily Loaded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lockable_trait.html">Prevent Multiple Executions of a Console Command</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Style a Console Command</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#basic-usage">Basic Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#helper-methods">Helper Methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#defining-your-own-styles">Defining your Own Styles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#writing-to-the-error-output">Writing to the error output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="verbosity.html">Verbosity Levels</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../console.html">Console Commands</a> &raquo;</li>
+        
+      <li>How to Style a Console Command</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/console/style.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-style-a-console-command">
+<span id="index-0"></span><h1>How to Style a Console Command<a class="headerlink" href="#how-to-style-a-console-command" title="Permalink to this headline">¶</a></h1>
+<p>One of the most boring tasks when creating console commands is to deal with the
+styling of the command’s input and output. Displaying titles and tables or asking
+questions to the user involves a lot of repetitive code.</p>
+<p>Consider for example the code used to display the title of the following command:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Command/GreetCommand.php</span>
+<span class="k">namespace</span> <span class="nx">App\Command</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Command\Command</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Input\InputInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Output\OutputInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">GreetCommand</span> <span class="k">extends</span> <span class="nx">Command</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">execute</span><span class="p">(</span><span class="nx">InputInterface</span> <span class="nv">$input</span><span class="p">,</span> <span class="nx">OutputInterface</span> <span class="nv">$output</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">([</span>
+            <span class="s1">&#39;&lt;info&gt;Lorem Ipsum Dolor Sit Amet&lt;/&gt;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&lt;info&gt;==========================&lt;/&gt;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="p">]);</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Displaying a simple title requires three lines of code, to change the font color,
+underline the contents and leave an additional blank line after the title. Dealing
+with styles is required for well-designed commands, but it complicates their code
+unnecessarily.</p>
+<p>In order to reduce that boilerplate code, Symfony commands can optionally use the
+<strong>Symfony Style Guide</strong>. These styles are implemented as a set of helper methods
+which allow to create <em>semantic</em> commands and forget about their styling.</p>
+<div class="section" id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<p>In your command, instantiate the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle"><span class="pre">SymfonyStyle</span></a></code>
+class and pass the <code class="docutils literal notranslate"><span class="pre">$input</span></code> and <code class="docutils literal notranslate"><span class="pre">$output</span></code> variables as its arguments. Then,
+you can start using any of its helpers, such as <code class="docutils literal notranslate"><span class="pre">title()</span></code>, which displays the
+title of the command:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Command/GreetCommand.php</span>
+<span class="k">namespace</span> <span class="nx">App\Command</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Command\Command</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Input\InputInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Output\OutputInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Style\SymfonyStyle</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">GreetCommand</span> <span class="k">extends</span> <span class="nx">Command</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">execute</span><span class="p">(</span><span class="nx">InputInterface</span> <span class="nv">$input</span><span class="p">,</span> <span class="nx">OutputInterface</span> <span class="nv">$output</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$io</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SymfonyStyle</span><span class="p">(</span><span class="nv">$input</span><span class="p">,</span> <span class="nv">$output</span><span class="p">);</span>
+        <span class="nv">$io</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">(</span><span class="s1">&#39;Lorem Ipsum Dolor Sit Amet&#39;</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="helper-methods">
+<h2>Helper Methods<a class="headerlink" href="#helper-methods" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle"><span class="pre">SymfonyStyle</span></a></code> class defines some
+helper methods that cover the most common interactions performed by console commands.</p>
+<div class="section" id="titling-methods">
+<h3>Titling Methods<a class="headerlink" href="#titling-methods" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::title()"><span class="pre">title()</span></a></code></dt>
+<dd><p class="first">It displays the given string as the command title. This method is meant to
+be used only once in a given command, but nothing prevents you to use it
+repeatedly:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$io</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">(</span><span class="s1">&#39;Lorem ipsum dolor sit amet&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::section()"><span class="pre">section()</span></a></code></dt>
+<dd><p class="first">It displays the given string as the title of some command section. This is
+only needed in complex commands which want to better separate their contents:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$io</span><span class="o">-&gt;</span><span class="na">section</span><span class="p">(</span><span class="s1">&#39;Adding a User&#39;</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">section</span><span class="p">(</span><span class="s1">&#39;Generating the Password&#39;</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="content-methods">
+<h3>Content Methods<a class="headerlink" href="#content-methods" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::text()"><span class="pre">text()</span></a></code></dt>
+<dd><p class="first">It displays the given string or array of strings as regular text. This is
+useful to render help messages and instructions for the user running the
+command:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// use simple strings for short messages</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">text</span><span class="p">(</span><span class="s1">&#39;Lorem ipsum dolor sit amet&#39;</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="c1">// consider using arrays when displaying long messages</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">text</span><span class="p">([</span>
+    <span class="s1">&#39;Lorem ipsum dolor sit amet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Consectetur adipiscing elit&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Aenean sit amet arcu vitae sem faucibus porta&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::listing()"><span class="pre">listing()</span></a></code></dt>
+<dd><p class="first">It displays an unordered list of elements passed as an array:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$io</span><span class="o">-&gt;</span><span class="na">listing</span><span class="p">([</span>
+    <span class="s1">&#39;Element #1 Lorem ipsum dolor sit amet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Element #2 Lorem ipsum dolor sit amet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Element #3 Lorem ipsum dolor sit amet&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::table()"><span class="pre">table()</span></a></code></dt>
+<dd><p class="first">It displays the given array of headers and rows as a compact table:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$io</span><span class="o">-&gt;</span><span class="na">table</span><span class="p">(</span>
+    <span class="p">[</span><span class="s1">&#39;Header 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Header 2&#39;</span><span class="p">],</span>
+    <span class="p">[</span>
+        <span class="p">[</span><span class="s1">&#39;Cell 1-1&#39;</span><span class="p">,</span> <span class="s1">&#39;Cell 1-2&#39;</span><span class="p">],</span>
+        <span class="p">[</span><span class="s1">&#39;Cell 2-1&#39;</span><span class="p">,</span> <span class="s1">&#39;Cell 2-2&#39;</span><span class="p">],</span>
+        <span class="p">[</span><span class="s1">&#39;Cell 3-1&#39;</span><span class="p">,</span> <span class="s1">&#39;Cell 3-2&#39;</span><span class="p">],</span>
+    <span class="p">]</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::horizontalTable()"><span class="pre">horizontalTable()</span></a></code></dt>
+<dd><p class="first">It displays the given array of headers and rows as a compact horizontal table:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$io</span><span class="o">-&gt;</span><span class="na">horizontalTable</span><span class="p">(</span>
+    <span class="p">[</span><span class="s1">&#39;Header 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Header 2&#39;</span><span class="p">],</span>
+    <span class="p">[</span>
+        <span class="p">[</span><span class="s1">&#39;Cell 1-1&#39;</span><span class="p">,</span> <span class="s1">&#39;Cell 1-2&#39;</span><span class="p">],</span>
+        <span class="p">[</span><span class="s1">&#39;Cell 2-1&#39;</span><span class="p">,</span> <span class="s1">&#39;Cell 2-2&#39;</span><span class="p">],</span>
+        <span class="p">[</span><span class="s1">&#39;Cell 3-1&#39;</span><span class="p">,</span> <span class="s1">&#39;Cell 3-2&#39;</span><span class="p">],</span>
+    <span class="p">]</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::definitionList()"><span class="pre">definitionList()</span></a></code></dt>
+<dd><p class="first">It displays the given <code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">=&gt;</span> <span class="pre">value</span></code> pairs as a compact list of elements:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$io</span><span class="o">-&gt;</span><span class="na">definitionList</span><span class="p">(</span>
+    <span class="s1">&#39;This is a title&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;foo1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;bar1&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;foo2&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;bar2&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;foo3&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;bar3&#39;</span><span class="p">],</span>
+    <span class="k">new</span> <span class="nx">TableSeparator</span><span class="p">(),</span>
+    <span class="s1">&#39;This is another title&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;foo4&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;bar4&#39;</span><span class="p">]</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::newLine()"><span class="pre">newLine()</span></a></code></dt>
+<dd><p class="first">It displays a blank line in the command output. Although it may seem useful,
+most of the times you won’t need it at all. The reason is that every helper
+already adds their own blank lines, so you don’t have to care about the
+vertical spacing:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// outputs a single blank line</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">newLine</span><span class="p">();</span>
+
+<span class="c1">// outputs three consecutive blank lines</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">newLine</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="admonition-methods">
+<h3>Admonition Methods<a class="headerlink" href="#admonition-methods" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::note()"><span class="pre">note()</span></a></code></dt>
+<dd><p class="first">It displays the given string or array of strings as a highlighted admonition.
+Use this helper sparingly to avoid cluttering command’s output:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// use simple strings for short notes</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">note</span><span class="p">(</span><span class="s1">&#39;Lorem ipsum dolor sit amet&#39;</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="c1">// consider using arrays when displaying long notes</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">note</span><span class="p">([</span>
+    <span class="s1">&#39;Lorem ipsum dolor sit amet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Consectetur adipiscing elit&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Aenean sit amet arcu vitae sem faucibus porta&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::caution()"><span class="pre">caution()</span></a></code></dt>
+<dd><p class="first">Similar to the <code class="docutils literal notranslate"><span class="pre">note()</span></code> helper, but the contents are more prominently
+highlighted. The resulting contents resemble an error message, so you should
+avoid using this helper unless strictly necessary:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// use simple strings for short caution message</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">caution</span><span class="p">(</span><span class="s1">&#39;Lorem ipsum dolor sit amet&#39;</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="c1">// consider using arrays when displaying long caution messages</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">caution</span><span class="p">([</span>
+    <span class="s1">&#39;Lorem ipsum dolor sit amet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Consectetur adipiscing elit&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Aenean sit amet arcu vitae sem faucibus porta&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="progress-bar-methods">
+<h3>Progress Bar Methods<a class="headerlink" href="#progress-bar-methods" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::progressStart()"><span class="pre">progressStart()</span></a></code></dt>
+<dd><p class="first">It displays a progress bar with a number of steps equal to the argument passed
+to the method (don’t pass any value if the length of the progress bar is
+unknown):</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// displays a progress bar of unknown length</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">progressStart</span><span class="p">();</span>
+
+<span class="c1">// displays a 100-step length progress bar</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">progressStart</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::progressAdvance()"><span class="pre">progressAdvance()</span></a></code></dt>
+<dd><p class="first">It makes the progress bar advance the given number of steps (or <code class="docutils literal notranslate"><span class="pre">1</span></code> step
+if no argument is passed):</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// advances the progress bar 1 step</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">progressAdvance</span><span class="p">();</span>
+
+<span class="c1">// advances the progress bar 10 steps</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">progressAdvance</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::progressFinish()"><span class="pre">progressFinish()</span></a></code></dt>
+<dd><p class="first">It finishes the progress bar (filling up all the remaining steps when its
+length is known):</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$io</span><span class="o">-&gt;</span><span class="na">progressFinish</span><span class="p">();</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="user-input-methods">
+<h3>User Input Methods<a class="headerlink" href="#user-input-methods" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::ask()"><span class="pre">ask()</span></a></code></dt>
+<dd><p class="first">It asks the user to provide some value:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$io</span><span class="o">-&gt;</span><span class="na">ask</span><span class="p">(</span><span class="s1">&#39;What is your name?&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>You can pass the default value as the second argument so the user can
+hit the &lt;Enter&gt; key to select that value:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$io</span><span class="o">-&gt;</span><span class="na">ask</span><span class="p">(</span><span class="s1">&#39;Where are you from?&#39;</span><span class="p">,</span> <span class="s1">&#39;United States&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In case you need to validate the given value, pass a callback validator as
+the third argument:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$io</span><span class="o">-&gt;</span><span class="na">ask</span><span class="p">(</span><span class="s1">&#39;Number of workers to start&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$number</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">is_numeric</span><span class="p">(</span><span class="nv">$number</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">\RuntimeException</span><span class="p">(</span><span class="s1">&#39;You must type a number.&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span> <span class="nv">$number</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::askHidden()"><span class="pre">askHidden()</span></a></code></dt>
+<dd><p class="first">It’s very similar to the <code class="docutils literal notranslate"><span class="pre">ask()</span></code> method but the user’s input will be hidden
+and it cannot define a default value. Use it when asking for sensitive information:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$io</span><span class="o">-&gt;</span><span class="na">askHidden</span><span class="p">(</span><span class="s1">&#39;What is your password?&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In case you need to validate the given value, pass a callback validator as
+the second argument:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$io</span><span class="o">-&gt;</span><span class="na">askHidden</span><span class="p">(</span><span class="s1">&#39;What is your password?&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$password</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$password</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">\RuntimeException</span><span class="p">(</span><span class="s1">&#39;Password cannot be empty.&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nv">$password</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::confirm()"><span class="pre">confirm()</span></a></code></dt>
+<dd><p class="first">It asks a Yes/No question to the user and it only returns <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$io</span><span class="o">-&gt;</span><span class="na">confirm</span><span class="p">(</span><span class="s1">&#39;Restart the web server?&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>You can pass the default value as the second argument so the user can
+hit the &lt;Enter&gt; key to select that value:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$io</span><span class="o">-&gt;</span><span class="na">confirm</span><span class="p">(</span><span class="s1">&#39;Restart the web server?&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::choice()"><span class="pre">choice()</span></a></code></dt>
+<dd><p class="first">It asks a question whose answer is constrained to the given list of valid
+answers:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$io</span><span class="o">-&gt;</span><span class="na">choice</span><span class="p">(</span><span class="s1">&#39;Select the queue to analyze&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;queue1&#39;</span><span class="p">,</span> <span class="s1">&#39;queue2&#39;</span><span class="p">,</span> <span class="s1">&#39;queue3&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p>You can pass the default value as the third argument so the user can
+hit the &lt;Enter&gt; key to select that value:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$io</span><span class="o">-&gt;</span><span class="na">choice</span><span class="p">(</span><span class="s1">&#39;Select the queue to analyze&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;queue1&#39;</span><span class="p">,</span> <span class="s1">&#39;queue2&#39;</span><span class="p">,</span> <span class="s1">&#39;queue3&#39;</span><span class="p">],</span> <span class="s1">&#39;queue1&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="result-methods">
+<h3>Result Methods<a class="headerlink" href="#result-methods" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::success()"><span class="pre">success()</span></a></code></dt>
+<dd><p class="first">It displays the given string or array of strings highlighted as a successful
+message (with a green background and the <code class="docutils literal notranslate"><span class="pre">[OK]</span></code> label). It’s meant to be
+used once to display the final result of executing the given command, but you
+can use it repeatedly during the execution of the command:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// use simple strings for short success messages</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">success</span><span class="p">(</span><span class="s1">&#39;Lorem ipsum dolor sit amet&#39;</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="c1">// consider using arrays when displaying long success messages</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">success</span><span class="p">([</span>
+    <span class="s1">&#39;Lorem ipsum dolor sit amet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Consectetur adipiscing elit&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::warning()"><span class="pre">warning()</span></a></code></dt>
+<dd><p class="first">It displays the given string or array of strings highlighted as a warning
+message (with a red background and the <code class="docutils literal notranslate"><span class="pre">[WARNING]</span></code> label). It’s meant to be
+used once to display the final result of executing the given command, but you
+can use it repeatedly during the execution of the command:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// use simple strings for short warning messages</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">warning</span><span class="p">(</span><span class="s1">&#39;Lorem ipsum dolor sit amet&#39;</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="c1">// consider using arrays when displaying long warning messages</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">warning</span><span class="p">([</span>
+    <span class="s1">&#39;Lorem ipsum dolor sit amet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Consectetur adipiscing elit&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::error()"><span class="pre">error()</span></a></code></dt>
+<dd><p class="first">It displays the given string or array of strings highlighted as an error
+message (with a red background and the <code class="docutils literal notranslate"><span class="pre">[ERROR]</span></code> label). It’s meant to be
+used once to display the final result of executing the given command, but you
+can use it repeatedly during the execution of the command:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// use simple strings for short error messages</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s1">&#39;Lorem ipsum dolor sit amet&#39;</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="c1">// consider using arrays when displaying long error messages</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">([</span>
+    <span class="s1">&#39;Lorem ipsum dolor sit amet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Consectetur adipiscing elit&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="defining-your-own-styles">
+<h2>Defining your Own Styles<a class="headerlink" href="#defining-your-own-styles" title="Permalink to this headline">¶</a></h2>
+<p>If you don’t like the design of the commands that use the Symfony Style, you can
+define your own set of console styles. Create a class that implements the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/StyleInterface.php" title="Symfony\Component\Console\Style\StyleInterface"><span class="pre">StyleInterface</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nx">App\Console</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Style\StyleInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">CustomStyle</span> <span class="k">implements</span> <span class="nx">StyleInterface</span>
+<span class="p">{</span>
+    <span class="c1">// ...implement the methods of the interface</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then, instantiate this custom class instead of the default <code class="docutils literal notranslate"><span class="pre">SymfonyStyle</span></code> in
+your commands. Thanks to the <code class="docutils literal notranslate"><span class="pre">StyleInterface</span></code> you won’t need to change the code
+of your commands to change their appearance:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Command/GreetCommand.php</span>
+<span class="k">namespace</span> <span class="nx">App\Console</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Console\CustomStyle</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Command\Command</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Input\InputInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Output\OutputInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">GreetCommand</span> <span class="k">extends</span> <span class="nx">Command</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">execute</span><span class="p">(</span><span class="nx">InputInterface</span> <span class="nv">$input</span><span class="p">,</span> <span class="nx">OutputInterface</span> <span class="nv">$output</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Before</span>
+        <span class="nv">$io</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SymfonyStyle</span><span class="p">(</span><span class="nv">$input</span><span class="p">,</span> <span class="nv">$output</span><span class="p">);</span>
+
+        <span class="c1">// After</span>
+        <span class="nv">$io</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CustomStyle</span><span class="p">(</span><span class="nv">$input</span><span class="p">,</span> <span class="nv">$output</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="writing-to-the-error-output">
+<h2>Writing to the error output<a class="headerlink" href="#writing-to-the-error-output" title="Permalink to this headline">¶</a></h2>
+<p>If you reuse the output of a command as the input of other commands or dump it
+into a file for later reuse, you probably want to exclude progress bars, notes
+and other output that provides no real value.</p>
+<p>Commands can output information in two different streams: <code class="docutils literal notranslate"><span class="pre">stdout</span></code> (standard
+output) is the stream where the real contents should be output and <code class="docutils literal notranslate"><span class="pre">stderr</span></code>
+(standard error) is the stream where the errors and the debugging messages
+should be output.</p>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle"><span class="pre">SymfonyStyle</span></a></code> class provides a
+convenient method called <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Style/SymfonyStyle.php" title="Symfony\Component\Console\Style\SymfonyStyle::getErrorStyle()"><span class="pre">getErrorStyle()</span></a></code>
+to switch between both streams. This method returns a new <code class="docutils literal notranslate"><span class="pre">SymfonyStyle</span></code>
+instance which makes use of the error output:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$io</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SymfonyStyle</span><span class="p">(</span><span class="nv">$input</span><span class="p">,</span> <span class="nv">$output</span><span class="p">);</span>
+
+<span class="c1">// Write to the standard output</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Reusable information&#39;</span><span class="p">);</span>
+
+<span class="c1">// Write to the error output</span>
+<span class="nv">$io</span><span class="o">-&gt;</span><span class="na">getErrorStyle</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">warning</span><span class="p">(</span><span class="s1">&#39;Debugging information or errors&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you create a <code class="docutils literal notranslate"><span class="pre">SymfonyStyle</span></code> instance with an <code class="docutils literal notranslate"><span class="pre">OutputInterface</span></code> object
+that is not an instance of <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Output/ConsoleOutputInterface.php" title="Symfony\Component\Console\Output\ConsoleOutputInterface"><span class="pre">ConsoleOutputInterface</span></a></code>,
+the <code class="docutils literal notranslate"><span class="pre">getErrorStyle()</span></code> method will have no effect and the returned object
+will still write to the standard output instead of the error output.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

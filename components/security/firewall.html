@@ -1,0 +1,486 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The Firewall and Authorization &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Securely Generating Random Values" href="secure_tools.html" />
+    <link rel="prev" title="Authorization" href="authorization.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cache.html">The Cache Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dependency_injection.html">The DependencyInjection Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../form.html">The Form Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../process.html">The Process Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../security.html">The Security Component</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../security.html#installation">Installation</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../security.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="authentication.html">Authentication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="authorization.html">Authorization</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">The Firewall and Authorization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="secure_tools.html">Securely Generating Random Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/access_control.html">How Does the Security access_control Work?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/access_denied_handler.html">How to Create a Custom Access Denied Handler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/acl.html">How to Use Access Control Lists (ACLs)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/auth_providers.html">Built-in Authentication Providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/csrf.html">How to Implement CSRF Protection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/custom_authentication_provider.html">How to Create a custom Authentication Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/experimental_authenticators.html">Using the new Authenticator-based Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/expressions.html">Security: Complex Access Controls with Expressions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/firewall_restriction.html">How to Restrict Firewalls to a Request</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/force_https.html">How to Force HTTPS or HTTP for different URLs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/form_login.html">Using the form_login Authentication Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/form_login_setup.html">How to Build a Login Form</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/guard_authentication.html">Custom Authentication System with Guard (API Token Example)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/impersonating_user.html">How to Impersonate a User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/json_login_setup.html">How to Build a JSON Authentication Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/ldap.html">Authenticating against an LDAP server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/multiple_guard_authenticators.html">How to Use Multiple Guard Authenticators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/named_encoders.html">How to Use A Different Password Encoder Algorithm Per User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/password_migration.html">How to Migrate a Password Hash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/remember_me.html">How to Add “Remember Me” Login Functionality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/reset_password.html">How to Add a Reset Password Feature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/securing_services.html">How to Secure any Service or Method in your Application</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/user_checkers.html">How to Create and Enable Custom User Checkers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/user_provider.html">Security User Providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../security/voters.html">How to Use Voters to Check User Permissions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/configuration/security.html">Security Configuration Reference (SecurityBundle)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/constraints/UserPassword.html">UserPassword</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">The Components</a> &raquo;</li>
+        
+          <li><a href="../security.html">The Security Component</a> &raquo;</li>
+        
+      <li>The Firewall and Authorization</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/components/security/firewall.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-firewall-and-authorization">
+<span id="index-0"></span><h1>The Firewall and Authorization<a class="headerlink" href="#the-firewall-and-authorization" title="Permalink to this headline">¶</a></h1>
+<p>Central to the Security component is authorization. This is handled by an instance
+of <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Authorization/AuthorizationCheckerInterface.php" title="Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface"><span class="pre">AuthorizationCheckerInterface</span></a></code>.
+When all steps in the process of authenticating the user have been taken successfully,
+you can ask the authorization checker if the authenticated user has access to a
+certain action or resource of the application:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Authorization\AuthorizationChecker</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Exception\AccessDeniedException</span><span class="p">;</span>
+
+<span class="c1">// instance of Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface</span>
+<span class="nv">$tokenStorage</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span>
+
+<span class="c1">// instance of Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface</span>
+<span class="nv">$authenticationManager</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span>
+
+<span class="c1">// instance of Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface</span>
+<span class="nv">$accessDecisionManager</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span>
+
+<span class="nv">$authorizationChecker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AuthorizationChecker</span><span class="p">(</span>
+    <span class="nv">$tokenStorage</span><span class="p">,</span>
+    <span class="nv">$authenticationManager</span><span class="p">,</span>
+    <span class="nv">$accessDecisionManager</span>
+<span class="p">);</span>
+
+<span class="c1">// ... authenticate the user</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$authorizationChecker</span><span class="o">-&gt;</span><span class="na">isGranted</span><span class="p">(</span><span class="s1">&#39;ROLE_ADMIN&#39;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nx">AccessDeniedException</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Read the dedicated articles to learn more about <a class="reference internal" href="authentication.html"><span class="doc">Authentication</span></a>
+and <a class="reference internal" href="authorization.html"><span class="doc">Authorization</span></a>.</p>
+</div>
+<div class="section" id="a-firewall-for-http-requests">
+<span id="firewall"></span><h2>A Firewall for HTTP Requests<a class="headerlink" href="#a-firewall-for-http-requests" title="Permalink to this headline">¶</a></h2>
+<p>Authenticating a user is done by the firewall. An application may have
+multiple secured areas, so the firewall is configured using a map of these
+secured areas. For each of these areas, the map contains a request matcher
+and a collection of listeners. The request matcher gives the firewall the
+ability to find out if the current request points to a secured area.
+The listeners are then asked if the current request can be used to authenticate
+the user:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\RequestMatcher</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Http\Firewall\ExceptionListener</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Http\FirewallMap</span><span class="p">;</span>
+
+<span class="nv">$firewallMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FirewallMap</span><span class="p">();</span>
+
+<span class="nv">$requestMatcher</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RequestMatcher</span><span class="p">(</span><span class="s1">&#39;^/secured-area/&#39;</span><span class="p">);</span>
+
+<span class="c1">// array of callables</span>
+<span class="nv">$listeners</span> <span class="o">=</span> <span class="p">[</span><span class="o">...</span><span class="p">];</span>
+
+<span class="nv">$exceptionListener</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ExceptionListener</span><span class="p">(</span><span class="o">...</span><span class="p">);</span>
+
+<span class="nv">$firewallMap</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$requestMatcher</span><span class="p">,</span> <span class="nv">$listeners</span><span class="p">,</span> <span class="nv">$exceptionListener</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The firewall map will be given to the firewall as its first argument, together
+with the event dispatcher that is used by the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/HttpKernel.php" title="Symfony\Component\HttpKernel\HttpKernel"><span class="pre">HttpKernel</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\KernelEvents</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Http\Firewall</span><span class="p">;</span>
+
+<span class="c1">// the EventDispatcher used by the HttpKernel</span>
+<span class="nv">$dispatcher</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span>
+
+<span class="nv">$firewall</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Firewall</span><span class="p">(</span><span class="nv">$firewallMap</span><span class="p">,</span> <span class="nv">$dispatcher</span><span class="p">);</span>
+
+<span class="nv">$dispatcher</span><span class="o">-&gt;</span><span class="na">addListener</span><span class="p">(</span>
+    <span class="nx">KernelEvents</span><span class="o">::</span><span class="na">REQUEST</span><span class="p">,</span>
+    <span class="p">[</span><span class="nv">$firewall</span><span class="p">,</span> <span class="s1">&#39;onKernelRequest&#39;</span><span class="p">]</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>The firewall is registered to listen to the <code class="docutils literal notranslate"><span class="pre">kernel.request</span></code> event that
+will be dispatched by the HttpKernel at the beginning of each request
+it processes. This way, the firewall may prevent the user from going any
+further than allowed.</p>
+<div class="section" id="firewall-config">
+<h3>Firewall Config<a class="headerlink" href="#firewall-config" title="Permalink to this headline">¶</a></h3>
+<p>The information about a given firewall, such as its name, provider, context,
+entry point and access denied URL, is provided by instances of the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/SecurityBundle/Security/FirewallConfig.php" title="Symfony\Bundle\SecurityBundle\Security\FirewallConfig"><span class="pre">FirewallConfig</span></a></code> class.</p>
+<p>This object can be accessed through the <code class="docutils literal notranslate"><span class="pre">getFirewallConfig(Request</span> <span class="pre">$request)</span></code>
+method of the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/SecurityBundle/Security/FirewallMap.php" title="Symfony\Bundle\SecurityBundle\Security\FirewallMap"><span class="pre">FirewallMap</span></a></code> class and
+through the <code class="docutils literal notranslate"><span class="pre">getConfig()</span></code>  method of the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/SecurityBundle/Security/FirewallContext.php" title="Symfony\Bundle\SecurityBundle\Security\FirewallContext"><span class="pre">FirewallContext</span></a></code> class.</p>
+</div>
+<div class="section" id="firewall-listeners">
+<span id="id1"></span><h3>Firewall Listeners<a class="headerlink" href="#firewall-listeners" title="Permalink to this headline">¶</a></h3>
+<p>When the firewall gets notified of the <code class="docutils literal notranslate"><span class="pre">kernel.request</span></code> event, it asks
+the firewall map if the request matches one of the secured areas. The first
+secured area that matches the request will return a set of corresponding
+firewall listeners (which each is a callable).
+These listeners will all be asked to handle the current request. This basically
+means: find out if the current request contains any information by which
+the user might be authenticated (for instance the Basic HTTP authentication
+listener checks if the request has a header called <code class="docutils literal notranslate"><span class="pre">PHP_AUTH_USER</span></code>).</p>
+</div>
+<div class="section" id="exception-listener">
+<h3>Exception Listener<a class="headerlink" href="#exception-listener" title="Permalink to this headline">¶</a></h3>
+<p>If any of the listeners throws an <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Exception/AuthenticationException.php" title="Symfony\Component\Security\Core\Exception\AuthenticationException"><span class="pre">AuthenticationException</span></a></code>,
+the exception listener that was provided when adding secured areas to the
+firewall map will jump in.</p>
+<p>The exception listener determines what happens next, based on the arguments
+it received when it was created. It may start the authentication procedure,
+perhaps ask the user to supply their credentials again (when they have only been
+authenticated based on a “remember-me” cookie), or transform the exception
+into an <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Exception/AccessDeniedHttpException.php" title="Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException"><span class="pre">AccessDeniedHttpException</span></a></code>,
+which will eventually result in an “HTTP/1.1 403: Access Denied” response.</p>
+</div>
+<div class="section" id="entry-points">
+<h3>Entry Points<a class="headerlink" href="#entry-points" title="Permalink to this headline">¶</a></h3>
+<p>When the user is not authenticated at all (i.e. when the token storage
+has no token yet), the firewall’s entry point will be called to “start”
+the authentication process. An entry point should implement
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Http/EntryPoint/AuthenticationEntryPointInterface.php" title="Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface"><span class="pre">AuthenticationEntryPointInterface</span></a></code>,
+which has only one method: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Http/EntryPoint/AuthenticationEntryPointInterface.php" title="Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface::start()"><span class="pre">start()</span></a></code>.
+This method receives the current <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request"><span class="pre">Request</span></a></code>
+object and the exception by which the exception listener was triggered.
+The method should return a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response"><span class="pre">Response</span></a></code>
+object. This could be, for instance, the page containing the login form or,
+in the case of Basic HTTP authentication, a response with a <code class="docutils literal notranslate"><span class="pre">WWW-Authenticate</span></code>
+header, which will prompt the user to supply their username and password.</p>
+</div>
+</div>
+<div class="section" id="flow-firewall-authentication-authorization">
+<h2>Flow: Firewall, Authentication, Authorization<a class="headerlink" href="#flow-firewall-authentication-authorization" title="Permalink to this headline">¶</a></h2>
+<p>Hopefully you can now see a little bit about how the “flow” of the security
+context works:</p>
+<ol class="arabic simple">
+<li>The Firewall is registered as a listener on the <code class="docutils literal notranslate"><span class="pre">kernel.request</span></code> event;</li>
+<li>At the beginning of the request, the Firewall checks the firewall map
+to see if any firewall should be active for this URL;</li>
+<li>If a firewall is found in the map for this URL, its listeners are notified;</li>
+<li>Each listener checks to see if the current request contains any authentication
+information - a listener may (a) authenticate a user, (b) throw an
+<code class="docutils literal notranslate"><span class="pre">AuthenticationException</span></code>, or (c) do nothing (because there is no
+authentication information on the request);</li>
+<li>Once a user is authenticated, you’ll use <a class="reference internal" href="authorization.html"><span class="doc">Authorization</span></a>
+to deny access to certain resources.</li>
+</ol>
+<p>Read the next articles to find out more about <a class="reference internal" href="authentication.html"><span class="doc">Authentication</span></a>
+and <a class="reference internal" href="authorization.html"><span class="doc">Authorization</span></a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

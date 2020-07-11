@@ -1,0 +1,520 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Set Up Before and After Filters &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Customize a Method Behavior without Using Inheritance" href="method_behavior.html" />
+    <link rel="prev" title="Events and Event Listeners" href="../event_dispatcher.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../event_dispatcher.html#creating-an-event-listener">Creating an Event Listener</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../event_dispatcher.html#creating-an-event-subscriber">Creating an Event Subscriber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../event_dispatcher.html#request-events-checking-types">Request Events, Checking Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../event_dispatcher.html#listeners-or-subscribers">Listeners or Subscribers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../event_dispatcher.html#event-aliases">Event Aliases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../event_dispatcher.html#debugging-event-listeners">Debugging Event Listeners</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../event_dispatcher.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Set Up Before and After Filters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#token-validation-example">Token Validation Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#before-filters-with-the-kernel-controller-event">Before Filters with the <code class="docutils literal notranslate"><span class="pre">kernel.controller</span></code> Event</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#after-filters-with-the-kernel-response-event">After Filters with the <code class="docutils literal notranslate"><span class="pre">kernel.response</span></code> Event</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="method_behavior.html">How to Customize a Method Behavior without Using Inheritance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../event_dispatcher.html">Events and Event Listeners</a> &raquo;</li>
+        
+      <li>How to Set Up Before and After Filters</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/event_dispatcher/before_after_filters.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-set-up-before-and-after-filters">
+<span id="index-0"></span><h1>How to Set Up Before and After Filters<a class="headerlink" href="#how-to-set-up-before-and-after-filters" title="Permalink to this headline">¶</a></h1>
+<p>It is quite common in web application development to need some logic to be
+executed just before or just after your controller actions acting as filters
+or hooks.</p>
+<p>Some web frameworks define methods like <code class="docutils literal notranslate"><span class="pre">preExecute()</span></code> and <code class="docutils literal notranslate"><span class="pre">postExecute()</span></code>,
+but there is no such thing in Symfony. The good news is that there is a much
+better way to interfere with the Request -&gt; Response process using the
+<a class="reference internal" href="../components/event_dispatcher.html"><span class="doc">EventDispatcher component</span></a>.</p>
+<div class="section" id="token-validation-example">
+<h2>Token Validation Example<a class="headerlink" href="#token-validation-example" title="Permalink to this headline">¶</a></h2>
+<p>Imagine that you need to develop an API where some controllers are public
+but some others are restricted to one or some clients. For these private features,
+you might provide a token to your clients to identify themselves.</p>
+<p>So, before executing your controller action, you need to check if the action
+is restricted or not. If it is restricted, you need to validate the provided
+token.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please note that for simplicity in this recipe, tokens will be defined
+in config and neither database setup nor authentication via the Security
+component will be used.</p>
+</div>
+</div>
+<div class="section" id="before-filters-with-the-kernel-controller-event">
+<h2>Before Filters with the <code class="docutils literal notranslate"><span class="pre">kernel.controller</span></code> Event<a class="headerlink" href="#before-filters-with-the-kernel-controller-event" title="Permalink to this headline">¶</a></h2>
+<p>First, define some token configuration as parameters:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">tokens</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">client1</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">pass1</span>
+        <span class="l l-Scalar l-Scalar-Plain">client2</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">pass2</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;parameters&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;tokens&quot;</span> <span class="na">type=</span><span class="s">&quot;collection&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;client1&quot;</span><span class="nt">&gt;</span>pass1<span class="nt">&lt;/parameter&gt;</span>
+            <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;client2&quot;</span><span class="nt">&gt;</span>pass2<span class="nt">&lt;/parameter&gt;</span>
+        <span class="nt">&lt;/parameter&gt;</span>
+    <span class="nt">&lt;/parameters&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;tokens&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;client1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pass1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;client2&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pass2&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="section" id="tag-controllers-to-be-checked">
+<h3>Tag Controllers to Be Checked<a class="headerlink" href="#tag-controllers-to-be-checked" title="Permalink to this headline">¶</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">kernel.controller</span></code> (aka <code class="docutils literal notranslate"><span class="pre">KernelEvents::CONTROLLER</span></code>) listener gets notified
+on <em>every</em> request, right before the controller is executed. So, first, you need
+some way to identify if the controller that matches the request needs token validation.</p>
+<p>A clean and easy way is to create an empty interface and make the controllers
+implement it:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">interface</span> <span class="nx">TokenAuthenticatedController</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>A controller that implements this interface looks like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Controller\TokenAuthenticatedController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">FooController</span> <span class="k">extends</span> <span class="nx">AbstractController</span> <span class="k">implements</span> <span class="nx">TokenAuthenticatedController</span>
+<span class="p">{</span>
+    <span class="c1">// An action that needs authentication</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">bar</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-an-event-subscriber">
+<h3>Creating an Event Subscriber<a class="headerlink" href="#creating-an-event-subscriber" title="Permalink to this headline">¶</a></h3>
+<p>Next, you’ll need to create an event subscriber, which will hold the logic
+that you want to be executed before your controllers. If you’re not familiar with
+event subscribers, you can learn more about them at <a class="reference internal" href="../event_dispatcher.html"><span class="doc">Events and Event Listeners</span></a>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/EventSubscriber/TokenSubscriber.php</span>
+<span class="k">namespace</span> <span class="nx">App\EventSubscriber</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Controller\TokenAuthenticatedController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher\EventSubscriberInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\ControllerEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\KernelEvents</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">TokenSubscriber</span> <span class="k">implements</span> <span class="nx">EventSubscriberInterface</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$tokens</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$tokens</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">tokens</span> <span class="o">=</span> <span class="nv">$tokens</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">onKernelController</span><span class="p">(</span><span class="nx">ControllerEvent</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$controller</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getController</span><span class="p">();</span>
+
+        <span class="c1">// when a controller class defines multiple action methods, the controller</span>
+        <span class="c1">// is returned as [$controllerInstance, &#39;methodName&#39;]</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">is_array</span><span class="p">(</span><span class="nv">$controller</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$controller</span> <span class="o">=</span> <span class="nv">$controller</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$controller</span> <span class="nx">instanceof</span> <span class="nx">TokenAuthenticatedController</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$token</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$token</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">tokens</span><span class="p">))</span> <span class="p">{</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="nx">AccessDeniedHttpException</span><span class="p">(</span><span class="s1">&#39;This action needs a valid token!&#39;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getSubscribedEvents</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="nx">KernelEvents</span><span class="o">::</span><span class="na">CONTROLLER</span> <span class="o">=&gt;</span> <span class="s1">&#39;onKernelController&#39;</span><span class="p">,</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That’s it! Your <code class="docutils literal notranslate"><span class="pre">services.yaml</span></code> file should already be setup to load services from
+the <code class="docutils literal notranslate"><span class="pre">EventSubscriber</span></code> directory. Symfony takes care of the rest. Your
+<code class="docutils literal notranslate"><span class="pre">TokenSubscriber</span></code> <code class="docutils literal notranslate"><span class="pre">onKernelController()</span></code> method will be executed on each request.
+If the controller that is about to be executed implements <code class="docutils literal notranslate"><span class="pre">TokenAuthenticatedController</span></code>,
+token authentication is applied. This lets you have a “before” filter on any controller
+you want.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If your subscriber is <em>not</em> called on each request, double-check that
+you’re <a class="reference internal" href="../service_container.html#service-container-services-load-example"><span class="std std-ref">loading services</span></a> from
+the <code class="docutils literal notranslate"><span class="pre">EventSubscriber</span></code> directory and have <a class="reference internal" href="../service_container.html#services-autoconfigure"><span class="std std-ref">autoconfigure</span></a>
+enabled. You can also manually add the <code class="docutils literal notranslate"><span class="pre">kernel.event_subscriber</span></code> tag.</p>
+</div>
+</div>
+</div>
+<div class="section" id="after-filters-with-the-kernel-response-event">
+<h2>After Filters with the <code class="docutils literal notranslate"><span class="pre">kernel.response</span></code> Event<a class="headerlink" href="#after-filters-with-the-kernel-response-event" title="Permalink to this headline">¶</a></h2>
+<p>In addition to having a “hook” that’s executed <em>before</em> your controller, you
+can also add a hook that’s executed <em>after</em> your controller. For this example,
+imagine that you want to add a <code class="docutils literal notranslate"><span class="pre">sha1</span></code> hash (with a salt using that token) to
+all responses that have passed this token authentication.</p>
+<p>Another core Symfony event - called <code class="docutils literal notranslate"><span class="pre">kernel.response</span></code> (aka <code class="docutils literal notranslate"><span class="pre">KernelEvents::RESPONSE</span></code>) -
+is notified on every request, but after the controller returns a Response object.
+To create an “after” listener, create a listener class and register
+it as a service on this event.</p>
+<p>For example, take the <code class="docutils literal notranslate"><span class="pre">TokenSubscriber</span></code> from the previous example and first
+record the authentication token inside the request attributes. This will
+serve as a basic flag that this request underwent token authentication:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">onKernelController</span><span class="p">(</span><span class="nx">ControllerEvent</span> <span class="nv">$event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$controller</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="nx">instanceof</span> <span class="nx">TokenAuthenticatedController</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$token</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$token</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">tokens</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">AccessDeniedHttpException</span><span class="p">(</span><span class="s1">&#39;This action needs a valid token!&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// mark the request as having passed token authentication</span>
+        <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;auth_token&#39;</span><span class="p">,</span> <span class="nv">$token</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now, configure the subscriber to listen to another event and add <code class="docutils literal notranslate"><span class="pre">onKernelResponse()</span></code>.
+This will look for the <code class="docutils literal notranslate"><span class="pre">auth_token</span></code> flag on the request object and set a custom
+header on the response if it’s found:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// add the new use statement at the top of your file</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\ResponseEvent</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">onKernelResponse</span><span class="p">(</span><span class="nx">ResponseEvent</span> <span class="nv">$event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// check to see if onKernelController marked this as a token &quot;auth&#39;ed&quot; request</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$token</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;auth_token&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+
+    <span class="c1">// create a hash and set it as a response header</span>
+    <span class="nv">$hash</span> <span class="o">=</span> <span class="nb">sha1</span><span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getContent</span><span class="p">()</span><span class="o">.</span><span class="nv">$token</span><span class="p">);</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;X-CONTENT-HASH&#39;</span><span class="p">,</span> <span class="nv">$hash</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getSubscribedEvents</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="nx">KernelEvents</span><span class="o">::</span><span class="na">CONTROLLER</span> <span class="o">=&gt;</span> <span class="s1">&#39;onKernelController&#39;</span><span class="p">,</span>
+        <span class="nx">KernelEvents</span><span class="o">::</span><span class="na">RESPONSE</span> <span class="o">=&gt;</span> <span class="s1">&#39;onKernelResponse&#39;</span><span class="p">,</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That’s it! The <code class="docutils literal notranslate"><span class="pre">TokenSubscriber</span></code> is now notified before every controller is
+executed (<code class="docutils literal notranslate"><span class="pre">onKernelController()</span></code>) and after every controller returns a response
+(<code class="docutils literal notranslate"><span class="pre">onKernelResponse()</span></code>). By making specific controllers implement the <code class="docutils literal notranslate"><span class="pre">TokenAuthenticatedController</span></code>
+interface, your listener knows which controllers it should take action on.
+And by storing a value in the request’s “attributes” bag, the <code class="docutils literal notranslate"><span class="pre">onKernelResponse()</span></code>
+method knows to add the extra header. Have fun!</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

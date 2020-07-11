@@ -1,0 +1,542 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The HttpFoundation Component &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Front Controller" href="front_controller.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Create your own PHP Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The HttpFoundation Component</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#going-oop-with-the-httpfoundation-component">Going OOP with the HttpFoundation Component</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="front_controller.html">The Front Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html">The Routing Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templating.html">Templating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel_controller_resolver.html">The HttpKernel Component: the Controller Resolver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="separation_of_concerns.html">The Separation of Concerns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit_testing.html">Unit Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel_httpkernelinterface.html">The HttpKernel Component: HttpKernelInterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel_httpkernel_class.html">The HttpKernel Component: The HttpKernel Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependency_injection.html">The DependencyInjection Component</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Create your own PHP Framework</a> &raquo;</li>
+        
+      <li>The HttpFoundation Component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/create_framework/http_foundation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-httpfoundation-component">
+<h1>The HttpFoundation Component<a class="headerlink" href="#the-httpfoundation-component" title="Permalink to this headline">¶</a></h1>
+<p>Before diving into the framework creation process, let’s first step back and
+let’s take a look at why you would like to use a framework instead of keeping
+your plain-old PHP applications as is. Why using a framework is actually a good
+idea, even for the simplest snippet of code and why creating your framework on
+top of the Symfony components is better than creating a framework from scratch.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We won’t talk about the traditional benefits of using a framework when
+working on big applications with more than a few developers; the Internet
+has already plenty of good resources on that topic.</p>
+</div>
+<p>Even if the “application” we wrote in the previous chapter was simple enough,
+it suffers from a few problems:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// framework/index.php</span>
+<span class="nv">$name</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">];</span>
+
+<span class="nb">printf</span><span class="p">(</span><span class="s1">&#39;Hello %s&#39;</span><span class="p">,</span> <span class="nv">$name</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>First, if the <code class="docutils literal notranslate"><span class="pre">name</span></code> query parameter is not defined in the URL query string,
+you will get a PHP warning; so let’s fix it:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// framework/index.php</span>
+<span class="nv">$name</span> <span class="o">=</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span> <span class="o">?</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">:</span> <span class="s1">&#39;World&#39;</span><span class="p">;</span>
+
+<span class="nb">printf</span><span class="p">(</span><span class="s1">&#39;Hello %s&#39;</span><span class="p">,</span> <span class="nv">$name</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Then, this <em>application is not secure</em>. Can you believe it? Even this simple
+snippet of PHP code is vulnerable to one of the most widespread Internet
+security issue, XSS (Cross-Site Scripting). Here is a more secure version:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$name</span> <span class="o">=</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span> <span class="o">?</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">:</span> <span class="s1">&#39;World&#39;</span><span class="p">;</span>
+
+<span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Content-Type: text/html; charset=utf-8&#39;</span><span class="p">);</span>
+
+<span class="nb">printf</span><span class="p">(</span><span class="s1">&#39;Hello %s&#39;</span><span class="p">,</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nx">ENT_QUOTES</span><span class="p">,</span> <span class="s1">&#39;UTF-8&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As you might have noticed, securing your code with <code class="docutils literal notranslate"><span class="pre">htmlspecialchars</span></code> is
+tedious and error prone. That’s one of the reasons why using a template
+engine like <a class="reference external" href="https://twig.symfony.com/">Twig</a>, where auto-escaping is enabled by default, might be a
+good idea (and explicit escaping is also less painful with the usage of a
+simple <code class="docutils literal notranslate"><span class="pre">e</span></code> filter).</p>
+</div>
+<p>As you can see for yourself, the simple code we had written first is not that
+simple anymore if we want to avoid PHP warnings/notices and make the code
+more secure.</p>
+<p>Beyond security, this code can be complex to test. Even if there is not
+much to test, it strikes me that writing unit tests for the simplest possible
+snippet of PHP code is not natural and feels ugly. Here is a tentative PHPUnit
+unit test for the above code:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// framework/test.php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">IndexTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testHello</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Fabien&#39;</span><span class="p">;</span>
+
+        <span class="nb">ob_start</span><span class="p">();</span>
+        <span class="k">include</span> <span class="s1">&#39;index.php&#39;</span><span class="p">;</span>
+        <span class="nv">$content</span> <span class="o">=</span> <span class="nb">ob_get_clean</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="s1">&#39;Hello Fabien&#39;</span><span class="p">,</span> <span class="nv">$content</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If our application were just slightly bigger, we would have been able to
+find even more problems. If you are curious about them, read the
+<a class="reference internal" href="../introduction/from_flat_php_to_symfony.html"><span class="doc">Symfony versus Flat PHP</span></a> chapter of the book.</p>
+</div>
+<p>At this point, if you are not convinced that security and testing are indeed
+two very good reasons to stop writing code the old way and adopt a framework
+instead (whatever adopting a framework means in this context), you can stop
+reading this book now and go back to whatever code you were working on before.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Using a framework should give you more than just security and testability,
+but the more important thing to keep in mind is that the framework you
+choose must allow you to write better code faster.</p>
+</div>
+<div class="section" id="going-oop-with-the-httpfoundation-component">
+<h2>Going OOP with the HttpFoundation Component<a class="headerlink" href="#going-oop-with-the-httpfoundation-component" title="Permalink to this headline">¶</a></h2>
+<p>Writing web code is about interacting with HTTP. So, the fundamental
+principles of our framework should be around the <a class="reference external" href="https://tools.ietf.org/wg/httpbis/">HTTP specification</a>.</p>
+<p>The HTTP specification describes how a client (a browser for instance)
+interacts with a server (our application via a web server). The dialog between
+the client and the server is specified by well-defined <em>messages</em>, requests
+and responses: <em>the client sends a request to the server and based on this
+request, the server returns a response</em>.</p>
+<p>In PHP, the request is represented by global variables (<code class="docutils literal notranslate"><span class="pre">$_GET</span></code>, <code class="docutils literal notranslate"><span class="pre">$_POST</span></code>,
+<code class="docutils literal notranslate"><span class="pre">$_FILE</span></code>, <code class="docutils literal notranslate"><span class="pre">$_COOKIE</span></code>, <code class="docutils literal notranslate"><span class="pre">$_SESSION</span></code>…) and the response is generated by
+functions (<code class="docutils literal notranslate"><span class="pre">echo</span></code>, <code class="docutils literal notranslate"><span class="pre">header</span></code>, <code class="docutils literal notranslate"><span class="pre">setcookie</span></code>, …).</p>
+<p>The first step towards better code is probably to use an Object-Oriented
+approach; that’s the main goal of the Symfony HttpFoundation component:
+replacing the default PHP global variables and functions by an Object-Oriented
+layer.</p>
+<p>To use this component, add it as a dependency of the project:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/http-foundation
+</pre></div>
+</td></tr></table></div>
+<p>Running this command will also automatically download the Symfony
+HttpFoundation component and install it under the <code class="docutils literal notranslate"><span class="pre">vendor/</span></code> directory.
+A <code class="docutils literal notranslate"><span class="pre">composer.json</span></code> and a <code class="docutils literal notranslate"><span class="pre">composer.lock</span></code> file will be generated as well,
+containing the new requirement.</p>
+<div class="sidebar">
+<p class="first sidebar-title">Class Autoloading</p>
+<p class="last">When installing a new dependency, Composer also generates a
+<code class="docutils literal notranslate"><span class="pre">vendor/autoload.php</span></code> file that allows any class to be <a class="reference external" href="https://www.php.net/autoload">autoloaded</a>.
+Without autoloading, you would need to require the file where a class
+is defined before being able to use it. But thanks to <a class="reference external" href="https://www.php-fig.org/psr/psr-4/">PSR-4</a>,
+we can just let Composer and PHP do the hard work for us.</p>
+</div>
+<p>Now, let’s rewrite our application by using the <code class="docutils literal notranslate"><span class="pre">Request</span></code> and the
+<code class="docutils literal notranslate"><span class="pre">Response</span></code> classes:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// framework/index.php</span>
+<span class="k">require_once</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+
+<span class="nv">$name</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;World&#39;</span><span class="p">);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">&#39;Hello %s&#39;</span><span class="p">,</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nx">ENT_QUOTES</span><span class="p">,</span> <span class="s1">&#39;UTF-8&#39;</span><span class="p">)));</span>
+
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">createFromGlobals()</span></code> method creates a <code class="docutils literal notranslate"><span class="pre">Request</span></code> object based on the
+current PHP global variables.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">send()</span></code> method sends the <code class="docutils literal notranslate"><span class="pre">Response</span></code> object back to the client (it
+first outputs the HTTP headers followed by the content).</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Before the <code class="docutils literal notranslate"><span class="pre">send()</span></code> call, we should have added a call to the
+<code class="docutils literal notranslate"><span class="pre">prepare()</span></code> method (<code class="docutils literal notranslate"><span class="pre">$response-&gt;prepare($request);</span></code>) to ensure that
+our Response were compliant with the HTTP specification. For instance, if
+we were to call the page with the <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> method, it would remove the
+content of the Response.</p>
+</div>
+<p>The main difference with the previous code is that you have total control of
+the HTTP messages. You can create whatever request you want and you are in
+charge of sending the response whenever you see fit.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We haven’t explicitly set the <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> header in the rewritten
+code as the charset of the Response object defaults to <code class="docutils literal notranslate"><span class="pre">UTF-8</span></code>.</p>
+</div>
+<p>With the <code class="docutils literal notranslate"><span class="pre">Request</span></code> class, you have all the request information at your
+fingertips thanks to a nice and simple API:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// the URI being requested (e.g. /about) minus any query parameters</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPathInfo</span><span class="p">();</span>
+
+<span class="c1">// retrieve GET and POST variables respectively</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;default value if bar does not exist&#39;</span><span class="p">);</span>
+
+<span class="c1">// retrieve SERVER variables</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">server</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;HTTP_HOST&#39;</span><span class="p">);</span>
+
+<span class="c1">// retrieves an instance of UploadedFile identified by foo</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">files</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+
+<span class="c1">// retrieve a COOKIE value</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">cookies</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;PHPSESSID&#39;</span><span class="p">);</span>
+
+<span class="c1">// retrieve an HTTP request header, with normalized, lowercase keys</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;content-type&#39;</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">();</span>    <span class="c1">// GET, POST, PUT, DELETE, HEAD</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getLanguages</span><span class="p">();</span> <span class="c1">// an array of languages the client accepts</span>
+</pre></div>
+</div>
+<p>You can also simulate a request:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;/index.php?name=Fabien&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>With the <code class="docutils literal notranslate"><span class="pre">Response</span></code> class, you can tweak the response:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">();</span>
+
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setContent</span><span class="p">(</span><span class="s1">&#39;Hello world!&#39;</span><span class="p">);</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setStatusCode</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;text/html&#39;</span><span class="p">);</span>
+
+<span class="c1">// configure the HTTP cache headers</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setMaxAge</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">To debug a response, cast it to a string; it will return the HTTP
+representation of the response (headers and content).</p>
+</div>
+<p>Last but not least, these classes, like every other class in the Symfony
+code, have been <a class="reference external" href="https://symfony.com/blog/symfony2-security-audit">audited</a> for security issues by an independent company. And
+being an Open-Source project also means that many other developers around the
+world have read the code and have already fixed potential security problems.
+When was the last time you ordered a professional security audit for your home-made
+framework?</p>
+<p>Even something as simple as getting the client IP address can be insecure:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nv">$myIp</span> <span class="o">===</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;REMOTE_ADDR&#39;</span><span class="p">])</span> <span class="p">{</span>
+    <span class="c1">// the client is a known one, so give it some more privilege</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It works perfectly fine until you add a reverse proxy in front of the
+production servers; at this point, you will have to change your code to make
+it work on both your development machine (where you don’t have a proxy) and
+your servers:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nv">$myIp</span> <span class="o">===</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;HTTP_X_FORWARDED_FOR&#39;</span><span class="p">]</span> <span class="o">||</span> <span class="nv">$myIp</span> <span class="o">===</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;REMOTE_ADDR&#39;</span><span class="p">])</span> <span class="p">{</span>
+    <span class="c1">// the client is a known one, so give it some more privilege</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">Request::getClientIp()</span></code> method would have given you the right
+behavior from day one (and it would have covered the case where you have
+chained proxies):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$myIp</span> <span class="o">===</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getClientIp</span><span class="p">())</span> <span class="p">{</span>
+    <span class="c1">// the client is a known one, so give it some more privilege</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And there is an added benefit: it is <em>secure</em> by default. What does it mean?
+The <code class="docutils literal notranslate"><span class="pre">$_SERVER['HTTP_X_FORWARDED_FOR']</span></code> value cannot be trusted as it can be
+manipulated by the end user when there is no proxy. So, if you are using this
+code in production without a proxy, it becomes trivially easy to abuse your
+system. That’s not the case with the <code class="docutils literal notranslate"><span class="pre">getClientIp()</span></code> method as you must
+explicitly trust your reverse proxies by calling <code class="docutils literal notranslate"><span class="pre">setTrustedProxies()</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nx">Request</span><span class="o">::</span><span class="na">setTrustedProxies</span><span class="p">([</span><span class="s1">&#39;10.0.0.1&#39;</span><span class="p">]);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$myIp</span> <span class="o">===</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getClientIp</span><span class="p">())</span> <span class="p">{</span>
+    <span class="c1">// the client is a known one, so give it some more privilege</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>So, the <code class="docutils literal notranslate"><span class="pre">getClientIp()</span></code> method works securely in all circumstances. You can
+use it in all your projects, whatever the configuration is, it will behave
+correctly and safely. That’s one of the goals of using a framework. If you were
+to write a framework from scratch, you would have to think about all these
+cases by yourself. Why not using a technology that already works?</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you want to learn more about the HttpFoundation component, you can have
+a look at the <code class="docutils literal notranslate"><span class="pre">Symfony\Component\HttpFoundation</span></code> API or read
+its dedicated <a class="reference internal" href="../components/http_foundation.html"><span class="doc">documentation</span></a>.</p>
+</div>
+<p>Believe or not but we have our first framework. You can stop now if you want.
+Using just the Symfony HttpFoundation component already allows you to write
+better and more testable code. It also allows you to write code faster as many
+day-to-day problems have already been solved for you.</p>
+<p>As a matter of fact, projects like Drupal have adopted the HttpFoundation
+component; if it works for them, it will probably work for you. Don’t reinvent
+the wheel.</p>
+<p>I’ve almost forgot to talk about one added benefit: using the HttpFoundation
+component is the start of better interoperability between all frameworks and
+<a class="reference external" href="https://symfony.com/components/HttpFoundation">applications using it</a> (like <a class="reference external" href="https://symfony.com/">Symfony</a>, <a class="reference external" href="https://www.drupal.org/">Drupal 8</a>, <a class="reference external" href="https://www.phpbb.com/">phpBB 3</a>, <a class="reference external" href="https://laravel.com/">Laravel</a>
+and <a class="reference external" href="https://ez.no/">ezPublish 5</a>,  and <a class="reference external" href="https://symfony.com/components/HttpFoundation">more</a>).</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

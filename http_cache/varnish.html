@@ -1,0 +1,553 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Use Varnish to Speed up my Website &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="HTTP Client" href="../http_client.html" />
+    <link rel="prev" title="HTTP Cache Validation" href="validation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../http_cache.html">HTTP Cache</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#caching-on-the-shoulders-of-giants">Caching on the Shoulders of Giants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#caching-with-a-gateway-cache">Caching with a Gateway Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#making-your-responses-http-cacheable">Making your Responses HTTP Cacheable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#cache-invalidation">Cache Invalidation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#using-edge-side-includes">Using Edge Side Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#http-caching-and-user-sessions">HTTP Caching and User Sessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#summary">Summary</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../http_cache.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cache_invalidation.html">Cache Invalidation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cache_vary.html">Varying the Response for HTTP Cache</a></li>
+<li class="toctree-l3"><a class="reference internal" href="esi.html">Working with Edge Side Includes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expiration.html">HTTP Cache Expiration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ssi.html">Working with Server Side Includes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validation.html">HTTP Cache Validation</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Use Varnish to Speed up my Website</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#make-symfony-trust-the-reverse-proxy">Make Symfony Trust the Reverse Proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routing-and-x-forwarded-headers">Routing and X-FORWARDED Headers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cookies-and-caching">Cookies and Caching</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensure-consistent-caching-behavior">Ensure Consistent Caching Behavior</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enable-edge-side-includes-esi">Enable Edge Side Includes (ESI)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cache-invalidation">Cache Invalidation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../http_cache.html">HTTP Cache</a> &raquo;</li>
+        
+      <li>How to Use Varnish to Speed up my Website</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/http_cache/varnish.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-use-varnish-to-speed-up-my-website">
+<span id="index-0"></span><h1>How to Use Varnish to Speed up my Website<a class="headerlink" href="#how-to-use-varnish-to-speed-up-my-website" title="Permalink to this headline">¶</a></h1>
+<p>Because Symfony’s cache uses the standard HTTP cache headers, the
+<a class="reference internal" href="../http_cache.html#symfony-gateway-cache"><span class="std std-ref">Symfony Reverse Proxy</span></a> can be replaced with any other reverse
+proxy. <a class="reference external" href="https://varnish-cache.org/">Varnish</a> is a powerful, open-source, HTTP accelerator capable of serving
+cached content fast and including support for <a class="reference internal" href="esi.html"><span class="doc">Edge Side Includes</span></a>.</p>
+<div class="section" id="make-symfony-trust-the-reverse-proxy">
+<span id="index-1"></span><h2>Make Symfony Trust the Reverse Proxy<a class="headerlink" href="#make-symfony-trust-the-reverse-proxy" title="Permalink to this headline">¶</a></h2>
+<p>Varnish automatically forwards the IP as <code class="docutils literal notranslate"><span class="pre">X-Forwarded-For</span></code> and leaves the
+<code class="docutils literal notranslate"><span class="pre">X-Forwarded-Proto</span></code> header in the request. If you do not configure Varnish as
+trusted proxy, Symfony will see all requests as coming through insecure HTTP
+connections from the Varnish host instead of the real client.</p>
+<p>Remember to call the <a class="reference internal" href="../deployment/proxies.html#request-set-trusted-proxies"><span class="std std-ref">Request::setTrustedProxies()</span></a>
+method in your front controller so that Varnish is seen as a trusted proxy
+and the <a class="reference internal" href="#varnish-x-forwarded-headers"><span class="std std-ref">X-Forwarded-*</span></a> headers are used.</p>
+</div>
+<div class="section" id="routing-and-x-forwarded-headers">
+<span id="varnish-x-forwarded-headers"></span><h2>Routing and X-FORWARDED Headers<a class="headerlink" href="#routing-and-x-forwarded-headers" title="Permalink to this headline">¶</a></h2>
+<p>To ensure that the Symfony Router generates URLs correctly with Varnish,
+an <code class="docutils literal notranslate"><span class="pre">X-Forwarded-Port</span></code> header must be present for Symfony to use the
+correct port number.</p>
+<p>This port number corresponds to the port your setup is using to receive external
+connections (<code class="docutils literal notranslate"><span class="pre">80</span></code> is the default value for HTTP connections). If the application
+also accepts HTTPS connections, there could be another proxy (as Varnish does
+not do HTTPS itself) on the default HTTPS port 443 that handles the SSL termination
+and forwards the requests as HTTP requests to Varnish with an <code class="docutils literal notranslate"><span class="pre">X-Forwarded-Proto</span></code>
+header. In this case, you need to add the following configuration snippet:</p>
+<div class="highlight-varnish4 notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">sub</span> <span class="n">vcl_recv</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">Proto</span> <span class="o">==</span> <span class="s">&quot;https&quot;</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">set</span> <span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">Port</span> <span class="o">=</span> <span class="s">&quot;443&quot;</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">set</span> <span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">Port</span> <span class="o">=</span> <span class="s">&quot;80&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="cookies-and-caching">
+<h2>Cookies and Caching<a class="headerlink" href="#cookies-and-caching" title="Permalink to this headline">¶</a></h2>
+<p>By default, a sane caching proxy does not cache anything when a request is sent
+with <a class="reference internal" href="../http_cache.html#http-cache-introduction"><span class="std std-ref">cookies or a basic authentication header</span></a>.
+This is because the content of the page is supposed to depend on the cookie
+value or authentication header.</p>
+<p>If you know for sure that the backend never uses sessions or basic
+authentication, have Varnish remove the corresponding header from requests to
+prevent clients from bypassing the cache. In practice, you will need sessions
+at least for some parts of the site, e.g. when using forms with
+<a class="reference internal" href="../security/csrf.html"><span class="doc">CSRF Protection</span></a>. In this situation, make sure to
+<a class="reference internal" href="../session.html#session-avoid-start"><span class="std std-ref">only start a session when actually needed</span></a>
+and clear the session when it is no longer needed. Alternatively, you can look
+into <a class="reference internal" href="../security/csrf.html#caching-pages-that-contain-csrf-protected-forms"><span class="std std-ref">caching pages that contain CSRF protected forms</span></a>.</p>
+<p>Cookies created in JavaScript and used only in the frontend, e.g. when using
+Google Analytics, are nonetheless sent to the server. These cookies are not
+relevant for the backend and should not affect the caching decision. Configure
+your Varnish cache to <a class="reference external" href="https://varnish-cache.org/trac/wiki/VCLExampleRemovingSomeCookies">clean the cookies header</a>. You want to keep the
+session cookie, if there is one, and get rid of all other cookies so that pages
+are cached if there is no active session. Unless you changed the default
+configuration of PHP, your session cookie has the name <code class="docutils literal notranslate"><span class="pre">PHPSESSID</span></code>:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>Varnish 4</em><div class="highlight-varnish4 notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">sub</span> <span class="n">vcl_recv</span> <span class="p">{</span>
+    <span class="c1">// Remove all cookies except the session ID.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">set</span> <span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span> <span class="o">=</span> <span class="s">&quot;;&quot;</span> <span class="o">+</span> <span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span><span class="p">;</span>
+        <span class="n">set</span> <span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span> <span class="o">=</span> <span class="n">regsuball</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span><span class="p">,</span> <span class="s">&quot;; +&quot;</span><span class="p">,</span> <span class="s">&quot;;&quot;</span><span class="p">);</span>
+        <span class="n">set</span> <span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span> <span class="o">=</span> <span class="n">regsuball</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span><span class="p">,</span> <span class="s">&quot;;(PHPSESSID)=&quot;</span><span class="p">,</span> <span class="s">&quot;; </span><span class="se">\1</span><span class="s">=&quot;</span><span class="p">);</span>
+        <span class="n">set</span> <span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span> <span class="o">=</span> <span class="n">regsuball</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span><span class="p">,</span> <span class="s">&quot;;[^ ][^;]*&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
+        <span class="n">set</span> <span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span> <span class="o">=</span> <span class="n">regsuball</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span><span class="p">,</span> <span class="s">&quot;^[; ]+|[; ]+$&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// If there are no more cookies, remove the header to get page cached.</span>
+            <span class="n">unset</span> <span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>Varnish 3</em><div class="highlight-varnish3 notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">sub</span> <span class="n">vcl_recv</span> <span class="p">{</span>
+    <span class="c1">// Remove all cookies except the session ID.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">set</span> <span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span> <span class="o">=</span> <span class="s">&quot;;&quot;</span> <span class="o">+</span> <span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span><span class="p">;</span>
+        <span class="n">set</span> <span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span> <span class="o">=</span> <span class="n">regsuball</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span><span class="p">,</span> <span class="s">&quot;; +&quot;</span><span class="p">,</span> <span class="s">&quot;;&quot;</span><span class="p">);</span>
+        <span class="n">set</span> <span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span> <span class="o">=</span> <span class="n">regsuball</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span><span class="p">,</span> <span class="s">&quot;;(PHPSESSID)=&quot;</span><span class="p">,</span> <span class="s">&quot;; </span><span class="se">\1</span><span class="s">=&quot;</span><span class="p">);</span>
+        <span class="n">set</span> <span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span> <span class="o">=</span> <span class="n">regsuball</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span><span class="p">,</span> <span class="s">&quot;;[^ ][^;]*&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
+        <span class="n">set</span> <span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span> <span class="o">=</span> <span class="n">regsuball</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span><span class="p">,</span> <span class="s">&quot;^[; ]+|[; ]+$&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// If there are no more cookies, remove the header to get page cached.</span>
+            <span class="n">remove</span> <span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cookie</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If content is not different for every user, but depends on the roles of a
+user, a solution is to separate the cache per group. This pattern is
+implemented and explained by the <a class="reference external" href="https://foshttpcachebundle.readthedocs.io/en/latest/features/user-context.html">FOSHttpCacheBundle</a> under the name
+<a class="reference external" href="https://foshttpcachebundle.readthedocs.org/en/latest/features/user-context.html">User Context</a>.</p>
+</div>
+</div>
+<div class="section" id="ensure-consistent-caching-behavior">
+<h2>Ensure Consistent Caching Behavior<a class="headerlink" href="#ensure-consistent-caching-behavior" title="Permalink to this headline">¶</a></h2>
+<p>Varnish uses the cache headers sent by your application to determine how
+to cache content. However, versions prior to Varnish 4 did not respect
+<code class="docutils literal notranslate"><span class="pre">Cache-Control:</span> <span class="pre">no-cache</span></code>, <code class="docutils literal notranslate"><span class="pre">no-store</span></code> and <code class="docutils literal notranslate"><span class="pre">private</span></code>. To ensure
+consistent behavior, use the following configuration if you are still
+using Varnish 3:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>Varnish 3</em><div class="highlight-varnish3 notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">sub</span> <span class="n">vcl_fetch</span> <span class="p">{</span>
+    <span class="c1">// By default, Varnish3 ignores Cache-Control: no-cache and private</span>
+    <span class="c1">// https://www.varnish-cache.org/docs/3.0/tutorial/increasing_your_hitrate.html#cache-control</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">beresp</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cache</span><span class="o">-</span><span class="n">Control</span> <span class="o">~</span> <span class="s">&quot;private&quot;</span> <span class="o">||</span>
+        <span class="n">beresp</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cache</span><span class="o">-</span><span class="n">Control</span> <span class="o">~</span> <span class="s">&quot;no-cache&quot;</span> <span class="o">||</span>
+        <span class="n">beresp</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Cache</span><span class="o">-</span><span class="n">Control</span> <span class="o">~</span> <span class="s">&quot;no-store&quot;</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">hit_for_pass</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can see the default behavior of Varnish in the form of a VCL file:
+<a class="reference external" href="https://github.com/varnishcache/varnish-cache/blob/3.0/bin/varnishd/default.vcl">default.vcl</a> for Varnish 3, <a class="reference external" href="https://github.com/varnishcache/varnish-cache/blob/4.1/bin/varnishd/builtin.vcl">builtin.vcl</a> for Varnish 4.</p>
+</div>
+</div>
+<div class="section" id="enable-edge-side-includes-esi">
+<h2>Enable Edge Side Includes (ESI)<a class="headerlink" href="#enable-edge-side-includes-esi" title="Permalink to this headline">¶</a></h2>
+<p>As explained in the <a class="reference internal" href="esi.html"><span class="doc">Edge Side Includes article</span></a>, Symfony
+detects whether it talks to a reverse proxy that understands ESI or not. When
+you use the Symfony reverse proxy, you don’t need to do anything. But to make
+Varnish instead of Symfony resolve the ESI tags, you need some configuration
+in Varnish. Symfony uses the <code class="docutils literal notranslate"><span class="pre">Surrogate-Capability</span></code> header from the <a class="reference external" href="http://www.w3.org/TR/edge-arch">Edge Architecture</a>
+described by Akamai.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Varnish only supports the <code class="docutils literal notranslate"><span class="pre">src</span></code> attribute for ESI tags (<code class="docutils literal notranslate"><span class="pre">onerror</span></code> and
+<code class="docutils literal notranslate"><span class="pre">alt</span></code> attributes are ignored).</p>
+</div>
+<p>First, configure Varnish so that it advertises its ESI support by adding a
+<code class="docutils literal notranslate"><span class="pre">Surrogate-Capability</span></code> header to requests forwarded to the backend
+application:</p>
+<div class="highlight-varnish4 notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">sub</span> <span class="n">vcl_recv</span> <span class="p">{</span>
+    <span class="c1">// Add a Surrogate-Capability header to announce ESI support.</span>
+    <span class="n">set</span> <span class="n">req</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Surrogate</span><span class="o">-</span><span class="n">Capability</span> <span class="o">=</span> <span class="s">&quot;abc=ESI/1.0&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">abc</span></code> part of the header isn’t important unless you have multiple
+“surrogates” that need to advertise their capabilities. See
+<a class="reference external" href="http://www.w3.org/TR/edge-arch">Surrogate-Capability Header</a> for details.</p>
+</div>
+<p>Then, optimize Varnish so that it only parses the response contents when there
+is at least one ESI tag by checking the <code class="docutils literal notranslate"><span class="pre">Surrogate-Control</span></code> header that
+Symfony adds automatically:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>Varnish 4</em><div class="highlight-varnish4 notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">sub</span> <span class="n">vcl_backend_response</span> <span class="p">{</span>
+    <span class="c1">// Check for ESI acknowledgement and remove Surrogate-Control header</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">beresp</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Surrogate</span><span class="o">-</span><span class="n">Control</span> <span class="o">~</span> <span class="s">&quot;ESI/1.0&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">unset</span> <span class="n">beresp</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Surrogate</span><span class="o">-</span><span class="n">Control</span><span class="p">;</span>
+        <span class="n">set</span> <span class="n">beresp</span><span class="p">.</span><span class="n">do_esi</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>Varnish 3</em><div class="highlight-varnish3 notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">sub</span> <span class="n">vcl_fetch</span> <span class="p">{</span>
+    <span class="c1">// Check for ESI acknowledgement and remove Surrogate-Control header</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">beresp</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Surrogate</span><span class="o">-</span><span class="n">Control</span> <span class="o">~</span> <span class="s">&quot;ESI/1.0&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">unset</span> <span class="n">beresp</span><span class="p">.</span><span class="n">http</span><span class="p">.</span><span class="n">Surrogate</span><span class="o">-</span><span class="n">Control</span><span class="p">;</span>
+        <span class="n">set</span> <span class="n">beresp</span><span class="p">.</span><span class="n">do_esi</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you followed the advice about ensuring a consistent caching
+behavior, those VCL functions already exist. Append the code
+to the end of the function, they won’t interfere with each other.</p>
+</div>
+</div>
+<div class="section" id="cache-invalidation">
+<span id="index-2"></span><h2>Cache Invalidation<a class="headerlink" href="#cache-invalidation" title="Permalink to this headline">¶</a></h2>
+<p>If you want to cache content that changes frequently and still serve
+the most recent version to users, you need to invalidate that content.
+While <a class="reference external" href="https://tools.ietf.org/html/rfc2616#section-13.10">cache invalidation</a> allows you to purge content from your
+proxy before it has expired, it adds complexity to your caching setup.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>The open source <a class="reference external" href="https://foshttpcachebundle.readthedocs.io/en/latest/features/user-context.html">FOSHttpCacheBundle</a> takes the pain out of cache
+invalidation by helping you to organize your caching and
+invalidation setup.</p>
+<p class="last">The documentation of the <a class="reference external" href="https://foshttpcachebundle.readthedocs.io/en/latest/features/user-context.html">FOSHttpCacheBundle</a> explains how to configure
+Varnish and other reverse proxies for cache invalidation.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

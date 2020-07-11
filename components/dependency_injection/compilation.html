@@ -1,0 +1,887 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Compiling the Container &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Container Building Workflow" href="workflow.html" />
+    <link rel="prev" title="The DependencyInjection Component" href="../dependency_injection.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cache.html">The Cache Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../dependency_injection.html">The DependencyInjection Component</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../dependency_injection.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dependency_injection.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dependency_injection.html#avoiding-your-code-becoming-dependent-on-the-container">Avoiding your Code Becoming Dependent on the Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dependency_injection.html#setting-up-the-container-with-configuration-files">Setting up the Container with Configuration Files</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../dependency_injection.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Compiling the Container</a></li>
+<li class="toctree-l4"><a class="reference internal" href="workflow.html">Container Building Workflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/3.3-di-changes.html">The Symfony 3.3 DI Container Changes Explained (autowiring, _defaults, etc)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/alias_private.html">How to Create Service Aliases and Mark Services as Private</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/autowiring.html">Defining Services Dependencies Automatically (Autowiring)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/calls.html">Service Method Calls and Setter Injection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/compiler_passes.html">How to Work with Compiler Passes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/configurators.html">How to Configure a Service with a Configurator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/debug.html">How to Debug the Service Container &amp; List Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/definitions.html">How to work with Service Definition Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/expression_language.html">How to Inject Values Based on Complex Expressions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/factories.html">Using a Factory to Create Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/import.html">How to Import Configuration Files/Resources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/injection_types.html">Types of Injection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/lazy_services.html">Lazy Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/optional_dependencies.html">How to Make Service Arguments/References Optional</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/parent_services.html">How to Manage Common Dependencies with Parent Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/request.html">How to Retrieve the Request from the Service Container</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/service_decoration.html">How to Decorate Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/service_subscribers_locators.html">Service Subscribers &amp; Locators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/shared.html">How to Define Non Shared Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/synthetic_services.html">How to Inject Instances into the Container</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../service_container/tags.html">How to Work with Service Tags</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../form.html">The Form Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../process.html">The Process Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html">The Security Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">The Components</a> &raquo;</li>
+        
+          <li><a href="../dependency_injection.html">The DependencyInjection Component</a> &raquo;</li>
+        
+      <li>Compiling the Container</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/components/dependency_injection/compilation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="compiling-the-container">
+<span id="index-0"></span><h1>Compiling the Container<a class="headerlink" href="#compiling-the-container" title="Permalink to this headline">¶</a></h1>
+<p>The service container can be compiled for various reasons. These reasons
+include checking for any potential issues such as circular references and
+making the container more efficient by resolving parameters and removing
+unused services. Also, certain features - like using
+<a class="reference internal" href="../../service_container/parent_services.html"><span class="doc">parent services</span></a>
+- require the container to be compiled.</p>
+<p>It is compiled by running:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">compile</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The compile method uses <em>Compiler Passes</em> for the compilation. The DependencyInjection
+component comes with several passes which are automatically registered for
+compilation. For example the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DependencyInjection/Compiler/CheckDefinitionValidityPass.php" title="Symfony\Component\DependencyInjection\Compiler\CheckDefinitionValidityPass"><span class="pre">CheckDefinitionValidityPass</span></a></code>
+checks for various potential issues with the definitions that have been
+set in the container. After this and several other passes that check the
+container’s validity, further compiler passes are used to optimize the
+configuration before it is cached. For example, private services and abstract
+services are removed and aliases are resolved.</p>
+<div class="section" id="managing-configuration-with-extensions">
+<span id="components-dependency-injection-extension"></span><h2>Managing Configuration with Extensions<a class="headerlink" href="#managing-configuration-with-extensions" title="Permalink to this headline">¶</a></h2>
+<p>As well as loading configuration directly into the container as shown in
+<a class="reference internal" href="../dependency_injection.html"><span class="doc">The DependencyInjection Component</span></a>, you can manage it
+by registering extensions with the container. The first step in the compilation
+process is to load configuration from any extension classes registered with
+the container. Unlike the configuration loaded directly, they are only processed
+when the container is compiled. If your application is modular then extensions
+allow each module to register and manage their own service configuration.</p>
+<p>The extensions must implement
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DependencyInjection/Extension/ExtensionInterface.php" title="Symfony\Component\DependencyInjection\Extension\ExtensionInterface"><span class="pre">ExtensionInterface</span></a></code>
+and can be registered with the container with:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">registerExtension</span><span class="p">(</span><span class="nv">$extension</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The main work of the extension is done in the <code class="docutils literal notranslate"><span class="pre">load()</span></code> method. In the <code class="docutils literal notranslate"><span class="pre">load()</span></code>
+method you can load configuration from one or more configuration files as
+well as manipulate the container definitions using the methods shown in
+<a class="reference internal" href="../../service_container/definitions.html"><span class="doc">How to work with Service Definition Objects</span></a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">load()</span></code> method is passed a fresh container to set up, which is then
+merged afterwards into the container it is registered with. This allows
+you to have several extensions managing container definitions independently.
+The extensions do not add to the containers configuration when they are
+added but are processed when the container’s <code class="docutils literal notranslate"><span class="pre">compile()</span></code> method is called.</p>
+<p>A very simple extension may just load configuration files into the container:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Config\FileLocator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Extension\ExtensionInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\XmlFileLoader</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">AcmeDemoExtension</span> <span class="k">implements</span> <span class="nx">ExtensionInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">load</span><span class="p">(</span><span class="k">array</span> <span class="nv">$configs</span><span class="p">,</span> <span class="nx">ContainerBuilder</span> <span class="nv">$container</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XmlFileLoader</span><span class="p">(</span>
+            <span class="nv">$container</span><span class="p">,</span>
+            <span class="k">new</span> <span class="nx">FileLocator</span><span class="p">(</span><span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../Resources/config&#39;</span><span class="p">)</span>
+        <span class="p">);</span>
+        <span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;services.xml&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This does not gain very much compared to loading the file directly into
+the overall container being built. It just allows the files to be split
+up among the modules/bundles. Being able to affect the configuration
+of a module from configuration files outside of the module/bundle is needed
+to make a complex application configurable. This can be done by specifying
+sections of config files loaded directly into the container as being for
+a particular extension. These sections on the config will not be processed
+directly by the container but by the relevant Extension.</p>
+<p>The Extension must specify a <code class="docutils literal notranslate"><span class="pre">getAlias()</span></code> method to implement the interface:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+
+<span class="k">class</span> <span class="nc">AcmeDemoExtension</span> <span class="k">implements</span> <span class="nx">ExtensionInterface</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getAlias</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;acme_demo&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For YAML configuration files specifying the alias for the extension as a
+key will mean that those values are passed to the Extension’s <code class="docutils literal notranslate"><span class="pre">load()</span></code> method:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># ...</span>
+<span class="l l-Scalar l-Scalar-Plain">acme_demo</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">foo</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fooValue</span>
+    <span class="l l-Scalar l-Scalar-Plain">bar</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">barValue</span>
+</pre></div>
+</td></tr></table></div>
+<p>If this file is loaded into the configuration then the values in it are
+only processed when the container is compiled at which point the Extensions
+are loaded:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Config\FileLocator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\YamlFileLoader</span><span class="p">;</span>
+
+<span class="nv">$containerBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">registerExtension</span><span class="p">(</span><span class="k">new</span> <span class="nx">AcmeDemoExtension</span><span class="p">);</span>
+
+<span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">YamlFileLoader</span><span class="p">(</span><span class="nv">$containerBuilder</span><span class="p">,</span> <span class="k">new</span> <span class="nx">FileLocator</span><span class="p">(</span><span class="no">__DIR__</span><span class="p">));</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;config.yaml&#39;</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">compile</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When loading a config file that uses an extension alias as a key, the
+extension must already have been registered with the container builder
+or an exception will be thrown.</p>
+</div>
+<p>The values from those sections of the config files are passed into the first
+argument of the <code class="docutils literal notranslate"><span class="pre">load()</span></code> method of the extension:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">load</span><span class="p">(</span><span class="k">array</span> <span class="nv">$configs</span><span class="p">,</span> <span class="nx">ContainerBuilder</span> <span class="nv">$container</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$foo</span> <span class="o">=</span> <span class="nv">$configs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;foo&#39;</span><span class="p">];</span> <span class="c1">//fooValue</span>
+    <span class="nv">$bar</span> <span class="o">=</span> <span class="nv">$configs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;bar&#39;</span><span class="p">];</span> <span class="c1">//barValue</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">$configs</span></code> argument is an array containing each different config file
+that was loaded into the container. You are only loading a single config
+file in the above example but it will still be within an array. The array
+will look like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;foo&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;fooValue&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;bar&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;barValue&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Whilst you can manually manage merging the different files, it is much better
+to use <a class="reference internal" href="../config.html"><span class="doc">the Config component</span></a> to
+merge and validate the config values. Using the configuration processing
+you could access the config value this way:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Config\Definition\Processor</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">load</span><span class="p">(</span><span class="k">array</span> <span class="nv">$configs</span><span class="p">,</span> <span class="nx">ContainerBuilder</span> <span class="nv">$container</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$configuration</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Configuration</span><span class="p">();</span>
+    <span class="nv">$processor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Processor</span><span class="p">();</span>
+    <span class="nv">$config</span> <span class="o">=</span> <span class="nv">$processor</span><span class="o">-&gt;</span><span class="na">processConfiguration</span><span class="p">(</span><span class="nv">$configuration</span><span class="p">,</span> <span class="nv">$configs</span><span class="p">);</span>
+
+    <span class="nv">$foo</span> <span class="o">=</span> <span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">];</span> <span class="c1">//fooValue</span>
+    <span class="nv">$bar</span> <span class="o">=</span> <span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;bar&#39;</span><span class="p">];</span> <span class="c1">//barValue</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>There are a further two methods you must implement. One to return the XML
+namespace so that the relevant parts of an XML config file are passed to
+the extension. The other to specify the base path to XSD files to validate
+the XML configuration:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">getXsdValidationBasePath</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../Resources/config/&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">getNamespace</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="s1">&#39;http://www.example.com/symfony/schema/&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">XSD validation is optional, returning <code class="docutils literal notranslate"><span class="pre">false</span></code> from the <code class="docutils literal notranslate"><span class="pre">getXsdValidationBasePath()</span></code>
+method will disable it.</p>
+</div>
+<p>The XML version of the config would then look like this:</p>
+<div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:acme_demo=</span><span class="s">&quot;http://www.example.com/symfony/schema/&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.example.com/symfony/schema/ https://www.example.com/symfony/schema/hello-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;acme_demo:config&gt;</span>
+        <span class="nt">&lt;acme_demo:foo&gt;</span>fooValue<span class="nt">&lt;/acme_demo:foo&gt;</span>
+        <span class="nt">&lt;acme_demo:bar&gt;</span>barValue<span class="nt">&lt;/acme_demo:bar&gt;</span>
+    <span class="nt">&lt;/acme_demo:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the Symfony full-stack Framework there is a base Extension class
+which implements these methods as well as a shortcut method for processing
+the configuration. See <a class="reference internal" href="../../bundles/extension.html"><span class="doc">How to Load Service Configuration inside a Bundle</span></a> for more details.</p>
+</div>
+<p>The processed config value can now be added as container parameters as if
+it were listed in a <code class="docutils literal notranslate"><span class="pre">parameters</span></code> section of the config file but with the
+additional benefit of merging multiple files and validation of the configuration:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">load</span><span class="p">(</span><span class="k">array</span> <span class="nv">$configs</span><span class="p">,</span> <span class="nx">ContainerBuilder</span> <span class="nv">$container</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$configuration</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Configuration</span><span class="p">();</span>
+    <span class="nv">$processor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Processor</span><span class="p">();</span>
+    <span class="nv">$config</span> <span class="o">=</span> <span class="nv">$processor</span><span class="o">-&gt;</span><span class="na">processConfiguration</span><span class="p">(</span><span class="nv">$configuration</span><span class="p">,</span> <span class="nv">$configs</span><span class="p">);</span>
+
+    <span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;acme_demo.FOO&#39;</span><span class="p">,</span> <span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">]);</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>More complex configuration requirements can be catered for in the Extension
+classes. For example, you may choose to load a main service configuration
+file but also load a secondary one only if a certain parameter is set:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">load</span><span class="p">(</span><span class="k">array</span> <span class="nv">$configs</span><span class="p">,</span> <span class="nx">ContainerBuilder</span> <span class="nv">$container</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$configuration</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Configuration</span><span class="p">();</span>
+    <span class="nv">$processor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Processor</span><span class="p">();</span>
+    <span class="nv">$config</span> <span class="o">=</span> <span class="nv">$processor</span><span class="o">-&gt;</span><span class="na">processConfiguration</span><span class="p">(</span><span class="nv">$configuration</span><span class="p">,</span> <span class="nv">$configs</span><span class="p">);</span>
+
+    <span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XmlFileLoader</span><span class="p">(</span>
+        <span class="nv">$container</span><span class="p">,</span>
+        <span class="k">new</span> <span class="nx">FileLocator</span><span class="p">(</span><span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../Resources/config&#39;</span><span class="p">)</span>
+    <span class="p">);</span>
+    <span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;services.xml&#39;</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;advanced&#39;</span><span class="p">])</span> <span class="p">{</span>
+        <span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;advanced.xml&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Just registering an extension with the container is not enough to get
+it included in the processed extensions when the container is compiled.
+Loading config which uses the extension’s alias as a key as in the above
+examples will ensure it is loaded. The container builder can also be
+told to load it with its
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DependencyInjection/ContainerBuilder.php" title="Symfony\Component\DependencyInjection\ContainerBuilder::loadFromExtension()"><span class="pre">loadFromExtension()</span></a></code>
+method:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+
+<span class="nv">$containerBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+<span class="nv">$extension</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AcmeDemoExtension</span><span class="p">();</span>
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">registerExtension</span><span class="p">(</span><span class="nv">$extension</span><span class="p">);</span>
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="nv">$extension</span><span class="o">-&gt;</span><span class="na">getAlias</span><span class="p">());</span>
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">compile</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you need to manipulate the configuration loaded by an extension then
+you cannot do it from another extension as it uses a fresh container.
+You should instead use a compiler pass which works with the full container
+after the extensions have been processed.</p>
+</div>
+</div>
+<div class="section" id="prepending-configuration-passed-to-the-extension">
+<span id="components-dependency-injection-compiler-passes"></span><h2>Prepending Configuration Passed to the Extension<a class="headerlink" href="#prepending-configuration-passed-to-the-extension" title="Permalink to this headline">¶</a></h2>
+<p>An Extension can prepend the configuration of any Bundle before the <code class="docutils literal notranslate"><span class="pre">load()</span></code>
+method is called by implementing
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DependencyInjection/Extension/PrependExtensionInterface.php" title="Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface"><span class="pre">PrependExtensionInterface</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">class</span> <span class="nc">AcmeDemoExtension</span> <span class="k">implements</span> <span class="nx">ExtensionInterface</span><span class="p">,</span> <span class="nx">PrependExtensionInterface</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">prepend</span><span class="p">(</span><span class="nx">ContainerBuilder</span> <span class="nv">$container</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+
+        <span class="nv">$container</span><span class="o">-&gt;</span><span class="na">prependExtensionConfig</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nv">$config</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For more details, see <a class="reference internal" href="../../bundles/prepend_extension.html"><span class="doc">How to Simplify Configuration of Multiple Bundles</span></a>, which
+is specific to the Symfony Framework, but contains more details about this
+feature.</p>
+</div>
+<div class="section" id="execute-code-during-compilation">
+<span id="components-di-compiler-pass"></span><span id="creating-a-compiler-pass"></span><h2>Execute Code During Compilation<a class="headerlink" href="#execute-code-during-compilation" title="Permalink to this headline">¶</a></h2>
+<p>You can also execute custom code during compilation by writing your own
+compiler pass. By implementing
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DependencyInjection/Compiler/CompilerPassInterface.php" title="Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface"><span class="pre">CompilerPassInterface</span></a></code>
+in your extension, the added <code class="docutils literal notranslate"><span class="pre">process()</span></code> method will be called during
+compilation:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">AcmeDemoExtension</span> <span class="k">implements</span> <span class="nx">ExtensionInterface</span><span class="p">,</span> <span class="nx">CompilerPassInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">process</span><span class="p">(</span><span class="nx">ContainerBuilder</span> <span class="nv">$container</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ... do something during the compilation</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As <code class="docutils literal notranslate"><span class="pre">process()</span></code> is called <em>after</em> all extensions are loaded, it allows you to
+edit service definitions of other extensions as well as retrieving information
+about service definitions.</p>
+<p>The container’s parameters and definitions can be manipulated using the
+methods described in <a class="reference internal" href="../../service_container/definitions.html"><span class="doc">How to work with Service Definition Objects</span></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please note that the <code class="docutils literal notranslate"><span class="pre">process()</span></code> method in the extension class is
+called during the <code class="docutils literal notranslate"><span class="pre">PassConfig::TYPE_BEFORE_OPTIMIZATION</span></code> step. You can read
+<a class="reference internal" href="#components-di-separate-compiler-passes"><span class="std std-ref">the next section</span></a> if you
+need to edit the container during another step.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As a rule, only work with services definition in a compiler pass and do not
+create service instances. In practice, this means using the methods
+<code class="docutils literal notranslate"><span class="pre">has()</span></code>, <code class="docutils literal notranslate"><span class="pre">findDefinition()</span></code>, <code class="docutils literal notranslate"><span class="pre">getDefinition()</span></code>, <code class="docutils literal notranslate"><span class="pre">setDefinition()</span></code>,
+etc. instead of <code class="docutils literal notranslate"><span class="pre">get()</span></code>, <code class="docutils literal notranslate"><span class="pre">set()</span></code>, etc.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Make sure your compiler pass does not require services to exist. Abort the
+method call if some required service is not available.</p>
+</div>
+<p>A common use-case of compiler passes is to search for all service definitions
+that have a certain tag in order to process dynamically plug each into some
+other service. See the section on <a class="reference internal" href="../../service_container/tags.html#service-container-compiler-pass-tags"><span class="std std-ref">service tags</span></a>
+for an example.</p>
+<div class="section" id="creating-separate-compiler-passes">
+<span id="components-di-separate-compiler-passes"></span><h3>Creating Separate Compiler Passes<a class="headerlink" href="#creating-separate-compiler-passes" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes, you need to do more than one thing during compilation, want to use
+compiler passes without an extension or you need to execute some code at
+another step in the compilation process. In these cases, you can create a new
+class implementing the <code class="docutils literal notranslate"><span class="pre">CompilerPassInterface</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">CustomPass</span> <span class="k">implements</span> <span class="nx">CompilerPassInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">process</span><span class="p">(</span><span class="nx">ContainerBuilder</span> <span class="nv">$container</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ... do something during the compilation</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You then need to register your custom pass with the container:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+
+<span class="nv">$containerBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">addCompilerPass</span><span class="p">(</span><span class="k">new</span> <span class="nx">CustomPass</span><span class="p">());</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Compiler passes are registered differently if you are using the full-stack
+framework, see <a class="reference internal" href="../../service_container/compiler_passes.html"><span class="doc">How to Work with Compiler Passes</span></a> for
+more details.</p>
+</div>
+<div class="section" id="controlling-the-pass-ordering">
+<h4>Controlling the Pass Ordering<a class="headerlink" href="#controlling-the-pass-ordering" title="Permalink to this headline">¶</a></h4>
+<p>The default compiler passes are grouped into optimization passes and removal
+passes. The optimization passes run first and include tasks such as resolving
+references within the definitions. The removal passes perform tasks such
+as removing private aliases and unused services. When registering compiler
+passes using <code class="docutils literal notranslate"><span class="pre">addCompilerPass()</span></code>, you can configure when your compiler pass
+is run. By default, they are run before the optimization passes.</p>
+<p>You can use the following constants to determine when your pass is executed:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">PassConfig::TYPE_BEFORE_OPTIMIZATION</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PassConfig::TYPE_OPTIMIZE</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PassConfig::TYPE_BEFORE_REMOVING</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PassConfig::TYPE_REMOVE</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PassConfig::TYPE_AFTER_REMOVING</span></code></li>
+</ul>
+<p>For example, to run your custom pass after the default removal passes have
+been run, use:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">addCompilerPass</span><span class="p">(</span>
+    <span class="k">new</span> <span class="nx">CustomPass</span><span class="p">(),</span>
+    <span class="nx">PassConfig</span><span class="o">::</span><span class="na">TYPE_AFTER_REMOVING</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>You can also control the order in which compiler passes are run for each
+compilation phase. Use the optional third argument of <code class="docutils literal notranslate"><span class="pre">addCompilerPass()</span></code> to
+set the priority as an integer number. The default priority is <code class="docutils literal notranslate"><span class="pre">0</span></code> and the higher
+its value, the earlier it’s executed:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="c1">// FirstPass is executed after SecondPass because its priority is lower</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">addCompilerPass</span><span class="p">(</span>
+    <span class="k">new</span> <span class="nx">FirstPass</span><span class="p">(),</span> <span class="nx">PassConfig</span><span class="o">::</span><span class="na">TYPE_AFTER_REMOVING</span><span class="p">,</span> <span class="mi">10</span>
+<span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">addCompilerPass</span><span class="p">(</span>
+    <span class="k">new</span> <span class="nx">SecondPass</span><span class="p">(),</span> <span class="nx">PassConfig</span><span class="o">::</span><span class="na">TYPE_AFTER_REMOVING</span><span class="p">,</span> <span class="mi">30</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dumping-the-configuration-for-performance">
+<span id="components-dependency-injection-dumping"></span><h2>Dumping the Configuration for Performance<a class="headerlink" href="#dumping-the-configuration-for-performance" title="Permalink to this headline">¶</a></h2>
+<p>Using configuration files to manage the service container can be much easier
+to understand than using PHP once there are a lot of services. This ease
+comes at a price though when it comes to performance as the config files
+need to be parsed and the PHP configuration built from them. The compilation
+process makes the container more efficient but it takes time to run. You
+can have the best of both worlds though by using configuration files and
+then dumping and caching the resulting configuration. The <code class="docutils literal notranslate"><span class="pre">PhpDumper</span></code>
+serves at dumping the compiled container:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Dumper\PhpDumper</span><span class="p">;</span>
+
+<span class="nv">$file</span> <span class="o">=</span> <span class="no">__DIR__</span> <span class="o">.</span><span class="s1">&#39;/cache/container.php&#39;</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="nv">$file</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">require_once</span> <span class="nv">$file</span><span class="p">;</span>
+    <span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ProjectServiceContainer</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nv">$containerBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+    <span class="c1">// ...</span>
+    <span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">compile</span><span class="p">();</span>
+
+    <span class="nv">$dumper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PhpDumper</span><span class="p">(</span><span class="nv">$containerBuilder</span><span class="p">);</span>
+    <span class="nb">file_put_contents</span><span class="p">(</span><span class="nv">$file</span><span class="p">,</span> <span class="nv">$dumper</span><span class="o">-&gt;</span><span class="na">dump</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ProjectServiceContainer</span></code> is the default name given to the dumped container
+class. However, you can change this with the <code class="docutils literal notranslate"><span class="pre">class</span></code> option when you
+dump it:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$file</span> <span class="o">=</span> <span class="no">__DIR__</span> <span class="o">.</span><span class="s1">&#39;/cache/container.php&#39;</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="nv">$file</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">require_once</span> <span class="nv">$file</span><span class="p">;</span>
+    <span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyCachedContainer</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nv">$containerBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+    <span class="c1">// ...</span>
+    <span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">compile</span><span class="p">();</span>
+
+    <span class="nv">$dumper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PhpDumper</span><span class="p">(</span><span class="nv">$containerBuilder</span><span class="p">);</span>
+    <span class="nb">file_put_contents</span><span class="p">(</span>
+        <span class="nv">$file</span><span class="p">,</span>
+        <span class="nv">$dumper</span><span class="o">-&gt;</span><span class="na">dump</span><span class="p">([</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;MyCachedContainer&#39;</span><span class="p">])</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You will now get the speed of the PHP configured container with the ease
+of using configuration files. Additionally dumping the container in this
+way further optimizes how the services are created by the container.</p>
+<p>In the above example you will need to delete the cached container file whenever
+you make any changes. Adding a check for a variable that determines if you
+are in debug mode allows you to keep the speed of the cached container in
+production but getting an up to date configuration whilst developing your
+application:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+
+<span class="c1">// based on something in your project</span>
+<span class="nv">$isDebug</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span>
+
+<span class="nv">$file</span> <span class="o">=</span> <span class="no">__DIR__</span> <span class="o">.</span><span class="s1">&#39;/cache/container.php&#39;</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$isDebug</span> <span class="o">&amp;&amp;</span> <span class="nb">file_exists</span><span class="p">(</span><span class="nv">$file</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">require_once</span> <span class="nv">$file</span><span class="p">;</span>
+    <span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyCachedContainer</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nv">$containerBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+    <span class="c1">// ...</span>
+    <span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">compile</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$isDebug</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$dumper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PhpDumper</span><span class="p">(</span><span class="nv">$containerBuilder</span><span class="p">);</span>
+        <span class="nb">file_put_contents</span><span class="p">(</span>
+            <span class="nv">$file</span><span class="p">,</span>
+            <span class="nv">$dumper</span><span class="o">-&gt;</span><span class="na">dump</span><span class="p">([</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;MyCachedContainer&#39;</span><span class="p">])</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This could be further improved by only recompiling the container in debug
+mode when changes have been made to its configuration rather than on every
+request. This can be done by caching the resource files used to configure
+the container in the way described in “<a class="reference internal" href="../config/caching.html"><span class="doc">Caching based on Resources</span></a>”
+in the config component documentation.</p>
+<p>You do not need to work out which files to cache as the container builder
+keeps track of all the resources used to configure it, not just the
+configuration files but the extension classes and compiler passes as well.
+This means that any changes to any of these files will invalidate the cache
+and trigger the container being rebuilt. You need to ask the container
+for these resources and use them as metadata for the cache:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+
+<span class="c1">// based on something in your project</span>
+<span class="nv">$isDebug</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span>
+
+<span class="nv">$file</span> <span class="o">=</span> <span class="no">__DIR__</span> <span class="o">.</span><span class="s1">&#39;/cache/container.php&#39;</span><span class="p">;</span>
+<span class="nv">$containerConfigCache</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ConfigCache</span><span class="p">(</span><span class="nv">$file</span><span class="p">,</span> <span class="nv">$isDebug</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$containerConfigCache</span><span class="o">-&gt;</span><span class="na">isFresh</span><span class="p">())</span> <span class="p">{</span>
+    <span class="nv">$containerBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+    <span class="c1">// ...</span>
+    <span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">compile</span><span class="p">();</span>
+
+    <span class="nv">$dumper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PhpDumper</span><span class="p">(</span><span class="nv">$containerBuilder</span><span class="p">);</span>
+    <span class="nv">$containerConfigCache</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span>
+        <span class="nv">$dumper</span><span class="o">-&gt;</span><span class="na">dump</span><span class="p">([</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;MyCachedContainer&#39;</span><span class="p">]),</span>
+        <span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">getResources</span><span class="p">()</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">require_once</span> <span class="nv">$file</span><span class="p">;</span>
+<span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyCachedContainer</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Now the cached dumped container is used regardless of whether debug mode
+is on or not. The difference is that the <code class="docutils literal notranslate"><span class="pre">ConfigCache</span></code> is set to debug
+mode with its second constructor argument. When the cache is not in debug
+mode the cached container will always be used if it exists. In debug mode,
+an additional metadata file is written with the timestamps of all the resource
+files. These are then checked to see if the files have changed, if they
+have the cache will be considered stale.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the full-stack framework the compilation and caching of the container
+is taken care of for you.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

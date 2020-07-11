@@ -1,0 +1,1441 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The Symfony 3.3 DI Container Changes Explained (autowiring, _defaults, etc) &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Create Service Aliases and Mark Services as Private" href="alias_private.html" />
+    <link rel="prev" title="Service Container" href="../service_container.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../service_container.html">Service Container</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#fetching-and-using-services">Fetching and using Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#creating-configuring-services-in-the-container">Creating/Configuring Services in the Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#injecting-services-config-into-a-service">Injecting Services/Config into a Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#service-parameters">Service Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#choose-a-specific-service">Choose a Specific Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#binding-arguments-by-name-or-type">Binding Arguments by Name or Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#the-autowire-option">The autowire Option</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#the-autoconfigure-option">The autoconfigure Option</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#linting-service-definitions">Linting Service Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#public-versus-private-services">Public Versus Private Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#importing-many-services-at-once-with-resource">Importing Many Services at once with resource</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#explicitly-configuring-services-and-arguments">Explicitly Configuring Services and Arguments</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../service_container.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">The Symfony 3.3 DI Container Changes Explained (autowiring, _defaults, etc)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#all-changes-are-optional">All Changes are Optional</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-new-default-services-yaml-file">The new Default services.yaml File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#services-are-loaded-automatically">1) Services are Loaded Automatically</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autowiring-by-default-use-type-hint-instead-of-service-id">2) Autowiring by Default: Use Type-hint instead of Service id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controllers-are-registered-as-services">3) Controllers are Registered as Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#auto-tagging-with-autoconfigure">4) Auto-tagging with autoconfigure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#auto-configure-with-instanceof">5) Auto-configure with _instanceof</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-about-performance">What about Performance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upgrading-to-the-new-symfony-3-3-configuration">Upgrading to the new Symfony 3.3 Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="alias_private.html">How to Create Service Aliases and Mark Services as Private</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autowiring.html">Defining Services Dependencies Automatically (Autowiring)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calls.html">Service Method Calls and Setter Injection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compiler_passes.html">How to Work with Compiler Passes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configurators.html">How to Configure a Service with a Configurator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug.html">How to Debug the Service Container &amp; List Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="definitions.html">How to work with Service Definition Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expression_language.html">How to Inject Values Based on Complex Expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="factories.html">Using a Factory to Create Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="import.html">How to Import Configuration Files/Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="injection_types.html">Types of Injection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lazy_services.html">Lazy Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_dependencies.html">How to Make Service Arguments/References Optional</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parent_services.html">How to Manage Common Dependencies with Parent Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="request.html">How to Retrieve the Request from the Service Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service_decoration.html">How to Decorate Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service_subscribers_locators.html">Service Subscribers &amp; Locators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shared.html">How to Define Non Shared Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synthetic_services.html">How to Inject Instances into the Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tags.html">How to Work with Service Tags</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../service_container.html">Service Container</a> &raquo;</li>
+        
+      <li>The Symfony 3.3 DI Container Changes Explained (autowiring, _defaults, etc)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/service_container/3.3-di-changes.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-symfony-3-3-di-container-changes-explained-autowiring-defaults-etc">
+<h1>The Symfony 3.3 DI Container Changes Explained (autowiring, _defaults, etc)<a class="headerlink" href="#the-symfony-3-3-di-container-changes-explained-autowiring-defaults-etc" title="Permalink to this headline">¶</a></h1>
+<p>If you look at the <code class="docutils literal notranslate"><span class="pre">services.yaml</span></code> file in a new Symfony 3.3 or newer project, you’ll
+notice some big changes: <code class="docutils literal notranslate"><span class="pre">_defaults</span></code>, <code class="docutils literal notranslate"><span class="pre">autowiring</span></code>, <code class="docutils literal notranslate"><span class="pre">autoconfigure</span></code> and more.
+These features are designed to <em>automate</em> configuration and make development faster,
+without sacrificing predictability, which is very important! Another goal is to make
+controllers and services behave more consistently. In Symfony 3.3, controllers <em>are</em>
+services by default.</p>
+<p>The documentation has already been updated to assume you have these new features
+enabled. If you’re an existing Symfony user and want to understand the “what”
+and “why” behind these changes, this article is for you!</p>
+<div class="section" id="all-changes-are-optional">
+<h2>All Changes are Optional<a class="headerlink" href="#all-changes-are-optional" title="Permalink to this headline">¶</a></h2>
+<p>Most importantly, <strong>you can upgrade to Symfony 3.3 today without making any changes to your app</strong>.
+Symfony has a strict <a class="reference internal" href="../contributing/code/bc.html"><span class="doc">backwards compatibility promise</span></a>,
+which means it’s always safe to upgrade across minor versions.</p>
+<p>All of the new features are <strong>optional</strong>: they are not enabled by default, so you
+need to actually change your configuration files to use them.</p>
+</div>
+<div class="section" id="the-new-default-services-yaml-file">
+<span id="service-33-default-definition"></span><h2>The new Default services.yaml File<a class="headerlink" href="#the-new-default-services-yaml-file" title="Permalink to this headline">¶</a></h2>
+<p>To understand the changes, look at the new default <code class="docutils literal notranslate"><span class="pre">services.yaml</span></code> file (this is
+what the file looks like in Symfony 4):</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># default configuration for services in *this* file</span>
+    <span class="l l-Scalar l-Scalar-Plain">_defaults</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">autowire</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>      <span class="c1"># Automatically injects dependencies in your services.</span>
+        <span class="l l-Scalar l-Scalar-Plain">autoconfigure</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span> <span class="c1"># Automatically registers your services as commands, event subscribers, etc.</span>
+        <span class="l l-Scalar l-Scalar-Plain">public</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>       <span class="c1"># Allows optimizing the container by removing unused services; this also means</span>
+                            <span class="c1"># fetching services directly from the container via $container-&gt;get() won&#39;t work.</span>
+                            <span class="c1"># The best practice is to be explicit about your dependencies anyway.</span>
+
+    <span class="c1"># makes classes in src/ available to be used as services</span>
+    <span class="c1"># this creates a service per class whose id is the fully-qualified class name</span>
+    <span class="l l-Scalar l-Scalar-Plain">App\</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="s">&#39;../src/*&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">exclude</span><span class="p p-Indicator">:</span> <span class="s">&#39;../src/{Entity,Migrations,Tests}&#39;</span>
+
+    <span class="c1"># controllers are imported separately to make sure services can be injected</span>
+    <span class="c1"># as action arguments even if you don&#39;t extend any base controller class</span>
+    <span class="l l-Scalar l-Scalar-Plain">App\Controller\</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="s">&#39;../src/Controller&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;controller.service_arguments&#39;</span><span class="p p-Indicator">]</span>
+
+    <span class="c1"># add more service definitions when explicit configuration is needed</span>
+    <span class="c1"># please note that last definitions always *replace* previous ones</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;defaults</span> <span class="na">autowire=</span><span class="s">&quot;true&quot;</span> <span class="na">autoconfigure=</span><span class="s">&quot;true&quot;</span> <span class="na">public=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;prototype</span> <span class="na">namespace=</span><span class="s">&quot;App\&quot;</span> <span class="na">resource=</span><span class="s">&quot;../src/*&quot;</span> <span class="na">exclude=</span><span class="s">&quot;../src/{Entity,Migrations,Tests}&quot;</span><span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;prototype</span> <span class="na">namespace=</span><span class="s">&quot;App\Controller\&quot;</span> <span class="na">resource=</span><span class="s">&quot;../src/Controller&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;controller.service_arguments&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/prototype&gt;</span>
+
+        <span class="c">&lt;!-- add more services, or override services that need manual wiring --&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// default configuration for services in *this* file</span>
+    <span class="nv">$services</span> <span class="o">=</span> <span class="nv">$configurator</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">()</span>
+        <span class="o">-&gt;</span><span class="na">defaults</span><span class="p">()</span>
+            <span class="o">-&gt;</span><span class="na">autowire</span><span class="p">()</span>      <span class="c1">// Automatically injects dependencies in your services.</span>
+            <span class="o">-&gt;</span><span class="na">autoconfigure</span><span class="p">()</span> <span class="c1">// Automatically registers your services as commands, event subscribers, etc.</span>
+    <span class="p">;</span>
+
+    <span class="c1">// makes classes in src/ available to be used as services</span>
+    <span class="c1">// this creates a service per class whose id is the fully-qualified class name</span>
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;App\\&#39;</span><span class="p">,</span> <span class="s1">&#39;../src/*&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">exclude</span><span class="p">(</span><span class="s1">&#39;../src/{Entity,Migrations,Tests}&#39;</span><span class="p">);</span>
+
+    <span class="c1">// controllers are imported separately to make sure services can be injected</span>
+    <span class="c1">// as action arguments even if you don&#39;t extend any base controller class</span>
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;App\\Controller\\&#39;</span><span class="p">,</span> <span class="s1">&#39;../src/Controller&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">tag</span><span class="p">(</span><span class="s1">&#39;controller.service_arguments&#39;</span><span class="p">);</span>
+
+    <span class="c1">// add more service definitions when explicit configuration is needed</span>
+    <span class="c1">// please note that last definitions always *replace* previous ones</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>This small bit of configuration contains a paradigm shift of how services
+are configured in Symfony.</p>
+</div>
+<div class="section" id="services-are-loaded-automatically">
+<span id="service-33-changes-automatic-registration"></span><h2>1) Services are Loaded Automatically<a class="headerlink" href="#services-are-loaded-automatically" title="Permalink to this headline">¶</a></h2>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Read the documentation for <a class="reference internal" href="../service_container.html#service-psr4-loader"><span class="std std-ref">automatic service loading</span></a>.</p>
+</div>
+<p>The first big change is that services do <em>not</em> need to be defined one-by-one anymore,
+thanks to the following config:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="c1"># makes classes in src/ available to be used as services</span>
+    <span class="c1"># this creates a service per class whose id is the fully-qualified class name</span>
+    <span class="l l-Scalar l-Scalar-Plain">App\</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="s">&#39;../src/*&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">exclude</span><span class="p p-Indicator">:</span> <span class="s">&#39;../src/{Entity,Migrations,Tests}&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="nt">&lt;prototype</span> <span class="na">namespace=</span><span class="s">&quot;App\&quot;</span> <span class="na">resource=</span><span class="s">&quot;../src/*&quot;</span> <span class="na">exclude=</span><span class="s">&quot;../src/{Entity,Migrations,Tests}&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="c1">// makes classes in src/ available to be used as services</span>
+    <span class="c1">// this creates a service per class whose id is the fully-qualified class name</span>
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;App\\&#39;</span><span class="p">,</span> <span class="s1">&#39;../src/*&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">exclude</span><span class="p">(</span><span class="s1">&#39;../src/{Entity,Migrations,Tests}&#39;</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>This means that every class in <code class="docutils literal notranslate"><span class="pre">src/</span></code> is <em>available</em> to be used as a
+service. And thanks to the <code class="docutils literal notranslate"><span class="pre">_defaults</span></code> section at the top of the file, all of
+these services are <strong>autowired</strong> and <strong>private</strong> (i.e. <code class="docutils literal notranslate"><span class="pre">public:</span> <span class="pre">false</span></code>).</p>
+<p>The service ids are equal to the class name (e.g. <code class="docutils literal notranslate"><span class="pre">App\Service\InvoiceGenerator</span></code>).
+And that’s another change you’ll notice in Symfony 3.3: we recommend that you use
+the class name as your service id, unless you have <a class="reference internal" href="../service_container.html#services-explicitly-configure-wire-services"><span class="std std-ref">multiple services for the same class</span></a>.</p>
+<blockquote>
+<div>But how does the container know the arguments to my services?</div></blockquote>
+<p>Since each service is <a class="reference internal" href="../service_container.html#services-autowire"><span class="std std-ref">autowired</span></a>, the container is able
+to determine most arguments automatically. But, you can always override the service
+and <a class="reference internal" href="../service_container.html#services-manually-wire-args"><span class="std std-ref">manually configure arguments</span></a> or anything
+else special about your service.</p>
+<blockquote>
+<div>But wait, if I have some model (non-service) classes in my <code class="docutils literal notranslate"><span class="pre">src/</span></code>
+directory, doesn’t this mean that <em>they</em> will also be registered as services?
+Isn’t that a problem?</div></blockquote>
+<p>Actually, this is <em>not</em> a problem. Since all the new services are <a class="reference internal" href="../service_container.html#container-public"><span class="std std-ref">private</span></a>
+(thanks to <code class="docutils literal notranslate"><span class="pre">_defaults</span></code>), if any of the services are <em>not</em> used in your code, they’re
+automatically removed from the compiled container. This means that the number of
+services in your container should be the <em>same</em> whether your explicitly configure
+each service or load them all at once with this method.</p>
+<blockquote>
+<div>Ok, but can I exclude some paths that I <em>know</em> won’t contain services?</div></blockquote>
+<p>Yes! The <code class="docutils literal notranslate"><span class="pre">exclude</span></code> key is a glob pattern that can be used to <em>ignore</em> paths
+that you do <em>not</em> want to be included as services. But, since unused services are
+automatically removed from the container, <code class="docutils literal notranslate"><span class="pre">exclude</span></code> is not that important. The
+biggest benefit is that those paths are not <em>tracked</em> by the container, and so may
+result in the container needing to be rebuilt less-often in the <code class="docutils literal notranslate"><span class="pre">dev</span></code> environment.</p>
+</div>
+<div class="section" id="autowiring-by-default-use-type-hint-instead-of-service-id">
+<h2>2) Autowiring by Default: Use Type-hint instead of Service id<a class="headerlink" href="#autowiring-by-default-use-type-hint-instead-of-service-id" title="Permalink to this headline">¶</a></h2>
+<p>The second big change is that autowiring is enabled (via <code class="docutils literal notranslate"><span class="pre">_defaults</span></code>) for all
+services you register. This also means that service id’s are now <em>less</em> important
+and “types” (i.e. class or interface names) are now <em>more</em> important.</p>
+<p>For example, before Symfony 3.3 (and this is still allowed), you could pass one
+service as an argument to another with the following config:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">app.invoice_generator</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Service\InvoiceGenerator</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">app.invoice_mailer</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Service\InvoiceMailer</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="s">&#39;@app.invoice_generator&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;app.invoice_generator&quot;</span>
+            <span class="na">class=</span><span class="s">&quot;App\Service\InvoiceGenerator&quot;</span><span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;app.invoice_mailer&quot;</span>
+            <span class="na">class=</span><span class="s">&quot;App\Service\InvoiceMailer&quot;</span><span class="nt">&gt;</span>
+
+            <span class="nt">&lt;argument</span> <span class="na">type=</span><span class="s">&quot;service&quot;</span> <span class="na">id=</span><span class="s">&quot;app.invoice_generator&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">App\Service\InvoiceGenerator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Service\InvoiceMailer</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Reference</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;app.invoice_generator&#39;</span><span class="p">,</span> <span class="nx">InvoiceGenerator</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;app.invoice_mailer&#39;</span><span class="p">,</span> <span class="nx">InvoiceMailer</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setArguments</span><span class="p">([</span><span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;app.invoice_generator&#39;</span><span class="p">)]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>To pass the <code class="docutils literal notranslate"><span class="pre">InvoiceGenerator</span></code> as an argument to <code class="docutils literal notranslate"><span class="pre">InvoiceMailer</span></code>, you needed
+to specify the service’s <em>id</em> as an argument: <code class="docutils literal notranslate"><span class="pre">app.invoice_generator</span></code>. Service
+id’s were the main way that you configured things.</p>
+<p>But in Symfony 3.3, thanks to autowiring, all you need to do is type-hint the
+argument with <code class="docutils literal notranslate"><span class="pre">InvoiceGenerator</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Service/InvoiceMailer.php</span>
+<span class="c1">// ...</span>
+
+<span class="k">class</span> <span class="nc">InvoiceMailer</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$generator</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">InvoiceGenerator</span> <span class="nv">$generator</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">generator</span> <span class="o">=</span> <span class="nv">$generator</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That’s it! Both services are <a class="reference internal" href="#service-33-changes-automatic-registration"><span class="std std-ref">automatically registered</span></a>
+and set to autowire. Without <em>any</em> configuration, the container knows to pass the
+auto-registered <code class="docutils literal notranslate"><span class="pre">App\Service\InvoiceGenerator</span></code> as the first argument. As
+you can see, the <em>type</em> of the class - <code class="docutils literal notranslate"><span class="pre">App\Service\InvoiceGenerator</span></code> - is
+what’s most important, not the id. You request an <em>instance</em> of a specific type and
+the container automatically passes you the correct service.</p>
+<blockquote>
+<div>Isn’t that magic? How does it know which service to pass me exactly? What if
+I have multiple services of the same instance?</div></blockquote>
+<p>The autowiring system was designed to be <em>super</em> predictable. It first works by looking
+for a service whose id <em>exactly</em> matches the type-hint. This means you’re in full
+control of what type-hint maps to what service. You can even use service aliases
+to get more control. If you have multiple services for a specific type, <em>you</em> choose
+which should be used for autowiring. For full details on the autowiring logic, see <a class="reference internal" href="autowiring.html#autowiring-logic-explained"><span class="std std-ref">Autowiring Logic Explained</span></a>.</p>
+<blockquote>
+<div>But what if I have a scalar (e.g. string) argument? How does it autowire that?</div></blockquote>
+<p>If you have an argument that is <em>not</em> an object, it can’t be autowired. But that’s
+ok! Symfony will give you a clear exception (on the next refresh of <em>any</em> page) telling
+you which argument of which service could not be autowired. To fix it, you can
+<a class="reference internal" href="../service_container.html#services-manually-wire-args"><span class="std std-ref">manually configure *just* that one argument</span></a>.
+This is the philosophy of autowiring: only configure the parts that you need to.
+Most configuration is automated.</p>
+<blockquote>
+<div>Ok, but autowiring makes your applications less stable. If you change one thing
+or make a mistake, unexpected things might happen. Isn’t that a problem?</div></blockquote>
+<p>Symfony has always valued stability, security and predictability first. Autowiring
+was designed with that in mind. Specifically:</p>
+<ul class="simple">
+<li>If there is a problem wiring <em>any</em> argument to <em>any</em> service, a clear exception
+is thrown on the next refresh of <em>any</em> page, even if you don’t use that service
+on that page. That’s <em>powerful</em>: it is <em>not</em> possible to make an autowiring mistake
+and not realize it.</li>
+<li>The container determines <em>which</em> service to pass in an explicit way: it looks for
+a service whose id matches the type-hint exactly. It does <em>not</em> scan all services
+looking for objects that have that class/interface.</li>
+</ul>
+<p>Autowiring aims to <em>automate</em> configuration without magic.</p>
+</div>
+<div class="section" id="controllers-are-registered-as-services">
+<h2>3) Controllers are Registered as Services<a class="headerlink" href="#controllers-are-registered-as-services" title="Permalink to this headline">¶</a></h2>
+<p>The third big change is that, in a new Symfony 3.3 project, your controllers are <em>services</em>:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="c1"># controllers are imported separately to make sure they&#39;re public</span>
+    <span class="c1"># and have a tag that allows actions to type-hint services</span>
+    <span class="l l-Scalar l-Scalar-Plain">App\Controller\</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="s">&#39;../src/Controller&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;controller.service_arguments&#39;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="nt">&lt;prototype</span> <span class="na">namespace=</span><span class="s">&quot;App\Controller\&quot;</span> <span class="na">resource=</span><span class="s">&quot;../src/Controller&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;controller.service_arguments&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/prototype&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="c1">// controllers are imported separately to make sure they&#39;re public</span>
+    <span class="c1">// and have a tag that allows actions to type-hint services</span>
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;App\\Controller\\&#39;</span><span class="p">,</span> <span class="s1">&#39;../src/Controller&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">tag</span><span class="p">(</span><span class="s1">&#39;controller.service_arguments&#39;</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>But, you might not even notice this. First, your controllers <em>can</em> still extend
+the same base controller class (<code class="docutils literal notranslate"><span class="pre">AbstractController</span></code>).
+This means you have access to all of the same shortcuts as before. Additionally,
+the <code class="docutils literal notranslate"><span class="pre">&#64;Route</span></code> annotation and <code class="docutils literal notranslate"><span class="pre">_controller</span></code> syntax (e.g. <code class="docutils literal notranslate"><span class="pre">App:Default:homepage</span></code>)
+used in routing will automatically use your controller as a service (as long as its
+service id matches its class name, which it <em>does</em> in this case). See <a class="reference internal" href="../controller/service.html"><span class="doc">How to Define Controllers as Services</span></a>
+for more details. You can even create <a class="reference internal" href="../controller/service.html#controller-service-invoke"><span class="std std-ref">invokable controllers</span></a></p>
+<p>In other words, everything works the same. You can even add the above configuration
+to your existing project without any issues: your controllers will behave the same
+as before. But now that your controllers are services, you can use dependency injection
+and autowiring like any other service.</p>
+<p>To make life even easier, it’s now possible to autowire arguments to your controller
+action methods, just like you can with the constructor of services. For example:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Psr\Log\LoggerInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">InvoiceController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">listInvoices</span><span class="p">(</span><span class="nx">LoggerInterface</span> <span class="nv">$logger</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$logger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;A new way to access services!&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This is <em>only</em> possible in a controller, and your controller service must be tagged
+with <code class="docutils literal notranslate"><span class="pre">controller.service_arguments</span></code> to make it happen. This new feature is used
+throughout the documentation.</p>
+<p>In general, the new best practice is to use normal constructor dependency injection
+(or “action” injection in controllers) instead of fetching public services via
+<code class="docutils literal notranslate"><span class="pre">$this-&gt;get()</span></code> (though that does still work).</p>
+</div>
+<div class="section" id="auto-tagging-with-autoconfigure">
+<span id="service-autoconfigure"></span><h2>4) Auto-tagging with autoconfigure<a class="headerlink" href="#auto-tagging-with-autoconfigure" title="Permalink to this headline">¶</a></h2>
+<p>The fourth big change is the <code class="docutils literal notranslate"><span class="pre">autoconfigure</span></code> key, which is set to <code class="docutils literal notranslate"><span class="pre">true</span></code> under
+<code class="docutils literal notranslate"><span class="pre">_defaults</span></code>. Thanks to this, the container will auto-tag services registered in
+this file. For example, suppose you want to create an event subscriber. First, you
+create the class:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/EventSubscriber/SetHeaderSusbcriber.php</span>
+<span class="c1">// ...</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher\EventSubscriberInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\ResponseEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\KernelEvents</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">SetHeaderSusbcriber</span> <span class="k">implements</span> <span class="nx">EventSubscriberInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">onKernelResponse</span><span class="p">(</span><span class="nx">ResponseEvent</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;X-SYMFONY-3.3&#39;</span><span class="p">,</span> <span class="s1">&#39;Less config&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getSubscribedEvents</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="nx">KernelEvents</span><span class="o">::</span><span class="na">RESPONSE</span> <span class="o">=&gt;</span> <span class="s1">&#39;onKernelResponse&#39;</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Great! In Symfony 3.2 or lower, you would now need to register this as a service
+in <code class="docutils literal notranslate"><span class="pre">services.yaml</span></code> and tag it with <code class="docutils literal notranslate"><span class="pre">kernel.event_subscriber</span></code>. In Symfony 3.3,
+you’re already done!</p>
+<p>The service is <a class="reference internal" href="#service-33-changes-automatic-registration"><span class="std std-ref">automatically registered</span></a>.
+And thanks to <code class="docutils literal notranslate"><span class="pre">autoconfigure</span></code>, Symfony automatically tags the service because
+it implements <code class="docutils literal notranslate"><span class="pre">EventSubscriberInterface</span></code>.</p>
+<blockquote>
+<div>That sounds like magic - it <em>automatically</em> tags my services?</div></blockquote>
+<p>In this case, you’ve created a class that implements <code class="docutils literal notranslate"><span class="pre">EventSubscriberInterface</span></code>
+and registered it as a service. This is more than enough for the container to know
+that you want this to be used as an event subscriber: more configuration is not needed.
+And the tags system is its own, Symfony-specific mechanism. And you can
+always set <code class="docutils literal notranslate"><span class="pre">autoconfigure</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code> in <code class="docutils literal notranslate"><span class="pre">services.yaml</span></code>, or disable it
+for a specific service.</p>
+<blockquote>
+<div>Does this mean tags are dead? Does this work for all tags?</div></blockquote>
+<p>This does <em>not</em> work for all tags. Many tags have <em>required</em> attributes, like event
+<em>listeners</em>, where you also need to specify the event name and method in your tag.
+Autoconfigure works only for tags without any required tag attributes, and as you
+read the docs for a feature, it’ll tell you whether or not the tag is needed. You
+can also look at the extension classes (e.g. <a class="reference external" href="https://github.com/symfony/symfony/blob/7938fdeceb03cc1df277a249cf3da70f0b50eb98/src/Symfony/Bundle/FrameworkBundle/DependencyInjection/FrameworkExtension.php#L247-L284">FrameworkExtension for 3.3.0</a>) to
+see what it autoconfigures.</p>
+<blockquote>
+<div>What if I need to add a priority to my tag?</div></blockquote>
+<p>Many autoconfigured tags have an optional priority. If you need to specify a priority
+(or any other optional tag attribute), no problem! <a class="reference internal" href="../service_container.html#services-manually-wire-args"><span class="std std-ref">Manually configure your service</span></a>
+and add the tag. Your tag will take precedence over the one added by auto-configuration.</p>
+</div>
+<div class="section" id="auto-configure-with-instanceof">
+<h2>5) Auto-configure with _instanceof<a class="headerlink" href="#auto-configure-with-instanceof" title="Permalink to this headline">¶</a></h2>
+<p>And the final big change is <code class="docutils literal notranslate"><span class="pre">_instanceof</span></code>. It acts as a default definition
+template (see <a class="reference internal" href="#service-33-default-definition">service-33-default_definition</a>), but only for services whose
+class matches a defined one.</p>
+<p>This can be very useful when many services share some tag that cannot be
+inherited from an abstract definition:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">_instanceof</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">App\Domain\LoaderInterface</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">public</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+            <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;app.domain_loader&#39;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="nt">&lt;instanceof</span> <span class="na">id=</span><span class="s">&quot;App\Domain\LoaderInterface&quot;</span> <span class="na">public=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;app.domain_loader&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/instanceof&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Domain\LoaderInterface</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">instanceof</span><span class="p">(</span><span class="nx">LoaderInterface</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">public</span><span class="p">()</span>
+        <span class="o">-&gt;</span><span class="na">tag</span><span class="p">(</span><span class="s1">&#39;app.domain_loader&#39;</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="what-about-performance">
+<h2>What about Performance<a class="headerlink" href="#what-about-performance" title="Permalink to this headline">¶</a></h2>
+<p>Symfony is unique because it has a <em>compiled</em> container. This means that there is
+<em>no</em> runtime performance impact for using any of these features. That’s also why
+the autowiring system can give you such clear errors.</p>
+<p>However, there is some performance impact in the <code class="docutils literal notranslate"><span class="pre">dev</span></code> environment. Most importantly,
+your container will likely be rebuilt more often when you modify your service classes.
+This is because it needs to rebuild whenever you add a new argument to a service,
+or add an interface to your class that should be autoconfigured.</p>
+<p>In very big projects, this may be a problem. If it is, you can always opt to <em>not</em>
+use autowiring. If you think the cache rebuilding system could be smarter in some
+situation, please open an issue!</p>
+</div>
+<div class="section" id="upgrading-to-the-new-symfony-3-3-configuration">
+<h2>Upgrading to the new Symfony 3.3 Configuration<a class="headerlink" href="#upgrading-to-the-new-symfony-3-3-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Ready to upgrade your existing project? Great! Suppose you have the following configuration:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">app.github_notifier</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Service\GitHubNotifier</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="s">&#39;@app.api_client_github&#39;</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">markdown_transformer</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Service\MarkdownTransformer</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">app.api_client_github</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Service\ApiClient</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="s">&#39;https://api.github.com&#39;</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">app.api_client_sl_connect</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Service\ApiClient</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="s">&#39;https://connect.symfony.com/api&#39;</span>
+</pre></div>
+</td></tr></table></div>
+<p>It’s optional, but let’s upgrade this to the new Symfony 3.3 configuration step-by-step,
+<em>without</em> breaking our application.</p>
+<div class="section" id="step-1-adding-defaults">
+<h3>Step 1): Adding _defaults<a class="headerlink" href="#step-1-adding-defaults" title="Permalink to this headline">¶</a></h3>
+<p>Start by adding a <code class="docutils literal notranslate"><span class="pre">_defaults</span></code> section with <code class="docutils literal notranslate"><span class="pre">autowire</span></code> and <code class="docutils literal notranslate"><span class="pre">autoconfigure</span></code>.</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span># config/services.yaml
+services:
+<span class="gi">+     _defaults:</span>
+<span class="gi">+         autowire: true</span>
+<span class="gi">+         autoconfigure: true</span>
+
+    # ...
+</pre></div>
+</td></tr></table></div>
+<p>You’re already <em>explicitly</em> configuring all of your services. So, <code class="docutils literal notranslate"><span class="pre">autowire</span></code>
+does nothing. You’re also already tagging your services, so <code class="docutils literal notranslate"><span class="pre">autoconfigure</span></code>
+also doesn’t change any existing services.</p>
+<p>You have not added <code class="docutils literal notranslate"><span class="pre">public:</span> <span class="pre">false</span></code> yet. That will come in a minute.</p>
+</div>
+<div class="section" id="step-2-using-class-service-id-s">
+<h3>Step 2) Using Class Service id’s<a class="headerlink" href="#step-2-using-class-service-id-s" title="Permalink to this headline">¶</a></h3>
+<p>Right now, the service ids are machine names - e.g. <code class="docutils literal notranslate"><span class="pre">app.github_notifier</span></code>. To
+work well with the new configuration system, your service ids should be class names,
+except when you have multiple instances of the same service.</p>
+<p>Start by updating the service ids to class names:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span># config/services.yaml
+services:
+    # ...
+
+<span class="gd">-     app.github_notifier:</span>
+<span class="gd">-         class: App\Service\GitHubNotifier</span>
+<span class="gi">+     App\Service\GitHubNotifier:</span>
+        arguments:
+            - &#39;@app.api_client_github&#39;
+
+<span class="gd">-     markdown_transformer:</span>
+<span class="gd">-         class: App\Service\MarkdownTransformer</span>
+<span class="gi">+     App\Service\MarkdownTransformer: ~</span>
+
+    # keep these ids because there are multiple instances per class
+    app.api_client_github:
+        # ...
+    app.api_client_sl_connect:
+        # ...
+</pre></div>
+</td></tr></table></div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Services associated with global PHP classes (i.e. not using PHP namespaces)
+must maintain the <code class="docutils literal notranslate"><span class="pre">class</span></code> parameter. For example, when using the old Twig
+classes (e.g. <code class="docutils literal notranslate"><span class="pre">Twig_Extensions_Extension_Intl</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Twig\Extensions\IntlExtension</span></code>),
+you can’t redefine the service as <code class="docutils literal notranslate"><span class="pre">Twig_Extensions_Extension_Intl:</span> <span class="pre">~</span></code> and
+you must keep the original <code class="docutils literal notranslate"><span class="pre">class</span></code> parameter.</p>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">If a service is processed by a <a class="reference internal" href="compiler_passes.html"><span class="doc">compiler pass</span></a>,
+you could face a  “You have requested a non-existent service” error.
+To get rid of this, be sure that the Compiler Pass is using <code class="docutils literal notranslate"><span class="pre">findDefinition()</span></code>
+instead of <code class="docutils literal notranslate"><span class="pre">getDefinition()</span></code>. The latter won’t take aliases into
+account when looking up for services.
+Furthermore it is always recommended to check for definition existence
+using <code class="docutils literal notranslate"><span class="pre">has()</span></code> function.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you get rid of deprecations and make your controllers extend from
+<code class="docutils literal notranslate"><span class="pre">AbstractController</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Controller</span></code>, you can skip the rest of
+this step because <code class="docutils literal notranslate"><span class="pre">AbstractController</span></code> doesn’t provide a container where
+you can get the services from. All services need to be injected as explained
+in the <a class="reference internal" href="#step-5"><span class="std std-ref">step 5 of this article</span></a>.</p>
+</div>
+<p>But, this change will break our app! The old service ids (e.g. <code class="docutils literal notranslate"><span class="pre">app.github_notifier</span></code>)
+no longer exist. The simplest way to fix this is to find all your old service ids
+and update them to the new class id: <code class="docutils literal notranslate"><span class="pre">app.github_notifier</span></code> to <code class="docutils literal notranslate"><span class="pre">App\Service\GitHubNotifier</span></code>.</p>
+<p>In large projects, there’s a better way: create legacy aliases that map the old id
+to the new id. Create a new <code class="docutils literal notranslate"><span class="pre">legacy_aliases.yaml</span></code> file:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/legacy_aliases.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">_defaults</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">public</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="c1"># aliases so that the old service ids can still be accessed</span>
+    <span class="c1"># remove these if/when you are not fetching these directly</span>
+    <span class="c1"># from the container via $container-&gt;get()</span>
+    <span class="l l-Scalar l-Scalar-Plain">app.github_notifier</span><span class="p p-Indicator">:</span> <span class="s">&#39;@App\Service\GitHubNotifier&#39;</span>
+    <span class="l l-Scalar l-Scalar-Plain">markdown_transformer</span><span class="p p-Indicator">:</span> <span class="s">&#39;@App\Service\MarkdownTransformer&#39;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Then import this at the top of <code class="docutils literal notranslate"><span class="pre">services.yaml</span></code>:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span># config/services.yaml
+<span class="gi">+ imports:</span>
+<span class="gi">+     - { resource: legacy_aliases.yaml }</span>
+
+# ...
+</pre></div>
+</td></tr></table></div>
+<p>That’s it! The old service ids still work. Later, (see the cleanup step below), you
+can remove these from your app.</p>
+</div>
+<div class="section" id="step-3-make-the-services-private">
+<h3>Step 3) Make the Services Private<a class="headerlink" href="#step-3-make-the-services-private" title="Permalink to this headline">¶</a></h3>
+<p>Now you’re ready to default all services to be private:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span># config/services.yaml
+# ...
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+<span class="gi">+       public: false</span>
+</pre></div>
+</td></tr></table></div>
+<p>Thanks to this, any services created in this file cannot be fetched directly from
+the container. But, since the old service id’s are aliases in a separate file (<code class="docutils literal notranslate"><span class="pre">legacy_aliases.yaml</span></code>),
+these <em>are</em> still public. This makes sure the app keeps working.</p>
+<p>If you did <em>not</em> change the id of some of your services (because there are multiple
+instances of the same class), you may need to make those public:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span># config/services.yaml
+# ...
+
+services:
+    # ...
+
+    app.api_client_github:
+        # ...
+
+<span class="gi">+         # remove this if/when you are not fetching this</span>
+<span class="gi">+         # directly from the container via $container-&gt;get()</span>
+<span class="gi">+         public: true</span>
+
+    app.api_client_sl_connect:
+        # ...
+<span class="gi">+         public: true</span>
+</pre></div>
+</td></tr></table></div>
+<p>This is to guarantee that the application doesn’t break. If you’re not fetching
+these services directly from the container, this isn’t needed. In a minute, you’ll
+clean that up.</p>
+</div>
+<div class="section" id="step-4-auto-registering-services">
+<h3>Step 4) Auto-registering Services<a class="headerlink" href="#step-4-auto-registering-services" title="Permalink to this headline">¶</a></h3>
+<p>You’re now ready to automatically register all services in <code class="docutils literal notranslate"><span class="pre">src/</span></code>
+(and/or any other directory/bundle you have):</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span># config/services.yaml
+
+services:
+    _defaults:
+        # ...
+
+<span class="gi">+     App\:</span>
+<span class="gi">+         resource: &#39;../src/*&#39;</span>
+<span class="gi">+         exclude: &#39;../src/{Entity,Migrations,Tests}&#39;</span>
+<span class="gi">+</span>
+<span class="gi">+     App\Controller\:</span>
+<span class="gi">+         resource: &#39;../src/Controller&#39;</span>
+<span class="gi">+         tags: [&#39;controller.service_arguments&#39;]</span>
+
+    # ...
+</pre></div>
+</td></tr></table></div>
+<p>That’s it! Actually, you’re already overriding and reconfiguring all the services
+you’re using (<code class="docutils literal notranslate"><span class="pre">App\Service\GitHubNotifier</span></code> and <code class="docutils literal notranslate"><span class="pre">App\Service\MarkdownTransformer</span></code>).
+But now, you won’t need to manually register future services.</p>
+<p>Once again, there is one extra complication if you have multiple services of the
+same class:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span># config/services.yaml
+
+services:
+    # ...
+
+<span class="gi">+     # alias ApiClient to one of our services below</span>
+<span class="gi">+     # app.api_client_github will be used to autowire ApiClient type-hints</span>
+<span class="gi">+     App\Service\ApiClient: &#39;@app.api_client_github&#39;</span>
+
+    app.api_client_github:
+        # ...
+    app.api_client_sl_connect:
+        # ...
+</pre></div>
+</td></tr></table></div>
+<p>This guarantees that if you try to autowire an <code class="docutils literal notranslate"><span class="pre">ApiClient</span></code> instance, the <code class="docutils literal notranslate"><span class="pre">app.api_client_github</span></code>
+will be used. If you <em>don’t</em> have this, the auto-registration feature will try to
+register a third <code class="docutils literal notranslate"><span class="pre">ApiClient</span></code> service and use that for autowiring (which will fail,
+because the class has a non-autowireable argument).</p>
+</div>
+<div class="section" id="step-5-cleanup">
+<span id="step-5"></span><h3>Step 5) Cleanup!<a class="headerlink" href="#step-5-cleanup" title="Permalink to this headline">¶</a></h3>
+<p>To make sure your application didn’t break, you did some extra work. Now it’s time
+to clean things up! First, update your application to <em>not</em> use the old service id’s (the
+ones in <code class="docutils literal notranslate"><span class="pre">legacy_aliases.yaml</span></code>). This means updating any service arguments (e.g.
+<code class="docutils literal notranslate"><span class="pre">&#64;app.github_notifier</span></code> to <code class="docutils literal notranslate"><span class="pre">&#64;App\Service\GitHubNotifier</span></code>) and updating your
+code to not fetch this service directly from the container. For example:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gd">-     public function index()</span>
+<span class="gi">+     public function index(GitHubNotifier $gitHubNotifier, MarkdownTransformer $markdownTransformer)</span>
+    {
+<span class="gd">-         // the old way of fetching services</span>
+<span class="gd">-         $githubNotifier = $this-&gt;container-&gt;get(&#39;app.github_notifier&#39;);</span>
+<span class="gd">-         $markdownTransformer = $this-&gt;container-&gt;get(&#39;markdown_transformer&#39;);</span>
+
+        // ...
+    }
+</pre></div>
+</td></tr></table></div>
+<p>As soon as you do this, you can delete <code class="docutils literal notranslate"><span class="pre">legacy_aliases.yaml</span></code> and remove its import.
+You should do the same thing for any services that you made public, like
+<code class="docutils literal notranslate"><span class="pre">app.api_client_github</span></code> and <code class="docutils literal notranslate"><span class="pre">app.api_client_sl_connect</span></code>. Once you’re not fetching
+these directly from the container, you can remove the <code class="docutils literal notranslate"><span class="pre">public:</span> <span class="pre">true</span></code> flag:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span># config/services.yaml
+services:
+    # ...
+
+    app.api_client_github:
+        # ...
+<span class="gd">-         public: true</span>
+
+    app.api_client_sl_connect:
+        # ...
+<span class="gd">-         public: true</span>
+</pre></div>
+</td></tr></table></div>
+<p>Finally, you can optionally remove any services from <code class="docutils literal notranslate"><span class="pre">services.yaml</span></code> whose arguments
+can be autowired. The final configuration looks like this:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">_defaults</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">autowire</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+        <span class="l l-Scalar l-Scalar-Plain">autoconfigure</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+        <span class="l l-Scalar l-Scalar-Plain">public</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="s">&#39;../src/*&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">exclude</span><span class="p p-Indicator">:</span> <span class="s">&#39;../src/{Entity,Migrations,Tests}&#39;</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\Controller\</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="s">&#39;../src/Controller&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;controller.service_arguments&#39;</span><span class="p p-Indicator">]</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\Service\GitHubNotifier</span><span class="p p-Indicator">:</span>
+        <span class="c1"># this could be deleted, or I can keep being explicit</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="s">&#39;@app.api_client_github&#39;</span>
+
+    <span class="c1"># alias ApiClient to one of our services below</span>
+    <span class="c1"># app.api_client_github will be used to autowire ApiClient type-hints</span>
+    <span class="l l-Scalar l-Scalar-Plain">App\Service\ApiClient</span><span class="p p-Indicator">:</span> <span class="s">&#39;@app.api_client_github&#39;</span>
+
+    <span class="c1"># keep these ids because there are multiple instances per class</span>
+    <span class="l l-Scalar l-Scalar-Plain">app.api_client_github</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Service\ApiClient</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="s">&#39;https://api.github.com&#39;</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">app.api_client_sl_connect</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Service\ApiClient</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="s">&#39;https://connect.symfony.com/api&#39;</span>
+</pre></div>
+</td></tr></table></div>
+<p>You can now take advantage of the new features going forward.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

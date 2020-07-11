@@ -1,0 +1,496 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The Front Controller &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Routing Component" href="routing.html" />
+    <link rel="prev" title="The HttpFoundation Component" href="http_foundation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Create your own PHP Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The Front Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html">The Routing Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templating.html">Templating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel_controller_resolver.html">The HttpKernel Component: the Controller Resolver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="separation_of_concerns.html">The Separation of Concerns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit_testing.html">Unit Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel_httpkernelinterface.html">The HttpKernel Component: HttpKernelInterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel_httpkernel_class.html">The HttpKernel Component: The HttpKernel Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependency_injection.html">The DependencyInjection Component</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Create your own PHP Framework</a> &raquo;</li>
+        
+      <li>The Front Controller</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/create_framework/front_controller.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-front-controller">
+<h1>The Front Controller<a class="headerlink" href="#the-front-controller" title="Permalink to this headline">¶</a></h1>
+<p>Up until now, our application is simplistic as there is only one page. To
+spice things up a little bit, let’s go crazy and add another page that says
+goodbye:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// framework/bye.php</span>
+<span class="k">require_once</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Goodbye!&#39;</span><span class="p">);</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>As you can see for yourself, much of the code is exactly the same as the one
+we have written for the first page. Let’s extract the common code that we can
+share between all our pages. Code sharing sounds like a good plan to create
+our first “real” framework!</p>
+<p>The PHP way of doing the refactoring would probably be the creation of an
+include file:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// framework/init.php</span>
+<span class="k">require_once</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Let’s see it in action:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// framework/index.php</span>
+<span class="k">require_once</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/init.php&#39;</span><span class="p">;</span>
+
+<span class="nv">$name</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;World&#39;</span><span class="p">);</span>
+
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setContent</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">&#39;Hello %s&#39;</span><span class="p">,</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nx">ENT_QUOTES</span><span class="p">,</span> <span class="s1">&#39;UTF-8&#39;</span><span class="p">)));</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>And for the “Goodbye” page:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// framework/bye.php</span>
+<span class="k">require_once</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/init.php&#39;</span><span class="p">;</span>
+
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setContent</span><span class="p">(</span><span class="s1">&#39;Goodbye!&#39;</span><span class="p">);</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>We have indeed moved most of the shared code into a central place, but it does
+not feel like a good abstraction, does it? We still have the <code class="docutils literal notranslate"><span class="pre">send()</span></code> method
+for all pages, our pages do not look like templates and we are still not able
+to test this code properly.</p>
+<p>Moreover, adding a new page means that we need to create a new PHP script,
+which name is exposed to the end user via the URL
+(<code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:4321/bye.php</span></code>): there is a direct mapping between the PHP
+script name and the client URL. This is because the dispatching of the request
+is done by the web server directly. It might be a good idea to move this
+dispatching to our code for better flexibility. This can be achieved by routing
+all client requests to a single PHP script.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Exposing a single PHP script to the end user is a design pattern called
+the “<a class="reference internal" href="../introduction/from_flat_php_to_symfony.html#from-flat-php-front-controller"><span class="std std-ref">front controller</span></a>”.</p>
+</div>
+<p>Such a script might look like the following:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// framework/front.php</span>
+<span class="k">require_once</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">();</span>
+
+<span class="nv">$map</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;/hello&#39;</span> <span class="o">=&gt;</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/hello.php&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/bye&#39;</span>   <span class="o">=&gt;</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/bye.php&#39;</span><span class="p">,</span>
+<span class="p">];</span>
+
+<span class="nv">$path</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPathInfo</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$map</span><span class="p">[</span><span class="nv">$path</span><span class="p">]))</span> <span class="p">{</span>
+    <span class="k">require</span> <span class="nv">$map</span><span class="p">[</span><span class="nv">$path</span><span class="p">];</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setStatusCode</span><span class="p">(</span><span class="mi">404</span><span class="p">);</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setContent</span><span class="p">(</span><span class="s1">&#39;Not Found&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>And here is for instance the new <code class="docutils literal notranslate"><span class="pre">hello.php</span></code> script:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// framework/hello.php</span>
+<span class="nv">$name</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;World&#39;</span><span class="p">);</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setContent</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">&#39;Hello %s&#39;</span><span class="p">,</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nx">ENT_QUOTES</span><span class="p">,</span> <span class="s1">&#39;UTF-8&#39;</span><span class="p">)));</span>
+</pre></div>
+</div>
+<p>In the <code class="docutils literal notranslate"><span class="pre">front.php</span></code> script, <code class="docutils literal notranslate"><span class="pre">$map</span></code> associates URL paths with their
+corresponding PHP script paths.</p>
+<p>As a bonus, if the client asks for a path that is not defined in the URL map,
+we return a custom 404 page; you are now in control of your website.</p>
+<p>To access a page, you must now use the <code class="docutils literal notranslate"><span class="pre">front.php</span></code> script:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:4321/front.php/hello?name=Fabien</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:4321/front.php/bye</span></code></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">/hello</span></code> and <code class="docutils literal notranslate"><span class="pre">/bye</span></code> are the page <em>paths</em>.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Most web servers like Apache or nginx are able to rewrite the incoming URLs
+and remove the front controller script so that your users will be able to
+type <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:4321/hello?name=Fabien</span></code>, which looks much better.</p>
+</div>
+<p>The trick is the usage of the <code class="docutils literal notranslate"><span class="pre">Request::getPathInfo()</span></code> method which returns
+the path of the Request by removing the front controller script name including
+its sub-directories (only if needed – see above tip).</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You don’t even need to setup a web server to test the code. Instead,
+replace the <code class="docutils literal notranslate"><span class="pre">$request</span> <span class="pre">=</span> <span class="pre">Request::createFromGlobals();</span></code> call to something
+like <code class="docutils literal notranslate"><span class="pre">$request</span> <span class="pre">=</span> <span class="pre">Request::create('/hello?name=Fabien');</span></code> where the
+argument is the URL path you want to simulate.</p>
+</div>
+<p>Now that the web server always access the same script (<code class="docutils literal notranslate"><span class="pre">front.php</span></code>) for all
+pages, we can secure the code further by moving all other PHP files outside the
+web root directory:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span>example.com
+├── composer.json
+├── composer.lock
+├── src
+│   └── pages
+│       ├── hello.php
+│       └── bye.php
+├── vendor
+│   └── autoload.php
+└── web
+    └── front.php
+</pre></div>
+</td></tr></table></div>
+<p>Now, configure your web server root directory to point to <code class="docutils literal notranslate"><span class="pre">web/</span></code> and all
+other files won’t be accessible from the client anymore.</p>
+<p>To test your changes in a browser (<code class="docutils literal notranslate"><span class="pre">http://localhost:4321/hello?name=Fabien</span></code>),
+run the <a class="reference internal" href="../setup/symfony_server.html"><span class="doc">Symfony Local Web Server</span></a>:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> symfony server:start --port<span class="o">=</span><span class="m">4321</span> --passthru<span class="o">=</span>front.php
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For this new structure to work, you will have to adjust some paths in
+various PHP files; the changes are left as an exercise for the reader.</p>
+</div>
+<p>The last thing that is repeated in each page is the call to <code class="docutils literal notranslate"><span class="pre">setContent()</span></code>.
+We can convert all pages to “templates” by just echoing the content and calling
+the <code class="docutils literal notranslate"><span class="pre">setContent()</span></code> directly from the front controller script:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/web/front.php</span>
+
+<span class="c1">// ...</span>
+
+<span class="nv">$path</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPathInfo</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$map</span><span class="p">[</span><span class="nv">$path</span><span class="p">]))</span> <span class="p">{</span>
+    <span class="nb">ob_start</span><span class="p">();</span>
+    <span class="k">include</span> <span class="nv">$map</span><span class="p">[</span><span class="nv">$path</span><span class="p">];</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setContent</span><span class="p">(</span><span class="nb">ob_get_clean</span><span class="p">());</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setStatusCode</span><span class="p">(</span><span class="mi">404</span><span class="p">);</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setContent</span><span class="p">(</span><span class="s1">&#39;Not Found&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// ...</span>
+</pre></div>
+</div>
+<p>And the <code class="docutils literal notranslate"><span class="pre">hello.php</span></code> script can now be converted to a template:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;!--</span> <span class="nx">example</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">src</span><span class="o">/</span><span class="nx">pages</span><span class="o">/</span><span class="nx">hello</span><span class="o">.</span><span class="nx">php</span> <span class="o">--&gt;</span>
+<span class="o">&lt;?</span><span class="nx">php</span> <span class="nv">$name</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;World&#39;</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">Hello </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nx">ENT_QUOTES</span><span class="p">,</span> <span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>We have the first version of our framework:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/web/front.php</span>
+<span class="k">require_once</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">();</span>
+
+<span class="nv">$map</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;/hello&#39;</span> <span class="o">=&gt;</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../src/pages/hello.php&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/bye&#39;</span>   <span class="o">=&gt;</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../src/pages/bye.php&#39;</span><span class="p">,</span>
+<span class="p">];</span>
+
+<span class="nv">$path</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPathInfo</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$map</span><span class="p">[</span><span class="nv">$path</span><span class="p">]))</span> <span class="p">{</span>
+    <span class="nb">ob_start</span><span class="p">();</span>
+    <span class="k">include</span> <span class="nv">$map</span><span class="p">[</span><span class="nv">$path</span><span class="p">];</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setContent</span><span class="p">(</span><span class="nb">ob_get_clean</span><span class="p">());</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setStatusCode</span><span class="p">(</span><span class="mi">404</span><span class="p">);</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setContent</span><span class="p">(</span><span class="s1">&#39;Not Found&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Adding a new page is a two-step process: add an entry in the map and create a
+PHP template in <code class="docutils literal notranslate"><span class="pre">src/pages/</span></code>. From a template, get the Request data via the
+<code class="docutils literal notranslate"><span class="pre">$request</span></code> variable and tweak the Response headers via the <code class="docutils literal notranslate"><span class="pre">$response</span></code>
+variable.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you decide to stop here, you can probably enhance your framework by
+extracting the URL map to a configuration file.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

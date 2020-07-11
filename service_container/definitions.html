@@ -1,0 +1,443 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to work with Service Definition Objects &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Inject Values Based on Complex Expressions" href="expression_language.html" />
+    <link rel="prev" title="How to Debug the Service Container &amp; List Services" href="debug.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../service_container.html">Service Container</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#fetching-and-using-services">Fetching and using Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#creating-configuring-services-in-the-container">Creating/Configuring Services in the Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#injecting-services-config-into-a-service">Injecting Services/Config into a Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#service-parameters">Service Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#choose-a-specific-service">Choose a Specific Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#binding-arguments-by-name-or-type">Binding Arguments by Name or Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#the-autowire-option">The autowire Option</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#the-autoconfigure-option">The autoconfigure Option</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#linting-service-definitions">Linting Service Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#public-versus-private-services">Public Versus Private Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#importing-many-services-at-once-with-resource">Importing Many Services at once with resource</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#explicitly-configuring-services-and-arguments">Explicitly Configuring Services and Arguments</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../service_container.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="3.3-di-changes.html">The Symfony 3.3 DI Container Changes Explained (autowiring, _defaults, etc)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alias_private.html">How to Create Service Aliases and Mark Services as Private</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autowiring.html">Defining Services Dependencies Automatically (Autowiring)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calls.html">Service Method Calls and Setter Injection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compiler_passes.html">How to Work with Compiler Passes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configurators.html">How to Configure a Service with a Configurator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug.html">How to Debug the Service Container &amp; List Services</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to work with Service Definition Objects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#getting-and-setting-service-definitions">Getting and Setting Service Definitions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#working-with-a-definition">Working with a Definition</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="expression_language.html">How to Inject Values Based on Complex Expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="factories.html">Using a Factory to Create Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="import.html">How to Import Configuration Files/Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="injection_types.html">Types of Injection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lazy_services.html">Lazy Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_dependencies.html">How to Make Service Arguments/References Optional</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parent_services.html">How to Manage Common Dependencies with Parent Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="request.html">How to Retrieve the Request from the Service Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service_decoration.html">How to Decorate Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service_subscribers_locators.html">Service Subscribers &amp; Locators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shared.html">How to Define Non Shared Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synthetic_services.html">How to Inject Instances into the Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tags.html">How to Work with Service Tags</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../service_container.html">Service Container</a> &raquo;</li>
+        
+      <li>How to work with Service Definition Objects</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/service_container/definitions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-work-with-service-definition-objects">
+<span id="index-0"></span><h1>How to work with Service Definition Objects<a class="headerlink" href="#how-to-work-with-service-definition-objects" title="Permalink to this headline">¶</a></h1>
+<p>Service definitions are the instructions describing how the container should
+build a service. They are not the actual services used by your applications.
+The container will create the actual class instances based on the configuration
+in the definition.</p>
+<p>Normally, you would use YAML, XML or PHP to describe the service definitions.
+But if you’re doing advanced things with the service container, like working
+with a <a class="reference internal" href="compiler_passes.html"><span class="doc">Compiler Pass</span></a> or creating a
+<a class="reference internal" href="../bundles/extension.html"><span class="doc">Dependency Injection Extension</span></a>, you may need to
+work directly with the <code class="docutils literal notranslate"><span class="pre">Definition</span></code> objects that define how a service will be
+instantiated.</p>
+<div class="section" id="getting-and-setting-service-definitions">
+<h2>Getting and Setting Service Definitions<a class="headerlink" href="#getting-and-setting-service-definitions" title="Permalink to this headline">¶</a></h2>
+<p>There are some helpful methods for working with the service definitions:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Definition</span><span class="p">;</span>
+
+<span class="c1">// finds out if there is an &quot;app.mailer&quot; definition</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">hasDefinition</span><span class="p">(</span><span class="s1">&#39;app.mailer&#39;</span><span class="p">);</span>
+<span class="c1">// finds out if there is an &quot;app.mailer&quot; definition or alias</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;app.mailer&#39;</span><span class="p">);</span>
+
+<span class="c1">// gets the &quot;app.user_config_manager&quot; definition</span>
+<span class="nv">$definition</span> <span class="o">=</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="na">getDefinition</span><span class="p">(</span><span class="s1">&#39;app.user_config_manager&#39;</span><span class="p">);</span>
+<span class="c1">// gets the definition with the &quot;app.user_config_manager&quot; ID or alias</span>
+<span class="nv">$definition</span> <span class="o">=</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="na">findDefinition</span><span class="p">(</span><span class="s1">&#39;app.user_config_manager&#39;</span><span class="p">);</span>
+
+<span class="c1">// adds a new &quot;app.number_generator&quot; definition</span>
+<span class="nv">$definition</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Definition</span><span class="p">(</span><span class="nx">\App\NumberGenerator</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setDefinition</span><span class="p">(</span><span class="s1">&#39;app.number_generator&#39;</span><span class="p">,</span> <span class="nv">$definition</span><span class="p">);</span>
+
+<span class="c1">// shortcut for the previous method</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;app.number_generator&#39;</span><span class="p">,</span> <span class="nx">\App\NumberGenerator</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="working-with-a-definition">
+<h2>Working with a Definition<a class="headerlink" href="#working-with-a-definition" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="creating-a-new-definition">
+<h3>Creating a New Definition<a class="headerlink" href="#creating-a-new-definition" title="Permalink to this headline">¶</a></h3>
+<p>In addition to manipulating and retrieving existing definitions, you can also
+define new service definitions with the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DependencyInjection/Definition.php" title="Symfony\Component\DependencyInjection\Definition"><span class="pre">Definition</span></a></code>
+class.</p>
+</div>
+<div class="section" id="class">
+<h3>Class<a class="headerlink" href="#class" title="Permalink to this headline">¶</a></h3>
+<p>The first optional argument of the <code class="docutils literal notranslate"><span class="pre">Definition</span></code> class is the fully qualified
+class name of the object returned when the service is fetched from the container:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">App\Config\CustomConfigManager</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Config\UserConfigManager</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Definition</span><span class="p">;</span>
+
+<span class="nv">$definition</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Definition</span><span class="p">(</span><span class="nx">UserConfigManager</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+<span class="c1">// override the class</span>
+<span class="nv">$definition</span><span class="o">-&gt;</span><span class="na">setClass</span><span class="p">(</span><span class="nx">CustomConfigManager</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+<span class="c1">// get the class configured for this definition</span>
+<span class="nv">$class</span> <span class="o">=</span> <span class="nv">$definition</span><span class="o">-&gt;</span><span class="na">getClass</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="constructor-arguments">
+<h3>Constructor Arguments<a class="headerlink" href="#constructor-arguments" title="Permalink to this headline">¶</a></h3>
+<p>The second optional argument of the <code class="docutils literal notranslate"><span class="pre">Definition</span></code> class is an array with the
+arguments passed to the constructor of the object returned when the service is
+fetched from the container:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">App\Config\DoctrineConfigManager</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Definition</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Reference</span><span class="p">;</span>
+
+<span class="nv">$definition</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Definition</span><span class="p">(</span><span class="nx">DoctrineConfigManager</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;doctrine&#39;</span><span class="p">),</span> <span class="c1">// a reference to another service</span>
+    <span class="s1">&#39;%app.config_table_name%&#39;</span><span class="p">,</span>  <span class="c1">// will be resolved to the value of a container parameter</span>
+<span class="p">]);</span>
+
+<span class="c1">// gets all arguments configured for this definition</span>
+<span class="nv">$constructorArguments</span> <span class="o">=</span> <span class="nv">$definition</span><span class="o">-&gt;</span><span class="na">getArguments</span><span class="p">();</span>
+
+<span class="c1">// gets a specific argument</span>
+<span class="nv">$firstArgument</span> <span class="o">=</span> <span class="nv">$definition</span><span class="o">-&gt;</span><span class="na">getArgument</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">// adds a new argument with the name of the argument</span>
+<span class="c1">// $argumentName = the name of the argument in the constructor</span>
+<span class="nv">$argument</span> <span class="o">=</span> <span class="nv">$definition</span><span class="o">-&gt;</span><span class="na">setArgument</span><span class="p">(</span><span class="s1">&#39;$argumentName&#39;</span><span class="p">,</span> <span class="nv">$argumentValue</span><span class="p">);</span>
+
+<span class="c1">// adds a new argument</span>
+<span class="nv">$definition</span><span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="nv">$argument</span><span class="p">);</span>
+
+<span class="c1">// replaces argument on a specific index (0 = first argument)</span>
+<span class="nv">$definition</span><span class="o">-&gt;</span><span class="na">replaceArgument</span><span class="p">(</span><span class="nv">$index</span><span class="p">,</span> <span class="nv">$argument</span><span class="p">);</span>
+
+<span class="c1">// replaces all previously configured arguments with the passed array</span>
+<span class="nv">$definition</span><span class="o">-&gt;</span><span class="na">setArguments</span><span class="p">(</span><span class="nv">$arguments</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Don’t use <code class="docutils literal notranslate"><span class="pre">get()</span></code> to get a service that you want to inject as constructor
+argument, the service is not yet available. Instead, use a
+<code class="docutils literal notranslate"><span class="pre">Reference</span></code> instance as shown above.</p>
+</div>
+</div>
+<div class="section" id="method-calls">
+<h3>Method Calls<a class="headerlink" href="#method-calls" title="Permalink to this headline">¶</a></h3>
+<p>If the service you are working with uses setter injection then you can manipulate
+any method calls in the definitions as well:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// gets all configured method calls</span>
+<span class="nv">$methodCalls</span> <span class="o">=</span> <span class="nv">$definition</span><span class="o">-&gt;</span><span class="na">getMethodCalls</span><span class="p">();</span>
+
+<span class="c1">// configures a new method call</span>
+<span class="nv">$definition</span><span class="o">-&gt;</span><span class="na">addMethodCall</span><span class="p">(</span><span class="s1">&#39;setLogger&#39;</span><span class="p">,</span> <span class="p">[</span><span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;logger&#39;</span><span class="p">)]);</span>
+
+<span class="c1">// configures an immutable-setter</span>
+<span class="nv">$definition</span><span class="o">-&gt;</span><span class="na">addMethodCall</span><span class="p">(</span><span class="s1">&#39;withLogger&#39;</span><span class="p">,</span> <span class="p">[</span><span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;logger&#39;</span><span class="p">)],</span> <span class="k">true</span><span class="p">);</span>
+
+<span class="c1">// replaces all previously configured method calls with the passed array</span>
+<span class="nv">$definition</span><span class="o">-&gt;</span><span class="na">setMethodCalls</span><span class="p">(</span><span class="nv">$methodCalls</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">There are more examples of specific ways of working with definitions
+in the PHP code blocks of the Service Container articles such as
+<a class="reference internal" href="factories.html"><span class="doc">Using a Factory to Create Services</span></a> and <a class="reference internal" href="parent_services.html"><span class="doc">How to Manage Common Dependencies with Parent Services</span></a>.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The methods here that change service definitions can only be used before
+the container is compiled. Once the container is compiled you cannot
+manipulate service definitions further. To learn more about compiling
+the container, see <a class="reference internal" href="../components/dependency_injection/compilation.html"><span class="doc">Compiling the Container</span></a>.</p>
+</div>
+</div>
+<div class="section" id="requiring-files">
+<h3>Requiring Files<a class="headerlink" href="#requiring-files" title="Permalink to this headline">¶</a></h3>
+<p>There might be use cases when you need to include another file just before
+the service itself gets loaded. To do so, you can use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DependencyInjection/Definition.php" title="Symfony\Component\DependencyInjection\Definition::setFile()"><span class="pre">setFile()</span></a></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$definition</span><span class="o">-&gt;</span><span class="na">setFile</span><span class="p">(</span><span class="s1">&#39;/src/path/to/file/foo.php&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Notice that Symfony will internally call the PHP statement <code class="docutils literal notranslate"><span class="pre">require_once</span></code>,
+which means that your file will be included only once per request.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

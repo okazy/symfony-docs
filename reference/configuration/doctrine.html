@@ -1,0 +1,899 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Doctrine Configuration Reference (DoctrineBundle) &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Mailer Configuration Reference (SwiftmailerBundle)" href="swiftmailer.html" />
+    <link rel="prev" title="Framework Configuration Reference (FrameworkBundle)" href="framework.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="framework.html">Framework Configuration Reference (FrameworkBundle)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Doctrine Configuration Reference (DoctrineBundle)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#doctrine-dbal-configuration">Doctrine DBAL Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#doctrine-orm-configuration">Doctrine ORM Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#shortened-configuration-syntax">Shortened Configuration Syntax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#caching-drivers">Caching Drivers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mapping-configuration">Mapping Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-mapping-entities-in-a-bundle">Custom Mapping Entities in a Bundle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mapping-entities-outside-of-a-bundle">Mapping Entities Outside of a Bundle</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security Configuration Reference (SecurityBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swiftmailer.html">Mailer Configuration Reference (SwiftmailerBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twig.html">Twig Configuration Reference (TwigBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monolog.html">Logging Configuration Reference (MonologBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web_profiler.html">Profiler Configuration Reference (WebProfilerBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html">Debug Configuration Reference (DebugBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel.html">Configuring in the Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms/types.html">Form Types Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constraints.html">Validation Constraints Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../twig_reference.html">Twig Extensions Defined by Symfony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dic_tags.html">Built-in Symfony Service Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../events.html">Built-in Symfony Events</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Reference Documents</a> &raquo;</li>
+        
+      <li>Doctrine Configuration Reference (DoctrineBundle)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reference/configuration/doctrine.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="doctrine-configuration-reference-doctrinebundle">
+<span id="index-0"></span><h1>Doctrine Configuration Reference (DoctrineBundle)<a class="headerlink" href="#doctrine-configuration-reference-doctrinebundle" title="Permalink to this headline">¶</a></h1>
+<p>The DoctrineBundle integrates both the <a class="reference internal" href="../../doctrine/dbal.html"><span class="doc">DBAL</span></a> and
+<a class="reference internal" href="../../doctrine.html"><span class="doc">ORM</span></a> Doctrine projects in Symfony applications. All these
+options are configured under the <code class="docutils literal notranslate"><span class="pre">doctrine</span></code> key in your application
+configuration.</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># displays the default config values defined by Symfony</span>
+<span class="gp">$</span> php bin/console config:dump-reference doctrine
+
+<span class="c1"># displays the actual config values used by your application</span>
+<span class="gp">$</span> php bin/console debug:config doctrine
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When using XML, you must use the <code class="docutils literal notranslate"><span class="pre">http://symfony.com/schema/dic/doctrine</span></code>
+namespace and the related XSD schema is available at:
+<code class="docutils literal notranslate"><span class="pre">https://symfony.com/schema/dic/doctrine/doctrine-1.0.xsd</span></code></p>
+</div>
+<div class="section" id="doctrine-dbal-configuration">
+<span id="reference-dbal-configuration"></span><span id="index-1"></span><h2>Doctrine DBAL Configuration<a class="headerlink" href="#doctrine-dbal-configuration" title="Permalink to this headline">¶</a></h2>
+<p>DoctrineBundle supports all parameters that default Doctrine drivers
+accept, converted to the XML or YAML naming standards that Symfony
+enforces. See the Doctrine <a class="reference external" href="https://www.doctrine-project.org/projects/doctrine-dbal/en/current/reference/configuration.html">DBAL documentation</a> for more information.
+The following block shows all possible configuration keys:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">doctrine</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">dbal</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">dbname</span><span class="p p-Indicator">:</span>               <span class="l l-Scalar l-Scalar-Plain">database</span>
+        <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span>                 <span class="l l-Scalar l-Scalar-Plain">localhost</span>
+        <span class="l l-Scalar l-Scalar-Plain">port</span><span class="p p-Indicator">:</span>                 <span class="l l-Scalar l-Scalar-Plain">1234</span>
+        <span class="l l-Scalar l-Scalar-Plain">user</span><span class="p p-Indicator">:</span>                 <span class="l l-Scalar l-Scalar-Plain">user</span>
+        <span class="l l-Scalar l-Scalar-Plain">password</span><span class="p p-Indicator">:</span>             <span class="l l-Scalar l-Scalar-Plain">secret</span>
+        <span class="l l-Scalar l-Scalar-Plain">driver</span><span class="p p-Indicator">:</span>               <span class="l l-Scalar l-Scalar-Plain">pdo_mysql</span>
+        <span class="c1"># if the url option is specified, it will override the above config</span>
+        <span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span>                  <span class="l l-Scalar l-Scalar-Plain">mysql://db_user:db_password@127.0.0.1:3306/db_name</span>
+        <span class="c1"># the DBAL driverClass option</span>
+        <span class="l l-Scalar l-Scalar-Plain">driver_class</span><span class="p p-Indicator">:</span>         <span class="l l-Scalar l-Scalar-Plain">App\DBAL\MyDatabaseDriver</span>
+        <span class="c1"># the DBAL driverOptions option</span>
+        <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">foo</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">bar</span>
+        <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span>                 <span class="s">&#39;%kernel.project_dir%/var/data/data.sqlite&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">memory</span><span class="p p-Indicator">:</span>               <span class="l l-Scalar l-Scalar-Plain">true</span>
+        <span class="l l-Scalar l-Scalar-Plain">unix_socket</span><span class="p p-Indicator">:</span>          <span class="l l-Scalar l-Scalar-Plain">/tmp/mysql.sock</span>
+        <span class="c1"># the DBAL wrapperClass option</span>
+        <span class="l l-Scalar l-Scalar-Plain">wrapper_class</span><span class="p p-Indicator">:</span>        <span class="l l-Scalar l-Scalar-Plain">App\DBAL\MyConnectionWrapper</span>
+        <span class="l l-Scalar l-Scalar-Plain">charset</span><span class="p p-Indicator">:</span>              <span class="l l-Scalar l-Scalar-Plain">UTF8</span>
+        <span class="l l-Scalar l-Scalar-Plain">logging</span><span class="p p-Indicator">:</span>              <span class="s">&#39;%kernel.debug%&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">platform_service</span><span class="p p-Indicator">:</span>     <span class="l l-Scalar l-Scalar-Plain">App\DBAL\MyDatabasePlatformService</span>
+        <span class="l l-Scalar l-Scalar-Plain">server_version</span><span class="p p-Indicator">:</span>       <span class="s">&#39;5.6&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">mapping_types</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">enum</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="l l-Scalar l-Scalar-Plain">types</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">custom</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\DBAL\MyCustomType</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:doctrine=</span><span class="s">&quot;http://symfony.com/schema/dic/doctrine&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/doctrine</span>
+<span class="s">        https://symfony.com/schema/dic/doctrine/doctrine-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;doctrine:config&gt;</span>
+        <span class="nt">&lt;doctrine:dbal</span>
+            <span class="na">name=</span><span class="s">&quot;default&quot;</span>
+            <span class="na">dbname=</span><span class="s">&quot;database&quot;</span>
+            <span class="na">host=</span><span class="s">&quot;localhost&quot;</span>
+            <span class="na">port=</span><span class="s">&quot;1234&quot;</span>
+            <span class="na">user=</span><span class="s">&quot;user&quot;</span>
+            <span class="na">password=</span><span class="s">&quot;secret&quot;</span>
+            <span class="na">driver=</span><span class="s">&quot;pdo_mysql&quot;</span>
+            <span class="na">driver-class=</span><span class="s">&quot;App\DBAL\MyDatabaseDriver&quot;</span>
+            <span class="na">path=</span><span class="s">&quot;%kernel.project_dir%/var/data/data.sqlite&quot;</span>
+            <span class="na">memory=</span><span class="s">&quot;true&quot;</span>
+            <span class="na">unix-socket=</span><span class="s">&quot;/tmp/mysql.sock&quot;</span>
+            <span class="na">wrapper-class=</span><span class="s">&quot;App\DBAL\MyConnectionWrapper&quot;</span>
+            <span class="na">charset=</span><span class="s">&quot;UTF8&quot;</span>
+            <span class="na">logging=</span><span class="s">&quot;%kernel.debug%&quot;</span>
+            <span class="na">platform-service=</span><span class="s">&quot;App\DBAL\MyDatabasePlatformService&quot;</span>
+            <span class="na">server-version=</span><span class="s">&quot;5.6&quot;</span><span class="nt">&gt;</span>
+
+            <span class="nt">&lt;doctrine:option</span> <span class="na">key=</span><span class="s">&quot;foo&quot;</span><span class="nt">&gt;</span>bar<span class="nt">&lt;/doctrine:option&gt;</span>
+            <span class="nt">&lt;doctrine:mapping-type</span> <span class="na">name=</span><span class="s">&quot;enum&quot;</span><span class="nt">&gt;</span>string<span class="nt">&lt;/doctrine:mapping-type&gt;</span>
+            <span class="nt">&lt;doctrine:type</span> <span class="na">name=</span><span class="s">&quot;custom&quot;</span><span class="nt">&gt;</span>App\DBAL\MyCustomType<span class="nt">&lt;/doctrine:type&gt;</span>
+        <span class="nt">&lt;/doctrine:dbal&gt;</span>
+    <span class="nt">&lt;/doctrine:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">server_version</span></code> option was added in Doctrine DBAL 2.5, which
+is used by DoctrineBundle 1.3. The value of this option should match
+your database server version (use <code class="docutils literal notranslate"><span class="pre">postgres</span> <span class="pre">-V</span></code> or <code class="docutils literal notranslate"><span class="pre">psql</span> <span class="pre">-V</span></code> command
+to find your PostgreSQL version and <code class="docutils literal notranslate"><span class="pre">mysql</span> <span class="pre">-V</span></code> to get your MySQL
+version).</p>
+<p>If you are running a MariaDB database, you must prefix the <code class="docutils literal notranslate"><span class="pre">server_version</span></code>
+value with <code class="docutils literal notranslate"><span class="pre">mariadb-</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">server_version:</span> <span class="pre">mariadb-10.2.12</span></code>).</p>
+<p>Always wrap the server version number with quotes to parse it as a string
+instead of a float number. Otherwise, the floating-point representation
+issues can make your version be considered a different number (e.g. <code class="docutils literal notranslate"><span class="pre">5.6</span></code>
+will be rounded as <code class="docutils literal notranslate"><span class="pre">5.5999999999999996447286321199499070644378662109375</span></code>).</p>
+<p class="last">If you don’t define this option and you haven’t created your database
+yet, you may get <code class="docutils literal notranslate"><span class="pre">PDOException</span></code> errors because Doctrine will try to
+guess the database server version automatically and none is available.</p>
+</div>
+<p>If you want to configure multiple connections in YAML, put them under the
+<code class="docutils literal notranslate"><span class="pre">connections</span></code> key and give them a unique name:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">doctrine</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">dbal</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">default_connection</span><span class="p p-Indicator">:</span>       <span class="l l-Scalar l-Scalar-Plain">default</span>
+        <span class="l l-Scalar l-Scalar-Plain">connections</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">dbname</span><span class="p p-Indicator">:</span>           <span class="l l-Scalar l-Scalar-Plain">Symfony</span>
+                <span class="l l-Scalar l-Scalar-Plain">user</span><span class="p p-Indicator">:</span>             <span class="l l-Scalar l-Scalar-Plain">root</span>
+                <span class="l l-Scalar l-Scalar-Plain">password</span><span class="p p-Indicator">:</span>         <span class="l l-Scalar l-Scalar-Plain">null</span>
+                <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span>             <span class="l l-Scalar l-Scalar-Plain">localhost</span>
+                <span class="l l-Scalar l-Scalar-Plain">server_version</span><span class="p p-Indicator">:</span>   <span class="s">&#39;5.6&#39;</span>
+            <span class="l l-Scalar l-Scalar-Plain">customer</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">dbname</span><span class="p p-Indicator">:</span>           <span class="l l-Scalar l-Scalar-Plain">customer</span>
+                <span class="l l-Scalar l-Scalar-Plain">user</span><span class="p p-Indicator">:</span>             <span class="l l-Scalar l-Scalar-Plain">root</span>
+                <span class="l l-Scalar l-Scalar-Plain">password</span><span class="p p-Indicator">:</span>         <span class="l l-Scalar l-Scalar-Plain">null</span>
+                <span class="l l-Scalar l-Scalar-Plain">host</span><span class="p p-Indicator">:</span>             <span class="l l-Scalar l-Scalar-Plain">localhost</span>
+                <span class="l l-Scalar l-Scalar-Plain">server_version</span><span class="p p-Indicator">:</span>   <span class="s">&#39;5.7&#39;</span>
+</pre></div>
+</td></tr></table></div>
+<p>The <code class="docutils literal notranslate"><span class="pre">database_connection</span></code> service always refers to the <em>default</em> connection,
+which is the first one defined or the one configured via the
+<code class="docutils literal notranslate"><span class="pre">default_connection</span></code> parameter.</p>
+<p>Each connection is also accessible via the <code class="docutils literal notranslate"><span class="pre">doctrine.dbal.[name]_connection</span></code>
+service where <code class="docutils literal notranslate"><span class="pre">[name]</span></code> is the name of the connection. In a controller
+extending <code class="docutils literal notranslate"><span class="pre">AbstractController</span></code>, you can access it directly using the
+<code class="docutils literal notranslate"><span class="pre">getConnection()</span></code> method and the name of the connection:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$connection</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDoctrine</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">(</span><span class="s1">&#39;customer&#39;</span><span class="p">);</span>
+
+<span class="nv">$result</span> <span class="o">=</span> <span class="nv">$connection</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">(</span><span class="s1">&#39;SELECT name FROM customer&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="doctrine-orm-configuration">
+<h2>Doctrine ORM Configuration<a class="headerlink" href="#doctrine-orm-configuration" title="Permalink to this headline">¶</a></h2>
+<p>This following configuration example shows all the configuration defaults
+that the ORM resolves to:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">doctrine</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">orm</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">auto_mapping</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+        <span class="c1"># the standard distribution overrides this to be true in debug, false otherwise</span>
+        <span class="l l-Scalar l-Scalar-Plain">auto_generate_proxy_classes</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+        <span class="l l-Scalar l-Scalar-Plain">proxy_namespace</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Proxies</span>
+        <span class="l l-Scalar l-Scalar-Plain">proxy_dir</span><span class="p p-Indicator">:</span> <span class="s">&#39;%kernel.cache_dir%/doctrine/orm/Proxies&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">default_entity_manager</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
+        <span class="l l-Scalar l-Scalar-Plain">metadata_cache_driver</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">array</span>
+        <span class="l l-Scalar l-Scalar-Plain">query_cache_driver</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">array</span>
+        <span class="l l-Scalar l-Scalar-Plain">result_cache_driver</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">array</span>
+</pre></div>
+</td></tr></table></div>
+<p>There are lots of other configuration options that you can use to overwrite
+certain classes, but those are for very advanced use-cases only.</p>
+<div class="section" id="shortened-configuration-syntax">
+<h3>Shortened Configuration Syntax<a class="headerlink" href="#shortened-configuration-syntax" title="Permalink to this headline">¶</a></h3>
+<p>When you are only using one entity manager, all config options available
+can be placed directly under <code class="docutils literal notranslate"><span class="pre">doctrine.orm</span></code> config level.</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">doctrine</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">orm</span><span class="p p-Indicator">:</span>
+        <span class="c1"># ...</span>
+        <span class="l l-Scalar l-Scalar-Plain">query_cache_driver</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+        <span class="l l-Scalar l-Scalar-Plain">metadata_cache_driver</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+        <span class="l l-Scalar l-Scalar-Plain">result_cache_driver</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+        <span class="l l-Scalar l-Scalar-Plain">connection</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">~</span>
+        <span class="l l-Scalar l-Scalar-Plain">class_metadata_factory_name</span><span class="p p-Indicator">:</span>  <span class="l l-Scalar l-Scalar-Plain">Doctrine\ORM\Mapping\ClassMetadataFactory</span>
+        <span class="l l-Scalar l-Scalar-Plain">default_repository_class</span><span class="p p-Indicator">:</span>  <span class="l l-Scalar l-Scalar-Plain">Doctrine\ORM\EntityRepository</span>
+        <span class="l l-Scalar l-Scalar-Plain">auto_mapping</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+        <span class="l l-Scalar l-Scalar-Plain">hydrators</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+        <span class="l l-Scalar l-Scalar-Plain">mappings</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+        <span class="l l-Scalar l-Scalar-Plain">dql</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+        <span class="l l-Scalar l-Scalar-Plain">filters</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+</pre></div>
+</td></tr></table></div>
+<p>This shortened version is commonly used in other documentation sections.
+Keep in mind that you can’t use both syntaxes at the same time.</p>
+</div>
+<div class="section" id="caching-drivers">
+<h3>Caching Drivers<a class="headerlink" href="#caching-drivers" title="Permalink to this headline">¶</a></h3>
+<p>Use any of the existing <a class="reference internal" href="../../cache.html"><span class="doc">Symfony Cache</span></a> pools or define new pools
+to cache each of Doctrine ORM elements (queries, results, etc.):</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/prod/doctrine.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">cache</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">pools</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">doctrine.result_cache_pool</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cache.app</span>
+            <span class="l l-Scalar l-Scalar-Plain">doctrine.system_cache_pool</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cache.system</span>
+
+<span class="l l-Scalar l-Scalar-Plain">doctrine</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">orm</span><span class="p p-Indicator">:</span>
+        <span class="c1"># ...</span>
+        <span class="l l-Scalar l-Scalar-Plain">metadata_cache_driver</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">pool</span>
+            <span class="l l-Scalar l-Scalar-Plain">pool</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">doctrine.system_cache_pool</span>
+        <span class="l l-Scalar l-Scalar-Plain">query_cache_driver</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">pool</span>
+            <span class="l l-Scalar l-Scalar-Plain">pool</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">doctrine.system_cache_pool</span>
+        <span class="l l-Scalar l-Scalar-Plain">result_cache_driver</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">pool</span>
+            <span class="l l-Scalar l-Scalar-Plain">pool</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">doctrine.result_cache_pool</span>
+
+        <span class="c1"># in addition to Symfony Cache pools, you can also use the</span>
+        <span class="c1"># &#39;type: service&#39; option to use any service as the cache</span>
+        <span class="l l-Scalar l-Scalar-Plain">query_cache_driver</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">service</span>
+            <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\ORM\MyCacheService</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="mapping-configuration">
+<h3>Mapping Configuration<a class="headerlink" href="#mapping-configuration" title="Permalink to this headline">¶</a></h3>
+<p>Explicit definition of all the mapped entities is the only necessary
+configuration for the ORM and there are several configuration options that
+you can control. The following configuration options exist for a mapping:</p>
+<div class="section" id="type">
+<h4><code class="docutils literal notranslate"><span class="pre">type</span></code><a class="headerlink" href="#type" title="Permalink to this headline">¶</a></h4>
+<p>One of <code class="docutils literal notranslate"><span class="pre">annotation</span></code> (the default value), <code class="docutils literal notranslate"><span class="pre">xml</span></code>, <code class="docutils literal notranslate"><span class="pre">yml</span></code>, <code class="docutils literal notranslate"><span class="pre">php</span></code> or
+<code class="docutils literal notranslate"><span class="pre">staticphp</span></code>. This specifies which type of metadata type your mapping uses.</p>
+</div>
+<div class="section" id="dir">
+<h4><code class="docutils literal notranslate"><span class="pre">dir</span></code><a class="headerlink" href="#dir" title="Permalink to this headline">¶</a></h4>
+<p>Absolute path to the mapping or entity files (depending on the driver).</p>
+</div>
+<div class="section" id="prefix">
+<h4><code class="docutils literal notranslate"><span class="pre">prefix</span></code><a class="headerlink" href="#prefix" title="Permalink to this headline">¶</a></h4>
+<p>A common namespace prefix that all entities of this mapping share. This prefix
+should never conflict with prefixes of other defined mappings otherwise some of
+your entities cannot be found by Doctrine.</p>
+</div>
+<div class="section" id="alias">
+<h4><code class="docutils literal notranslate"><span class="pre">alias</span></code><a class="headerlink" href="#alias" title="Permalink to this headline">¶</a></h4>
+<p>Doctrine offers a way to alias entity namespaces to simpler, shorter names
+to be used in DQL queries or for Repository access.</p>
+</div>
+<div class="section" id="is-bundle">
+<h4><code class="docutils literal notranslate"><span class="pre">is_bundle</span></code><a class="headerlink" href="#is-bundle" title="Permalink to this headline">¶</a></h4>
+<p>This option is <code class="docutils literal notranslate"><span class="pre">false</span></code> by default and it’s considered a legacy option. It was
+only useful in previous Symfony versions, when it was recommended to use bundles
+to organize the application code.</p>
+</div>
+</div>
+<div class="section" id="custom-mapping-entities-in-a-bundle">
+<h3>Custom Mapping Entities in a Bundle<a class="headerlink" href="#custom-mapping-entities-in-a-bundle" title="Permalink to this headline">¶</a></h3>
+<p>Doctrine’s <code class="docutils literal notranslate"><span class="pre">auto_mapping</span></code> feature loads annotation configuration from
+the <code class="docutils literal notranslate"><span class="pre">Entity/</span></code> directory of each bundle <em>and</em> looks for other formats (e.g.
+YAML, XML) in the <code class="docutils literal notranslate"><span class="pre">Resources/config/doctrine</span></code> directory.</p>
+<p>If you store metadata somewhere else in your bundle, you can define your
+own mappings, where you tell Doctrine exactly <em>where</em> to look, along with
+some other configurations.</p>
+<p>If you’re using the <code class="docutils literal notranslate"><span class="pre">auto_mapping</span></code> configuration, you just need to overwrite
+the configurations you want. In this case it’s important that the key of
+the mapping configurations corresponds to the name of the bundle.</p>
+<p>For example, suppose you decide to store your <code class="docutils literal notranslate"><span class="pre">XML</span></code> configuration for
+<code class="docutils literal notranslate"><span class="pre">AppBundle</span></code> entities in the <code class="docutils literal notranslate"><span class="pre">&#64;AppBundle/SomeResources/config/doctrine</span></code>
+directory instead:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">doctrine</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">orm</span><span class="p p-Indicator">:</span>
+        <span class="c1"># ...</span>
+        <span class="l l-Scalar l-Scalar-Plain">auto_mapping</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+        <span class="l l-Scalar l-Scalar-Plain">mappings</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+            <span class="l l-Scalar l-Scalar-Plain">AppBundle</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">xml</span>
+                <span class="l l-Scalar l-Scalar-Plain">dir</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">SomeResources/config/doctrine</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; charset=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:doctrine=</span><span class="s">&quot;http://symfony.com/schema/dic/doctrine&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;doctrine:config&gt;</span>
+        <span class="nt">&lt;doctrine:orm</span> <span class="na">auto-mapping=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;mapping</span> <span class="na">name=</span><span class="s">&quot;AppBundle&quot;</span> <span class="na">dir=</span><span class="s">&quot;SomeResources/config/doctrine&quot;</span> <span class="na">type=</span><span class="s">&quot;xml&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/doctrine:orm&gt;</span>
+    <span class="nt">&lt;/doctrine:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;doctrine&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;orm&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;auto_mapping&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="s1">&#39;mappings&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;AppBundle&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;dir&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;SomeResources/config/doctrine&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;xml&#39;</span><span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="mapping-entities-outside-of-a-bundle">
+<h3>Mapping Entities Outside of a Bundle<a class="headerlink" href="#mapping-entities-outside-of-a-bundle" title="Permalink to this headline">¶</a></h3>
+<p>For example, the following looks for entity classes in the <code class="docutils literal notranslate"><span class="pre">Entity</span></code>
+namespace in the <code class="docutils literal notranslate"><span class="pre">src/Entity</span></code> directory and gives them an <code class="docutils literal notranslate"><span class="pre">App</span></code> alias
+(so you can say things like <code class="docutils literal notranslate"><span class="pre">App:Post</span></code>):</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">doctrine</span><span class="p p-Indicator">:</span>
+        <span class="c1"># ...</span>
+        <span class="l l-Scalar l-Scalar-Plain">orm</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+            <span class="l l-Scalar l-Scalar-Plain">mappings</span><span class="p p-Indicator">:</span>
+                <span class="c1"># ...</span>
+                <span class="l l-Scalar l-Scalar-Plain">SomeEntityNamespace</span><span class="p p-Indicator">:</span>
+                    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">annotation</span>
+                    <span class="l l-Scalar l-Scalar-Plain">dir</span><span class="p p-Indicator">:</span> <span class="s">&#39;%kernel.project_dir%/src/Entity&#39;</span>
+                    <span class="l l-Scalar l-Scalar-Plain">is_bundle</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+                    <span class="l l-Scalar l-Scalar-Plain">prefix</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Entity</span>
+                    <span class="l l-Scalar l-Scalar-Plain">alias</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; charset=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:doctrine=</span><span class="s">&quot;http://symfony.com/schema/dic/doctrine&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;doctrine:config&gt;</span>
+        <span class="nt">&lt;doctrine:orm&gt;</span>
+            <span class="nt">&lt;mapping</span> <span class="na">name=</span><span class="s">&quot;SomeEntityNamespace&quot;</span>
+                <span class="na">type=</span><span class="s">&quot;annotation&quot;</span>
+                <span class="na">dir=</span><span class="s">&quot;%kernel.project_dir%/src/Entity&quot;</span>
+                <span class="na">is-bundle=</span><span class="s">&quot;false&quot;</span>
+                <span class="na">prefix=</span><span class="s">&quot;App\Entity&quot;</span>
+                <span class="na">alias=</span><span class="s">&quot;App&quot;</span>
+            <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/doctrine:orm&gt;</span>
+    <span class="nt">&lt;/doctrine:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;doctrine&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;orm&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;auto_mapping&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="s1">&#39;mappings&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;SomeEntityNamespace&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;type&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;annotation&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;dir&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;%kernel.project_dir%/src/Entity&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;is_bundle&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+                <span class="s1">&#39;prefix&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;App\Entity&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;alias&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;App&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="section" id="detecting-a-mapping-configuration-format">
+<h4>Detecting a Mapping Configuration Format<a class="headerlink" href="#detecting-a-mapping-configuration-format" title="Permalink to this headline">¶</a></h4>
+<p>If the <code class="docutils literal notranslate"><span class="pre">type</span></code> on the bundle configuration isn’t set, the DoctrineBundle
+will try to detect the correct mapping configuration format for the bundle.</p>
+<p>DoctrineBundle will look for files matching <code class="docutils literal notranslate"><span class="pre">*.orm.[FORMAT]</span></code> (e.g.
+<code class="docutils literal notranslate"><span class="pre">Post.orm.yaml</span></code>) in the configured <code class="docutils literal notranslate"><span class="pre">dir</span></code> of your mapping (if you’re mapping
+a bundle, then <code class="docutils literal notranslate"><span class="pre">dir</span></code> is relative to the bundle’s directory).</p>
+<p>The bundle looks for (in this order) XML, YAML and PHP files.
+Using the <code class="docutils literal notranslate"><span class="pre">auto_mapping</span></code> feature, every bundle can have only one
+configuration format. The bundle will stop as soon as it locates one.</p>
+<p>If it wasn’t possible to determine a configuration format for a bundle,
+the DoctrineBundle will check if there is an <code class="docutils literal notranslate"><span class="pre">Entity</span></code> folder in the bundle’s
+root directory. If the folder exist, Doctrine will fall back to using an
+annotation driver.</p>
+</div>
+<div class="section" id="default-value-of-dir">
+<h4>Default Value of Dir<a class="headerlink" href="#default-value-of-dir" title="Permalink to this headline">¶</a></h4>
+<p>If <code class="docutils literal notranslate"><span class="pre">dir</span></code> is not specified, then its default value depends on which configuration
+driver is being used. For drivers that rely on the PHP files (annotation,
+<code class="docutils literal notranslate"><span class="pre">staticphp</span></code>) it will be <code class="docutils literal notranslate"><span class="pre">[Bundle]/Entity</span></code>. For drivers that are using
+configuration files (XML, YAML, …) it will be
+<code class="docutils literal notranslate"><span class="pre">[Bundle]/Resources/config/doctrine</span></code>.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">dir</span></code> configuration is set and the <code class="docutils literal notranslate"><span class="pre">is_bundle</span></code> configuration
+is <code class="docutils literal notranslate"><span class="pre">true</span></code>, the DoctrineBundle will prefix the <code class="docutils literal notranslate"><span class="pre">dir</span></code> configuration with
+the path of the bundle.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,660 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The Filesystem Component &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Finder Component" href="finder.html" />
+    <link rel="prev" title="Expression" href="../reference/constraints/Expression.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cache.html">The Cache Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependency_injection.html">The DependencyInjection Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The Filesystem Component</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mkdir"><code class="docutils literal notranslate"><span class="pre">mkdir</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exists"><code class="docutils literal notranslate"><span class="pre">exists</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#copy"><code class="docutils literal notranslate"><span class="pre">copy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#touch"><code class="docutils literal notranslate"><span class="pre">touch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#chown"><code class="docutils literal notranslate"><span class="pre">chown</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#chgrp"><code class="docutils literal notranslate"><span class="pre">chgrp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#chmod"><code class="docutils literal notranslate"><span class="pre">chmod</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remove"><code class="docutils literal notranslate"><span class="pre">remove</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rename"><code class="docutils literal notranslate"><span class="pre">rename</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#symlink"><code class="docutils literal notranslate"><span class="pre">symlink</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#readlink"><code class="docutils literal notranslate"><span class="pre">readlink</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#makepathrelative"><code class="docutils literal notranslate"><span class="pre">makePathRelative</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mirror"><code class="docutils literal notranslate"><span class="pre">mirror</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#isabsolutepath"><code class="docutils literal notranslate"><span class="pre">isAbsolutePath</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tempnam"><code class="docutils literal notranslate"><span class="pre">tempnam</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dumpfile"><code class="docutils literal notranslate"><span class="pre">dumpFile</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#appendtofile"><code class="docutils literal notranslate"><span class="pre">appendToFile</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#error-handling">Error Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="form.html">The Form Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html">The Process Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">The Security Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">The Components</a> &raquo;</li>
+        
+      <li>The Filesystem Component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/components/filesystem.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-filesystem-component">
+<span id="index-0"></span><h1>The Filesystem Component<a class="headerlink" href="#the-filesystem-component" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div>The Filesystem component provides basic utilities for the filesystem.</div></blockquote>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/filesystem
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you install this component outside of a Symfony application, you must
+require the <code class="docutils literal notranslate"><span class="pre">vendor/autoload.php</span></code> file in your code to enable the class
+autoloading mechanism provided by Composer. Read
+<a class="reference internal" href="using_components.html"><span class="doc">this article</span></a> for more details.</p>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem"><span class="pre">Filesystem</span></a></code> class is the unique
+endpoint for filesystem operations:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Filesystem\Exception\IOExceptionInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Filesystem\Filesystem</span><span class="p">;</span>
+
+<span class="nv">$filesystem</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Filesystem</span><span class="p">();</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">mkdir</span><span class="p">(</span><span class="nb">sys_get_temp_dir</span><span class="p">()</span><span class="o">.</span><span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="nx">random_int</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">));</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">IOExceptionInterface</span> <span class="nv">$exception</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;An error occurred while creating your directory at &quot;</span><span class="o">.</span><span class="nv">$exception</span><span class="o">-&gt;</span><span class="na">getPath</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Methods <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::mkdir()"><span class="pre">mkdir()</span></a></code>,
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::exists()"><span class="pre">exists()</span></a></code>,
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::touch()"><span class="pre">touch()</span></a></code>,
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::remove()"><span class="pre">remove()</span></a></code>,
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::chmod()"><span class="pre">chmod()</span></a></code>,
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::chown()"><span class="pre">chown()</span></a></code> and
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::chgrp()"><span class="pre">chgrp()</span></a></code> can receive a
+string, an array or any object implementing <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.traversable.php" title="Traversable"><span class="pre">Traversable</span></a></code> as
+the target argument.</p>
+</div>
+<div class="section" id="mkdir">
+<h3><code class="docutils literal notranslate"><span class="pre">mkdir</span></code><a class="headerlink" href="#mkdir" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::mkdir()"><span class="pre">mkdir()</span></a></code> creates a directory recursively.
+On POSIX filesystems, directories are created with a default mode value
+<cite>0777</cite>. You can use the second argument to set your own mode:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">mkdir</span><span class="p">(</span><span class="s1">&#39;/tmp/photos&#39;</span><span class="p">,</span> <span class="mo">0700</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can pass an array or any <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.traversable.php" title="Traversable"><span class="pre">Traversable</span></a></code> object as the first
+argument.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function ignores already existing directories.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The directory permissions are affected by the current <a class="reference external" href="https://en.wikipedia.org/wiki/Umask">umask</a>.
+Set the <code class="docutils literal notranslate"><span class="pre">umask</span></code> for your webserver, use PHP’s <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.umask.php" title="umask"><span class="pre">umask</span></a></code>
+function or use the <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.chmod.php" title="chmod"><span class="pre">chmod</span></a></code> function after the
+directory has been created.</p>
+</div>
+</div>
+<div class="section" id="exists">
+<h3><code class="docutils literal notranslate"><span class="pre">exists</span></code><a class="headerlink" href="#exists" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::exists()"><span class="pre">exists()</span></a></code> checks for the
+presence of one or more files or directories and returns <code class="docutils literal notranslate"><span class="pre">false</span></code> if any of
+them is missing:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// if this absolute directory exists, returns true</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">exists</span><span class="p">(</span><span class="s1">&#39;/tmp/photos&#39;</span><span class="p">);</span>
+
+<span class="c1">// if rabbit.jpg exists and bottle.png does not exist, returns false</span>
+<span class="c1">// non-absolute paths are relative to the directory where the running PHP script is stored</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">exists</span><span class="p">([</span><span class="s1">&#39;rabbit.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;bottle.png&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can pass an array or any <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.traversable.php" title="Traversable"><span class="pre">Traversable</span></a></code> object as the first
+argument.</p>
+</div>
+</div>
+<div class="section" id="copy">
+<h3><code class="docutils literal notranslate"><span class="pre">copy</span></code><a class="headerlink" href="#copy" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::copy()"><span class="pre">copy()</span></a></code> makes a copy of a
+single file (use <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::mirror()"><span class="pre">mirror()</span></a></code> to
+copy directories). If the target already exists, the file is copied only if the
+source modification date is later than the target. This behavior can be overridden
+by the third boolean argument:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// works only if image-ICC has been modified after image.jpg</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">copy</span><span class="p">(</span><span class="s1">&#39;image-ICC.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;image.jpg&#39;</span><span class="p">);</span>
+
+<span class="c1">// image.jpg will be overridden</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">copy</span><span class="p">(</span><span class="s1">&#39;image-ICC.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;image.jpg&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="touch">
+<h3><code class="docutils literal notranslate"><span class="pre">touch</span></code><a class="headerlink" href="#touch" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::touch()"><span class="pre">touch()</span></a></code> sets access and
+modification time for a file. The current time is used by default. You can set
+your own with the second argument. The third argument is the access time:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// sets modification time to the current timestamp</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">touch</span><span class="p">(</span><span class="s1">&#39;file.txt&#39;</span><span class="p">);</span>
+<span class="c1">// sets modification time 10 seconds in the future</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">touch</span><span class="p">(</span><span class="s1">&#39;file.txt&#39;</span><span class="p">,</span> <span class="nb">time</span><span class="p">()</span> <span class="o">+</span> <span class="mi">10</span><span class="p">);</span>
+<span class="c1">// sets access time 10 seconds in the past</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">touch</span><span class="p">(</span><span class="s1">&#39;file.txt&#39;</span><span class="p">,</span> <span class="nb">time</span><span class="p">(),</span> <span class="nb">time</span><span class="p">()</span> <span class="o">-</span> <span class="mi">10</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can pass an array or any <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.traversable.php" title="Traversable"><span class="pre">Traversable</span></a></code> object as the first
+argument.</p>
+</div>
+</div>
+<div class="section" id="chown">
+<h3><code class="docutils literal notranslate"><span class="pre">chown</span></code><a class="headerlink" href="#chown" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::chown()"><span class="pre">chown()</span></a></code> changes the owner of
+a file. The third argument is a boolean recursive option:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// sets the owner of the lolcat video to www-data</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">chown</span><span class="p">(</span><span class="s1">&#39;lolcat.mp4&#39;</span><span class="p">,</span> <span class="s1">&#39;www-data&#39;</span><span class="p">);</span>
+<span class="c1">// changes the owner of the video directory recursively</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">chown</span><span class="p">(</span><span class="s1">&#39;/video&#39;</span><span class="p">,</span> <span class="s1">&#39;www-data&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can pass an array or any <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.traversable.php" title="Traversable"><span class="pre">Traversable</span></a></code> object as the first
+argument.</p>
+</div>
+</div>
+<div class="section" id="chgrp">
+<h3><code class="docutils literal notranslate"><span class="pre">chgrp</span></code><a class="headerlink" href="#chgrp" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::chgrp()"><span class="pre">chgrp()</span></a></code> changes the group of
+a file. The third argument is a boolean recursive option:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// sets the group of the lolcat video to nginx</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">chgrp</span><span class="p">(</span><span class="s1">&#39;lolcat.mp4&#39;</span><span class="p">,</span> <span class="s1">&#39;nginx&#39;</span><span class="p">);</span>
+<span class="c1">// changes the group of the video directory recursively</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">chgrp</span><span class="p">(</span><span class="s1">&#39;/video&#39;</span><span class="p">,</span> <span class="s1">&#39;nginx&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can pass an array or any <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.traversable.php" title="Traversable"><span class="pre">Traversable</span></a></code> object as the first
+argument.</p>
+</div>
+</div>
+<div class="section" id="chmod">
+<h3><code class="docutils literal notranslate"><span class="pre">chmod</span></code><a class="headerlink" href="#chmod" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::chmod()"><span class="pre">chmod()</span></a></code> changes the mode or
+permissions of a file. The fourth argument is a boolean recursive option:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// sets the mode of the video to 0600</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">chmod</span><span class="p">(</span><span class="s1">&#39;video.ogg&#39;</span><span class="p">,</span> <span class="mo">0600</span><span class="p">);</span>
+<span class="c1">// changes the mod of the src directory recursively</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">chmod</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">,</span> <span class="mo">0700</span><span class="p">,</span> <span class="mo">0000</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can pass an array or any <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.traversable.php" title="Traversable"><span class="pre">Traversable</span></a></code> object as the first
+argument.</p>
+</div>
+</div>
+<div class="section" id="remove">
+<h3><code class="docutils literal notranslate"><span class="pre">remove</span></code><a class="headerlink" href="#remove" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::remove()"><span class="pre">remove()</span></a></code> deletes files,
+directories and symlinks:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">remove</span><span class="p">([</span><span class="s1">&#39;symlink&#39;</span><span class="p">,</span> <span class="s1">&#39;/path/to/directory&#39;</span><span class="p">,</span> <span class="s1">&#39;activity.log&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can pass an array or any <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.traversable.php" title="Traversable"><span class="pre">Traversable</span></a></code> object as the first
+argument.</p>
+</div>
+</div>
+<div class="section" id="rename">
+<h3><code class="docutils literal notranslate"><span class="pre">rename</span></code><a class="headerlink" href="#rename" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::rename()"><span class="pre">rename()</span></a></code> changes the name
+of a single file or directory:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// renames a file</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">rename</span><span class="p">(</span><span class="s1">&#39;/tmp/processed_video.ogg&#39;</span><span class="p">,</span> <span class="s1">&#39;/path/to/store/video_647.ogg&#39;</span><span class="p">);</span>
+<span class="c1">// renames a directory</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">rename</span><span class="p">(</span><span class="s1">&#39;/tmp/files&#39;</span><span class="p">,</span> <span class="s1">&#39;/path/to/store/files&#39;</span><span class="p">);</span>
+<span class="c1">// if the target already exists, a third boolean argument is available to overwrite.</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">rename</span><span class="p">(</span><span class="s1">&#39;/tmp/processed_video2.ogg&#39;</span><span class="p">,</span> <span class="s1">&#39;/path/to/store/video_647.ogg&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="symlink">
+<h3><code class="docutils literal notranslate"><span class="pre">symlink</span></code><a class="headerlink" href="#symlink" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::symlink()"><span class="pre">symlink()</span></a></code> creates a
+symbolic link from the target to the destination. If the filesystem does not
+support symbolic links, a third boolean argument is available:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// creates a symbolic link</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">symlink</span><span class="p">(</span><span class="s1">&#39;/path/to/source&#39;</span><span class="p">,</span> <span class="s1">&#39;/path/to/destination&#39;</span><span class="p">);</span>
+<span class="c1">// duplicates the source directory if the filesystem</span>
+<span class="c1">// does not support symbolic links</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">symlink</span><span class="p">(</span><span class="s1">&#39;/path/to/source&#39;</span><span class="p">,</span> <span class="s1">&#39;/path/to/destination&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="readlink">
+<h3><code class="docutils literal notranslate"><span class="pre">readlink</span></code><a class="headerlink" href="#readlink" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::readlink()"><span class="pre">readlink()</span></a></code> read links targets.</p>
+<p>PHP’s <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.readlink.php" title="readlink"><span class="pre">readlink</span></a></code> function returns the target of a symbolic link. However, its behavior
+is completely different under Windows and Unix. On Windows systems, <code class="docutils literal notranslate"><span class="pre">readlink()</span></code>
+resolves recursively the children links of a link until a final target is found. On
+Unix-based systems <code class="docutils literal notranslate"><span class="pre">readlink()</span></code> only resolves the next link.</p>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::readlink()"><span class="pre">readlink()</span></a></code> method provided
+by the Filesystem component always behaves in the same way:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// returns the next direct target of the link without considering the existence of the target</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">readlink</span><span class="p">(</span><span class="s1">&#39;/path/to/link&#39;</span><span class="p">);</span>
+
+<span class="c1">// returns its absolute fully resolved final version of the target (if there are nested links, they are resolved)</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">readlink</span><span class="p">(</span><span class="s1">&#39;/path/to/link&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Its behavior is the following:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">readlink</span><span class="p">(</span><span class="nv">$path</span><span class="p">,</span> <span class="nv">$canonicalize</span> <span class="o">=</span> <span class="k">false</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>When <code class="docutils literal notranslate"><span class="pre">$canonicalize</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code>:</dt>
+<dd><ul class="first last">
+<li>if <code class="docutils literal notranslate"><span class="pre">$path</span></code> does not exist or is not a link, it returns <code class="docutils literal notranslate"><span class="pre">null</span></code>.</li>
+<li>if <code class="docutils literal notranslate"><span class="pre">$path</span></code> is a link, it returns the next direct target of the link without considering the existence of the target.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>When <code class="docutils literal notranslate"><span class="pre">$canonicalize</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>:</dt>
+<dd><ul class="first last">
+<li>if <code class="docutils literal notranslate"><span class="pre">$path</span></code> does not exist, it returns null.</li>
+<li>if <code class="docutils literal notranslate"><span class="pre">$path</span></code> exists, it returns its absolute fully resolved final version.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="makepathrelative">
+<h3><code class="docutils literal notranslate"><span class="pre">makePathRelative</span></code><a class="headerlink" href="#makepathrelative" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::makePathRelative()"><span class="pre">makePathRelative()</span></a></code> takes two
+absolute paths and returns the relative path from the second path to the first one:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// returns &#39;../&#39;</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">makePathRelative</span><span class="p">(</span>
+    <span class="s1">&#39;/var/lib/symfony/src/Symfony/&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/var/lib/symfony/src/Symfony/Component&#39;</span>
+<span class="p">);</span>
+<span class="c1">// returns &#39;videos/&#39;</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">makePathRelative</span><span class="p">(</span><span class="s1">&#39;/tmp/videos&#39;</span><span class="p">,</span> <span class="s1">&#39;/tmp&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mirror">
+<h3><code class="docutils literal notranslate"><span class="pre">mirror</span></code><a class="headerlink" href="#mirror" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::mirror()"><span class="pre">mirror()</span></a></code> copies all the
+contents of the source directory into the target one (use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::copy()"><span class="pre">copy()</span></a></code> method to copy single
+files):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">mirror</span><span class="p">(</span><span class="s1">&#39;/path/to/source&#39;</span><span class="p">,</span> <span class="s1">&#39;/path/to/target&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="isabsolutepath">
+<h3><code class="docutils literal notranslate"><span class="pre">isAbsolutePath</span></code><a class="headerlink" href="#isabsolutepath" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::isAbsolutePath()"><span class="pre">isAbsolutePath()</span></a></code> returns
+<code class="docutils literal notranslate"><span class="pre">true</span></code> if the given path is absolute, <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// returns true</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">isAbsolutePath</span><span class="p">(</span><span class="s1">&#39;/tmp&#39;</span><span class="p">);</span>
+<span class="c1">// returns true</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">isAbsolutePath</span><span class="p">(</span><span class="s1">&#39;c:\\Windows&#39;</span><span class="p">);</span>
+<span class="c1">// returns false</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">isAbsolutePath</span><span class="p">(</span><span class="s1">&#39;tmp&#39;</span><span class="p">);</span>
+<span class="c1">// returns false</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">isAbsolutePath</span><span class="p">(</span><span class="s1">&#39;../dir&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tempnam">
+<h3><code class="docutils literal notranslate"><span class="pre">tempnam</span></code><a class="headerlink" href="#tempnam" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::tempnam()"><span class="pre">tempnam()</span></a></code> creates a
+temporary file with a unique filename, and returns its path, or throw an
+exception on failure:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// returns a path like : /tmp/prefix_wyjgtF</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">tempnam</span><span class="p">(</span><span class="s1">&#39;/tmp&#39;</span><span class="p">,</span> <span class="s1">&#39;prefix_&#39;</span><span class="p">);</span>
+<span class="c1">// returns a path like : /tmp/prefix_wyjgtF.png</span>
+<span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">tempnam</span><span class="p">(</span><span class="s1">&#39;/tmp&#39;</span><span class="p">,</span> <span class="s1">&#39;prefix_&#39;</span><span class="p">,</span> <span class="s1">&#39;.png&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The option to set a suffix in  <code class="docutils literal notranslate"><span class="pre">tempnam()</span></code> was introduced in Symfony 5.1.</p>
+</div>
+</div>
+<div class="section" id="dumpfile">
+<h3><code class="docutils literal notranslate"><span class="pre">dumpFile</span></code><a class="headerlink" href="#dumpfile" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::dumpFile()"><span class="pre">dumpFile()</span></a></code> saves the given
+contents into a file. It does this in an atomic manner: it writes a temporary
+file first and then moves it to the new file location when it’s finished.
+This means that the user will always see either the complete old file or
+complete new file (but never a partially-written file):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">dumpFile</span><span class="p">(</span><span class="s1">&#39;file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello World&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">file.txt</span></code> file contains <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">World</span></code> now.</p>
+</div>
+<div class="section" id="appendtofile">
+<h3><code class="docutils literal notranslate"><span class="pre">appendToFile</span></code><a class="headerlink" href="#appendtofile" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Filesystem.php" title="Symfony\Component\Filesystem\Filesystem::appendToFile()"><span class="pre">appendToFile()</span></a></code> adds new
+contents at the end of some file:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$filesystem</span><span class="o">-&gt;</span><span class="na">appendToFile</span><span class="p">(</span><span class="s1">&#39;logs.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;Email sent to user@example.com&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If either the file or its containing directory doesn’t exist, this method
+creates them before appending the contents.</p>
+</div>
+</div>
+<div class="section" id="error-handling">
+<h2>Error Handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h2>
+<p>Whenever something wrong happens, an exception implementing
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Exception/ExceptionInterface.php" title="Symfony\Component\Filesystem\Exception\ExceptionInterface"><span class="pre">ExceptionInterface</span></a></code> or
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Exception/IOExceptionInterface.php" title="Symfony\Component\Filesystem\Exception\IOExceptionInterface"><span class="pre">IOExceptionInterface</span></a></code> is thrown.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">An <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Filesystem/Exception/IOException.php" title="Symfony\Component\Filesystem\Exception\IOException"><span class="pre">IOException</span></a></code> is
+thrown if directory creation fails.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

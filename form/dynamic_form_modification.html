@@ -1,0 +1,883 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Dynamically Modify Forms Using Form Events &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Define the Validation Groups to Use" href="validation_groups.html" />
+    <link rel="prev" title="Form Events" href="events.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../forms.html">Forms</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#building-forms">Building Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#rendering-forms">Rendering Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#processing-forms">Processing Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#validating-forms">Validating Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#other-common-form-features">Other Common Form Features</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../forms.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../reference/forms/types.html">Form Types Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller/upload_file.html">How to Upload Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../security/csrf.html">How to Implement CSRF Protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_dependencies.html">How to Access Services or Config from Inside a Form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_custom_field_type.html">How to Create a Custom Form Field Type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_transformers.html">How to Use Data Transformers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_mappers.html">When and How to Use Data Mappers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_form_type_extension.html">How to Create a Form Type Extension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="type_guesser.html">Creating a custom Type Guesser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootstrap4.html">Bootstrap 4 Form Theme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_customization.html">How to Customize Form Rendering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_themes.html">How to Work with Form Themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="events.html">Form Events</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Dynamically Modify Forms Using Form Events</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#customizing-your-form-based-on-the-underlying-data">Customizing your Form Based on the Underlying Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-dynamically-generate-forms-based-on-user-data">How to dynamically Generate Forms Based on user Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynamic-generation-for-submitted-forms">Dynamic Generation for Submitted Forms</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="validation_groups.html">How to Define the Validation Groups to Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validation_group_service_resolver.html">How to Dynamically Configure Form Validation Groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="button_based_validation.html">How to Choose Validation Groups Based on the Clicked Button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="disabling_validation.html">How to Disable the Validation of Submitted Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="direct_submit.html">How to Use the submit() Function to Handle Form Submissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="embedded.html">How to Embed Forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_collections.html">How to Embed a Collection of Forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="inherit_data_option.html">How to Reduce Code Duplication with “inherit_data”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multiple_buttons.html">How to Submit a Form with Multiple Buttons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_testing.html">How to Unit Test your Forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="use_empty_data.html">How to Configure empty Data for a Form Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="without_class.html">How to Use a Form without a Data Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../forms.html">Forms</a> &raquo;</li>
+        
+      <li>How to Dynamically Modify Forms Using Form Events</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/form/dynamic_form_modification.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-dynamically-modify-forms-using-form-events">
+<span id="index-0"></span><h1>How to Dynamically Modify Forms Using Form Events<a class="headerlink" href="#how-to-dynamically-modify-forms-using-form-events" title="Permalink to this headline">¶</a></h1>
+<p>Often times, a form can’t be created statically. In this article, you’ll learn
+how to customize your form based on three common use-cases:</p>
+<ol class="arabic">
+<li><p class="first"><a class="reference internal" href="#form-events-underlying-data"><span class="std std-ref">Customizing your Form Based on the Underlying Data</span></a></p>
+<p>Example: you have a “Product” form and need to modify/add/remove a field
+based on the data on the underlying Product being edited.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="#form-events-user-data"><span class="std std-ref">How to dynamically Generate Forms Based on user Data</span></a></p>
+<p>Example: you create a “Friend Message” form and need to build a drop-down
+that contains only users that are friends with the <em>current</em> authenticated
+user.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="#form-events-submitted-data"><span class="std std-ref">Dynamic Generation for Submitted Forms</span></a></p>
+<p>Example: on a registration form, you have a “country” field and a “state”
+field which should populate dynamically based on the value in the “country”
+field.</p>
+</li>
+</ol>
+<p>If you wish to learn more about the basics behind form events, you can
+take a look at the <a class="reference internal" href="events.html"><span class="doc">Form Events</span></a> documentation.</p>
+<div class="section" id="customizing-your-form-based-on-the-underlying-data">
+<span id="form-events-underlying-data"></span><h2>Customizing your Form Based on the Underlying Data<a class="headerlink" href="#customizing-your-form-based-on-the-underlying-data" title="Permalink to this headline">¶</a></h2>
+<p>Before starting with dynamic form generation, remember what
+a bare form class looks like:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/ProductType.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form\Type</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Entity\Product</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\AbstractType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormBuilderInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\OptionsResolver\OptionsResolver</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ProductType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">buildForm</span><span class="p">(</span><span class="nx">FormBuilderInterface</span> <span class="nv">$builder</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefaults</span><span class="p">([</span>
+            <span class="s1">&#39;data_class&#39;</span> <span class="o">=&gt;</span> <span class="nx">Product</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If this particular section of code isn’t already familiar to you, you
+probably need to take a step back and first review the <a class="reference internal" href="../forms.html"><span class="doc">Forms article</span></a>
+before proceeding.</p>
+</div>
+<p>Assume for a moment that this form utilizes an imaginary “Product” class
+that has only two properties (“name” and “price”). The form generated from
+this class will look the exact same regardless if a new Product is being created
+or if an existing product is being edited (e.g. a product fetched from the database).</p>
+<p>Suppose now, that you don’t want the user to be able to change the <code class="docutils literal notranslate"><span class="pre">name</span></code> value
+once the object has been created. To do this, you can rely on Symfony’s
+<a class="reference internal" href="../components/event_dispatcher.html"><span class="doc">EventDispatcher component</span></a>
+system to analyze the data on the object and modify the form based on the
+Product object’s data. In this article, you’ll learn how to add this level of
+flexibility to your forms.</p>
+<div class="section" id="adding-an-event-listener-to-a-form-class">
+<h3>Adding an Event Listener to a Form Class<a class="headerlink" href="#adding-an-event-listener-to-a-form-class" title="Permalink to this headline">¶</a></h3>
+<p>So, instead of directly adding that <code class="docutils literal notranslate"><span class="pre">name</span></code> widget, the responsibility of
+creating that particular field is delegated to an event listener:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/ProductType.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form\Type</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormEvents</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ProductType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">buildForm</span><span class="p">(</span><span class="nx">FormBuilderInterface</span> <span class="nv">$builder</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">);</span>
+
+        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">addEventListener</span><span class="p">(</span><span class="nx">FormEvents</span><span class="o">::</span><span class="na">PRE_SET_DATA</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">FormEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// ... adding the name field if needed</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The goal is to create a <code class="docutils literal notranslate"><span class="pre">name</span></code> field <em>only</em> if the underlying <code class="docutils literal notranslate"><span class="pre">Product</span></code>
+object is new (e.g. hasn’t been persisted to the database). Based on that,
+the event listener might look like the following:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">buildForm</span><span class="p">(</span><span class="nx">FormBuilderInterface</span> <span class="nv">$builder</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">addEventListener</span><span class="p">(</span><span class="nx">FormEvents</span><span class="o">::</span><span class="na">PRE_SET_DATA</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">FormEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$product</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">();</span>
+        <span class="nv">$form</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getForm</span><span class="p">();</span>
+
+        <span class="c1">// checks if the Product object is &quot;new&quot;</span>
+        <span class="c1">// If no data is passed to the form, the data is &quot;null&quot;.</span>
+        <span class="c1">// This should be considered a new &quot;Product&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$product</span> <span class="o">||</span> <span class="k">null</span> <span class="o">===</span> <span class="nv">$product</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">())</span> <span class="p">{</span>
+            <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="nx">TextType</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">FormEvents::PRE_SET_DATA</span></code> line actually resolves to the string
+<code class="docutils literal notranslate"><span class="pre">form.pre_set_data</span></code>. <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/FormEvents.php" title="Symfony\Component\Form\FormEvents"><span class="pre">FormEvents</span></a></code>
+serves an organizational purpose. It is a centralized location in which
+you can find all of the various form events available. You can view the
+full list of form events via the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/FormEvents.php" title="Symfony\Component\Form\FormEvents"><span class="pre">FormEvents</span></a></code> class.</p>
+</div>
+</div>
+<div class="section" id="adding-an-event-subscriber-to-a-form-class">
+<h3>Adding an Event Subscriber to a Form Class<a class="headerlink" href="#adding-an-event-subscriber-to-a-form-class" title="Permalink to this headline">¶</a></h3>
+<p>For better reusability or if there is some heavy logic in your event listener,
+you can also move the logic for creating the <code class="docutils literal notranslate"><span class="pre">name</span></code> field to an
+<a class="reference internal" href="../components/event_dispatcher.html#event-dispatcher-using-event-subscribers"><span class="std std-ref">event subscriber</span></a>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/EventListener/AddNameFieldSubscriber.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form\EventListener</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher\EventSubscriberInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\TextType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormEvents</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">AddNameFieldSubscriber</span> <span class="k">implements</span> <span class="nx">EventSubscriberInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getSubscribedEvents</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Tells the dispatcher that you want to listen on the form.pre_set_data</span>
+        <span class="c1">// event and that the preSetData method should be called.</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nx">FormEvents</span><span class="o">::</span><span class="na">PRE_SET_DATA</span> <span class="o">=&gt;</span> <span class="s1">&#39;preSetData&#39;</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">preSetData</span><span class="p">(</span><span class="nx">FormEvent</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$product</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">();</span>
+        <span class="nv">$form</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getForm</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$product</span> <span class="o">||</span> <span class="k">null</span> <span class="o">===</span> <span class="nv">$product</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">())</span> <span class="p">{</span>
+            <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="nx">TextType</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Great! Now use that in your form class:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/ProductType.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form\Type</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="k">use</span> <span class="nx">App\Form\EventListener\AddNameFieldSubscriber</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ProductType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">buildForm</span><span class="p">(</span><span class="nx">FormBuilderInterface</span> <span class="nv">$builder</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">);</span>
+
+        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">addEventSubscriber</span><span class="p">(</span><span class="k">new</span> <span class="nx">AddNameFieldSubscriber</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="how-to-dynamically-generate-forms-based-on-user-data">
+<span id="form-events-user-data"></span><h2>How to dynamically Generate Forms Based on user Data<a class="headerlink" href="#how-to-dynamically-generate-forms-based-on-user-data" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes you want a form to be generated dynamically based not only on data
+from the form but also on something else - like some data from the current user.
+Suppose you have a social website where a user can only message people marked
+as friends on the website. In this case, a “choice list” of whom to message
+should only contain users that are the current user’s friends.</p>
+<div class="section" id="creating-the-form-type">
+<h3>Creating the Form Type<a class="headerlink" href="#creating-the-form-type" title="Permalink to this headline">¶</a></h3>
+<p>Using an event listener, your form might look like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/FriendMessageFormType.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form\Type</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\AbstractType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\TextareaType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\TextType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormBuilderInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormEvents</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">FriendMessageFormType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">buildForm</span><span class="p">(</span><span class="nx">FormBuilderInterface</span> <span class="nv">$builder</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$builder</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;subject&#39;</span><span class="p">,</span> <span class="nx">TextType</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="nx">TextareaType</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="p">;</span>
+        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">addEventListener</span><span class="p">(</span><span class="nx">FormEvents</span><span class="o">::</span><span class="na">PRE_SET_DATA</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">FormEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// ... add a choice list of friends of the current application user</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The problem is now to get the current user and create a choice field that
+contains only this user’s friends. This can be done injecting the <code class="docutils literal notranslate"><span class="pre">Security</span></code>
+service into the form type so you can get the current user object:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Security</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">class</span> <span class="nc">FriendMessageFormType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$security</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">Security</span> <span class="nv">$security</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">security</span> <span class="o">=</span> <span class="nv">$security</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ....</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="customizing-the-form-type">
+<h3>Customizing the Form Type<a class="headerlink" href="#customizing-the-form-type" title="Permalink to this headline">¶</a></h3>
+<p>Now that you have all the basics in place you can use the features of the
+security helper to fill in the listener logic:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/FriendMessageFormType.php</span>
+<span class="k">use</span> <span class="nx">App\Entity\User</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\ORM\EntityRepository</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bridge\Doctrine\Form\Type\EntityType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\TextareaType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\TextType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Security</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">class</span> <span class="nc">FriendMessageFormType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$security</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">Security</span> <span class="nv">$security</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">security</span> <span class="o">=</span> <span class="nv">$security</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">buildForm</span><span class="p">(</span><span class="nx">FormBuilderInterface</span> <span class="nv">$builder</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$builder</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;subject&#39;</span><span class="p">,</span> <span class="nx">TextType</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="nx">TextareaType</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="p">;</span>
+
+        <span class="c1">// grab the user, do a quick sanity check that one exists</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">security</span><span class="o">-&gt;</span><span class="na">getUser</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">\LogicException</span><span class="p">(</span>
+                <span class="s1">&#39;The FriendMessageFormType cannot be used without an authenticated user!&#39;</span>
+            <span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">addEventListener</span><span class="p">(</span><span class="nx">FormEvents</span><span class="o">::</span><span class="na">PRE_SET_DATA</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">FormEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">null</span> <span class="o">!==</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getFriend</span><span class="p">())</span> <span class="p">{</span>
+                <span class="c1">// we don&#39;t need to add the friend field because</span>
+                <span class="c1">// the message will be addressed to a fixed friend</span>
+                <span class="k">return</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="nv">$form</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getForm</span><span class="p">();</span>
+
+            <span class="nv">$formOptions</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="nx">User</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+                <span class="s1">&#39;choice_label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;fullName&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;query_builder&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nx">UserRepository</span> <span class="nv">$userRepository</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="c1">// call a method on your repository that returns the query builder</span>
+                    <span class="c1">// return $userRepository-&gt;createFriendsQueryBuilder($user);</span>
+                <span class="p">},</span>
+            <span class="p">];</span>
+
+            <span class="c1">// create the field, this is similar the $builder-&gt;add()</span>
+            <span class="c1">// field name, field type, field options</span>
+            <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;friend&#39;</span><span class="p">,</span> <span class="nx">EntityType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nv">$formOptions</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You might wonder, now that you have access to the <code class="docutils literal notranslate"><span class="pre">User</span></code> object, why not
+just use it directly in <code class="docutils literal notranslate"><span class="pre">buildForm()</span></code> and omit the event listener? This is
+because doing so in the <code class="docutils literal notranslate"><span class="pre">buildForm()</span></code> method would result in the whole
+form type being modified and not just this one form instance. This may not
+usually be a problem, but technically a single form type could be used on a
+single request to create many forms or fields.</p>
+</div>
+</div>
+<div class="section" id="using-the-form">
+<h3>Using the Form<a class="headerlink" href="#using-the-form" title="Permalink to this headline">¶</a></h3>
+<p>If you’re using the <a class="reference internal" href="../service_container.html#service-container-services-load-example"><span class="std std-ref">default services.yaml configuration</span></a>,
+your form is ready to be used thanks to <a class="reference internal" href="../service_container.html#services-autowire"><span class="std std-ref">autowire</span></a> and
+<a class="reference internal" href="../service_container.html#services-autoconfigure"><span class="std std-ref">autoconfigure</span></a>.
+Otherwise, <a class="reference internal" href="../service_container.html#service-container-creating-service"><span class="std std-ref">register the form class as a service</span></a>
+and <a class="reference internal" href="../service_container/tags.html"><span class="doc">tag it</span></a> with the <code class="docutils literal notranslate"><span class="pre">form.type</span></code> tag.</p>
+<p>In a controller, create the form like normal:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">FriendMessageController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">new</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$form</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createForm</span><span class="p">(</span><span class="nx">FriendMessageFormType</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can also  embed the form type into another form:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// inside some other &quot;form type&quot; class</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">buildForm</span><span class="p">(</span><span class="nx">FormBuilderInterface</span> <span class="nv">$builder</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="nx">FriendMessageFormType</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="dynamic-generation-for-submitted-forms">
+<span id="form-events-submitted-data"></span><h2>Dynamic Generation for Submitted Forms<a class="headerlink" href="#dynamic-generation-for-submitted-forms" title="Permalink to this headline">¶</a></h2>
+<p>Another case that can appear is that you want to customize the form specific to
+the data that was submitted by the user. For example, imagine you have a registration
+form for sports gatherings. Some events will allow you to specify your preferred
+position on the field. This would be a <code class="docutils literal notranslate"><span class="pre">choice</span></code> field for example. However, the
+possible choices will depend on each sport. Football will have attack, defense,
+goalkeeper etc… Baseball will have a pitcher but will not have a goalkeeper. You
+will need the correct options in order for validation to pass.</p>
+<p>The meetup is passed as an entity field to the form. So we can access each
+sport like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/SportMeetupType.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form\Type</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Bridge\Doctrine\Form\Type\EntityType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\AbstractType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormBuilderInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormEvents</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">class</span> <span class="nc">SportMeetupType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">buildForm</span><span class="p">(</span><span class="nx">FormBuilderInterface</span> <span class="nv">$builder</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$builder</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;sport&#39;</span><span class="p">,</span> <span class="nx">EntityType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+                <span class="s1">&#39;class&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;App\Entity\Sport&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;placeholder&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="p">])</span>
+        <span class="p">;</span>
+
+        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">addEventListener</span><span class="p">(</span>
+            <span class="nx">FormEvents</span><span class="o">::</span><span class="na">PRE_SET_DATA</span><span class="p">,</span>
+            <span class="k">function</span> <span class="p">(</span><span class="nx">FormEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$form</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getForm</span><span class="p">();</span>
+
+                <span class="c1">// this would be your entity, i.e. SportMeetup</span>
+                <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">();</span>
+
+                <span class="nv">$sport</span> <span class="o">=</span> <span class="nv">$data</span><span class="o">-&gt;</span><span class="na">getSport</span><span class="p">();</span>
+                <span class="nv">$positions</span> <span class="o">=</span> <span class="k">null</span> <span class="o">===</span> <span class="nv">$sport</span> <span class="o">?</span> <span class="p">[]</span> <span class="o">:</span> <span class="nv">$sport</span><span class="o">-&gt;</span><span class="na">getAvailablePositions</span><span class="p">();</span>
+
+                <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;position&#39;</span><span class="p">,</span> <span class="nx">EntityType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+                    <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;App\Entity\Position&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;placeholder&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;choices&#39;</span> <span class="o">=&gt;</span> <span class="nv">$positions</span><span class="p">,</span>
+                <span class="p">]);</span>
+            <span class="p">}</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When you’re building this form to display to the user for the first time,
+then this example works perfectly.</p>
+<p>However, things get more difficult when you handle the form submission. This
+is because the <code class="docutils literal notranslate"><span class="pre">PRE_SET_DATA</span></code> event tells us the data that you’re starting
+with (e.g. an empty <code class="docutils literal notranslate"><span class="pre">SportMeetup</span></code> object), <em>not</em> the submitted data.</p>
+<p>On a form, we can usually listen to the following events:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">PRE_SET_DATA</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">POST_SET_DATA</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">PRE_SUBMIT</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">SUBMIT</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">POST_SUBMIT</span></code></li>
+</ul>
+<p>The key is to add a <code class="docutils literal notranslate"><span class="pre">POST_SUBMIT</span></code> listener to the field that your new field
+depends on. If you add a <code class="docutils literal notranslate"><span class="pre">POST_SUBMIT</span></code> listener to a form child (e.g. <code class="docutils literal notranslate"><span class="pre">sport</span></code>),
+and add new children to the parent form, the Form component will detect the
+new field automatically and map it to the submitted client data.</p>
+<p>The type would now look like:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/SportMeetupType.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form\Type</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Entity\Sport</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bridge\Doctrine\Form\Type\EntityType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormInterface</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">class</span> <span class="nc">SportMeetupType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">buildForm</span><span class="p">(</span><span class="nx">FormBuilderInterface</span> <span class="nv">$builder</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$builder</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;sport&#39;</span><span class="p">,</span> <span class="nx">EntityType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+                <span class="s1">&#39;class&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;App\Entity\Sport&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;placeholder&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="p">])</span>
+        <span class="p">;</span>
+
+        <span class="nv">$formModifier</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nx">FormInterface</span> <span class="nv">$form</span><span class="p">,</span> <span class="nx">Sport</span> <span class="nv">$sport</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$positions</span> <span class="o">=</span> <span class="k">null</span> <span class="o">===</span> <span class="nv">$sport</span> <span class="o">?</span> <span class="p">[]</span> <span class="o">:</span> <span class="nv">$sport</span><span class="o">-&gt;</span><span class="na">getAvailablePositions</span><span class="p">();</span>
+
+            <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;position&#39;</span><span class="p">,</span> <span class="nx">EntityType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+                <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;App\Entity\Position&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;placeholder&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;choices&#39;</span> <span class="o">=&gt;</span> <span class="nv">$positions</span><span class="p">,</span>
+            <span class="p">]);</span>
+        <span class="p">};</span>
+
+        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">addEventListener</span><span class="p">(</span>
+            <span class="nx">FormEvents</span><span class="o">::</span><span class="na">PRE_SET_DATA</span><span class="p">,</span>
+            <span class="k">function</span> <span class="p">(</span><span class="nx">FormEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$formModifier</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// this would be your entity, i.e. SportMeetup</span>
+                <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">();</span>
+
+                <span class="nv">$formModifier</span><span class="p">(</span><span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getForm</span><span class="p">(),</span> <span class="nv">$data</span><span class="o">-&gt;</span><span class="na">getSport</span><span class="p">());</span>
+            <span class="p">}</span>
+        <span class="p">);</span>
+
+        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;sport&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">addEventListener</span><span class="p">(</span>
+            <span class="nx">FormEvents</span><span class="o">::</span><span class="na">POST_SUBMIT</span><span class="p">,</span>
+            <span class="k">function</span> <span class="p">(</span><span class="nx">FormEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$formModifier</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// It&#39;s important here to fetch $event-&gt;getForm()-&gt;getData(), as</span>
+                <span class="c1">// $event-&gt;getData() will get you the client data (that is, the ID)</span>
+                <span class="nv">$sport</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getForm</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">();</span>
+
+                <span class="c1">// since we&#39;ve added the listener to the child, we&#39;ll have to pass on</span>
+                <span class="c1">// the parent to the callback functions!</span>
+                <span class="nv">$formModifier</span><span class="p">(</span><span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getForm</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getParent</span><span class="p">(),</span> <span class="nv">$sport</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can see that you need to listen on these two events and have different
+callbacks only because in two different scenarios, the data that you can use is
+available in different events. Other than that, the listeners always perform
+exactly the same things on a given form.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SUBMIT</span></code> event does not allow to modify the form
+the listener is bound to, but it allows to modify its parent.</p>
+</div>
+<p>One piece that is still missing is the client-side updating of your form after
+the sport is selected. This should be handled by making an AJAX call back to
+your application. Assume that you have a sport meetup creation controller:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/MeetupController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Entity\SportMeetup</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Form\Type\SportMeetupType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">class</span> <span class="nc">MeetupController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$meetup</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SportMeetup</span><span class="p">();</span>
+        <span class="nv">$form</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createForm</span><span class="p">(</span><span class="nx">SportMeetupType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nv">$meetup</span><span class="p">);</span>
+        <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">handleRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$form</span><span class="o">-&gt;</span><span class="na">isSubmitted</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">isValid</span><span class="p">())</span> <span class="p">{</span>
+            <span class="c1">// ... save the meetup, redirect etc.</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span>
+            <span class="s1">&#39;meetup/create.html.twig&#39;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s1">&#39;form&#39;</span> <span class="o">=&gt;</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">createView</span><span class="p">()]</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The associated template uses some JavaScript to update the <code class="docutils literal notranslate"><span class="pre">position</span></code> form
+field according to the current selection in the <code class="docutils literal notranslate"><span class="pre">sport</span></code> field:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">{# templates/meetup/create.html.twig #}</span>
+<span class="cp">{{</span> <span class="nv">form_start</span><span class="o">(</span><span class="nv">form</span><span class="o">)</span> <span class="cp">}}</span>
+    <span class="cp">{{</span> <span class="nv">form_row</span><span class="o">(</span><span class="nv">form.sport</span><span class="o">)</span> <span class="cp">}}</span>    <span class="c">{# &lt;select id=&quot;meetup_sport&quot; ... #}</span>
+    <span class="cp">{{</span> <span class="nv">form_row</span><span class="o">(</span><span class="nv">form.position</span><span class="o">)</span> <span class="cp">}}</span> <span class="c">{# &lt;select id=&quot;meetup_position&quot; ... #}</span>
+    <span class="c">{# ... #}</span>
+<span class="cp">{{</span> <span class="nv">form_end</span><span class="o">(</span><span class="nv">form</span><span class="o">)</span> <span class="cp">}}</span>
+
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="kd">var</span> <span class="nx">$sport</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#meetup_sport&#39;</span><span class="p">);</span>
+<span class="c1">// When sport gets selected ...</span>
+<span class="nx">$sport</span><span class="p">.</span><span class="nx">change</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// ... retrieve the corresponding form.</span>
+  <span class="kd">var</span> <span class="nx">$form</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">closest</span><span class="p">(</span><span class="s1">&#39;form&#39;</span><span class="p">);</span>
+  <span class="c1">// Simulate form data, but only include the selected sport value.</span>
+  <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="nx">data</span><span class="p">[</span><span class="nx">$sport</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="nx">$sport</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
+  <span class="c1">// Submit data via AJAX to the form&#39;s action path.</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+    <span class="nx">url</span> <span class="o">:</span> <span class="nx">$form</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">),</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="nx">$form</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">),</span>
+    <span class="nx">data</span> <span class="o">:</span> <span class="nx">data</span><span class="p">,</span>
+    <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">html</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Replace current position field ...</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#meetup_position&#39;</span><span class="p">).</span><span class="nx">replaceWith</span><span class="p">(</span>
+        <span class="c1">// ... with the returned one from the AJAX response.</span>
+        <span class="nx">$</span><span class="p">(</span><span class="nx">html</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;#meetup_position&#39;</span><span class="p">)</span>
+      <span class="p">);</span>
+      <span class="c1">// Position field now displays the appropriate positions.</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>The major benefit of submitting the whole form to just extract the updated
+<code class="docutils literal notranslate"><span class="pre">position</span></code> field is that no additional server-side code is needed; all the
+code from above to generate the submitted form can be reused.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

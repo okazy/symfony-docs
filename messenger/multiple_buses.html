@@ -1,0 +1,678 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Multiple Buses &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Migrating an Existing Application to Symfony" href="../migration.html" />
+    <link rel="prev" title="Transactional Messages: Handle New Messages After Handling is Done" href="message-recorder.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#creating-a-message-handler">Creating a Message &amp; Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#dispatching-the-message">Dispatching the Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#transports-async-queued-messages">Transports: Async/Queued Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#consuming-messages-running-the-worker">Consuming Messages (Running the Worker)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#retries-failures">Retries &amp; Failures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#transport-configuration">Transport Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#customizing-handlers">Customizing Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#extending-messenger">Extending Messenger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#multiple-buses-command-event-buses">Multiple Buses, Command &amp; Event Buses</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../messenger.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="custom-transport.html">How to Create Your own Messenger Transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="handler_results.html">Getting Results from your Handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="message-recorder.html">Transactional Messages: Handle New Messages After Handling is Done</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Multiple Buses</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#restrict-handlers-per-bus">Restrict Handlers per Bus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debugging-the-buses">Debugging the Buses</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a> &raquo;</li>
+        
+      <li>Multiple Buses</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/messenger/multiple_buses.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="multiple-buses">
+<span id="index-0"></span><h1>Multiple Buses<a class="headerlink" href="#multiple-buses" title="Permalink to this headline">¶</a></h1>
+<p>A common architecture when building applications is to separate commands from
+queries. Commands are actions that do something and queries fetch data. This
+is called CQRS (Command Query Responsibility Segregation). See Martin Fowler’s
+<a class="reference external" href="https://martinfowler.com/bliki/CQRS.html">article about CQRS</a> to learn more. This architecture could be used together
+with the Messenger component by defining multiple buses.</p>
+<p>A <strong>command bus</strong> is a little different from a <strong>query bus</strong>. For example, command
+buses usually don’t provide any results and query buses are rarely asynchronous.
+You can configure these buses and their rules by using middleware.</p>
+<p>It might also be a good idea to separate actions from reactions by introducing
+an <strong>event bus</strong>. The event bus could have zero or more subscribers.</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">messenger</span><span class="p p-Indicator">:</span>
+        <span class="c1"># The bus that is going to be injected when injecting MessageBusInterface</span>
+        <span class="l l-Scalar l-Scalar-Plain">default_bus</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">command.bus</span>
+        <span class="l l-Scalar l-Scalar-Plain">buses</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">command.bus</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">middleware</span><span class="p p-Indicator">:</span>
+                    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">validation</span>
+                    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">doctrine_transaction</span>
+            <span class="l l-Scalar l-Scalar-Plain">query.bus</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">middleware</span><span class="p p-Indicator">:</span>
+                    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">validation</span>
+            <span class="l l-Scalar l-Scalar-Plain">event.bus</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">default_middleware</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">allow_no_handlers</span>
+                <span class="l l-Scalar l-Scalar-Plain">middleware</span><span class="p p-Indicator">:</span>
+                    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">validation</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/messenger.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="c">&lt;!-- The bus that is going to be injected when injecting MessageBusInterface --&gt;</span>
+        <span class="nt">&lt;framework:messenger</span> <span class="na">default-bus=</span><span class="s">&quot;command.bus&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;framework:bus</span> <span class="na">name=</span><span class="s">&quot;command.bus&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;framework:middleware</span> <span class="na">id=</span><span class="s">&quot;validation&quot;</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;framework:middleware</span> <span class="na">id=</span><span class="s">&quot;doctrine_transaction&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;framework:bus&gt;</span>
+            <span class="nt">&lt;framework:bus</span> <span class="na">name=</span><span class="s">&quot;query.bus&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;framework:middleware</span> <span class="na">id=</span><span class="s">&quot;validation&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;framework:bus&gt;</span>
+            <span class="nt">&lt;framework:bus</span> <span class="na">name=</span><span class="s">&quot;event.bus&quot;</span> <span class="na">default-middleware=</span><span class="s">&quot;allow_no_handlers&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;framework:middleware</span> <span class="na">id=</span><span class="s">&quot;validation&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;framework:bus&gt;</span>
+        <span class="nt">&lt;/framework:messenger&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/messenger.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;messenger&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="c1">// The bus that is going to be injected when injecting MessageBusInterface</span>
+        <span class="s1">&#39;default_bus&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;command.bus&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;buses&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;command.bus&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;middleware&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="s1">&#39;validation&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;doctrine_transaction&#39;</span><span class="p">,</span>
+                <span class="p">],</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;query.bus&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;middleware&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="s1">&#39;validation&#39;</span><span class="p">,</span>
+                <span class="p">],</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;event.bus&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;default_middleware&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;allow_no_handlers&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;middleware&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="s1">&#39;validation&#39;</span><span class="p">,</span>
+                <span class="p">],</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>This will create three new services:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">command.bus</span></code>: autowireable with the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/MessageBusInterface.php" title="Symfony\Component\Messenger\MessageBusInterface"><span class="pre">MessageBusInterface</span></a></code>
+type-hint (because this is the <code class="docutils literal notranslate"><span class="pre">default_bus</span></code>);</li>
+<li><code class="docutils literal notranslate"><span class="pre">query.bus</span></code>: autowireable with <code class="docutils literal notranslate"><span class="pre">MessageBusInterface</span> <span class="pre">$queryBus</span></code>;</li>
+<li><code class="docutils literal notranslate"><span class="pre">event.bus</span></code>: autowireable with <code class="docutils literal notranslate"><span class="pre">MessageBusInterface</span> <span class="pre">$eventBus</span></code>.</li>
+</ul>
+<div class="section" id="restrict-handlers-per-bus">
+<h2>Restrict Handlers per Bus<a class="headerlink" href="#restrict-handlers-per-bus" title="Permalink to this headline">¶</a></h2>
+<p>By default, each handler will be available to handle messages on <em>all</em>
+of your buses. To prevent dispatching a message to the wrong bus without an error,
+you can restrict each handler to a specific bus using the <code class="docutils literal notranslate"><span class="pre">messenger.message_handler</span></code> tag:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">App\MessageHandler\SomeCommandHandler</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[{</span> <span class="nv">name</span><span class="p p-Indicator">:</span> <span class="nv">messenger.message_handler</span><span class="p p-Indicator">,</span> <span class="nv">bus</span><span class="p p-Indicator">:</span> <span class="nv">command.bus</span> <span class="p p-Indicator">}]</span>
+        <span class="c1"># prevent handlers from being registered twice (or you can remove</span>
+        <span class="c1"># the MessageHandlerInterface that autoconfigure uses to find handlers)</span>
+        <span class="l l-Scalar l-Scalar-Plain">autoconfigure</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\MessageHandler\SomeCommandHandler&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;messenger.message_handler&quot;</span> <span class="na">bus=</span><span class="s">&quot;command.bus&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">App\MessageHandler\SomeCommandHandler</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">tag</span><span class="p">(</span><span class="s1">&#39;messenger.message_handler&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;bus&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;command.bus&#39;</span><span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>This way, the <code class="docutils literal notranslate"><span class="pre">App\MessageHandler\SomeCommandHandler</span></code> handler will only be
+known by the <code class="docutils literal notranslate"><span class="pre">command.bus</span></code> bus.</p>
+<p>You can also automatically add this tag to a number of classes by following
+a naming convention and registering all of the handler services by name with
+the correct tag:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+
+<span class="c1"># put this after the &quot;App\&quot; line that registers all your services</span>
+<span class="l l-Scalar l-Scalar-Plain">command_handlers</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">namespace</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\MessageHandler\</span>
+    <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="s">&#39;%kernel.project_dir%/src/MessageHandler/*CommandHandler.php&#39;</span>
+    <span class="l l-Scalar l-Scalar-Plain">autoconfigure</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">name</span><span class="p p-Indicator">:</span> <span class="nv">messenger.message_handler</span><span class="p p-Indicator">,</span> <span class="nv">bus</span><span class="p p-Indicator">:</span> <span class="nv">command.bus</span> <span class="p p-Indicator">}</span>
+
+<span class="l l-Scalar l-Scalar-Plain">query_handlers</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">namespace</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\MessageHandler\</span>
+    <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="s">&#39;%kernel.project_dir%/src/MessageHandler/*QueryHandler.php&#39;</span>
+    <span class="l l-Scalar l-Scalar-Plain">autoconfigure</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">name</span><span class="p p-Indicator">:</span> <span class="nv">messenger.message_handler</span><span class="p p-Indicator">,</span> <span class="nv">bus</span><span class="p p-Indicator">:</span> <span class="nv">query.bus</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="c">&lt;!-- command handlers --&gt;</span>
+        <span class="nt">&lt;prototype</span> <span class="na">namespace=</span><span class="s">&quot;App\MessageHandler\&quot;</span> <span class="na">resource=</span><span class="s">&quot;%kernel.project_dir%/src/MessageHandler/*CommandHandler.php&quot;</span> <span class="na">autoconfigure=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;messenger.message_handler&quot;</span> <span class="na">bus=</span><span class="s">&quot;command.bus&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/prototype&gt;</span>
+        <span class="c">&lt;!-- query handlers --&gt;</span>
+        <span class="nt">&lt;prototype</span> <span class="na">namespace=</span><span class="s">&quot;App\MessageHandler\&quot;</span> <span class="na">resource=</span><span class="s">&quot;%kernel.project_dir%/src/MessageHandler/*QueryHandler.php&quot;</span> <span class="na">autoconfigure=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;messenger.message_handler&quot;</span> <span class="na">bus=</span><span class="s">&quot;query.bus&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/prototype&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+
+<span class="c1">// Command handlers</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;App\MessageHandler\\&#39;</span><span class="p">,</span> <span class="s1">&#39;%kernel.project_dir%/src/MessageHandler/*CommandHandler.php&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">autoconfigure</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">tag</span><span class="p">(</span><span class="s1">&#39;messenger.message_handler&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;bus&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;command.bus&#39;</span><span class="p">]);</span>
+
+<span class="c1">// Query handlers</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;App\MessageHandler\\&#39;</span><span class="p">,</span> <span class="s1">&#39;%kernel.project_dir%/src/MessageHandler/*QueryHandler.php&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">autoconfigure</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">tag</span><span class="p">(</span><span class="s1">&#39;messenger.message_handler&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;bus&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;query.bus&#39;</span><span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="debugging-the-buses">
+<h2>Debugging the Buses<a class="headerlink" href="#debugging-the-buses" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">debug:messenger</span></code> command lists available messages &amp; handlers per bus.
+You can also restrict the list to a specific bus by providing its name as argument.</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console debug:messenger
+
+<span class="go">  Messenger</span>
+<span class="go">  =========</span>
+
+<span class="go">  command.bus</span>
+<span class="go">  -----------</span>
+
+<span class="go">   The following messages can be dispatched:</span>
+
+<span class="go">   ---------------------------------------------------------------------------------------</span>
+<span class="go">    App\Message\DummyCommand</span>
+<span class="go">        handled by App\MessageHandler\DummyCommandHandler</span>
+<span class="go">    App\Message\MultipleBusesMessage</span>
+<span class="go">        handled by App\MessageHandler\MultipleBusesMessageHandler</span>
+<span class="go">   ---------------------------------------------------------------------------------------</span>
+
+<span class="go">  query.bus</span>
+<span class="go">  ---------</span>
+
+<span class="go">   The following messages can be dispatched:</span>
+
+<span class="go">   ---------------------------------------------------------------------------------------</span>
+<span class="go">    App\Message\DummyQuery</span>
+<span class="go">        handled by App\MessageHandler\DummyQueryHandler</span>
+<span class="go">    App\Message\MultipleBusesMessage</span>
+<span class="go">        handled by App\MessageHandler\MultipleBusesMessageHandler</span>
+<span class="go">   ---------------------------------------------------------------------------------------</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

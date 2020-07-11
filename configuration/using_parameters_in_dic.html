@@ -1,0 +1,485 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using Parameters within a Dependency Injection Class &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Symfony Framework Best Practices" href="../best_practices.html" />
+    <link rel="prev" title="How to Keep Sensitive Information Secret" href="secrets.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../getting_started/index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../page_creation.html">Create your First Page in Symfony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controller.html">Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../templates.html">Creating and Using Templates</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../configuration.html">Configuring Symfony</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-files">Configuration Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-parameters">Configuration Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-environments">Configuration Environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-based-on-environment-variables">Configuration Based on Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#accessing-configuration-parameters">Accessing Configuration Parameters</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../configuration.html#keep-going">Keep Going!</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dot-env-changes.html">Nov 2018 Changes to .env &amp; How to Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="env_var_processors.html">Environment Variable Processors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="front_controllers_and_kernel.html">Understanding how the Front Controller, Kernel and Environments Work together</a></li>
+<li class="toctree-l4"><a class="reference internal" href="micro_kernel_trait.html">Building your own Framework with the MicroKernelTrait</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multiple_kernels.html">How To Create Symfony Applications with Multiple Kernels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="override_dir_structure.html">How to Override Symfony’s default Directory Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="secrets.html">How to Keep Sensitive Information Secret</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Using Parameters within a Dependency Injection Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../getting_started/index.html">Getting Started</a> &raquo;</li>
+        
+          <li><a href="../configuration.html">Configuring Symfony</a> &raquo;</li>
+        
+      <li>Using Parameters within a Dependency Injection Class</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/configuration/using_parameters_in_dic.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="using-parameters-within-a-dependency-injection-class">
+<span id="index-0"></span><h1>Using Parameters within a Dependency Injection Class<a class="headerlink" href="#using-parameters-within-a-dependency-injection-class" title="Permalink to this headline">¶</a></h1>
+<p>You have seen how to use configuration parameters within
+<a class="reference internal" href="../service_container.html#service-container-parameters"><span class="std std-ref">Symfony service containers</span></a>.
+There are special cases such as when you want, for instance, to use the
+<code class="docutils literal notranslate"><span class="pre">%kernel.debug%</span></code> parameter to make the services in your bundle enter
+debug mode. For this case there is more work to do in order
+to make the system understand the parameter value. By default,
+your parameter <code class="docutils literal notranslate"><span class="pre">%kernel.debug%</span></code> will be treated as a
+simple string. Consider the following example:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// inside Configuration class</span>
+<span class="nv">$rootNode</span>
+    <span class="o">-&gt;</span><span class="na">children</span><span class="p">()</span>
+        <span class="o">-&gt;</span><span class="na">booleanNode</span><span class="p">(</span><span class="s1">&#39;logging&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">defaultValue</span><span class="p">(</span><span class="s1">&#39;%kernel.debug%&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">()</span>
+        <span class="c1">// ...</span>
+    <span class="o">-&gt;</span><span class="na">end</span><span class="p">()</span>
+<span class="p">;</span>
+
+<span class="c1">// inside the Extension class</span>
+<span class="nv">$config</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">processConfiguration</span><span class="p">(</span><span class="nv">$configuration</span><span class="p">,</span> <span class="nv">$configs</span><span class="p">);</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;logging&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p>Now, examine the results to see this closely:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">my_bundle</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">logging</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="c1"># true, as expected</span>
+
+<span class="l l-Scalar l-Scalar-Plain">my_bundle</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">logging</span><span class="p p-Indicator">:</span> <span class="s">&#39;%kernel.debug%&#39;</span>
+    <span class="c1"># true/false (depends on 2nd argument of the Kernel class),</span>
+    <span class="c1"># as expected, because %kernel.debug% inside configuration</span>
+    <span class="c1"># gets evaluated before being passed to the extension</span>
+
+<span class="l l-Scalar l-Scalar-Plain">my_bundle</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">~</span>
+<span class="c1"># passes the string &quot;%kernel.debug%&quot;.</span>
+<span class="c1"># Which is always considered as true.</span>
+<span class="c1"># The Configurator does not know anything about</span>
+<span class="c1"># &quot;%kernel.debug%&quot; being a parameter.</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:my-bundle=</span><span class="s">&quot;http://example.org/schema/dic/my_bundle&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://example.org/schema/dic/my_bundle</span>
+<span class="s">        https://example.org/schema/dic/my_bundle/my_bundle-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;my-bundle:config</span> <span class="na">logging=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+    <span class="c">&lt;!-- true, as expected --&gt;</span>
+
+    <span class="nt">&lt;my-bundle:config</span> <span class="na">logging=</span><span class="s">&quot;%kernel.debug%&quot;</span><span class="nt">/&gt;</span>
+    <span class="c">&lt;!-- true/false (depends on 2nd parameter of Kernel),</span>
+<span class="c">         as expected, because %kernel.debug% inside configuration</span>
+<span class="c">         gets evaluated before being passed to the extension --&gt;</span>
+
+    <span class="nt">&lt;my-bundle:config/&gt;</span>
+    <span class="c">&lt;!-- passes the string &quot;%kernel.debug%&quot;.</span>
+<span class="c">         Which is always considered as true.</span>
+<span class="c">         The Configurator does not know anything about</span>
+<span class="c">         &quot;%kernel.debug%&quot; being a parameter. --&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;my_bundle&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="s1">&#39;logging&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="c1">// true, as expected</span>
+    <span class="p">)</span>
+<span class="p">];</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;my_bundle&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="s1">&#39;logging&#39;</span> <span class="o">=&gt;</span> <span class="s2">&quot;%kernel.debug%&quot;</span><span class="p">,</span>
+        <span class="c1">// true/false (depends on 2nd parameter of Kernel),</span>
+        <span class="c1">// as expected, because %kernel.debug% inside configuration</span>
+        <span class="c1">// gets evaluated before being passed to the extension</span>
+    <span class="p">)</span>
+<span class="p">];</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;my_bundle&#39;</span><span class="p">);</span>
+<span class="c1">// passes the string &quot;%kernel.debug%&quot;.</span>
+<span class="c1">// Which is always considered as true.</span>
+<span class="c1">// The Configurator does not know anything about</span>
+<span class="c1">// &quot;%kernel.debug%&quot; being a parameter.</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>In order to support this use case, the <code class="docutils literal notranslate"><span class="pre">Configuration</span></code> class has to
+be injected with this parameter via the extension as follows:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nx">App\DependencyInjection</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Config\Definition\Builder\TreeBuilder</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Config\Definition\ConfigurationInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Configuration</span> <span class="k">implements</span> <span class="nx">ConfigurationInterface</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$debug</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span>  <span class="fm">__construct</span><span class="p">(</span><span class="nv">$debug</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">debug</span> <span class="o">=</span> <span class="p">(</span><span class="nx">bool</span><span class="p">)</span> <span class="nv">$debug</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getConfigTreeBuilder</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$treeBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TreeBuilder</span><span class="p">(</span><span class="s1">&#39;my_bundle&#39;</span><span class="p">);</span>
+
+        <span class="nv">$treeBuilder</span><span class="o">-&gt;</span><span class="na">getRootNode</span><span class="p">()</span>
+            <span class="o">-&gt;</span><span class="na">children</span><span class="p">()</span>
+                <span class="c1">// ...</span>
+                <span class="o">-&gt;</span><span class="na">booleanNode</span><span class="p">(</span><span class="s1">&#39;logging&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">defaultValue</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">()</span>
+                <span class="c1">// ...</span>
+            <span class="o">-&gt;</span><span class="na">end</span><span class="p">()</span>
+        <span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$treeBuilder</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And set it in the constructor of <code class="docutils literal notranslate"><span class="pre">Configuration</span></code> via the <code class="docutils literal notranslate"><span class="pre">Extension</span></code> class:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nx">App\DependencyInjection</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\DependencyInjection\Extension</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">AppExtension</span> <span class="k">extends</span> <span class="nx">Extension</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getConfiguration</span><span class="p">(</span><span class="k">array</span> <span class="nv">$config</span><span class="p">,</span> <span class="nx">ContainerBuilder</span> <span class="nv">$container</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">Configuration</span><span class="p">(</span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">getParameter</span><span class="p">(</span><span class="s1">&#39;kernel.debug&#39;</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">There are some instances of <code class="docutils literal notranslate"><span class="pre">%kernel.debug%</span></code> usage within a
+<code class="docutils literal notranslate"><span class="pre">Configurator</span></code> class for example in TwigBundle. However, this is because
+the default parameter value is set by the Extension class.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

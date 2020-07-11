@@ -1,0 +1,718 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Migrating an Existing Application to Symfony &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Creating and Sending Notifications" href="notifier.html" />
+    <link rel="prev" title="Multiple Buses" href="messenger/multiple_buses.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Migrating an Existing Application to Symfony</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#choosing-the-target-symfony-version">Choosing the Target Symfony Version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-up-composer">Setting up Composer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#removing-global-state-from-the-legacy-application">Removing Global State from the Legacy Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-up-the-environment">Setting up the Environment</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#establishing-a-safety-net-for-regressions">Establishing a Safety Net for Regressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introducing-symfony-to-the-existing-application">Introducing Symfony to the Existing Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#booting-symfony-in-a-front-controller">Booting Symfony in a Front Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#front-controller-with-legacy-bridge">Front Controller with Legacy Bridge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#legacy-route-loader">Legacy Route Loader</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Migrating an Existing Application to Symfony</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/migration.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="migrating-an-existing-application-to-symfony">
+<span id="index-0"></span><h1>Migrating an Existing Application to Symfony<a class="headerlink" href="#migrating-an-existing-application-to-symfony" title="Permalink to this headline">¶</a></h1>
+<p>When you have an existing application that was not built with Symfony,
+you might want to move over parts of that application without rewriting
+the existing logic completely. For those cases there is a pattern called
+<a class="reference external" href="https://martinfowler.com/bliki/StranglerFigApplication.html">Strangler Application</a>. The basic idea of this pattern is to create a
+new application that gradually takes over functionality from an existing
+application. This migration approach can be implemented with Symfony in
+various ways and has some benefits over a rewrite such as being able
+to introduce new features in the existing application and reducing risk
+by avoiding a “big bang”-release for the new application.</p>
+<div class="screencast admonition">
+<p class="first admonition-title">Screencast</p>
+<p class="last">The topic of migrating from an existing application towards Symfony is
+sometimes discussed during conferences. For example the talk
+<a class="reference external" href="https://youtu.be/YzyiZNY9htQ">Modernizing with Symfony</a> reiterates some of the points from this page.</p>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>Before you start introducing Symfony to the existing application, you have to
+ensure certain requirements are met by your existing application and
+environment.  Making the decisions and preparing the environment before
+starting the migration process is crucial for its success.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The following steps do not require you to have the new Symfony
+application in place and in fact it might be safer to introduce these
+changes beforehand in your existing application.</p>
+</div>
+<div class="section" id="choosing-the-target-symfony-version">
+<h3>Choosing the Target Symfony Version<a class="headerlink" href="#choosing-the-target-symfony-version" title="Permalink to this headline">¶</a></h3>
+<p>Most importantly, this means that you will have to decide which version you
+are aiming to migrate to, either a current stable release or the long
+term support version (LTS). The main difference is, how frequently you
+will need to upgrade in order to use a supported version. In the context
+of a migration, other factors, such as the supported PHP-version or
+support for libraries/bundles you use, may have a strong impact as well.
+Using the most recent, stable release will likely give you more features,
+but it will also require you to update more frequently to ensure you will
+get support for bug fixes and security patches and you will have to work
+faster on fixing deprecations to be able to upgrade.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">When upgrading to Symfony you might be tempted to also use
+<a class="reference internal" href="setup.html#symfony-flex"><span class="std std-ref">Flex</span></a>. Please keep in mind that it primarily
+focuses on bootstrapping a new Symfony application according to best
+practices regarding the directory structure. When you work in the
+constraints of an existing application you might not be able to
+follow these constraints, making Flex less useful.</p>
+</div>
+<p>First of all your environment needs to be able to support the minimum
+requirements for both applications. In other words, when the Symfony
+release you aim to use requires PHP 7.1 and your existing application
+does not yet support this PHP version, you will probably have to upgrade
+your legacy project. Use the <code class="docutils literal notranslate"><span class="pre">check:requirements</span></code> command to check if your
+server meets the <a class="reference internal" href="setup.html#symfony-tech-requirements"><span class="std std-ref">technical requirements for running Symfony applications</span></a>
+and compare them with your current application’s environment to make sure you
+are able to run both applications on the same system. Having a test
+system, that is as close to the production environment as possible,
+where you can just install a new Symfony project next to the existing one
+and check if it is working will give you an even more reliable result.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If your current project is running on an older PHP version such as
+PHP 5.x upgrading to a recent version will give you a performance
+boost without having to change your code.</p>
+</div>
+</div>
+<div class="section" id="setting-up-composer">
+<h3>Setting up Composer<a class="headerlink" href="#setting-up-composer" title="Permalink to this headline">¶</a></h3>
+<p>Another point you will have to look out for is conflicts between
+dependencies in both applications. This is especially important if your
+existing application already uses Symfony components or libraries commonly
+used in Symfony applications such as Doctrine ORM, Swiftmailer or Twig.
+A good way for ensuring compatibility is to use the same <code class="docutils literal notranslate"><span class="pre">composer.json</span></code>
+for both project’s dependencies.</p>
+<p>Once you have introduced composer for managing your project’s dependencies
+you can use its autoloader to ensure you do not run into any conflicts due
+to custom autoloading from your existing framework. This usually entails
+adding an <a class="reference external" href="https://getcomposer.org/doc/04-schema.md#autoload">autoload</a>-section to your <code class="docutils literal notranslate"><span class="pre">composer.json</span></code> and configuring it
+based on your application and replacing your custom logic with something
+like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">require</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/vendor/autoload.php&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="removing-global-state-from-the-legacy-application">
+<h3>Removing Global State from the Legacy Application<a class="headerlink" href="#removing-global-state-from-the-legacy-application" title="Permalink to this headline">¶</a></h3>
+<p>In older PHP applications it was quite common to rely on global state and
+even mutate it during runtime. This might have side effects on the newly
+introduced Symfony application. In other words code relying on globals
+in the existing application should be refactored to allow for both systems
+to work simultaneously. Since relying on global state is considered an
+anti-pattern nowadays you might want to start working on this even before
+doing any integration.</p>
+</div>
+<div class="section" id="setting-up-the-environment">
+<h3>Setting up the Environment<a class="headerlink" href="#setting-up-the-environment" title="Permalink to this headline">¶</a></h3>
+<p>There might be additional steps you need to take depending on the libraries
+you use, the original framework your project is based on and most importantly
+the age of the project as PHP itself underwent many improvements throughout
+the years that your code might not have caught on to, yet. As long as both
+your existing code and a new Symfony project can run in parallel on the
+same system you are on a good way. All these steps do not require you to
+introduce Symfony just yet and will already open up some opportunities for
+modernizing your existing code.</p>
+</div>
+</div>
+<div class="section" id="establishing-a-safety-net-for-regressions">
+<h2>Establishing a Safety Net for Regressions<a class="headerlink" href="#establishing-a-safety-net-for-regressions" title="Permalink to this headline">¶</a></h2>
+<p>Before you can safely make changes to the existing code, you must ensure that
+nothing will break. One reason for choosing to migrate is making sure that the
+application is in a state where it can run at all times. The best way for
+ensuring a working state is to establish automated tests.</p>
+<p>It is quite common for an existing application to either not have a test suite
+at all or have low code coverage. Introducing unit tests for this code is
+likely not cost effective as the old code might be replaced with functionality
+from Symfony components or might be adapted to the new application.
+Additionally legacy code tends to be hard to write tests for making the process
+slow and cumbersome.</p>
+<p>Instead of providing low level tests, that ensure each class works as expected, it
+might makes sense to write high level tests ensuring that at least anything user
+facing works on at least a superficial level. These kinds of tests are commonly
+called End-to-End tests, because they cover the whole application from what the
+user sees in the browser down to the very code that is being run and connected
+services like a database. To automate this you have to make sure that you can
+get a test instance of your system running as easily as possible and making
+sure that external systems do not change your production environment, e.g.
+provide a separate test database with (anonymized) data from a production
+system or being able to setup a new schema with a basic dataset for your test
+environment. Since these tests do not rely as much on isolating testable code
+and instead look at the interconnected system, writing them is usually easier
+and more productive when doing a migration. You can then limit your effort on
+writing lower level tests on parts of the code that you have to change or
+replace in the new application making sure it is testable right from the start.</p>
+<p>There are tools aimed at End-to-End testing you can use such as
+<a class="reference external" href="https://github.com/symfony/panther">Symfony Panther</a> or you can write <a class="reference internal" href="testing.html"><span class="doc">functional tests</span></a>
+in the new Symfony application as soon as the initial setup is completed.
+For example you can add so called Smoke Tests, which only ensure a certain
+path is accessible by checking the HTTP status code returned or looking for
+a text snippet from the page.</p>
+</div>
+<div class="section" id="introducing-symfony-to-the-existing-application">
+<h2>Introducing Symfony to the Existing Application<a class="headerlink" href="#introducing-symfony-to-the-existing-application" title="Permalink to this headline">¶</a></h2>
+<p>The following instructions only provide an outline of common tasks for
+setting up a Symfony application that falls back to a legacy application
+whenever a route is not accessible. Your mileage may vary and likely you
+will need to adjust some of this or even provide additional configuration
+or retrofitting to make it work with your application. This guide is not
+supposed to be comprehensive and instead aims to be a starting point.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you get stuck or need additional help you can reach out to the
+<a class="reference internal" href="contributing/community/index.html"><span class="doc">Symfony community</span></a> whenever you need
+concrete feedback on an issue you are facing.</p>
+</div>
+<div class="section" id="booting-symfony-in-a-front-controller">
+<h3>Booting Symfony in a Front Controller<a class="headerlink" href="#booting-symfony-in-a-front-controller" title="Permalink to this headline">¶</a></h3>
+<p>When looking at how a typical PHP application is bootstrapped there are
+two major approaches. Nowadays most frameworks provide a so called
+front controller which acts as an entrypoint. No matter which URL-path
+in your application you are going to, every request is being sent to
+this front controller, which then determines which parts of your
+application to load, e.g. which controller and action to call. This is
+also the approach that Symfony takes with <code class="docutils literal notranslate"><span class="pre">public/index.php</span></code> being
+the front controller. Especially in older applications it was common
+that different paths were handled by different PHP files.</p>
+<p>In any case you have to create a <code class="docutils literal notranslate"><span class="pre">public/index.php</span></code> that will start
+your Symfony application by either copying the file from the
+<code class="docutils literal notranslate"><span class="pre">FrameworkBundle</span></code>-recipe or by using Flex and requiring the
+FrameworkBundle. You will also likely have to update you web server
+(e.g. Apache or nginx) to always use this front controller. You can
+look at <a class="reference internal" href="setup/web_server_configuration.html"><span class="doc">Web Server Configuration</span></a>
+for examples on how this might look. For example when using Apache you can
+use Rewrite Rules to ensure PHP files are ignored and instead only index.php
+is called:</p>
+<div class="highlight-apache notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">RewriteEngine</span> <span class="k">On</span>
+
+<span class="nb">RewriteCond</span> %{REQUEST_URI}::$1 ^(/.+)/(.*)::\<span class="m">2</span>$
+<span class="nb">RewriteRule</span> ^(.*) - [E=BASE:%1]
+
+<span class="nb">RewriteCond</span> %{ENV:REDIRECT_STATUS} ^$
+<span class="nb">RewriteRule</span> ^index\.php(?:/(.*)|$) %{ENV:BASE}/$1 [R=301,L]
+
+<span class="nb">RewriteRule</span> ^index\.php - [L]
+
+<span class="nb">RewriteCond</span> %{REQUEST_FILENAME} -f
+<span class="nb">RewriteCond</span> %{REQUEST_FILENAME} !^.+\.php$
+<span class="nb">RewriteRule</span> ^ - [L]
+
+<span class="nb">RewriteRule</span> ^ %{ENV:BASE}/index.php [L]
+</pre></div>
+</td></tr></table></div>
+<p>This change will make sure that from now on your Symfony application is
+the first one handling all requests. The next step is to make sure that
+your existing application is started and taking over whenever Symfony
+can not yet handle a path previously managed by the existing application.</p>
+<p>From this point, many tactics are possible and every project requires its
+unique approach for migration. This guide shows two examples of commonly used
+approaches, which you can use as a base for your own approach:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#front-controller-with-legacy-bridge">Front Controller with Legacy Bridge</a>, which leaves the legacy application
+untouched and allows to migrate it in phases to the Symfony application.</li>
+<li><a class="reference internal" href="#legacy-route-loader">Legacy Route Loader</a>, where the legacy application is integrated in phases
+into Symfony, with a fully integrated final result.</li>
+</ul>
+</div>
+<div class="section" id="front-controller-with-legacy-bridge">
+<h3>Front Controller with Legacy Bridge<a class="headerlink" href="#front-controller-with-legacy-bridge" title="Permalink to this headline">¶</a></h3>
+<p>Once you have a running Symfony application that takes over all requests,
+falling back to your legacy application is done by extending the original front
+controller script with some logic for going to your legacy system. The file
+could look something like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// public/index.php</span>
+<span class="k">use</span> <span class="nx">App\Kernel</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\LegacyBridge</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Debug\Debug</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="nb">dirname</span><span class="p">(</span><span class="no">__DIR__</span><span class="p">)</span><span class="o">.</span><span class="s1">&#39;/vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="p">(</span><span class="k">new</span> <span class="nx">Dotenv</span><span class="p">())</span><span class="o">-&gt;</span><span class="na">bootEnv</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="no">__DIR__</span><span class="p">)</span><span class="o">.</span><span class="s1">&#39;/.env&#39;</span><span class="p">);</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * The kernel will always be available globally, allowing you to</span>
+<span class="cm"> * access it from your existing application and through it the</span>
+<span class="cm"> * service container. This allows for introducing new features in</span>
+<span class="cm"> * the existing application.</span>
+<span class="cm"> */</span>
+<span class="k">global</span> <span class="nv">$kernel</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;APP_DEBUG&#39;</span><span class="p">])</span> <span class="p">{</span>
+    <span class="nb">umask</span><span class="p">(</span><span class="mo">0000</span><span class="p">);</span>
+
+    <span class="nx">Debug</span><span class="o">::</span><span class="na">enable</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$trustedProxies</span> <span class="o">=</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;TRUSTED_PROXIES&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="nv">$_ENV</span><span class="p">[</span><span class="s1">&#39;TRUSTED_PROXIES&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">Request</span><span class="o">::</span><span class="na">setTrustedProxies</span><span class="p">(</span>
+      <span class="nb">explode</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="nv">$trustedProxies</span><span class="p">),</span>
+      <span class="nx">Request</span><span class="o">::</span><span class="na">HEADER_X_FORWARDED_ALL</span> <span class="o">^</span> <span class="nx">Request</span><span class="o">::</span><span class="na">HEADER_X_FORWARDED_HOST</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$trustedHosts</span> <span class="o">=</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;TRUSTED_HOSTS&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="nv">$_ENV</span><span class="p">[</span><span class="s1">&#39;TRUSTED_HOSTS&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">Request</span><span class="o">::</span><span class="na">setTrustedHosts</span><span class="p">([</span><span class="nv">$trustedHosts</span><span class="p">]);</span>
+<span class="p">}</span>
+
+<span class="nv">$kernel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Kernel</span><span class="p">(</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;APP_ENV&#39;</span><span class="p">],</span> <span class="p">(</span><span class="nx">bool</span><span class="p">)</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;APP_DEBUG&#39;</span><span class="p">]);</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$kernel</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * LegacyBridge will take care of figuring out whether to boot up the</span>
+<span class="cm"> * existing application or to send the Symfony response back to the client.</span>
+<span class="cm"> */</span>
+<span class="nv">$scriptFile</span> <span class="o">=</span> <span class="nx">LegacyBridge</span><span class="o">::</span><span class="na">prepareLegacyScript</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="no">__DIR__</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$scriptFile</span> <span class="o">!==</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">require</span> <span class="nv">$scriptFile</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="nv">$kernel</span><span class="o">-&gt;</span><span class="na">terminate</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>There are 2 major deviations from the original file:</p>
+<dl class="docutils">
+<dt>Line 15</dt>
+<dd>First of all, <code class="docutils literal notranslate"><span class="pre">$kernel</span></code> is made globally available. This allows you to use
+Symfony features inside your existing application and gives access to
+services configured in our Symfony application. This helps you prepare your
+own code to work better within the Symfony application before you transition
+it over. For instance, by replacing outdated or redundant libraries with
+Symfony components.</dd>
+<dt>Line 38 - 47</dt>
+<dd>Instead of sending the Symfony response directly, a <code class="docutils literal notranslate"><span class="pre">LegacyBridge</span></code> is
+called to decide whether the legacy application should be booted and used to
+create the response instead.</dd>
+</dl>
+<p>This legacy bridge is responsible for figuring out which file should be loaded
+in order to process the old application logic. This can either be a front
+controller similar to Symfony’s <code class="docutils literal notranslate"><span class="pre">public/index.php</span></code> or a specific script file
+based on the current route. The basic outline of this LegacyBridge could look
+somewhat like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/LegacyBridge.php</span>
+<span class="k">namespace</span> <span class="nx">App</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">LegacyBridge</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">prepareLegacyScript</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$publicDirectory</span><span class="p">)</span><span class="o">:</span> <span class="nx">string</span>
+    <span class="p">{</span>
+        <span class="c1">// If Symfony successfully handled the route, you do not have to do anything.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">false</span> <span class="o">===</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">isNotFound</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Figure out how to map to the needed script file</span>
+        <span class="c1">// from the existing application and possibly (re-)set</span>
+        <span class="c1">// some env vars.</span>
+        <span class="nv">$legacyScriptFilename</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$legacyScriptFilename</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This is the most generic approach you can take, that is likely to work
+no matter what your previous system was. You might have to account for
+certain “quirks”, but since your original application is only started
+after Symfony finished handling the request you reduced the chances
+for side effects and any interference.</p>
+<p>Since the old script is called in the global variable scope it will reduce side
+effects on the old code which can sometimes require variables from the global
+scope. At the same time, because your Symfony application will always be
+booted first, you can access the container via the <code class="docutils literal notranslate"><span class="pre">$kernel</span></code> variable and
+then fetch any service (using <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/KernelInterface.php" title="Symfony\Component\HttpKernel\KernelInterface::getContainer()"><span class="pre">getContainer()</span></a></code>).
+This can be helpful if you want to introduce new features to your legacy
+application, without switching over the whole action to the new application.
+For example, you could now use the Symfony Translator in your old application
+or instead of using your old database logic, you could use Doctrine to refactor
+old queries. This will also allow you to incrementally improve the legacy code
+making it easier to transition it over to the new Symfony application.</p>
+<p>The major downside is, that both systems are not well integrated
+into each other leading to some redundancies and possibly duplicated code.
+For example, since the Symfony application is already done handling the
+request you can not take advantage of kernel events or utilize Symfony’s
+routing for determining which legacy script to call.</p>
+</div>
+<div class="section" id="legacy-route-loader">
+<h3>Legacy Route Loader<a class="headerlink" href="#legacy-route-loader" title="Permalink to this headline">¶</a></h3>
+<p>The major difference to the LegacyBridge-approach from before is, that the
+logic is moved inside the Symfony application. It removes some of the
+redundancies and allows us to also interact with parts of the legacy
+application from inside Symfony, instead of just the other way around.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The following route loader is just a generic example that you might
+have to tweak for your legacy application. You can familiarize
+yourself with the concepts by reading up on it in <a class="reference internal" href="routing.html"><span class="doc">Routing</span></a>.</p>
+</div>
+<p>The legacy route loader is <a class="reference internal" href="routing/custom_route_loader.html"><span class="doc">a custom route loader</span></a>.
+The legacy route loader has a similar functionality as the previous
+LegacyBridge, but it is a service that is registered inside Symfony’s Routing
+component:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Legacy/LegacyRouteLoader.php</span>
+<span class="k">namespace</span> <span class="nx">App\Legacy</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Config\Loader\Loader</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\Route</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\RouteCollection</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">LegacyRouteLoader</span> <span class="k">extends</span> <span class="nx">Loader</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">load</span><span class="p">(</span><span class="nv">$resource</span><span class="p">,</span> <span class="nv">$type</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$collection</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RouteCollection</span><span class="p">();</span>
+        <span class="nv">$finder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Finder</span><span class="p">();</span>
+        <span class="nv">$finder</span><span class="o">-&gt;</span><span class="na">files</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;*.php&#39;</span><span class="p">);</span>
+
+        <span class="sd">/** @var SplFileInfo $legacyScriptFile */</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$finder</span><span class="o">-&gt;</span><span class="na">in</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">webDir</span><span class="p">)</span> <span class="k">as</span> <span class="nv">$legacyScriptFile</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// This assumes all legacy files use &quot;.php&quot; as extension</span>
+            <span class="nv">$filename</span> <span class="o">=</span> <span class="nb">basename</span><span class="p">(</span><span class="nv">$legacyScriptFile</span><span class="o">-&gt;</span><span class="na">getRelativePathname</span><span class="p">(),</span> <span class="s1">&#39;.php&#39;</span><span class="p">);</span>
+            <span class="nv">$routeName</span> <span class="o">=</span> <span class="nb">sprintf</span><span class="p">(</span><span class="s1">&#39;app.legacy.%s&#39;</span><span class="p">,</span> <span class="nb">str_replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;__&#39;</span><span class="p">,</span> <span class="nv">$filename</span><span class="p">));</span>
+
+            <span class="nv">$collection</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$routeName</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Route</span><span class="p">(</span><span class="nv">$legacyScriptFile</span><span class="o">-&gt;</span><span class="na">getRelativePathname</span><span class="p">(),</span> <span class="p">[</span>
+                <span class="s1">&#39;_controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;App\Controller\LegacyController::loadLegacyScript&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;requestPath&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/&#39;</span> <span class="o">.</span> <span class="nv">$legacyScriptFile</span><span class="o">-&gt;</span><span class="na">getRelativePathname</span><span class="p">(),</span>
+                <span class="s1">&#39;legacyScript&#39;</span> <span class="o">=&gt;</span> <span class="nv">$legacyScriptFile</span><span class="o">-&gt;</span><span class="na">getPathname</span><span class="p">(),</span>
+            <span class="p">]));</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$collection</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You will also have to register the loader in your application’s
+<code class="docutils literal notranslate"><span class="pre">routing.yaml</span></code> as described in the documentation for
+<a class="reference internal" href="routing/custom_route_loader.html"><span class="doc">Custom Route Loaders</span></a>.
+Depending on your configuration, you might also have to tag the service with
+<code class="docutils literal notranslate"><span class="pre">routing.loader</span></code>. Afterwards you should be able to see all the legacy routes
+in your route configuration, e.g. when you call the <code class="docutils literal notranslate"><span class="pre">debug:router</span></code>-command:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console debug:router
+</pre></div>
+</td></tr></table></div>
+<p>In order to use these routes you will need to create a controller that handles
+these routes. You might have noticed the <code class="docutils literal notranslate"><span class="pre">_controller</span></code> attribute in the
+previous code example, which tells Symfony which Controller to call whenever it
+tries to access one of our legacy routes. The controller itself can then use the
+other route attributes (i.e. <code class="docutils literal notranslate"><span class="pre">requestPath</span></code> and <code class="docutils literal notranslate"><span class="pre">legacyScript</span></code>) to determine
+which script to call and wrap the output in a response class:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/LegacyController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\StreamedResponse</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">LegacyController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">loadLegacyScript</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$requestPath</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$legacyScript</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">StreamedResponse</span><span class="p">(</span>
+            <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$requestPath</span><span class="p">,</span> <span class="nv">$legacyScript</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;PHP_SELF&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$requestPath</span><span class="p">;</span>
+                <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;SCRIPT_NAME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$requestPath</span><span class="p">;</span>
+                <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;SCRIPT_FILENAME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$legacyScript</span><span class="p">;</span>
+
+                <span class="nb">chdir</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="nv">$legacyScript</span><span class="p">));</span>
+
+                <span class="k">require</span> <span class="nv">$legacyScript</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This controller will set some server variables that might be needed by
+the legacy application. This will simulate the legacy script being called
+directly, in case it relies on these variables (e.g. when determining
+relative paths or file names). Finally the action requires the old script,
+which essentially calls the original script as before, but it runs inside
+our current application scope, instead of the global scope.</p>
+<p>There are some risks to this approach, as it is no longer run in the global
+scope. However, since the legacy code now runs inside a controller action, you gain
+access to many functionalities from the new Symfony application, including the
+chance to use Symfony’s event lifecycle. For instance, this allows you to
+transition the authentication and authorization of the legacy application over
+to the Symfony application using the Security component and its firewalls.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

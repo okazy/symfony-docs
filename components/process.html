@@ -1,0 +1,828 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The Process Component &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The PropertyAccess Component" href="property_access.html" />
+    <link rel="prev" title="The PHPUnit Bridge" href="phpunit_bridge.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cache.html">The Cache Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependency_injection.html">The DependencyInjection Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="form.html">The Form Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The Process Component</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-features-from-the-os-shell">Using Features From the OS Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-environment-variables-for-processes">Setting Environment Variables for Processes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-real-time-process-output">Getting real-time Process Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-processes-asynchronously">Running Processes Asynchronously</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#streaming-to-the-standard-input-of-a-process">Streaming to the Standard Input of a Process</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-php-streams-as-the-standard-input-of-a-process">Using PHP Streams as the Standard Input of a Process</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#stopping-a-process">Stopping a Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#executing-php-code-in-isolation">Executing PHP Code in Isolation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-a-prepared-command-line">Using a Prepared Command Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#process-timeout">Process Timeout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#process-idle-timeout">Process Idle Timeout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#process-signals">Process Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#process-pid">Process Pid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#disabling-output">Disabling Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-the-executable-php-binary">Finding the Executable PHP Binary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#checking-for-tty-support">Checking for TTY Support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">The Security Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">The Components</a> &raquo;</li>
+        
+      <li>The Process Component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/components/process.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-process-component">
+<span id="index-0"></span><h1>The Process Component<a class="headerlink" href="#the-process-component" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div>The Process component executes commands in sub-processes.</div></blockquote>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/process
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you install this component outside of a Symfony application, you must
+require the <code class="docutils literal notranslate"><span class="pre">vendor/autoload.php</span></code> file in your code to enable the class
+autoloading mechanism provided by Composer. Read
+<a class="reference internal" href="using_components.html"><span class="doc">this article</span></a> for more details.</p>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process"><span class="pre">Process</span></a></code> class executes a command in a
+sub-process, taking care of the differences between operating system and
+escaping arguments to prevent security issues. It replaces PHP functions like
+<code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.exec.php" title="exec"><span class="pre">exec</span></a></code>, <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.passthru.php" title="passthru"><span class="pre">passthru</span></a></code>, <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.shell-exec.php" title="shell_exec"><span class="pre">shell_exec</span></a></code> and
+<code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.system.php" title="system"><span class="pre">system</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Process\Exception\ProcessFailedException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Process\Process</span><span class="p">;</span>
+
+<span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="s1">&#39;-lsa&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+
+<span class="c1">// executes after the command finishes</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$process</span><span class="o">-&gt;</span><span class="na">isSuccessful</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nx">ProcessFailedException</span><span class="p">(</span><span class="nv">$process</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">echo</span> <span class="nv">$process</span><span class="o">-&gt;</span><span class="na">getOutput</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">getOutput()</span></code> method always returns the whole content of the standard
+output of the command and <code class="docutils literal notranslate"><span class="pre">getErrorOutput()</span></code> the content of the error
+output. Alternatively, the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::getIncrementalOutput()"><span class="pre">getIncrementalOutput()</span></a></code>
+and <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::getIncrementalErrorOutput()"><span class="pre">getIncrementalErrorOutput()</span></a></code>
+methods return the new output since the last call.</p>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::clearOutput()"><span class="pre">clearOutput()</span></a></code> method clears
+the contents of the output and
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::clearErrorOutput()"><span class="pre">clearErrorOutput()</span></a></code> clears
+the contents of the error output.</p>
+<p>You can also use the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process"><span class="pre">Process</span></a></code> class with the
+for each construct to get the output while it is generated. By default, the loop waits
+for new output before going to the next iteration:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="s1">&#39;-lsa&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">();</span>
+
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$process</span> <span class="k">as</span> <span class="nv">$type</span> <span class="o">=&gt;</span> <span class="nv">$data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$process</span><span class="o">::</span><span class="na">OUT</span> <span class="o">===</span> <span class="nv">$type</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Read from stdout: &quot;</span><span class="o">.</span><span class="nv">$data</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// $process::ERR === $type</span>
+        <span class="k">echo</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Read from stderr: &quot;</span><span class="o">.</span><span class="nv">$data</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>The Process component internally uses a PHP iterator to get the output while
+it is generated. That iterator is exposed via the <code class="docutils literal notranslate"><span class="pre">getIterator()</span></code> method
+to allow customizing its behavior:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="s1">&#39;-lsa&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">();</span>
+<span class="nv">$iterator</span> <span class="o">=</span> <span class="nv">$process</span><span class="o">-&gt;</span><span class="na">getIterator</span><span class="p">(</span><span class="nv">$process</span><span class="o">::</span><span class="na">ITER_SKIP_ERR</span> <span class="o">|</span> <span class="nv">$process</span><span class="o">::</span><span class="na">ITER_KEEP_OUTPUT</span><span class="p">);</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$iterator</span> <span class="k">as</span> <span class="nv">$data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$data</span><span class="o">.</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">mustRun()</span></code> method is identical to <code class="docutils literal notranslate"><span class="pre">run()</span></code>, except that it will throw
+a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Exception/ProcessFailedException.php" title="Symfony\Component\Process\Exception\ProcessFailedException"><span class="pre">ProcessFailedException</span></a></code>
+if the process couldn’t be executed successfully (i.e. the process exited
+with a non-zero code):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Process\Exception\ProcessFailedException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Process\Process</span><span class="p">;</span>
+
+<span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="s1">&#39;-lsa&#39;</span><span class="p">]);</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nv">$process</span><span class="o">-&gt;</span><span class="na">mustRun</span><span class="p">();</span>
+
+    <span class="k">echo</span> <span class="nv">$process</span><span class="o">-&gt;</span><span class="na">getOutput</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">ProcessFailedException</span> <span class="nv">$exception</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$exception</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can get the last output time in seconds by using the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::getLastOutputTime()"><span class="pre">getLastOutputTime()</span></a></code> method.
+This method returns <code class="docutils literal notranslate"><span class="pre">null</span></code> if the process wasn’t started!</p>
+</div>
+</div>
+<div class="section" id="using-features-from-the-os-shell">
+<h2>Using Features From the OS Shell<a class="headerlink" href="#using-features-from-the-os-shell" title="Permalink to this headline">¶</a></h2>
+<p>Using array of arguments is the recommended way to define commands. This
+saves you from any escaping and allows sending signals seamlessly
+(e.g. to stop processes while they run):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;/path/command&#39;</span><span class="p">,</span> <span class="s1">&#39;--option&#39;</span><span class="p">,</span> <span class="s1">&#39;argument&#39;</span><span class="p">,</span> <span class="s1">&#39;etc.&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;/path/to/php&#39;</span><span class="p">,</span> <span class="s1">&#39;--define&#39;</span><span class="p">,</span> <span class="s1">&#39;memory_limit=1024M&#39;</span><span class="p">,</span> <span class="s1">&#39;/path/to/script.php&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p>If you need to use stream redirections, conditional execution, or any other
+feature provided by the shell of your operating system, you can also define
+commands as strings using the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::fromShellCommandline()"><span class="pre">fromShellCommandline()</span></a></code> static
+factory.</p>
+<p>Each operating system provides a different syntax for their command-lines,
+so it becomes your responsibility to deal with escaping and portability.</p>
+<p>When using strings to define commands, variable arguments are passed as
+environment variables using the second argument of the <code class="docutils literal notranslate"><span class="pre">run()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mustRun()</span></code> or <code class="docutils literal notranslate"><span class="pre">start()</span></code> methods. Referencing them is also OS-dependent:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// On Unix-like OSes (Linux, macOS)</span>
+<span class="nv">$process</span> <span class="o">=</span> <span class="nx">Process</span><span class="o">::</span><span class="na">fromShellCommandline</span><span class="p">(</span><span class="s1">&#39;echo &quot;$MESSAGE&quot;&#39;</span><span class="p">);</span>
+
+<span class="c1">// On Windows</span>
+<span class="nv">$process</span> <span class="o">=</span> <span class="nx">Process</span><span class="o">::</span><span class="na">fromShellCommandline</span><span class="p">(</span><span class="s1">&#39;echo &quot;!MESSAGE!&quot;&#39;</span><span class="p">);</span>
+
+<span class="c1">// On both Unix-like and Windows</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;MESSAGE&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Something to output&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p>If you prefer to create portable commands that are independent from the
+operating system, you can write the above command as follows:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// works the same on Windows , Linux and macOS</span>
+<span class="nv">$process</span> <span class="o">=</span> <span class="nx">Process</span><span class="o">::</span><span class="na">fromShellCommandline</span><span class="p">(</span><span class="s1">&#39;echo &quot;${:MESSAGE}&quot;&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Portable commands require using a syntax that is specific to the component: when
+enclosing a variable name into <code class="docutils literal notranslate"><span class="pre">&quot;${:</span></code> and <code class="docutils literal notranslate"><span class="pre">}&quot;</span></code> exactly, the process object
+will replace it with its escaped value, or will fail if the variable is not
+found in the list of environment variables attached to the command.</p>
+</div>
+<div class="section" id="setting-environment-variables-for-processes">
+<h2>Setting Environment Variables for Processes<a class="headerlink" href="#setting-environment-variables-for-processes" title="Permalink to this headline">¶</a></h2>
+<p>The constructor of the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process"><span class="pre">Process</span></a></code> class and
+all of its methods related to executing processes (<code class="docutils literal notranslate"><span class="pre">run()</span></code>, <code class="docutils literal notranslate"><span class="pre">mustRun()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">start()</span></code>, etc.) allow passing an array of environment variables to set while
+running the process:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;...&#39;</span><span class="p">],</span> <span class="k">null</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ENV_VAR_NAME&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;value&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span> <span class="o">=</span> <span class="nx">Process</span><span class="o">::</span><span class="na">fromShellCommandline</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ENV_VAR_NAME&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;value&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ENV_VAR_NAME&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;value&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p>In addition to the env vars passed explicitly, processes inherit all the env
+vars defined in your system. You can prevent this by setting to <code class="docutils literal notranslate"><span class="pre">false</span></code> the
+env vars you want to remove:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;...&#39;</span><span class="p">],</span> <span class="k">null</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;APP_ENV&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">&#39;SYMFONY_DOTENV_VARS&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-real-time-process-output">
+<h2>Getting real-time Process Output<a class="headerlink" href="#getting-real-time-process-output" title="Permalink to this headline">¶</a></h2>
+<p>When executing a long running command (like <code class="docutils literal notranslate"><span class="pre">rsync</span></code> to a remote
+server), you can give feedback to the end user in real-time by passing an
+anonymous function to the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::run()"><span class="pre">run()</span></a></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Process\Process</span><span class="p">;</span>
+
+<span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="s1">&#39;-lsa&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$type</span><span class="p">,</span> <span class="nv">$buffer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">Process</span><span class="o">::</span><span class="na">ERR</span> <span class="o">===</span> <span class="nv">$type</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s1">&#39;ERR &gt; &#39;</span><span class="o">.</span><span class="nv">$buffer</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s1">&#39;OUT &gt; &#39;</span><span class="o">.</span><span class="nv">$buffer</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This feature won’t work as expected in servers using PHP output buffering.
+In those cases, either disable the <a class="reference external" href="https://www.php.net/manual/en/outcontrol.configuration.php">output_buffering</a> PHP option or use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.ob-flush.php" title="ob_flush"><span class="pre">ob_flush</span></a></code> PHP function to force sending the output buffer.</p>
+</div>
+</div>
+<div class="section" id="running-processes-asynchronously">
+<h2>Running Processes Asynchronously<a class="headerlink" href="#running-processes-asynchronously" title="Permalink to this headline">¶</a></h2>
+<p>You can also start the subprocess and then let it run asynchronously, retrieving
+output and the status in your main process whenever you need it. Use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::start()"><span class="pre">start()</span></a></code> method to start an asynchronous
+process, the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::isRunning()"><span class="pre">isRunning()</span></a></code> method
+to check if the process is done and the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::getOutput()"><span class="pre">getOutput()</span></a></code> method to get the output:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="s1">&#39;-lsa&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">();</span>
+
+<span class="k">while</span> <span class="p">(</span><span class="nv">$process</span><span class="o">-&gt;</span><span class="na">isRunning</span><span class="p">())</span> <span class="p">{</span>
+    <span class="c1">// waiting for process to finish</span>
+<span class="p">}</span>
+
+<span class="k">echo</span> <span class="nv">$process</span><span class="o">-&gt;</span><span class="na">getOutput</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>You can also wait for a process to end if you started it asynchronously and
+are done doing other stuff:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="s1">&#39;-lsa&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">();</span>
+
+<span class="c1">// ... do other things</span>
+
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">wait</span><span class="p">();</span>
+
+<span class="c1">// ... do things after the process has finished</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::wait()"><span class="pre">wait()</span></a></code> method is blocking,
+which means that your code will halt at this line until the external
+process is completed.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If a <code class="docutils literal notranslate"><span class="pre">Response</span></code> is sent <strong>before</strong> a child process had a chance to complete,
+the server process will be killed (depending on your OS). It means that
+your task will be stopped right away. Running an asynchronous process
+is not the same as running a process that survives its parent process.</p>
+<p class="last">If you want your process to survive the request/response cycle, you can
+take advantage of the <code class="docutils literal notranslate"><span class="pre">kernel.terminate</span></code> event, and run your command
+<strong>synchronously</strong> inside this event. Be aware that <code class="docutils literal notranslate"><span class="pre">kernel.terminate</span></code>
+is called only if you use PHP-FPM.</p>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Beware also that if you do that, the said PHP-FPM process will not be
+available to serve any new request until the subprocess is finished. This
+means you can quickly block your FPM pool if you’re not careful enough.
+That is why it’s generally way better not to do any fancy things even
+after the request is sent, but to use a job queue instead.</p>
+</div>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::wait()"><span class="pre">wait()</span></a></code> takes one optional argument:
+a callback that is called repeatedly whilst the process is still running, passing
+in the output and its type:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="s1">&#39;-lsa&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">();</span>
+
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">wait</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$type</span><span class="p">,</span> <span class="nv">$buffer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">Process</span><span class="o">::</span><span class="na">ERR</span> <span class="o">===</span> <span class="nv">$type</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s1">&#39;ERR &gt; &#39;</span><span class="o">.</span><span class="nv">$buffer</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s1">&#39;OUT &gt; &#39;</span><span class="o">.</span><span class="nv">$buffer</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Instead of waiting until the process has finished, you can use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::waitUntil()"><span class="pre">waitUntil()</span></a></code> method to keep or stop
+waiting based on some PHP logic. The following example starts a long running
+process and checks its output to wait until its fully initialized:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;/usr/bin/php&#39;</span><span class="p">,</span> <span class="s1">&#39;slow-starting-server.php&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">();</span>
+
+<span class="c1">// ... do other things</span>
+
+<span class="c1">// waits until the given anonymous function returns true</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">waitUntil</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$type</span><span class="p">,</span> <span class="nv">$output</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$output</span> <span class="o">===</span> <span class="s1">&#39;Ready. Waiting for commands...&#39;</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="c1">// ... do things after the process is ready</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="streaming-to-the-standard-input-of-a-process">
+<h2>Streaming to the Standard Input of a Process<a class="headerlink" href="#streaming-to-the-standard-input-of-a-process" title="Permalink to this headline">¶</a></h2>
+<p>Before a process is started, you can specify its standard input using either the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::setInput()"><span class="pre">setInput()</span></a></code> method or the 4th argument
+of the constructor. The provided input can be a string, a stream resource or a
+<code class="docutils literal notranslate"><span class="pre">Traversable</span></code> object:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;cat&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">setInput</span><span class="p">(</span><span class="s1">&#39;foobar&#39;</span><span class="p">);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>When this input is fully written to the subprocess standard input, the corresponding
+pipe is closed.</p>
+<p>In order to write to a subprocess standard input while it is running, the component
+provides the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/InputStream.php" title="Symfony\Component\Process\InputStream"><span class="pre">InputStream</span></a></code> class:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$input</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">InputStream</span><span class="p">();</span>
+<span class="nv">$input</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+
+<span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;cat&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">setInput</span><span class="p">(</span><span class="nv">$input</span><span class="p">);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">();</span>
+
+<span class="c1">// ... read process output or do other things</span>
+
+<span class="nv">$input</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
+<span class="nv">$input</span><span class="o">-&gt;</span><span class="na">close</span><span class="p">();</span>
+
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">wait</span><span class="p">();</span>
+
+<span class="c1">// will echo: foobar</span>
+<span class="k">echo</span> <span class="nv">$process</span><span class="o">-&gt;</span><span class="na">getOutput</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/InputStream.php" title="Symfony\Component\Process\InputStream::write()"><span class="pre">write()</span></a></code> method accepts scalars,
+stream resources or <code class="docutils literal notranslate"><span class="pre">Traversable</span></code> objects as argument. As shown in the above example,
+you need to explicitly call the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/InputStream.php" title="Symfony\Component\Process\InputStream::close()"><span class="pre">close()</span></a></code>
+method when you are done writing to the standard input of the subprocess.</p>
+<div class="section" id="using-php-streams-as-the-standard-input-of-a-process">
+<h3>Using PHP Streams as the Standard Input of a Process<a class="headerlink" href="#using-php-streams-as-the-standard-input-of-a-process" title="Permalink to this headline">¶</a></h3>
+<p>The input of a process can also be defined using <a class="reference external" href="https://www.php.net/manual/en/book.stream.php">PHP streams</a>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$stream</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="s1">&#39;php://temporary&#39;</span><span class="p">,</span> <span class="s1">&#39;w+&#39;</span><span class="p">);</span>
+
+<span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;cat&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">setInput</span><span class="p">(</span><span class="nv">$stream</span><span class="p">);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">();</span>
+
+<span class="nb">fwrite</span><span class="p">(</span><span class="nv">$stream</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+
+<span class="c1">// ... read process output or do other things</span>
+
+<span class="nb">fwrite</span><span class="p">(</span><span class="nv">$stream</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">);</span>
+<span class="nb">fclose</span><span class="p">(</span><span class="nv">$stream</span><span class="p">);</span>
+
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">wait</span><span class="p">();</span>
+
+<span class="c1">// will echo: &#39;foobar&#39;</span>
+<span class="k">echo</span> <span class="nv">$process</span><span class="o">-&gt;</span><span class="na">getOutput</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="stopping-a-process">
+<h2>Stopping a Process<a class="headerlink" href="#stopping-a-process" title="Permalink to this headline">¶</a></h2>
+<p>Any asynchronous process can be stopped at any time with the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::stop()"><span class="pre">stop()</span></a></code> method. This method takes
+two arguments: a timeout and a signal. Once the timeout is reached, the signal
+is sent to the running process. The default signal sent to a process is <code class="docutils literal notranslate"><span class="pre">SIGKILL</span></code>.
+Please read the <a class="reference internal" href="#reference-process-signal"><span class="std std-ref">signal documentation below</span></a>
+to find out more about signal handling in the Process component:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="s1">&#39;-lsa&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">();</span>
+
+<span class="c1">// ... do other things</span>
+
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">stop</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nx">SIGINT</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="executing-php-code-in-isolation">
+<h2>Executing PHP Code in Isolation<a class="headerlink" href="#executing-php-code-in-isolation" title="Permalink to this headline">¶</a></h2>
+<p>If you want to execute some PHP code in isolation, use the <code class="docutils literal notranslate"><span class="pre">PhpProcess</span></code>
+instead:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Process\PhpProcess</span><span class="p">;</span>
+
+<span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PhpProcess</span><span class="p">(</span><span class="s">&lt;&lt;&lt;</span><span class="dl">EOF</span><span class="s"></span>
+<span class="s">    &lt;?= &#39;Hello World&#39; ?&gt;</span>
+<span class="dl">EOF</span>
+<span class="p">);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-a-prepared-command-line">
+<h2>Using a Prepared Command Line<a class="headerlink" href="#using-a-prepared-command-line" title="Permalink to this headline">¶</a></h2>
+<p>You can run the process by using a a prepared command line using the
+double bracket notation. You can use a placeholder in order to have a
+process that can only be changed with the values and without changing
+the PHP code:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Process\Process</span><span class="p">;</span>
+
+<span class="nv">$process</span> <span class="o">=</span> <span class="nx">Process</span><span class="o">::</span><span class="na">fromShellCommandline</span><span class="p">(</span><span class="s1">&#39;echo &quot;$name&quot;&#39;</span><span class="p">);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Elsa&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">A prepared command line will not be escaped automatically!</p>
+</div>
+</div>
+<div class="section" id="process-timeout">
+<h2>Process Timeout<a class="headerlink" href="#process-timeout" title="Permalink to this headline">¶</a></h2>
+<p>By default processes have a timeout of 60 seconds, but you can change it passing
+a different timeout (in seconds) to the <code class="docutils literal notranslate"><span class="pre">setTimeout()</span></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Process\Process</span><span class="p">;</span>
+
+<span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="s1">&#39;-lsa&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">setTimeout</span><span class="p">(</span><span class="mi">3600</span><span class="p">);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>If the timeout is reached, a
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Exception/ProcessTimedOutException.php" title="Symfony\Component\Process\Exception\ProcessTimedOutException"><span class="pre">ProcessTimedOutException</span></a></code> is thrown.</p>
+<p>For long running commands, it is your responsibility to perform the timeout
+check regularly:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$process</span><span class="o">-&gt;</span><span class="na">setTimeout</span><span class="p">(</span><span class="mi">3600</span><span class="p">);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">();</span>
+
+<span class="k">while</span> <span class="p">(</span><span class="nv">$condition</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="c1">// check if the timeout is reached</span>
+    <span class="nv">$process</span><span class="o">-&gt;</span><span class="na">checkTimeout</span><span class="p">();</span>
+
+    <span class="nb">usleep</span><span class="p">(</span><span class="mi">200000</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>You can get the process start time using the <code class="docutils literal notranslate"><span class="pre">getStartTime()</span></code> method.</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The <code class="docutils literal notranslate"><span class="pre">getStartTime()</span></code> method was introduced in Symfony 5.1.</p>
+</div>
+</div>
+</div>
+<div class="section" id="process-idle-timeout">
+<span id="reference-process-signal"></span><h2>Process Idle Timeout<a class="headerlink" href="#process-idle-timeout" title="Permalink to this headline">¶</a></h2>
+<p>In contrast to the timeout of the previous paragraph, the idle timeout only
+considers the time since the last output was produced by the process:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Process\Process</span><span class="p">;</span>
+
+<span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;something-with-variable-runtime&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">setTimeout</span><span class="p">(</span><span class="mi">3600</span><span class="p">);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">setIdleTimeout</span><span class="p">(</span><span class="mi">60</span><span class="p">);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>In the case above, a process is considered timed out, when either the total runtime
+exceeds 3600 seconds, or the process does not produce any output for 60 seconds.</p>
+</div>
+<div class="section" id="process-signals">
+<h2>Process Signals<a class="headerlink" href="#process-signals" title="Permalink to this headline">¶</a></h2>
+<p>When running a program asynchronously, you can send it POSIX signals with the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::signal()"><span class="pre">signal()</span></a></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Process\Process</span><span class="p">;</span>
+
+<span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;find&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;-name&#39;</span><span class="p">,</span> <span class="s1">&#39;rabbit&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">();</span>
+
+<span class="c1">// will send a SIGKILL to the process</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">signal</span><span class="p">(</span><span class="nx">SIGKILL</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="process-pid">
+<h2>Process Pid<a class="headerlink" href="#process-pid" title="Permalink to this headline">¶</a></h2>
+<p>You can access the <a class="reference external" href="https://en.wikipedia.org/wiki/Process_identifier">pid</a> of a running process with the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::getPid()"><span class="pre">getPid()</span></a></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Process\Process</span><span class="p">;</span>
+
+<span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;/usr/bin/php&#39;</span><span class="p">,</span> <span class="s1">&#39;worker.php&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">();</span>
+
+<span class="nv">$pid</span> <span class="o">=</span> <span class="nv">$process</span><span class="o">-&gt;</span><span class="na">getPid</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="disabling-output">
+<h2>Disabling Output<a class="headerlink" href="#disabling-output" title="Permalink to this headline">¶</a></h2>
+<p>As standard output and error output are always fetched from the underlying process,
+it might be convenient to disable output in some cases to save memory.
+Use <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::disableOutput()"><span class="pre">disableOutput()</span></a></code> and
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::enableOutput()"><span class="pre">enableOutput()</span></a></code> to toggle this feature:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Process\Process</span><span class="p">;</span>
+
+<span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">([</span><span class="s1">&#39;/usr/bin/php&#39;</span><span class="p">,</span> <span class="s1">&#39;worker.php&#39;</span><span class="p">]);</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">disableOutput</span><span class="p">();</span>
+<span class="nv">$process</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p>You cannot enable or disable the output while the process is running.</p>
+<p>If you disable the output, you cannot access <code class="docutils literal notranslate"><span class="pre">getOutput()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">getIncrementalOutput()</span></code>, <code class="docutils literal notranslate"><span class="pre">getErrorOutput()</span></code>, <code class="docutils literal notranslate"><span class="pre">getIncrementalErrorOutput()</span></code> or
+<code class="docutils literal notranslate"><span class="pre">setIdleTimeout()</span></code>.</p>
+<p class="last">However, it is possible to pass a callback to the <code class="docutils literal notranslate"><span class="pre">start</span></code>, <code class="docutils literal notranslate"><span class="pre">run</span></code> or <code class="docutils literal notranslate"><span class="pre">mustRun</span></code>
+methods to handle process output in a streaming fashion.</p>
+</div>
+</div>
+<div class="section" id="finding-the-executable-php-binary">
+<h2>Finding the Executable PHP Binary<a class="headerlink" href="#finding-the-executable-php-binary" title="Permalink to this headline">¶</a></h2>
+<p>This component also provides a utility class called
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/PhpExecutableFinder.php" title="Symfony\Component\Process\PhpExecutableFinder"><span class="pre">PhpExecutableFinder</span></a></code> which returns the
+absolute path of the executable PHP binary available on your server:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Process\PhpExecutableFinder</span><span class="p">;</span>
+
+<span class="nv">$phpBinaryFinder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PhpExecutableFinder</span><span class="p">();</span>
+<span class="nv">$phpBinaryPath</span> <span class="o">=</span> <span class="nv">$phpBinaryFinder</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">();</span>
+<span class="c1">// $phpBinaryPath = &#39;/usr/local/bin/php&#39; (the result will be different on your computer)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="checking-for-tty-support">
+<h2>Checking for TTY Support<a class="headerlink" href="#checking-for-tty-support" title="Permalink to this headline">¶</a></h2>
+<p>Another utility provided by this component is a method called
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Process/Process.php" title="Symfony\Component\Process\Process::isTtySupported()"><span class="pre">isTtySupported()</span></a></code> which returns
+whether <a class="reference external" href="https://en.wikipedia.org/wiki/Tty_(unix)">TTY</a> is supported on the current operating system:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Process\Process</span><span class="p">;</span>
+
+<span class="nv">$process</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Process</span><span class="p">())</span><span class="o">-&gt;</span><span class="na">setTty</span><span class="p">(</span><span class="nx">Process</span><span class="o">::</span><span class="na">isTtySupported</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

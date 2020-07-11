@@ -1,0 +1,715 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The DependencyInjection Component &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Compiling the Container" href="dependency_injection/compilation.html" />
+    <link rel="prev" title="The Contracts Component" href="contracts.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cache.html">The Cache Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The DependencyInjection Component</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#basic-usage">Basic Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#avoiding-your-code-becoming-dependent-on-the-container">Avoiding your Code Becoming Dependent on the Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-up-the-container-with-configuration-files">Setting up the Container with Configuration Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#learn-more">Learn More</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dependency_injection/compilation.html">Compiling the Container</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dependency_injection/workflow.html">Container Building Workflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/3.3-di-changes.html">The Symfony 3.3 DI Container Changes Explained (autowiring, _defaults, etc)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/alias_private.html">How to Create Service Aliases and Mark Services as Private</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/autowiring.html">Defining Services Dependencies Automatically (Autowiring)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/calls.html">Service Method Calls and Setter Injection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/compiler_passes.html">How to Work with Compiler Passes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/configurators.html">How to Configure a Service with a Configurator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/debug.html">How to Debug the Service Container &amp; List Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/definitions.html">How to work with Service Definition Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/expression_language.html">How to Inject Values Based on Complex Expressions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/factories.html">Using a Factory to Create Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/import.html">How to Import Configuration Files/Resources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/injection_types.html">Types of Injection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/lazy_services.html">Lazy Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/optional_dependencies.html">How to Make Service Arguments/References Optional</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/parent_services.html">How to Manage Common Dependencies with Parent Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/request.html">How to Retrieve the Request from the Service Container</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/service_decoration.html">How to Decorate Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/service_subscribers_locators.html">Service Subscribers &amp; Locators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/shared.html">How to Define Non Shared Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/synthetic_services.html">How to Inject Instances into the Container</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/tags.html">How to Work with Service Tags</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="form.html">The Form Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html">The Process Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">The Security Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">The Components</a> &raquo;</li>
+        
+      <li>The DependencyInjection Component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/components/dependency_injection.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-dependencyinjection-component">
+<span id="index-0"></span><h1>The DependencyInjection Component<a class="headerlink" href="#the-dependencyinjection-component" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div>The DependencyInjection component implements a <a class="reference external" href="https://www.php-fig.org/psr/psr-11/">PSR-11</a> compatible service
+container that allows you to standardize and centralize the way objects are
+constructed in your application.</div></blockquote>
+<p>For an introduction to Dependency Injection and service containers see
+<a class="reference internal" href="../service_container.html"><span class="doc">Service Container</span></a>.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/dependency-injection
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you install this component outside of a Symfony application, you must
+require the <code class="docutils literal notranslate"><span class="pre">vendor/autoload.php</span></code> file in your code to enable the class
+autoloading mechanism provided by Composer. Read
+<a class="reference internal" href="using_components.html"><span class="doc">this article</span></a> for more details.</p>
+</div>
+</div>
+<div class="section" id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">This article explains how to use the DependencyInjection features as an
+independent component in any PHP application. Read the <a class="reference internal" href="../service_container.html"><span class="doc">Service Container</span></a>
+article to learn about how to use it in Symfony applications.</p>
+</div>
+<p>You might have a class like the following <code class="docutils literal notranslate"><span class="pre">Mailer</span></code> that
+you want to make available as a service:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$transport</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">transport</span> <span class="o">=</span> <span class="s1">&#39;sendmail&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can register this in the container as a service:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+
+<span class="nv">$containerBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;mailer&#39;</span><span class="p">,</span> <span class="s1">&#39;Mailer&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>An improvement to the class to make it more flexible would be to allow
+the container to set the <code class="docutils literal notranslate"><span class="pre">transport</span></code> used. If you change the class
+so this is passed into the constructor:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$transport</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$transport</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">transport</span> <span class="o">=</span> <span class="nv">$transport</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then you can set the choice of transport in the container:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+
+<span class="nv">$containerBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+<span class="nv">$containerBuilder</span>
+    <span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;mailer&#39;</span><span class="p">,</span> <span class="s1">&#39;Mailer&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="s1">&#39;sendmail&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This class is now much more flexible as you have separated the choice of
+transport out of the implementation and into the container.</p>
+<p>Which mail transport you have chosen may be something other services need
+to know about. You can avoid having to change it in multiple places by making
+it a parameter in the container and then referring to this parameter for
+the <code class="docutils literal notranslate"><span class="pre">Mailer</span></code> service’s constructor argument:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+
+<span class="nv">$containerBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;mailer.transport&#39;</span><span class="p">,</span> <span class="s1">&#39;sendmail&#39;</span><span class="p">);</span>
+<span class="nv">$containerBuilder</span>
+    <span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;mailer&#39;</span><span class="p">,</span> <span class="s1">&#39;Mailer&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="s1">&#39;%mailer.transport%&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Now that the <code class="docutils literal notranslate"><span class="pre">mailer</span></code> service is in the container you can inject it as
+a dependency of other classes. If you have a <code class="docutils literal notranslate"><span class="pre">NewsletterManager</span></code> class
+like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NewsletterManager</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$mailer</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">\Mailer</span> <span class="nv">$mailer</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">mailer</span> <span class="o">=</span> <span class="nv">$mailer</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When defining the <code class="docutils literal notranslate"><span class="pre">newsletter_manager</span></code> service, the <code class="docutils literal notranslate"><span class="pre">mailer</span></code> service does
+not exist yet. Use the <code class="docutils literal notranslate"><span class="pre">Reference</span></code> class to tell the container to inject the
+<code class="docutils literal notranslate"><span class="pre">mailer</span></code> service when it initializes the newsletter manager:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Reference</span><span class="p">;</span>
+
+<span class="nv">$containerBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;mailer.transport&#39;</span><span class="p">,</span> <span class="s1">&#39;sendmail&#39;</span><span class="p">);</span>
+<span class="nv">$containerBuilder</span>
+    <span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;mailer&#39;</span><span class="p">,</span> <span class="s1">&#39;Mailer&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="s1">&#39;%mailer.transport%&#39;</span><span class="p">);</span>
+
+<span class="nv">$containerBuilder</span>
+    <span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;newsletter_manager&#39;</span><span class="p">,</span> <span class="s1">&#39;NewsletterManager&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;mailer&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>If the <code class="docutils literal notranslate"><span class="pre">NewsletterManager</span></code> did not require the <code class="docutils literal notranslate"><span class="pre">Mailer</span></code> and injecting
+it was only optional then you could use setter injection instead:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NewsletterManager</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$mailer</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setMailer</span><span class="p">(</span><span class="nx">\Mailer</span> <span class="nv">$mailer</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">mailer</span> <span class="o">=</span> <span class="nv">$mailer</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can now choose not to inject a <code class="docutils literal notranslate"><span class="pre">Mailer</span></code> into the <code class="docutils literal notranslate"><span class="pre">NewsletterManager</span></code>.
+If you do want to though then the container can call the setter method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Reference</span><span class="p">;</span>
+
+<span class="nv">$containerBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;mailer.transport&#39;</span><span class="p">,</span> <span class="s1">&#39;sendmail&#39;</span><span class="p">);</span>
+<span class="nv">$containerBuilder</span>
+    <span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;mailer&#39;</span><span class="p">,</span> <span class="s1">&#39;Mailer&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="s1">&#39;%mailer.transport%&#39;</span><span class="p">);</span>
+
+<span class="nv">$containerBuilder</span>
+    <span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;newsletter_manager&#39;</span><span class="p">,</span> <span class="s1">&#39;NewsletterManager&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addMethodCall</span><span class="p">(</span><span class="s1">&#39;setMailer&#39;</span><span class="p">,</span> <span class="p">[</span><span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;mailer&#39;</span><span class="p">)]);</span>
+</pre></div>
+</div>
+<p>You could then get your <code class="docutils literal notranslate"><span class="pre">newsletter_manager</span></code> service from the container
+like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+
+<span class="nv">$containerBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+
+<span class="c1">// ...</span>
+
+<span class="nv">$newsletterManager</span> <span class="o">=</span> <span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;newsletter_manager&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="avoiding-your-code-becoming-dependent-on-the-container">
+<h2>Avoiding your Code Becoming Dependent on the Container<a class="headerlink" href="#avoiding-your-code-becoming-dependent-on-the-container" title="Permalink to this headline">¶</a></h2>
+<p>Whilst you can retrieve services from the container directly it is best
+to minimize this. For example, in the <code class="docutils literal notranslate"><span class="pre">NewsletterManager</span></code> you injected
+the <code class="docutils literal notranslate"><span class="pre">mailer</span></code> service in rather than asking for it from the container.
+You could have injected the container in and retrieved the <code class="docutils literal notranslate"><span class="pre">mailer</span></code> service
+from it but it would then be tied to this particular container making it
+difficult to reuse the class elsewhere.</p>
+<p>You will need to get a service from the container at some point but this
+should be as few times as possible at the entry point to your application.</p>
+</div>
+<div class="section" id="setting-up-the-container-with-configuration-files">
+<span id="components-dependency-injection-loading-config"></span><h2>Setting up the Container with Configuration Files<a class="headerlink" href="#setting-up-the-container-with-configuration-files" title="Permalink to this headline">¶</a></h2>
+<p>As well as setting up the services using PHP as above you can also use
+configuration files. This allows you to use XML or YAML to write the definitions
+for the services rather than using PHP to define the services as in the
+above examples. In anything but the smallest applications it makes sense
+to organize the service definitions by moving them into one or more configuration
+files. To do this you also need to install
+<a class="reference internal" href="config.html"><span class="doc">the Config component</span></a>.</p>
+<p>Loading an XML config file:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Config\FileLocator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\XmlFileLoader</span><span class="p">;</span>
+
+<span class="nv">$containerBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+<span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XmlFileLoader</span><span class="p">(</span><span class="nv">$containerBuilder</span><span class="p">,</span> <span class="k">new</span> <span class="nx">FileLocator</span><span class="p">(</span><span class="no">__DIR__</span><span class="p">));</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;services.xml&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Loading a YAML config file:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Config\FileLocator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\YamlFileLoader</span><span class="p">;</span>
+
+<span class="nv">$containerBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+<span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">YamlFileLoader</span><span class="p">(</span><span class="nv">$containerBuilder</span><span class="p">,</span> <span class="k">new</span> <span class="nx">FileLocator</span><span class="p">(</span><span class="no">__DIR__</span><span class="p">));</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;services.yaml&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you want to load YAML config files then you will also need to install
+<a class="reference internal" href="yaml.html"><span class="doc">the Yaml component</span></a>.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>If your application uses unconventional file extensions (for example, your
+XML files have a <code class="docutils literal notranslate"><span class="pre">.config</span></code> extension) you can pass the file type as the
+second optional parameter of the <code class="docutils literal notranslate"><span class="pre">load()</span></code> method:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;services.config&#39;</span><span class="p">,</span> <span class="s1">&#39;xml&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<p>If you <em>do</em> want to use PHP to create the services then you can move this
+into a separate config file and load it in a similar way:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Config\FileLocator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\PhpFileLoader</span><span class="p">;</span>
+
+<span class="nv">$containerBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ContainerBuilder</span><span class="p">();</span>
+<span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PhpFileLoader</span><span class="p">(</span><span class="nv">$containerBuilder</span><span class="p">,</span> <span class="k">new</span> <span class="nx">FileLocator</span><span class="p">(</span><span class="no">__DIR__</span><span class="p">));</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;services.php&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>You can now set up the <code class="docutils literal notranslate"><span class="pre">newsletter_manager</span></code> and <code class="docutils literal notranslate"><span class="pre">mailer</span></code> services using
+config files:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">mailer.transport</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">sendmail</span>
+
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">mailer</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span>     <span class="l l-Scalar l-Scalar-Plain">Mailer</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;%mailer.transport%&#39;</span><span class="p p-Indicator">]</span>
+    <span class="l l-Scalar l-Scalar-Plain">newsletter_manager</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span>     <span class="l l-Scalar l-Scalar-Plain">NewsletterManager</span>
+        <span class="l l-Scalar l-Scalar-Plain">calls</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">setMailer</span><span class="p p-Indicator">,</span> <span class="p p-Indicator">[</span><span class="s">&#39;@mailer&#39;</span><span class="p p-Indicator">]]</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;parameters&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;mailer.transport&quot;</span><span class="nt">&gt;</span>sendmail<span class="nt">&lt;/parameter&gt;</span>
+    <span class="nt">&lt;/parameters&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;mailer&quot;</span> <span class="na">class=</span><span class="s">&quot;Mailer&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;argument&gt;</span>%mailer.transport%<span class="nt">&lt;/argument&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;newsletter_manager&quot;</span> <span class="na">class=</span><span class="s">&quot;NewsletterManager&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;call</span> <span class="na">method=</span><span class="s">&quot;setMailer&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;argument</span> <span class="na">type=</span><span class="s">&quot;service&quot;</span> <span class="na">id=</span><span class="s">&quot;mailer&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/call&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$configurator</span><span class="o">-&gt;</span><span class="na">parameters</span><span class="p">()</span>
+        <span class="c1">// ...</span>
+        <span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;mailer.transport&#39;</span><span class="p">,</span> <span class="s1">&#39;sendmail&#39;</span><span class="p">)</span>
+    <span class="p">;</span>
+
+    <span class="nv">$services</span> <span class="o">=</span> <span class="nv">$configurator</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">();</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;mailer&#39;</span><span class="p">,</span> <span class="s1">&#39;Mailer&#39;</span><span class="p">)</span>
+        <span class="c1">// the param() method was introduced in Symfony 5.2.</span>
+        <span class="o">-&gt;</span><span class="na">args</span><span class="p">([</span><span class="nx">param</span><span class="p">(</span><span class="s1">&#39;mailer.transport&#39;</span><span class="p">)])</span>
+    <span class="p">;</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;newsletter_manager&#39;</span><span class="p">,</span> <span class="s1">&#39;NewsletterManager&#39;</span><span class="p">)</span>
+        <span class="c1">// In versions earlier to Symfony 5.1 the service() function was called ref()</span>
+        <span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="s1">&#39;setMailer&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">service</span><span class="p">(</span><span class="s1">&#39;mailer&#39;</span><span class="p">)])</span>
+    <span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="learn-more">
+<h2>Learn More<a class="headerlink" href="#learn-more" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dependency_injection/compilation.html">Compiling the Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependency_injection/workflow.html">Container Building Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/3.3-di-changes.html">The Symfony 3.3 DI Container Changes Explained (autowiring, _defaults, etc)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/alias_private.html">How to Create Service Aliases and Mark Services as Private</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/autowiring.html">Defining Services Dependencies Automatically (Autowiring)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/calls.html">Service Method Calls and Setter Injection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/compiler_passes.html">How to Work with Compiler Passes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/configurators.html">How to Configure a Service with a Configurator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/debug.html">How to Debug the Service Container &amp; List Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/definitions.html">How to work with Service Definition Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/expression_language.html">How to Inject Values Based on Complex Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/factories.html">Using a Factory to Create Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/import.html">How to Import Configuration Files/Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/injection_types.html">Types of Injection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/lazy_services.html">Lazy Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/optional_dependencies.html">How to Make Service Arguments/References Optional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/parent_services.html">How to Manage Common Dependencies with Parent Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/request.html">How to Retrieve the Request from the Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/service_decoration.html">How to Decorate Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/service_subscribers_locators.html">Service Subscribers &amp; Locators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/shared.html">How to Define Non Shared Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/synthetic_services.html">How to Inject Instances into the Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/tags.html">How to Work with Service Tags</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

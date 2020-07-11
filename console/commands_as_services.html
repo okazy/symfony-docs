@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Define Commands as Services &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Hide Console Commands" href="hide_commands.html" />
+    <link rel="prev" title="How to Call a Command from a Controller" href="command_in_controller.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../console.html">Console Commands</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../console.html#the-console-app-env-app-debug">The Console: APP_ENV &amp; APP_DEBUG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#creating-a-command">Creating a Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#configuring-the-command">Configuring the Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#registering-the-command">Registering the Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#executing-the-command">Executing the Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#console-output">Console Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#console-input">Console Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#getting-services-from-the-service-container">Getting Services from the Service Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#command-lifecycle">Command Lifecycle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#testing-commands">Testing Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#logging-command-errors">Logging Command Errors</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../console.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="calling_commands.html">How to Call Other Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coloring.html">How to Color and Style the Console Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command_in_controller.html">How to Call a Command from a Controller</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Define Commands as Services</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lazy-loading">Lazy Loading</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hide_commands.html">How to Hide Console Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="input.html">Console Input (Arguments &amp; Options)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lazy_commands.html">How to Make Commands Lazily Loaded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lockable_trait.html">Prevent Multiple Executions of a Console Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="style.html">How to Style a Console Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="verbosity.html">Verbosity Levels</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../console.html">Console Commands</a> &raquo;</li>
+        
+      <li>How to Define Commands as Services</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/console/commands_as_services.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-define-commands-as-services">
+<span id="index-0"></span><h1>How to Define Commands as Services<a class="headerlink" href="#how-to-define-commands-as-services" title="Permalink to this headline">¶</a></h1>
+<p>If you’re using the <a class="reference internal" href="../service_container.html#service-container-services-load-example"><span class="std std-ref">default services.yaml configuration</span></a>,
+your command classes are already registered as services. Great! This is the
+recommended setup.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can also manually register your command as a service by configuring the service
+and <a class="reference internal" href="../service_container/tags.html"><span class="doc">tagging it</span></a> with <code class="docutils literal notranslate"><span class="pre">console.command</span></code>.</p>
+</div>
+<p>For example, suppose you want to log something from within your command:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nx">App\Command</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Psr\Log\LoggerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Command\Command</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Input\InputInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Output\OutputInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">SunshineCommand</span> <span class="k">extends</span> <span class="nx">Command</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="k">static</span> <span class="nv">$defaultName</span> <span class="o">=</span> <span class="s1">&#39;app:sunshine&#39;</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$logger</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">LoggerInterface</span> <span class="nv">$logger</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span> <span class="o">=</span> <span class="nv">$logger</span><span class="p">;</span>
+
+        <span class="c1">// you *must* call the parent constructor</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">configure</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span>
+            <span class="o">-&gt;</span><span class="na">setDescription</span><span class="p">(</span><span class="s1">&#39;Good morning!&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">execute</span><span class="p">(</span><span class="nx">InputInterface</span> <span class="nv">$input</span><span class="p">,</span> <span class="nx">OutputInterface</span> <span class="nv">$output</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;Waking up the sun&#39;</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+
+        <span class="k">return</span> <span class="nx">Command</span><span class="o">::</span><span class="na">SUCCESS</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you’re using the <a class="reference internal" href="../service_container.html#service-container-services-load-example"><span class="std std-ref">default services.yaml configuration</span></a>,
+the command class will automatically be registered as a service and passed the <code class="docutils literal notranslate"><span class="pre">$logger</span></code>
+argument (thanks to autowiring). In other words, <em>just</em> by creating this class, everything
+works! You can call the <code class="docutils literal notranslate"><span class="pre">app:sunshine</span></code> command and start logging.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">You <em>do</em> have access to services in <code class="docutils literal notranslate"><span class="pre">configure()</span></code>. However, if your command is
+not <a class="reference internal" href="#console-command-service-lazy-loading"><span class="std std-ref">lazy</span></a>, try to avoid doing any
+work (e.g. making database queries), as that code will be run, even if you’re using
+the console to execute a different command.</p>
+</div>
+<div class="section" id="lazy-loading">
+<span id="console-command-service-lazy-loading"></span><h2>Lazy Loading<a class="headerlink" href="#lazy-loading" title="Permalink to this headline">¶</a></h2>
+<p>To make your command lazily loaded, either define its <code class="docutils literal notranslate"><span class="pre">$defaultName</span></code> static property:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SunshineCommand</span> <span class="k">extends</span> <span class="nx">Command</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="k">static</span> <span class="nv">$defaultName</span> <span class="o">=</span> <span class="s1">&#39;app:sunshine&#39;</span><span class="p">;</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Or set the <code class="docutils literal notranslate"><span class="pre">command</span></code> attribute on the <code class="docutils literal notranslate"><span class="pre">console.command</span></code> tag in your service definition:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\Command\SunshineCommand</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">name</span><span class="p p-Indicator">:</span> <span class="s">&#39;console.command&#39;</span><span class="p p-Indicator">,</span> <span class="nv">command</span><span class="p p-Indicator">:</span> <span class="s">&#39;app:sunshine&#39;</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\Command\SunshineCommand&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;console.command&quot;</span> <span class="na">command=</span><span class="s">&quot;app:sunshine&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">App\Command\SunshineCommand</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="nx">SunshineCommand</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addTag</span><span class="p">(</span><span class="s1">&#39;console.command&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;command&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;app:sunshine&#39;</span><span class="p">])</span>
+<span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the command defines aliases (using the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Command/Command.php" title="Symfony\Component\Console\Command\Command::getAliases()"><span class="pre">getAliases()</span></a></code> method)
+you must add one <code class="docutils literal notranslate"><span class="pre">console.command</span></code> tag per alias.</p>
+</div>
+<p>That’s it. One way or another, the <code class="docutils literal notranslate"><span class="pre">SunshineCommand</span></code> will be instantiated
+only when the <code class="docutils literal notranslate"><span class="pre">app:sunshine</span></code> command is actually called.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You don’t need to call <code class="docutils literal notranslate"><span class="pre">setName()</span></code> for configuring the command when it is lazy.</p>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Calling the <code class="docutils literal notranslate"><span class="pre">list</span></code> command will instantiate all commands, including lazy commands.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

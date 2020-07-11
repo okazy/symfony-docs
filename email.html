@@ -1,0 +1,1036 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Swift Mailer &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Events and Event Listeners" href="event_dispatcher.html" />
+    <link rel="prev" title="How to Configure Symfony to Work behind a Load Balancer or a Reverse Proxy" href="deployment/proxies.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Swift Mailer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sending-emails">Sending Emails</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-gmail-to-send-emails">Using Gmail to Send Emails</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-cloud-services-to-send-emails">Using Cloud Services to Send Emails</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-work-with-emails-during-development">How to Work with Emails during Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#disabling-sending">Disabling Sending</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sending-to-a-specified-address-es">Sending to a Specified Address(es)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sending-to-a-specified-address-but-with-exceptions">Sending to a Specified Address but with Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#viewing-from-the-web-debug-toolbar">Viewing from the Web Debug Toolbar</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-spool-emails">How to Spool Emails</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#spool-using-memory">Spool Using Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spool-using-files">Spool Using Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-test-that-an-email-is-sent-in-a-functional-test">How to Test that an Email is Sent in a Functional Test</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#problem-the-collector-object-is-null">Problem: The Collector Object Is <code class="docutils literal notranslate"><span class="pre">null</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#problem-the-collector-doesn-t-contain-the-email">Problem: The Collector Doesn’t Contain the Email</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Swift Mailer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/email.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="swift-mailer">
+<span id="index-0"></span><h1>Swift Mailer<a class="headerlink" href="#swift-mailer" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In Symfony 4.3, the <a class="reference internal" href="mailer.html"><span class="doc">Mailer</span></a> component was introduced and can
+be used instead of Swift Mailer.</p>
+</div>
+<p>Symfony provides a mailer feature based on the popular <a class="reference external" href="https://swiftmailer.symfony.com/">Swift Mailer</a> library
+via the <a class="reference external" href="https://github.com/symfony/swiftmailer-bundle">SwiftMailerBundle</a>. This mailer supports sending messages with your
+own mail servers as well as using popular email providers like <a class="reference external" href="https://mandrill.com/">Mandrill</a>,
+<a class="reference external" href="https://sendgrid.com/">SendGrid</a>, and <a class="reference external" href="https://aws.amazon.com/ses/">Amazon SES</a>.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>In applications using <a class="reference internal" href="setup.html#symfony-flex"><span class="std std-ref">Symfony Flex</span></a>, run this command to
+install the Swift Mailer based mailer before using it:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/swiftmailer-bundle
+</pre></div>
+</td></tr></table></div>
+<p>If your application doesn’t use Symfony Flex, follow the installation
+instructions on <a class="reference external" href="https://github.com/symfony/swiftmailer-bundle">SwiftMailerBundle</a>.</p>
+</div>
+<div class="section" id="configuration">
+<span id="swift-mailer-configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">config/packages/swiftmailer.yaml</span></code> file that’s created when installing the
+mailer provides all the initial config needed to send emails, except your mail
+server connection details. Those parameters are defined in the <code class="docutils literal notranslate"><span class="pre">MAILER_URL</span></code>
+environment variable in the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># .env (or override MAILER_URL in .env.local to avoid committing your changes)</span>
+
+<span class="c1"># use this to disable email delivery</span>
+<span class="nv">MAILER_URL</span><span class="o">=</span>null://localhost
+
+<span class="c1"># use this to configure a traditional SMTP server</span>
+<span class="nv">MAILER_URL</span><span class="o">=</span>smtp://localhost:465?encryption<span class="o">=</span>ssl<span class="p">&amp;</span><span class="nv">auth_mode</span><span class="o">=</span>login<span class="p">&amp;</span><span class="nv">username</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">password</span><span class="o">=</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">If the username, password or host contain any character considered special in a
+URI (such as <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>, <code class="docutils literal notranslate"><span class="pre">$</span></code>, <code class="docutils literal notranslate"><span class="pre">#</span></code>, <code class="docutils literal notranslate"><span class="pre">/</span></code>, <code class="docutils literal notranslate"><span class="pre">:</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">!</span></code>), you must
+encode them. See <a class="reference external" href="https://www.ietf.org/rfc/rfc3986.txt">RFC 3986</a> for the full list of reserved characters or use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.urlencode.php" title="urlencode"><span class="pre">urlencode</span></a></code> function to encode them.</p>
+</div>
+<p>Refer to the <a class="reference internal" href="reference/configuration/swiftmailer.html"><span class="doc">SwiftMailer configuration reference</span></a>
+for the detailed explanation of all the available config options.</p>
+</div>
+<div class="section" id="sending-emails">
+<h2>Sending Emails<a class="headerlink" href="#sending-emails" title="Permalink to this headline">¶</a></h2>
+<p>The Swift Mailer library works by creating, configuring and then sending
+<code class="docutils literal notranslate"><span class="pre">Swift_Message</span></code> objects. The “mailer” is responsible for the actual delivery
+of the message and is accessible via the <code class="docutils literal notranslate"><span class="pre">Swift_Mailer</span></code> service. Overall,
+sending an email is pretty straightforward:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nx">\Swift_Mailer</span> <span class="nv">$mailer</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$message</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">\Swift_Message</span><span class="p">(</span><span class="s1">&#39;Hello Email&#39;</span><span class="p">))</span>
+        <span class="o">-&gt;</span><span class="na">setFrom</span><span class="p">(</span><span class="s1">&#39;send@example.com&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">setTo</span><span class="p">(</span><span class="s1">&#39;recipient@example.com&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">renderView</span><span class="p">(</span>
+                <span class="c1">// templates/emails/registration.html.twig</span>
+                <span class="s1">&#39;emails/registration.html.twig&#39;</span><span class="p">,</span>
+                <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">]</span>
+            <span class="p">),</span>
+            <span class="s1">&#39;text/html&#39;</span>
+        <span class="p">)</span>
+
+        <span class="c1">// you can remove the following code if you don&#39;t define a text version for your emails</span>
+        <span class="o">-&gt;</span><span class="na">addPart</span><span class="p">(</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">renderView</span><span class="p">(</span>
+                <span class="c1">// templates/emails/registration.txt.twig</span>
+                <span class="s1">&#39;emails/registration.txt.twig&#39;</span><span class="p">,</span>
+                <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">]</span>
+            <span class="p">),</span>
+            <span class="s1">&#39;text/plain&#39;</span>
+        <span class="p">)</span>
+    <span class="p">;</span>
+
+    <span class="nv">$mailer</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$message</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="o">...</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To keep things decoupled, the email body has been stored in a template and
+rendered with the <code class="docutils literal notranslate"><span class="pre">renderView()</span></code> method. The <code class="docutils literal notranslate"><span class="pre">registration.html.twig</span></code>
+template might look something like this:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">{# templates/emails/registration.html.twig #}</span>
+<span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>You did it! You registered!<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+
+Hi <span class="cp">{{</span> <span class="nv">name</span> <span class="cp">}}</span>! You&#39;re successfully registered.
+
+<span class="c">{# example, assuming you have a route named &quot;login&quot; #}</span>
+To login, go to: <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">url</span><span class="o">(</span><span class="s1">&#39;login&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>...<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>.
+
+Thanks!
+
+<span class="c">{# Makes an absolute URL to the /images/logo.png file #}</span>
+<span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">absolute_url</span><span class="o">(</span><span class="nv">asset</span><span class="o">(</span><span class="s1">&#39;images/logo.png&#39;</span><span class="o">))</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>The <code class="docutils literal notranslate"><span class="pre">$message</span></code> object supports many more options, such as including attachments,
+adding HTML content, and much more. Refer to the <a class="reference external" href="https://swiftmailer.symfony.com/docs/messages.html">Creating Messages</a> section
+of the Swift Mailer documentation for more details.</p>
+</div>
+<div class="section" id="using-gmail-to-send-emails">
+<span id="email-using-gmail"></span><h2>Using Gmail to Send Emails<a class="headerlink" href="#using-gmail-to-send-emails" title="Permalink to this headline">¶</a></h2>
+<p>During development, you might prefer to send emails using Gmail instead of
+setting up a regular SMTP server. To do that, update the <code class="docutils literal notranslate"><span class="pre">MAILER_URL</span></code> of your
+<code class="docutils literal notranslate"><span class="pre">.env</span></code> file to this:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># username is your full Gmail or Google Apps email address</span>
+<span class="nv">MAILER_URL</span><span class="o">=</span>gmail://username:password@localhost
+</pre></div>
+</td></tr></table></div>
+<p>The <code class="docutils literal notranslate"><span class="pre">gmail</span></code> transport is a shortcut that uses the <code class="docutils literal notranslate"><span class="pre">smtp</span></code> transport, <code class="docutils literal notranslate"><span class="pre">ssl</span></code>
+encryption, <code class="docutils literal notranslate"><span class="pre">login</span></code> auth mode and <code class="docutils literal notranslate"><span class="pre">smtp.gmail.com</span></code> host. If your app uses
+other encryption or auth mode, you must override those values
+(<a class="reference internal" href="reference/configuration/swiftmailer.html"><span class="doc">see mailer config reference</span></a>):</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># username is your full Gmail or Google Apps email address</span>
+<span class="nv">MAILER_URL</span><span class="o">=</span>gmail://username:password@localhost?encryption<span class="o">=</span>tls<span class="p">&amp;</span><span class="nv">auth_mode</span><span class="o">=</span>oauth
+</pre></div>
+</td></tr></table></div>
+<p>If your Gmail account uses 2-Step-Verification, you must <a class="reference external" href="https://support.google.com/accounts/answer/185833">generate an App password</a>
+and use it as the value of the mailer password. You must also ensure that you
+<a class="reference external" href="https://support.google.com/accounts/answer/6010255">allow less secure applications to access your Gmail account</a>.</p>
+</div>
+<div class="section" id="using-cloud-services-to-send-emails">
+<h2>Using Cloud Services to Send Emails<a class="headerlink" href="#using-cloud-services-to-send-emails" title="Permalink to this headline">¶</a></h2>
+<p>Cloud mailing services are a popular option for companies that don’t want to set
+up and maintain their own reliable mail servers. To use these services in a
+Symfony app, update the value of <code class="docutils literal notranslate"><span class="pre">MAILER_URL</span></code> in the <code class="docutils literal notranslate"><span class="pre">.env</span></code>
+file. For example, for <a class="reference external" href="https://aws.amazon.com/ses/">Amazon SES</a> (Simple Email Service):</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># The host will be different depending on your AWS zone</span>
+<span class="c1"># The username/password credentials are obtained from the Amazon SES console</span>
+<span class="nv">MAILER_URL</span><span class="o">=</span>smtp://email-smtp.us-east-1.amazonaws.com:587?encryption<span class="o">=</span>tls<span class="p">&amp;</span><span class="nv">username</span><span class="o">=</span>YOUR_SES_USERNAME<span class="p">&amp;</span><span class="nv">password</span><span class="o">=</span>YOUR_SES_PASSWORD
+</pre></div>
+</td></tr></table></div>
+<p>Use the same technique for other mail services, as most of the time there is
+nothing more to it than configuring an SMTP endpoint.</p>
+</div>
+<div class="section" id="how-to-work-with-emails-during-development">
+<h2>How to Work with Emails during Development<a class="headerlink" href="#how-to-work-with-emails-during-development" title="Permalink to this headline">¶</a></h2>
+<p>When developing an application which sends email, you will often
+not want to actually send the email to the specified recipient during
+development. If you are using the SwiftmailerBundle with Symfony, you
+can achieve this through configuration settings without having to make
+any changes to your application’s code at all. There are two main choices
+when it comes to handling email during development: (a) disabling the
+sending of email altogether or (b) sending all email to a specific
+address (with optional exceptions).</p>
+<div class="section" id="disabling-sending">
+<h3>Disabling Sending<a class="headerlink" href="#disabling-sending" title="Permalink to this headline">¶</a></h3>
+<p>You can disable sending email by setting the <code class="docutils literal notranslate"><span class="pre">disable_delivery</span></code> option to
+<code class="docutils literal notranslate"><span class="pre">true</span></code>, which is the default value used by Symfony in the <code class="docutils literal notranslate"><span class="pre">test</span></code> environment
+(email messages will continue to be sent in the other environments):</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/test/swiftmailer.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">swiftmailer</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">disable_delivery</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/test/swiftmailer.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:swiftmailer=</span><span class="s">&quot;http://symfony.com/schema/dic/swiftmailer&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/swiftmailer https://symfony.com/schema/dic/swiftmailer/swiftmailer-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;swiftmailer:config</span> <span class="na">disable-delivery=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/test/swiftmailer.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;swiftmailer&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;disable_delivery&#39;</span> <span class="o">=&gt;</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="sending-to-a-specified-address-es">
+<span id="sending-to-a-specified-address"></span><h3>Sending to a Specified Address(es)<a class="headerlink" href="#sending-to-a-specified-address-es" title="Permalink to this headline">¶</a></h3>
+<p>You can also choose to have all email sent to a specific address or a list of addresses, instead
+of the address actually specified when sending the message. This can be done
+via the <code class="docutils literal notranslate"><span class="pre">delivery_addresses</span></code> option:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/dev/swiftmailer.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">swiftmailer</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">delivery_addresses</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;dev@example.com&#39;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/dev/swiftmailer.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:swiftmailer=</span><span class="s">&quot;http://symfony.com/schema/dic/swiftmailer&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/swiftmailer</span>
+<span class="s">        https://symfony.com/schema/dic/swiftmailer/swiftmailer-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;swiftmailer:config&gt;</span>
+        <span class="nt">&lt;swiftmailer:delivery-address&gt;</span>dev@example.com<span class="nt">&lt;/swiftmailer:delivery-address&gt;</span>
+    <span class="nt">&lt;/swiftmailer:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/dev/swiftmailer.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;swiftmailer&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;delivery_addresses&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;dev@example.com&#39;</span><span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Now, suppose you’re sending an email to <code class="docutils literal notranslate"><span class="pre">recipient&#64;example.com</span></code> in a controller:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nx">\Swift_Mailer</span> <span class="nv">$mailer</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$message</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">\Swift_Message</span><span class="p">(</span><span class="s1">&#39;Hello Email&#39;</span><span class="p">))</span>
+        <span class="o">-&gt;</span><span class="na">setFrom</span><span class="p">(</span><span class="s1">&#39;send@example.com&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">setTo</span><span class="p">(</span><span class="s1">&#39;recipient@example.com&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">renderView</span><span class="p">(</span>
+                <span class="c1">// templates/hello/email.txt.twig</span>
+                <span class="s1">&#39;hello/email.txt.twig&#39;</span><span class="p">,</span>
+                <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">;</span>
+    <span class="nv">$mailer</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$message</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="o">...</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the <code class="docutils literal notranslate"><span class="pre">dev</span></code> environment, the email will instead be sent to <code class="docutils literal notranslate"><span class="pre">dev&#64;example.com</span></code>.
+Swift Mailer will add an extra header to the email, <code class="docutils literal notranslate"><span class="pre">X-Swift-To</span></code>, containing
+the replaced address, so you can still see who it would have been sent to.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In addition to the <code class="docutils literal notranslate"><span class="pre">to</span></code> addresses, this will also stop the email being
+sent to any <code class="docutils literal notranslate"><span class="pre">CC</span></code> and <code class="docutils literal notranslate"><span class="pre">BCC</span></code> addresses set for it. Swift Mailer will add
+additional headers to the email with the overridden addresses in them.
+These are <code class="docutils literal notranslate"><span class="pre">X-Swift-Cc</span></code> and <code class="docutils literal notranslate"><span class="pre">X-Swift-Bcc</span></code> for the <code class="docutils literal notranslate"><span class="pre">CC</span></code> and <code class="docutils literal notranslate"><span class="pre">BCC</span></code>
+addresses respectively.</p>
+</div>
+</div>
+<div class="section" id="sending-to-a-specified-address-but-with-exceptions">
+<span id="id1"></span><h3>Sending to a Specified Address but with Exceptions<a class="headerlink" href="#sending-to-a-specified-address-but-with-exceptions" title="Permalink to this headline">¶</a></h3>
+<p>Suppose you want to have all email redirected to a specific address,
+(like in the above scenario to <code class="docutils literal notranslate"><span class="pre">dev&#64;example.com</span></code>). But then you may want
+email sent to some specific email addresses to go through after all, and
+not be redirected (even if it is in the dev environment). This can be done
+by adding the <code class="docutils literal notranslate"><span class="pre">delivery_whitelist</span></code> option:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/dev/swiftmailer.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">swiftmailer</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">delivery_addresses</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;dev@example.com&#39;</span><span class="p p-Indicator">]</span>
+    <span class="l l-Scalar l-Scalar-Plain">delivery_whitelist</span><span class="p p-Indicator">:</span>
+        <span class="c1"># all email addresses matching these regexes will be delivered</span>
+        <span class="c1"># like normal, as well as being sent to dev@example.com</span>
+        <span class="p p-Indicator">-</span> <span class="s">&#39;/@specialdomain\.com$/&#39;</span>
+        <span class="p p-Indicator">-</span> <span class="s">&#39;/^admin@mydomain\.com$/&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/dev/swiftmailer.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:swiftmailer=</span><span class="s">&quot;http://symfony.com/schema/dic/swiftmailer&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/swiftmailer</span>
+<span class="s">        https://symfony.com/schema/dic/swiftmailer/swiftmailer-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;swiftmailer:config&gt;</span>
+        <span class="c">&lt;!-- all email addresses matching these regexes will be delivered</span>
+<span class="c">             like normal, as well as being sent to dev@example.com --&gt;</span>
+        <span class="nt">&lt;swiftmailer:delivery-whitelist-pattern&gt;</span>/@specialdomain\.com$/<span class="nt">&lt;/swiftmailer:delivery-whitelist-pattern&gt;</span>
+        <span class="nt">&lt;swiftmailer:delivery-whitelist-pattern&gt;</span>/^admin@mydomain\.com$/<span class="nt">&lt;/swiftmailer:delivery-whitelist-pattern&gt;</span>
+        <span class="nt">&lt;swiftmailer:delivery-address&gt;</span>dev@example.com<span class="nt">&lt;/swiftmailer:delivery-address&gt;</span>
+    <span class="nt">&lt;/swiftmailer:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/dev/swiftmailer.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;swiftmailer&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;delivery_addresses&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s2">&quot;dev@example.com&quot;</span><span class="p">],</span>
+    <span class="s1">&#39;delivery_whitelist&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="c1">// all email addresses matching these regexes will be delivered</span>
+        <span class="c1">// like normal, as well as being sent to dev@example.com</span>
+        <span class="s1">&#39;/@specialdomain\.com$/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;/^admin@mydomain\.com$/&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>In the above example all email messages will be redirected to <code class="docutils literal notranslate"><span class="pre">dev&#64;example.com</span></code>
+and messages sent to the <code class="docutils literal notranslate"><span class="pre">admin&#64;mydomain.com</span></code> address or to any email address
+belonging to the domain <code class="docutils literal notranslate"><span class="pre">specialdomain.com</span></code> will also be delivered as normal.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">delivery_whitelist</span></code> option is ignored unless the <code class="docutils literal notranslate"><span class="pre">delivery_addresses</span></code> option is defined.</p>
+</div>
+</div>
+<div class="section" id="viewing-from-the-web-debug-toolbar">
+<h3>Viewing from the Web Debug Toolbar<a class="headerlink" href="#viewing-from-the-web-debug-toolbar" title="Permalink to this headline">¶</a></h3>
+<p>You can view any email sent during a single response when you are in the
+<code class="docutils literal notranslate"><span class="pre">dev</span></code> environment using the web debug toolbar. The email icon in the toolbar
+will show how many emails were sent. If you click it, a report will open
+showing the details of the sent emails.</p>
+<p>If you’re sending an email and then immediately redirecting to another page,
+the web debug toolbar will not display an email icon or a report on the next
+page.</p>
+<p>Instead, you can set the <code class="docutils literal notranslate"><span class="pre">intercept_redirects</span></code> option to <code class="docutils literal notranslate"><span class="pre">true</span></code> in the
+<code class="docutils literal notranslate"><span class="pre">dev</span></code> environment, which will cause the redirect to stop and allow you to open
+the report with details of the sent emails.</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/dev/web_profiler.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">web_profiler</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">intercept_redirects</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/dev/web_profiler.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:webprofiler=</span><span class="s">&quot;http://symfony.com/schema/dic/webprofiler&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/webprofiler</span>
+<span class="s">        https://symfony.com/schema/dic/webprofiler/webprofiler-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;webprofiler:config</span>
+        <span class="na">intercept-redirects=</span><span class="s">&quot;true&quot;</span>
+    <span class="nt">/&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/dev/web_profiler.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;web_profiler&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;intercept_redirects&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;true&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Alternatively, you can open the profiler after the redirect and search
+by the submit URL used on the previous request (e.g. <code class="docutils literal notranslate"><span class="pre">/contact/handle</span></code>).
+The profiler’s search feature allows you to load the profiler information
+for any past requests.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">In addition to the features provided by Symfony, there are applications that
+can help you test emails during application development, like <a class="reference external" href="https://github.com/sj26/mailcatcher">MailCatcher</a>,
+<a class="reference external" href="https://mailtrap.io/">Mailtrap</a> and <a class="reference external" href="https://github.com/mailhog/MailHog">MailHog</a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="how-to-spool-emails">
+<h2>How to Spool Emails<a class="headerlink" href="#how-to-spool-emails" title="Permalink to this headline">¶</a></h2>
+<p>The default behavior of the Symfony mailer is to send the email messages
+immediately. You may, however, want to avoid the performance hit of the
+communication to the email server, which could cause the user to wait for the
+next page to load while the email is sending. This can be avoided by choosing to
+“spool” the emails instead of sending them directly.</p>
+<p>This makes the mailer to not attempt to send the email message but instead save
+it somewhere such as a file. Another process can then read from the spool and
+take care of sending the emails in the spool. Currently only spooling to file or
+memory is supported.</p>
+<div class="section" id="spool-using-memory">
+<span id="email-spool-memory"></span><h3>Spool Using Memory<a class="headerlink" href="#spool-using-memory" title="Permalink to this headline">¶</a></h3>
+<p>When you use spooling to store the emails to memory, they will get sent right
+before the kernel terminates. This means the email only gets sent if the whole
+request got executed without any unhandled exception or any errors. To configure
+this spool, use the following configuration:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/swiftmailer.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">swiftmailer</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">spool</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{</span> <span class="nv">type</span><span class="p p-Indicator">:</span> <span class="nv">memory</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/swiftmailer.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:swiftmailer=</span><span class="s">&quot;http://symfony.com/schema/dic/swiftmailer&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/swiftmailer https://symfony.com/schema/dic/swiftmailer/swiftmailer-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;swiftmailer:config&gt;</span>
+        <span class="nt">&lt;swiftmailer:spool</span> <span class="na">type=</span><span class="s">&quot;memory&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/swiftmailer:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/swiftmailer.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;swiftmailer&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+    <span class="s1">&#39;spool&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;memory&#39;</span><span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="spool-using-files">
+<span id="spool-using-a-file"></span><h3>Spool Using Files<a class="headerlink" href="#spool-using-files" title="Permalink to this headline">¶</a></h3>
+<p>When you use the filesystem for spooling, Symfony creates a folder in the given
+path for each mail service (e.g. “default” for the default service). This folder
+will contain files for each email in the spool. So make sure this directory is
+writable by Symfony (or your webserver/php)!</p>
+<p>In order to use the spool with files, use the following configuration:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/swiftmailer.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">swiftmailer</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">spool</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">file</span>
+        <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/path/to/spooldir</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/swiftmailer.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:swiftmailer=</span><span class="s">&quot;http://symfony.com/schema/dic/swiftmailer&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/swiftmailer https://symfony.com/schema/dic/swiftmailer/swiftmailer-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;swiftmailer:config&gt;</span>
+        <span class="nt">&lt;swiftmailer:spool</span>
+            <span class="na">type=</span><span class="s">&quot;file&quot;</span>
+            <span class="na">path=</span><span class="s">&quot;/path/to/spooldir&quot;</span>
+        <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/swiftmailer:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/swiftmailer.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;swiftmailer&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+
+    <span class="s1">&#39;spool&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;file&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;path&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/path/to/spooldir&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>If you want to store the spool somewhere with your project directory,
+remember that you can use the <code class="docutils literal notranslate"><span class="pre">%kernel.project_dir%</span></code> parameter to reference
+the project’s root:</p>
+<div class="last highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="s">&#39;%kernel.project_dir%/var/spool&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Now, when your app sends an email, it will not actually be sent but instead
+added to the spool. Sending the messages from the spool is done separately.
+There is a console command to send the messages in the spool:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nv">APP_ENV</span><span class="o">=</span>prod php bin/console swiftmailer:spool:send
+</pre></div>
+</td></tr></table></div>
+<p>It has an option to limit the number of messages to be sent:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nv">APP_ENV</span><span class="o">=</span>prod php bin/console swiftmailer:spool:send --message-limit<span class="o">=</span><span class="m">10</span>
+</pre></div>
+</td></tr></table></div>
+<p>You can also set the time limit in seconds:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nv">APP_ENV</span><span class="o">=</span>prod php bin/console swiftmailer:spool:send --time-limit<span class="o">=</span><span class="m">10</span>
+</pre></div>
+</td></tr></table></div>
+<p>In practice you will not want to run this manually. Instead, the console command
+should be triggered by a cron job or scheduled task and run at a regular
+interval.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p>When you create a message with SwiftMailer, it generates a <code class="docutils literal notranslate"><span class="pre">Swift_Message</span></code>
+class. If the <code class="docutils literal notranslate"><span class="pre">swiftmailer</span></code> service is lazy loaded, it generates instead a
+proxy class named <code class="docutils literal notranslate"><span class="pre">Swift_Message_&lt;someRandomCharacters&gt;</span></code>.</p>
+<p>If you use the memory spool, this change is transparent and has no impact.
+But when using the filesystem spool, the message class is serialized in
+a file with the randomized class name. The problem is that this random
+class name changes on every cache clear.</p>
+<p>So if you send a mail and then you clear the cache, on the next execution of
+<code class="docutils literal notranslate"><span class="pre">swiftmailer:spool:send</span></code> an error will raise because the class
+<code class="docutils literal notranslate"><span class="pre">Swift_Message_&lt;someRandomCharacters&gt;</span></code> doesn’t exist (anymore).</p>
+<p class="last">The solutions are either to use the memory spool or to load the
+<code class="docutils literal notranslate"><span class="pre">swiftmailer</span></code> service without the <code class="docutils literal notranslate"><span class="pre">lazy</span></code> option (see <a class="reference internal" href="service_container/lazy_services.html"><span class="doc">Lazy Services</span></a>).</p>
+</div>
+</div>
+</div>
+<div class="section" id="how-to-test-that-an-email-is-sent-in-a-functional-test">
+<h2>How to Test that an Email is Sent in a Functional Test<a class="headerlink" href="#how-to-test-that-an-email-is-sent-in-a-functional-test" title="Permalink to this headline">¶</a></h2>
+<p>Sending emails with Symfony is pretty straightforward thanks to the
+SwiftmailerBundle, which leverages the power of the <a class="reference external" href="https://swiftmailer.symfony.com/">Swift Mailer</a> library.</p>
+<p>To functionally test that an email was sent, and even assert the email subject,
+content or any other headers, you can use <a class="reference internal" href="profiler.html"><span class="doc">the Symfony Profiler</span></a>.</p>
+<p>Start with a controller action that sends an email:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">sendEmail</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nx">\Swift_Mailer</span> <span class="nv">$mailer</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$message</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">\Swift_Message</span><span class="p">(</span><span class="s1">&#39;Hello Email&#39;</span><span class="p">))</span>
+        <span class="o">-&gt;</span><span class="na">setFrom</span><span class="p">(</span><span class="s1">&#39;send@example.com&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">setTo</span><span class="p">(</span><span class="s1">&#39;recipient@example.com&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="s1">&#39;You should see me from the profiler!&#39;</span><span class="p">)</span>
+    <span class="p">;</span>
+
+    <span class="nv">$mailer</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$message</span><span class="p">);</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In your functional test, use the <code class="docutils literal notranslate"><span class="pre">swiftmailer</span></code> collector on the profiler
+to get information about the messages sent on the previous request:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// tests/Controller/MailControllerTest.php</span>
+<span class="k">namespace</span> <span class="nx">App\Tests\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Test\WebTestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MailControllerTest</span> <span class="k">extends</span> <span class="nx">WebTestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testMailIsSentAndContentIsOk</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$client</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="na">createClient</span><span class="p">();</span>
+
+        <span class="c1">// enables the profiler for the next request (it does nothing if the profiler is not available)</span>
+        <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">enableProfiler</span><span class="p">();</span>
+
+        <span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;/path/to/above/action&#39;</span><span class="p">);</span>
+
+        <span class="nv">$mailCollector</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getProfile</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getCollector</span><span class="p">(</span><span class="s1">&#39;swiftmailer&#39;</span><span class="p">);</span>
+
+        <span class="c1">// checks that an email was sent</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nv">$mailCollector</span><span class="o">-&gt;</span><span class="na">getMessageCount</span><span class="p">());</span>
+
+        <span class="nv">$collectedMessages</span> <span class="o">=</span> <span class="nv">$mailCollector</span><span class="o">-&gt;</span><span class="na">getMessages</span><span class="p">();</span>
+        <span class="nv">$message</span> <span class="o">=</span> <span class="nv">$collectedMessages</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+
+        <span class="c1">// Asserting email data</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertInstanceOf</span><span class="p">(</span><span class="s1">&#39;Swift_Message&#39;</span><span class="p">,</span> <span class="nv">$message</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="s1">&#39;Hello Email&#39;</span><span class="p">,</span> <span class="nv">$message</span><span class="o">-&gt;</span><span class="na">getSubject</span><span class="p">());</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="s1">&#39;send@example.com&#39;</span><span class="p">,</span> <span class="nb">key</span><span class="p">(</span><span class="nv">$message</span><span class="o">-&gt;</span><span class="na">getFrom</span><span class="p">()));</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="s1">&#39;recipient@example.com&#39;</span><span class="p">,</span> <span class="nb">key</span><span class="p">(</span><span class="nv">$message</span><span class="o">-&gt;</span><span class="na">getTo</span><span class="p">()));</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span>
+            <span class="s1">&#39;You should see me from the profiler!&#39;</span><span class="p">,</span>
+            <span class="nv">$message</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">()</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="troubleshooting">
+<h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="problem-the-collector-object-is-null">
+<h4>Problem: The Collector Object Is <code class="docutils literal notranslate"><span class="pre">null</span></code><a class="headerlink" href="#problem-the-collector-object-is-null" title="Permalink to this headline">¶</a></h4>
+<p>The email collector is only available when the profiler is enabled and collects
+information, as explained in <a class="reference internal" href="testing/profiling.html"><span class="doc">How to Use the Profiler in a Functional Test</span></a>.</p>
+</div>
+<div class="section" id="problem-the-collector-doesn-t-contain-the-email">
+<h4>Problem: The Collector Doesn’t Contain the Email<a class="headerlink" href="#problem-the-collector-doesn-t-contain-the-email" title="Permalink to this headline">¶</a></h4>
+<p>If a redirection is performed after sending the email (for example when you send
+an email after a form is processed and before redirecting to another page), make
+sure that the test client doesn’t follow the redirects, as explained in
+<a class="reference internal" href="testing.html"><span class="doc">Testing</span></a>. Otherwise, the collector will contain the information of the
+redirected page and the email won’t be accessible.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

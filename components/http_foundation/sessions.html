@@ -1,0 +1,633 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Session Management &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="The HttpKernel Component" href="../http_kernel.html" />
+    <link rel="prev" title="Testing with Sessions" href="session_testing.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cache.html">The Cache Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dependency_injection.html">The DependencyInjection Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../form.html">The Form Component</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../http_foundation.html">The HttpFoundation Component</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../http_foundation.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../http_foundation.html#request">Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../http_foundation.html#response">Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../http_foundation.html#session">Session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../http_foundation.html#safe-content-preference">Safe Content Preference</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../http_foundation.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="session_configuration.html">Configuring Sessions and Save Handlers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="session_php_bridge.html">Integrating with Legacy Sessions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="session_testing.html">Testing with Sessions</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Session Management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../controller.html">Controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../controller/argument_value_resolver.html">Extending Action Argument Resolving</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../controller/error_pages.html">How to Customize Error Pages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../controller/forwarding.html">How to Forward Requests to another Controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../controller/service.html">How to Define Controllers as Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../controller/soap_web_service.html">How to Create a SOAP Web Service in a Symfony Controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../controller/upload_file.html">How to Upload Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../session/database.html">Store Sessions in a Database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../session/locale_sticky_session.html">Making the Locale “Sticky” during a User’s Session</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../session/php_bridge.html">Bridge a legacy Application with Symfony Sessions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../session/proxy_examples.html">Session Proxy Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../http_cache/cache_invalidation.html">Cache Invalidation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../http_cache/cache_vary.html">Varying the Response for HTTP Cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../http_cache/esi.html">Working with Edge Side Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../http_cache/expiration.html">HTTP Cache Expiration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../http_cache/ssi.html">Working with Server Side Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../http_cache/validation.html">HTTP Cache Validation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../http_cache/varnish.html">How to Use Varnish to Speed up my Website</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../process.html">The Process Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html">The Security Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">The Components</a> &raquo;</li>
+        
+          <li><a href="../http_foundation.html">The HttpFoundation Component</a> &raquo;</li>
+        
+      <li>Session Management</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/components/http_foundation/sessions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="session-management">
+<span id="index-0"></span><h1>Session Management<a class="headerlink" href="#session-management" title="Permalink to this headline">¶</a></h1>
+<p>The Symfony HttpFoundation component has a very powerful and flexible session
+subsystem which is designed to provide session management through a clear
+object-oriented interface using a variety of session storage drivers.</p>
+<p>Sessions are used via the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Session.php" title="Symfony\Component\HttpFoundation\Session\Session"><span class="pre">Session</span></a></code>
+implementation of <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/SessionInterface.php" title="Symfony\Component\HttpFoundation\Session\SessionInterface"><span class="pre">SessionInterface</span></a></code> interface.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Make sure your PHP session isn’t already started before using the Session
+class. If you have a legacy session system that starts your session, see
+<a class="reference internal" href="session_php_bridge.html"><span class="doc">Legacy Sessions</span></a>.</p>
+</div>
+<p>Quick example:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\Session</span><span class="p">;</span>
+
+<span class="nv">$session</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Session</span><span class="p">();</span>
+<span class="nv">$session</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">();</span>
+
+<span class="c1">// set and get session attributes</span>
+<span class="nv">$session</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;Drak&#39;</span><span class="p">);</span>
+<span class="nv">$session</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+
+<span class="c1">// set flash messages</span>
+<span class="nv">$session</span><span class="o">-&gt;</span><span class="na">getFlashBag</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;notice&#39;</span><span class="p">,</span> <span class="s1">&#39;Profile updated&#39;</span><span class="p">);</span>
+
+<span class="c1">// retrieve messages</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$session</span><span class="o">-&gt;</span><span class="na">getFlashBag</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;notice&#39;</span><span class="p">,</span> <span class="p">[])</span> <span class="k">as</span> <span class="nv">$message</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">&#39;&lt;div class=&quot;flash-notice&quot;&gt;&#39;</span><span class="o">.</span><span class="nv">$message</span><span class="o">.</span><span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Symfony sessions are designed to replace several native PHP functions.
+Applications should avoid using <code class="docutils literal notranslate"><span class="pre">session_start()</span></code>, <code class="docutils literal notranslate"><span class="pre">session_regenerate_id()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">session_id()</span></code>, <code class="docutils literal notranslate"><span class="pre">session_name()</span></code>, and <code class="docutils literal notranslate"><span class="pre">session_destroy()</span></code> and instead
+use the APIs in the following section.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">While it is recommended to explicitly start a session, a session will actually
+start on demand, that is, if any session request is made to read/write session
+data.</p>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Symfony sessions are incompatible with <code class="docutils literal notranslate"><span class="pre">php.ini</span></code> directive <code class="docutils literal notranslate"><span class="pre">session.auto_start</span> <span class="pre">=</span> <span class="pre">1</span></code>
+This directive should be turned off in <code class="docutils literal notranslate"><span class="pre">php.ini</span></code>, in the webserver directives or
+in <code class="docutils literal notranslate"><span class="pre">.htaccess</span></code>.</p>
+</div>
+<div class="section" id="session-api">
+<h2>Session API<a class="headerlink" href="#session-api" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Session.php" title="Symfony\Component\HttpFoundation\Session\Session"><span class="pre">Session</span></a></code> class implements
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/SessionInterface.php" title="Symfony\Component\HttpFoundation\Session\SessionInterface"><span class="pre">SessionInterface</span></a></code>.</p>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Session.php" title="Symfony\Component\HttpFoundation\Session\Session"><span class="pre">Session</span></a></code> has the
+following API, divided into a couple of groups.</p>
+<div class="section" id="session-workflow">
+<h3>Session Workflow<a class="headerlink" href="#session-workflow" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Session.php" title="Symfony\Component\HttpFoundation\Session\Session::start()"><span class="pre">start()</span></a></code></dt>
+<dd>Starts the session - do not use <code class="docutils literal notranslate"><span class="pre">session_start()</span></code>.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Session.php" title="Symfony\Component\HttpFoundation\Session\Session::migrate()"><span class="pre">migrate()</span></a></code></dt>
+<dd>Regenerates the session ID - do not use <code class="docutils literal notranslate"><span class="pre">session_regenerate_id()</span></code>.
+This method can optionally change the lifetime of the new cookie that will
+be emitted by calling this method.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Session.php" title="Symfony\Component\HttpFoundation\Session\Session::invalidate()"><span class="pre">invalidate()</span></a></code></dt>
+<dd>Clears all session data and regenerates session ID. Do not use <code class="docutils literal notranslate"><span class="pre">session_destroy()</span></code>.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Session.php" title="Symfony\Component\HttpFoundation\Session\Session::getId()"><span class="pre">getId()</span></a></code></dt>
+<dd>Gets the session ID. Do not use <code class="docutils literal notranslate"><span class="pre">session_id()</span></code>.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Session.php" title="Symfony\Component\HttpFoundation\Session\Session::setId()"><span class="pre">setId()</span></a></code></dt>
+<dd>Sets the session ID. Do not use <code class="docutils literal notranslate"><span class="pre">session_id()</span></code>.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Session.php" title="Symfony\Component\HttpFoundation\Session\Session::getName()"><span class="pre">getName()</span></a></code></dt>
+<dd>Gets the session name. Do not use <code class="docutils literal notranslate"><span class="pre">session_name()</span></code>.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Session.php" title="Symfony\Component\HttpFoundation\Session\Session::setName()"><span class="pre">setName()</span></a></code></dt>
+<dd>Sets the session name. Do not use <code class="docutils literal notranslate"><span class="pre">session_name()</span></code>.</dd>
+</dl>
+</div>
+<div class="section" id="session-attributes">
+<h3>Session Attributes<a class="headerlink" href="#session-attributes" title="Permalink to this headline">¶</a></h3>
+<p>The session attributes are stored internally in a “Bag”, a PHP object that acts
+like an array. They can be set, removed, checked, etc. using the methods
+explained later in this article for the <code class="docutils literal notranslate"><span class="pre">AttributeBagInterface</span></code> class. See
+<a class="reference internal" href="#attribute-bag-interface"><span class="std std-ref">Attributes</span></a>.</p>
+<p>In addition, a few methods exist for “Bag” management:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Session.php" title="Symfony\Component\HttpFoundation\Session\Session::registerBag()"><span class="pre">registerBag()</span></a></code></dt>
+<dd>Registers a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/SessionBagInterface.php" title="Symfony\Component\HttpFoundation\Session\SessionBagInterface"><span class="pre">SessionBagInterface</span></a></code>.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Session.php" title="Symfony\Component\HttpFoundation\Session\Session::getBag()"><span class="pre">getBag()</span></a></code></dt>
+<dd>Gets a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/SessionBagInterface.php" title="Symfony\Component\HttpFoundation\Session\SessionBagInterface"><span class="pre">SessionBagInterface</span></a></code> by
+bag name.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Session.php" title="Symfony\Component\HttpFoundation\Session\Session::getFlashBag()"><span class="pre">getFlashBag()</span></a></code></dt>
+<dd>Gets the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Flash/FlashBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface"><span class="pre">FlashBagInterface</span></a></code>.
+This is just a shortcut for convenience.</dd>
+</dl>
+</div>
+<div class="section" id="session-metadata">
+<h3>Session Metadata<a class="headerlink" href="#session-metadata" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Session.php" title="Symfony\Component\HttpFoundation\Session\Session::getMetadataBag()"><span class="pre">getMetadataBag()</span></a></code></dt>
+<dd>Gets the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Storage/MetadataBag.php" title="Symfony\Component\HttpFoundation\Session\Storage\MetadataBag"><span class="pre">MetadataBag</span></a></code>
+which contains information about the session.</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="session-data-management">
+<h2>Session Data Management<a class="headerlink" href="#session-data-management" title="Permalink to this headline">¶</a></h2>
+<p>PHP’s session management requires the use of the <code class="docutils literal notranslate"><span class="pre">$_SESSION</span></code> super-global,
+however, this interferes somewhat with code testability and encapsulation in an
+OOP paradigm. To help overcome this, Symfony uses <em>session bags</em> linked to the
+session to encapsulate a specific dataset of attributes or flash messages.</p>
+<p>This approach also mitigates namespace pollution within the <code class="docutils literal notranslate"><span class="pre">$_SESSION</span></code>
+super-global because each bag stores all its data under a unique namespace.
+This allows Symfony to peacefully co-exist with other applications or libraries
+that might use the <code class="docutils literal notranslate"><span class="pre">$_SESSION</span></code> super-global and all data remains completely
+compatible with Symfony’s session management.</p>
+<p>Symfony provides two kinds of storage bags, with two separate implementations.
+Everything is written against interfaces so you may extend or create your own
+bag types if necessary.</p>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/SessionBagInterface.php" title="Symfony\Component\HttpFoundation\Session\SessionBagInterface"><span class="pre">SessionBagInterface</span></a></code> has
+the following API which is intended mainly for internal purposes:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/SessionBagInterface.php" title="Symfony\Component\HttpFoundation\Session\SessionBagInterface::getStorageKey()"><span class="pre">getStorageKey()</span></a></code></dt>
+<dd>Returns the key which the bag will ultimately store its array under in <code class="docutils literal notranslate"><span class="pre">$_SESSION</span></code>.
+Generally this value can be left at its default and is for internal use.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/SessionBagInterface.php" title="Symfony\Component\HttpFoundation\Session\SessionBagInterface::initialize()"><span class="pre">initialize()</span></a></code></dt>
+<dd>This is called internally by Symfony session storage classes to link bag data
+to the session.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/SessionBagInterface.php" title="Symfony\Component\HttpFoundation\Session\SessionBagInterface::getName()"><span class="pre">getName()</span></a></code></dt>
+<dd>Returns the name of the session bag.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/SessionBagInterface.php" title="Symfony\Component\HttpFoundation\Session\SessionBagInterface::clear()"><span class="pre">clear()</span></a></code></dt>
+<dd>Clears out data from bag.</dd>
+</dl>
+</div>
+<div class="section" id="attributes">
+<span id="attribute-bag-interface"></span><h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h2>
+<p>The purpose of the bags implementing the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Attribute/AttributeBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface"><span class="pre">AttributeBagInterface</span></a></code>
+is to handle session attribute storage. This might include things like user ID,
+and “Remember Me” login settings or other user based state information.</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Attribute/AttributeBag.php" title="Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag"><span class="pre">AttributeBag</span></a></code></dt>
+<dd>This is the standard default implementation.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Attribute/NamespacedAttributeBag.php" title="Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag"><span class="pre">NamespacedAttributeBag</span></a></code></dt>
+<dd>This implementation allows for attributes to be stored in a structured namespace.</dd>
+</dl>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Attribute/AttributeBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface"><span class="pre">AttributeBagInterface</span></a></code>
+has the API</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Attribute/AttributeBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface::set()"><span class="pre">set()</span></a></code></dt>
+<dd>Sets an attribute by name (<code class="docutils literal notranslate"><span class="pre">set('name',</span> <span class="pre">'value')</span></code>).</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Attribute/AttributeBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface::get()"><span class="pre">get()</span></a></code></dt>
+<dd>Gets an attribute by name (<code class="docutils literal notranslate"><span class="pre">get('name')</span></code>) and can define a default
+value when the attribute doesn’t exist (<code class="docutils literal notranslate"><span class="pre">get('name',</span> <span class="pre">'default_value')</span></code>).</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Attribute/AttributeBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface::all()"><span class="pre">all()</span></a></code></dt>
+<dd>Gets all attributes as an associative array of <code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">=&gt;</span> <span class="pre">value</span></code>.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Attribute/AttributeBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface::has()"><span class="pre">has()</span></a></code></dt>
+<dd>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the attribute exists.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Attribute/AttributeBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface::replace()"><span class="pre">replace()</span></a></code></dt>
+<dd>Sets multiple attributes at once using an associative array (<code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">=&gt;</span> <span class="pre">value</span></code>).
+If the attributes existed, they are replaced; if not, they are created.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Attribute/AttributeBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface::remove()"><span class="pre">remove()</span></a></code></dt>
+<dd>Deletes an attribute by name and returns its value.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Attribute/AttributeBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface::clear()"><span class="pre">clear()</span></a></code></dt>
+<dd>Deletes all attributes.</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\Session</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage</span><span class="p">;</span>
+
+<span class="nv">$session</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Session</span><span class="p">(</span><span class="k">new</span> <span class="nx">NativeSessionStorage</span><span class="p">(),</span> <span class="k">new</span> <span class="nx">AttributeBag</span><span class="p">());</span>
+<span class="nv">$session</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">,</span> <span class="s1">&#39;a6c1e0b6&#39;</span><span class="p">);</span>
+<span class="c1">// ...</span>
+<span class="nv">$token</span> <span class="o">=</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
+<span class="c1">// if the attribute may or may not exist, you can define a default value for it</span>
+<span class="nv">$token</span> <span class="o">=</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;attribute-name&#39;</span><span class="p">,</span> <span class="s1">&#39;default-attribute-value&#39;</span><span class="p">);</span>
+<span class="c1">// ...</span>
+<span class="nv">$session</span><span class="o">-&gt;</span><span class="na">clear</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="section" id="namespaced-attributes">
+<span id="id1"></span><h3>Namespaced Attributes<a class="headerlink" href="#namespaced-attributes" title="Permalink to this headline">¶</a></h3>
+<p>Any plain key-value storage system is limited in the extent to which
+complex data can be stored since each key must be unique. You can achieve
+namespacing by introducing a naming convention to the keys so different parts of
+your application could operate without clashing. For example, <code class="docutils literal notranslate"><span class="pre">module1.foo</span></code> and
+<code class="docutils literal notranslate"><span class="pre">module2.foo</span></code>. However, sometimes this is not very practical when the attributes
+data is an array, for example a set of tokens. In this case, managing the array
+becomes a burden because you have to retrieve the array then process it and
+store it again:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$tokens</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;tokens&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;a&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;a6c1e0b6&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;b&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;f4a7b1f3&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">];</span>
+</pre></div>
+</div>
+<p>So any processing of this might quickly get ugly, even adding a token to the array:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$tokens</span> <span class="o">=</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;tokens&#39;</span><span class="p">);</span>
+<span class="nv">$tokens</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">;</span>
+<span class="nv">$session</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;tokens&#39;</span><span class="p">,</span> <span class="nv">$tokens</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>With structured namespacing, the key can be translated to the array
+structure like this using a namespace character (which defaults to <code class="docutils literal notranslate"><span class="pre">/</span></code>):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag</span><span class="p">;</span>
+
+<span class="nv">$session</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Session</span><span class="p">(</span><span class="k">new</span> <span class="nx">NativeSessionStorage</span><span class="p">(),</span> <span class="k">new</span> <span class="nx">NamespacedAttributeBag</span><span class="p">());</span>
+<span class="nv">$session</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;tokens/c&#39;</span><span class="p">,</span> <span class="nv">$value</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="flash-messages">
+<h2>Flash Messages<a class="headerlink" href="#flash-messages" title="Permalink to this headline">¶</a></h2>
+<p>The purpose of the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Flash/FlashBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface"><span class="pre">FlashBagInterface</span></a></code>
+is to provide a way of setting and retrieving messages on a per session basis.
+The usual workflow would be to set flash messages in a request and to display them
+after a page redirect. For example, a user submits a form which hits an update
+controller, and after processing the controller redirects the page to either the
+updated page or an error page. Flash messages set in the previous page request
+would be displayed immediately on the subsequent page load for that session.
+This is however just one application for flash messages.</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Flash/AutoExpireFlashBag.php" title="Symfony\Component\HttpFoundation\Session\Flash\AutoExpireFlashBag"><span class="pre">AutoExpireFlashBag</span></a></code></dt>
+<dd>In this implementation, messages set in one page-load will
+be available for display only on the next page load. These messages will auto
+expire regardless of if they are retrieved or not.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Flash/FlashBag.php" title="Symfony\Component\HttpFoundation\Session\Flash\FlashBag"><span class="pre">FlashBag</span></a></code></dt>
+<dd>In this implementation, messages will remain in the session until
+they are explicitly retrieved or cleared. This makes it possible to use ESI
+caching.</dd>
+</dl>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Flash/FlashBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface"><span class="pre">FlashBagInterface</span></a></code>
+has the API</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Flash/FlashBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface::add()"><span class="pre">add()</span></a></code></dt>
+<dd>Adds a flash message to the stack of specified type.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Flash/FlashBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface::set()"><span class="pre">set()</span></a></code></dt>
+<dd>Sets flashes by type; This method conveniently takes both single messages as
+a <code class="docutils literal notranslate"><span class="pre">string</span></code> or multiple messages in an <code class="docutils literal notranslate"><span class="pre">array</span></code>.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Flash/FlashBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface::get()"><span class="pre">get()</span></a></code></dt>
+<dd>Gets flashes by type and clears those flashes from the bag.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Flash/FlashBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface::setAll()"><span class="pre">setAll()</span></a></code></dt>
+<dd>Sets all flashes, accepts a keyed array of arrays <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">=&gt;</span> <span class="pre">[messages]</span></code>.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Flash/FlashBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface::all()"><span class="pre">all()</span></a></code></dt>
+<dd>Gets all flashes (as a keyed array of arrays) and clears the flashes from the bag.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Flash/FlashBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface::peek()"><span class="pre">peek()</span></a></code></dt>
+<dd>Gets flashes by type (read only).</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Flash/FlashBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface::peekAll()"><span class="pre">peekAll()</span></a></code></dt>
+<dd>Gets all flashes (read only) as keyed array of arrays.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Flash/FlashBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface::has()"><span class="pre">has()</span></a></code></dt>
+<dd>Returns true if the type exists, false if not.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Flash/FlashBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface::keys()"><span class="pre">keys()</span></a></code></dt>
+<dd>Returns an array of the stored flash types.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Flash/FlashBagInterface.php" title="Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface::clear()"><span class="pre">clear()</span></a></code></dt>
+<dd>Clears the bag.</dd>
+</dl>
+<p>For simple applications it is usually sufficient to have one flash message per
+type, for example a confirmation notice after a form is submitted. However,
+flash messages are stored in a keyed array by flash <code class="docutils literal notranslate"><span class="pre">$type</span></code> which means your
+application can issue multiple messages for a given type. This allows the API
+to be used for more complex messaging in your application.</p>
+<p>Examples of setting multiple flashes:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\Session</span><span class="p">;</span>
+
+<span class="nv">$session</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Session</span><span class="p">();</span>
+<span class="nv">$session</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">();</span>
+
+<span class="c1">// add flash messages</span>
+<span class="nv">$session</span><span class="o">-&gt;</span><span class="na">getFlashBag</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span>
+    <span class="s1">&#39;warning&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Your config file is writable, it should be set read-only&#39;</span>
+<span class="p">);</span>
+<span class="nv">$session</span><span class="o">-&gt;</span><span class="na">getFlashBag</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;Failed to update name&#39;</span><span class="p">);</span>
+<span class="nv">$session</span><span class="o">-&gt;</span><span class="na">getFlashBag</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;Another error&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Displaying the flash messages might look as follows.</p>
+<p>Display one type of message:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// display warnings</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$session</span><span class="o">-&gt;</span><span class="na">getFlashBag</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;warning&#39;</span><span class="p">,</span> <span class="p">[])</span> <span class="k">as</span> <span class="nv">$message</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">&#39;&lt;div class=&quot;flash-warning&quot;&gt;&#39;</span><span class="o">.</span><span class="nv">$message</span><span class="o">.</span><span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// display errors</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$session</span><span class="o">-&gt;</span><span class="na">getFlashBag</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">[])</span> <span class="k">as</span> <span class="nv">$message</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">&#39;&lt;div class=&quot;flash-error&quot;&gt;&#39;</span><span class="o">.</span><span class="nv">$message</span><span class="o">.</span><span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Compact method to process display all flashes at once:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">foreach</span> <span class="p">(</span><span class="nv">$session</span><span class="o">-&gt;</span><span class="na">getFlashBag</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">all</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$type</span> <span class="o">=&gt;</span> <span class="nv">$messages</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$messages</span> <span class="k">as</span> <span class="nv">$message</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s1">&#39;&lt;div class=&quot;flash-&#39;</span><span class="o">.</span><span class="nv">$type</span><span class="o">.</span><span class="s1">&#39;&quot;&gt;&#39;</span><span class="o">.</span><span class="nv">$message</span><span class="o">.</span><span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

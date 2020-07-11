@@ -1,0 +1,784 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The PropertyInfo Component &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The PSR-7 Bridge" href="psr7.html" />
+    <link rel="prev" title="The PropertyAccess Component" href="property_access.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cache.html">The Cache Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependency_injection.html">The DependencyInjection Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="form.html">The Form Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html">The Process Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The PropertyInfo Component</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#extractor-ordering">Extractor Ordering</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#extractable-information">Extractable Information</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#list-information">List Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#type-information">Type Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#description-information">Description Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#access-information">Access Information</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#property-initializable-information">Property Initializable Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#type-objects">Type Objects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#type-getbuiltintype"><code class="docutils literal notranslate"><span class="pre">Type::getBuiltInType()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#type-isnullable"><code class="docutils literal notranslate"><span class="pre">Type::isNullable()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#type-getclassname"><code class="docutils literal notranslate"><span class="pre">Type::getClassName()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#type-iscollection"><code class="docutils literal notranslate"><span class="pre">Type::isCollection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#type-getcollectionkeytype-type-getcollectionvaluetype"><code class="docutils literal notranslate"><span class="pre">Type::getCollectionKeyType()</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">Type::getCollectionValueType()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#extractors">Extractors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#reflectionextractor">ReflectionExtractor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#phpdocextractor">PhpDocExtractor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#serializerextractor">SerializerExtractor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#doctrineextractor">DoctrineExtractor</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-your-own-extractors">Creating Your Own Extractors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">The Security Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">The Components</a> &raquo;</li>
+        
+      <li>The PropertyInfo Component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/components/property_info.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-propertyinfo-component">
+<span id="index-0"></span><h1>The PropertyInfo Component<a class="headerlink" href="#the-propertyinfo-component" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div>The PropertyInfo component allows you to get information
+about class properties by using different sources of metadata.</div></blockquote>
+<p>While the <a class="reference internal" href="property_access.html"><span class="doc">PropertyAccess component</span></a>
+allows you to read and write values to/from objects and arrays, the PropertyInfo
+component works solely with class definitions to provide information about the
+data type and visibility - including via getter or setter methods - of the properties
+within that class.</p>
+<div class="section" id="installation">
+<span id="components-property-information-installation"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/property-info
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you install this component outside of a Symfony application, you must
+require the <code class="docutils literal notranslate"><span class="pre">vendor/autoload.php</span></code> file in your code to enable the class
+autoloading mechanism provided by Composer. Read
+<a class="reference internal" href="using_components.html"><span class="doc">this article</span></a> for more details.</p>
+</div>
+<p>Additional dependencies may be required for some of the
+<a class="reference internal" href="#components-property-info-extractors"><span class="std std-ref">extractors provided with this component</span></a>.</p>
+</div>
+<div class="section" id="usage">
+<span id="components-property-information-usage"></span><h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>To use this component, create a new
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyInfoExtractor.php" title="Symfony\Component\PropertyInfo\PropertyInfoExtractor"><span class="pre">PropertyInfoExtractor</span></a></code> instance and
+provide it with a set of information extractors:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Example\Namespace\YourAwesomeCoolClass</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\PropertyInfo\PropertyInfoExtractor</span><span class="p">;</span>
+
+<span class="c1">// a full list of extractors is shown further below</span>
+<span class="nv">$phpDocExtractor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PhpDocExtractor</span><span class="p">();</span>
+<span class="nv">$reflectionExtractor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReflectionExtractor</span><span class="p">();</span>
+
+<span class="c1">// list of PropertyListExtractorInterface (any iterable)</span>
+<span class="nv">$listExtractors</span> <span class="o">=</span> <span class="p">[</span><span class="nv">$reflectionExtractor</span><span class="p">];</span>
+
+<span class="c1">// list of PropertyTypeExtractorInterface (any iterable)</span>
+<span class="nv">$typeExtractors</span> <span class="o">=</span> <span class="p">[</span><span class="nv">$phpDocExtractor</span><span class="p">,</span> <span class="nv">$reflectionExtractor</span><span class="p">];</span>
+
+<span class="c1">// list of PropertyDescriptionExtractorInterface (any iterable)</span>
+<span class="nv">$descriptionExtractors</span> <span class="o">=</span> <span class="p">[</span><span class="nv">$phpDocExtractor</span><span class="p">];</span>
+
+<span class="c1">// list of PropertyAccessExtractorInterface (any iterable)</span>
+<span class="nv">$accessExtractors</span> <span class="o">=</span> <span class="p">[</span><span class="nv">$reflectionExtractor</span><span class="p">];</span>
+
+<span class="c1">// list of PropertyInitializableExtractorInterface (any iterable)</span>
+<span class="nv">$propertyInitializableExtractors</span> <span class="o">=</span> <span class="p">[</span><span class="nv">$reflectionExtractor</span><span class="p">];</span>
+
+<span class="nv">$propertyInfo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PropertyInfoExtractor</span><span class="p">(</span>
+    <span class="nv">$listExtractors</span><span class="p">,</span>
+    <span class="nv">$typeExtractors</span><span class="p">,</span>
+    <span class="nv">$descriptionExtractors</span><span class="p">,</span>
+    <span class="nv">$accessExtractors</span><span class="p">,</span>
+    <span class="nv">$propertyInitializableExtractors</span>
+<span class="p">);</span>
+
+<span class="c1">// see below for more examples</span>
+<span class="nv">$class</span> <span class="o">=</span> <span class="nx">YourAwesomeCoolClass</span><span class="o">::</span><span class="na">class</span><span class="p">;</span>
+<span class="nv">$properties</span> <span class="o">=</span> <span class="nv">$propertyInfo</span><span class="o">-&gt;</span><span class="na">getProperties</span><span class="p">(</span><span class="nv">$class</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="section" id="extractor-ordering">
+<h3>Extractor Ordering<a class="headerlink" href="#extractor-ordering" title="Permalink to this headline">¶</a></h3>
+<p>The order of extractor instances within an array matters: the first non-null
+result will be returned. That is why you must provide each category of extractors
+as a separate array, even if an extractor provides information for more than
+one category.</p>
+<p>For example, while the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/Extractor/ReflectionExtractor.php" title="Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor"><span class="pre">ReflectionExtractor</span></a></code>
+and <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Doctrine/PropertyInfo/DoctrineExtractor.php" title="Symfony\Bridge\Doctrine\PropertyInfo\DoctrineExtractor"><span class="pre">DoctrineExtractor</span></a></code>
+both provide list and type information it is probably better that:</p>
+<ul>
+<li><p class="first">The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/Extractor/ReflectionExtractor.php" title="Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor"><span class="pre">ReflectionExtractor</span></a></code>
+has priority for list information so that all properties in a class (not
+just mapped properties) are returned.</p>
+</li>
+<li><p class="first">The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Doctrine/PropertyInfo/DoctrineExtractor.php" title="Symfony\Bridge\Doctrine\PropertyInfo\DoctrineExtractor"><span class="pre">DoctrineExtractor</span></a></code>
+has priority for type information so that entity metadata is used instead
+of type-hinting to provide more accurate type information:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Bridge\Doctrine\PropertyInfo\DoctrineExtractor</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\PropertyInfo\PropertyInfoExtractor</span><span class="p">;</span>
+
+<span class="nv">$reflectionExtractor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReflectionExtractor</span><span class="p">();</span>
+<span class="nv">$doctrineExtractor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DoctrineExtractor</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">);</span>
+
+<span class="nv">$propertyInfo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PropertyInfoExtractor</span><span class="p">(</span>
+    <span class="c1">// List extractors</span>
+    <span class="p">[</span>
+        <span class="nv">$reflectionExtractor</span><span class="p">,</span>
+        <span class="nv">$doctrineExtractor</span>
+    <span class="p">],</span>
+    <span class="c1">// Type extractors</span>
+    <span class="p">[</span>
+        <span class="nv">$doctrineExtractor</span><span class="p">,</span>
+        <span class="nv">$reflectionExtractor</span>
+    <span class="p">]</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="extractable-information">
+<span id="components-property-information-extractable-information"></span><h2>Extractable Information<a class="headerlink" href="#extractable-information" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyInfoExtractor.php" title="Symfony\Component\PropertyInfo\PropertyInfoExtractor"><span class="pre">PropertyInfoExtractor</span></a></code>
+class exposes public methods to extract several types of information:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#property-info-list"><span class="std std-ref">List of properties</span></a>: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyListExtractorInterface.php" title="Symfony\Component\PropertyInfo\PropertyListExtractorInterface::getProperties()"><span class="pre">getProperties()</span></a></code></li>
+<li><a class="reference internal" href="#property-info-type"><span class="std std-ref">Property type</span></a>: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyTypeExtractorInterface.php" title="Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface::getTypes()"><span class="pre">getTypes()</span></a></code>
+(including typed properties since PHP 7.4)</li>
+<li><a class="reference internal" href="#property-info-description"><span class="std std-ref">Property description</span></a>: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyDescriptionExtractorInterface.php" title="Symfony\Component\PropertyInfo\PropertyDescriptionExtractorInterface::getShortDescription()"><span class="pre">getShortDescription()</span></a></code> and <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyDescriptionExtractorInterface.php" title="Symfony\Component\PropertyInfo\PropertyDescriptionExtractorInterface::getLongDescription()"><span class="pre">getLongDescription()</span></a></code></li>
+<li><a class="reference internal" href="#property-info-access"><span class="std std-ref">Property access details</span></a>: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyAccessExtractorInterface.php" title="Symfony\Component\PropertyInfo\PropertyAccessExtractorInterface::isReadable()"><span class="pre">isReadable()</span></a></code> and  <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyAccessExtractorInterface.php" title="Symfony\Component\PropertyInfo\PropertyAccessExtractorInterface::isWritable()"><span class="pre">isWritable()</span></a></code></li>
+<li><a class="reference internal" href="#property-info-initializable"><span class="std std-ref">Property initializable through the constructor</span></a>:  <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyInitializableExtractorInterface.php" title="Symfony\Component\PropertyInfo\PropertyInitializableExtractorInterface::isInitializable()"><span class="pre">isInitializable()</span></a></code></li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Be sure to pass a <em>class</em> name, not an object to the extractor methods:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// bad! It may work, but not with all extractors</span>
+<span class="nv">$propertyInfo</span><span class="o">-&gt;</span><span class="na">getProperties</span><span class="p">(</span><span class="nv">$awesomeObject</span><span class="p">);</span>
+
+<span class="c1">// Good!</span>
+<span class="nv">$propertyInfo</span><span class="o">-&gt;</span><span class="na">getProperties</span><span class="p">(</span><span class="nb">get_class</span><span class="p">(</span><span class="nv">$awesomeObject</span><span class="p">));</span>
+<span class="nv">$propertyInfo</span><span class="o">-&gt;</span><span class="na">getProperties</span><span class="p">(</span><span class="s1">&#39;Example\Namespace\YourAwesomeClass&#39;</span><span class="p">);</span>
+<span class="nv">$propertyInfo</span><span class="o">-&gt;</span><span class="na">getProperties</span><span class="p">(</span><span class="nx">YourAwesomeClass</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="list-information">
+<span id="property-info-list"></span><h3>List Information<a class="headerlink" href="#list-information" title="Permalink to this headline">¶</a></h3>
+<p>Extractors that implement <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyListExtractorInterface.php" title="Symfony\Component\PropertyInfo\PropertyListExtractorInterface"><span class="pre">PropertyListExtractorInterface</span></a></code>
+provide the list of properties that are available on a class as an array
+containing each property name as a string:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$properties</span> <span class="o">=</span> <span class="nv">$propertyInfo</span><span class="o">-&gt;</span><span class="na">getProperties</span><span class="p">(</span><span class="nv">$class</span><span class="p">);</span>
+<span class="cm">/*</span>
+<span class="cm">    Example Result</span>
+<span class="cm">    --------------</span>
+<span class="cm">    array(3) {</span>
+<span class="cm">        [0] =&gt; string(8) &quot;username&quot;</span>
+<span class="cm">        [1] =&gt; string(8) &quot;password&quot;</span>
+<span class="cm">        [2] =&gt; string(6) &quot;active&quot;</span>
+<span class="cm">    }</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="type-information">
+<span id="property-info-type"></span><h3>Type Information<a class="headerlink" href="#type-information" title="Permalink to this headline">¶</a></h3>
+<p>Extractors that implement <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyTypeExtractorInterface.php" title="Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface"><span class="pre">PropertyTypeExtractorInterface</span></a></code>
+provide <a class="reference internal" href="#components-property-info-type"><span class="std std-ref">extensive data type information</span></a>
+for a property:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$types</span> <span class="o">=</span> <span class="nv">$propertyInfo</span><span class="o">-&gt;</span><span class="na">getTypes</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$property</span><span class="p">);</span>
+<span class="cm">/*</span>
+<span class="cm">    Example Result</span>
+<span class="cm">    --------------</span>
+<span class="cm">    array(1) {</span>
+<span class="cm">        [0] =&gt;</span>
+<span class="cm">            class Symfony\Component\PropertyInfo\Type (6) {</span>
+<span class="cm">            private $builtinType          =&gt; string(6) &quot;string&quot;</span>
+<span class="cm">            private $nullable             =&gt; bool(false)</span>
+<span class="cm">            private $class                =&gt; NULL</span>
+<span class="cm">            private $collection           =&gt; bool(false)</span>
+<span class="cm">            private $collectionKeyType    =&gt; NULL</span>
+<span class="cm">            private $collectionValueType  =&gt; NULL</span>
+<span class="cm">        }</span>
+<span class="cm">    }</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="#components-property-info-type"><span class="std std-ref">Type Objects</span></a> for info about the <code class="docutils literal notranslate"><span class="pre">Type</span></code> class.</p>
+</div>
+<div class="section" id="description-information">
+<span id="property-info-description"></span><h3>Description Information<a class="headerlink" href="#description-information" title="Permalink to this headline">¶</a></h3>
+<p>Extractors that implement <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyDescriptionExtractorInterface.php" title="Symfony\Component\PropertyInfo\PropertyDescriptionExtractorInterface"><span class="pre">PropertyDescriptionExtractorInterface</span></a></code>
+provide long and short descriptions from a properties annotations as
+strings:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$title</span> <span class="o">=</span> <span class="nv">$propertyInfo</span><span class="o">-&gt;</span><span class="na">getShortDescription</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$property</span><span class="p">);</span>
+<span class="cm">/*</span>
+<span class="cm">    Example Result</span>
+<span class="cm">    --------------</span>
+<span class="cm">    string(41) &quot;This is the first line of the DocComment.&quot;</span>
+<span class="cm">*/</span>
+
+<span class="nv">$paragraph</span> <span class="o">=</span> <span class="nv">$propertyInfo</span><span class="o">-&gt;</span><span class="na">getLongDescription</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$property</span><span class="p">);</span>
+<span class="cm">/*</span>
+<span class="cm">    Example Result</span>
+<span class="cm">    --------------</span>
+<span class="cm">    string(79):</span>
+<span class="cm">        These is the subsequent paragraph in the DocComment.</span>
+<span class="cm">        It can span multiple lines.</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="access-information">
+<span id="property-info-access"></span><h3>Access Information<a class="headerlink" href="#access-information" title="Permalink to this headline">¶</a></h3>
+<p>Extractors that implement <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyAccessExtractorInterface.php" title="Symfony\Component\PropertyInfo\PropertyAccessExtractorInterface"><span class="pre">PropertyAccessExtractorInterface</span></a></code>
+provide whether properties are readable or writable as booleans:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$propertyInfo</span><span class="o">-&gt;</span><span class="na">isReadable</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$property</span><span class="p">);</span>
+<span class="c1">// Example Result: bool(true)</span>
+
+<span class="nv">$propertyInfo</span><span class="o">-&gt;</span><span class="na">isWritable</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$property</span><span class="p">);</span>
+<span class="c1">// Example Result: bool(false)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/Extractor/ReflectionExtractor.php" title="Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor"><span class="pre">ReflectionExtractor</span></a></code> looks
+for getter/isser/setter/hasser method in addition to whether or not a property is public
+to determine if it’s accessible. This based on how the <a class="reference internal" href="property_access.html"><span class="doc">PropertyAccess</span></a>
+works.</p>
+</div>
+</div>
+<div class="section" id="property-initializable-information">
+<span id="property-info-initializable"></span><h2>Property Initializable Information<a class="headerlink" href="#property-initializable-information" title="Permalink to this headline">¶</a></h2>
+<p>Extractors that implement <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyInitializableExtractorInterface.php" title="Symfony\Component\PropertyInfo\PropertyInitializableExtractorInterface"><span class="pre">PropertyInitializableExtractorInterface</span></a></code>
+provide whether properties are initializable through the class’s constructor as booleans:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$propertyInfo</span><span class="o">-&gt;</span><span class="na">isInitializable</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$property</span><span class="p">);</span>
+<span class="c1">// Example Result: bool(true)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/Extractor/ReflectionExtractor.php" title="Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor::isInitializable()"><span class="pre">isInitializable()</span></a></code>
+returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if a constructor’s parameter of the given class matches the
+given property name.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>The main <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyInfoExtractor.php" title="Symfony\Component\PropertyInfo\PropertyInfoExtractor"><span class="pre">PropertyInfoExtractor</span></a></code>
+class implements all interfaces, delegating the extraction of property
+information to the extractors that have been registered with it.</p>
+<p class="last">This means that any method available on each of the extractors is also
+available on the main <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyInfoExtractor.php" title="Symfony\Component\PropertyInfo\PropertyInfoExtractor"><span class="pre">PropertyInfoExtractor</span></a></code>
+class.</p>
+</div>
+</div>
+<div class="section" id="type-objects">
+<span id="components-property-info-type"></span><h2>Type Objects<a class="headerlink" href="#type-objects" title="Permalink to this headline">¶</a></h2>
+<p>Compared to the other extractors, type information extractors provide much
+more information than can be represented as simple scalar values. Because
+of this, type extractors return an array of <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/Type.php" title="Symfony\Component\PropertyInfo\Type"><span class="pre">Type</span></a></code>
+objects for each type that the property supports.</p>
+<p>For example, if a property supports both <code class="docutils literal notranslate"><span class="pre">integer</span></code> and <code class="docutils literal notranslate"><span class="pre">string</span></code> (via
+the <code class="docutils literal notranslate"><span class="pre">&#64;return</span> <span class="pre">int|string</span></code> annotation),
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyInfoExtractor.php" title="Symfony\Component\PropertyInfo\PropertyInfoExtractor::getTypes()"><span class="pre">PropertyInfoExtractor::getTypes()</span></a></code>
+will return an array containing <strong>two</strong> instances of the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/Type.php" title="Symfony\Component\PropertyInfo\Type"><span class="pre">Type</span></a></code>
+class.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Most extractors will return only one <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/Type.php" title="Symfony\Component\PropertyInfo\Type"><span class="pre">Type</span></a></code>
+instance. The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/Extractor/PhpDocExtractor.php" title="Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor"><span class="pre">PhpDocExtractor</span></a></code>
+is currently the only extractor that returns multiple instances in the array.</p>
+</div>
+<p>Each object will provide 6 attributes, available in the 6 methods:</p>
+<div class="section" id="type-getbuiltintype">
+<span id="components-property-info-type-builtin"></span><h3><code class="docutils literal notranslate"><span class="pre">Type::getBuiltInType()</span></code><a class="headerlink" href="#type-getbuiltintype" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/Type.php" title="Symfony\Component\PropertyInfo\Type::getBuiltinType()"><span class="pre">Type::getBuiltinType()</span></a></code>
+method returns the built-in PHP data type, which can be one of these
+string values: <code class="docutils literal notranslate"><span class="pre">array</span></code>, <code class="docutils literal notranslate"><span class="pre">bool</span></code>, <code class="docutils literal notranslate"><span class="pre">callable</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">int</span></code>,
+<code class="docutils literal notranslate"><span class="pre">iterable</span></code>, <code class="docutils literal notranslate"><span class="pre">null</span></code>, <code class="docutils literal notranslate"><span class="pre">object</span></code>, <code class="docutils literal notranslate"><span class="pre">resource</span></code> or <code class="docutils literal notranslate"><span class="pre">string</span></code>.</p>
+<p>Constants inside the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/Type.php" title="Symfony\Component\PropertyInfo\Type"><span class="pre">Type</span></a></code>
+class, in the form <code class="docutils literal notranslate"><span class="pre">Type::BUILTIN_TYPE_*</span></code>, are provided for convenience.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>Support for typed properties (added in PHP 7.4) was introduced in Symfony 5.1.</p>
+</div>
+</div>
+<div class="section" id="type-isnullable">
+<h3><code class="docutils literal notranslate"><span class="pre">Type::isNullable()</span></code><a class="headerlink" href="#type-isnullable" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/Type.php" title="Symfony\Component\PropertyInfo\Type::isNullable()"><span class="pre">Type::isNullable()</span></a></code>
+method will return a boolean value indicating whether the property parameter
+can be set to <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+</div>
+<div class="section" id="type-getclassname">
+<h3><code class="docutils literal notranslate"><span class="pre">Type::getClassName()</span></code><a class="headerlink" href="#type-getclassname" title="Permalink to this headline">¶</a></h3>
+<p>If the <a class="reference internal" href="#components-property-info-type-builtin"><span class="std std-ref">built-in PHP data type</span></a>
+is <code class="docutils literal notranslate"><span class="pre">object</span></code>, the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/Type.php" title="Symfony\Component\PropertyInfo\Type::getClassName()"><span class="pre">Type::getClassName()</span></a></code>
+method will return the fully-qualified class or interface name accepted.</p>
+</div>
+<div class="section" id="type-iscollection">
+<h3><code class="docutils literal notranslate"><span class="pre">Type::isCollection()</span></code><a class="headerlink" href="#type-iscollection" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/Type.php" title="Symfony\Component\PropertyInfo\Type::isCollection()"><span class="pre">Type::isCollection()</span></a></code>
+method will return a boolean value indicating if the property parameter is
+a collection - a non-scalar value capable of containing other values. Currently
+this returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if:</p>
+<ul class="simple">
+<li>The <a class="reference internal" href="#components-property-info-type-builtin"><span class="std std-ref">built-in PHP data type</span></a>
+is <code class="docutils literal notranslate"><span class="pre">array</span></code>;</li>
+<li>The mutator method the property is derived from has a prefix of <code class="docutils literal notranslate"><span class="pre">add</span></code>
+or <code class="docutils literal notranslate"><span class="pre">remove</span></code> (which are defined as the list of array mutator prefixes);</li>
+<li>The <a class="reference external" href="https://www.phpdoc.org/">phpDocumentor</a> annotation is of type “collection” (e.g.
+<code class="docutils literal notranslate"><span class="pre">&#64;var</span> <span class="pre">SomeClass&lt;DateTime&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;var</span> <span class="pre">SomeClass&lt;integer,string&gt;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&#64;var</span> <span class="pre">Doctrine\Common\Collections\Collection&lt;App\Entity\SomeEntity&gt;</span></code>, etc.)</li>
+</ul>
+</div>
+<div class="section" id="type-getcollectionkeytype-type-getcollectionvaluetype">
+<h3><code class="docutils literal notranslate"><span class="pre">Type::getCollectionKeyType()</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">Type::getCollectionValueType()</span></code><a class="headerlink" href="#type-getcollectionkeytype-type-getcollectionvaluetype" title="Permalink to this headline">¶</a></h3>
+<p>If the property is a collection, additional type objects may be returned
+for both the key and value types of the collection (if the information is
+available), via the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/Type.php" title="Symfony\Component\PropertyInfo\Type::getCollectionKeyType()"><span class="pre">Type::getCollectionKeyType()</span></a></code>
+and <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/Type.php" title="Symfony\Component\PropertyInfo\Type::getCollectionValueType()"><span class="pre">Type::getCollectionValueType()</span></a></code>
+methods.</p>
+</div>
+</div>
+<div class="section" id="extractors">
+<span id="components-property-info-extractors"></span><h2>Extractors<a class="headerlink" href="#extractors" title="Permalink to this headline">¶</a></h2>
+<p>The extraction of property information is performed by <em>extractor classes</em>.
+An extraction class can provide one or more types of property information
+by implementing the correct interface(s).</p>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyInfoExtractor.php" title="Symfony\Component\PropertyInfo\PropertyInfoExtractor"><span class="pre">PropertyInfoExtractor</span></a></code> will
+iterate over the relevant extractor classes in the order they were set, call
+the appropriate method and return the first result that is not <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+<p id="components-property-information-extractors-available">While you can create your own extractors, the following are already available
+to cover most use-cases:</p>
+<div class="section" id="reflectionextractor">
+<h3>ReflectionExtractor<a class="headerlink" href="#reflectionextractor" title="Permalink to this headline">¶</a></h3>
+<p>Using PHP reflection, the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/Extractor/ReflectionExtractor.php" title="Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor"><span class="pre">ReflectionExtractor</span></a></code>
+provides list, type and access information from setter and accessor methods.
+It can also give the type of a property (even extracting it from the constructor
+arguments), and if it is initializable through the constructor. It supports
+return and scalar types for PHP 7:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor</span><span class="p">;</span>
+
+<span class="nv">$reflectionExtractor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReflectionExtractor</span><span class="p">();</span>
+
+<span class="c1">// List information.</span>
+<span class="nv">$reflectionExtractor</span><span class="o">-&gt;</span><span class="na">getProperties</span><span class="p">(</span><span class="nv">$class</span><span class="p">);</span>
+
+<span class="c1">// Type information.</span>
+<span class="nv">$reflectionExtractor</span><span class="o">-&gt;</span><span class="na">getTypes</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$property</span><span class="p">);</span>
+
+<span class="c1">// Access information.</span>
+<span class="nv">$reflectionExtractor</span><span class="o">-&gt;</span><span class="na">isReadable</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$property</span><span class="p">);</span>
+<span class="nv">$reflectionExtractor</span><span class="o">-&gt;</span><span class="na">isWritable</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$property</span><span class="p">);</span>
+
+<span class="c1">// Initializable information</span>
+<span class="nv">$reflectionExtractor</span><span class="o">-&gt;</span><span class="na">isInitializable</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$property</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>When using the Symfony framework, this service is automatically registered
+when the <code class="docutils literal notranslate"><span class="pre">property_info</span></code> feature is enabled:</p>
+<div class="last highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">property_info</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">enabled</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="phpdocextractor">
+<h3>PhpDocExtractor<a class="headerlink" href="#phpdocextractor" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This extractor depends on the <a class="reference external" href="https://packagist.org/packages/phpdocumentor/reflection-docblock">phpdocumentor/reflection-docblock</a> library.</p>
+</div>
+<p>Using <a class="reference external" href="https://github.com/phpDocumentor/ReflectionDocBlock">phpDocumentor Reflection</a> to parse property and method annotations,
+the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/Extractor/PhpDocExtractor.php" title="Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor"><span class="pre">PhpDocExtractor</span></a></code>
+provides type and description information. This extractor is automatically
+registered with the <code class="docutils literal notranslate"><span class="pre">property_info</span></code> in the Symfony Framework <em>if</em> the dependent
+library is present:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor</span><span class="p">;</span>
+
+<span class="nv">$phpDocExtractor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PhpDocExtractor</span><span class="p">();</span>
+
+<span class="c1">// Type information.</span>
+<span class="nv">$phpDocExtractor</span><span class="o">-&gt;</span><span class="na">getTypes</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$property</span><span class="p">);</span>
+<span class="c1">// Description information.</span>
+<span class="nv">$phpDocExtractor</span><span class="o">-&gt;</span><span class="na">getShortDescription</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$property</span><span class="p">);</span>
+<span class="nv">$phpDocExtractor</span><span class="o">-&gt;</span><span class="na">getLongDescription</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$property</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="serializerextractor">
+<h3>SerializerExtractor<a class="headerlink" href="#serializerextractor" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This extractor depends on the <a class="reference external" href="https://packagist.org/packages/symfony/serializer">symfony/serializer</a> library.</p>
+</div>
+<p>Using <a class="reference internal" href="../serializer.html#serializer-using-serialization-groups-annotations"><span class="std std-ref">groups metadata</span></a>
+from the <a class="reference internal" href="serializer.html"><span class="doc">Serializer component</span></a>,
+the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/Extractor/SerializerExtractor.php" title="Symfony\Component\PropertyInfo\Extractor\SerializerExtractor"><span class="pre">SerializerExtractor</span></a></code>
+provides list information. This extractor is <em>not</em> registered automatically
+with the <code class="docutils literal notranslate"><span class="pre">property_info</span></code> service in the Symfony Framework:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Doctrine\Common\Annotations\AnnotationReader</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\PropertyInfo\Extractor\SerializerExtractor</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader</span><span class="p">;</span>
+
+<span class="nv">$serializerClassMetadataFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ClassMetadataFactory</span><span class="p">(</span>
+    <span class="k">new</span> <span class="nx">AnnotationLoader</span><span class="p">(</span><span class="k">new</span> <span class="nx">AnnotationReader</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$serializerExtractor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SerializerExtractor</span><span class="p">(</span><span class="nv">$serializerClassMetadataFactory</span><span class="p">);</span>
+
+<span class="c1">// List information.</span>
+<span class="nv">$serializerExtractor</span><span class="o">-&gt;</span><span class="na">getProperties</span><span class="p">(</span><span class="nv">$class</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="doctrineextractor">
+<h3>DoctrineExtractor<a class="headerlink" href="#doctrineextractor" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This extractor depends on the <a class="reference external" href="https://packagist.org/packages/symfony/doctrine-bridge">symfony/doctrine-bridge</a> and <a class="reference external" href="https://packagist.org/packages/doctrine/orm">doctrine/orm</a>
+libraries.</p>
+</div>
+<p>Using entity mapping data from <a class="reference external" href="https://www.doctrine-project.org/projects/orm.html">Doctrine ORM</a>, the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Doctrine/PropertyInfo/DoctrineExtractor.php" title="Symfony\Bridge\Doctrine\PropertyInfo\DoctrineExtractor"><span class="pre">DoctrineExtractor</span></a></code>
+provides list and type information. This extractor is not registered automatically
+with the <code class="docutils literal notranslate"><span class="pre">property_info</span></code> service in the Symfony Framework:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Doctrine\ORM\EntityManager</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\ORM\Tools\Setup</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bridge\Doctrine\PropertyInfo\DoctrineExtractor</span><span class="p">;</span>
+
+<span class="nv">$config</span> <span class="o">=</span> <span class="nx">Setup</span><span class="o">::</span><span class="na">createAnnotationMetadataConfiguration</span><span class="p">([</span><span class="no">__DIR__</span><span class="p">],</span> <span class="k">true</span><span class="p">);</span>
+<span class="nv">$entityManager</span> <span class="o">=</span> <span class="nx">EntityManager</span><span class="o">::</span><span class="na">create</span><span class="p">([</span>
+    <span class="s1">&#39;driver&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pdo_sqlite&#39;</span><span class="p">,</span>
+    <span class="c1">// ...</span>
+<span class="p">],</span> <span class="nv">$config</span><span class="p">);</span>
+<span class="nv">$doctrineExtractor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DoctrineExtractor</span><span class="p">(</span><span class="nv">$entityManager</span><span class="p">);</span>
+
+<span class="c1">// List information.</span>
+<span class="nv">$doctrineExtractor</span><span class="o">-&gt;</span><span class="na">getProperties</span><span class="p">(</span><span class="nv">$class</span><span class="p">);</span>
+<span class="c1">// Type information.</span>
+<span class="nv">$doctrineExtractor</span><span class="o">-&gt;</span><span class="na">getTypes</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="nv">$property</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-your-own-extractors">
+<span id="components-property-information-extractors-creation"></span><h2>Creating Your Own Extractors<a class="headerlink" href="#creating-your-own-extractors" title="Permalink to this headline">¶</a></h2>
+<p>You can create your own property information extractors by creating a
+class that implements one or more of the following interfaces:
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyAccessExtractorInterface.php" title="Symfony\Component\PropertyInfo\PropertyAccessExtractorInterface"><span class="pre">PropertyAccessExtractorInterface</span></a></code>,
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyDescriptionExtractorInterface.php" title="Symfony\Component\PropertyInfo\PropertyDescriptionExtractorInterface"><span class="pre">PropertyDescriptionExtractorInterface</span></a></code>,
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyListExtractorInterface.php" title="Symfony\Component\PropertyInfo\PropertyListExtractorInterface"><span class="pre">PropertyListExtractorInterface</span></a></code>,
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyTypeExtractorInterface.php" title="Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface"><span class="pre">PropertyTypeExtractorInterface</span></a></code> and
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyInfo/PropertyInitializableExtractorInterface.php" title="Symfony\Component\PropertyInfo\PropertyInitializableExtractorInterface"><span class="pre">PropertyInitializableExtractorInterface</span></a></code>.</p>
+<p>If you have enabled the PropertyInfo component with the FrameworkBundle,
+you can automatically register your extractor class with the <code class="docutils literal notranslate"><span class="pre">property_info</span></code>
+service by defining it as a service with one or more of the following
+<a class="reference internal" href="../service_container/tags.html"><span class="doc">tags</span></a>:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">property_info.list_extractor</span></code> if it provides list information.</li>
+<li><code class="docutils literal notranslate"><span class="pre">property_info.type_extractor</span></code> if it provides type information.</li>
+<li><code class="docutils literal notranslate"><span class="pre">property_info.description_extractor</span></code> if it provides description information.</li>
+<li><code class="docutils literal notranslate"><span class="pre">property_info.access_extractor</span></code> if it provides access information.</li>
+<li><code class="docutils literal notranslate"><span class="pre">property_info.initializable_extractor</span></code> if it provides initializable information
+(it checks if a property can be initialized through the constructor).</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

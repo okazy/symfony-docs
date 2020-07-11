@@ -1,0 +1,367 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Color and Style the Console Output &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Call a Command from a Controller" href="command_in_controller.html" />
+    <link rel="prev" title="How to Call Other Commands" href="calling_commands.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../console.html">Console Commands</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../console.html#the-console-app-env-app-debug">The Console: APP_ENV &amp; APP_DEBUG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#creating-a-command">Creating a Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#configuring-the-command">Configuring the Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#registering-the-command">Registering the Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#executing-the-command">Executing the Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#console-output">Console Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#console-input">Console Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#getting-services-from-the-service-container">Getting Services from the Service Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#command-lifecycle">Command Lifecycle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#testing-commands">Testing Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html#logging-command-errors">Logging Command Errors</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../console.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="calling_commands.html">How to Call Other Commands</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Color and Style the Console Output</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-color-styles">Using Color Styles</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="command_in_controller.html">How to Call a Command from a Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands_as_services.html">How to Define Commands as Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hide_commands.html">How to Hide Console Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="input.html">Console Input (Arguments &amp; Options)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lazy_commands.html">How to Make Commands Lazily Loaded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lockable_trait.html">Prevent Multiple Executions of a Console Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="style.html">How to Style a Console Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="verbosity.html">Verbosity Levels</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../console.html">Console Commands</a> &raquo;</li>
+        
+      <li>How to Color and Style the Console Output</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/console/coloring.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-color-and-style-the-console-output">
+<h1>How to Color and Style the Console Output<a class="headerlink" href="#how-to-color-and-style-the-console-output" title="Permalink to this headline">¶</a></h1>
+<p>By using colors in the command output, you can distinguish different types of
+output (e.g. important messages, titles, comments, etc.).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, the Windows command console doesn’t support output coloring. The
+Console component disables output coloring for Windows systems, but if your
+commands invoke other scripts which emit color sequences, they will be
+wrongly displayed as raw escape characters. Install the <a class="reference external" href="https://cmder.net/">Cmder</a>, <a class="reference external" href="https://conemu.github.io/">ConEmu</a>,
+<a class="reference external" href="https://github.com/adoxa/ansicon/releases">ANSICON</a>, <a class="reference external" href="https://mintty.github.io/">Mintty</a> (used by default in GitBash and Cygwin) or <a class="reference external" href="https://hyper.is/">Hyper</a>
+free applications to add coloring support to your Windows command console.</p>
+</div>
+<div class="section" id="using-color-styles">
+<h2>Using Color Styles<a class="headerlink" href="#using-color-styles" title="Permalink to this headline">¶</a></h2>
+<p>Whenever you output text, you can surround the text with tags to color its
+output. For example:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// green text</span>
+<span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="s1">&#39;&lt;info&gt;foo&lt;/info&gt;&#39;</span><span class="p">);</span>
+
+<span class="c1">// yellow text</span>
+<span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="s1">&#39;&lt;comment&gt;foo&lt;/comment&gt;&#39;</span><span class="p">);</span>
+
+<span class="c1">// black text on a cyan background</span>
+<span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="s1">&#39;&lt;question&gt;foo&lt;/question&gt;&#39;</span><span class="p">);</span>
+
+<span class="c1">// white text on a red background</span>
+<span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="s1">&#39;&lt;error&gt;foo&lt;/error&gt;&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The closing tag can be replaced by <code class="docutils literal notranslate"><span class="pre">&lt;/&gt;</span></code>, which revokes all formatting options
+established by the last opened tag.</p>
+<p>It is possible to define your own styles using the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Formatter/OutputFormatterStyle.php" title="Symfony\Component\Console\Formatter\OutputFormatterStyle"><span class="pre">OutputFormatterStyle</span></a></code> class:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Console\Formatter\OutputFormatterStyle</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$outputStyle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OutputFormatterStyle</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="s1">&#39;blink&#39;</span><span class="p">]);</span>
+<span class="nv">$output</span><span class="o">-&gt;</span><span class="na">getFormatter</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setStyle</span><span class="p">(</span><span class="s1">&#39;fire&#39;</span><span class="p">,</span> <span class="nv">$outputStyle</span><span class="p">);</span>
+
+<span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="s1">&#39;&lt;fire&gt;foo&lt;/&gt;&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Available foreground and background colors are: <code class="docutils literal notranslate"><span class="pre">black</span></code>, <code class="docutils literal notranslate"><span class="pre">red</span></code>, <code class="docutils literal notranslate"><span class="pre">green</span></code>,
+<code class="docutils literal notranslate"><span class="pre">yellow</span></code>, <code class="docutils literal notranslate"><span class="pre">blue</span></code>, <code class="docutils literal notranslate"><span class="pre">magenta</span></code>, <code class="docutils literal notranslate"><span class="pre">cyan</span></code> and <code class="docutils literal notranslate"><span class="pre">white</span></code>.</p>
+<p>And available options are: <code class="docutils literal notranslate"><span class="pre">bold</span></code>, <code class="docutils literal notranslate"><span class="pre">underscore</span></code>, <code class="docutils literal notranslate"><span class="pre">blink</span></code>, <code class="docutils literal notranslate"><span class="pre">reverse</span></code>
+(enables the “reverse video” mode where the background and foreground colors
+are swapped) and <code class="docutils literal notranslate"><span class="pre">conceal</span></code> (sets the foreground color to transparent, making
+the typed text invisible - although it can be selected and copied; this option is
+commonly used when asking the user to type sensitive information).</p>
+<p>You can also set these colors and options directly inside the tag name:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// green text</span>
+<span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="s1">&#39;&lt;fg=green&gt;foo&lt;/&gt;&#39;</span><span class="p">);</span>
+
+<span class="c1">// black text on a cyan background</span>
+<span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="s1">&#39;&lt;fg=black;bg=cyan&gt;foo&lt;/&gt;&#39;</span><span class="p">);</span>
+
+<span class="c1">// bold text on a yellow background</span>
+<span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="s1">&#39;&lt;bg=yellow;options=bold&gt;foo&lt;/&gt;&#39;</span><span class="p">);</span>
+
+<span class="c1">// bold text with underscore</span>
+<span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="s1">&#39;&lt;options=bold,underscore&gt;foo&lt;/&gt;&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you need to render a tag literally, escape it with a backslash: <code class="docutils literal notranslate"><span class="pre">\&lt;info&gt;</span></code>
+or use the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Formatter/OutputFormatter.php" title="Symfony\Component\Console\Formatter\OutputFormatter::escape()"><span class="pre">escape()</span></a></code>
+method to escape all the tags included in the given string.</p>
+</div>
+<div class="section" id="displaying-clickable-links">
+<h3>Displaying Clickable Links<a class="headerlink" href="#displaying-clickable-links" title="Permalink to this headline">¶</a></h3>
+<p>Commands can use the special <code class="docutils literal notranslate"><span class="pre">&lt;href&gt;</span></code> tag to display links similar to the
+<code class="docutils literal notranslate"><span class="pre">&lt;a&gt;</span></code> elements of web pages:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="s1">&#39;&lt;href=https://symfony.com&gt;Symfony Homepage&lt;/&gt;&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If your terminal belongs to the <a class="reference external" href="https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda">list of terminal emulators that support links</a>
+you can click on the <em>“Symfony Homepage”</em> text to open its URL in your default
+browser. Otherwise, you’ll see <em>“Symfony Homepage”</em> as regular text and the URL
+will be lost.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

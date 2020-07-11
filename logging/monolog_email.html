@@ -1,0 +1,831 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Configure Monolog to Email Errors &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Log Messages to different Files" href="channels_handlers.html" />
+    <link rel="prev" title="Logging" href="../logging.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../logging.html">Logging</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../logging.html#logging-a-message">Logging a Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging.html#monolog">Monolog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging.html#where-logs-are-stored">Where Logs are Stored</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging.html#handlers-writing-logs-to-different-locations">Handlers: Writing Logs to different Locations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging.html#all-built-in-handlers">All Built-in Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging.html#how-to-rotate-your-log-files">How to Rotate your Log Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging.html#using-a-logger-inside-a-service">Using a Logger inside a Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging.html#adding-extra-data-to-each-log-e-g-a-unique-request-token">Adding extra Data to each Log (e.g. a unique request token)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../logging.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Configure Monolog to Email Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="channels_handlers.html">How to Log Messages to different Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="formatter.html">How to Define a Custom Logging Formatter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="processors.html">How to Add extra Data to Log Messages via a Processor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="handlers.html">Handlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monolog_exclude_http_codes.html">How to Configure Monolog to Exclude Specific HTTP Codes from the Log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monolog_console.html">How to Configure Monolog to Display Console Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monolog_regex_based_excludes.html">How to Configure Monolog to Exclude 404 Errors from the Log</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../logging.html">Logging</a> &raquo;</li>
+        
+      <li>How to Configure Monolog to Email Errors</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/logging/monolog_email.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-configure-monolog-to-email-errors">
+<span id="index-0"></span><h1>How to Configure Monolog to Email Errors<a class="headerlink" href="#how-to-configure-monolog-to-email-errors" title="Permalink to this headline">¶</a></h1>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">This feature is not compatible yet with the new <a class="reference internal" href="../mailer.html"><span class="doc">Symfony mailer</span></a>,
+so it requires using SwiftMailer.</p>
+</div>
+<p><a class="reference external" href="https://github.com/Seldaek/monolog">Monolog</a> can be configured to send an email when an error occurs within an
+application. The configuration for this requires a few nested handlers
+in order to avoid receiving too many emails. This configuration looks
+complicated at first but each handler is fairly straightforward when
+it is broken down.</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/prod/monolog.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">monolog</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">handlers</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span>         <span class="l l-Scalar l-Scalar-Plain">fingers_crossed</span>
+            <span class="c1"># 500 errors are logged at the critical level</span>
+            <span class="l l-Scalar l-Scalar-Plain">action_level</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">critical</span>
+            <span class="c1"># to also log 400 level errors (but not 404&#39;s):</span>
+            <span class="c1"># action_level: error</span>
+            <span class="c1"># excluded_404s:</span>
+            <span class="c1">#     - ^/</span>
+            <span class="l l-Scalar l-Scalar-Plain">handler</span><span class="p p-Indicator">:</span>      <span class="l l-Scalar l-Scalar-Plain">deduplicated</span>
+        <span class="l l-Scalar l-Scalar-Plain">deduplicated</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span>    <span class="l l-Scalar l-Scalar-Plain">deduplication</span>
+            <span class="l l-Scalar l-Scalar-Plain">handler</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">swift</span>
+        <span class="l l-Scalar l-Scalar-Plain">swift</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span>       <span class="l l-Scalar l-Scalar-Plain">swift_mailer</span>
+            <span class="l l-Scalar l-Scalar-Plain">from_email</span><span class="p p-Indicator">:</span> <span class="s">&#39;error@example.com&#39;</span>
+            <span class="l l-Scalar l-Scalar-Plain">to_email</span><span class="p p-Indicator">:</span>   <span class="s">&#39;error@example.com&#39;</span>
+            <span class="c1"># or list of recipients</span>
+            <span class="c1"># to_email:   [&#39;dev1@example.com&#39;, &#39;dev2@example.com&#39;, ...]</span>
+            <span class="l l-Scalar l-Scalar-Plain">subject</span><span class="p p-Indicator">:</span>    <span class="s">&#39;An</span><span class="nv"> </span><span class="s">Error</span><span class="nv"> </span><span class="s">Occurred!</span><span class="nv"> </span><span class="s">%%message%%&#39;</span>
+            <span class="l l-Scalar l-Scalar-Plain">level</span><span class="p p-Indicator">:</span>      <span class="l l-Scalar l-Scalar-Plain">debug</span>
+            <span class="l l-Scalar l-Scalar-Plain">formatter</span><span class="p p-Indicator">:</span>  <span class="l l-Scalar l-Scalar-Plain">monolog.formatter.html</span>
+            <span class="l l-Scalar l-Scalar-Plain">content_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">text/html</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/prod/monolog.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:monolog=</span><span class="s">&quot;http://symfony.com/schema/dic/monolog&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/monolog https://symfony.com/schema/dic/monolog/monolog-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;monolog:config&gt;</span>
+        <span class="c">&lt;!--</span>
+<span class="c">        500 errors are logged at the critical level,</span>
+<span class="c">        to also log 400 level errors (but not 404&#39;s):</span>
+<span class="c">        action-level=&quot;error&quot;</span>
+<span class="c">        And add this child inside this monolog:handler</span>
+<span class="c">        &lt;monolog:excluded-404&gt;^/&lt;/monolog:excluded-404&gt;</span>
+<span class="c">        --&gt;</span>
+        <span class="nt">&lt;monolog:handler</span>
+            <span class="na">name=</span><span class="s">&quot;main&quot;</span>
+            <span class="na">type=</span><span class="s">&quot;fingers_crossed&quot;</span>
+            <span class="na">action-level=</span><span class="s">&quot;critical&quot;</span>
+            <span class="na">handler=</span><span class="s">&quot;deduplicated&quot;</span>
+        <span class="nt">/&gt;</span>
+        <span class="nt">&lt;monolog:handler</span>
+            <span class="na">name=</span><span class="s">&quot;deduplicated&quot;</span>
+            <span class="na">type=</span><span class="s">&quot;deduplication&quot;</span>
+            <span class="na">handler=</span><span class="s">&quot;swift&quot;</span>
+        <span class="nt">/&gt;</span>
+        <span class="nt">&lt;monolog:handler</span>
+            <span class="na">name=</span><span class="s">&quot;swift&quot;</span>
+            <span class="na">type=</span><span class="s">&quot;swift_mailer&quot;</span>
+            <span class="na">from-email=</span><span class="s">&quot;error@example.com&quot;</span>
+            <span class="na">subject=</span><span class="s">&quot;An Error Occurred! %%message%%&quot;</span>
+            <span class="na">level=</span><span class="s">&quot;debug&quot;</span>
+            <span class="na">formatter=</span><span class="s">&quot;monolog.formatter.html&quot;</span>
+            <span class="na">content-type=</span><span class="s">&quot;text/html&quot;</span><span class="nt">&gt;</span>
+
+            <span class="nt">&lt;monolog:to-email&gt;</span>error@example.com<span class="nt">&lt;/monolog:to-email&gt;</span>
+
+            <span class="c">&lt;!-- or list of recipients --&gt;</span>
+            <span class="c">&lt;!--</span>
+<span class="c">            &lt;monolog:to-email&gt;dev1@example.com&lt;/monolog:to-email&gt;</span>
+<span class="c">            &lt;monolog:to-email&gt;dev2@example.com&lt;/monolog:to-email&gt;</span>
+<span class="c">            ...</span>
+<span class="c">            --&gt;</span>
+        <span class="nt">&lt;/monolog:handler&gt;</span>
+    <span class="nt">&lt;/monolog:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/prod/monolog.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;monolog&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;handlers&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;main&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;type&#39;</span>         <span class="o">=&gt;</span> <span class="s1">&#39;fingers_crossed&#39;</span><span class="p">,</span>
+            <span class="c1">// 500 errors are logged at the critical level</span>
+            <span class="s1">&#39;action_level&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;critical&#39;</span><span class="p">,</span>
+            <span class="c1">// to also log 400 level errors (but not 404&#39;s):</span>
+            <span class="c1">// &#39;action_level&#39; =&gt; &#39;error&#39;,</span>
+            <span class="c1">// &#39;excluded_404s&#39; =&gt; [</span>
+            <span class="c1">//     &#39;^/&#39;,</span>
+            <span class="c1">// ],</span>
+            <span class="s1">&#39;handler&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;deduplicated&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;deduplicated&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;type&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;deduplication&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;handler&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;swift&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;swift&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;type&#39;</span>         <span class="o">=&gt;</span> <span class="s1">&#39;swift_mailer&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;from_email&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;error@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;to_email&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;error@example.com&#39;</span><span class="p">,</span>
+            <span class="c1">// or a list of recipients</span>
+            <span class="c1">// &#39;to_email&#39;   =&gt; [&#39;dev1@example.com&#39;, &#39;dev2@example.com&#39;, ...],</span>
+            <span class="s1">&#39;subject&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;An Error Occurred! %%message%%&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;level&#39;</span>        <span class="o">=&gt;</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;formatter&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;monolog.formatter.html&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;content_type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;text/html&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">main</span></code> handler is a <code class="docutils literal notranslate"><span class="pre">fingers_crossed</span></code> handler which means that
+it is only triggered when the action level, in this case <code class="docutils literal notranslate"><span class="pre">critical</span></code> is reached.
+The <code class="docutils literal notranslate"><span class="pre">critical</span></code> level is only triggered for 5xx HTTP code errors. If this level
+is reached once, the <code class="docutils literal notranslate"><span class="pre">fingers_crossed</span></code> handler will log all messages
+regardless of their level. The <code class="docutils literal notranslate"><span class="pre">handler</span></code> setting means that the output
+is then passed onto the <code class="docutils literal notranslate"><span class="pre">deduplicated</span></code> handler.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you want both 400 level and 500 level errors to trigger an email,
+set the <code class="docutils literal notranslate"><span class="pre">action_level</span></code> to <code class="docutils literal notranslate"><span class="pre">error</span></code> instead of <code class="docutils literal notranslate"><span class="pre">critical</span></code>. See the
+code above for an example.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">deduplicated</span></code> handler keeps all the messages for a request and then
+passes them onto the nested handler in one go, but only if the records are
+unique over a given period of time (60 seconds by default). If the records are
+duplicated they are discarded. Adding this handler reduces the amount of
+notifications to a manageable level, specially in critical failure scenarios.
+You can adjust the time period using the <code class="docutils literal notranslate"><span class="pre">time</span></code> option:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/prod/monolog.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">monolog</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">handlers</span><span class="p p-Indicator">:</span>
+        <span class="c1"># ...</span>
+        <span class="l l-Scalar l-Scalar-Plain">deduplicated</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">deduplication</span>
+            <span class="c1"># the time in seconds during which duplicate entries are discarded (default: 60)</span>
+            <span class="l l-Scalar l-Scalar-Plain">time</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
+            <span class="l l-Scalar l-Scalar-Plain">handler</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">swift</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/prod/monolog.xml --&gt;</span>
+
+<span class="c">&lt;!-- time: the time in seconds during which duplicate entries are discarded (default: 60) --&gt;</span>
+<span class="nt">&lt;monolog:handler</span> <span class="na">name=</span><span class="s">&quot;deduplicated&quot;</span>
+    <span class="na">type=</span><span class="s">&quot;deduplication&quot;</span>
+    <span class="na">time=</span><span class="s">&quot;10&quot;</span>
+    <span class="na">handler=</span><span class="s">&quot;swift&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/prod/monolog.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;monolog&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;handlers&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="c1">// ...</span>
+        <span class="s1">&#39;deduplicated&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;type&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;deduplication&#39;</span><span class="p">,</span>
+            <span class="c1">// the time in seconds during which duplicate entries are discarded (default: 60)</span>
+            <span class="s1">&#39;time&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="s1">&#39;handler&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;swift&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>The messages are then passed to the <code class="docutils literal notranslate"><span class="pre">swift</span></code> handler. This is the handler that
+actually deals with emailing you the error. The settings for this are
+straightforward, the to and from addresses, the formatter, the content type
+and the subject.</p>
+<p>You can combine these handlers with other handlers so that the errors still
+get logged on the server as well as the emails being sent:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/prod/monolog.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">monolog</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">handlers</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span>         <span class="l l-Scalar l-Scalar-Plain">fingers_crossed</span>
+            <span class="l l-Scalar l-Scalar-Plain">action_level</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">critical</span>
+            <span class="l l-Scalar l-Scalar-Plain">handler</span><span class="p p-Indicator">:</span>      <span class="l l-Scalar l-Scalar-Plain">grouped</span>
+        <span class="l l-Scalar l-Scalar-Plain">grouped</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span>    <span class="l l-Scalar l-Scalar-Plain">group</span>
+            <span class="l l-Scalar l-Scalar-Plain">members</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="nv">streamed</span><span class="p p-Indicator">,</span> <span class="nv">deduplicated</span><span class="p p-Indicator">]</span>
+        <span class="l l-Scalar l-Scalar-Plain">streamed</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span>  <span class="l l-Scalar l-Scalar-Plain">stream</span>
+            <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span>  <span class="s">&#39;%kernel.logs_dir%/%kernel.environment%.log&#39;</span>
+            <span class="l l-Scalar l-Scalar-Plain">level</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">debug</span>
+        <span class="l l-Scalar l-Scalar-Plain">deduplicated</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span>    <span class="l l-Scalar l-Scalar-Plain">deduplication</span>
+            <span class="l l-Scalar l-Scalar-Plain">handler</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">swift</span>
+        <span class="l l-Scalar l-Scalar-Plain">swift</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span>         <span class="l l-Scalar l-Scalar-Plain">swift_mailer</span>
+            <span class="l l-Scalar l-Scalar-Plain">from_email</span><span class="p p-Indicator">:</span>   <span class="s">&#39;error@example.com&#39;</span>
+            <span class="l l-Scalar l-Scalar-Plain">to_email</span><span class="p p-Indicator">:</span>     <span class="s">&#39;error@example.com&#39;</span>
+            <span class="l l-Scalar l-Scalar-Plain">subject</span><span class="p p-Indicator">:</span>      <span class="s">&#39;An</span><span class="nv"> </span><span class="s">Error</span><span class="nv"> </span><span class="s">Occurred!</span><span class="nv"> </span><span class="s">%%message%%&#39;</span>
+            <span class="l l-Scalar l-Scalar-Plain">level</span><span class="p p-Indicator">:</span>        <span class="l l-Scalar l-Scalar-Plain">debug</span>
+            <span class="l l-Scalar l-Scalar-Plain">formatter</span><span class="p p-Indicator">:</span>    <span class="l l-Scalar l-Scalar-Plain">monolog.formatter.html</span>
+            <span class="l l-Scalar l-Scalar-Plain">content_type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">text/html</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/prod/monolog.xml --&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:monolog=</span><span class="s">&quot;http://symfony.com/schema/dic/monolog&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/monolog https://symfony.com/schema/dic/monolog/monolog-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;monolog:config&gt;</span>
+        <span class="nt">&lt;monolog:handler</span>
+            <span class="na">name=</span><span class="s">&quot;main&quot;</span>
+            <span class="na">type=</span><span class="s">&quot;fingers_crossed&quot;</span>
+            <span class="na">action_level=</span><span class="s">&quot;critical&quot;</span>
+            <span class="na">handler=</span><span class="s">&quot;grouped&quot;</span>
+        <span class="nt">/&gt;</span>
+        <span class="nt">&lt;monolog:handler</span>
+            <span class="na">name=</span><span class="s">&quot;grouped&quot;</span>
+            <span class="na">type=</span><span class="s">&quot;group&quot;</span>
+        <span class="nt">&gt;</span>
+            <span class="nt">&lt;member</span> <span class="na">type=</span><span class="s">&quot;stream&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;member</span> <span class="na">type=</span><span class="s">&quot;deduplicated&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/monolog:handler&gt;</span>
+        <span class="nt">&lt;monolog:handler</span>
+            <span class="na">name=</span><span class="s">&quot;stream&quot;</span>
+            <span class="na">path=</span><span class="s">&quot;%kernel.logs_dir%/%kernel.environment%.log&quot;</span>
+            <span class="na">level=</span><span class="s">&quot;debug&quot;</span>
+        <span class="nt">/&gt;</span>
+        <span class="nt">&lt;monolog:handler</span>
+            <span class="na">name=</span><span class="s">&quot;deduplicated&quot;</span>
+            <span class="na">type=</span><span class="s">&quot;deduplication&quot;</span>
+            <span class="na">handler=</span><span class="s">&quot;swift&quot;</span>
+        <span class="nt">/&gt;</span>
+        <span class="nt">&lt;monolog:handler</span>
+            <span class="na">name=</span><span class="s">&quot;swift&quot;</span>
+            <span class="na">type=</span><span class="s">&quot;swift_mailer&quot;</span>
+            <span class="na">from-email=</span><span class="s">&quot;error@example.com&quot;</span>
+            <span class="na">subject=</span><span class="s">&quot;An Error Occurred! %%message%%&quot;</span>
+            <span class="na">level=</span><span class="s">&quot;debug&quot;</span>
+            <span class="na">formatter=</span><span class="s">&quot;monolog.formatter.html&quot;</span>
+            <span class="na">content-type=</span><span class="s">&quot;text/html&quot;</span><span class="nt">&gt;</span>
+
+            <span class="nt">&lt;monolog:to-email&gt;</span>error@example.com<span class="nt">&lt;/monolog:to-email&gt;</span>
+
+            <span class="c">&lt;!-- or list of recipients --&gt;</span>
+            <span class="c">&lt;!--</span>
+<span class="c">            &lt;monolog:to-email&gt;dev1@example.com&lt;/monolog:to-email&gt;</span>
+<span class="c">            &lt;monolog:to-email&gt;dev2@example.com&lt;/monolog:to-email&gt;</span>
+<span class="c">            ...</span>
+<span class="c">            --&gt;</span>
+        <span class="nt">&lt;/monolog:handler&gt;</span>
+    <span class="nt">&lt;/monolog:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/prod/monolog.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;monolog&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;handlers&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;main&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;type&#39;</span>         <span class="o">=&gt;</span> <span class="s1">&#39;fingers_crossed&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;action_level&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;critical&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;handler&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;grouped&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;grouped&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;type&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;group&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;members&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;streamed&#39;</span><span class="p">,</span> <span class="s1">&#39;deduplicated&#39;</span><span class="p">],</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;streamed&#39;</span>  <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;type&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;stream&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;path&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;%kernel.logs_dir%/%kernel.environment%.log&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;level&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;deduplicated&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;type&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;deduplication&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;handler&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;swift&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;swift&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;type&#39;</span>         <span class="o">=&gt;</span> <span class="s1">&#39;swift_mailer&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;from_email&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;error@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;to_email&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;error@example.com&#39;</span><span class="p">,</span>
+            <span class="c1">// or a list of recipients</span>
+            <span class="c1">// &#39;to_email&#39;   =&gt; [&#39;dev1@example.com&#39;, &#39;dev2@example.com&#39;, ...],</span>
+            <span class="s1">&#39;subject&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;An Error Occurred! %%message%%&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;level&#39;</span>        <span class="o">=&gt;</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;formatter&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;monolog.formatter.html&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;content_type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;text/html&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>This uses the <code class="docutils literal notranslate"><span class="pre">group</span></code> handler to send the messages to the two
+group members, the <code class="docutils literal notranslate"><span class="pre">deduplicated</span></code> and the <code class="docutils literal notranslate"><span class="pre">stream</span></code> handlers. The messages will
+now be both written to the log file and emailed.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

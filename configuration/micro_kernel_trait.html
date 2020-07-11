@@ -1,0 +1,654 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building your own Framework with the MicroKernelTrait &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How To Create Symfony Applications with Multiple Kernels" href="multiple_kernels.html" />
+    <link rel="prev" title="Understanding how the Front Controller, Kernel and Environments Work together" href="front_controllers_and_kernel.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../getting_started/index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../page_creation.html">Create your First Page in Symfony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controller.html">Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../templates.html">Creating and Using Templates</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../configuration.html">Configuring Symfony</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-files">Configuration Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-parameters">Configuration Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-environments">Configuration Environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-based-on-environment-variables">Configuration Based on Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#accessing-configuration-parameters">Accessing Configuration Parameters</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../configuration.html#keep-going">Keep Going!</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dot-env-changes.html">Nov 2018 Changes to .env &amp; How to Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="env_var_processors.html">Environment Variable Processors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="front_controllers_and_kernel.html">Understanding how the Front Controller, Kernel and Environments Work together</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Building your own Framework with the MicroKernelTrait</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multiple_kernels.html">How To Create Symfony Applications with Multiple Kernels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="override_dir_structure.html">How to Override Symfony’s default Directory Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="secrets.html">How to Keep Sensitive Information Secret</a></li>
+<li class="toctree-l4"><a class="reference internal" href="using_parameters_in_dic.html">Using Parameters within a Dependency Injection Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../getting_started/index.html">Getting Started</a> &raquo;</li>
+        
+          <li><a href="../configuration.html">Configuring Symfony</a> &raquo;</li>
+        
+      <li>Building your own Framework with the MicroKernelTrait</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/configuration/micro_kernel_trait.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-your-own-framework-with-the-microkerneltrait">
+<h1>Building your own Framework with the MicroKernelTrait<a class="headerlink" href="#building-your-own-framework-with-the-microkerneltrait" title="Permalink to this headline">¶</a></h1>
+<p>The default <code class="docutils literal notranslate"><span class="pre">Kernel</span></code> class included in Symfony applications uses a
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/FrameworkBundle/Kernel/MicroKernelTrait.php" title="Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait"><span class="pre">MicroKernelTrait</span></a></code> to configure
+the bundles, the routes and the service container in the same class.</p>
+<p>This micro-kernel approach is flexible, allowing you to control your application
+structure and features.</p>
+<div class="section" id="a-single-file-symfony-application">
+<h2>A Single-File Symfony Application<a class="headerlink" href="#a-single-file-symfony-application" title="Permalink to this headline">¶</a></h2>
+<p>Start with a completely empty directory and install these Symfony components
+via Composer:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/config symfony/http-kernel <span class="err">\</span>
+<span class="go">  symfony/http-foundation symfony/routing \</span>
+<span class="go">  symfony/dependency-injection symfony/framework-bundle</span>
+</pre></div>
+</td></tr></table></div>
+<p>Next, create an <code class="docutils literal notranslate"><span class="pre">index.php</span></code> file that defines the kernel class and executes it:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// index.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\JsonResponse</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Kernel</span> <span class="k">as</span> <span class="nx">BaseKernel</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Kernel</span> <span class="k">extends</span> <span class="nx">BaseKernel</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">MicroKernelTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">registerBundles</span><span class="p">()</span><span class="o">:</span> <span class="k">array</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="k">new</span> <span class="nx">Symfony\Bundle\FrameworkBundle\FrameworkBundle</span><span class="p">(),</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">configureContainer</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$c</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="c1">// PHP equivalent of config/packages/framework.yaml</span>
+        <span class="nv">$c</span><span class="o">-&gt;</span><span class="na">extension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+            <span class="s1">&#39;secret&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;S0ME_SECRET&#39;</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">configureRoutes</span><span class="p">(</span><span class="nx">RoutingConfigurator</span> <span class="nv">$routes</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;random_number&#39;</span><span class="p">,</span> <span class="s1">&#39;/random/{limit}&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">controller</span><span class="p">([</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;randomNumber&#39;</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">randomNumber</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$limit</span><span class="p">)</span><span class="o">:</span> <span class="nx">JsonResponse</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">JsonResponse</span><span class="p">([</span>
+            <span class="s1">&#39;number&#39;</span> <span class="o">=&gt;</span> <span class="nx">random_int</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$limit</span><span class="p">),</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$kernel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Kernel</span><span class="p">(</span><span class="s1">&#39;dev&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$kernel</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+<span class="nv">$kernel</span><span class="o">-&gt;</span><span class="na">terminate</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>That’s it! To test it, start the <a class="reference internal" href="../setup/symfony_server.html"><span class="doc">Symfony Local Web Server</span></a>:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> symfony server:start
+</pre></div>
+</td></tr></table></div>
+<p>Then see the JSON response in your browser: <a class="reference external" href="http://localhost:8000/random/10">http://localhost:8000/random/10</a></p>
+</div>
+<div class="section" id="the-methods-of-a-micro-kernel">
+<h2>The Methods of a “Micro” Kernel<a class="headerlink" href="#the-methods-of-a-micro-kernel" title="Permalink to this headline">¶</a></h2>
+<p>When you use the <code class="docutils literal notranslate"><span class="pre">MicroKernelTrait</span></code>, your kernel needs to have exactly three methods
+that define your bundles, your services and your routes:</p>
+<dl class="docutils">
+<dt><strong>registerBundles()</strong></dt>
+<dd>This is the same <code class="docutils literal notranslate"><span class="pre">registerBundles()</span></code> that you see in a normal kernel.</dd>
+<dt><strong>configureContainer(ContainerConfigurator $c)</strong></dt>
+<dd>This method builds and configures the container. In practice, you will use
+<code class="docutils literal notranslate"><span class="pre">extension()</span></code> to configure different bundles (this is the equivalent
+of what you see in a normal <code class="docutils literal notranslate"><span class="pre">config/packages/*</span></code> file). You can also register
+services directly in PHP or load external configuration files (shown below).</dd>
+<dt><strong>configureRoutes(RoutingConfigurator $routes)</strong></dt>
+<dd>Your job in this method is to add routes to the application. The
+<code class="docutils literal notranslate"><span class="pre">RoutingConfigurator</span></code> has methods that make adding routes in PHP more
+fun. You can also load external routing files (shown below).</dd>
+</dl>
+</div>
+<div class="section" id="advanced-example-twig-annotations-and-the-web-debug-toolbar">
+<h2>Advanced Example: Twig, Annotations and the Web Debug Toolbar<a class="headerlink" href="#advanced-example-twig-annotations-and-the-web-debug-toolbar" title="Permalink to this headline">¶</a></h2>
+<p>The purpose of the <code class="docutils literal notranslate"><span class="pre">MicroKernelTrait</span></code> is <em>not</em> to have a single-file application.
+Instead, its goal to give you the power to choose your bundles and structure.</p>
+<p>First, you’ll probably want to put your PHP classes in an <code class="docutils literal notranslate"><span class="pre">src/</span></code> directory. Configure
+your <code class="docutils literal notranslate"><span class="pre">composer.json</span></code> file to load from there:</p>
+<div class="highlight-json notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;require&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;...&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;autoload&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;psr-4&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;App\\&quot;</span><span class="p">:</span> <span class="s2">&quot;src/&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Then, run <code class="docutils literal notranslate"><span class="pre">composer</span> <span class="pre">dump-autoload</span></code> to dump your new autoload config.</p>
+<p>Now, suppose you want to use Twig and load routes via annotations. Instead of
+putting <em>everything</em> in <code class="docutils literal notranslate"><span class="pre">index.php</span></code>, create a new <code class="docutils literal notranslate"><span class="pre">src/Kernel.php</span></code> to
+hold the kernel. Now it looks like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Kernel.php</span>
+<span class="k">namespace</span> <span class="nx">App</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Kernel</span> <span class="k">as</span> <span class="nx">BaseKernel</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Kernel</span> <span class="k">extends</span> <span class="nx">BaseKernel</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">MicroKernelTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">registerBundles</span><span class="p">()</span><span class="o">:</span> <span class="k">array</span>
+    <span class="p">{</span>
+        <span class="nv">$bundles</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="k">new</span> <span class="nx">\Symfony\Bundle\FrameworkBundle\FrameworkBundle</span><span class="p">(),</span>
+            <span class="k">new</span> <span class="nx">\Symfony\Bundle\TwigBundle\TwigBundle</span><span class="p">(),</span>
+        <span class="p">];</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getEnvironment</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;dev&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$bundles</span><span class="p">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$bundles</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">configureContainer</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$c</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="nv">$c</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../config/framework.yaml&#39;</span><span class="p">);</span>
+
+        <span class="c1">// register all classes in /src/ as service</span>
+        <span class="nv">$c</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">()</span>
+            <span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;App\\&#39;</span><span class="p">,</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/*&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">autowire</span><span class="p">()</span>
+            <span class="o">-&gt;</span><span class="na">autoconfigure</span><span class="p">()</span>
+        <span class="p">;</span>
+
+        <span class="c1">// configure WebProfilerBundle only if the bundle is enabled</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bundles</span><span class="p">[</span><span class="s1">&#39;WebProfilerBundle&#39;</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="nv">$c</span><span class="o">-&gt;</span><span class="na">extension</span><span class="p">(</span><span class="s1">&#39;web_profiler&#39;</span><span class="p">,</span> <span class="p">[</span>
+                <span class="s1">&#39;toolbar&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+                <span class="s1">&#39;intercept_redirects&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+            <span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">configureRoutes</span><span class="p">(</span><span class="nx">RoutingConfigurator</span> <span class="nv">$routes</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="c1">// import the WebProfilerRoutes, only if the bundle is enabled</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bundles</span><span class="p">[</span><span class="s1">&#39;WebProfilerBundle&#39;</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;@WebProfilerBundle/Resources/config/routing/wdt.xml&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="p">(</span><span class="s1">&#39;/_wdt&#39;</span><span class="p">);</span>
+            <span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;@WebProfilerBundle/Resources/config/routing/profiler.xml&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="p">(</span><span class="s1">&#39;/_profiler&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// load the annotation routes</span>
+        <span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/Controller/&#39;</span><span class="p">,</span> <span class="s1">&#39;annotation&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// optional, to use the standard Symfony cache directory</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getCacheDir</span><span class="p">()</span><span class="o">:</span> <span class="nx">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../var/cache/&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getEnvironment</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// optional, to use the standard Symfony logs directory</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getLogDir</span><span class="p">()</span><span class="o">:</span> <span class="nx">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../var/log&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Before continuing, run this command to add support for the new dependencies:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/yaml symfony/twig-bundle symfony/web-profiler-bundle doctrine/annotations
+</pre></div>
+</td></tr></table></div>
+<p>Unlike the previous kernel, this loads an external <code class="docutils literal notranslate"><span class="pre">config/framework.yaml</span></code> file,
+because the configuration started to get bigger:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">secret</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">S0ME_SECRET</span>
+    <span class="l l-Scalar l-Scalar-Plain">profiler</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{</span> <span class="nv">only_exceptions</span><span class="p p-Indicator">:</span> <span class="nv">false</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/framework.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config</span> <span class="na">secret=</span><span class="s">&quot;S0ME_SECRET&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;framework:profiler</span> <span class="na">only-exceptions=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/framework.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;secret&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;S0ME_SECRET&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;profiler&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;only_exceptions&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>This also loads annotation routes from an <code class="docutils literal notranslate"><span class="pre">src/Controller/</span></code> directory, which
+has one file in it:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/MicroController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\Annotation\Route</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MicroController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @Route(&quot;/random/{limit}&quot;)</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">randomNumber</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$limit</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span>
+    <span class="p">{</span>
+        <span class="nv">$number</span> <span class="o">=</span> <span class="nx">random_int</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$limit</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;micro/random.html.twig&#39;</span><span class="p">,</span> <span class="p">[</span>
+            <span class="s1">&#39;number&#39;</span> <span class="o">=&gt;</span> <span class="nv">$number</span><span class="p">,</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Template files should live in the <code class="docutils literal notranslate"><span class="pre">templates/</span></code> directory at the root of your project.
+This template lives at <code class="docutils literal notranslate"><span class="pre">templates/micro/random.html.twig</span></code>:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- templates/micro/random.html.twig --&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Random action<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">number</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Finally, you need a front controller to boot and run the application. Create a
+<code class="docutils literal notranslate"><span class="pre">public/index.php</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// public/index.php</span>
+<span class="k">use</span> <span class="nx">App\Kernel</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\Common\Annotations\AnnotationRegistry</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+
+<span class="nv">$loader</span> <span class="o">=</span> <span class="k">require</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/autoload.php&#39;</span><span class="p">;</span>
+<span class="c1">// auto-load annotations</span>
+<span class="nx">AnnotationRegistry</span><span class="o">::</span><span class="na">registerLoader</span><span class="p">([</span><span class="nv">$loader</span><span class="p">,</span> <span class="s1">&#39;loadClass&#39;</span><span class="p">]);</span>
+
+<span class="nv">$kernel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Kernel</span><span class="p">(</span><span class="s1">&#39;dev&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$kernel</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+<span class="nv">$kernel</span><span class="o">-&gt;</span><span class="na">terminate</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>That’s it! This <code class="docutils literal notranslate"><span class="pre">/random/10</span></code> URL will work, Twig will render, and you’ll even
+get the web debug toolbar to show up at the bottom. The final structure looks like
+this:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span>your-project/
+├─ config/
+│  └─ framework.yaml
+├─ public/
+|  └─ index.php
+├─ src/
+|  ├─ Controller
+|  |  └─ MicroController.php
+|  └─ Kernel.php
+├─ templates/
+|  └─ micro/
+|     └─ random.html.twig
+├─ var/
+|  ├─ cache/
+│  └─ log/
+├─ vendor/
+│  └─ ...
+├─ composer.json
+└─ composer.lock
+</pre></div>
+</td></tr></table></div>
+<p>As before you can use the <a class="reference internal" href="../setup/symfony_server.html"><span class="doc">Symfony Local Web Server</span></a>:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> symfony server:start
+</pre></div>
+</td></tr></table></div>
+<p>Then visit the page in your browser: <a class="reference external" href="http://localhost:8000/random/10">http://localhost:8000/random/10</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

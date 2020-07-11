@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The PSR-7 Bridge &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Security Component" href="security.html" />
+    <link rel="prev" title="The PropertyInfo Component" href="property_info.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cache.html">The Cache Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependency_injection.html">The DependencyInjection Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="form.html">The Form Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html">The Process Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The PSR-7 Bridge</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#converting-from-httpfoundation-objects-to-psr-7">Converting from HttpFoundation Objects to PSR-7</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#converting-objects-implementing-psr-7-interfaces-to-httpfoundation">Converting Objects implementing PSR-7 Interfaces to HttpFoundation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">The Security Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">The Components</a> &raquo;</li>
+        
+      <li>The PSR-7 Bridge</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/components/psr7.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-psr-7-bridge">
+<span id="index-0"></span><h1>The PSR-7 Bridge<a class="headerlink" href="#the-psr-7-bridge" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div>The PSR-7 bridge converts <a class="reference internal" href="http_foundation.html"><span class="doc">HttpFoundation</span></a>
+objects from and to objects implementing HTTP message interfaces defined
+by the <a class="reference external" href="https://www.php-fig.org/psr/psr-7/">PSR-7</a>.</div></blockquote>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/psr-http-message-bridge
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you install this component outside of a Symfony application, you must
+require the <code class="docutils literal notranslate"><span class="pre">vendor/autoload.php</span></code> file in your code to enable the class
+autoloading mechanism provided by Composer. Read
+<a class="reference internal" href="using_components.html"><span class="doc">this article</span></a> for more details.</p>
+</div>
+<p>The bridge also needs a PSR-7 and <a class="reference external" href="https://www.php-fig.org/psr/psr-17/">PSR-17</a> implementation to convert
+HttpFoundation objects to PSR-7 objects. The following command installs the
+<code class="docutils literal notranslate"><span class="pre">nyholm/psr7</span></code> library, a lightweight and fast PSR-7 implementation, but you
+can use any of the <a class="reference external" href="https://packagist.org/providers/psr/http-factory-implementation">libraries that implement psr/http-factory-implementation</a>:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require nyholm/psr7
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="converting-from-httpfoundation-objects-to-psr-7">
+<h3>Converting from HttpFoundation Objects to PSR-7<a class="headerlink" href="#converting-from-httpfoundation-objects-to-psr-7" title="Permalink to this headline">¶</a></h3>
+<p>The bridge provides an interface of a factory called
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/PsrHttpMessage/HttpMessageFactoryInterface.php" title="Symfony\Bridge\PsrHttpMessage\HttpMessageFactoryInterface"><span class="pre">HttpMessageFactoryInterface</span></a></code>
+that builds objects implementing PSR-7 interfaces from HttpFoundation objects.</p>
+<p>The following code snippet explains how to convert a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request"><span class="pre">Request</span></a></code>
+to a <code class="docutils literal notranslate"><span class="pre">Nyholm\Psr7\ServerRequest</span></code> class implementing the
+<code class="docutils literal notranslate"><span class="pre">Psr\Http\Message\ServerRequestInterface</span></code> interface:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Nyholm\Psr7\Factory\Psr17Factory</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+
+<span class="nv">$symfonyRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Request</span><span class="p">([],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[</span><span class="s1">&#39;HTTP_HOST&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;dunglas.fr&#39;</span><span class="p">],</span> <span class="s1">&#39;Content&#39;</span><span class="p">);</span>
+<span class="c1">// The HTTP_HOST server key must be set to avoid an unexpected error</span>
+
+<span class="nv">$psr17Factory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Psr17Factory</span><span class="p">();</span>
+<span class="nv">$psrHttpFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PsrHttpFactory</span><span class="p">(</span><span class="nv">$psr17Factory</span><span class="p">,</span> <span class="nv">$psr17Factory</span><span class="p">,</span> <span class="nv">$psr17Factory</span><span class="p">,</span> <span class="nv">$psr17Factory</span><span class="p">);</span>
+<span class="nv">$psrRequest</span> <span class="o">=</span> <span class="nv">$psrHttpFactory</span><span class="o">-&gt;</span><span class="na">createRequest</span><span class="p">(</span><span class="nv">$symfonyRequest</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>And now from a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response"><span class="pre">Response</span></a></code> to a
+<code class="docutils literal notranslate"><span class="pre">Nyholm\Psr7\Response</span></code> class implementing the
+<code class="docutils literal notranslate"><span class="pre">Psr\Http\Message\ResponseInterface</span></code> interface:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Nyholm\Psr7\Factory\Psr17Factory</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+
+<span class="nv">$symfonyResponse</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Content&#39;</span><span class="p">);</span>
+
+<span class="nv">$psr17Factory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Psr17Factory</span><span class="p">();</span>
+<span class="nv">$psrHttpFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PsrHttpFactory</span><span class="p">(</span><span class="nv">$psr17Factory</span><span class="p">,</span> <span class="nv">$psr17Factory</span><span class="p">,</span> <span class="nv">$psr17Factory</span><span class="p">,</span> <span class="nv">$psr17Factory</span><span class="p">);</span>
+<span class="nv">$psrResponse</span> <span class="o">=</span> <span class="nv">$psrHttpFactory</span><span class="o">-&gt;</span><span class="na">createResponse</span><span class="p">(</span><span class="nv">$symfonyResponse</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="converting-objects-implementing-psr-7-interfaces-to-httpfoundation">
+<h3>Converting Objects implementing PSR-7 Interfaces to HttpFoundation<a class="headerlink" href="#converting-objects-implementing-psr-7-interfaces-to-httpfoundation" title="Permalink to this headline">¶</a></h3>
+<p>On the other hand, the bridge provide a factory interface called
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/PsrHttpMessage/HttpFoundationFactoryInterface.php" title="Symfony\Bridge\PsrHttpMessage\HttpFoundationFactoryInterface"><span class="pre">HttpFoundationFactoryInterface</span></a></code>
+that builds HttpFoundation objects from objects implementing PSR-7 interfaces.</p>
+<p>The next snippet explain how to convert an object implementing the
+<code class="docutils literal notranslate"><span class="pre">Psr\Http\Message\ServerRequestInterface</span></code> interface to a
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request"><span class="pre">Request</span></a></code> instance:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory</span><span class="p">;</span>
+
+<span class="c1">// $psrRequest is an instance of Psr\Http\Message\ServerRequestInterface</span>
+
+<span class="nv">$httpFoundationFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpFoundationFactory</span><span class="p">();</span>
+<span class="nv">$symfonyRequest</span> <span class="o">=</span> <span class="nv">$httpFoundationFactory</span><span class="o">-&gt;</span><span class="na">createRequest</span><span class="p">(</span><span class="nv">$psrRequest</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>From an object implementing the <code class="docutils literal notranslate"><span class="pre">Psr\Http\Message\ResponseInterface</span></code>
+to a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response"><span class="pre">Response</span></a></code> instance:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory</span><span class="p">;</span>
+
+<span class="c1">// $psrResponse is an instance of Psr\Http\Message\ResponseInterface</span>
+
+<span class="nv">$httpFoundationFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpFoundationFactory</span><span class="p">();</span>
+<span class="nv">$symfonyResponse</span> <span class="o">=</span> <span class="nv">$httpFoundationFactory</span><span class="o">-&gt;</span><span class="na">createResponse</span><span class="p">(</span><span class="nv">$psrResponse</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

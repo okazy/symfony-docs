@@ -1,0 +1,697 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Console Commands &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to Call Other Commands" href="console/calling_commands.html" />
+    <link rel="prev" title="Cache" href="cache.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Cache</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Console Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-console-app-env-app-debug">The Console: APP_ENV &amp; APP_DEBUG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-command">Creating a Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-the-command">Configuring the Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#registering-the-command">Registering the Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#executing-the-command">Executing the Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#console-output">Console Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#output-sections">Output Sections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#console-input">Console Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-services-from-the-service-container">Getting Services from the Service Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command-lifecycle">Command Lifecycle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-commands">Testing Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#logging-command-errors">Logging Command Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#learn-more">Learn More</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="console/calling_commands.html">How to Call Other Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="console/coloring.html">How to Color and Style the Console Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="console/command_in_controller.html">How to Call a Command from a Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="console/commands_as_services.html">How to Define Commands as Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="console/hide_commands.html">How to Hide Console Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="console/input.html">Console Input (Arguments &amp; Options)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="console/lazy_commands.html">How to Make Commands Lazily Loaded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="console/lockable_trait.html">Prevent Multiple Executions of a Console Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="console/style.html">How to Style a Console Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="console/verbosity.html">Verbosity Levels</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Console Commands</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/console.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="console-commands">
+<span id="index-0"></span><h1>Console Commands<a class="headerlink" href="#console-commands" title="Permalink to this headline">¶</a></h1>
+<p>The Symfony framework provides lots of commands through the <code class="docutils literal notranslate"><span class="pre">bin/console</span></code> script
+(e.g. the well-known <code class="docutils literal notranslate"><span class="pre">bin/console</span> <span class="pre">cache:clear</span></code> command). These commands are
+created with the <a class="reference internal" href="components/console.html"><span class="doc">Console component</span></a>. You can also
+use it to create your own commands.</p>
+<div class="section" id="the-console-app-env-app-debug">
+<h2>The Console: APP_ENV &amp; APP_DEBUG<a class="headerlink" href="#the-console-app-env-app-debug" title="Permalink to this headline">¶</a></h2>
+<p>Console commands run in the <a class="reference internal" href="configuration.html#config-dot-env"><span class="std std-ref">environment</span></a> defined in the <code class="docutils literal notranslate"><span class="pre">APP_ENV</span></code>
+variable of the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file, which is <code class="docutils literal notranslate"><span class="pre">dev</span></code> by default. It also reads the <code class="docutils literal notranslate"><span class="pre">APP_DEBUG</span></code>
+value to turn “debug” mode on or off (it defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>, which is on).</p>
+<p>To run the command in another environment or debug mode, edit the value of <code class="docutils literal notranslate"><span class="pre">APP_ENV</span></code>
+and <code class="docutils literal notranslate"><span class="pre">APP_DEBUG</span></code>.</p>
+</div>
+<div class="section" id="creating-a-command">
+<h2>Creating a Command<a class="headerlink" href="#creating-a-command" title="Permalink to this headline">¶</a></h2>
+<p>Commands are defined in classes extending
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Command/Command.php" title="Symfony\Component\Console\Command\Command"><span class="pre">Command</span></a></code>. For example, you may
+want a command to create a user:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Command/CreateUserCommand.php</span>
+<span class="k">namespace</span> <span class="nx">App\Command</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Command\Command</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Input\InputInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Output\OutputInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">CreateUserCommand</span> <span class="k">extends</span> <span class="nx">Command</span>
+<span class="p">{</span>
+    <span class="c1">// the name of the command (the part after &quot;bin/console&quot;)</span>
+    <span class="k">protected</span> <span class="k">static</span> <span class="nv">$defaultName</span> <span class="o">=</span> <span class="s1">&#39;app:create-user&#39;</span><span class="p">;</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">configure</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">execute</span><span class="p">(</span><span class="nx">InputInterface</span> <span class="nv">$input</span><span class="p">,</span> <span class="nx">OutputInterface</span> <span class="nv">$output</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ... put here the code to run in your command</span>
+
+        <span class="c1">// this method must return an integer number with the &quot;exit status code&quot;</span>
+        <span class="c1">// of the command. You can also use these constants to make code more readable</span>
+
+        <span class="c1">// return this if there was no problem running the command</span>
+        <span class="c1">// (it&#39;s equivalent to returning int(0))</span>
+        <span class="k">return</span> <span class="nx">Command</span><span class="o">::</span><span class="na">SUCCESS</span><span class="p">;</span>
+
+        <span class="c1">// or return this if some error happened during the execution</span>
+        <span class="c1">// (it&#39;s equivalent to returning int(1))</span>
+        <span class="c1">// return Command::FAILURE;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The <code class="docutils literal notranslate"><span class="pre">Command::SUCCESS</span></code> and <code class="docutils literal notranslate"><span class="pre">Command::FAILURE</span></code> constants were introduced
+in Symfony 5.1.</p>
+</div>
+</div>
+<div class="section" id="configuring-the-command">
+<h2>Configuring the Command<a class="headerlink" href="#configuring-the-command" title="Permalink to this headline">¶</a></h2>
+<p>You can optionally define a description, help message and the
+<a class="reference internal" href="console/input.html"><span class="doc">input options and arguments</span></a>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">protected</span> <span class="k">function</span> <span class="nf">configure</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$this</span>
+        <span class="c1">// the short description shown while running &quot;php bin/console list&quot;</span>
+        <span class="o">-&gt;</span><span class="na">setDescription</span><span class="p">(</span><span class="s1">&#39;Creates a new user.&#39;</span><span class="p">)</span>
+
+        <span class="c1">// the full command description shown when running the command with</span>
+        <span class="c1">// the &quot;--help&quot; option</span>
+        <span class="o">-&gt;</span><span class="na">setHelp</span><span class="p">(</span><span class="s1">&#39;This command allows you to create a user...&#39;</span><span class="p">)</span>
+    <span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">configure()</span></code> method is called automatically at the end of the command
+constructor. If your command defines its own constructor, set the properties
+first and then call to the parent constructor, to make those properties
+available in the <code class="docutils literal notranslate"><span class="pre">configure()</span></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Command\Command</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Input\InputArgument</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">CreateUserCommand</span> <span class="k">extends</span> <span class="nx">Command</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">bool</span> <span class="nv">$requirePassword</span> <span class="o">=</span> <span class="k">false</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// best practices recommend to call the parent constructor first and</span>
+        <span class="c1">// then set your own properties. That wouldn&#39;t work in this case</span>
+        <span class="c1">// because configure() needs the properties set in this constructor</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">requirePassword</span> <span class="o">=</span> <span class="nv">$requirePassword</span><span class="p">;</span>
+
+        <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">configure</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span>
+            <span class="c1">// ...</span>
+            <span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">requirePassword</span> <span class="o">?</span> <span class="nx">InputArgument</span><span class="o">::</span><span class="na">REQUIRED</span> <span class="o">:</span> <span class="nx">InputArgument</span><span class="o">::</span><span class="na">OPTIONAL</span><span class="p">,</span> <span class="s1">&#39;User password&#39;</span><span class="p">)</span>
+        <span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="registering-the-command">
+<h2>Registering the Command<a class="headerlink" href="#registering-the-command" title="Permalink to this headline">¶</a></h2>
+<p>Symfony commands must be registered as services and <a class="reference internal" href="service_container/tags.html"><span class="doc">tagged</span></a>
+with the <code class="docutils literal notranslate"><span class="pre">console.command</span></code> tag. If you’re using the
+<a class="reference internal" href="service_container.html#service-container-services-load-example"><span class="std std-ref">default services.yaml configuration</span></a>,
+this is already done for you, thanks to <a class="reference internal" href="service_container.html#services-autoconfigure"><span class="std std-ref">autoconfiguration</span></a>.</p>
+</div>
+<div class="section" id="executing-the-command">
+<h2>Executing the Command<a class="headerlink" href="#executing-the-command" title="Permalink to this headline">¶</a></h2>
+<p>After configuring and registering the command, you can execute it in the terminal:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console app:create-user
+</pre></div>
+</td></tr></table></div>
+<p>As you might expect, this command will do nothing as you didn’t write any logic
+yet. Add your own logic inside the <code class="docutils literal notranslate"><span class="pre">execute()</span></code> method.</p>
+</div>
+<div class="section" id="console-output">
+<h2>Console Output<a class="headerlink" href="#console-output" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">execute()</span></code> method has access to the output stream to write messages to
+the console:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">protected</span> <span class="k">function</span> <span class="nf">execute</span><span class="p">(</span><span class="nx">InputInterface</span> <span class="nv">$input</span><span class="p">,</span> <span class="nx">OutputInterface</span> <span class="nv">$output</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// outputs multiple lines to the console (adding &quot;\n&quot; at the end of each line)</span>
+    <span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">([</span>
+        <span class="s1">&#39;User Creator&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;============&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="p">]);</span>
+
+    <span class="c1">// the value returned by someMethod() can be an iterator (https://secure.php.net/iterator)</span>
+    <span class="c1">// that generates and returns the messages with the &#39;yield&#39; PHP keyword</span>
+    <span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">someMethod</span><span class="p">());</span>
+
+    <span class="c1">// outputs a message followed by a &quot;\n&quot;</span>
+    <span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="s1">&#39;Whoa!&#39;</span><span class="p">);</span>
+
+    <span class="c1">// outputs a message without adding a &quot;\n&quot; at the end of the line</span>
+    <span class="nv">$output</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;You are about to &#39;</span><span class="p">);</span>
+    <span class="nv">$output</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;create a user.&#39;</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="nx">Command</span><span class="o">::</span><span class="na">SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now, try executing the command:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console app:create-user
+<span class="go">User Creator</span>
+<span class="go">============</span>
+
+<span class="go">Whoa!</span>
+<span class="go">You are about to create a user.</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="output-sections">
+<span id="console-output-sections"></span><h3>Output Sections<a class="headerlink" href="#output-sections" title="Permalink to this headline">¶</a></h3>
+<p>The regular console output can be divided into multiple independent regions
+called “output sections”. Create one or more of these sections when you need to
+clear and overwrite the output information.</p>
+<p>Sections are created with the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Output/ConsoleOutput.php" title="Symfony\Component\Console\Output\ConsoleOutput::section()"><span class="pre">section()</span></a></code> method,
+which returns an instance of
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Output/ConsoleSectionOutput.php" title="Symfony\Component\Console\Output\ConsoleSectionOutput"><span class="pre">ConsoleSectionOutput</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyCommand</span> <span class="k">extends</span> <span class="nx">Command</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">execute</span><span class="p">(</span><span class="nx">InputInterface</span> <span class="nv">$input</span><span class="p">,</span> <span class="nx">OutputInterface</span> <span class="nv">$output</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$section1</span> <span class="o">=</span> <span class="nv">$output</span><span class="o">-&gt;</span><span class="na">section</span><span class="p">();</span>
+        <span class="nv">$section2</span> <span class="o">=</span> <span class="nv">$output</span><span class="o">-&gt;</span><span class="na">section</span><span class="p">();</span>
+        <span class="nv">$section1</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">);</span>
+        <span class="nv">$section2</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="s1">&#39;World!&#39;</span><span class="p">);</span>
+        <span class="c1">// Output displays &quot;Hello\nWorld!\n&quot;</span>
+
+        <span class="c1">// overwrite() replaces all the existing section contents with the given content</span>
+        <span class="nv">$section1</span><span class="o">-&gt;</span><span class="na">overwrite</span><span class="p">(</span><span class="s1">&#39;Goodbye&#39;</span><span class="p">);</span>
+        <span class="c1">// Output now displays &quot;Goodbye\nWorld!\n&quot;</span>
+
+        <span class="c1">// clear() deletes all the section contents...</span>
+        <span class="nv">$section2</span><span class="o">-&gt;</span><span class="na">clear</span><span class="p">();</span>
+        <span class="c1">// Output now displays &quot;Goodbye\n&quot;</span>
+
+        <span class="c1">// ...but you can also delete a given number of lines</span>
+        <span class="c1">// (this example deletes the last two lines of the section)</span>
+        <span class="nv">$section1</span><span class="o">-&gt;</span><span class="na">clear</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+        <span class="c1">// Output is now completely empty!</span>
+
+        <span class="k">return</span> <span class="nx">Command</span><span class="o">::</span><span class="na">SUCCESS</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A new line is appended automatically when displaying information in a section.</p>
+</div>
+<p>Output sections let you manipulate the Console output in advanced ways, such as
+<a class="reference internal" href="components/console/helpers/progressbar.html#console-multiple-progress-bars"><span class="std std-ref">displaying multiple progress bars</span></a> which
+are updated independently and <a class="reference internal" href="components/console/helpers/table.html#console-modify-rendered-tables"><span class="std std-ref">appending rows to tables</span></a>
+that have already been rendered.</p>
+</div>
+</div>
+<div class="section" id="console-input">
+<h2>Console Input<a class="headerlink" href="#console-input" title="Permalink to this headline">¶</a></h2>
+<p>Use input options or arguments to pass information to the command:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Console\Input\InputArgument</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="k">protected</span> <span class="k">function</span> <span class="nf">configure</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$this</span>
+        <span class="c1">// configure an argument</span>
+        <span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="nx">InputArgument</span><span class="o">::</span><span class="na">REQUIRED</span><span class="p">,</span> <span class="s1">&#39;The username of the user.&#39;</span><span class="p">)</span>
+        <span class="c1">// ...</span>
+    <span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// ...</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">execute</span><span class="p">(</span><span class="nx">InputInterface</span> <span class="nv">$input</span><span class="p">,</span> <span class="nx">OutputInterface</span> <span class="nv">$output</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">([</span>
+        <span class="s1">&#39;User Creator&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;============&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="p">]);</span>
+
+    <span class="c1">// retrieve the argument value using getArgument()</span>
+    <span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="s1">&#39;Username: &#39;</span><span class="o">.</span><span class="nv">$input</span><span class="o">-&gt;</span><span class="na">getArgument</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">));</span>
+
+    <span class="k">return</span> <span class="nx">Command</span><span class="o">::</span><span class="na">SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now, you can pass the username to the command:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console app:create-user Wouter
+<span class="go">User Creator</span>
+<span class="go">============</span>
+
+<span class="go">Username: Wouter</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Read <a class="reference internal" href="console/input.html"><span class="doc">Console Input (Arguments &amp; Options)</span></a> for more information about console options and
+arguments.</p>
+</div>
+</div>
+<div class="section" id="getting-services-from-the-service-container">
+<h2>Getting Services from the Service Container<a class="headerlink" href="#getting-services-from-the-service-container" title="Permalink to this headline">¶</a></h2>
+<p>To actually create a new user, the command has to access some
+<a class="reference internal" href="service_container.html"><span class="doc">services</span></a>. Since your command is already registered
+as a service, you can use normal dependency injection. Imagine you have a
+<code class="docutils literal notranslate"><span class="pre">App\Service\UserManager</span></code> service that you want to access:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">use</span> <span class="nx">App\Service\UserManager</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Command\Command</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">CreateUserCommand</span> <span class="k">extends</span> <span class="nx">Command</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$userManager</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">UserManager</span> <span class="nv">$userManager</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">userManager</span> <span class="o">=</span> <span class="nv">$userManager</span><span class="p">;</span>
+
+        <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">execute</span><span class="p">(</span><span class="nx">InputInterface</span> <span class="nv">$input</span><span class="p">,</span> <span class="nx">OutputInterface</span> <span class="nv">$output</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">userManager</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="nv">$input</span><span class="o">-&gt;</span><span class="na">getArgument</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">));</span>
+
+        <span class="nv">$output</span><span class="o">-&gt;</span><span class="na">writeln</span><span class="p">(</span><span class="s1">&#39;User successfully generated!&#39;</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nx">Command</span><span class="o">::</span><span class="na">SUCCESS</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="command-lifecycle">
+<h2>Command Lifecycle<a class="headerlink" href="#command-lifecycle" title="Permalink to this headline">¶</a></h2>
+<p>Commands have three lifecycle methods that are invoked when running the
+command:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Command/Command.php" title="Symfony\Component\Console\Command\Command::initialize()"><span class="pre">initialize()</span></a></code> <em>(optional)</em></dt>
+<dd>This method is executed before the <code class="docutils literal notranslate"><span class="pre">interact()</span></code> and the <code class="docutils literal notranslate"><span class="pre">execute()</span></code>
+methods. Its main purpose is to initialize variables used in the rest of
+the command methods.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Command/Command.php" title="Symfony\Component\Console\Command\Command::interact()"><span class="pre">interact()</span></a></code> <em>(optional)</em></dt>
+<dd>This method is executed after <code class="docutils literal notranslate"><span class="pre">initialize()</span></code> and before <code class="docutils literal notranslate"><span class="pre">execute()</span></code>.
+Its purpose is to check if some of the options/arguments are missing
+and interactively ask the user for those values. This is the last place
+where you can ask for missing options/arguments. After this command,
+missing options/arguments will result in an error.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Command/Command.php" title="Symfony\Component\Console\Command\Command::execute()"><span class="pre">execute()</span></a></code> <em>(required)</em></dt>
+<dd>This method is executed after <code class="docutils literal notranslate"><span class="pre">interact()</span></code> and <code class="docutils literal notranslate"><span class="pre">initialize()</span></code>.
+It contains the logic you want the command to execute and it must
+return an integer which will be used as the command <a class="reference external" href="https://en.wikipedia.org/wiki/Exit_status">exit status</a>.</dd>
+</dl>
+</div>
+<div class="section" id="testing-commands">
+<span id="console-testing-commands"></span><h2>Testing Commands<a class="headerlink" href="#testing-commands" title="Permalink to this headline">¶</a></h2>
+<p>Symfony provides several tools to help you test your commands. The most
+useful one is the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Tester/CommandTester.php" title="Symfony\Component\Console\Tester\CommandTester"><span class="pre">CommandTester</span></a></code>
+class. It uses special input and output classes to ease testing without a real
+console:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// tests/Command/CreateUserCommandTest.php</span>
+<span class="k">namespace</span> <span class="nx">App\Tests\Command</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Console\Application</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Test\KernelTestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Console\Tester\CommandTester</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">CreateUserCommandTest</span> <span class="k">extends</span> <span class="nx">KernelTestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testExecute</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$kernel</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="na">createKernel</span><span class="p">();</span>
+        <span class="nv">$application</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Application</span><span class="p">(</span><span class="nv">$kernel</span><span class="p">);</span>
+
+        <span class="nv">$command</span> <span class="o">=</span> <span class="nv">$application</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;app:create-user&#39;</span><span class="p">);</span>
+        <span class="nv">$commandTester</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CommandTester</span><span class="p">(</span><span class="nv">$command</span><span class="p">);</span>
+        <span class="nv">$commandTester</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">([</span>
+            <span class="c1">// pass arguments to the helper</span>
+            <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Wouter&#39;</span><span class="p">,</span>
+
+            <span class="c1">// prefix the key with two dashes when passing options,</span>
+            <span class="c1">// e.g: &#39;--some-option&#39; =&gt; &#39;option_value&#39;,</span>
+        <span class="p">]);</span>
+
+        <span class="c1">// the output of the command in the console</span>
+        <span class="nv">$output</span> <span class="o">=</span> <span class="nv">$commandTester</span><span class="o">-&gt;</span><span class="na">getDisplay</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertStringContainsString</span><span class="p">(</span><span class="s1">&#39;Username: Wouter&#39;</span><span class="p">,</span> <span class="nv">$output</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can also test a whole console application by using
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Tester/ApplicationTester.php" title="Symfony\Component\Console\Tester\ApplicationTester"><span class="pre">ApplicationTester</span></a></code>.</p>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">When testing commands using the <code class="docutils literal notranslate"><span class="pre">CommandTester</span></code> class, console events are
+not dispatched. If you need to test those events, use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Tester/ApplicationTester.php" title="Symfony\Component\Console\Tester\ApplicationTester"><span class="pre">ApplicationTester</span></a></code> instead.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When using the Console component in a standalone project, use
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Application.php" title="Symfony\Component\Console\Application"><span class="pre">Symfony\Component\Console\Application</span></a></code>
+and extend the normal <code class="docutils literal notranslate"><span class="pre">\PHPUnit\Framework\TestCase</span></code>.</p>
+</div>
+</div>
+<div class="section" id="logging-command-errors">
+<h2>Logging Command Errors<a class="headerlink" href="#logging-command-errors" title="Permalink to this headline">¶</a></h2>
+<p>Whenever an exception is thrown while running commands, Symfony adds a log
+message for it including the entire failing command. In addition, Symfony
+registers an <a class="reference internal" href="event_dispatcher.html"><span class="doc">event subscriber</span></a> to listen to the
+<a class="reference internal" href="components/console/events.html#console-events-terminate"><span class="std std-ref">ConsoleEvents::TERMINATE event</span></a> and adds a log
+message whenever a command doesn’t finish with the <code class="docutils literal notranslate"><span class="pre">0</span></code> <a class="reference external" href="https://en.wikipedia.org/wiki/Exit_status">exit status</a>.</p>
+</div>
+<div class="section" id="learn-more">
+<h2>Learn More<a class="headerlink" href="#learn-more" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="console/calling_commands.html">How to Call Other Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console/coloring.html">How to Color and Style the Console Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console/command_in_controller.html">How to Call a Command from a Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console/commands_as_services.html">How to Define Commands as Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console/hide_commands.html">How to Hide Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console/input.html">Console Input (Arguments &amp; Options)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console/lazy_commands.html">How to Make Commands Lazily Loaded</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console/lockable_trait.html">Prevent Multiple Executions of a Console Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console/style.html">How to Style a Console Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console/verbosity.html">Verbosity Levels</a></li>
+</ul>
+</div>
+<p>The console component also contains a set of “helpers” - different small
+tools capable of helping you with different tasks:</p>
+<ul class="simple">
+<li><a class="reference internal" href="components/console/helpers/questionhelper.html"><span class="doc">Question Helper</span></a>: interactively ask the user for information</li>
+<li><a class="reference internal" href="components/console/helpers/formatterhelper.html"><span class="doc">Formatter Helper</span></a>: customize the output colorization</li>
+<li><a class="reference internal" href="components/console/helpers/progressbar.html"><span class="doc">Progress Bar</span></a>: shows a progress bar</li>
+<li><a class="reference internal" href="components/console/helpers/table.html"><span class="doc">Table</span></a>: displays tabular data as a table</li>
+<li><a class="reference internal" href="components/console/helpers/debug_formatter.html"><span class="doc">Debug Formatter Helper</span></a>: provides functions to
+output debug information when running an external program</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

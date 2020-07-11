@@ -1,0 +1,624 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Customize Error Pages &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Forward Requests to another Controller" href="forwarding.html" />
+    <link rel="prev" title="Extending Action Argument Resolving" href="argument_value_resolver.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../getting_started/index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../page_creation.html">Create your First Page in Symfony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../controller.html">Controller</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../controller.html#a-simple-controller">A Simple Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller.html#the-base-controller-classes-services">The Base Controller Class &amp; Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller.html#generating-controllers">Generating Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller.html#managing-errors-and-404-pages">Managing Errors and 404 Pages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller.html#the-request-object-as-a-controller-argument">The Request object as a Controller Argument</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller.html#managing-the-session">Managing the Session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller.html#the-request-and-response-object">The Request and Response Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller.html#final-thoughts">Final Thoughts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller.html#keep-going">Keep Going!</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../controller.html#learn-more-about-controllers">Learn more about Controllers</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../templates.html">Creating and Using Templates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="argument_value_resolver.html">Extending Action Argument Resolving</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">How to Customize Error Pages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="forwarding.html">How to Forward Requests to another Controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="service.html">How to Define Controllers as Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="soap_web_service.html">How to Create a SOAP Web Service in a Symfony Controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="upload_file.html">How to Upload Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../templates.html">Creating and Using Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration.html">Configuring Symfony</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../getting_started/index.html">Getting Started</a> &raquo;</li>
+        
+          <li><a href="../setup.html">Installing &amp; Setting up the Symfony Framework</a> &raquo;</li>
+        
+          <li><a href="../page_creation.html">Create your First Page in Symfony</a> &raquo;</li>
+        
+          <li><a href="../routing.html">Routing</a> &raquo;</li>
+        
+          <li><a href="../controller.html">Controller</a> &raquo;</li>
+        
+      <li>How to Customize Error Pages</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/controller/error_pages.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-customize-error-pages">
+<span id="index-0"></span><h1>How to Customize Error Pages<a class="headerlink" href="#how-to-customize-error-pages" title="Permalink to this headline">¶</a></h1>
+<p>In Symfony applications, all errors are treated as exceptions, no matter if they
+are just a 404 Not Found error or a fatal error triggered by throwing some
+exception in your code.</p>
+<p>In the <a class="reference internal" href="../configuration.html#configuration-environments"><span class="std std-ref">development environment</span></a>,
+Symfony catches all the exceptions and displays a special <strong>exception page</strong>
+with lots of debug information to help you discover the root problem:</p>
+<img alt="A typical exception page in the development environment" class="with-browser align-center" src="../_images/exceptions-in-dev-environment.png" />
+<p>Since these pages contain a lot of sensitive internal information, Symfony won’t
+display them in the production environment. Instead, it’ll show a simple and
+generic <strong>error page</strong>:</p>
+<img alt="A typical error page in the production environment" class="with-browser align-center" src="../_images/errors-in-prod-environment.png" />
+<p>Error pages for the production environment can be customized in different ways
+depending on your needs:</p>
+<ol class="arabic simple">
+<li>If you just want to change the contents and styles of the error pages to match
+the rest of your application, <a class="reference internal" href="#use-default-error-controller"><span class="std std-ref">override the default error templates</span></a>;</li>
+<li>If you want to change the contents of non-HTML error output,
+<a class="reference internal" href="#overriding-non-html-error-output"><span class="std std-ref">create a new normalizer</span></a>;</li>
+<li>If you also want to tweak the logic used by Symfony to generate error pages,
+<a class="reference internal" href="#custom-error-controller"><span class="std std-ref">override the default error controller</span></a>;</li>
+<li>If you need total control of exception handling to execute your own logic
+<a class="reference internal" href="#use-kernel-exception-event"><span class="std std-ref">use the kernel.exception event</span></a>.</li>
+</ol>
+<div class="section" id="overriding-the-default-error-templates">
+<span id="using-the-default-errorcontroller"></span><span id="use-default-error-controller"></span><h2>Overriding the Default Error Templates<a class="headerlink" href="#overriding-the-default-error-templates" title="Permalink to this headline">¶</a></h2>
+<p>You can use the built-in Twig error renderer to override the default error
+templates. Both the TwigBundle and TwigBridge need to be installed for this. Run
+this command to ensure both are installed:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/twig-pack
+</pre></div>
+</td></tr></table></div>
+<p>When the error page loads, <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Twig/ErrorRenderer/TwigErrorRenderer.php" title="Symfony\Bridge\Twig\ErrorRenderer\TwigErrorRenderer"><span class="pre">TwigErrorRenderer</span></a></code>
+is used to render a Twig template to show the user.</p>
+<p id="controller-error-pages-by-status-code">This renderer uses the HTTP status code and the following
+logic to determine the template filename:</p>
+<ol class="arabic simple">
+<li>Look for a template for the given status code (like <code class="docutils literal notranslate"><span class="pre">error500.html.twig</span></code>);</li>
+<li>If the previous template doesn’t exist, discard the status code and look for
+a generic error template (<code class="docutils literal notranslate"><span class="pre">error.html.twig</span></code>).</li>
+</ol>
+<p id="overriding-or-adding-templates">To override these templates, rely on the standard Symfony method for
+<a class="reference internal" href="../bundles/override.html#override-templates"><span class="std std-ref">overriding templates that live inside a bundle</span></a> and
+put them in the <code class="docutils literal notranslate"><span class="pre">templates/bundles/TwigBundle/Exception/</span></code> directory.</p>
+<p>A typical project that returns HTML pages might look like this:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span>templates/
+└─ bundles/
+   └─ TwigBundle/
+      └─ Exception/
+         ├─ error404.html.twig
+         ├─ error403.html.twig
+         └─ error.html.twig      # All other HTML errors (including 500)
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="example-404-error-template">
+<h2>Example 404 Error Template<a class="headerlink" href="#example-404-error-template" title="Permalink to this headline">¶</a></h2>
+<p>To override the 404 error template for HTML pages, create a new
+<code class="docutils literal notranslate"><span class="pre">error404.html.twig</span></code> template located at <code class="docutils literal notranslate"><span class="pre">templates/bundles/TwigBundle/Exception/</span></code>:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">{# templates/bundles/TwigBundle/Exception/error404.html.twig #}</span>
+<span class="cp">{%</span> <span class="k">extends</span> <span class="s1">&#39;base.html.twig&#39;</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">body</span> <span class="cp">%}</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Page not found<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+        The requested page couldn&#39;t be located. Checkout for any URL
+        misspelling or <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">path</span><span class="o">(</span><span class="s1">&#39;homepage&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>return to the homepage<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>.
+    <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</td></tr></table></div>
+<p>In case you need them, the <code class="docutils literal notranslate"><span class="pre">TwigErrorRenderer</span></code> passes some information to
+the error template via the <code class="docutils literal notranslate"><span class="pre">status_code</span></code> and <code class="docutils literal notranslate"><span class="pre">status_text</span></code> variables that
+store the HTTP status code and message respectively.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can customize the status code of an exception by implementing
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Exception/HttpExceptionInterface.php" title="Symfony\Component\HttpKernel\Exception\HttpExceptionInterface"><span class="pre">HttpExceptionInterface</span></a></code>
+and its required <code class="docutils literal notranslate"><span class="pre">getStatusCode()</span></code> method. Otherwise, the <code class="docutils literal notranslate"><span class="pre">status_code</span></code>
+will default to <code class="docutils literal notranslate"><span class="pre">500</span></code>.</p>
+</div>
+<p>Additionally you have access to the Exception with <code class="docutils literal notranslate"><span class="pre">exception</span></code>, which for example
+allows you to output the stack trace using <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">exception.traceAsString</span> <span class="pre">}}</span></code> or
+access any other method on the object. You should be careful with this though,
+as this is very likely to expose sensitive data.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">PHP errors are turned into exceptions as well by default, so you can also
+access these error details using <code class="docutils literal notranslate"><span class="pre">exception</span></code>.</p>
+</div>
+</div>
+<div class="section" id="security-404-pages">
+<h2>Security &amp; 404 Pages<a class="headerlink" href="#security-404-pages" title="Permalink to this headline">¶</a></h2>
+<p>Due to the order of how routing and security are loaded, security information will
+<em>not</em> be available on your 404 pages. This means that it will appear as if your
+user is logged out on the 404 page (it will work while testing, but not on production).</p>
+<div class="section" id="testing-error-pages-during-development">
+<span id="testing-error-pages"></span><h3>Testing Error Pages during Development<a class="headerlink" href="#testing-error-pages-during-development" title="Permalink to this headline">¶</a></h3>
+<p>While you’re in the development environment, Symfony shows the big <em>exception</em>
+page instead of your shiny new customized error page. So, how can you see
+what it looks like and debug it?</p>
+<p>Fortunately, the default <code class="docutils literal notranslate"><span class="pre">ErrorController</span></code> allows you to preview your
+<em>error</em> pages during development.</p>
+<p>To use this feature, you need to load some special routes provided by FrameworkBundle
+(if the application uses <a class="reference internal" href="../setup.html#symfony-flex"><span class="std std-ref">Symfony Flex</span></a> they are loaded
+automatically when installing <code class="docutils literal notranslate"><span class="pre">symfony/framework-bundle</span></code>):</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/routes/dev/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">_errors</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">resource</span><span class="p p-Indicator">:</span> <span class="s">&#39;@FrameworkBundle/Resources/config/routing/errors.xml&#39;</span>
+    <span class="l l-Scalar l-Scalar-Plain">prefix</span><span class="p p-Indicator">:</span>   <span class="l l-Scalar l-Scalar-Plain">/_error</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/routes/dev/framework.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;routes</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/routing&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/routing</span>
+<span class="s">        https://symfony.com/schema/routing/routing-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;import</span> <span class="na">resource=</span><span class="s">&quot;@FrameworkBundle/Resources/config/routing/errors.xml&quot;</span> <span class="na">prefix=</span><span class="s">&quot;/_error&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/routes&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/routes/dev/framework.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RoutingConfigurator</span> <span class="nv">$routes</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;@FrameworkBundle/Resources/config/routing/errors.xml&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">prefix</span><span class="p">(</span><span class="s1">&#39;/_error&#39;</span><span class="p">)</span>
+    <span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>With this route added, you can use URLs like these to preview the <em>error</em> page
+for a given status code as HTML or for a given status code and format.</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span>http://localhost/index.php/_error/{statusCode}
+http://localhost/index.php/_error/{statusCode}.{format}
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="overriding-error-output-for-non-html-formats">
+<span id="overriding-non-html-error-output"></span><h2>Overriding Error output for non-HTML formats<a class="headerlink" href="#overriding-error-output-for-non-html-formats" title="Permalink to this headline">¶</a></h2>
+<p>To override non-HTML error output, the Serializer component needs to be installed.</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/serializer-pack
+</pre></div>
+</td></tr></table></div>
+<p>The Serializer component has a built-in <code class="docutils literal notranslate"><span class="pre">FlattenException</span></code> normalizer
+(<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Serializer/Normalizer/ProblemNormalizer.php" title="Symfony\Component\Serializer\Normalizer\ProblemNormalizer"><span class="pre">ProblemNormalizer</span></a></code>) and
+JSON/XML/CSV/YAML encoders. When your application throws an exception, Symfony
+can output it in one of those formats. If you want to change the output
+contents, create a new Normalizer that supports the <code class="docutils literal notranslate"><span class="pre">FlattenException</span></code> input:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1"># src/App/Serializer/MyCustomProblemNormalizer.php</span>
+<span class="k">namespace</span> <span class="nx">App\Serializer</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\ErrorHandler\Exception\FlattenException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Serializer\Normalizer\NormalizerInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyCustomProblemNormalizer</span> <span class="k">implements</span> <span class="nx">NormalizerInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">normalize</span><span class="p">(</span><span class="nv">$exception</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$format</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$context</span> <span class="o">=</span> <span class="p">[])</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;This is my custom problem normalizer.&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;exception&#39;</span><span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="nv">$exception</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">(),</span>
+                <span class="s1">&#39;code&#39;</span> <span class="o">=&gt;</span> <span class="nv">$exception</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">(),</span>
+            <span class="p">],</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">supportsNormalization</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$format</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$data</span> <span class="nx">instanceof</span> <span class="nx">FlattenException</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="overriding-the-default-errorcontroller">
+<span id="replacing-the-default-errorcontroller"></span><span id="custom-error-controller"></span><h2>Overriding the Default ErrorController<a class="headerlink" href="#overriding-the-default-errorcontroller" title="Permalink to this headline">¶</a></h2>
+<p>If you need a little more flexibility beyond just overriding the template,
+then you can change the controller that renders the error page. For example,
+you might need to pass some additional variables into your template.</p>
+<p>To do this, create a new controller anywhere in your application and set
+the <a class="reference internal" href="../reference/configuration/framework.html#config-framework-error-controller"><span class="std std-ref">framework.error_controller</span></a>
+configuration option to point to it:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">error_controller</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Controller\ErrorController::show</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/framework.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:error-controller&gt;</span>App\Controller\ErrorController::show<span class="nt">&lt;/framework:error-controller&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/framework.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;error_controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;App\Controller\ErrorController::show&#39;</span><span class="p">,</span>
+    <span class="c1">// ...</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/EventListener/ErrorListener.php" title="Symfony\Component\HttpKernel\EventListener\ErrorListener"><span class="pre">ErrorListener</span></a></code>
+class used by the FrameworkBundle as a listener of the <code class="docutils literal notranslate"><span class="pre">kernel.exception</span></code> event creates
+the request that will be dispatched to your controller. In addition, your controller
+will be passed two parameters:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">exception</span></code></dt>
+<dd>The original <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Throwable.php" title="Throwable"><span class="pre">Throwable</span></a></code> instance being handled.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">logger</span></code></dt>
+<dd>A <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src//Symfony/Component/HttpKernel/Log/DebugLoggerInterface.php" title="\Symfony\Component\HttpKernel\Log\DebugLoggerInterface"><span class="pre">DebugLoggerInterface</span></a></code>
+instance which may be <code class="docutils literal notranslate"><span class="pre">null</span></code> in some circumstances.</dd>
+</dl>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The <a class="reference internal" href="#testing-error-pages"><span class="std std-ref">error page preview</span></a> also works for
+your own controllers set up this way.</p>
+</div>
+</div>
+<div class="section" id="working-with-the-kernel-exception-event">
+<span id="use-kernel-exception-event"></span><h2>Working with the <code class="docutils literal notranslate"><span class="pre">kernel.exception</span></code> Event<a class="headerlink" href="#working-with-the-kernel-exception-event" title="Permalink to this headline">¶</a></h2>
+<p>When an exception is thrown, the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/HttpKernel.php" title="Symfony\Component\HttpKernel\HttpKernel"><span class="pre">HttpKernel</span></a></code>
+class catches it and dispatches a <code class="docutils literal notranslate"><span class="pre">kernel.exception</span></code> event. This gives you the
+power to convert the exception into a <code class="docutils literal notranslate"><span class="pre">Response</span></code> in a few different ways.</p>
+<p>Working with this event is actually much more powerful than what has been explained
+before, but also requires a thorough understanding of Symfony internals. Suppose
+that your code throws specialized exceptions with a particular meaning to your
+application domain.</p>
+<p><a class="reference internal" href="../event_dispatcher.html"><span class="doc">Writing your own event listener</span></a>
+for the <code class="docutils literal notranslate"><span class="pre">kernel.exception</span></code> event allows you to have a closer look at the exception
+and take different actions depending on it. Those actions might include logging
+the exception, redirecting the user to another page or rendering specialized
+error pages.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If your listener calls <code class="docutils literal notranslate"><span class="pre">setThrowable()</span></code> on the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Event/ExceptionEvent.php" title="Symfony\Component\HttpKernel\Event\ExceptionEvent"><span class="pre">ExceptionEvent</span></a></code>,
+event, propagation will be stopped and the response will be sent to
+the client.</p>
+</div>
+<p>This approach allows you to create centralized and layered error handling:
+instead of catching (and handling) the same exceptions in various controllers
+time and again, you can have just one (or several) listeners deal with them.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">See <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Http/Firewall/ExceptionListener.php" title="Symfony\Component\Security\Http\Firewall\ExceptionListener"><span class="pre">ExceptionListener</span></a></code>
+class code for a real example of an advanced listener of this type. This
+listener handles various security-related exceptions that are thrown in
+your application (like <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Exception/AccessDeniedException.php" title="Symfony\Component\Security\Core\Exception\AccessDeniedException"><span class="pre">AccessDeniedException</span></a></code>)
+and takes measures like redirecting the user to the login page, logging them
+out and other things.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

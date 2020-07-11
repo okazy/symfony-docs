@@ -1,0 +1,561 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The EventDispatcher Component &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The HttpKernel Component: HttpKernelInterface" href="http_kernel_httpkernelinterface.html" />
+    <link rel="prev" title="Unit Testing" href="unit_testing.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Create your own PHP Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="front_controller.html">The Front Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html">The Routing Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templating.html">Templating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel_controller_resolver.html">The HttpKernel Component: the Controller Resolver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="separation_of_concerns.html">The Separation of Concerns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit_testing.html">Unit Testing</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel_httpkernelinterface.html">The HttpKernel Component: HttpKernelInterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel_httpkernel_class.html">The HttpKernel Component: The HttpKernel Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependency_injection.html">The DependencyInjection Component</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Create your own PHP Framework</a> &raquo;</li>
+        
+      <li>The EventDispatcher Component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/create_framework/event_dispatcher.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-eventdispatcher-component">
+<h1>The EventDispatcher Component<a class="headerlink" href="#the-eventdispatcher-component" title="Permalink to this headline">¶</a></h1>
+<p>Our framework is still missing a major characteristic of any good framework:
+<em>extensibility</em>. Being extensible means that the developer should be able to
+hook into the framework life cycle to modify the way the request is handled.</p>
+<p>What kind of hooks are we talking about? Authentication or caching for
+instance. To be flexible, hooks must be plug-and-play; the ones you “register”
+for an application are different from the next one depending on your specific
+needs. Many software have a similar concept like Drupal or Wordpress. In some
+languages, there is even a standard like <a class="reference external" href="https://www.python.org/dev/peps/pep-0333/#middleware-components-that-play-both-sides">WSGI</a> in Python or <a class="reference external" href="https://github.com/rack/rack">Rack</a> in Ruby.</p>
+<p>As there is no standard for PHP, we are going to use a well-known design
+pattern, the <em>Mediator</em>, to allow any kind of behaviors to be attached to our
+framework; the Symfony EventDispatcher Component implements a lightweight
+version of this pattern:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/event-dispatcher
+</pre></div>
+</td></tr></table></div>
+<p>How does it work? The <em>dispatcher</em>, the central object of the event dispatcher
+system, notifies <em>listeners</em> of an <em>event</em> dispatched to it. Put another way:
+your code dispatches an event to the dispatcher, the dispatcher notifies all
+registered listeners for the event, and each listener do whatever it wants
+with the event.</p>
+<p>As an example, let’s create a listener that transparently adds the Google
+Analytics code to all responses.</p>
+<p>To make it work, the framework must dispatch an event just before returning
+the Response instance:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/src/Simplex/Framework.php</span>
+<span class="k">namespace</span> <span class="nx">Simplex</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher\EventDispatcher</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Controller\ControllerResolverInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\Exception\ResourceNotFoundException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\Matcher\UrlMatcherInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Framework</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$dispatcher</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$matcher</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$controllerResolver</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$argumentResolver</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">EventDispatcher</span> <span class="nv">$dispatcher</span><span class="p">,</span> <span class="nx">UrlMatcherInterface</span> <span class="nv">$matcher</span><span class="p">,</span> <span class="nx">ControllerResolverInterface</span> <span class="nv">$controllerResolver</span><span class="p">,</span> <span class="nx">ArgumentResolverInterface</span> <span class="nv">$argumentResolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dispatcher</span> <span class="o">=</span> <span class="nv">$dispatcher</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">matcher</span> <span class="o">=</span> <span class="nv">$matcher</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">controllerResolver</span> <span class="o">=</span> <span class="nv">$controllerResolver</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">argumentResolver</span> <span class="o">=</span> <span class="nv">$argumentResolver</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">matcher</span><span class="o">-&gt;</span><span class="na">getContext</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">matcher</span><span class="o">-&gt;</span><span class="na">match</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPathInfo</span><span class="p">()));</span>
+
+            <span class="nv">$controller</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">controllerResolver</span><span class="o">-&gt;</span><span class="na">getController</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+            <span class="nv">$arguments</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">argumentResolver</span><span class="o">-&gt;</span><span class="na">getArguments</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$controller</span><span class="p">);</span>
+
+            <span class="nv">$response</span> <span class="o">=</span> <span class="nb">call_user_func_array</span><span class="p">(</span><span class="nv">$controller</span><span class="p">,</span> <span class="nv">$arguments</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">ResourceNotFoundException</span> <span class="nv">$exception</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Not Found&#39;</span><span class="p">,</span> <span class="mi">404</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$exception</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;An error occurred&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// dispatch a response event</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dispatcher</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span><span class="k">new</span> <span class="nx">ResponseEvent</span><span class="p">(</span><span class="nv">$response</span><span class="p">,</span> <span class="nv">$request</span><span class="p">),</span> <span class="s1">&#39;response&#39;</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Each time the framework handles a Request, a <code class="docutils literal notranslate"><span class="pre">ResponseEvent</span></code> event is
+now dispatched:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/src/Simplex/ResponseEvent.php</span>
+<span class="k">namespace</span> <span class="nx">Simplex</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Contracts\EventDispatcher\Event</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ResponseEvent</span> <span class="k">extends</span> <span class="nx">Event</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$request</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$response</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">Response</span> <span class="nv">$response</span><span class="p">,</span> <span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span> <span class="o">=</span> <span class="nv">$response</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span> <span class="o">=</span> <span class="nv">$request</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getResponse</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getRequest</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The last step is the creation of the dispatcher in the front controller and
+the registration of a listener for the <code class="docutils literal notranslate"><span class="pre">response</span></code> event:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/web/front.php</span>
+<span class="k">require_once</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher\EventDispatcher</span><span class="p">;</span>
+
+<span class="nv">$dispatcher</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventDispatcher</span><span class="p">();</span>
+<span class="nv">$dispatcher</span><span class="o">-&gt;</span><span class="na">addListener</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Simplex\ResponseEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">isRedirection</span><span class="p">()</span>
+        <span class="o">||</span> <span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="k">false</span> <span class="o">===</span> <span class="nb">strpos</span><span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">),</span> <span class="s1">&#39;html&#39;</span><span class="p">))</span>
+        <span class="o">||</span> <span class="s1">&#39;html&#39;</span> <span class="o">!==</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getRequestFormat</span><span class="p">()</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setContent</span><span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getContent</span><span class="p">()</span><span class="o">.</span><span class="s1">&#39;GA CODE&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nv">$controllerResolver</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ControllerResolver</span><span class="p">();</span>
+<span class="nv">$argumentResolver</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArgumentResolver</span><span class="p">();</span>
+
+<span class="nv">$framework</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Simplex\Framework</span><span class="p">(</span><span class="nv">$dispatcher</span><span class="p">,</span> <span class="nv">$matcher</span><span class="p">,</span> <span class="nv">$controllerResolver</span><span class="p">,</span> <span class="nv">$argumentResolver</span><span class="p">);</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$framework</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The listener is just a proof of concept and you should add the Google
+Analytics code just before the body tag.</p>
+</div>
+<p>As you can see, <code class="docutils literal notranslate"><span class="pre">addListener()</span></code> associates a valid PHP callback to a named
+event (<code class="docutils literal notranslate"><span class="pre">response</span></code>); the event name must be the same as the one used in the
+<code class="docutils literal notranslate"><span class="pre">dispatch()</span></code> call.</p>
+<p>In the listener, we add the Google Analytics code only if the response is not
+a redirection, if the requested format is HTML and if the response content
+type is HTML (these conditions demonstrate the ease of manipulating the
+Request and Response data from your code).</p>
+<p>So far so good, but let’s add another listener on the same event. Let’s say
+that we want to set the <code class="docutils literal notranslate"><span class="pre">Content-Length</span></code> of the Response if it is not already
+set:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$dispatcher</span><span class="o">-&gt;</span><span class="na">addListener</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Simplex\ResponseEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+    <span class="nv">$headers</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$headers</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;Content-Length&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nv">$headers</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;Transfer-Encoding&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nv">$headers</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;Content-Length&#39;</span><span class="p">,</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getContent</span><span class="p">()));</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Depending on whether you have added this piece of code before the previous
+listener registration or after it, you will have the wrong or the right value
+for the <code class="docutils literal notranslate"><span class="pre">Content-Length</span></code> header. Sometimes, the order of the listeners
+matter but by default, all listeners are registered with the same priority,
+<code class="docutils literal notranslate"><span class="pre">0</span></code>. To tell the dispatcher to run a listener early, change the priority to
+a positive number; negative numbers can be used for low priority listeners.
+Here, we want the <code class="docutils literal notranslate"><span class="pre">Content-Length</span></code> listener to be executed last, so change
+the priority to <code class="docutils literal notranslate"><span class="pre">-255</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$dispatcher</span><span class="o">-&gt;</span><span class="na">addListener</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Simplex\ResponseEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+    <span class="nv">$headers</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$headers</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;Content-Length&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nv">$headers</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;Transfer-Encoding&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nv">$headers</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;Content-Length&#39;</span><span class="p">,</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getContent</span><span class="p">()));</span>
+    <span class="p">}</span>
+<span class="p">},</span> <span class="o">-</span><span class="mi">255</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">When creating your framework, think about priorities (reserve some numbers
+for internal listeners for instance) and document them thoroughly.</p>
+</div>
+<p>Let’s refactor the code a bit by moving the Google listener to its own class:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/src/Simplex/GoogleListener.php</span>
+<span class="k">namespace</span> <span class="nx">Simplex</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">GoogleListener</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">onResponse</span><span class="p">(</span><span class="nx">ResponseEvent</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">isRedirection</span><span class="p">()</span>
+            <span class="o">||</span> <span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="k">false</span> <span class="o">===</span> <span class="nb">strpos</span><span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">),</span> <span class="s1">&#39;html&#39;</span><span class="p">))</span>
+            <span class="o">||</span> <span class="s1">&#39;html&#39;</span> <span class="o">!==</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getRequestFormat</span><span class="p">()</span>
+        <span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setContent</span><span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getContent</span><span class="p">()</span><span class="o">.</span><span class="s1">&#39;GA CODE&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And do the same with the other listener:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/src/Simplex/ContentLengthListener.php</span>
+<span class="k">namespace</span> <span class="nx">Simplex</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ContentLengthListener</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">onResponse</span><span class="p">(</span><span class="nx">ResponseEvent</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+        <span class="nv">$headers</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$headers</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;Content-Length&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nv">$headers</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;Transfer-Encoding&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$headers</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;Content-Length&#39;</span><span class="p">,</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getContent</span><span class="p">()));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Our front controller should now look like the following:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$dispatcher</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventDispatcher</span><span class="p">();</span>
+<span class="nv">$dispatcher</span><span class="o">-&gt;</span><span class="na">addListener</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span> <span class="p">[</span><span class="k">new</span> <span class="nx">Simplex\ContentLengthListener</span><span class="p">(),</span> <span class="s1">&#39;onResponse&#39;</span><span class="p">],</span> <span class="o">-</span><span class="mi">255</span><span class="p">);</span>
+<span class="nv">$dispatcher</span><span class="o">-&gt;</span><span class="na">addListener</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span> <span class="p">[</span><span class="k">new</span> <span class="nx">Simplex\GoogleListener</span><span class="p">(),</span> <span class="s1">&#39;onResponse&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p>Even if the code is now nicely wrapped in classes, there is still a slight
+issue: the knowledge of the priorities is “hardcoded” in the front controller,
+instead of being in the listeners themselves. For each application, you have
+to remember to set the appropriate priorities. Moreover, the listener method
+names are also exposed here, which means that refactoring our listeners would
+mean changing all the applications that rely on those listeners. The solution
+to this dilemma is to use subscribers instead of listeners:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$dispatcher</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventDispatcher</span><span class="p">();</span>
+<span class="nv">$dispatcher</span><span class="o">-&gt;</span><span class="na">addSubscriber</span><span class="p">(</span><span class="k">new</span> <span class="nx">Simplex\ContentLengthListener</span><span class="p">());</span>
+<span class="nv">$dispatcher</span><span class="o">-&gt;</span><span class="na">addSubscriber</span><span class="p">(</span><span class="k">new</span> <span class="nx">Simplex\GoogleListener</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>A subscriber knows about all the events it is interested in and pass this
+information to the dispatcher via the <code class="docutils literal notranslate"><span class="pre">getSubscribedEvents()</span></code> method. Have a
+look at the new version of the <code class="docutils literal notranslate"><span class="pre">GoogleListener</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/src/Simplex/GoogleListener.php</span>
+<span class="k">namespace</span> <span class="nx">Simplex</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher\EventSubscriberInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">GoogleListener</span> <span class="k">implements</span> <span class="nx">EventSubscriberInterface</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getSubscribedEvents</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;response&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;onResponse&#39;</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And here is the new version of <code class="docutils literal notranslate"><span class="pre">ContentLengthListener</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/src/Simplex/ContentLengthListener.php</span>
+<span class="k">namespace</span> <span class="nx">Simplex</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher\EventSubscriberInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ContentLengthListener</span> <span class="k">implements</span> <span class="nx">EventSubscriberInterface</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getSubscribedEvents</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;response&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;onResponse&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">255</span><span class="p">]];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">A single subscriber can host as many listeners as you want on as many
+events as needed.</p>
+</div>
+<p>To make your framework truly flexible, don’t hesitate to add more events; and
+to make it more awesome out of the box, add more listeners. Again, this book
+is not about creating a generic framework, but one that is tailored to your
+needs. Stop whenever you see fit, and further evolve the code from there.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

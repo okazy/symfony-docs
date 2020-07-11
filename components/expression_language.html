@@ -1,0 +1,451 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The ExpressionLanguage Component &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Dumping and Manipulating the AST of Expressions" href="expression_language/ast.html" />
+    <link rel="prev" title="The Traceable Event Dispatcher" href="event_dispatcher/traceable_dispatcher.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cache.html">The Cache Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependency_injection.html">The DependencyInjection Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The ExpressionLanguage Component</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-can-the-expression-engine-help-me">How can the Expression Engine Help Me?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#expression-syntax">Expression Syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#passing-in-variables">Passing in Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#caching">Caching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ast-dumping-and-editing">AST Dumping and Editing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#learn-more">Learn More</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="expression_language/ast.html">Dumping and Manipulating the AST of Expressions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expression_language/caching.html">Caching Expressions Using Parser Caches</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expression_language/extending.html">Extending the ExpressionLanguage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="expression_language/syntax.html">The Expression Syntax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../service_container/expression_language.html">How to Inject Values Based on Complex Expressions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/constraints/Expression.html">Expression</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="form.html">The Form Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html">The Process Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">The Security Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">The Components</a> &raquo;</li>
+        
+      <li>The ExpressionLanguage Component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/components/expression_language.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-expressionlanguage-component">
+<span id="index-0"></span><h1>The ExpressionLanguage Component<a class="headerlink" href="#the-expressionlanguage-component" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div>The ExpressionLanguage component provides an engine that can compile and
+evaluate expressions. An expression is a one-liner that returns a value
+(mostly, but not limited to, Booleans).</div></blockquote>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/expression-language
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you install this component outside of a Symfony application, you must
+require the <code class="docutils literal notranslate"><span class="pre">vendor/autoload.php</span></code> file in your code to enable the class
+autoloading mechanism provided by Composer. Read
+<a class="reference internal" href="using_components.html"><span class="doc">this article</span></a> for more details.</p>
+</div>
+</div>
+<div class="section" id="how-can-the-expression-engine-help-me">
+<h2>How can the Expression Engine Help Me?<a class="headerlink" href="#how-can-the-expression-engine-help-me" title="Permalink to this headline">¶</a></h2>
+<p>The purpose of the component is to allow users to use expressions inside
+configuration for more complex logic. For some examples, the Symfony Framework
+uses expressions in security, for validation rules and in route matching.</p>
+<p>Besides using the component in the framework itself, the ExpressionLanguage
+component is a perfect candidate for the foundation of a <em>business rule engine</em>.
+The idea is to let the webmaster of a website configure things in a dynamic
+way without using PHP and without introducing security problems:</p>
+<div class="highlight-text notranslate" id="component-expression-language-examples"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span># Get the special price if
+user.getGroup() in [&#39;good_customers&#39;, &#39;collaborator&#39;]
+
+# Promote article to the homepage when
+article.commentCount &gt; 100 and article.category not in [&quot;misc&quot;]
+
+# Send an alert when
+product.stock &lt; 15
+</pre></div>
+</td></tr></table></div>
+<p>Expressions can be seen as a very restricted PHP sandbox and are immune to
+external injections as you must explicitly declare which variables are available
+in an expression.</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>The ExpressionLanguage component can compile and evaluate expressions.
+Expressions are one-liners that often return a Boolean, which can be used
+by the code executing the expression in an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement. A simple example
+of an expression is <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">2</span></code>. You can also use more complicated expressions,
+such as <code class="docutils literal notranslate"><span class="pre">someArray[3].someMethod('bar')</span></code>.</p>
+<p>The component provides 2 ways to work with expressions:</p>
+<ul class="simple">
+<li><strong>evaluation</strong>: the expression is evaluated without being compiled to PHP;</li>
+<li><strong>compile</strong>: the expression is compiled to PHP, so it can be cached and
+evaluated.</li>
+</ul>
+<p>The main class of the component is
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/ExpressionLanguage/ExpressionLanguage.php" title="Symfony\Component\ExpressionLanguage\ExpressionLanguage"><span class="pre">ExpressionLanguage</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\ExpressionLanguage\ExpressionLanguage</span><span class="p">;</span>
+
+<span class="nv">$expressionLanguage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ExpressionLanguage</span><span class="p">();</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$expressionLanguage</span><span class="o">-&gt;</span><span class="na">evaluate</span><span class="p">(</span><span class="s1">&#39;1 + 2&#39;</span><span class="p">));</span> <span class="c1">// displays 3</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$expressionLanguage</span><span class="o">-&gt;</span><span class="na">compile</span><span class="p">(</span><span class="s1">&#39;1 + 2&#39;</span><span class="p">));</span> <span class="c1">// displays (1 + 2)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="expression-syntax">
+<h2>Expression Syntax<a class="headerlink" href="#expression-syntax" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference internal" href="expression_language/syntax.html"><span class="doc">The Expression Syntax</span></a> to learn the syntax of the
+ExpressionLanguage component.</p>
+</div>
+<div class="section" id="passing-in-variables">
+<h2>Passing in Variables<a class="headerlink" href="#passing-in-variables" title="Permalink to this headline">¶</a></h2>
+<p>You can also pass variables into the expression, which can be of any valid
+PHP type (including objects):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\ExpressionLanguage\ExpressionLanguage</span><span class="p">;</span>
+
+<span class="nv">$expressionLanguage</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ExpressionLanguage</span><span class="p">();</span>
+
+<span class="k">class</span> <span class="nc">Apple</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$variety</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nv">$apple</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Apple</span><span class="p">();</span>
+<span class="nv">$apple</span><span class="o">-&gt;</span><span class="na">variety</span> <span class="o">=</span> <span class="s1">&#39;Honeycrisp&#39;</span><span class="p">;</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$expressionLanguage</span><span class="o">-&gt;</span><span class="na">evaluate</span><span class="p">(</span>
+    <span class="s1">&#39;fruit.variety&#39;</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;fruit&#39;</span> <span class="o">=&gt;</span> <span class="nv">$apple</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">));</span> <span class="c1">// displays &quot;Honeycrisp&quot;</span>
+</pre></div>
+</div>
+<p>For more information, see the <a class="reference internal" href="expression_language/syntax.html"><span class="doc">The Expression Syntax</span></a>
+entry, especially <a class="reference internal" href="expression_language/syntax.html#component-expression-objects"><span class="std std-ref">Working with Objects</span></a> and <a class="reference internal" href="expression_language/syntax.html#component-expression-arrays"><span class="std std-ref">Working with Arrays</span></a>.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">When using variables in expressions, avoid passing untrusted data into the
+array of variables. If you can’t avoid that, sanitize non-alphanumeric
+characters in untrusted data to prevent malicious users from injecting
+control characters and altering the expression.</p>
+</div>
+</div>
+<div class="section" id="caching">
+<h2>Caching<a class="headerlink" href="#caching" title="Permalink to this headline">¶</a></h2>
+<p>The component provides some different caching strategies, read more about them
+in <a class="reference internal" href="expression_language/caching.html"><span class="doc">Caching Expressions Using Parser Caches</span></a>.</p>
+</div>
+<div class="section" id="ast-dumping-and-editing">
+<h2>AST Dumping and Editing<a class="headerlink" href="#ast-dumping-and-editing" title="Permalink to this headline">¶</a></h2>
+<p>The AST (<em>Abstract Syntax Tree</em>) of expressions can be dumped and manipulated
+as explained in <a class="reference internal" href="expression_language/ast.html"><span class="doc">Dumping and Manipulating the AST of Expressions</span></a>.</p>
+</div>
+<div class="section" id="learn-more">
+<h2>Learn More<a class="headerlink" href="#learn-more" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="expression_language/ast.html">Dumping and Manipulating the AST of Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expression_language/caching.html">Caching Expressions Using Parser Caches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expression_language/extending.html">Extending the ExpressionLanguage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expression_language/syntax.html">The Expression Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container/expression_language.html">How to Inject Values Based on Complex Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/constraints/Expression.html">Expression</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

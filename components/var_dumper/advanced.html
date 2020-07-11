@@ -1,0 +1,695 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Advanced Usage of the VarDumper Component &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="The VarExporter Component" href="../var_exporter.html" />
+    <link rel="prev" title="The VarDumper Component" href="../var_dumper.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cache.html">The Cache Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dependency_injection.html">The DependencyInjection Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../form.html">The Form Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../process.html">The Process Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html">The Security Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validator.html">The Validator Component</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../var_dumper.html">The VarDumper Component</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../var_dumper.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../var_dumper.html#the-dump-function">The dump() Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../var_dumper.html#the-dump-server">The Dump Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../var_dumper.html#debugbundle-and-twig-integration">DebugBundle and Twig Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../var_dumper.html#using-the-vardumper-component-in-your-phpunit-test-suite">Using the VarDumper Component in your PHPUnit Test Suite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../var_dumper.html#dump-examples-and-output">Dump Examples and Output</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../var_dumper.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Advanced Usage of the VarDumper Component</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">The Components</a> &raquo;</li>
+        
+          <li><a href="../var_dumper.html">The VarDumper Component</a> &raquo;</li>
+        
+      <li>Advanced Usage of the VarDumper Component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/components/var_dumper/advanced.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="advanced-usage-of-the-vardumper-component">
+<span id="index-0"></span><h1>Advanced Usage of the VarDumper Component<a class="headerlink" href="#advanced-usage-of-the-vardumper-component" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">dump()</span></code> function is just a thin wrapper and a more convenient way to call
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/VarDumper.php" title="Symfony\Component\VarDumper\VarDumper::dump()"><span class="pre">VarDumper::dump()</span></a></code>.
+You can change the behavior of this function by calling
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/VarDumper.php" title="Symfony\Component\VarDumper\VarDumper::setHandler()"><span class="pre">VarDumper::setHandler($callable)</span></a></code>.
+Calls to <code class="docutils literal notranslate"><span class="pre">dump()</span></code> will then be forwarded to <code class="docutils literal notranslate"><span class="pre">$callable</span></code>.</p>
+<p>By adding a handler, you can customize the <a class="reference internal" href="#cloners">Cloners</a>, <a class="reference internal" href="#dumpers">Dumpers</a> and <a class="reference internal" href="#casters">Casters</a>
+as explained below. A simple implementation of a handler function might look
+like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Cloner\VarCloner</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Dumper\CliDumper</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Dumper\HtmlDumper</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\VarDumper</span><span class="p">;</span>
+
+<span class="nx">VarDumper</span><span class="o">::</span><span class="na">setHandler</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$var</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$cloner</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VarCloner</span><span class="p">();</span>
+    <span class="nv">$dumper</span> <span class="o">=</span> <span class="s1">&#39;cli&#39;</span> <span class="o">===</span> <span class="nx">PHP_SAPI</span> <span class="o">?</span> <span class="k">new</span> <span class="nx">CliDumper</span><span class="p">()</span> <span class="o">:</span> <span class="k">new</span> <span class="nx">HtmlDumper</span><span class="p">();</span>
+
+    <span class="nv">$dumper</span><span class="o">-&gt;</span><span class="na">dump</span><span class="p">(</span><span class="nv">$cloner</span><span class="o">-&gt;</span><span class="na">cloneVar</span><span class="p">(</span><span class="nv">$var</span><span class="p">));</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="section" id="cloners">
+<h2>Cloners<a class="headerlink" href="#cloners" title="Permalink to this headline">¶</a></h2>
+<p>A cloner is used to create an intermediate representation of any PHP variable.
+Its output is a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Cloner/Data.php" title="Symfony\Component\VarDumper\Cloner\Data"><span class="pre">Data</span></a></code>
+object that wraps this representation.</p>
+<p>You can create a <code class="docutils literal notranslate"><span class="pre">Data</span></code> object this way:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Cloner\VarCloner</span><span class="p">;</span>
+
+<span class="nv">$cloner</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VarCloner</span><span class="p">();</span>
+<span class="nv">$data</span> <span class="o">=</span> <span class="nv">$cloner</span><span class="o">-&gt;</span><span class="na">cloneVar</span><span class="p">(</span><span class="nv">$myVar</span><span class="p">);</span>
+<span class="c1">// this is commonly then passed to the dumper</span>
+<span class="c1">// see the example at the top of this page</span>
+<span class="c1">// $dumper-&gt;dump($data);</span>
+</pre></div>
+</div>
+<p>Whatever the cloned data structure, resulting <code class="docutils literal notranslate"><span class="pre">Data</span></code> objects are always
+serializable.</p>
+<p>A cloner applies limits when creating the representation, so that one
+can represent only a subset of the cloned variable.
+Before calling <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Cloner/VarCloner.php" title="Symfony\Component\VarDumper\Cloner\VarCloner::cloneVar()"><span class="pre">cloneVar()</span></a></code>,
+you can configure these limits:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Cloner/VarCloner.php" title="Symfony\Component\VarDumper\Cloner\VarCloner::setMaxItems()"><span class="pre">setMaxItems()</span></a></code></dt>
+<dd>Configures the maximum number of items that will be cloned
+<em>past the minimum nesting depth</em>. Items are counted using a breadth-first
+algorithm so that lower level items have higher priority than deeply nested
+items. Specifying <code class="docutils literal notranslate"><span class="pre">-1</span></code> removes the limit.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Cloner/VarCloner.php" title="Symfony\Component\VarDumper\Cloner\VarCloner::setMinDepth()"><span class="pre">setMinDepth()</span></a></code></dt>
+<dd>Configures the minimum tree depth where we are guaranteed to clone
+all the items. After this depth is reached, only <code class="docutils literal notranslate"><span class="pre">setMaxItems</span></code>
+items will be cloned. The default value is <code class="docutils literal notranslate"><span class="pre">1</span></code>, which is consistent
+with older Symfony versions.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Cloner/VarCloner.php" title="Symfony\Component\VarDumper\Cloner\VarCloner::setMaxString()"><span class="pre">setMaxString()</span></a></code></dt>
+<dd>Configures the maximum number of characters that will be cloned before
+cutting overlong strings.  Specifying <code class="docutils literal notranslate"><span class="pre">-1</span></code> removes the limit.</dd>
+</dl>
+<p>Before dumping it, you can further limit the resulting
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Cloner/Data.php" title="Symfony\Component\VarDumper\Cloner\Data"><span class="pre">Data</span></a></code> object using the following methods:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Cloner/Data.php" title="Symfony\Component\VarDumper\Cloner\Data::withMaxDepth()"><span class="pre">withMaxDepth()</span></a></code></dt>
+<dd>Limits dumps in the depth dimension.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Cloner/Data.php" title="Symfony\Component\VarDumper\Cloner\Data::withMaxItemsPerDepth()"><span class="pre">withMaxItemsPerDepth()</span></a></code></dt>
+<dd>Limits the number of items per depth level.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Cloner/Data.php" title="Symfony\Component\VarDumper\Cloner\Data::withRefHandles()"><span class="pre">withRefHandles()</span></a></code></dt>
+<dd>Removes internal objects’ handles for sparser output (useful for tests).</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Cloner/Data.php" title="Symfony\Component\VarDumper\Cloner\Data::seek()"><span class="pre">seek()</span></a></code></dt>
+<dd>Selects only sub-parts of already cloned arrays, objects or resources.</dd>
+</dl>
+<p>Unlike the previous limits on cloners that remove data on purpose, these can
+be changed back and forth before dumping since they do not affect the
+intermediate representation internally.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When no limit is applied, a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Cloner/Data.php" title="Symfony\Component\VarDumper\Cloner\Data"><span class="pre">Data</span></a></code>
+object is as accurate as the native <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.serialize.php" title="serialize"><span class="pre">serialize</span></a></code> function,
+and thus could be used for purposes beyond debugging.</p>
+</div>
+</div>
+<div class="section" id="dumpers">
+<h2>Dumpers<a class="headerlink" href="#dumpers" title="Permalink to this headline">¶</a></h2>
+<p>A dumper is responsible for outputting a string representation of a PHP variable,
+using a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Cloner/Data.php" title="Symfony\Component\VarDumper\Cloner\Data"><span class="pre">Data</span></a></code> object as input.
+The destination and the formatting of this output vary with dumpers.</p>
+<p>This component comes with an <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Dumper/HtmlDumper.php" title="Symfony\Component\VarDumper\Dumper\HtmlDumper"><span class="pre">HtmlDumper</span></a></code>
+for HTML output and a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Dumper/CliDumper.php" title="Symfony\Component\VarDumper\Dumper\CliDumper"><span class="pre">CliDumper</span></a></code>
+for optionally colored command line output.</p>
+<p>For example, if you want to dump some <code class="docutils literal notranslate"><span class="pre">$variable</span></code>, do:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Cloner\VarCloner</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Dumper\CliDumper</span><span class="p">;</span>
+
+<span class="nv">$cloner</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VarCloner</span><span class="p">();</span>
+<span class="nv">$dumper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CliDumper</span><span class="p">();</span>
+
+<span class="nv">$dumper</span><span class="o">-&gt;</span><span class="na">dump</span><span class="p">(</span><span class="nv">$cloner</span><span class="o">-&gt;</span><span class="na">cloneVar</span><span class="p">(</span><span class="nv">$variable</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>By using the first argument of the constructor, you can select the output
+stream where the dump will be written. By default, the <code class="docutils literal notranslate"><span class="pre">CliDumper</span></code> writes
+on <code class="docutils literal notranslate"><span class="pre">php://stdout</span></code> and the <code class="docutils literal notranslate"><span class="pre">HtmlDumper</span></code> on <code class="docutils literal notranslate"><span class="pre">php://output</span></code>. But any PHP
+stream (resource or URL) is acceptable.</p>
+<p>Instead of a stream destination, you can also pass it a <code class="docutils literal notranslate"><span class="pre">callable</span></code> that
+will be called repeatedly for each line generated by a dumper. This
+callable can be configured using the first argument of a dumper’s constructor,
+but also using the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Dumper/AbstractDumper.php" title="Symfony\Component\VarDumper\Dumper\AbstractDumper::setOutput()"><span class="pre">setOutput()</span></a></code>
+method or the second argument of the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Dumper/AbstractDumper.php" title="Symfony\Component\VarDumper\Dumper\AbstractDumper::dump()"><span class="pre">dump()</span></a></code> method.</p>
+<p>For example, to get a dump as a string in a variable, you can do:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Cloner\VarCloner</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Dumper\CliDumper</span><span class="p">;</span>
+
+<span class="nv">$cloner</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VarCloner</span><span class="p">();</span>
+<span class="nv">$dumper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CliDumper</span><span class="p">();</span>
+<span class="nv">$output</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="nv">$dumper</span><span class="o">-&gt;</span><span class="na">dump</span><span class="p">(</span>
+    <span class="nv">$cloner</span><span class="o">-&gt;</span><span class="na">cloneVar</span><span class="p">(</span><span class="nv">$variable</span><span class="p">),</span>
+    <span class="k">function</span> <span class="p">(</span><span class="nv">$line</span><span class="p">,</span> <span class="nv">$depth</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="o">&amp;</span><span class="nv">$output</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// A negative depth means &quot;end of dump&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$depth</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Adds a two spaces indentation to the line</span>
+            <span class="nv">$output</span> <span class="o">.=</span> <span class="nb">str_repeat</span><span class="p">(</span><span class="s1">&#39;  &#39;</span><span class="p">,</span> <span class="nv">$depth</span><span class="p">)</span><span class="o">.</span><span class="nv">$line</span><span class="o">.</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">);</span>
+
+<span class="c1">// $output is now populated with the dump representation of $variable</span>
+</pre></div>
+</div>
+<p>Another option for doing the same could be:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Cloner\VarCloner</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Dumper\CliDumper</span><span class="p">;</span>
+
+<span class="nv">$cloner</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VarCloner</span><span class="p">();</span>
+<span class="nv">$dumper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CliDumper</span><span class="p">();</span>
+<span class="nv">$output</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="s1">&#39;php://memory&#39;</span><span class="p">,</span> <span class="s1">&#39;r+b&#39;</span><span class="p">);</span>
+
+<span class="nv">$dumper</span><span class="o">-&gt;</span><span class="na">dump</span><span class="p">(</span><span class="nv">$cloner</span><span class="o">-&gt;</span><span class="na">cloneVar</span><span class="p">(</span><span class="nv">$variable</span><span class="p">),</span> <span class="nv">$output</span><span class="p">);</span>
+<span class="nv">$output</span> <span class="o">=</span> <span class="nb">stream_get_contents</span><span class="p">(</span><span class="nv">$output</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">// $output is now populated with the dump representation of $variable</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>You can pass <code class="docutils literal notranslate"><span class="pre">true</span></code> to the second argument of the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Dumper/AbstractDumper.php" title="Symfony\Component\VarDumper\Dumper\AbstractDumper::dump()"><span class="pre">dump()</span></a></code>
+method to make it return the dump as a string:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$output</span> <span class="o">=</span> <span class="nv">$dumper</span><span class="o">-&gt;</span><span class="na">dump</span><span class="p">(</span><span class="nv">$cloner</span><span class="o">-&gt;</span><span class="na">cloneVar</span><span class="p">(</span><span class="nv">$variable</span><span class="p">),</span> <span class="k">true</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<p>Dumpers implement the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Dumper/DataDumperInterface.php" title="Symfony\Component\VarDumper\Dumper\DataDumperInterface"><span class="pre">DataDumperInterface</span></a></code>
+interface that specifies the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Dumper/DataDumperInterface.php" title="Symfony\Component\VarDumper\Dumper\DataDumperInterface::dump()"><span class="pre">dump(Data</span> <span class="pre">$data)</span></a></code>
+method. They also typically implement the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Cloner/DumperInterface.php" title="Symfony\Component\VarDumper\Cloner\DumperInterface"><span class="pre">DumperInterface</span></a></code> that frees
+them from re-implementing the logic required to walk through a
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Cloner/Data.php" title="Symfony\Component\VarDumper\Cloner\Data"><span class="pre">Data</span></a></code> object’s internal structure.</p>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Dumper/HtmlDumper.php" title="Symfony\Component\VarDumper\Dumper\HtmlDumper"><span class="pre">HtmlDumper</span></a></code> uses a dark
+theme by default. Use the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Dumper/HtmlDumper.php" title="Symfony\Component\VarDumper\Dumper\HtmlDumper::setTheme()"><span class="pre">setTheme()</span></a></code>
+method to use a light theme:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$htmlDumper</span><span class="o">-&gt;</span><span class="na">setTheme</span><span class="p">(</span><span class="s1">&#39;light&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Dumper/HtmlDumper.php" title="Symfony\Component\VarDumper\Dumper\HtmlDumper"><span class="pre">HtmlDumper</span></a></code> limits string
+length and nesting depth of the output to make it more readable. These options
+can be overridden by the third optional parameter of the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Dumper/DataDumperInterface.php" title="Symfony\Component\VarDumper\Dumper\DataDumperInterface::dump()"><span class="pre">dump(Data</span> <span class="pre">$data)</span></a></code>
+method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Dumper\HtmlDumper</span><span class="p">;</span>
+
+<span class="nv">$output</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="s1">&#39;php://memory&#39;</span><span class="p">,</span> <span class="s1">&#39;r+b&#39;</span><span class="p">);</span>
+
+<span class="nv">$dumper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HtmlDumper</span><span class="p">();</span>
+<span class="nv">$dumper</span><span class="o">-&gt;</span><span class="na">dump</span><span class="p">(</span><span class="nv">$var</span><span class="p">,</span> <span class="nv">$output</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// 1 and 160 are the default values for these options</span>
+    <span class="s1">&#39;maxDepth&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;maxStringLength&#39;</span> <span class="o">=&gt;</span> <span class="mi">160</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>The output format of a dumper can be fine tuned by the two flags
+<code class="docutils literal notranslate"><span class="pre">DUMP_STRING_LENGTH</span></code> and <code class="docutils literal notranslate"><span class="pre">DUMP_LIGHT_ARRAY</span></code> which are passed as a bitmap
+in the third constructor argument. They can also be set via environment
+variables when using
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Test/VarDumperTestTrait.php" title="Symfony\Component\VarDumper\Test\VarDumperTestTrait::assertDumpEquals()"><span class="pre">assertDumpEquals($dump,</span> <span class="pre">$data,</span> <span class="pre">$filter,</span> <span class="pre">$message)</span></a></code>
+during unit testing.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">$filter</span></code> argument of <code class="docutils literal notranslate"><span class="pre">assertDumpEquals()</span></code> can be used to pass a
+bit field of <code class="docutils literal notranslate"><span class="pre">Caster::EXCLUDE_*</span></code> constants and influences the expected
+output produced by the different casters.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">DUMP_STRING_LENGTH</span></code> is set, then the length of a string is displayed
+next to its content:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Cloner\VarCloner</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Dumper\AbstractDumper</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Dumper\CliDumper</span><span class="p">;</span>
+
+<span class="nv">$varCloner</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VarCloner</span><span class="p">();</span>
+<span class="nv">$var</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">];</span>
+
+<span class="nv">$dumper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CliDumper</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nv">$dumper</span><span class="o">-&gt;</span><span class="na">dump</span><span class="p">(</span><span class="nv">$varCloner</span><span class="o">-&gt;</span><span class="na">cloneVar</span><span class="p">(</span><span class="nv">$var</span><span class="p">),</span> <span class="k">true</span><span class="p">);</span>
+
+<span class="c1">// array:1 [</span>
+<span class="c1">//   0 =&gt; &quot;test&quot;</span>
+<span class="c1">// ]</span>
+
+<span class="nv">$dumper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CliDumper</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="nx">AbstractDumper</span><span class="o">::</span><span class="na">DUMP_STRING_LENGTH</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$dumper</span><span class="o">-&gt;</span><span class="na">dump</span><span class="p">(</span><span class="nv">$varCloner</span><span class="o">-&gt;</span><span class="na">cloneVar</span><span class="p">(</span><span class="nv">$var</span><span class="p">),</span> <span class="k">true</span><span class="p">);</span>
+
+<span class="c1">// (added string length before the string)</span>
+<span class="c1">// array:1 [</span>
+<span class="c1">//   0 =&gt; (4) &quot;test&quot;</span>
+<span class="c1">// ]</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">DUMP_LIGHT_ARRAY</span></code> is set, then arrays are dumped in a shortened format
+similar to PHP’s short array notation:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Cloner\VarCloner</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Dumper\AbstractDumper</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Dumper\CliDumper</span><span class="p">;</span>
+
+<span class="nv">$varCloner</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VarCloner</span><span class="p">();</span>
+<span class="nv">$var</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">];</span>
+
+<span class="nv">$dumper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CliDumper</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nv">$dumper</span><span class="o">-&gt;</span><span class="na">dump</span><span class="p">(</span><span class="nv">$varCloner</span><span class="o">-&gt;</span><span class="na">cloneVar</span><span class="p">(</span><span class="nv">$var</span><span class="p">),</span> <span class="k">true</span><span class="p">);</span>
+
+<span class="c1">// array:1 [</span>
+<span class="c1">//   0 =&gt; &quot;test&quot;</span>
+<span class="c1">// ]</span>
+
+<span class="nv">$dumper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CliDumper</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="nx">AbstractDumper</span><span class="o">::</span><span class="na">DUMP_LIGHT_ARRAY</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$dumper</span><span class="o">-&gt;</span><span class="na">dump</span><span class="p">(</span><span class="nv">$varCloner</span><span class="o">-&gt;</span><span class="na">cloneVar</span><span class="p">(</span><span class="nv">$var</span><span class="p">),</span> <span class="k">true</span><span class="p">);</span>
+
+<span class="c1">// (no more array:1 prefix)</span>
+<span class="c1">// [</span>
+<span class="c1">//   0 =&gt; &quot;test&quot;</span>
+<span class="c1">// ]</span>
+</pre></div>
+</div>
+<p>If you would like to use both options, then you can combine them by
+using the logical OR operator <code class="docutils literal notranslate"><span class="pre">|</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Cloner\VarCloner</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Dumper\AbstractDumper</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Dumper\CliDumper</span><span class="p">;</span>
+
+<span class="nv">$varCloner</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VarCloner</span><span class="p">();</span>
+<span class="nv">$var</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">];</span>
+
+<span class="nv">$dumper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CliDumper</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="nx">AbstractDumper</span><span class="o">::</span><span class="na">DUMP_STRING_LENGTH</span> <span class="o">|</span> <span class="nx">AbstractDumper</span><span class="o">::</span><span class="na">DUMP_LIGHT_ARRAY</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$dumper</span><span class="o">-&gt;</span><span class="na">dump</span><span class="p">(</span><span class="nv">$varCloner</span><span class="o">-&gt;</span><span class="na">cloneVar</span><span class="p">(</span><span class="nv">$var</span><span class="p">),</span> <span class="k">true</span><span class="p">);</span>
+
+<span class="c1">// [</span>
+<span class="c1">//   0 =&gt; (4) &quot;test&quot;</span>
+<span class="c1">// ]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="casters">
+<h2>Casters<a class="headerlink" href="#casters" title="Permalink to this headline">¶</a></h2>
+<p>Objects and resources nested in a PHP variable are “cast” to arrays in the
+intermediate <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Cloner/Data.php" title="Symfony\Component\VarDumper\Cloner\Data"><span class="pre">Data</span></a></code>
+representation. You can customize the array representation for each object/resource
+by hooking a Caster into this process. The component already includes many
+casters for base PHP classes and other common classes.</p>
+<p>If you want to build your own Caster, you can register one before cloning
+a PHP variable. Casters are registered using either a Cloner’s constructor
+or its <code class="docutils literal notranslate"><span class="pre">addCasters()</span></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Cloner\VarCloner</span><span class="p">;</span>
+
+<span class="nv">$myCasters</span> <span class="o">=</span> <span class="p">[</span><span class="o">...</span><span class="p">];</span>
+<span class="nv">$cloner</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VarCloner</span><span class="p">(</span><span class="nv">$myCasters</span><span class="p">);</span>
+
+<span class="c1">// or</span>
+
+<span class="nv">$cloner</span><span class="o">-&gt;</span><span class="na">addCasters</span><span class="p">(</span><span class="nv">$myCasters</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The provided <code class="docutils literal notranslate"><span class="pre">$myCasters</span></code> argument is an array that maps a class,
+an interface or a resource type to a callable:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$myCasters</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;FooClass&#39;</span> <span class="o">=&gt;</span> <span class="nv">$myFooClassCallableCaster</span><span class="p">,</span>
+    <span class="s1">&#39;:bar resource&#39;</span> <span class="o">=&gt;</span> <span class="nv">$myBarResourceCallableCaster</span><span class="p">,</span>
+<span class="p">];</span>
+</pre></div>
+</div>
+<p>As you can notice, resource types are prefixed by a <code class="docutils literal notranslate"><span class="pre">:</span></code> to prevent
+colliding with a class name.</p>
+<p>Because an object has one main class and potentially many parent classes
+or interfaces, many casters can be applied to one object. In this case,
+casters are called one after the other, starting from casters bound to the
+interfaces, the parents classes and then the main class. Several casters
+can also be registered for the same resource type/class/interface.
+They are called in registration order.</p>
+<p>Casters are responsible for returning the properties of the object or resource
+being cloned in an array. They are callables that accept five arguments:</p>
+<ul class="simple">
+<li>the object or resource being casted;</li>
+<li>an array modeled for objects after PHP’s native <code class="docutils literal notranslate"><span class="pre">(array)</span></code> cast operator;</li>
+<li>a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Cloner/Stub.php" title="Symfony\Component\VarDumper\Cloner\Stub"><span class="pre">Stub</span></a></code> object
+representing the main properties of the object (class, type, etc.);</li>
+<li>true/false when the caster is called nested in a structure or not;</li>
+<li>A bit field of <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Caster/Caster.php" title="Symfony\Component\VarDumper\Caster\Caster"><span class="pre">Caster</span></a></code> <code class="docutils literal notranslate"><span class="pre">::EXCLUDE_*</span></code>
+constants.</li>
+</ul>
+<p>Here is a simple caster not doing anything:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Cloner\Stub</span><span class="p">;</span>
+
+<span class="k">function</span> <span class="nf">myCaster</span><span class="p">(</span><span class="nv">$object</span><span class="p">,</span> <span class="nv">$array</span><span class="p">,</span> <span class="nx">Stub</span> <span class="nv">$stub</span><span class="p">,</span> <span class="nv">$isNested</span><span class="p">,</span> <span class="nv">$filter</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// ... populate/alter $array to your needs</span>
+
+    <span class="k">return</span> <span class="nv">$array</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For objects, the <code class="docutils literal notranslate"><span class="pre">$array</span></code> parameter comes pre-populated using PHP’s native
+<code class="docutils literal notranslate"><span class="pre">(array)</span></code> casting operator or with the return value of <code class="docutils literal notranslate"><span class="pre">$object-&gt;__debugInfo()</span></code>
+if the magic method exists. Then, the return value of one Caster is given
+as the array argument to the next Caster in the chain.</p>
+<p>When casting with the <code class="docutils literal notranslate"><span class="pre">(array)</span></code> operator, PHP prefixes protected properties
+with a <code class="docutils literal notranslate"><span class="pre">\0*\0</span></code> and private ones with the class owning the property. For example,
+<code class="docutils literal notranslate"><span class="pre">\0Foobar\0</span></code> will be the prefix for all private properties of objects of
+type Foobar. Casters follow this convention and add two more prefixes: <code class="docutils literal notranslate"><span class="pre">\0~\0</span></code>
+is used for virtual properties and <code class="docutils literal notranslate"><span class="pre">\0+\0</span></code> for dynamic ones (runtime added
+properties not in the class declaration).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Although you can, it is advised to not alter the state of an object
+while casting it in a Caster.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Before writing your own casters, you should check the existing ones.</p>
+</div>
+<div class="section" id="adding-semantics-with-metadata">
+<h3>Adding Semantics with Metadata<a class="headerlink" href="#adding-semantics-with-metadata" title="Permalink to this headline">¶</a></h3>
+<p>Since casters are hooked on specific classes or interfaces, they know about the
+objects they manipulate. By altering the <code class="docutils literal notranslate"><span class="pre">$stub</span></code> object (the third argument of
+any caster), one can transfer this knowledge to the resulting <code class="docutils literal notranslate"><span class="pre">Data</span></code> object,
+thus to dumpers. To help you do this (see the source code for how it works),
+the component comes with a set of wrappers for common additional semantics. You
+can use:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Caster/ConstStub.php" title="Symfony\Component\VarDumper\Caster\ConstStub"><span class="pre">ConstStub</span></a></code> to wrap a value that is
+best represented by a PHP constant;</li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Caster/ClassStub.php" title="Symfony\Component\VarDumper\Caster\ClassStub"><span class="pre">ClassStub</span></a></code> to wrap a PHP identifier
+(<em>i.e.</em> a class name, a method name, an interface, <em>etc.</em>);</li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Caster/CutStub.php" title="Symfony\Component\VarDumper\Caster\CutStub"><span class="pre">CutStub</span></a></code> to replace big noisy
+objects/strings/<em>etc.</em> by ellipses;</li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Caster/CutArrayStub.php" title="Symfony\Component\VarDumper\Caster\CutArrayStub"><span class="pre">CutArrayStub</span></a></code> to keep only some
+useful keys of an array;</li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Caster/ImgStub.php" title="Symfony\Component\VarDumper\Caster\ImgStub"><span class="pre">ImgStub</span></a></code> to wrap an image;</li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Caster/EnumStub.php" title="Symfony\Component\VarDumper\Caster\EnumStub"><span class="pre">EnumStub</span></a></code> to wrap a set of virtual
+values (<em>i.e.</em> values that do not exist as properties in the original PHP data
+structure, but are worth listing alongside with real ones);</li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Caster/LinkStub.php" title="Symfony\Component\VarDumper\Caster\LinkStub"><span class="pre">LinkStub</span></a></code> to wrap strings that can
+be turned into links by dumpers;</li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Caster/TraceStub.php" title="Symfony\Component\VarDumper\Caster\TraceStub"><span class="pre">TraceStub</span></a></code> and their</li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Caster/FrameStub.php" title="Symfony\Component\VarDumper\Caster\FrameStub"><span class="pre">FrameStub</span></a></code> and</li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Caster/ArgsStub.php" title="Symfony\Component\VarDumper\Caster\ArgsStub"><span class="pre">ArgsStub</span></a></code> relatives to wrap PHP
+traces (used by <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/VarDumper/Caster/ExceptionCaster.php" title="Symfony\Component\VarDumper\Caster\ExceptionCaster"><span class="pre">ExceptionCaster</span></a></code>).</li>
+</ul>
+<p>For example, if you know that your <code class="docutils literal notranslate"><span class="pre">Product</span></code> objects have a <code class="docutils literal notranslate"><span class="pre">brochure</span></code> property
+that holds a file name or a URL, you can wrap them in a <code class="docutils literal notranslate"><span class="pre">LinkStub</span></code> to tell
+<code class="docutils literal notranslate"><span class="pre">HtmlDumper</span></code> to make them clickable:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Caster\LinkStub</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\VarDumper\Cloner\Stub</span><span class="p">;</span>
+
+<span class="k">function</span> <span class="nf">ProductCaster</span><span class="p">(</span><span class="nx">Product</span> <span class="nv">$object</span><span class="p">,</span> <span class="nv">$array</span><span class="p">,</span> <span class="nx">Stub</span> <span class="nv">$stub</span><span class="p">,</span> <span class="nv">$isNested</span><span class="p">,</span> <span class="nv">$filter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$array</span><span class="p">[</span><span class="s1">&#39;brochure&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">LinkStub</span><span class="p">(</span><span class="nv">$array</span><span class="p">[</span><span class="s1">&#39;brochure&#39;</span><span class="p">]);</span>
+
+    <span class="k">return</span> <span class="nv">$array</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

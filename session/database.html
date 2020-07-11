@@ -1,0 +1,1139 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Store Sessions in a Database &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Test Code that Interacts with the Database" href="../testing/database.html" />
+    <link rel="prev" title="How to Generate Entities from an Existing Database" href="../doctrine/reverse_engineering.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#installing-doctrine">Installing Doctrine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#creating-an-entity-class">Creating an Entity Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#migrations-creating-the-database-tables-schema">Migrations: Creating the Database Tables/Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#migrations-adding-more-fields">Migrations &amp; Adding more Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#persisting-objects-to-the-database">Persisting Objects to the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#validating-objects">Validating Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#fetching-objects-from-the-database">Fetching Objects from the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#automatically-fetching-objects-paramconverter">Automatically Fetching Objects (ParamConverter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#updating-an-object">Updating an Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#deleting-an-object">Deleting an Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#querying-for-objects-the-repository">Querying for Objects: The Repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#relationships-and-associations">Relationships and Associations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#database-testing">Database Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#doctrine-extensions-timestampable-translatable-etc">Doctrine Extensions (Timestampable, Translatable, etc.)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../doctrine.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../doctrine/associations.html">How to Work with Doctrine Associations / Relations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../doctrine/events.html">Doctrine Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../doctrine/registration_form.html">How to Implement a Registration Form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../doctrine/custom_dql_functions.html">How to Register custom DQL Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../doctrine/dbal.html">How to Use Doctrine DBAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../doctrine/multiple_entity_managers.html">How to Work with multiple Entity Managers and Connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../doctrine/resolve_target_entity.html">How to Define Relationships with Abstract Classes and Interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../doctrine/reverse_engineering.html">How to Generate Entities from an Existing Database</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Store Sessions in a Database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#store-sessions-in-a-key-value-database-redis">Store Sessions in a key-value Database (Redis)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#store-sessions-in-a-relational-database-mysql-postgresql">Store Sessions in a Relational Database (MySQL, PostgreSQL)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#store-sessions-in-a-nosql-database-mongodb">Store Sessions in a NoSQL Database (MongoDB)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/database.html">How to Test Code that Interacts with the Database</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../doctrine.html">Databases and the Doctrine ORM</a> &raquo;</li>
+        
+      <li>Store Sessions in a Database</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/session/database.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="store-sessions-in-a-database">
+<span id="index-0"></span><h1>Store Sessions in a Database<a class="headerlink" href="#store-sessions-in-a-database" title="Permalink to this headline">¶</a></h1>
+<p>Symfony stores sessions in files by default. If your application is served by
+multiple servers, you’ll need to use instead a database to make sessions work
+across different servers.</p>
+<p>Symfony can store sessions in all kinds of databases (relational, NoSQL and
+key-value) but recommends key-value databases like Redis to get best performance.</p>
+<div class="section" id="store-sessions-in-a-key-value-database-redis">
+<h2>Store Sessions in a key-value Database (Redis)<a class="headerlink" href="#store-sessions-in-a-key-value-database-redis" title="Permalink to this headline">¶</a></h2>
+<p>This section assumes that you have a fully-working Redis server and have also
+installed and configured the <a class="reference external" href="https://github.com/phpredis/phpredis">phpredis extension</a>.</p>
+<p>First, define a Symfony service for the connection to the Redis server:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">Redis</span><span class="p p-Indicator">:</span>
+        <span class="c1"># you can also use \RedisArray, \RedisCluster or \Predis\Client classes</span>
+        <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Redis</span>
+        <span class="l l-Scalar l-Scalar-Plain">calls</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">method</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">connect</span>
+              <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+                  <span class="p p-Indicator">-</span> <span class="s">&#39;%env(REDIS_HOST)%&#39;</span>
+                  <span class="p p-Indicator">-</span> <span class="s">&#39;%env(int:REDIS_PORT)%&#39;</span>
+
+            <span class="c1"># uncomment the following if your Redis server requires a password</span>
+            <span class="c1"># - method: auth</span>
+            <span class="c1">#   arguments:</span>
+            <span class="c1">#       - &#39;%env(REDIS_PASSWORD)%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="c">&lt;!-- you can also use \RedisArray, \RedisCluster or \Predis\Client classes --&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;Redis&quot;</span> <span class="na">class=</span><span class="s">&quot;Redis&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;call</span> <span class="na">method=</span><span class="s">&quot;connect&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;argument&gt;</span>%env(REDIS_HOST)%<span class="nt">&lt;/argument&gt;</span>
+                <span class="nt">&lt;argument&gt;</span>%env(int:REDIS_PORT)%<span class="nt">&lt;/argument&gt;</span>
+            <span class="nt">&lt;/call&gt;</span>
+
+            <span class="c">&lt;!-- uncomment the following if your Redis server requires a password:</span>
+<span class="c">            &lt;call method=&quot;auth&quot;&gt;</span>
+<span class="c">                &lt;argument&gt;%env(REDIS_PASSWORD)%&lt;/argument&gt;</span>
+<span class="c">            &lt;/call&gt; --&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Reference</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$container</span>
+    <span class="c1">// you can also use \RedisArray, \RedisCluster or \Predis\Client classes</span>
+    <span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;Redis&#39;</span><span class="p">,</span> <span class="nx">\Redis</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addMethodCall</span><span class="p">(</span><span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;%env(REDIS_HOST)%&#39;</span><span class="p">,</span> <span class="s1">&#39;%env(int:REDIS_PORT)%&#39;</span><span class="p">])</span>
+    <span class="c1">// uncomment the following if your Redis server requires a password:</span>
+    <span class="c1">// -&gt;addMethodCall(&#39;auth&#39;, [&#39;%env(REDIS_PASSWORD)%&#39;])</span>
+<span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Now pass this <code class="docutils literal notranslate"><span class="pre">\Redis</span></code> connection as an argument of the service associated to the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Storage/Handler/RedisSessionHandler.php" title="Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler"><span class="pre">RedisSessionHandler</span></a></code>.
+This argument can also be a <code class="docutils literal notranslate"><span class="pre">\RedisArray</span></code>, <code class="docutils literal notranslate"><span class="pre">\RedisCluster</span></code>, <code class="docutils literal notranslate"><span class="pre">\Predis\Client</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">RedisProxy</span></code>:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="s">&#39;@Redis&#39;</span>
+            <span class="c1"># you can optionally pass an array of options. The only option is &#39;prefix&#39;,</span>
+            <span class="c1"># which defines the prefix to use for the keys to avoid collision on the Redis server</span>
+            <span class="c1"># - { prefix: &#39;my_prefix&#39; }</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="nt">&lt;services&gt;</span>
+    <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;argument</span> <span class="na">type=</span><span class="s">&quot;service&quot;</span> <span class="na">id=</span><span class="s">&quot;Redis&quot;</span><span class="nt">/&gt;</span>
+        <span class="c">&lt;!-- you can optionally pass an array of options. The only option is &#39;prefix&#39;,</span>
+<span class="c">             which defines the prefix to use for the keys to avoid collision on the Redis server:</span>
+<span class="c">        &lt;argument type=&quot;collection&quot;&gt;</span>
+<span class="c">            &lt;argument key=&quot;prefix&quot;&gt;my_prefix&lt;/argument&gt;</span>
+<span class="c">        &lt;/argument&gt; --&gt;</span>
+    <span class="nt">&lt;/service&gt;</span>
+<span class="nt">&lt;/services&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler</span><span class="p">;</span>
+
+<span class="nv">$container</span>
+    <span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="nx">RedisSessionHandler</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span>
+        <span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;Redis&#39;</span><span class="p">),</span>
+        <span class="c1">// you can optionally pass an array of options. The only option is &#39;prefix&#39;,</span>
+        <span class="c1">// which defines the prefix to use for the keys to avoid collision on the Redis server:</span>
+        <span class="c1">// [&#39;prefix&#39; =&gt; &#39;my_prefix&#39;],</span>
+    <span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Next, use the <a class="reference internal" href="../reference/configuration/framework.html#config-framework-session-handler-id"><span class="std std-ref">handler_id</span></a>
+configuration option to tell Symfony to use this service as the session handler:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">session</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">handler_id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/framework.xml --&gt;</span>
+<span class="nt">&lt;framework:config&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;framework:session</span> <span class="na">handler-id=</span><span class="s">&quot;Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/framework:config&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/framework.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+    <span class="s1">&#39;session&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;handler_id&#39;</span> <span class="o">=&gt;</span> <span class="nx">RedisSessionHandler</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>That’s all! Symfony will now use your Redis server to read and write the session
+data. The main drawback of this solution is that Redis does not perform session
+locking, so you can face <em>race conditions</em> when accessing sessions. For example,
+you may see an <em>“Invalid CSRF token”</em> error because two requests were made in
+parallel and only the first one stored the CSRF token in the session.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">If you use Memcached instead of Redis, follow a similar approach but replace
+<code class="docutils literal notranslate"><span class="pre">RedisSessionHandler</span></code> by <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Storage/Handler/MemcachedSessionHandler.php" title="Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler"><span class="pre">MemcachedSessionHandler</span></a></code>.</p>
+</div>
+</div>
+<div class="section" id="store-sessions-in-a-relational-database-mysql-postgresql">
+<h2>Store Sessions in a Relational Database (MySQL, PostgreSQL)<a class="headerlink" href="#store-sessions-in-a-relational-database-mysql-postgresql" title="Permalink to this headline">¶</a></h2>
+<p>Symfony includes a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Storage/Handler/PdoSessionHandler.php" title="Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler"><span class="pre">PdoSessionHandler</span></a></code>
+to store sessions in relational databases like MySQL and PostgreSQL. To use it,
+first register a new handler service with your database credentials:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="s">&#39;%env(DATABASE_URL)%&#39;</span>
+
+            <span class="c1"># you can also use PDO configuration, but requires passing two arguments</span>
+            <span class="c1"># - &#39;mysql:dbname=mydatabase; host=myhost; port=myport&#39;</span>
+            <span class="c1"># - { db_username: myuser, db_password: mypassword }</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler&quot;</span> <span class="na">public=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;argument&gt;</span>%env(DATABASE_URL)%<span class="nt">&lt;/argument&gt;</span>
+
+            <span class="c">&lt;!-- you can also use PDO configuration, but requires passing two arguments: --&gt;</span>
+            <span class="c">&lt;!-- &lt;argument&gt;mysql:dbname=mydatabase, host=myhost&lt;/argument&gt;</span>
+<span class="c">                &lt;argument type=&quot;collection&quot;&gt;</span>
+<span class="c">                    &lt;argument key=&quot;db_username&quot;&gt;myuser&lt;/argument&gt;</span>
+<span class="c">                    &lt;argument key=&quot;db_password&quot;&gt;mypassword&lt;/argument&gt;</span>
+<span class="c">                &lt;/argument&gt; --&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler</span><span class="p">;</span>
+
+<span class="nv">$storageDefinition</span> <span class="o">=</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="na">autowire</span><span class="p">(</span><span class="nx">PdoSessionHandler</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setArguments</span><span class="p">([</span>
+        <span class="s1">&#39;%env(DATABASE_URL)%&#39;</span><span class="p">,</span>
+        <span class="c1">// you can also use PDO configuration, but requires passing two arguments:</span>
+        <span class="c1">// &#39;mysql:dbname=mydatabase; host=myhost; port=myport&#39;,</span>
+        <span class="c1">// [&#39;db_username&#39; =&gt; &#39;myuser&#39;, &#39;db_password&#39; =&gt; &#39;mypassword&#39;],</span>
+    <span class="p">])</span>
+<span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Next, use the <a class="reference internal" href="../reference/configuration/framework.html#config-framework-session-handler-id"><span class="std std-ref">handler_id</span></a>
+configuration option to tell Symfony to use this service as the session handler:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">session</span><span class="p p-Indicator">:</span>
+        <span class="c1"># ...</span>
+        <span class="l l-Scalar l-Scalar-Plain">handler_id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/framework.xml --&gt;</span>
+<span class="nt">&lt;framework:config&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;framework:session</span>
+        <span class="na">handler-id=</span><span class="s">&quot;Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/framework:config&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/framework.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+    <span class="s1">&#39;session&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;handler_id&#39;</span> <span class="o">=&gt;</span> <span class="nx">PdoSessionHandler</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="section" id="configuring-the-session-table-and-column-names">
+<h3>Configuring the Session Table and Column Names<a class="headerlink" href="#configuring-the-session-table-and-column-names" title="Permalink to this headline">¶</a></h3>
+<p>The table used to store sessions is called <code class="docutils literal notranslate"><span class="pre">sessions</span></code> by default and defines
+certain column names. You can configure these values with the second argument
+passed to the <code class="docutils literal notranslate"><span class="pre">PdoSessionHandler</span></code> service:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="s">&#39;%env(DATABASE_URL)%&#39;</span>
+            <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">db_table</span><span class="p p-Indicator">:</span> <span class="s">&#39;customer_session&#39;</span><span class="p p-Indicator">,</span> <span class="nv">db_id_col</span><span class="p p-Indicator">:</span> <span class="s">&#39;guid&#39;</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler&quot;</span> <span class="na">public=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;argument&gt;</span>%env(DATABASE_URL)%<span class="nt">&lt;/argument&gt;</span>
+            <span class="nt">&lt;argument</span> <span class="na">type=</span><span class="s">&quot;collection&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;argument</span> <span class="na">key=</span><span class="s">&quot;db_table&quot;</span><span class="nt">&gt;</span>customer_session<span class="nt">&lt;/argument&gt;</span>
+                <span class="nt">&lt;argument</span> <span class="na">key=</span><span class="s">&quot;db_id_col&quot;</span><span class="nt">&gt;</span>guid<span class="nt">&lt;/argument&gt;</span>
+            <span class="nt">&lt;/argument&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">autowire</span><span class="p">(</span><span class="nx">PdoSessionHandler</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setArguments</span><span class="p">([</span>
+        <span class="s1">&#39;%env(DATABASE_URL)%&#39;</span><span class="p">,</span>
+        <span class="p">[</span><span class="s1">&#39;db_table&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;customer_session&#39;</span><span class="p">,</span> <span class="s1">&#39;db_id_col&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;guid&#39;</span><span class="p">],</span>
+    <span class="p">])</span>
+<span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>These are parameters that you can configure:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">db_table</span></code> (default <code class="docutils literal notranslate"><span class="pre">sessions</span></code>):</dt>
+<dd>The name of the session table in your database;</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">db_username</span></code>: (default: <code class="docutils literal notranslate"><span class="pre">''</span></code>)</dt>
+<dd>The username used to connect when using the PDO configuration (when using
+the connection based on the <code class="docutils literal notranslate"><span class="pre">DATABASE_URL</span></code> env var, it overrides the
+username defined in the env var).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">db_password</span></code>: (default: <code class="docutils literal notranslate"><span class="pre">''</span></code>)</dt>
+<dd>The password used to connect when using the PDO configuration (when using
+the connection based on the <code class="docutils literal notranslate"><span class="pre">DATABASE_URL</span></code> env var, it overrides the
+password defined in the env var).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">db_id_col</span></code> (default <code class="docutils literal notranslate"><span class="pre">sess_id</span></code>):</dt>
+<dd>The name of the column where to store the session ID (column type: <code class="docutils literal notranslate"><span class="pre">VARCHAR(128)</span></code>);</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">db_data_col</span></code> (default <code class="docutils literal notranslate"><span class="pre">sess_data</span></code>):</dt>
+<dd>The name of the column where to store the session data (column type: <code class="docutils literal notranslate"><span class="pre">BLOB</span></code>);</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">db_time_col</span></code> (default <code class="docutils literal notranslate"><span class="pre">sess_time</span></code>):</dt>
+<dd>The name of the column where to store the session creation timestamp (column type: <code class="docutils literal notranslate"><span class="pre">INTEGER</span></code>);</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">db_lifetime_col</span></code> (default <code class="docutils literal notranslate"><span class="pre">sess_lifetime</span></code>):</dt>
+<dd>The name of the column where to store the session lifetime (column type: <code class="docutils literal notranslate"><span class="pre">INTEGER</span></code>);</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">db_connection_options</span></code> (default: <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</dt>
+<dd>An array of driver-specific connection options;</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">lock_mode</span></code> (default: <code class="docutils literal notranslate"><span class="pre">LOCK_TRANSACTIONAL</span></code>)</dt>
+<dd>The strategy for locking the database to avoid <em>race conditions</em>. Possible
+values are <code class="docutils literal notranslate"><span class="pre">LOCK_NONE</span></code> (no locking), <code class="docutils literal notranslate"><span class="pre">LOCK_ADVISORY</span></code> (application-level
+locking) and <code class="docutils literal notranslate"><span class="pre">LOCK_TRANSACTIONAL</span></code> (row-level locking).</dd>
+</dl>
+</div>
+<div class="section" id="preparing-the-database-to-store-sessions">
+<h3>Preparing the Database to Store Sessions<a class="headerlink" href="#preparing-the-database-to-store-sessions" title="Permalink to this headline">¶</a></h3>
+<p>Before storing sessions in the database, you must create the table that stores
+the information. The session handler provides a method called
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Storage/PdoSessionHandler.php" title="Symfony\Component\HttpFoundation\Session\Storage\PdoSessionHandler::createTable()"><span class="pre">createTable()</span></a></code>
+to set up this table for you according to the database engine used:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">try</span> <span class="p">{</span>
+    <span class="nv">$sessionHandlerService</span><span class="o">-&gt;</span><span class="na">createTable</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">\PDOException</span> <span class="nv">$exception</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// the table could not be created for some reason</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you prefer to set up the table yourself, it’s recommended to generate an
+empty database migration with the following command:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console doctrine:migrations:generate
+</pre></div>
+</td></tr></table></div>
+<p>Then, find the appropriate SQL for your database below, add it to the migration
+file and run the migration with the following command:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console doctrine:migrations:migrate
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="mysql">
+<h4>MySQL<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-sql notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">sessions</span><span class="o">`</span> <span class="p">(</span>
+    <span class="o">`</span><span class="n">sess_id</span><span class="o">`</span> <span class="n">VARBINARY</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="o">`</span><span class="n">sess_data</span><span class="o">`</span> <span class="nb">BLOB</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="o">`</span><span class="n">sess_lifetime</span><span class="o">`</span> <span class="nb">INTEGER</span> <span class="n">UNSIGNED</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="o">`</span><span class="n">sess_time</span><span class="o">`</span> <span class="nb">INTEGER</span> <span class="n">UNSIGNED</span> <span class="k">NOT</span> <span class="k">NULL</span>
+<span class="p">)</span> <span class="k">COLLATE</span> <span class="n">utf8mb4_bin</span><span class="p">,</span> <span class="n">ENGINE</span> <span class="o">=</span> <span class="n">InnoDB</span><span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A <code class="docutils literal notranslate"><span class="pre">BLOB</span></code> column type (which is the one used by default by <code class="docutils literal notranslate"><span class="pre">createTable()</span></code>)
+stores up to 64 kb. If the user session data exceeds this, an exception may
+be thrown or their session will be silently reset. Consider using a <code class="docutils literal notranslate"><span class="pre">MEDIUMBLOB</span></code>
+if you need more space.</p>
+</div>
+</div>
+<div class="section" id="postgresql">
+<h4>PostgreSQL<a class="headerlink" href="#postgresql" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-sql notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">sessions</span> <span class="p">(</span>
+    <span class="n">sess_id</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">sess_data</span> <span class="n">BYTEA</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">sess_lifetime</span> <span class="nb">INTEGER</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">sess_time</span> <span class="nb">INTEGER</span> <span class="k">NOT</span> <span class="k">NULL</span>
+<span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="microsoft-sql-server">
+<h4>Microsoft SQL Server<a class="headerlink" href="#microsoft-sql-server" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-sql notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">sessions</span> <span class="p">(</span>
+    <span class="n">sess_id</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">sess_data</span> <span class="n">VARBINARY</span><span class="p">(</span><span class="k">MAX</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">sess_lifetime</span> <span class="nb">INTEGER</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">sess_time</span> <span class="nb">INTEGER</span> <span class="k">NOT</span> <span class="k">NULL</span>
+<span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+</div>
+<div class="section" id="store-sessions-in-a-nosql-database-mongodb">
+<h2>Store Sessions in a NoSQL Database (MongoDB)<a class="headerlink" href="#store-sessions-in-a-nosql-database-mongodb" title="Permalink to this headline">¶</a></h2>
+<p>Symfony includes a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Storage/Handler/MongoDbSessionHandler.php" title="Symfony\Component\HttpFoundation\Session\Storage\Handler\MongoDbSessionHandler"><span class="pre">MongoDbSessionHandler</span></a></code>
+to store sessions in the MongoDB NoSQL database. First, make sure to have a
+working MongoDB connection in your Symfony application as explained in the
+<a class="reference external" href="https://symfony.com/doc/master/bundles/DoctrineMongoDBBundle/config.html">DoctrineMongoDBBundle configuration</a> article.</p>
+<p>Then, register a new handler service for <code class="docutils literal notranslate"><span class="pre">MongoDbSessionHandler</span></code> and pass it
+the MongoDB connection as argument:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">Symfony\Component\HttpFoundation\Session\Storage\Handler\MongoDbSessionHandler</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="s">&#39;@doctrine_mongodb.odm.default_connection&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;Symfony\Component\HttpFoundation\Session\Storage\Handler\MongoDbSessionHandler&quot;</span> <span class="na">public=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;argument</span> <span class="na">type=</span><span class="s">&quot;service&quot;</span><span class="nt">&gt;</span>doctrine_mongodb.odm.default_connection<span class="nt">&lt;/argument&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\Storage\Handler\MongoDbSessionHandler</span><span class="p">;</span>
+
+<span class="nv">$storageDefinition</span> <span class="o">=</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="na">autowire</span><span class="p">(</span><span class="nx">MongoDbSessionHandler</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setArguments</span><span class="p">([</span>
+        <span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;doctrine_mongodb.odm.default_connection&#39;</span><span class="p">),</span>
+    <span class="p">])</span>
+<span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Next, use the <a class="reference internal" href="../reference/configuration/framework.html#config-framework-session-handler-id"><span class="std std-ref">handler_id</span></a>
+configuration option to tell Symfony to use this service as the session handler:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">session</span><span class="p p-Indicator">:</span>
+        <span class="c1"># ...</span>
+        <span class="l l-Scalar l-Scalar-Plain">handler_id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Symfony\Component\HttpFoundation\Session\Storage\Handler\MongoDbSessionHandler</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/framework.xml --&gt;</span>
+<span class="nt">&lt;framework:config&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;framework:session</span>
+        <span class="na">handler-id=</span><span class="s">&quot;Symfony\Component\HttpFoundation\Session\Storage\Handler\MongoDbSessionHandler&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/framework:config&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/framework.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\Storage\Handler\MongoDbSessionHandler</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+    <span class="s1">&#39;session&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;handler_id&#39;</span> <span class="o">=&gt;</span> <span class="nx">MongoDbSessionHandler</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">MongoDB ODM 1.x only works with the legacy driver, which is no longer
+supported by the Symfony session class. Install the <code class="docutils literal notranslate"><span class="pre">alcaeus/mongo-php-adapter</span></code>
+package to retrieve the underlying <code class="docutils literal notranslate"><span class="pre">\MongoDB\Client</span></code> object or upgrade to
+MongoDB ODM 2.0.</p>
+</div>
+<p>That’s all! Symfony will now use your MongoDB server to read and write the
+session data. You do not need to do anything to initialize your session
+collection. However, you may want to add an index to improve garbage collection
+performance. Run this from the <a class="reference external" href="https://docs.mongodb.com/manual/mongo/">MongoDB shell</a>:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nx">use</span> <span class="nx">session_db</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">ensureIndex</span><span class="p">(</span> <span class="p">{</span> <span class="s2">&quot;expires_at&quot;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">},</span> <span class="p">{</span> <span class="nx">expireAfterSeconds</span><span class="o">:</span> <span class="mi">0</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="configuring-the-session-field-names">
+<h3>Configuring the Session Field Names<a class="headerlink" href="#configuring-the-session-field-names" title="Permalink to this headline">¶</a></h3>
+<p>The collection used to store sessions defines certain field names. You can
+configure these values with the second argument passed to the
+<code class="docutils literal notranslate"><span class="pre">MongoDbSessionHandler</span></code> service:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">Symfony\Component\HttpFoundation\Session\Storage\Handler\MongoDbSessionHandler</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="s">&#39;@doctrine_mongodb.odm.default_connection&#39;</span>
+            <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">id_field</span><span class="p p-Indicator">:</span> <span class="s">&#39;_guid&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;expiry_field&#39;</span><span class="p p-Indicator">:</span> <span class="s">&#39;eol&#39;</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;Symfony\Component\HttpFoundation\Session\Storage\Handler\MongoDbSessionHandler&quot;</span> <span class="na">public=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;argument</span> <span class="na">type=</span><span class="s">&quot;service&quot;</span><span class="nt">&gt;</span>doctrine_mongodb.odm.default_connection<span class="nt">&lt;/argument&gt;</span>
+            <span class="nt">&lt;argument</span> <span class="na">type=</span><span class="s">&quot;collection&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;argument</span> <span class="na">key=</span><span class="s">&quot;id_field&quot;</span><span class="nt">&gt;</span>_guid<span class="nt">&lt;/argument&gt;</span>
+                <span class="nt">&lt;argument</span> <span class="na">key=</span><span class="s">&quot;expiry_field&quot;</span><span class="nt">&gt;</span>eol<span class="nt">&lt;/argument&gt;</span>
+            <span class="nt">&lt;/argument&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\Storage\Handler\MongoDbSessionHandler</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">autowire</span><span class="p">(</span><span class="nx">MongoDbSessionHandler</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setArguments</span><span class="p">([</span>
+        <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+        <span class="p">[</span><span class="s1">&#39;id_field&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;_guid&#39;</span><span class="p">,</span> <span class="s1">&#39;expiry_field&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;eol&#39;</span><span class="p">],</span>
+    <span class="p">])</span>
+<span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>These are parameters that you can configure:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">id_field</span></code> (default <code class="docutils literal notranslate"><span class="pre">_id</span></code>):</dt>
+<dd>The name of the field where to store the session ID;</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">data_field</span></code> (default <code class="docutils literal notranslate"><span class="pre">data</span></code>):</dt>
+<dd>The name of the field where to store the session data;</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">time_field</span></code> (default <code class="docutils literal notranslate"><span class="pre">time</span></code>):</dt>
+<dd>The name of the field where to store the session creation timestamp;</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">expiry_field</span></code> (default <code class="docutils literal notranslate"><span class="pre">expires_at</span></code>):</dt>
+<dd>The name of the field where to store the session lifetime.</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

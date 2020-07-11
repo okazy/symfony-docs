@@ -1,0 +1,474 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Write a custom Twig Extension &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Extending Action Argument Resolving" href="../controller/argument_value_resolver.html" />
+    <link rel="prev" title="How to Embed Asynchronous Content with hinclude.js" href="hinclude.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../getting_started/index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../page_creation.html">Create your First Page in Symfony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../controller.html">Controller</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../controller.html#a-simple-controller">A Simple Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller.html#the-base-controller-classes-services">The Base Controller Class &amp; Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller.html#generating-controllers">Generating Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller.html#managing-errors-and-404-pages">Managing Errors and 404 Pages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller.html#the-request-object-as-a-controller-argument">The Request object as a Controller Argument</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller.html#managing-the-session">Managing the Session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller.html#the-request-and-response-object">The Request and Response Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller.html#final-thoughts">Final Thoughts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller.html#keep-going">Keep Going!</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../controller.html#learn-more-about-controllers">Learn more about Controllers</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../templates.html">Creating and Using Templates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../controller/argument_value_resolver.html">Extending Action Argument Resolving</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../controller/error_pages.html">How to Customize Error Pages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../controller/forwarding.html">How to Forward Requests to another Controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../controller/service.html">How to Define Controllers as Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../controller/soap_web_service.html">How to Create a SOAP Web Service in a Symfony Controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../controller/upload_file.html">How to Upload Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../templates.html">Creating and Using Templates</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../templates.html#twig-templating-language">Twig Templating Language</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../templates.html#creating-templates">Creating Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../templates.html#rendering-templates">Rendering Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../templates.html#debugging-templates">Debugging Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../templates.html#reusing-template-contents">Reusing Template Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../templates.html#output-escaping">Output Escaping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../templates.html#template-namespaces">Template Namespaces</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../templates.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="PHP.html">How to Use PHP instead of Twig for Templates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="global_variables.html">How to Inject Variables Automatically into all Templates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hinclude.html">How to Embed Asynchronous Content with hinclude.js</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">How to Write a custom Twig Extension</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration.html">Configuring Symfony</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../getting_started/index.html">Getting Started</a> &raquo;</li>
+        
+          <li><a href="../setup.html">Installing &amp; Setting up the Symfony Framework</a> &raquo;</li>
+        
+          <li><a href="../page_creation.html">Create your First Page in Symfony</a> &raquo;</li>
+        
+          <li><a href="../routing.html">Routing</a> &raquo;</li>
+        
+          <li><a href="../controller.html">Controller</a> &raquo;</li>
+        
+          <li><a href="../templates.html">Creating and Using Templates</a> &raquo;</li>
+        
+      <li>How to Write a custom Twig Extension</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/templating/twig_extension.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-write-a-custom-twig-extension">
+<span id="index-0"></span><h1>How to Write a custom Twig Extension<a class="headerlink" href="#how-to-write-a-custom-twig-extension" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://twig.symfony.com/doc/2.x/advanced.html#creating-an-extension">Twig Extensions</a> allow to create custom functions, filters and more to use
+them in your Twig templates. Before writing your own Twig extension, check if
+the filter/function that you need is already implemented in:</p>
+<ul class="simple">
+<li>The <a class="reference external" href="https://twig.symfony.com/doc/2.x/#reference">default Twig filters and functions</a>;</li>
+<li>The <a class="reference internal" href="../reference/twig_reference.html"><span class="doc">Twig filters and functions added by Symfony</span></a>;</li>
+<li>The <a class="reference external" href="https://github.com/twigphp?q=extra">official Twig extensions</a> related to strings, HTML, Markdown, internationalization, etc.</li>
+</ul>
+<div class="section" id="create-the-extension-class">
+<h2>Create the Extension Class<a class="headerlink" href="#create-the-extension-class" title="Permalink to this headline">¶</a></h2>
+<p>Suppose you want to create a new filter called <code class="docutils literal notranslate"><span class="pre">price</span></code> that formats a number
+into money:</p>
+<div class="highlight-twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">product.price</span><span class="o">|</span><span class="nf">price</span> <span class="cp">}}</span><span class="x"></span>
+
+<span class="c">{# pass in the 3 optional arguments #}</span><span class="x"></span>
+<span class="cp">{{</span> <span class="nv">product.price</span><span class="o">|</span><span class="nf">price</span><span class="o">(</span><span class="m">2</span><span class="o">,</span> <span class="s1">&#39;,&#39;</span><span class="o">,</span> <span class="s1">&#39;.&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x"></span>
+</pre></div>
+</td></tr></table></div>
+<p>Create a class that extends <code class="docutils literal notranslate"><span class="pre">AbstractExtension</span></code> and fill in the logic:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Twig/AppExtension.php</span>
+<span class="k">namespace</span> <span class="nx">App\Twig</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Twig\Extension\AbstractExtension</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Twig\TwigFilter</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">AppExtension</span> <span class="k">extends</span> <span class="nx">AbstractExtension</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getFilters</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="k">new</span> <span class="nx">TwigFilter</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;formatPrice&#39;</span><span class="p">]),</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">formatPrice</span><span class="p">(</span><span class="nv">$number</span><span class="p">,</span> <span class="nv">$decimals</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$decPoint</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="nv">$thousandsSep</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$price</span> <span class="o">=</span> <span class="nb">number_format</span><span class="p">(</span><span class="nv">$number</span><span class="p">,</span> <span class="nv">$decimals</span><span class="p">,</span> <span class="nv">$decPoint</span><span class="p">,</span> <span class="nv">$thousandsSep</span><span class="p">);</span>
+        <span class="nv">$price</span> <span class="o">=</span> <span class="s1">&#39;$&#39;</span><span class="o">.</span><span class="nv">$price</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$price</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you want to create a function instead of a filter, define the
+<code class="docutils literal notranslate"><span class="pre">getFunctions()</span></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Twig/AppExtension.php</span>
+<span class="k">namespace</span> <span class="nx">App\Twig</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Twig\Extension\AbstractExtension</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Twig\TwigFunction</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">AppExtension</span> <span class="k">extends</span> <span class="nx">AbstractExtension</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getFunctions</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="k">new</span> <span class="nx">TwigFunction</span><span class="p">(</span><span class="s1">&#39;area&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;calculateArea&#39;</span><span class="p">]),</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">calculateArea</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$width</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$length</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$width</span> <span class="o">*</span> <span class="nv">$length</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Along with custom filters and functions, you can also register
+<a class="reference external" href="https://twig.symfony.com/doc/2.x/advanced.html#id1">global variables</a>.</p>
+</div>
+<div class="section" id="register-an-extension-as-a-service">
+<h3>Register an Extension as a Service<a class="headerlink" href="#register-an-extension-as-a-service" title="Permalink to this headline">¶</a></h3>
+<p>Next, register your class as a service and tag it with <code class="docutils literal notranslate"><span class="pre">twig.extension</span></code>. If you’re
+using the <a class="reference internal" href="../service_container.html#service-container-services-load-example"><span class="std std-ref">default services.yaml configuration</span></a>,
+you’re done! Symfony will automatically know about your new service and add the tag.</p>
+<p>You can now start using your filter in any Twig template. Optionally, execute
+this command to confirm that your new filter was successfully registered:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># display all information about Twig</span>
+<span class="gp">$</span> php bin/console debug:twig
+
+<span class="c1"># display only the information about a specific filter</span>
+<span class="gp">$</span> php bin/console debug:twig --filter<span class="o">=</span>price
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="creating-lazy-loaded-twig-extensions">
+<span id="lazy-loaded-twig-extensions"></span><h2>Creating Lazy-Loaded Twig Extensions<a class="headerlink" href="#creating-lazy-loaded-twig-extensions" title="Permalink to this headline">¶</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.35: </span>Support for lazy-loaded extensions was introduced in Twig 1.35.0 and 2.4.4.</p>
+</div>
+<p>Including the code of the custom filters/functions in the Twig extension class
+is the simplest way to create extensions. However, Twig must initialize all
+extensions before rendering any template, even if the template doesn’t use an
+extension.</p>
+<p>If extensions don’t define dependencies (i.e. if you don’t inject services in
+them) performance is not affected. However, if extensions define lots of complex
+dependencies (e.g. those making database connections), the performance loss can
+be significant.</p>
+<p>That’s why Twig allows to decouple the extension definition from its
+implementation. Following the same example as before, the first change would be
+to remove the <code class="docutils literal notranslate"><span class="pre">formatPrice()</span></code> method from the extension and update the PHP
+callable defined in <code class="docutils literal notranslate"><span class="pre">getFilters()</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Twig/AppExtension.php</span>
+<span class="k">namespace</span> <span class="nx">App\Twig</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Twig\AppRuntime</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Twig\Extension\AbstractExtension</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Twig\TwigFilter</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">AppExtension</span> <span class="k">extends</span> <span class="nx">AbstractExtension</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getFilters</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="c1">// the logic of this filter is now implemented in a different class</span>
+            <span class="k">new</span> <span class="nx">TwigFilter</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">AppRuntime</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="s1">&#39;formatPrice&#39;</span><span class="p">]),</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then, create the new <code class="docutils literal notranslate"><span class="pre">AppRuntime</span></code> class (it’s not required but these classes
+are suffixed with <code class="docutils literal notranslate"><span class="pre">Runtime</span></code> by convention) and include the logic of the
+previous <code class="docutils literal notranslate"><span class="pre">formatPrice()</span></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Twig/AppRuntime.php</span>
+<span class="k">namespace</span> <span class="nx">App\Twig</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Twig\Extension\RuntimeExtensionInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">AppRuntime</span> <span class="k">implements</span> <span class="nx">RuntimeExtensionInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// this simple example doesn&#39;t define any dependency, but in your own</span>
+        <span class="c1">// extensions, you&#39;ll need to inject services using this constructor</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">formatPrice</span><span class="p">(</span><span class="nv">$number</span><span class="p">,</span> <span class="nv">$decimals</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$decPoint</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="nv">$thousandsSep</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$price</span> <span class="o">=</span> <span class="nb">number_format</span><span class="p">(</span><span class="nv">$number</span><span class="p">,</span> <span class="nv">$decimals</span><span class="p">,</span> <span class="nv">$decPoint</span><span class="p">,</span> <span class="nv">$thousandsSep</span><span class="p">);</span>
+        <span class="nv">$price</span> <span class="o">=</span> <span class="s1">&#39;$&#39;</span><span class="o">.</span><span class="nv">$price</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$price</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you’re using the default <code class="docutils literal notranslate"><span class="pre">services.yaml</span></code> configuration, this will already
+work! Otherwise, <a class="reference internal" href="../service_container.html#service-container-creating-service"><span class="std std-ref">create a service</span></a>
+for this class and <a class="reference internal" href="../service_container/tags.html"><span class="doc">tag your service</span></a> with <code class="docutils literal notranslate"><span class="pre">twig.runtime</span></code>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,676 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Add extra Data to Log Messages via a Processor &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Handlers" href="handlers.html" />
+    <link rel="prev" title="How to Define a Custom Logging Formatter" href="formatter.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../logging.html">Logging</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../logging.html#logging-a-message">Logging a Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging.html#monolog">Monolog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging.html#where-logs-are-stored">Where Logs are Stored</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging.html#handlers-writing-logs-to-different-locations">Handlers: Writing Logs to different Locations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging.html#all-built-in-handlers">All Built-in Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging.html#how-to-rotate-your-log-files">How to Rotate your Log Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging.html#using-a-logger-inside-a-service">Using a Logger inside a Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../logging.html#adding-extra-data-to-each-log-e-g-a-unique-request-token">Adding extra Data to each Log (e.g. a unique request token)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../logging.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="monolog_email.html">How to Configure Monolog to Email Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="channels_handlers.html">How to Log Messages to different Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="formatter.html">How to Define a Custom Logging Formatter</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Add extra Data to Log Messages via a Processor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#adding-a-session-request-token">Adding a Session/Request Token</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#registering-processors-per-handler">Registering Processors per Handler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#registering-processors-per-channel">Registering Processors per Channel</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="handlers.html">Handlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monolog_exclude_http_codes.html">How to Configure Monolog to Exclude Specific HTTP Codes from the Log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monolog_console.html">How to Configure Monolog to Display Console Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="monolog_regex_based_excludes.html">How to Configure Monolog to Exclude 404 Errors from the Log</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../logging.html">Logging</a> &raquo;</li>
+        
+      <li>How to Add extra Data to Log Messages via a Processor</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/logging/processors.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-add-extra-data-to-log-messages-via-a-processor">
+<h1>How to Add extra Data to Log Messages via a Processor<a class="headerlink" href="#how-to-add-extra-data-to-log-messages-via-a-processor" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/Seldaek/monolog">Monolog</a> allows you to process every record before logging it by adding some
+extra data. This is the role of a processor, which can be applied for the whole
+handler stack or only for a specific handler or channel.</p>
+<p>A processor is a callable receiving the record as its first argument.
+Processors are configured using the <code class="docutils literal notranslate"><span class="pre">monolog.processor</span></code> DIC tag. See the
+<a class="reference internal" href="../reference/dic_tags.html#dic-tags-monolog-processor"><span class="std std-ref">reference about it</span></a>.</p>
+<div class="section" id="adding-a-session-request-token">
+<h2>Adding a Session/Request Token<a class="headerlink" href="#adding-a-session-request-token" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes it is hard to tell which entries in the log belong to which session
+and/or request. The following example will add a unique token for each request
+using a processor:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nx">App\Logger</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\SessionInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">SessionRequestProcessor</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$session</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$sessionId</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">SessionInterface</span> <span class="nv">$session</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span> <span class="o">=</span> <span class="nv">$session</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// this method is called for each log record; optimize it to not hurt performance</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">(</span><span class="k">array</span> <span class="nv">$record</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">isStarted</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$record</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sessionId</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sessionId</span> <span class="o">=</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="o">?:</span> <span class="s1">&#39;????????&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nv">$record</span><span class="p">[</span><span class="s1">&#39;extra&#39;</span><span class="p">][</span><span class="s1">&#39;token&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sessionId</span><span class="o">.</span><span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="nb">substr</span><span class="p">(</span><span class="nb">uniqid</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span> <span class="o">-</span><span class="mi">8</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$record</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Next, register your class as a service, as well as a formatter that uses the extra
+information:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">monolog.formatter.session_request</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Monolog\Formatter\LineFormatter</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="s">&quot;[%%datetime%%]</span><span class="nv"> </span><span class="s">[%%extra.token%%]</span><span class="nv"> </span><span class="s">%%channel%%.%%level_name%%:</span><span class="nv"> </span><span class="s">%%message%%</span><span class="nv"> </span><span class="s">%%context%%</span><span class="nv"> </span><span class="s">%%extra%%\n&quot;</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\Logger\SessionRequestProcessor</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">name</span><span class="p p-Indicator">:</span> <span class="nv">monolog.processor</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:monolog=</span><span class="s">&quot;http://symfony.com/schema/dic/monolog&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/monolog</span>
+<span class="s">        https://symfony.com/schema/dic/monolog/monolog-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;monolog.formatter.session_request&quot;</span>
+            <span class="na">class=</span><span class="s">&quot;Monolog\Formatter\LineFormatter&quot;</span><span class="nt">&gt;</span>
+
+            <span class="nt">&lt;argument&gt;</span>[%%datetime%%] [%%extra.token%%] %%channel%%.%%level_name%%: %%message%% %%context%% %%extra%%<span class="ni">&amp;#xA;</span><span class="nt">&lt;/argument&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\Logger\SessionRequestProcessor&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;monolog.processor&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">App\Logger\SessionRequestProcessor</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Monolog\Formatter\LineFormatter</span><span class="p">;</span>
+
+<span class="nv">$container</span>
+    <span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;monolog.formatter.session_request&#39;</span><span class="p">,</span> <span class="nx">LineFormatter</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="s1">&#39;[%%datetime%%] [%%extra.token%%] %%channel%%.%%level_name%%: %%message%% %%context%% %%extra%%\n&#39;</span><span class="p">);</span>
+
+<span class="nv">$container</span>
+    <span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="nx">SessionRequestProcessor</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addTag</span><span class="p">(</span><span class="s1">&#39;monolog.processor&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;processRecord&#39;</span><span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Finally, set the formatter to be used on whatever handler you want:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/prod/monolog.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">monolog</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">handlers</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">stream</span>
+            <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="s">&#39;%kernel.logs_dir%/%kernel.environment%.log&#39;</span>
+            <span class="l l-Scalar l-Scalar-Plain">level</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">debug</span>
+            <span class="l l-Scalar l-Scalar-Plain">formatter</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">monolog.formatter.session_request</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/prod/monolog.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:monolog=</span><span class="s">&quot;http://symfony.com/schema/dic/monolog&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/monolog</span>
+<span class="s">        https://symfony.com/schema/dic/monolog/monolog-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;monolog:config&gt;</span>
+        <span class="nt">&lt;monolog:handler</span>
+            <span class="na">name=</span><span class="s">&quot;main&quot;</span>
+            <span class="na">type=</span><span class="s">&quot;stream&quot;</span>
+            <span class="na">path=</span><span class="s">&quot;%kernel.logs_dir%/%kernel.environment%.log&quot;</span>
+            <span class="na">level=</span><span class="s">&quot;debug&quot;</span>
+            <span class="na">formatter=</span><span class="s">&quot;monolog.formatter.session_request&quot;</span>
+        <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/monolog:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/prod/monolog.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;monolog&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;handlers&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;main&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;type&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;stream&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;path&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;%kernel.logs_dir%/%kernel.environment%.log&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;level&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;formatter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;monolog.formatter.session_request&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>If you use several handlers, you can also register a processor at the
+handler level or at the channel level instead of registering it globally
+(see the following sections).</p>
+<p>Symfony’s MonologBridge provides processors that can be registered inside your application.</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Monolog/Processor/DebugProcessor.php" title="Symfony\Bridge\Monolog\Processor\DebugProcessor"><span class="pre">DebugProcessor</span></a></code></dt>
+<dd>Adds additional information useful for debugging like a timestamp or an
+error message to the record.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Monolog/Processor/TokenProcessor.php" title="Symfony\Bridge\Monolog\Processor\TokenProcessor"><span class="pre">TokenProcessor</span></a></code></dt>
+<dd>Adds information from the current user’s token to the record namely
+username, roles and whether the user is authenticated.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Monolog/Processor/WebProcessor.php" title="Symfony\Bridge\Monolog\Processor\WebProcessor"><span class="pre">WebProcessor</span></a></code></dt>
+<dd>Overrides data from the request using the data inside Symfony’s request
+object.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Monolog/Processor/RouteProcessor.php" title="Symfony\Bridge\Monolog\Processor\RouteProcessor"><span class="pre">RouteProcessor</span></a></code></dt>
+<dd>Adds information about current route (controller, action, route parameters).</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Monolog/Processor/ConsoleCommandProcessor.php" title="Symfony\Bridge\Monolog\Processor\ConsoleCommandProcessor"><span class="pre">ConsoleCommandProcessor</span></a></code></dt>
+<dd>Adds information about current console command.</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Check out the <a class="reference external" href="https://github.com/Seldaek/monolog/tree/master/src/Monolog/Processor">built-in Monolog processors</a> to learn more about how to
+create these processors.</p>
+</div>
+</div>
+<div class="section" id="registering-processors-per-handler">
+<h2>Registering Processors per Handler<a class="headerlink" href="#registering-processors-per-handler" title="Permalink to this headline">¶</a></h2>
+<p>You can register a processor per handler using the <code class="docutils literal notranslate"><span class="pre">handler</span></code> option of
+the <code class="docutils literal notranslate"><span class="pre">monolog.processor</span></code> tag:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">App\Logger\SessionRequestProcessor</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">name</span><span class="p p-Indicator">:</span> <span class="nv">monolog.processor</span><span class="p p-Indicator">,</span> <span class="nv">handler</span><span class="p p-Indicator">:</span> <span class="nv">main</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:monolog=</span><span class="s">&quot;http://symfony.com/schema/dic/monolog&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/monolog</span>
+<span class="s">        https://symfony.com/schema/dic/monolog/monolog-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\Logger\SessionRequestProcessor&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;monolog.processor&quot;</span> <span class="na">handler=</span><span class="s">&quot;main&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$container</span>
+    <span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="nx">SessionRequestProcessor</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addTag</span><span class="p">(</span><span class="s1">&#39;monolog.processor&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;handler&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;main&#39;</span><span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="registering-processors-per-channel">
+<h2>Registering Processors per Channel<a class="headerlink" href="#registering-processors-per-channel" title="Permalink to this headline">¶</a></h2>
+<p>You can register a processor per channel using the <code class="docutils literal notranslate"><span class="pre">channel</span></code> option of
+the <code class="docutils literal notranslate"><span class="pre">monolog.processor</span></code> tag:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">App\Logger\SessionRequestProcessor</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">name</span><span class="p p-Indicator">:</span> <span class="nv">monolog.processor</span><span class="p p-Indicator">,</span> <span class="nv">channel</span><span class="p p-Indicator">:</span> <span class="nv">main</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:monolog=</span><span class="s">&quot;http://symfony.com/schema/dic/monolog&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/monolog</span>
+<span class="s">        https://symfony.com/schema/dic/monolog/monolog-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\Logger\SessionRequestProcessor&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;monolog.processor&quot;</span> <span class="na">channel=</span><span class="s">&quot;main&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$container</span>
+    <span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="nx">SessionRequestProcessor</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addTag</span><span class="p">(</span><span class="s1">&#39;monolog.processor&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;channel&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;main&#39;</span><span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

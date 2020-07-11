@@ -1,0 +1,775 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Form Events &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Dynamically Modify Forms Using Form Events" href="dynamic_form_modification.html" />
+    <link rel="prev" title="How to Work with Form Themes" href="form_themes.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../forms.html">Forms</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#building-forms">Building Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#rendering-forms">Rendering Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#processing-forms">Processing Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#validating-forms">Validating Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#other-common-form-features">Other Common Form Features</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../forms.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../reference/forms/types.html">Form Types Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller/upload_file.html">How to Upload Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../security/csrf.html">How to Implement CSRF Protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_dependencies.html">How to Access Services or Config from Inside a Form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_custom_field_type.html">How to Create a Custom Form Field Type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_transformers.html">How to Use Data Transformers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_mappers.html">When and How to Use Data Mappers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_form_type_extension.html">How to Create a Form Type Extension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="type_guesser.html">Creating a custom Type Guesser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootstrap4.html">Bootstrap 4 Form Theme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_customization.html">How to Customize Form Rendering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_themes.html">How to Work with Form Themes</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Form Events</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-form-workflow">The Form Workflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#registering-event-listeners-or-event-subscribers">Registering Event Listeners or Event Subscribers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dynamic_form_modification.html">How to Dynamically Modify Forms Using Form Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validation_groups.html">How to Define the Validation Groups to Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validation_group_service_resolver.html">How to Dynamically Configure Form Validation Groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="button_based_validation.html">How to Choose Validation Groups Based on the Clicked Button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="disabling_validation.html">How to Disable the Validation of Submitted Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="direct_submit.html">How to Use the submit() Function to Handle Form Submissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="embedded.html">How to Embed Forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_collections.html">How to Embed a Collection of Forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="inherit_data_option.html">How to Reduce Code Duplication with “inherit_data”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multiple_buttons.html">How to Submit a Form with Multiple Buttons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_testing.html">How to Unit Test your Forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="use_empty_data.html">How to Configure empty Data for a Form Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="without_class.html">How to Use a Form without a Data Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../forms.html">Forms</a> &raquo;</li>
+        
+      <li>Form Events</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/form/events.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="form-events">
+<span id="index-0"></span><h1>Form Events<a class="headerlink" href="#form-events" title="Permalink to this headline">¶</a></h1>
+<p>The Form component provides a structured process to let you customize your
+forms, by making use of the
+<a class="reference internal" href="../components/event_dispatcher.html"><span class="doc">EventDispatcher component</span></a>.
+Using form events, you may modify information or fields at different steps
+of the workflow: from the population of the form to the submission of the
+data from the request.</p>
+<p>For example, if you need to add a field depending on request values, you can
+register an event listener to the <code class="docutils literal notranslate"><span class="pre">FormEvents::PRE_SUBMIT</span></code> event as follows:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormEvents</span><span class="p">;</span>
+
+<span class="nv">$listener</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nx">FormEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+
+<span class="nv">$form</span> <span class="o">=</span> <span class="nv">$formFactory</span><span class="o">-&gt;</span><span class="na">createBuilder</span><span class="p">()</span>
+    <span class="c1">// ... add form fields</span>
+    <span class="o">-&gt;</span><span class="na">addEventListener</span><span class="p">(</span><span class="nx">FormEvents</span><span class="o">::</span><span class="na">PRE_SUBMIT</span><span class="p">,</span> <span class="nv">$listener</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+</pre></div>
+</div>
+<div class="section" id="the-form-workflow">
+<h2>The Form Workflow<a class="headerlink" href="#the-form-workflow" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-form-submission-workflow">
+<h3>The Form Submission Workflow<a class="headerlink" href="#the-form-submission-workflow" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/general_flow.png" class="align-center" src="../_images/general_flow.png" />
+</div>
+<div class="section" id="pre-populating-the-form-formevents-pre-set-data-and-formevents-post-set-data">
+<h3>1) Pre-populating the Form (<code class="docutils literal notranslate"><span class="pre">FormEvents::PRE_SET_DATA</span></code> and <code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SET_DATA</span></code>)<a class="headerlink" href="#pre-populating-the-form-formevents-pre-set-data-and-formevents-post-set-data" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/set_data_flow.png" class="align-center" src="../_images/set_data_flow.png" />
+<p>Two events are dispatched during pre-population of a form, when
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/Form.php" title="Symfony\Component\Form\Form::setData()"><span class="pre">Form::setData()</span></a></code>
+is called: <code class="docutils literal notranslate"><span class="pre">FormEvents::PRE_SET_DATA</span></code> and <code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SET_DATA</span></code>.</p>
+<div class="section" id="a-the-formevents-pre-set-data-event">
+<h4>A) The <code class="docutils literal notranslate"><span class="pre">FormEvents::PRE_SET_DATA</span></code> Event<a class="headerlink" href="#a-the-formevents-pre-set-data-event" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">FormEvents::PRE_SET_DATA</span></code> event is dispatched at the beginning of the
+<code class="docutils literal notranslate"><span class="pre">Form::setData()</span></code> method. It can be used to:</p>
+<ul class="simple">
+<li>Modify the data given during pre-population;</li>
+<li>Modify a form depending on the pre-populated data (adding or removing fields dynamically).</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="65%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Data Type</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Model data</td>
+<td><code class="docutils literal notranslate"><span class="pre">null</span></code></td>
+</tr>
+<tr class="row-odd"><td>Normalized data</td>
+<td><code class="docutils literal notranslate"><span class="pre">null</span></code></td>
+</tr>
+<tr class="row-even"><td>View data</td>
+<td><code class="docutils literal notranslate"><span class="pre">null</span></code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">See all form events at a glance in the
+<a class="reference internal" href="#component-form-event-table"><span class="std std-ref">Form Events Information Table</span></a>.</p>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">During <code class="docutils literal notranslate"><span class="pre">FormEvents::PRE_SET_DATA</span></code>,
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/Form.php" title="Symfony\Component\Form\Form::setData()"><span class="pre">Form::setData()</span></a></code>
+is locked and will throw an exception if used. If you wish to modify
+data, you should use
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/FormEvent.php" title="Symfony\Component\Form\FormEvent::setData()"><span class="pre">FormEvent::setData()</span></a></code>
+instead.</p>
+</div>
+<div class="sidebar">
+<p class="first sidebar-title"><code class="docutils literal notranslate"><span class="pre">FormEvents::PRE_SET_DATA</span></code> in the Form component</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">Symfony\Component\Form\Extension\Core\Type\CollectionType</span></code> form type relies
+on the <code class="docutils literal notranslate"><span class="pre">Symfony\Component\Form\Extension\Core\EventListener\ResizeFormListener</span></code>
+subscriber, listening to the <code class="docutils literal notranslate"><span class="pre">FormEvents::PRE_SET_DATA</span></code> event in order
+to reorder the form’s fields depending on the data from the pre-populated
+object, by removing and adding all form rows.</p>
+</div>
+</div>
+<div class="section" id="b-the-formevents-post-set-data-event">
+<h4>B) The <code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SET_DATA</span></code> Event<a class="headerlink" href="#b-the-formevents-post-set-data-event" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SET_DATA</span></code> event is dispatched at the end of the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/Form.php" title="Symfony\Component\Form\Form::setData()"><span class="pre">Form::setData()</span></a></code>
+method. This event is mostly here for reading data after having pre-populated
+the form.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Data Type</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Model data</td>
+<td>Model data injected into <code class="docutils literal notranslate"><span class="pre">setData()</span></code></td>
+</tr>
+<tr class="row-odd"><td>Normalized data</td>
+<td>Model data transformed using a model transformer</td>
+</tr>
+<tr class="row-even"><td>View data</td>
+<td>Normalized data transformed using a view transformer</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">See all form events at a glance in the
+<a class="reference internal" href="#component-form-event-table"><span class="std std-ref">Form Events Information Table</span></a>.</p>
+</div>
+<div class="sidebar">
+<p class="first sidebar-title"><code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SET_DATA</span></code> in the Form component</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">Symfony\Component\Form\Extension\DataCollector\EventListener\DataCollectorListener</span></code>
+class is subscribed to listen to the <code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SET_DATA</span></code> event
+in order to collect information about the forms from the denormalized
+model and view data.</p>
+</div>
+</div>
+</div>
+<div class="section" id="submitting-a-form-formevents-pre-submit-formevents-submit-and-formevents-post-submit">
+<h3>2) Submitting a Form (<code class="docutils literal notranslate"><span class="pre">FormEvents::PRE_SUBMIT</span></code>, <code class="docutils literal notranslate"><span class="pre">FormEvents::SUBMIT</span></code> and <code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SUBMIT</span></code>)<a class="headerlink" href="#submitting-a-form-formevents-pre-submit-formevents-submit-and-formevents-post-submit" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/submission_flow.png" class="align-center" src="../_images/submission_flow.png" />
+<p>Three events are dispatched when
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/Form.php" title="Symfony\Component\Form\Form::handleRequest()"><span class="pre">Form::handleRequest()</span></a></code>
+or <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/Form.php" title="Symfony\Component\Form\Form::submit()"><span class="pre">Form::submit()</span></a></code> are
+called: <code class="docutils literal notranslate"><span class="pre">FormEvents::PRE_SUBMIT</span></code>, <code class="docutils literal notranslate"><span class="pre">FormEvents::SUBMIT</span></code>,
+<code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SUBMIT</span></code>.</p>
+<div class="section" id="a-the-formevents-pre-submit-event">
+<h4>A) The <code class="docutils literal notranslate"><span class="pre">FormEvents::PRE_SUBMIT</span></code> Event<a class="headerlink" href="#a-the-formevents-pre-submit-event" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">FormEvents::PRE_SUBMIT</span></code> event is dispatched at the beginning of the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/Form.php" title="Symfony\Component\Form\Form::submit()"><span class="pre">Form::submit()</span></a></code> method.</p>
+<p>It can be used to:</p>
+<ul class="simple">
+<li>Change data from the request, before submitting the data to the form;</li>
+<li>Add or remove form fields, before submitting the data to the form.</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Data Type</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Model data</td>
+<td>Same as in <code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SET_DATA</span></code></td>
+</tr>
+<tr class="row-odd"><td>Normalized data</td>
+<td>Same as in <code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SET_DATA</span></code></td>
+</tr>
+<tr class="row-even"><td>View data</td>
+<td>Same as in <code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SET_DATA</span></code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">See all form events at a glance in the
+<a class="reference internal" href="#component-form-event-table"><span class="std std-ref">Form Events Information Table</span></a>.</p>
+</div>
+<div class="sidebar">
+<p class="first sidebar-title"><code class="docutils literal notranslate"><span class="pre">FormEvents::PRE_SUBMIT</span></code> in the Form component</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">Symfony\Component\Form\Extension\Core\EventListener\TrimListener</span></code>
+subscriber subscribes to the <code class="docutils literal notranslate"><span class="pre">FormEvents::PRE_SUBMIT</span></code> event in order to
+trim the request’s data (for string values).
+The <code class="docutils literal notranslate"><span class="pre">Symfony\Component\Form\Extension\Csrf\EventListener\CsrfValidationListener</span></code>
+subscriber subscribes to the <code class="docutils literal notranslate"><span class="pre">FormEvents::PRE_SUBMIT</span></code> event in order to
+validate the CSRF token.</p>
+</div>
+</div>
+<div class="section" id="b-the-formevents-submit-event">
+<h4>B) The <code class="docutils literal notranslate"><span class="pre">FormEvents::SUBMIT</span></code> Event<a class="headerlink" href="#b-the-formevents-submit-event" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">FormEvents::SUBMIT</span></code> event is dispatched right before the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/Form.php" title="Symfony\Component\Form\Form::submit()"><span class="pre">Form::submit()</span></a></code> method
+transforms back the normalized data to the model and view data.</p>
+<p>It can be used to change data from the normalized representation of the data.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Data Type</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Model data</td>
+<td>Same as in <code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SET_DATA</span></code></td>
+</tr>
+<tr class="row-odd"><td>Normalized data</td>
+<td>Data from the request reverse-transformed from the request using a view transformer</td>
+</tr>
+<tr class="row-even"><td>View data</td>
+<td>Same as in <code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SET_DATA</span></code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">See all form events at a glance in the
+<a class="reference internal" href="#component-form-event-table"><span class="std std-ref">Form Events Information Table</span></a>.</p>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">At this point, you cannot add or remove fields to the form.</p>
+</div>
+<div class="sidebar">
+<p class="first sidebar-title"><code class="docutils literal notranslate"><span class="pre">FormEvents::SUBMIT</span></code> in the Form component</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">Symfony\Component\Form\Extension\Core\EventListener\FixUrlProtocolListener</span></code>
+subscribes to the <code class="docutils literal notranslate"><span class="pre">FormEvents::SUBMIT</span></code> event in order to prepend a default
+protocol to URL fields that were submitted without a protocol.</p>
+</div>
+</div>
+<div class="section" id="c-the-formevents-post-submit-event">
+<h4>C) The <code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SUBMIT</span></code> Event<a class="headerlink" href="#c-the-formevents-post-submit-event" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SUBMIT</span></code> event is dispatched after the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/Form.php" title="Symfony\Component\Form\Form::submit()"><span class="pre">Form::submit()</span></a></code> once the
+model and view data have been denormalized.</p>
+<p>It can be used to fetch data after denormalization.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Data Type</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Model data</td>
+<td>Normalized data reverse-transformed using a model transformer</td>
+</tr>
+<tr class="row-odd"><td>Normalized data</td>
+<td>Same as in <code class="docutils literal notranslate"><span class="pre">FormEvents::SUBMIT</span></code></td>
+</tr>
+<tr class="row-even"><td>View data</td>
+<td>Normalized data transformed using a view transformer</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">See all form events at a glance in the
+<a class="reference internal" href="#component-form-event-table"><span class="std std-ref">Form Events Information Table</span></a>.</p>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">At this point, you cannot add or remove fields to the current form and its
+children.</p>
+</div>
+<div class="sidebar">
+<p class="first sidebar-title"><code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SUBMIT</span></code> in the Form component</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">Symfony\Component\Form\Extension\DataCollector\EventListener\DataCollectorListener</span></code>
+subscribes to the <code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SUBMIT</span></code> event in order to collect
+information about the forms.
+The <code class="docutils literal notranslate"><span class="pre">Symfony\Component\Form\Extension\Validator\EventListener\ValidationListener</span></code>
+subscribes to the <code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SUBMIT</span></code> event in order to
+automatically validate the denormalized object.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="registering-event-listeners-or-event-subscribers">
+<h2>Registering Event Listeners or Event Subscribers<a class="headerlink" href="#registering-event-listeners-or-event-subscribers" title="Permalink to this headline">¶</a></h2>
+<p>In order to be able to use Form events, you need to create an event listener
+or an event subscriber and register it to an event.</p>
+<p>The name of each of the “form” events is defined as a constant on the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/FormEvents.php" title="Symfony\Component\Form\FormEvents"><span class="pre">FormEvents</span></a></code> class.
+Additionally, each event callback (listener or subscriber method) is passed a
+single argument, which is an instance of
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/FormEvent.php" title="Symfony\Component\Form\FormEvent"><span class="pre">FormEvent</span></a></code>. The event object contains a
+reference to the current state of the form and the current data being
+processed.</p>
+<table border="1" class="docutils" id="component-form-event-table">
+<colgroup>
+<col width="33%" />
+<col width="44%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head"><code class="docutils literal notranslate"><span class="pre">FormEvents</span></code> Constant</th>
+<th class="head">Event’s Data</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">form.pre_set_data</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">FormEvents::PRE_SET_DATA</span></code></td>
+<td>Model data</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">form.post_set_data</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SET_DATA</span></code></td>
+<td>Model data</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">form.pre_submit</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">FormEvents::PRE_SUBMIT</span></code></td>
+<td>Request data</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">form.submit</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">FormEvents::SUBMIT</span></code></td>
+<td>Normalized data</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">form.post_submit</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">FormEvents::POST_SUBMIT</span></code></td>
+<td>View data</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="event-listeners">
+<h3>Event Listeners<a class="headerlink" href="#event-listeners" title="Permalink to this headline">¶</a></h3>
+<p>An event listener may be any type of valid callable. For example, you can
+define an event listener function inline right in the <code class="docutils literal notranslate"><span class="pre">addEventListener</span></code>
+method of the <code class="docutils literal notranslate"><span class="pre">FormFactory</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\CheckboxType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\EmailType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\TextType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormEvents</span><span class="p">;</span>
+
+<span class="nv">$form</span> <span class="o">=</span> <span class="nv">$formFactory</span><span class="o">-&gt;</span><span class="na">createBuilder</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="nx">TextType</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;showEmail&#39;</span><span class="p">,</span> <span class="nx">CheckboxType</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addEventListener</span><span class="p">(</span><span class="nx">FormEvents</span><span class="o">::</span><span class="na">PRE_SUBMIT</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">FormEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">();</span>
+        <span class="nv">$form</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getForm</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// checks whether the user has chosen to display their email or not.</span>
+        <span class="c1">// If the data was submitted previously, the additional value that is</span>
+        <span class="c1">// included in the request variables needs to be removed.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$user</span><span class="p">[</span><span class="s1">&#39;showEmail&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$user</span><span class="p">[</span><span class="s1">&#39;showEmail&#39;</span><span class="p">])</span> <span class="p">{</span>
+            <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="nx">EmailType</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nb">unset</span><span class="p">(</span><span class="nv">$user</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]);</span>
+            <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">setData</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+    <span class="o">-&gt;</span><span class="na">getForm</span><span class="p">();</span>
+
+<span class="c1">// ...</span>
+</pre></div>
+</div>
+<p>When you have created a form type class, you can use one of its methods as a
+callback for better readability:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/SubscriptionType.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\CheckboxType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\TextType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormEvents</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">SubscriptionType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">buildForm</span><span class="p">(</span><span class="nx">FormBuilderInterface</span> <span class="nv">$builder</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$builder</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="nx">TextType</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;showEmail&#39;</span><span class="p">,</span> <span class="nx">CheckboxType</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">addEventListener</span><span class="p">(</span>
+                <span class="nx">FormEvents</span><span class="o">::</span><span class="na">PRE_SET_DATA</span><span class="p">,</span>
+                <span class="p">[</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;onPreSetData&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">onPreSetData</span><span class="p">(</span><span class="nx">FormEvent</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="event-subscribers">
+<h3>Event Subscribers<a class="headerlink" href="#event-subscribers" title="Permalink to this headline">¶</a></h3>
+<p>Event subscribers have different uses:</p>
+<ul class="simple">
+<li>Improving readability;</li>
+<li>Listening to multiple events;</li>
+<li>Regrouping multiple listeners inside a single class.</li>
+</ul>
+<p>Consider the following example of a form event subscriber:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/EventListener/AddEmailFieldListener.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form\EventListener</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher\EventSubscriberInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\EmailType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormEvents</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">AddEmailFieldListener</span> <span class="k">implements</span> <span class="nx">EventSubscriberInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getSubscribedEvents</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="nx">FormEvents</span><span class="o">::</span><span class="na">PRE_SET_DATA</span> <span class="o">=&gt;</span> <span class="s1">&#39;onPreSetData&#39;</span><span class="p">,</span>
+            <span class="nx">FormEvents</span><span class="o">::</span><span class="na">PRE_SUBMIT</span>   <span class="o">=&gt;</span> <span class="s1">&#39;onPreSubmit&#39;</span><span class="p">,</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">onPreSetData</span><span class="p">(</span><span class="nx">FormEvent</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">();</span>
+        <span class="nv">$form</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getForm</span><span class="p">();</span>
+
+        <span class="c1">// checks whether the user from the initial data has chosen to</span>
+        <span class="c1">// display their email or not.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">true</span> <span class="o">===</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">isShowEmail</span><span class="p">())</span> <span class="p">{</span>
+            <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="nx">EmailType</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">onPreSubmit</span><span class="p">(</span><span class="nx">FormEvent</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">();</span>
+        <span class="nv">$form</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getForm</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// checks whether the user has chosen to display their email or not.</span>
+        <span class="c1">// If the data was submitted previously, the additional value that</span>
+        <span class="c1">// is included in the request variables needs to be removed.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$user</span><span class="p">[</span><span class="s1">&#39;showEmail&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$user</span><span class="p">[</span><span class="s1">&#39;showEmail&#39;</span><span class="p">])</span> <span class="p">{</span>
+            <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="nx">EmailType</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nb">unset</span><span class="p">(</span><span class="nv">$user</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]);</span>
+            <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">setData</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To register the event subscriber, use the <code class="docutils literal notranslate"><span class="pre">addEventSubscriber()</span></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">App\Form\EventListener\AddEmailFieldListener</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\CheckboxType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\TextType</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+
+<span class="nv">$form</span> <span class="o">=</span> <span class="nv">$formFactory</span><span class="o">-&gt;</span><span class="na">createBuilder</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="nx">TextType</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;showEmail&#39;</span><span class="p">,</span> <span class="nx">CheckboxType</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addEventSubscriber</span><span class="p">(</span><span class="k">new</span> <span class="nx">AddEmailFieldListener</span><span class="p">())</span>
+    <span class="o">-&gt;</span><span class="na">getForm</span><span class="p">();</span>
+
+<span class="c1">// ...</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

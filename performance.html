@@ -1,0 +1,485 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Performance &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Profiler" href="profiler.html" />
+    <link rel="prev" title="How to send SMS Messages" href="notifier/texters.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Performance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#symfony-application-checklist">Symfony Application Checklist</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-apcu-polyfill-if-your-server-uses-apc">Install APCu Polyfill if your Server Uses APC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dump-the-service-container-into-a-single-file">Dump the Service Container into a Single File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restrict-the-number-of-locales-enabled-in-the-application">Restrict the Number of Locales Enabled in the Application</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#production-server-checklist">Production Server Checklist</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#use-the-opcache-byte-code-cache">Use the OPcache Byte Code Cache</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-the-opcache-class-preloading">Use the OPcache class preloading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-opcache-for-maximum-performance">Configure OPcache for Maximum Performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#don-t-check-php-files-timestamps">Don’t Check PHP Files Timestamps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-the-php-realpath-cache">Configure the PHP <code class="docutils literal notranslate"><span class="pre">realpath</span></code> Cache</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optimize-composer-autoloader">Optimize Composer Autoloader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#learn-more">Learn more</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Performance</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/performance.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="performance">
+<span id="index-0"></span><h1>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h1>
+<p>Symfony is fast, right out of the box. However, you can make it faster if you
+optimize your servers and your applications as explained in the following
+performance checklists.</p>
+<div class="section" id="symfony-application-checklist">
+<h2>Symfony Application Checklist<a class="headerlink" href="#symfony-application-checklist" title="Permalink to this headline">¶</a></h2>
+<p>These are the code and configuration changes that you can make in your Symfony
+application to improve its performance:</p>
+<ol class="arabic simple">
+<li><a class="reference internal" href="#performance-install-apcu-polyfill"><span class="std std-ref">Install APCu Polyfill if your server uses APC</span></a></li>
+<li><a class="reference internal" href="#performance-service-container-single-file"><span class="std std-ref">Dump the service container into a single file</span></a></li>
+<li><a class="reference internal" href="#performance-enabled-locales"><span class="std std-ref">Restrict the number of locales enabled in the application</span></a></li>
+</ol>
+<div class="section" id="install-apcu-polyfill-if-your-server-uses-apc">
+<span id="performance-install-apcu-polyfill"></span><h3>Install APCu Polyfill if your Server Uses APC<a class="headerlink" href="#install-apcu-polyfill-if-your-server-uses-apc" title="Permalink to this headline">¶</a></h3>
+<p>If your production server still uses the legacy APC PHP extension instead of
+OPcache, install the <a class="reference external" href="https://github.com/symfony/polyfill-apcu">APCu Polyfill component</a> in your application to enable
+compatibility with <a class="reference external" href="https://www.php.net/manual/en/ref.apcu.php">APCu PHP functions</a> and unlock support for advanced Symfony
+features, such as the APCu Cache adapter.</p>
+</div>
+<div class="section" id="dump-the-service-container-into-a-single-file">
+<span id="performance-service-container-single-file"></span><h3>Dump the Service Container into a Single File<a class="headerlink" href="#dump-the-service-container-into-a-single-file" title="Permalink to this headline">¶</a></h3>
+<p>Symfony compiles the <a class="reference internal" href="service_container.html"><span class="doc">service container</span></a> into multiple
+small files by default. Set this parameter to <code class="docutils literal notranslate"><span class="pre">true</span></code> to compile the entire
+container into a single file, which could improve performance when using
+“class preloading” in PHP 7.4 or newer versions:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">container.dumper.inline_factories</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;parameters&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;container.dumper.inline_factories&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/parameter&gt;</span>
+    <span class="nt">&lt;/parameters&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;container.dumper.inline_factories&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="restrict-the-number-of-locales-enabled-in-the-application">
+<span id="performance-enabled-locales"></span><h3>Restrict the Number of Locales Enabled in the Application<a class="headerlink" href="#restrict-the-number-of-locales-enabled-in-the-application" title="Permalink to this headline">¶</a></h3>
+<p>Use the <a class="reference internal" href="reference/configuration/framework.html#reference-translator-enabled-locales"><span class="std std-ref">framework.translator.enabled_locales</span></a>
+option to only generate the translation files actually used in your application.</p>
+</div>
+</div>
+<div class="section" id="production-server-checklist">
+<h2>Production Server Checklist<a class="headerlink" href="#production-server-checklist" title="Permalink to this headline">¶</a></h2>
+<p>These are the changes that you can make in your production server to improve
+performance when running Symfony applications:</p>
+<ol class="arabic simple">
+<li><a class="reference internal" href="#performance-use-opcache"><span class="std std-ref">Use the OPcache byte code cache</span></a></li>
+<li><a class="reference internal" href="#performance-use-preloading"><span class="std std-ref">Use the OPcache class preloading</span></a></li>
+<li><a class="reference internal" href="#performance-configure-opcache"><span class="std std-ref">Configure OPcache for maximum performance</span></a></li>
+<li><a class="reference internal" href="#performance-dont-check-timestamps"><span class="std std-ref">Don’t check PHP files timestamps</span></a></li>
+<li><a class="reference internal" href="#performance-configure-realpath-cache"><span class="std std-ref">Configure the PHP realpath Cache</span></a></li>
+<li><a class="reference internal" href="#performance-optimize-composer-autoloader"><span class="std std-ref">Optimize Composer Autoloader</span></a></li>
+</ol>
+<div class="section" id="use-the-opcache-byte-code-cache">
+<span id="performance-use-opcache"></span><h3>Use the OPcache Byte Code Cache<a class="headerlink" href="#use-the-opcache-byte-code-cache" title="Permalink to this headline">¶</a></h3>
+<p>OPcache stores the compiled PHP files to avoid having to recompile them for
+every request. There are some <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_PHP_accelerators">byte code caches</a> available, but as of PHP
+5.5, PHP comes with <a class="reference external" href="https://www.php.net/manual/en/book.opcache.php">OPcache</a> built-in. For older versions, the most widely
+used byte code cache is <a class="reference external" href="https://www.php.net/manual/en/book.apc.php">APC</a>.</p>
+</div>
+<div class="section" id="use-the-opcache-class-preloading">
+<span id="performance-use-preloading"></span><h3>Use the OPcache class preloading<a class="headerlink" href="#use-the-opcache-class-preloading" title="Permalink to this headline">¶</a></h3>
+<p>Starting from PHP 7.4, OPcache can compile and load classes at start-up and
+make them available to all requests until the server is restarted, improving
+performance significantly.</p>
+<p>During container compilation, Symfony generates the file with the list of
+classes to preload. The only requirement is that you need to set both
+<code class="docutils literal notranslate"><span class="pre">container.dumper.inline_factories</span></code> and  <code class="docutils literal notranslate"><span class="pre">container.dumper.inline_class_loader</span></code>
+parameters to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p>The preload file path is the same as the compiled service container but with the
+<code class="docutils literal notranslate"><span class="pre">preload</span></code> suffix:</p>
+<div class="highlight-ini notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">; php.ini</span>
+<span class="na">opcache.preload</span><span class="o">=</span><span class="s">/path/to/project/var/cache/prod/srcApp_KernelProdContainer.preload.php</span>
+</pre></div>
+</td></tr></table></div>
+<p>Use the <a class="reference internal" href="reference/dic_tags.html#dic-tags-container-preload"><span class="std std-ref">container.preload</span></a> and
+<a class="reference internal" href="reference/dic_tags.html#dic-tags-container-nopreload"><span class="std std-ref">container.no_preload</span></a> service tags to define
+which classes should or should not be preloaded PHP.</p>
+</div>
+<div class="section" id="configure-opcache-for-maximum-performance">
+<span id="performance-configure-opcache"></span><h3>Configure OPcache for Maximum Performance<a class="headerlink" href="#configure-opcache-for-maximum-performance" title="Permalink to this headline">¶</a></h3>
+<p>The default OPcache configuration is not suited for Symfony applications, so
+it’s recommended to change these settings as follows:</p>
+<div class="highlight-ini notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">; php.ini</span>
+<span class="c1">; maximum memory that OPcache can use to store compiled PHP files</span>
+<span class="na">opcache.memory_consumption</span><span class="o">=</span><span class="s">256</span>
+
+<span class="c1">; maximum number of files that can be stored in the cache</span>
+<span class="na">opcache.max_accelerated_files</span><span class="o">=</span><span class="s">20000</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="don-t-check-php-files-timestamps">
+<span id="performance-dont-check-timestamps"></span><h3>Don’t Check PHP Files Timestamps<a class="headerlink" href="#don-t-check-php-files-timestamps" title="Permalink to this headline">¶</a></h3>
+<p>In production servers, PHP files should never change, unless a new application
+version is deployed. However, by default OPcache checks if cached files have
+changed their contents since they were cached. This check introduces some
+overhead that can be avoided as follows:</p>
+<div class="highlight-ini notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">; php.ini</span>
+<span class="na">opcache.validate_timestamps</span><span class="o">=</span><span class="s">0</span>
+</pre></div>
+</td></tr></table></div>
+<p>After each deploy, you must empty and regenerate the cache of OPcache. Otherwise
+you won’t see the updates made in the application. Given that in PHP, the CLI
+and the web processes don’t share the same OPcache, you cannot clear the web
+server OPcache by executing some command in your terminal. These are some of the
+possible solutions:</p>
+<ol class="arabic simple">
+<li>Restart the web server;</li>
+<li>Call the <code class="docutils literal notranslate"><span class="pre">apc_clear_cache()</span></code> or <code class="docutils literal notranslate"><span class="pre">opcache_reset()</span></code> functions via the
+web server (i.e. by having these in a script that you execute over the web);</li>
+<li>Use the <a class="reference external" href="https://github.com/gordalina/cachetool">cachetool</a> utility to control APC and OPcache from the CLI.</li>
+</ol>
+</div>
+<div class="section" id="configure-the-php-realpath-cache">
+<span id="performance-configure-realpath-cache"></span><h3>Configure the PHP <code class="docutils literal notranslate"><span class="pre">realpath</span></code> Cache<a class="headerlink" href="#configure-the-php-realpath-cache" title="Permalink to this headline">¶</a></h3>
+<p>When a relative path is transformed into its real and absolute path, PHP
+caches the result to improve performance. Applications that open many PHP files,
+such as Symfony projects, should use at least these values:</p>
+<div class="highlight-ini notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">; php.ini</span>
+<span class="c1">; maximum memory allocated to store the results</span>
+<span class="na">realpath_cache_size</span><span class="o">=</span><span class="s">4096K</span>
+
+<span class="c1">; save the results for 10 minutes (600 seconds)</span>
+<span class="na">realpath_cache_ttl</span><span class="o">=</span><span class="s">600</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">PHP disables the <code class="docutils literal notranslate"><span class="pre">realpath</span></code> cache when the <a class="reference external" href="https://www.php.net/manual/ini.core.php#ini.open-basedir">open_basedir</a> config option
+is enabled.</p>
+</div>
+</div>
+<div class="section" id="optimize-composer-autoloader">
+<span id="performance-optimize-composer-autoloader"></span><h3>Optimize Composer Autoloader<a class="headerlink" href="#optimize-composer-autoloader" title="Permalink to this headline">¶</a></h3>
+<p>The class loader used while developing the application is optimized to find
+new and changed classes. In production servers, PHP files should never change,
+unless a new application version is deployed. That’s why you can optimize
+Composer’s autoloader to scan the entire application once and build a “class map”,
+which is a big array of the locations of all the classes and it’s stored
+in <code class="docutils literal notranslate"><span class="pre">vendor/composer/autoload_classmap.php</span></code>.</p>
+<p>Execute this command to generate the class map (and make it part of your
+deployment process too):</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer dump-autoload --no-dev --classmap-authoritative
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">--no-dev</span></code> excludes the classes that are only needed in the development
+environment (i.e. <code class="docutils literal notranslate"><span class="pre">require-dev</span></code> dependencies and <code class="docutils literal notranslate"><span class="pre">autoload-dev</span></code> rules);</li>
+<li><code class="docutils literal notranslate"><span class="pre">--classmap-authoritative</span></code> creates a class map for PSR-0 and PSR-4 compatible classes
+used in your application and prevents Composer from scanning the file system for
+classes that are not found in the class map. (see: <a class="reference external" href="https://getcomposer.org/doc/articles/autoloader-optimization.md">Composer’s autoloader optimization</a>).</li>
+</ul>
+</div>
+</div>
+<div class="section" id="learn-more">
+<h2>Learn more<a class="headerlink" href="#learn-more" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="http_cache/varnish.html"><span class="doc">How to Use Varnish to Speed up my Website</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,430 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Working with Server Side Includes &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="HTTP Cache Validation" href="validation.html" />
+    <link rel="prev" title="HTTP Cache Expiration" href="expiration.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../http_cache.html">HTTP Cache</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#caching-on-the-shoulders-of-giants">Caching on the Shoulders of Giants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#caching-with-a-gateway-cache">Caching with a Gateway Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#making-your-responses-http-cacheable">Making your Responses HTTP Cacheable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#cache-invalidation">Cache Invalidation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#using-edge-side-includes">Using Edge Side Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#http-caching-and-user-sessions">HTTP Caching and User Sessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../http_cache.html#summary">Summary</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../http_cache.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cache_invalidation.html">Cache Invalidation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cache_vary.html">Varying the Response for HTTP Cache</a></li>
+<li class="toctree-l3"><a class="reference internal" href="esi.html">Working with Edge Side Includes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expiration.html">HTTP Cache Expiration</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Working with Server Side Includes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-ssi-in-symfony">Using SSI in Symfony</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="validation.html">HTTP Cache Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varnish.html">How to Use Varnish to Speed up my Website</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../http_cache.html">HTTP Cache</a> &raquo;</li>
+        
+      <li>Working with Server Side Includes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/http_cache/ssi.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="working-with-server-side-includes">
+<span id="server-side-includes"></span><span id="index-0"></span><h1>Working with Server Side Includes<a class="headerlink" href="#working-with-server-side-includes" title="Permalink to this headline">¶</a></h1>
+<p>In a similar way as <a class="reference internal" href="esi.html"><span class="doc">ESI (Edge Side Includes)</span></a>,
+SSI can be used to control HTTP caching on fragments of a response.
+The most important difference that is SSI is known directly by most
+web servers like <a class="reference external" href="https://httpd.apache.org/docs/current/en/howto/ssi.html">Apache</a>, <a class="reference external" href="https://nginx.org/en/docs/http/ngx_http_ssi_module.html">Nginx</a> etc.</p>
+<p>The SSI instructions are done via HTML comments:</p>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="c">&lt;!-- ... some content --&gt;</span>
+
+        <span class="c">&lt;!-- Embed the content of another page here --&gt;</span>
+        <span class="c">&lt;!--#include virtual=&quot;http://...&quot; --&gt;</span>
+
+        <span class="c">&lt;!-- ... more content --&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>There are some other <a class="reference external" href="https://en.wikipedia.org/wiki/Server_Side_Includes#Directives">available directives</a> but
+Symfony manages only the <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">virtual</span></code> one.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Be careful with SSI, your website may be victim of injections.
+Please read this <a class="reference external" href="https://www.owasp.org/index.php/Server-Side_Includes_(SSI)_Injection">OWASP article</a> first!</p>
+</div>
+<p>When the web server reads an SSI directive, it requests the given URI or gives
+directly from its cache. It repeats this process until there is no more
+SSI directives to handle. Then, it merges all responses into one and sends
+it to the client.</p>
+<div class="section" id="using-ssi-in-symfony">
+<span id="id1"></span><h2>Using SSI in Symfony<a class="headerlink" href="#using-ssi-in-symfony" title="Permalink to this headline">¶</a></h2>
+<p>First, to use SSI, be sure to enable it in your application configuration:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">ssi</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{</span> <span class="nv">enabled</span><span class="p p-Indicator">:</span> <span class="nv">true</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/framework.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:ssi</span> <span class="na">enabled=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/framework.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;ssi&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;enabled&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Suppose you have a page with private content like a Profile page and you want
+to cache a static GDPR content block. With SSI, you can add some expiration
+on this block and keep the page private:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/ProfileController.php</span>
+
+<span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">ProfileController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span><span class="o">:</span> <span class="nx">Response</span>
+    <span class="p">{</span>
+        <span class="c1">// by default, responses are private</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;profile/index.html.twig&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">gdpr</span><span class="p">()</span><span class="o">:</span> <span class="nx">Response</span>
+    <span class="p">{</span>
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;profile/gdpr.html.twig&#39;</span><span class="p">);</span>
+
+        <span class="c1">// sets to public and adds some expiration</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setSharedMaxAge</span><span class="p">(</span><span class="mi">600</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The profile index page has not public caching, but the GDPR block has
+10 minutes of expiration. Let’s include this block into the main one:</p>
+<div class="highlight-twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">{# templates/profile/index.html.twig #}</span><span class="x"></span>
+
+<span class="c">{# you can use a controller reference #}</span><span class="x"></span>
+<span class="cp">{{</span> <span class="nv">render_ssi</span><span class="o">(</span><span class="nv">controller</span><span class="o">(</span><span class="s1">&#39;App\\Controller\\ProfileController::gdpr&#39;</span><span class="o">))</span> <span class="cp">}}</span><span class="x"></span>
+
+<span class="c">{# ... or a URL #}</span><span class="x"></span>
+<span class="cp">{{</span> <span class="nv">render_ssi</span><span class="o">(</span><span class="nv">url</span><span class="o">(</span><span class="s1">&#39;profile_gdpr&#39;</span><span class="o">))</span> <span class="cp">}}</span><span class="x"></span>
+</pre></div>
+</td></tr></table></div>
+<p>The <code class="docutils literal notranslate"><span class="pre">render_ssi</span></code> twig helper will generate something like:</p>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!--#include virtual=&quot;/_fragment?_hash=abcdef1234&amp;_path=_controller=App\Controller\ProfileController::gdpr&quot; --&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p><code class="docutils literal notranslate"><span class="pre">render_ssi</span></code> ensures that SSI directive are generated only if the request
+has the header requirement like <code class="docutils literal notranslate"><span class="pre">Surrogate-Capability:</span> <span class="pre">device=&quot;SSI/1.0&quot;</span></code>
+(normally given by the web server).
+Otherwise it will embed directly the sub-response.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For more information about Symfony cache fragments, take a tour on
+the <a class="reference internal" href="esi.html#http-cache-fragments"><span class="std std-ref">ESI documentation</span></a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,1166 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Security Configuration Reference (SecurityBundle) &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="UserPassword" href="../constraints/UserPassword.html" />
+    <link rel="prev" title="Security: Complex Access Controls with Expressions" href="../../security/expressions.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="framework.html">Framework Configuration Reference (FrameworkBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doctrine.html">Doctrine Configuration Reference (DoctrineBundle)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Security Configuration Reference (SecurityBundle)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#access-denied-url">access_denied_url</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#always-authenticate-before-granting">always_authenticate_before_granting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#anonymous">anonymous</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#erase-credentials">erase_credentials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hide-user-not-found">hide_user_not_found</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#session-fixation-strategy">session_fixation_strategy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#access-control">access_control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#encoders">encoders</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-sodium-password-encoder">Using the Sodium Password Encoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-auto-password-encoder">Using the “auto” Password Encoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-pbkdf2-encoder">Using the PBKDF2 Encoder</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#firewalls">firewalls</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#form-login-authentication"><code class="docutils literal notranslate"><span class="pre">form_login</span></code> Authentication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#invalidate-session">invalidate_session</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#success-handler">success_handler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#csrf-parameter">csrf_parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#csrf-token-generator">csrf_token_generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#csrf-token-id">csrf_token_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ldap-authentication">LDAP Authentication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#firewall-context">Firewall Context</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-checkers">User Checkers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#providers">providers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#role-hierarchy">role_hierarchy</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swiftmailer.html">Mailer Configuration Reference (SwiftmailerBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twig.html">Twig Configuration Reference (TwigBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monolog.html">Logging Configuration Reference (MonologBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web_profiler.html">Profiler Configuration Reference (WebProfilerBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html">Debug Configuration Reference (DebugBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel.html">Configuring in the Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms/types.html">Form Types Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constraints.html">Validation Constraints Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../twig_reference.html">Twig Extensions Defined by Symfony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dic_tags.html">Built-in Symfony Service Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../events.html">Built-in Symfony Events</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../components/index.html">The Components</a> &raquo;</li>
+        
+          <li><a href="../../components/security.html">The Security Component</a> &raquo;</li>
+        
+      <li>Security Configuration Reference (SecurityBundle)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reference/configuration/security.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="security-configuration-reference-securitybundle">
+<span id="index-0"></span><h1>Security Configuration Reference (SecurityBundle)<a class="headerlink" href="#security-configuration-reference-securitybundle" title="Permalink to this headline">¶</a></h1>
+<p>The SecurityBundle integrates the <a class="reference internal" href="../../components/security.html"><span class="doc">Security component</span></a>
+in Symfony applications. All these options are configured under the <code class="docutils literal notranslate"><span class="pre">security</span></code>
+key in your application configuration.</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># displays the default config values defined by Symfony</span>
+<span class="gp">$</span> php bin/console config:dump-reference security
+
+<span class="c1"># displays the actual config values used by your application</span>
+<span class="gp">$</span> php bin/console debug:config security
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When using XML, you must use the <code class="docutils literal notranslate"><span class="pre">http://symfony.com/schema/dic/security</span></code>
+namespace and the related XSD schema is available at:
+<code class="docutils literal notranslate"><span class="pre">https://symfony.com/schema/dic/services/services-1.0.xsd</span></code></p>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p><strong>Basic Options</strong>:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#access-denied-url">access_denied_url</a></li>
+<li><a class="reference internal" href="#always-authenticate-before-granting">always_authenticate_before_granting</a></li>
+<li><a class="reference internal" href="#anonymous">anonymous</a></li>
+<li><a class="reference internal" href="#erase-credentials">erase_credentials</a></li>
+<li><a class="reference internal" href="#hide-user-not-found">hide_user_not_found</a></li>
+<li><a class="reference internal" href="#session-fixation-strategy">session_fixation_strategy</a></li>
+</ul>
+<p><strong>Advanced Options</strong>:</p>
+<p>Some of these options define tens of sub-options and they are explained in
+separate articles:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#access-control">access_control</a></li>
+<li><a class="reference internal" href="#encoders">encoders</a></li>
+<li><a class="reference internal" href="#firewalls">firewalls</a></li>
+<li><a class="reference internal" href="#providers">providers</a></li>
+<li><a class="reference internal" href="#role-hierarchy">role_hierarchy</a></li>
+</ul>
+<div class="section" id="access-denied-url">
+<h3>access_denied_url<a class="headerlink" href="#access-denied-url" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">null</span></code></p>
+<p>Defines the URL where the user is redirected after a <code class="docutils literal notranslate"><span class="pre">403</span></code> HTTP error (unless
+you define a custom access deny handler). Example: <code class="docutils literal notranslate"><span class="pre">/no-permission</span></code></p>
+</div>
+<div class="section" id="always-authenticate-before-granting">
+<h3>always_authenticate_before_granting<a class="headerlink" href="#always-authenticate-before-granting" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the user is asked to authenticate before each call to the
+<code class="docutils literal notranslate"><span class="pre">isGranted()</span></code> method in services and controllers or <code class="docutils literal notranslate"><span class="pre">is_granted()</span></code> from
+templates.</p>
+</div>
+<div class="section" id="anonymous">
+<h3>anonymous<a class="headerlink" href="#anonymous" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">~</span></code></p>
+<p>When set to <code class="docutils literal notranslate"><span class="pre">lazy</span></code>, Symfony loads the user (and starts the session) only if
+the application actually accesses the <code class="docutils literal notranslate"><span class="pre">User</span></code> object (e.g. via a <code class="docutils literal notranslate"><span class="pre">is_granted()</span></code>
+call in a template or <code class="docutils literal notranslate"><span class="pre">isGranted()</span></code> in a controller or service).</p>
+</div>
+<div class="section" id="erase-credentials">
+<h3>erase_credentials<a class="headerlink" href="#erase-credentials" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">true</span></code></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the <code class="docutils literal notranslate"><span class="pre">eraseCredentials()</span></code> method of the user object is called
+after authentication.</p>
+</div>
+<div class="section" id="hide-user-not-found">
+<h3>hide_user_not_found<a class="headerlink" href="#hide-user-not-found" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">true</span></code></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, when a user is not found a generic exception of type
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Exception/BadCredentialsException.php" title="Symfony\Component\Security\Core\Exception\BadCredentialsException"><span class="pre">BadCredentialsException</span></a></code>
+is thrown with the message “Bad credentials”.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">false</span></code>, the exception thrown is of type
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Exception/UsernameNotFoundException.php" title="Symfony\Component\Security\Core\Exception\UsernameNotFoundException"><span class="pre">UsernameNotFoundException</span></a></code>
+and it includes the given not found username.</p>
+</div>
+<div class="section" id="session-fixation-strategy">
+<h3>session_fixation_strategy<a class="headerlink" href="#session-fixation-strategy" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">SessionAuthenticationStrategy::MIGRATE</span></code></p>
+<p><a class="reference external" href="https://owasp.org/www-community/attacks/Session_fixation">Session Fixation</a> is a security attack that permits an attacker to hijack a
+valid user session. Applications that don’t assign new session IDs when
+authenticating users are vulnerable to this attack.</p>
+<p>The possible values of this option are:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">NONE</span></code> constant from <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Http/Session/SessionAuthenticationStrategy.php" title="Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy"><span class="pre">SessionAuthenticationStrategy</span></a></code>
+Don’t change the session after authentication. This is <strong>not recommended</strong>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">MIGRATE</span></code> constant from <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Http/Session/SessionAuthenticationStrategy.php" title="Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy"><span class="pre">SessionAuthenticationStrategy</span></a></code>
+The session ID is updated, but the rest of session attributes are kept.</li>
+<li><code class="docutils literal notranslate"><span class="pre">INVALIDATE</span></code> constant from <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Http/Session/SessionAuthenticationStrategy.php" title="Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy"><span class="pre">SessionAuthenticationStrategy</span></a></code>
+The entire session is regenerated, so the session ID is updated but all the
+other session attributes are lost.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="access-control">
+<h2>access_control<a class="headerlink" href="#access-control" title="Permalink to this headline">¶</a></h2>
+<p>Defines the security protection of the URLs of your application. It’s used for
+example to trigger the user authentication when trying to access to the backend
+and to allow anonymous users to the login form page.</p>
+<p>This option is explained in detail in <a class="reference internal" href="../../security/access_control.html"><span class="doc">How Does the Security access_control Work?</span></a>.</p>
+</div>
+<div class="section" id="encoders">
+<h2>encoders<a class="headerlink" href="#encoders" title="Permalink to this headline">¶</a></h2>
+<p>This option defines the algorithm used to <em>encode</em> the password of the users.
+Although Symfony calls it <em>“password encoding”</em> for historical reasons, this is
+in fact, <em>“password hashing”</em>.</p>
+<p>If your app defines more than one user class, each of them can define its own
+encoding algorithm. Also, each algorithm defines different config options:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">encoders</span><span class="p p-Indicator">:</span>
+        <span class="c1"># auto encoder with default options</span>
+        <span class="l l-Scalar l-Scalar-Plain">App\Entity\User</span><span class="p p-Indicator">:</span> <span class="s">&#39;auto&#39;</span>
+
+        <span class="c1"># auto encoder with custom options</span>
+        <span class="l l-Scalar l-Scalar-Plain">App\Entity\User</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">algorithm</span><span class="p p-Indicator">:</span> <span class="s">&#39;auto&#39;</span>
+            <span class="l l-Scalar l-Scalar-Plain">cost</span><span class="p p-Indicator">:</span>      <span class="l l-Scalar l-Scalar-Plain">15</span>
+
+        <span class="c1"># Sodium encoder with default options</span>
+        <span class="l l-Scalar l-Scalar-Plain">App\Entity\User</span><span class="p p-Indicator">:</span> <span class="s">&#39;sodium&#39;</span>
+
+        <span class="c1"># Sodium encoder with custom options</span>
+        <span class="l l-Scalar l-Scalar-Plain">App\Entity\User</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">algorithm</span><span class="p p-Indicator">:</span>   <span class="s">&#39;sodium&#39;</span>
+            <span class="l l-Scalar l-Scalar-Plain">memory_cost</span><span class="p p-Indicator">:</span>  <span class="l l-Scalar l-Scalar-Plain">16384</span> <span class="c1"># Amount in KiB. (16384 = 16 MiB)</span>
+            <span class="l l-Scalar l-Scalar-Plain">time_cost</span><span class="p p-Indicator">:</span>    <span class="l l-Scalar l-Scalar-Plain">2</span>     <span class="c1"># Number of iterations</span>
+
+        <span class="c1"># MessageDigestPasswordEncoder encoder using SHA512 hashing with default options</span>
+        <span class="l l-Scalar l-Scalar-Plain">AppBundle\Entity\User</span><span class="p p-Indicator">:</span> <span class="s">&#39;sha512&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/security.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; charset=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;srv:container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/security&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:srv=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/security</span>
+<span class="s">        https://symfony.com/schema/dic/security/security-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;config&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+        <span class="c">&lt;!-- auto encoder with default options --&gt;</span>
+        <span class="nt">&lt;encoder</span>
+            <span class="na">class=</span><span class="s">&quot;App\Entity\User&quot;</span>
+            <span class="na">algorithm=</span><span class="s">&quot;auto&quot;</span>
+        <span class="nt">/&gt;</span>
+
+        <span class="c">&lt;!-- auto encoder with custom options --&gt;</span>
+        <span class="nt">&lt;encoder</span>
+            <span class="na">class=</span><span class="s">&quot;App\Entity\User&quot;</span>
+            <span class="na">algorithm=</span><span class="s">&quot;auto&quot;</span>
+            <span class="na">cost=</span><span class="s">&quot;15&quot;</span>
+        <span class="nt">/&gt;</span>
+
+        <span class="c">&lt;!-- Sodium encoder with default options --&gt;</span>
+        <span class="nt">&lt;encoder</span>
+            <span class="na">class=</span><span class="s">&quot;App\Entity\User&quot;</span>
+            <span class="na">algorithm=</span><span class="s">&quot;sodium&quot;</span>
+        <span class="nt">/&gt;</span>
+
+        <span class="c">&lt;!-- Sodium encoder with custom options --&gt;</span>
+        <span class="c">&lt;!-- memory_cost: amount in KiB. (16384 = 16 MiB)</span>
+<span class="c">             time_cost: number of iterations --&gt;</span>
+        <span class="nt">&lt;encoder</span>
+            <span class="na">class=</span><span class="s">&quot;App\Entity\User&quot;</span>
+            <span class="na">algorithm=</span><span class="s">&quot;sodium&quot;</span>
+            <span class="na">memory_cost=</span><span class="s">&quot;16384&quot;</span>
+            <span class="na">time_cost=</span><span class="s">&quot;2&quot;</span>
+        <span class="nt">/&gt;</span>
+
+        <span class="c">&lt;!-- MessageDigestPasswordEncoder encoder using SHA512 hashing with default options --&gt;</span>
+        <span class="nt">&lt;encoder</span>
+            <span class="na">class=</span><span class="s">&quot;App\Entity\User&quot;</span>
+            <span class="na">algorithm=</span><span class="s">&quot;sha512&quot;</span>
+        <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/config&gt;</span>
+<span class="nt">&lt;/srv:container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/security.php</span>
+<span class="k">use</span> <span class="nx">App\Entity\User</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+    <span class="s1">&#39;encoders&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="c1">// auto encoder with default options</span>
+        <span class="nx">User</span><span class="o">::</span><span class="na">class</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;algorithm&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+
+        <span class="c1">// auto encoder with custom options</span>
+        <span class="nx">User</span><span class="o">::</span><span class="na">class</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;algorithm&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;cost&#39;</span>      <span class="o">=&gt;</span> <span class="mi">15</span><span class="p">,</span>
+        <span class="p">],</span>
+
+        <span class="c1">// Sodium encoder with default options</span>
+        <span class="nx">User</span><span class="o">::</span><span class="na">class</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;algorithm&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;sodium&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+
+        <span class="c1">// Sodium encoder with custom options</span>
+        <span class="nx">User</span><span class="o">::</span><span class="na">class</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;algorithm&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;sodium&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;memory_cost&#39;</span> <span class="o">=&gt;</span> <span class="mi">16384</span><span class="p">,</span> <span class="c1">// Amount in KiB. (16384 = 16 MiB)</span>
+            <span class="s1">&#39;time_cost&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>       <span class="c1">// Number of iterations</span>
+        <span class="p">],</span>
+
+        <span class="c1">// MessageDigestPasswordEncoder encoder using SHA512 hashing with default options</span>
+        <span class="nx">User</span><span class="o">::</span><span class="na">class</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;algorithm&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;sha512&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can also create your own password encoders as services and you can even
+select a different password encoder for each user instance. Read
+<a class="reference internal" href="../../security/named_encoders.html"><span class="doc">this article</span></a> for more details.</p>
+</div>
+<div class="section" id="using-the-sodium-password-encoder">
+<span id="using-the-argon2i-password-encoder"></span><span id="reference-security-sodium"></span><h3>Using the Sodium Password Encoder<a class="headerlink" href="#using-the-sodium-password-encoder" title="Permalink to this headline">¶</a></h3>
+<p>It uses the <a class="reference external" href="https://en.wikipedia.org/wiki/Argon2">Argon2 key derivation function</a> and it’s the encoder recommended
+by Symfony. Argon2 support was introduced in PHP 7.2, but if you use an earlier
+PHP version, you can install the <a class="reference external" href="https://pecl.php.net/package/libsodium">libsodium</a> PHP extension.</p>
+<p>The encoded passwords are <code class="docutils literal notranslate"><span class="pre">96</span></code> characters long, but due to the hashing
+requirements saved in the resulting hash this may change in the future, so make
+sure to allocate enough space for them to be persisted. Also, passwords include
+the <a class="reference external" href="https://en.wikipedia.org/wiki/Salt_(cryptography)">cryptographic salt</a> inside them (it’s generated automatically for each new
+password) so you don’t have to deal with it.</p>
+</div>
+<div class="section" id="using-the-auto-password-encoder">
+<span id="reference-security-encoder-auto"></span><h3>Using the “auto” Password Encoder<a class="headerlink" href="#using-the-auto-password-encoder" title="Permalink to this headline">¶</a></h3>
+<p>It selects automatically the best possible encoder. Currently, it tries to use
+Sodium by default and falls back to the <a class="reference external" href="https://en.wikipedia.org/wiki/Bcrypt">bcrypt password hashing function</a> if
+not possible. In the future, when PHP adds new hashing techniques, it may use
+different password hashers.</p>
+<p>It produces encoded passwords with <code class="docutils literal notranslate"><span class="pre">60</span></code> characters long, so make sure to
+allocate enough space for them to be persisted. Also, passwords include the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Salt_(cryptography)">cryptographic salt</a> inside them (it’s generated automatically for each new
+password) so you don’t have to deal with it.</p>
+<p>Its only configuration option is <code class="docutils literal notranslate"><span class="pre">cost</span></code>, which is an integer in the range of
+<code class="docutils literal notranslate"><span class="pre">4-31</span></code> (by default, <code class="docutils literal notranslate"><span class="pre">13</span></code>). Each single increment of the cost <strong>doubles the
+time</strong> it takes to encode a password. It’s designed this way so the password
+strength can be adapted to the future improvements in computation power.</p>
+<p>You can change the cost at any time — even if you already have some passwords
+encoded using a different cost. New passwords will be encoded using the new
+cost, while the already encoded ones will be validated using a cost that was
+used back when they were encoded.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">A simple technique to make tests much faster when using BCrypt is to set
+the cost to <code class="docutils literal notranslate"><span class="pre">4</span></code>, which is the minimum value allowed, in the <code class="docutils literal notranslate"><span class="pre">test</span></code>
+environment configuration.</p>
+</div>
+</div>
+<div class="section" id="using-the-pbkdf2-encoder">
+<span id="reference-security-pbkdf2"></span><h3>Using the PBKDF2 Encoder<a class="headerlink" href="#using-the-pbkdf2-encoder" title="Permalink to this headline">¶</a></h3>
+<p>Using the <a class="reference external" href="https://en.wikipedia.org/wiki/PBKDF2">PBKDF2</a> encoder is no longer recommended since PHP added support for
+Sodium and BCrypt. Legacy application still using it are encouraged to upgrade
+to those newer encoding algorithms.</p>
+</div>
+</div>
+<div class="section" id="firewalls">
+<h2>firewalls<a class="headerlink" href="#firewalls" title="Permalink to this headline">¶</a></h2>
+<p>This is arguably the most important option of the security config file. It
+defines the authentication mechanism used for each URL (or URL pattern) of your
+application:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">firewalls</span><span class="p p-Indicator">:</span>
+        <span class="c1"># &#39;main&#39; is the name of the firewall (can be chosen freely)</span>
+        <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
+            <span class="c1"># &#39;pattern&#39; is a regular expression matched against the incoming</span>
+            <span class="c1"># request URL. If there&#39;s a match, authentication is triggered</span>
+            <span class="l l-Scalar l-Scalar-Plain">pattern</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">^/admin</span>
+            <span class="c1"># the rest of options depend on the authentication mechanism</span>
+            <span class="c1"># ...</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/security.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;srv:container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/security&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:srv=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/security</span>
+<span class="s">        https://symfony.com/schema/dic/security/security-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;config&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="c">&lt;!-- &#39;pattern&#39; is a regular expression matched against the incoming</span>
+<span class="c">             request URL. If there&#39;s a match, authentication is triggered --&gt;</span>
+        <span class="nt">&lt;firewall</span> <span class="na">name=</span><span class="s">&quot;main&quot;</span> <span class="na">pattern=</span><span class="s">&quot;^/admin&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- the rest of options depend on the authentication mechanism --&gt;</span>
+            <span class="c">&lt;!-- ... --&gt;</span>
+        <span class="nt">&lt;/firewall&gt;</span>
+    <span class="nt">&lt;/config&gt;</span>
+<span class="nt">&lt;/srv:container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/security.php</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;firewalls&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="c1">// &#39;main&#39; is the name of the firewall (can be chosen freely)</span>
+        <span class="s1">&#39;main&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// &#39;pattern&#39; is a regular expression matched against the incoming</span>
+            <span class="c1">// request URL. If there&#39;s a match, authentication is triggered</span>
+            <span class="s1">&#39;pattern&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;^/admin&#39;</span><span class="p">,</span>
+            <span class="c1">// the rest of options depend on the authentication mechanism</span>
+            <span class="c1">// ...</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Read <a class="reference internal" href="../../security/firewall_restriction.html"><span class="doc">this article</span></a> to learn about how
+to restrict firewalls by host and HTTP methods.</p>
+</div>
+<p>In addition to some common config options, the most important firewall options
+depend on the authentication mechanism, which can be any of these:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">firewalls</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+                <span class="l l-Scalar l-Scalar-Plain">x509</span><span class="p p-Indicator">:</span>
+                    <span class="c1"># ...</span>
+                <span class="l l-Scalar l-Scalar-Plain">remote_user</span><span class="p p-Indicator">:</span>
+                    <span class="c1"># ...</span>
+                <span class="l l-Scalar l-Scalar-Plain">simple_preauth</span><span class="p p-Indicator">:</span>
+                    <span class="c1"># ...</span>
+                <span class="l l-Scalar l-Scalar-Plain">guard</span><span class="p p-Indicator">:</span>
+                    <span class="c1"># ...</span>
+                <span class="l l-Scalar l-Scalar-Plain">form_login</span><span class="p p-Indicator">:</span>
+                    <span class="c1"># ...</span>
+                <span class="l l-Scalar l-Scalar-Plain">form_login_ldap</span><span class="p p-Indicator">:</span>
+                    <span class="c1"># ...</span>
+                <span class="l l-Scalar l-Scalar-Plain">json_login</span><span class="p p-Indicator">:</span>
+                    <span class="c1"># ...</span>
+                <span class="l l-Scalar l-Scalar-Plain">simple_form</span><span class="p p-Indicator">:</span>
+                    <span class="c1"># ...</span>
+                <span class="l l-Scalar l-Scalar-Plain">http_basic</span><span class="p p-Indicator">:</span>
+                    <span class="c1"># ...</span>
+                <span class="l l-Scalar l-Scalar-Plain">http_basic_ldap</span><span class="p p-Indicator">:</span>
+                    <span class="c1"># ...</span>
+                <span class="l l-Scalar l-Scalar-Plain">http_digest</span><span class="p p-Indicator">:</span>
+                    <span class="c1"># ...</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="form-login-authentication">
+<span id="reference-security-firewall-form-login"></span><h3><code class="docutils literal notranslate"><span class="pre">form_login</span></code> Authentication<a class="headerlink" href="#form-login-authentication" title="Permalink to this headline">¶</a></h3>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">form_login</span></code> authentication listener beneath a firewall,
+there are several common options for configuring the “form login” experience.
+For even more details, see <a class="reference internal" href="../../security/form_login.html"><span class="doc">Using the form_login Authentication Provider</span></a>.</p>
+<div class="section" id="login-path">
+<h4>login_path<a class="headerlink" href="#login-path" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">/login</span></code></p>
+<p>This is the route or path that the user will be redirected to (unless <code class="docutils literal notranslate"><span class="pre">use_forward</span></code>
+is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>) when they try to access a protected resource but isn’t
+fully authenticated.</p>
+<p>This path <strong>must</strong> be accessible by a normal, un-authenticated user, else
+you may create a redirect loop.</p>
+</div>
+<div class="section" id="check-path">
+<h4>check_path<a class="headerlink" href="#check-path" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">/login_check</span></code></p>
+<p>This is the route or path that your login form must submit to. The firewall
+will intercept any requests (<code class="docutils literal notranslate"><span class="pre">POST</span></code> requests only, by default) to this
+URL and process the submitted login credentials.</p>
+<p>Be sure that this URL is covered by your main firewall (i.e. don’t create
+a separate firewall just for <code class="docutils literal notranslate"><span class="pre">check_path</span></code> URL).</p>
+</div>
+<div class="section" id="use-forward">
+<h4>use_forward<a class="headerlink" href="#use-forward" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<p>If you’d like the user to be forwarded to the login form instead of being
+redirected, set this option to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</div>
+<div class="section" id="username-parameter">
+<h4>username_parameter<a class="headerlink" href="#username-parameter" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">_username</span></code></p>
+<p>This is the field name that you should give to the username field of your
+login form. When you submit the form to <code class="docutils literal notranslate"><span class="pre">check_path</span></code>, the security system
+will look for a POST parameter with this name.</p>
+</div>
+<div class="section" id="password-parameter">
+<h4>password_parameter<a class="headerlink" href="#password-parameter" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">_password</span></code></p>
+<p>This is the field name that you should give to the password field of your
+login form. When you submit the form to <code class="docutils literal notranslate"><span class="pre">check_path</span></code>, the security system
+will look for a POST parameter with this name.</p>
+</div>
+<div class="section" id="post-only">
+<h4>post_only<a class="headerlink" href="#post-only" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">true</span></code></p>
+<p>By default, you must submit your login form to the <code class="docutils literal notranslate"><span class="pre">check_path</span></code> URL as
+a POST request. By setting this option to <code class="docutils literal notranslate"><span class="pre">false</span></code>, you can send a GET
+request to the <code class="docutils literal notranslate"><span class="pre">check_path</span></code> URL.</p>
+<p><strong>Options Related to Redirecting after Login</strong></p>
+</div>
+<div class="section" id="always-use-default-target-path">
+<h4>always_use_default_target_path<a class="headerlink" href="#always-use-default-target-path" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, users are always redirected to the default target path regardless
+of the previous URL that was stored in the session.</p>
+</div>
+<div class="section" id="default-target-path">
+<h4>default_target_path<a class="headerlink" href="#default-target-path" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">/</span></code></p>
+<p>The page users are redirected to when there is no previous page stored in the
+session (for example, when the users browse the login page directly).</p>
+</div>
+<div class="section" id="target-path-parameter">
+<h4>target_path_parameter<a class="headerlink" href="#target-path-parameter" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">_target_path</span></code></p>
+<p>When using a login form, if you include an HTML element to set the target path,
+this option lets you change the name of the HTML element itself.</p>
+</div>
+<div class="section" id="use-referer">
+<h4>use_referer<a class="headerlink" href="#use-referer" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the user is redirected to the value stored in the <code class="docutils literal notranslate"><span class="pre">HTTP_REFERER</span></code>
+header when no previous URL was stored in the session. If the referrer URL is
+the same as the one generated with the <code class="docutils literal notranslate"><span class="pre">login_path</span></code> route, the user is
+redirected to the <code class="docutils literal notranslate"><span class="pre">default_target_path</span></code> to avoid a redirection loop.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For historical reasons, and to match the misspelling of the HTTP standard,
+the option is called <code class="docutils literal notranslate"><span class="pre">use_referer</span></code> instead of <code class="docutils literal notranslate"><span class="pre">use_referrer</span></code>.</p>
+</div>
+<p><strong>Options Related to Logout Configuration</strong></p>
+</div>
+</div>
+<div class="section" id="invalidate-session">
+<h3>invalidate_session<a class="headerlink" href="#invalidate-session" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">true</span></code></p>
+<p>By default, when users log out from any firewall, their sessions are invalidated.
+This means that logging out from one firewall automatically logs them out from
+all the other firewalls.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">invalidate_session</span></code> option allows to redefine this behavior. Set this
+option to <code class="docutils literal notranslate"><span class="pre">false</span></code> in every firewall and the user will only be logged out from
+the current firewall and not the other ones.</p>
+</div>
+<div class="section" id="success-handler">
+<span id="reference-security-logout-success-handler"></span><h3>success_handler<a class="headerlink" href="#success-handler" title="Permalink to this headline">¶</a></h3>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 5.1: </span>This option is deprecated since Symfony 5.1. Register an
+<a class="reference internal" href="../../event_dispatcher.html"><span class="doc">event listener</span></a> on the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Http/Event/LogoutEvent.php" title="Symfony\Component\Security\Http\Event\LogoutEvent"><span class="pre">LogoutEvent</span></a></code>
+instead.</p>
+</div>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">'security.logout.success_handler'</span></code></p>
+<p>The service ID used for handling a successful logout. The service must implement
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Http/Logout/LogoutSuccessHandlerInterface.php" title="Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface"><span class="pre">LogoutSuccessHandlerInterface</span></a></code>.</p>
+</div>
+<div class="section" id="csrf-parameter">
+<span id="reference-security-logout-csrf"></span><h3>csrf_parameter<a class="headerlink" href="#csrf-parameter" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">'_csrf_token'</span></code></p>
+<p>The name of the parameter that stores the CSRF token value.</p>
+</div>
+<div class="section" id="csrf-token-generator">
+<h3>csrf_token_generator<a class="headerlink" href="#csrf-token-generator" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">null</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">id</span></code> of the service used to generate the CSRF tokens. Symfony provides a
+default service whose ID is <code class="docutils literal notranslate"><span class="pre">security.csrf.token_manager</span></code>.</p>
+</div>
+<div class="section" id="csrf-token-id">
+<h3>csrf_token_id<a class="headerlink" href="#csrf-token-id" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">'logout'</span></code></p>
+<p>An arbitrary string used to identify the token (and check its validity afterwards).</p>
+</div>
+<div class="section" id="ldap-authentication">
+<span id="reference-security-ldap"></span><h3>LDAP Authentication<a class="headerlink" href="#ldap-authentication" title="Permalink to this headline">¶</a></h3>
+<p>There are several options for connecting against an LDAP server,
+using the <code class="docutils literal notranslate"><span class="pre">form_login_ldap</span></code>, <code class="docutils literal notranslate"><span class="pre">http_basic_ldap</span></code> and <code class="docutils literal notranslate"><span class="pre">json_login_ldap</span></code> authentication
+providers or the <code class="docutils literal notranslate"><span class="pre">ldap</span></code> user provider.</p>
+<p>For even more details, see <a class="reference internal" href="../../security/ldap.html"><span class="doc">Authenticating against an LDAP server</span></a>.</p>
+<p><strong>Authentication</strong></p>
+<p>You can authenticate to an LDAP server using the LDAP variants of the
+<code class="docutils literal notranslate"><span class="pre">form_login</span></code>, <code class="docutils literal notranslate"><span class="pre">http_basic</span></code> and <code class="docutils literal notranslate"><span class="pre">json_login</span></code> authentication providers. Use
+<code class="docutils literal notranslate"><span class="pre">form_login_ldap</span></code>, <code class="docutils literal notranslate"><span class="pre">http_basic_ldap</span></code> and <code class="docutils literal notranslate"><span class="pre">json_login_ldap</span></code>, which will
+attempt to <code class="docutils literal notranslate"><span class="pre">bind</span></code> against an LDAP server instead of using password comparison.</p>
+<p>Both authentication providers have the same arguments as their normal
+counterparts, with the addition of two configuration keys:</p>
+<div class="section" id="service">
+<h4>service<a class="headerlink" href="#service" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">ldap</span></code></p>
+<p>This is the name of your configured LDAP client.</p>
+</div>
+<div class="section" id="dn-string">
+<h4>dn_string<a class="headerlink" href="#dn-string" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">{username}</span></code></p>
+<p>This is the string which will be used as the bind DN. The <code class="docutils literal notranslate"><span class="pre">{username}</span></code>
+placeholder will be replaced with the user-provided value (their login).
+Depending on your LDAP server’s configuration, you may need to override
+this value.</p>
+</div>
+<div class="section" id="query-string">
+<h4>query_string<a class="headerlink" href="#query-string" title="Permalink to this headline">¶</a></h4>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">null</span></code></p>
+<p>This is the string which will be used to query for the DN. The <code class="docutils literal notranslate"><span class="pre">{username}</span></code>
+placeholder will be replaced with the user-provided value (their login).
+Depending on your LDAP server’s configuration, you will need to override
+this value. This setting is only necessary if the user’s DN cannot be derived
+statically using the <code class="docutils literal notranslate"><span class="pre">dn_string</span></code> config option.</p>
+<p><strong>User provider</strong></p>
+<p>Users will still be fetched from the configured user provider. If you wish to
+fetch your users from an LDAP server, you will need to use the
+<a class="reference internal" href="../../security/ldap.html"><span class="doc">LDAP User Provider</span></a> and any of these authentication
+providers: <code class="docutils literal notranslate"><span class="pre">form_login_ldap</span></code> or <code class="docutils literal notranslate"><span class="pre">http_basic_ldap</span></code> or <code class="docutils literal notranslate"><span class="pre">json_login_ldap</span></code>.</p>
+</div>
+</div>
+<div class="section" id="firewall-context">
+<span id="reference-security-firewall-context"></span><h3>Firewall Context<a class="headerlink" href="#firewall-context" title="Permalink to this headline">¶</a></h3>
+<p>Most applications will only need one <a class="reference internal" href="../../security.html#security-firewalls"><span class="std std-ref">firewall</span></a>.
+But if your application <em>does</em> use multiple firewalls, you’ll notice that
+if you’re authenticated in one firewall, you’re not automatically authenticated
+in another. In other words, the systems don’t share a common “context”:
+each firewall acts like a separate security system.</p>
+<p>However, each firewall has an optional <code class="docutils literal notranslate"><span class="pre">context</span></code> key (which defaults to
+the name of the firewall), which is used when storing and retrieving security
+data to and from the session. If this key were set to the same value across
+multiple firewalls, the “context” could actually be shared:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">firewalls</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">somename</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+            <span class="l l-Scalar l-Scalar-Plain">context</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">my_context</span>
+        <span class="l l-Scalar l-Scalar-Plain">othername</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+            <span class="l l-Scalar l-Scalar-Plain">context</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">my_context</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/security.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; charset=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;srv:container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/security&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:srv=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/security</span>
+<span class="s">        https://symfony.com/schema/dic/security/security-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;config&gt;</span>
+        <span class="nt">&lt;firewall</span> <span class="na">name=</span><span class="s">&quot;somename&quot;</span> <span class="na">context=</span><span class="s">&quot;my_context&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- ... --&gt;</span>
+        <span class="nt">&lt;/firewall&gt;</span>
+        <span class="nt">&lt;firewall</span> <span class="na">name=</span><span class="s">&quot;othername&quot;</span> <span class="na">context=</span><span class="s">&quot;my_context&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- ... --&gt;</span>
+        <span class="nt">&lt;/firewall&gt;</span>
+    <span class="nt">&lt;/config&gt;</span>
+<span class="nt">&lt;/srv:container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/security.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;firewalls&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;somename&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// ...</span>
+            <span class="s1">&#39;context&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;my_context&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;othername&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// ...</span>
+            <span class="s1">&#39;context&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;my_context&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The firewall context key is stored in session, so every firewall using it
+must set its <code class="docutils literal notranslate"><span class="pre">stateless</span></code> option to <code class="docutils literal notranslate"><span class="pre">false</span></code>. Otherwise, the context is
+ignored and you won’t be able to authenticate on multiple firewalls at the
+same time.</p>
+</div>
+</div>
+<div class="section" id="user-checkers">
+<h3>User Checkers<a class="headerlink" href="#user-checkers" title="Permalink to this headline">¶</a></h3>
+<p>During the authentication of a user, additional checks might be required to
+verify if the identified user is allowed to log in. Each firewall can include
+a <code class="docutils literal notranslate"><span class="pre">user_checker</span></code> option to define the service used to perform those checks.</p>
+<p>Learn more about user checkers in <a class="reference internal" href="../../security/user_checkers.html"><span class="doc">How to Create and Enable Custom User Checkers</span></a>.</p>
+</div>
+</div>
+<div class="section" id="providers">
+<h2>providers<a class="headerlink" href="#providers" title="Permalink to this headline">¶</a></h2>
+<p>This options defines how the application users are loaded (from a database,
+an LDAP server, a configuration file, etc.) Read the following articles to learn
+more about each of those providers:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../security/user_provider.html#security-entity-user-provider"><span class="std std-ref">Load users from a database</span></a></li>
+<li><a class="reference internal" href="../../security/user_provider.html#security-ldap-user-provider"><span class="std std-ref">Load users from an LDAP server</span></a></li>
+<li><a class="reference internal" href="../../security/user_provider.html#security-memory-user-provider"><span class="std std-ref">Load users from a configuration file</span></a></li>
+<li><a class="reference internal" href="../../security/user_provider.html#custom-user-provider"><span class="std std-ref">Create your own user provider</span></a></li>
+</ul>
+</div>
+<div class="section" id="role-hierarchy">
+<h2>role_hierarchy<a class="headerlink" href="#role-hierarchy" title="Permalink to this headline">¶</a></h2>
+<p>Instead of associating many roles to users, this option allows you to define
+role inheritance rules by creating a role hierarchy, as explained in
+<a class="reference internal" href="../../security.html#security-role-hierarchy"><span class="std std-ref">Hierarchical Roles</span></a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

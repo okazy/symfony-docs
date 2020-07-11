@@ -1,0 +1,929 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Best Practices for Reusable Bundles &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Best Practices for Reusable Bundles</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/bundles/best_practices.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="best-practices-for-reusable-bundles">
+<span id="index-0"></span><h1>Best Practices for Reusable Bundles<a class="headerlink" href="#best-practices-for-reusable-bundles" title="Permalink to this headline">¶</a></h1>
+<p>This article is all about how to structure your <strong>reusable bundles</strong> to be
+configurable and extendable. Reusable bundles are those meant to be shared
+privately across many company projects or publicly so any Symfony project can
+install them.</p>
+<div class="section" id="bundle-name">
+<span id="bundles-naming-conventions"></span><span id="index-1"></span><h2>Bundle Name<a class="headerlink" href="#bundle-name" title="Permalink to this headline">¶</a></h2>
+<p>A bundle is also a PHP namespace. The namespace must follow the <a class="reference external" href="https://www.php-fig.org/psr/psr-4/">PSR-4</a>
+interoperability standard for PHP namespaces and class names: it starts with a
+vendor segment, followed by zero or more category segments, and it ends with the
+namespace short name, which must end with <code class="docutils literal notranslate"><span class="pre">Bundle</span></code>.</p>
+<p>A namespace becomes a bundle as soon as you add a bundle class to it. The
+bundle class name must follow these rules:</p>
+<ul class="simple">
+<li>Use only alphanumeric characters and underscores;</li>
+<li>Use a StudlyCaps name (i.e. camelCase with an uppercase first letter);</li>
+<li>Use a descriptive and short name (no more than two words);</li>
+<li>Prefix the name with the concatenation of the vendor (and optionally the
+category namespaces);</li>
+<li>Suffix the name with <code class="docutils literal notranslate"><span class="pre">Bundle</span></code>.</li>
+</ul>
+<p>Here are some valid bundle namespaces and class names:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="59%" />
+<col width="41%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Namespace</th>
+<th class="head">Bundle Class Name</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">Acme\Bundle\BlogBundle</span></code></td>
+<td>AcmeBlogBundle</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">Acme\BlogBundle</span></code></td>
+<td>AcmeBlogBundle</td>
+</tr>
+</tbody>
+</table>
+<p>By convention, the <code class="docutils literal notranslate"><span class="pre">getName()</span></code> method of the bundle class should return the
+class name.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you share your bundle publicly, you must use the bundle class name as
+the name of the repository (AcmeBlogBundle and not BlogBundle for instance).</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Symfony core Bundles do not prefix the Bundle class with <code class="docutils literal notranslate"><span class="pre">Symfony</span></code>
+and always add a <code class="docutils literal notranslate"><span class="pre">Bundle</span></code> sub-namespace; for example:
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/FrameworkBundle/FrameworkBundle.php" title="Symfony\Bundle\FrameworkBundle\FrameworkBundle"><span class="pre">FrameworkBundle</span></a></code>.</p>
+</div>
+<p>Each bundle has an alias, which is the lower-cased short version of the bundle
+name using underscores (<code class="docutils literal notranslate"><span class="pre">acme_blog</span></code> for AcmeBlogBundle). This alias
+is used to enforce uniqueness within a project and for defining bundle’s
+configuration options (see below for some usage examples).</p>
+</div>
+<div class="section" id="directory-structure">
+<h2>Directory Structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
+<p>The basic directory structure of an AcmeBlogBundle must read as follows:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span>&lt;your-bundle&gt;/
+├─ AcmeBlogBundle.php
+├─ Controller/
+├─ README.md
+├─ LICENSE
+├─ Resources/
+│   ├─ config/
+│   ├─ doc/
+│   │  └─ index.rst
+│   ├─ translations/
+│   ├─ views/
+│   └─ public/
+└─ Tests/
+</pre></div>
+</td></tr></table></div>
+<p><strong>The following files are mandatory</strong>, because they ensure a structure convention
+that automated tools can rely on:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">AcmeBlogBundle.php</span></code>: This is the class that transforms a plain directory
+into a Symfony bundle (change this to your bundle’s name);</li>
+<li><code class="docutils literal notranslate"><span class="pre">README.md</span></code>: This file contains the basic description of the bundle and it
+usually shows some basic examples and links to its full documentation (it
+can use any of the markup formats supported by GitHub, such as <code class="docutils literal notranslate"><span class="pre">README.rst</span></code>);</li>
+<li><code class="docutils literal notranslate"><span class="pre">LICENSE</span></code>: The full contents of the license used by the code. Most third-party
+bundles are published under the MIT license, but you can <a class="reference external" href="https://choosealicense.com/">choose any license</a>;</li>
+<li><code class="docutils literal notranslate"><span class="pre">Resources/doc/index.rst</span></code>: The root file for the Bundle documentation.</li>
+</ul>
+<p>The depth of subdirectories should be kept to a minimum for the most used
+classes and files. Two levels is the maximum.</p>
+<p>The bundle directory is read-only. If you need to write temporary files, store
+them under the <code class="docutils literal notranslate"><span class="pre">cache/</span></code> or <code class="docutils literal notranslate"><span class="pre">log/</span></code> directory of the host application. Tools
+can generate files in the bundle directory structure, but only if the generated
+files are going to be part of the repository.</p>
+<p>The following classes and files have specific emplacements (some are mandatory
+and others are just conventions followed by most developers):</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="56%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Type</th>
+<th class="head">Directory</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Commands</td>
+<td><code class="docutils literal notranslate"><span class="pre">Command/</span></code></td>
+</tr>
+<tr class="row-odd"><td>Controllers</td>
+<td><code class="docutils literal notranslate"><span class="pre">Controller/</span></code></td>
+</tr>
+<tr class="row-even"><td>Service Container Extensions</td>
+<td><code class="docutils literal notranslate"><span class="pre">DependencyInjection/</span></code></td>
+</tr>
+<tr class="row-odd"><td>Doctrine ORM entities (when not using annotations)</td>
+<td><code class="docutils literal notranslate"><span class="pre">Entity/</span></code></td>
+</tr>
+<tr class="row-even"><td>Doctrine ODM documents (when not using annotations)</td>
+<td><code class="docutils literal notranslate"><span class="pre">Document/</span></code></td>
+</tr>
+<tr class="row-odd"><td>Event Listeners</td>
+<td><code class="docutils literal notranslate"><span class="pre">EventListener/</span></code></td>
+</tr>
+<tr class="row-even"><td>Configuration (routes, services, etc.)</td>
+<td><code class="docutils literal notranslate"><span class="pre">Resources/config/</span></code></td>
+</tr>
+<tr class="row-odd"><td>Web Assets (CSS, JS, images)</td>
+<td><code class="docutils literal notranslate"><span class="pre">Resources/public/</span></code></td>
+</tr>
+<tr class="row-even"><td>Translation files</td>
+<td><code class="docutils literal notranslate"><span class="pre">Resources/translations/</span></code></td>
+</tr>
+<tr class="row-odd"><td>Validation (when not using annotations)</td>
+<td><code class="docutils literal notranslate"><span class="pre">Resources/config/validation/</span></code></td>
+</tr>
+<tr class="row-even"><td>Serialization (when not using annotations)</td>
+<td><code class="docutils literal notranslate"><span class="pre">Resources/config/serialization/</span></code></td>
+</tr>
+<tr class="row-odd"><td>Templates</td>
+<td><code class="docutils literal notranslate"><span class="pre">Resources/views/</span></code></td>
+</tr>
+<tr class="row-even"><td>Unit and Functional Tests</td>
+<td><code class="docutils literal notranslate"><span class="pre">Tests/</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<p>The bundle directory structure is used as the namespace hierarchy. For
+instance, a <code class="docutils literal notranslate"><span class="pre">ContentController</span></code> controller which is stored in
+<code class="docutils literal notranslate"><span class="pre">Acme/BlogBundle/Controller/ContentController.php</span></code> would have the fully
+qualified class name of <code class="docutils literal notranslate"><span class="pre">Acme\BlogBundle\Controller\ContentController</span></code>.</p>
+<p>All classes and files must follow the <a class="reference internal" href="../contributing/code/standards.html"><span class="doc">Symfony coding standards</span></a>.</p>
+<p>Some classes should be seen as facades and should be as short as possible, like
+Commands, Helpers, Listeners and Controllers.</p>
+<p>Classes that connect to the event dispatcher should be suffixed with
+<code class="docutils literal notranslate"><span class="pre">Listener</span></code>.</p>
+<p>Exception classes should be stored in an <code class="docutils literal notranslate"><span class="pre">Exception</span></code> sub-namespace.</p>
+</div>
+<div class="section" id="vendors">
+<h2>Vendors<a class="headerlink" href="#vendors" title="Permalink to this headline">¶</a></h2>
+<p>A bundle must not embed third-party PHP libraries. It should rely on the
+standard Symfony autoloading instead.</p>
+<p>A bundle should also not embed third-party libraries written in JavaScript,
+CSS or any other language.</p>
+</div>
+<div class="section" id="tests">
+<h2>Tests<a class="headerlink" href="#tests" title="Permalink to this headline">¶</a></h2>
+<p>A bundle should come with a test suite written with PHPUnit and stored under
+the <code class="docutils literal notranslate"><span class="pre">Tests/</span></code> directory. Tests should follow the following principles:</p>
+<ul class="simple">
+<li>The test suite must be executable with a simple <code class="docutils literal notranslate"><span class="pre">phpunit</span></code> command run from
+a sample application;</li>
+<li>The functional tests should only be used to test the response output and
+some profiling information if you have some;</li>
+<li>The tests should cover at least 95% of the code base.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A test suite must not contain <code class="docutils literal notranslate"><span class="pre">AllTests.php</span></code> scripts, but must rely on the
+existence of a <code class="docutils literal notranslate"><span class="pre">phpunit.xml.dist</span></code> file.</p>
+</div>
+</div>
+<div class="section" id="continuous-integration">
+<h2>Continuous Integration<a class="headerlink" href="#continuous-integration" title="Permalink to this headline">¶</a></h2>
+<p>Testing bundle code continuously, including all its commits and pull requests,
+is a good practice called Continuous Integration. There are several services
+providing this feature for free for open source projects. The most popular
+service for Symfony bundles is called <a class="reference external" href="https://travis-ci.org/">Travis CI</a>.</p>
+<p>Here is the recommended configuration file (<code class="docutils literal notranslate"><span class="pre">.travis.yml</span></code>) for Symfony bundles,
+which test the two latest <a class="reference internal" href="../contributing/community/releases.html"><span class="doc">LTS versions</span></a>
+of Symfony and the latest beta release:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">language</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">php</span>
+
+<span class="l l-Scalar l-Scalar-Plain">cache</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">directories</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">$HOME/.composer/cache/files</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">$HOME/symfony-bridge/.phpunit</span>
+
+<span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">global</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">PHPUNIT_FLAGS=&quot;-v&quot;</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">SYMFONY_PHPUNIT_DIR=&quot;$HOME/symfony-bridge/.phpunit&quot;</span>
+
+<span class="l l-Scalar l-Scalar-Plain">matrix</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">fast_finish</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="l l-Scalar l-Scalar-Plain">include</span><span class="p p-Indicator">:</span>
+          <span class="c1"># Minimum supported dependencies with the latest and oldest PHP version</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">php</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">7.2</span>
+          <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">COMPOSER_FLAGS=&quot;--prefer-stable --prefer-lowest&quot; SYMFONY_DEPRECATIONS_HELPER=&quot;max[self]=0&quot;</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">php</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">7.1</span>
+          <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">COMPOSER_FLAGS=&quot;--prefer-stable --prefer-lowest&quot; SYMFONY_DEPRECATIONS_HELPER=&quot;max[self]=0&quot;</span>
+
+          <span class="c1"># Test the latest stable release</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">php</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">7.1</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">php</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">7.2</span>
+          <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">COVERAGE=true PHPUNIT_FLAGS=&quot;-v --coverage-text&quot;</span>
+
+          <span class="c1"># Test LTS versions. This makes sure we do not use Symfony packages with version greater</span>
+          <span class="c1"># than 2 or 3 respectively. Read more at https://github.com/symfony/lts</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">php</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">7.2</span>
+          <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">DEPENDENCIES=&quot;symfony/lts:^2&quot;</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">php</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">7.2</span>
+          <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">DEPENDENCIES=&quot;symfony/lts:^3&quot;</span>
+
+          <span class="c1"># Latest commit to master</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">php</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">7.2</span>
+          <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">STABILITY=&quot;dev&quot;</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">allow_failures</span><span class="p p-Indicator">:</span>
+          <span class="c1"># Dev-master is allowed to fail.</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">env</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">STABILITY=&quot;dev&quot;</span>
+
+<span class="l l-Scalar l-Scalar-Plain">before_install</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">if ! [ -z &quot;$STABILITY&quot; ]; then composer config minimum-stability ${STABILITY}; fi;</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">if ! [ -v &quot;$DEPENDENCIES&quot; ]; then composer require --no-update ${DEPENDENCIES}; fi;</span>
+
+<span class="l l-Scalar l-Scalar-Plain">install</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">composer update ${COMPOSER_FLAGS} --prefer-dist --no-interaction</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">./vendor/bin/simple-phpunit install</span>
+
+<span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">composer validate --strict --no-check-lock</span>
+    <span class="c1"># simple-phpunit is the PHPUnit wrapper provided by the PHPUnit Bridge component and</span>
+    <span class="c1"># it helps with testing legacy code and deprecations (composer require symfony/phpunit-bridge)</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">./vendor/bin/simple-phpunit $PHPUNIT_FLAGS</span>
+</pre></div>
+</td></tr></table></div>
+<p>Consider using the <a class="reference external" href="https://docs.travis-ci.com/user/cron-jobs/">Travis cron</a> tool to make sure your project is built even if
+there are no new pull requests or commits.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Bundles should set <code class="docutils literal notranslate"><span class="pre">&quot;type&quot;:</span> <span class="pre">&quot;symfony-bundle&quot;</span></code> in their <code class="docutils literal notranslate"><span class="pre">composer.json</span></code> file.
+With this, <a class="reference internal" href="../setup.html#symfony-flex"><span class="std std-ref">Symfony Flex</span></a> will be able to automatically
+enable your bundle when it’s installed.</p>
+<p>If your bundle requires any setup (e.g. configuration, new files, changes to
+<code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>, etc), then you should create a <a class="reference external" href="https://github.com/symfony/recipes">Symfony Flex recipe</a>.</p>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>All classes and functions must come with full PHPDoc.</p>
+<p>Extensive documentation should also be provided in the <code class="docutils literal notranslate"><span class="pre">Resources/doc/</span></code>
+directory.
+The index file (for example <code class="docutils literal notranslate"><span class="pre">Resources/doc/index.rst</span></code> or
+<code class="docutils literal notranslate"><span class="pre">Resources/doc/index.md</span></code>) is the only mandatory file and must be the entry
+point for the documentation. The
+<a class="reference internal" href="../contributing/documentation/format.html"><span class="doc">reStructuredText (rST)</span></a> is the format
+used to render the documentation on the Symfony website.</p>
+<div class="section" id="installation-instructions">
+<h3>Installation Instructions<a class="headerlink" href="#installation-instructions" title="Permalink to this headline">¶</a></h3>
+<p>In order to ease the installation of third-party bundles, consider using the
+following standardized instructions in your <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file.</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>Markdown</em><div class="highlight-markdown notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41</pre></div></td><td class="code"><div class="highlight"><pre><span></span>Installation
+============
+
+Make sure Composer is installed globally, as explained in the
+[installation chapter](https://getcomposer.org/doc/00-intro.md)
+of the Composer documentation.
+
+Applications that use Symfony Flex
+----------------------------------
+
+Open a command console, enter your project directory and execute:
+
+```console
+$ composer require &lt;package-name&gt;
+```
+
+Applications that don&#39;t use Symfony Flex
+----------------------------------------
+
+### Step 1: Download the Bundle
+
+Open a command console, enter your project directory and execute the
+following command to download the latest stable version of this bundle:
+
+```console
+$ composer require &lt;package-name&gt;
+```
+
+### Step 2: Enable the Bundle
+
+Then, enable the bundle by adding it to the list of registered bundles
+in the `config/bundles.php` file of your project:
+
+```php
+// config/bundles.php
+
+return [
+    // ...
+    &lt;vendor&gt;\&lt;bundle-name&gt;\&lt;bundle-long-name&gt;::class =&gt; [&#39;all&#39; =&gt; true],
+];
+```
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>reStructuredText</em><div class="highlight-rst notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gh">Installation</span>
+<span class="gh">============</span>
+
+Make sure Composer is installed globally, as explained in the
+<span class="s">`installation chapter`_</span> of the Composer documentation.
+
+----------------------------------
+
+Open a command console, enter your project directory and execute:
+
+<span class="p">..</span> <span class="ow">code-block</span><span class="p">::</span> <span class="k">bash</span>
+
+    $ composer require &lt;package-name&gt;
+
+<span class="gh">Applications that don&#39;t use Symfony Flex</span>
+<span class="gh">----------------------------------------</span>
+
+<span class="gh">Step 1: Download the Bundle</span>
+<span class="gh">~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+
+Open a command console, enter your project directory and execute the
+following command to download the latest stable version of this bundle:
+
+<span class="p">..</span> <span class="ow">code-block</span><span class="p">::</span> <span class="k">terminal</span>
+
+<span class="s">    $ composer require &lt;package-name&gt;</span>
+
+<span class="gh">Step 2: Enable the Bundle</span>
+<span class="gh">~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+
+Then, enable the bundle by adding it to the list of registered bundles
+in the <span class="s">``config/bundles.php``</span> file of your project<span class="se">::</span>
+
+<span class="s">    // config/bundles.php</span>
+<span class="s">    return [</span>
+<span class="s">        // ...</span>
+<span class="s">        &lt;vendor&gt;\&lt;bundle-name&gt;\&lt;bundle-long-name&gt;::class =&gt; [&#39;all&#39; =&gt; true],</span>
+<span class="s">    ];</span>
+
+<span class="p">..</span> <span class="nt">_`installation chapter`:</span> https://getcomposer.org/doc/00-intro.md
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>The example above assumes that you are installing the latest stable version of
+the bundle, where you don’t have to provide the package version number
+(e.g. <code class="docutils literal notranslate"><span class="pre">composer</span> <span class="pre">require</span> <span class="pre">friendsofsymfony/user-bundle</span></code>). If the installation
+instructions refer to some past bundle version or to some unstable version,
+include the version constraint (e.g. <code class="docutils literal notranslate"><span class="pre">composer</span> <span class="pre">require</span> <span class="pre">friendsofsymfony/user-bundle</span> <span class="pre">&quot;~2.0&#64;dev&quot;</span></code>).</p>
+<p>Optionally, you can add more installation steps (<em>Step 3</em>, <em>Step 4</em>, etc.) to
+explain other required installation tasks, such as registering routes or
+dumping assets.</p>
+</div>
+</div>
+<div class="section" id="routing">
+<h2>Routing<a class="headerlink" href="#routing" title="Permalink to this headline">¶</a></h2>
+<p>If the bundle provides routes, they must be prefixed with the bundle alias.
+For example, if your bundle is called AcmeBlogBundle, all its routes must be
+prefixed with <code class="docutils literal notranslate"><span class="pre">acme_blog_</span></code>.</p>
+</div>
+<div class="section" id="templates">
+<h2>Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h2>
+<p>If a bundle provides templates, they must use Twig. A bundle must not provide
+a main layout, except if it provides a full working application.</p>
+</div>
+<div class="section" id="translation-files">
+<h2>Translation Files<a class="headerlink" href="#translation-files" title="Permalink to this headline">¶</a></h2>
+<p>If a bundle provides message translations, they must be defined in the XLIFF
+format; the domain should be named after the bundle name (<code class="docutils literal notranslate"><span class="pre">acme_blog</span></code>).</p>
+<p>A bundle must not override existing messages from another bundle.</p>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>To provide more flexibility, a bundle can provide configurable settings by
+using the Symfony built-in mechanisms.</p>
+<p>For simple configuration settings, rely on the default <code class="docutils literal notranslate"><span class="pre">parameters</span></code> entry of
+the Symfony configuration. Symfony parameters are simple key/value pairs; a
+value being any valid PHP value. Each parameter name should start with the
+bundle alias, though this is just a best-practice suggestion. The rest of the
+parameter name will use a period (<code class="docutils literal notranslate"><span class="pre">.</span></code>) to separate different parts (e.g.
+<code class="docutils literal notranslate"><span class="pre">acme_blog.author.email</span></code>).</p>
+<p>The end user can provide values in any configuration file:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">acme_blog.author.email</span><span class="p p-Indicator">:</span> <span class="s">&#39;fabien@example.com&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;parameters&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;acme_blog.author.email&quot;</span><span class="nt">&gt;</span>fabien@example.com<span class="nt">&lt;/parameter&gt;</span>
+    <span class="nt">&lt;/parameters&gt;</span>
+
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;acme_blog.author.email&#39;</span><span class="p">,</span> <span class="s1">&#39;fabien@example.com&#39;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Retrieve the configuration parameters in your code from the container:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">getParameter</span><span class="p">(</span><span class="s1">&#39;acme_blog.author.email&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>While this mechanism requires the least effort, you should consider using the
+more advanced <a class="reference internal" href="configuration.html"><span class="doc">semantic bundle configuration</span></a> to
+make your configuration more robust.</p>
+</div>
+<div class="section" id="versioning">
+<h2>Versioning<a class="headerlink" href="#versioning" title="Permalink to this headline">¶</a></h2>
+<p>Bundles must be versioned following the <a class="reference external" href="https://semver.org/">Semantic Versioning Standard</a>.</p>
+</div>
+<div class="section" id="services">
+<h2>Services<a class="headerlink" href="#services" title="Permalink to this headline">¶</a></h2>
+<p>If the bundle defines services, they must be prefixed with the bundle alias
+instead of using fully qualified class names like you do in your project
+services. For example, AcmeBlogBundle services must be prefixed with <code class="docutils literal notranslate"><span class="pre">acme_blog</span></code>.
+The reason is that bundles shouldn’t rely on features such as service autowiring
+or autoconfiguration to not impose an overhead when compiling application services.</p>
+<p>In addition, services not meant to be used by the application directly, should
+be <a class="reference internal" href="../service_container/alias_private.html#container-private-services"><span class="std std-ref">defined as private</span></a>. For public services,
+<a class="reference internal" href="../service_container/autowiring.html#service-autowiring-alias"><span class="std std-ref">aliases should be created</span></a> from the interface/class
+to the service id. For example, in MonologBundle, an alias is created from
+<code class="docutils literal notranslate"><span class="pre">Psr\Log\LoggerInterface</span></code> to <code class="docutils literal notranslate"><span class="pre">logger</span></code> so that the <code class="docutils literal notranslate"><span class="pre">LoggerInterface</span></code> type-hint
+can be used for autowiring.</p>
+<p>Services should not use autowiring or autoconfiguration. Instead, all services should
+be defined explicitly.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">You can learn much more about service loading in bundles reading this article:
+<a class="reference internal" href="extension.html"><span class="doc">How to Load Service Configuration inside a Bundle</span></a>.</p>
+</div>
+</div>
+<div class="section" id="composer-metadata">
+<h2>Composer Metadata<a class="headerlink" href="#composer-metadata" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">composer.json</span></code> file should include at least the following metadata:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code></dt>
+<dd>Consists of the vendor and the short bundle name. If you are releasing the
+bundle on your own instead of on behalf of a company, use your personal name
+(e.g. <code class="docutils literal notranslate"><span class="pre">johnsmith/blog-bundle</span></code>). Exclude the vendor name from the bundle
+short name and separate each word with an hyphen. For example: AcmeBlogBundle
+is transformed into <code class="docutils literal notranslate"><span class="pre">blog-bundle</span></code> and AcmeSocialConnectBundle is
+transformed into <code class="docutils literal notranslate"><span class="pre">social-connect-bundle</span></code>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">description</span></code></dt>
+<dd>A brief explanation of the purpose of the bundle.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">type</span></code></dt>
+<dd>Use the <code class="docutils literal notranslate"><span class="pre">symfony-bundle</span></code> value.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">license</span></code></dt>
+<dd>a string (or array of strings) with a <a class="reference external" href="https://spdx.org/licenses/">valid license identifier</a>, such as <code class="docutils literal notranslate"><span class="pre">MIT</span></code>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">autoload</span></code></dt>
+<dd>This information is used by Symfony to load the classes of the bundle. It’s
+recommended to use the <a class="reference external" href="https://www.php-fig.org/psr/psr-4/">PSR-4</a> autoload standard: use the namespace as key,
+and the location of the bundle’s main class (relative to <code class="docutils literal notranslate"><span class="pre">composer.json</span></code>)
+as value. For example, if the main class is located in the bundle root
+directory: <code class="docutils literal notranslate"><span class="pre">&quot;autoload&quot;:</span> <span class="pre">{</span> <span class="pre">&quot;psr-4&quot;:</span> <span class="pre">{</span> <span class="pre">&quot;SomeVendor\\BlogBundle\\&quot;:</span> <span class="pre">&quot;&quot;</span> <span class="pre">}</span> <span class="pre">}</span></code>.
+If the main class is located in the <code class="docutils literal notranslate"><span class="pre">src/</span></code> directory of the bundle:
+<code class="docutils literal notranslate"><span class="pre">&quot;autoload&quot;:</span> <span class="pre">{</span> <span class="pre">&quot;psr-4&quot;:</span> <span class="pre">{</span> <span class="pre">&quot;SomeVendor\\BlogBundle\\&quot;:</span> <span class="pre">&quot;src/&quot;</span> <span class="pre">}</span> <span class="pre">}</span></code>.</dd>
+</dl>
+<p>In order to make it easier for developers to find your bundle, register it on
+<a class="reference external" href="https://packagist.org/">Packagist</a>, the official repository for Composer packages.</p>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<p>If the bundle references any resources (config files, translation files, etc.),
+don’t use physical paths (e.g. <code class="docutils literal notranslate"><span class="pre">__DIR__/config/services.xml</span></code>) but logical
+paths (e.g. <code class="docutils literal notranslate"><span class="pre">&#64;FooBundle/Resources/config/services.xml</span></code>).</p>
+<p>The logical paths are required because of the bundle overriding mechanism that
+lets you override any resource/file of any bundle. See <a class="reference internal" href="../components/http_kernel.html#http-kernel-resource-locator"><span class="std std-ref">Locating Resources</span></a>
+for more details about transforming physical paths into logical paths.</p>
+<p>Beware that templates use a simplified version of the logical path shown above.
+For example, an <code class="docutils literal notranslate"><span class="pre">index.html.twig</span></code> template located in the <code class="docutils literal notranslate"><span class="pre">Resources/views/Default/</span></code>
+directory of the FooBundle, is referenced as <code class="docutils literal notranslate"><span class="pre">&#64;Foo/Default/index.html.twig</span></code>.</p>
+</div>
+<div class="section" id="learn-more">
+<h2>Learn more<a class="headerlink" href="#learn-more" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="extension.html"><span class="doc">How to Load Service Configuration inside a Bundle</span></a></li>
+<li><a class="reference internal" href="configuration.html"><span class="doc">How to Create Friendly Configuration for a Bundle</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,563 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Create a Form Type Extension &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Creating a custom Type Guesser" href="type_guesser.html" />
+    <link rel="prev" title="When and How to Use Data Mappers" href="data_mappers.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../forms.html">Forms</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#building-forms">Building Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#rendering-forms">Rendering Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#processing-forms">Processing Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#validating-forms">Validating Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../forms.html#other-common-form-features">Other Common Form Features</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../forms.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../reference/forms/types.html">Form Types Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controller/upload_file.html">How to Upload Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../security/csrf.html">How to Implement CSRF Protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_dependencies.html">How to Access Services or Config from Inside a Form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_custom_field_type.html">How to Create a Custom Form Field Type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_transformers.html">How to Use Data Transformers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data_mappers.html">When and How to Use Data Mappers</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Create a Form Type Extension</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#defining-the-form-type-extension">Defining the Form Type Extension</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#registering-your-form-type-extension-as-a-service">Registering your Form Type Extension as a Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-the-extension-business-logic">Adding the extension Business Logic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#override-the-file-widget-template-fragment">Override the File Widget Template Fragment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-form-type-extension">Using the Form Type Extension</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generic-form-type-extensions">Generic Form Type Extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="type_guesser.html">Creating a custom Type Guesser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootstrap4.html">Bootstrap 4 Form Theme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_customization.html">How to Customize Form Rendering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_themes.html">How to Work with Form Themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="events.html">Form Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dynamic_form_modification.html">How to Dynamically Modify Forms Using Form Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validation_groups.html">How to Define the Validation Groups to Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validation_group_service_resolver.html">How to Dynamically Configure Form Validation Groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="button_based_validation.html">How to Choose Validation Groups Based on the Clicked Button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="disabling_validation.html">How to Disable the Validation of Submitted Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="direct_submit.html">How to Use the submit() Function to Handle Form Submissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="embedded.html">How to Embed Forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form_collections.html">How to Embed a Collection of Forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="inherit_data_option.html">How to Reduce Code Duplication with “inherit_data”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multiple_buttons.html">How to Submit a Form with Multiple Buttons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unit_testing.html">How to Unit Test your Forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="use_empty_data.html">How to Configure empty Data for a Form Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="without_class.html">How to Use a Form without a Data Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../forms.html">Forms</a> &raquo;</li>
+        
+      <li>How to Create a Form Type Extension</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/form/create_form_type_extension.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-create-a-form-type-extension">
+<span id="index-0"></span><h1>How to Create a Form Type Extension<a class="headerlink" href="#how-to-create-a-form-type-extension" title="Permalink to this headline">¶</a></h1>
+<p>Form type extensions are <em>incredibly</em> powerful: they allow you to <em>modify</em> any
+existing form field types across the entire system.</p>
+<p>They have 2 main use-cases:</p>
+<ol class="arabic simple">
+<li>You want to add a <strong>specific feature to a single form type</strong> (such
+as adding a “download” feature to the <code class="docutils literal notranslate"><span class="pre">FileType</span></code> field type);</li>
+<li>You want to add a <strong>generic feature to several types</strong> (such as
+adding a “help” text to every “input text”-like type).</li>
+</ol>
+<p>Imagine that you have a <code class="docutils literal notranslate"><span class="pre">Media</span></code> entity, and that each media is associated
+to a file. Your <code class="docutils literal notranslate"><span class="pre">Media</span></code> form uses a file type, but when editing the entity,
+you would like to see its image automatically rendered next to the file
+input.</p>
+<div class="section" id="defining-the-form-type-extension">
+<h2>Defining the Form Type Extension<a class="headerlink" href="#defining-the-form-type-extension" title="Permalink to this headline">¶</a></h2>
+<p>First, create the form type extension class extending from
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/AbstractTypeExtension.php" title="Symfony\Component\Form\AbstractTypeExtension"><span class="pre">AbstractTypeExtension</span></a></code> (you can implement
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/FormTypeExtensionInterface.php" title="Symfony\Component\Form\FormTypeExtensionInterface"><span class="pre">FormTypeExtensionInterface</span></a></code> instead if you prefer):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Extension/ImageTypeExtension.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form\Extension</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\AbstractTypeExtension</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\FileType</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ImageTypeExtension</span> <span class="k">extends</span> <span class="nx">AbstractTypeExtension</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * Return the class of the type being extended.</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getExtendedTypes</span><span class="p">()</span><span class="o">:</span> <span class="nx">iterable</span>
+    <span class="p">{</span>
+        <span class="c1">// return FormType::class to modify (nearly) every field in the system</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nx">FileType</span><span class="o">::</span><span class="na">class</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The only method you <strong>must</strong> implement is <code class="docutils literal notranslate"><span class="pre">getExtendedTypes()</span></code>, which is used
+to configure <em>which</em> field types you want to modify.</p>
+<p>Depending on your use case, you may need to override some of the following methods:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">buildForm()</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">buildView()</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">configureOptions()</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">finishView()</span></code></li>
+</ul>
+<p>For more information on what those methods do, see the
+<a class="reference internal" href="create_custom_field_type.html#form-type-methods-explanation"><span class="std std-ref">custom form field type</span></a> article.</p>
+</div>
+<div class="section" id="registering-your-form-type-extension-as-a-service">
+<h2>Registering your Form Type Extension as a Service<a class="headerlink" href="#registering-your-form-type-extension-as-a-service" title="Permalink to this headline">¶</a></h2>
+<p>Form type extensions must be <a class="reference internal" href="../service_container.html#service-container-creating-service"><span class="std std-ref">registered as services</span></a>
+and <a class="reference internal" href="../service_container/tags.html"><span class="doc">tagged</span></a> with the <code class="docutils literal notranslate"><span class="pre">form.type_extension</span></code> tag.
+If you’re using the
+<a class="reference internal" href="../service_container.html#service-container-services-load-example"><span class="std std-ref">default services.yaml configuration</span></a>,
+this is already done for you, thanks to <a class="reference internal" href="../service_container.html#services-autoconfigure"><span class="std std-ref">autoconfiguration</span></a>.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">There is an optional tag attribute called <code class="docutils literal notranslate"><span class="pre">priority</span></code>, which defaults to
+<code class="docutils literal notranslate"><span class="pre">0</span></code> and controls the order in which the form type extensions are loaded
+(the higher the priority, the earlier an extension is loaded). This is
+useful when you need to guarantee that one extension is loaded before or
+after another extension. Using this attribute requires you to add the
+service configuration explicitly.</p>
+</div>
+<p>Once the extension is registered, any method that you’ve overridden (e.g.
+<code class="docutils literal notranslate"><span class="pre">buildForm()</span></code>) will be called whenever <em>any</em> field of the given type
+(<code class="docutils literal notranslate"><span class="pre">FileType</span></code>) is built.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>Run the following command to verify that the form type extension was
+successfully registered in the application:</p>
+<div class="last highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console debug:form
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="adding-the-extension-business-logic">
+<h2>Adding the extension Business Logic<a class="headerlink" href="#adding-the-extension-business-logic" title="Permalink to this headline">¶</a></h2>
+<p>The goal of your extension is to display a nice image next to file input
+(when the underlying model contains images). For that purpose, suppose that
+you use an approach similar to the one described in
+<a class="reference internal" href="../controller/upload_file.html"><span class="doc">How to handle File Uploads with Doctrine</span></a>:
+you have a Media model with a path property, corresponding to the image path in
+the database:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Entity/Media.php</span>
+<span class="k">namespace</span> <span class="nx">App\Entity</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Validator\Constraints</span> <span class="k">as</span> <span class="nx">Assert</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Media</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @var string The path - typically stored in the database</span>
+<span class="sd">     */</span>
+    <span class="k">private</span> <span class="nv">$path</span><span class="p">;</span>
+
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getWebPath</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ... $webPath being the full image URL, to be used in templates</span>
+
+        <span class="k">return</span> <span class="nv">$webPath</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Your form type extension class will need to do two things in order to extend
+the <code class="docutils literal notranslate"><span class="pre">FileType::class</span></code> form type:</p>
+<ol class="arabic simple">
+<li>Override the <code class="docutils literal notranslate"><span class="pre">configureOptions()</span></code> method so that any <code class="docutils literal notranslate"><span class="pre">FileType</span></code> field can
+have an  <code class="docutils literal notranslate"><span class="pre">image_property</span></code> option;</li>
+<li>Override the <code class="docutils literal notranslate"><span class="pre">buildView()</span></code> methods to pass the image URL to the view.</li>
+</ol>
+<p>For example:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Extension/ImageTypeExtension.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form\Extension</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\AbstractTypeExtension</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\FileType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormView</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\OptionsResolver\OptionsResolver</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\PropertyAccess\PropertyAccess</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ImageTypeExtension</span> <span class="k">extends</span> <span class="nx">AbstractTypeExtension</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getExtendedTypes</span><span class="p">()</span><span class="o">:</span> <span class="nx">iterable</span>
+    <span class="p">{</span>
+        <span class="c1">// return FormType::class to modify (nearly) every field in the system</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nx">FileType</span><span class="o">::</span><span class="na">class</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// makes it legal for FileType fields to have an image_property option</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefined</span><span class="p">([</span><span class="s1">&#39;image_property&#39;</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">buildView</span><span class="p">(</span><span class="nx">FormView</span> <span class="nv">$view</span><span class="p">,</span> <span class="nx">FormInterface</span> <span class="nv">$form</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;image_property&#39;</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="c1">// this will be whatever class/entity is bound to your form (e.g. Media)</span>
+            <span class="nv">$parentData</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getParent</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">();</span>
+
+            <span class="nv">$imageUrl</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">null</span> <span class="o">!==</span> <span class="nv">$parentData</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$accessor</span> <span class="o">=</span> <span class="nx">PropertyAccess</span><span class="o">::</span><span class="na">createPropertyAccessor</span><span class="p">();</span>
+                <span class="nv">$imageUrl</span> <span class="o">=</span> <span class="nv">$accessor</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$parentData</span><span class="p">,</span> <span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;image_property&#39;</span><span class="p">]);</span>
+            <span class="p">}</span>
+
+            <span class="c1">// sets an &quot;image_url&quot; variable that will be available when rendering this field</span>
+            <span class="nv">$view</span><span class="o">-&gt;</span><span class="na">vars</span><span class="p">[</span><span class="s1">&#39;image_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$imageUrl</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="override-the-file-widget-template-fragment">
+<h2>Override the File Widget Template Fragment<a class="headerlink" href="#override-the-file-widget-template-fragment" title="Permalink to this headline">¶</a></h2>
+<p>Each field type is rendered by a template fragment. Those template fragments
+can be overridden in order to customize form rendering. For more information,
+you can refer to the <a class="reference internal" href="form_themes.html#form-fragment-naming"><span class="std std-ref">form fragment naming</span></a> rules.</p>
+<p>In your extension class, you added a new variable (<code class="docutils literal notranslate"><span class="pre">image_url</span></code>), but
+you still need to take advantage of this new variable in your templates.
+Specifically, you need to override the <code class="docutils literal notranslate"><span class="pre">file_widget</span></code> block:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">{# templates/form/fields.html.twig #}</span>
+<span class="cp">{%</span> <span class="k">extends</span> <span class="s1">&#39;form_div_layout.html.twig&#39;</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">file_widget</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">spaceless</span> <span class="cp">%}</span>
+
+    <span class="cp">{{</span> <span class="nb">block</span><span class="o">(</span><span class="s1">&#39;form_widget&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+    <span class="cp">{%</span> <span class="k">if</span> <span class="nv">image_url</span> <span class="k">is</span> <span class="k">not</span> <span class="nf">null</span> <span class="cp">%}</span>
+        <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">asset</span><span class="o">(</span><span class="nv">image_url</span><span class="o">)</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">/&gt;</span>
+    <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+
+    <span class="cp">{%</span> <span class="k">endspaceless</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Be sure to <a class="reference internal" href="form_themes.html#forms-theming-global"><span class="std std-ref">configure this form theme template</span></a> so that
+the form system sees it.</p>
+</div>
+<div class="section" id="using-the-form-type-extension">
+<h2>Using the Form Type Extension<a class="headerlink" href="#using-the-form-type-extension" title="Permalink to this headline">¶</a></h2>
+<p>From now on, when adding a field of type <code class="docutils literal notranslate"><span class="pre">FileType::class</span></code> to your form, you can
+specify an <code class="docutils literal notranslate"><span class="pre">image_property</span></code> option that will be used to display an image
+next to the file field. For example:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/MediaType.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form\Type</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\AbstractType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\FileType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\TextType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormBuilderInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MediaType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">buildForm</span><span class="p">(</span><span class="nx">FormBuilderInterface</span> <span class="nv">$builder</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$builder</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="nx">TextType</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="nx">FileType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;image_property&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;webPath&#39;</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When displaying the form, if the underlying model has already been associated
+with an image, you will see it displayed next to the file input.</p>
+</div>
+<div class="section" id="generic-form-type-extensions">
+<h2>Generic Form Type Extensions<a class="headerlink" href="#generic-form-type-extensions" title="Permalink to this headline">¶</a></h2>
+<p>You can modify several form types at once by specifying their common parent
+(<a class="reference internal" href="../reference/forms/types.html"><span class="doc">Form Types Reference</span></a>). For example, several form types inherit from the
+<code class="docutils literal notranslate"><span class="pre">TextType</span></code> form type (such as <code class="docutils literal notranslate"><span class="pre">EmailType</span></code>, <code class="docutils literal notranslate"><span class="pre">SearchType</span></code>, <code class="docutils literal notranslate"><span class="pre">UrlType</span></code>, etc.).
+A form type extension applying to <code class="docutils literal notranslate"><span class="pre">TextType</span></code> (i.e. whose <code class="docutils literal notranslate"><span class="pre">getExtendedType()</span></code>
+method returns <code class="docutils literal notranslate"><span class="pre">TextType::class</span></code>) would apply to all of these form types.</p>
+<p>In the same way, since <strong>most</strong> form types natively available in Symfony inherit
+from the <code class="docutils literal notranslate"><span class="pre">FormType</span></code> form type, a form type extension applying to <code class="docutils literal notranslate"><span class="pre">FormType</span></code>
+would apply to all of these (notable exceptions are the <code class="docutils literal notranslate"><span class="pre">ButtonType</span></code> form
+types). Also keep in mind that if you created (or are using) a <em>custom</em> form type,
+it’s possible that it does <em>not</em> extend <code class="docutils literal notranslate"><span class="pre">FormType</span></code>, and so your form type extension
+may not be applied to it.</p>
+<p>Another option is to return multiple form types in the <code class="docutils literal notranslate"><span class="pre">getExtendedTypes()</span></code>
+method to extend all of them:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\DateTimeType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\DateType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\TimeType</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">DateTimeExtension</span> <span class="k">extends</span> <span class="nx">AbstractTypeExtension</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getExtendedTypes</span><span class="p">()</span><span class="o">:</span> <span class="nx">iterable</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nx">DateTimeType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nx">DateType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nx">TimeType</span><span class="o">::</span><span class="na">class</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

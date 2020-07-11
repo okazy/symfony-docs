@@ -1,0 +1,718 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Symfony Local Web Server &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Install or Upgrade to the Latest, Unreleased Symfony Version" href="unstable_versions.html" />
+    <link rel="prev" title="Upgrading Existing Applications to Symfony Flex" href="flex.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#technical-requirements">Technical Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#creating-symfony-applications">Creating Symfony Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#running-symfony-applications">Running Symfony Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#setting-up-an-existing-symfony-project">Setting up an Existing Symfony Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#installing-packages">Installing Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#checking-security-vulnerabilities">Checking Security Vulnerabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#symfony-lts-versions">Symfony LTS Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#the-symfony-demo-application">The Symfony Demo application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../setup.html#start-coding">Start Coding!</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../setup.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../page_creation.html">Create your First Page in Symfony</a></li>
+<li class="toctree-l3"><a class="reference internal" href="homestead.html">Using Symfony with Homestead/Vagrant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web_server_configuration.html">Configuring a Web Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bundles.html">Upgrading a Third-Party Bundle for a Major Symfony Version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_permissions.html">Setting up or Fixing File Permissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flex.html">Upgrading Existing Applications to Symfony Flex</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Symfony Local Web Server</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enabling-php-fpm">Enabling PHP-FPM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enabling-tls">Enabling TLS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#different-php-settings-per-project">Different PHP Settings Per Project</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#local-domain-names">Local Domain Names</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#long-running-commands">Long-Running Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#docker-integration">Docker Integration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#symfonycloud-integration">SymfonyCloud Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="unstable_versions.html">How to Install or Upgrade to the Latest, Unreleased Symfony Version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrade_major.html">Upgrading a Major Version (e.g. 4.4.0 to 5.0.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrade_minor.html">Upgrading a Minor Version (e.g. 4.0.0 to 4.1.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrade_patch.html">Upgrading a Patch Version (e.g. 5.0.0 to 5.0.1)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../getting_started/index.html">Getting Started</a> &raquo;</li>
+        
+          <li><a href="../setup.html">Installing &amp; Setting up the Symfony Framework</a> &raquo;</li>
+        
+      <li>Symfony Local Web Server</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/setup/symfony_server.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="symfony-local-web-server">
+<h1>Symfony Local Web Server<a class="headerlink" href="#symfony-local-web-server" title="Permalink to this headline">¶</a></h1>
+<p>You can run Symfony applications with any web server (Apache, nginx, the
+internal PHP web server, etc.). However, Symfony provides its own web server to
+make you more productive while developing your applications.</p>
+<p>Although this server is not intended for production use, it supports HTTP/2,
+TLS/SSL, automatic generation of security certificates, local domains, and many
+other features that sooner or later you’ll need when developing web projects.
+Moreover, the server is not tied to Symfony and you can also use it with any
+PHP application and even with HTML/SPA (single page applications).</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>The Symfony server is part of the <code class="docutils literal notranslate"><span class="pre">symfony</span></code> binary created when you
+<a class="reference external" href="https://symfony.com/download">install Symfony</a> and has support for Linux, macOS and Windows.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Symfony binary is developed internally at Symfony. If you want to
+report a bug or suggest a new feature, please create an issue on
+<a class="reference external" href="https://github.com/symfony/cli">symfony/cli</a>.</p>
+</div>
+</div>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>The Symfony server is started once per project, so you may end up with several
+instances (each of them listening to a different port). This is the common
+workflow to serve a Symfony project:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> my-project/
+<span class="gp">$</span> symfony server:start
+
+<span class="go">  [OK] Web server listening on http://127.0.0.1:....</span>
+<span class="go">  ...</span>
+
+<span class="c1"># Now, browse the given URL, or run this command:</span>
+<span class="gp">$</span> symfony open:local
+</pre></div>
+</td></tr></table></div>
+<p>Running the server this way makes it display the log messages in the console, so
+you won’t be able to run other commands at the same time. If you prefer, you can
+run the Symfony server in the background:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> my-project/
+
+<span class="c1"># start the server in the background</span>
+<span class="gp">$</span> symfony server:start -d
+
+<span class="c1"># continue working and running other commands...</span>
+
+<span class="c1"># show the latest log messages</span>
+<span class="gp">$</span> symfony server:log
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="enabling-php-fpm">
+<h2>Enabling PHP-FPM<a class="headerlink" href="#enabling-php-fpm" title="Permalink to this headline">¶</a></h2>
+<p>When the server starts it will check for common patterns like <code class="docutils literal notranslate"><span class="pre">web/app.php</span></code>,
+<code class="docutils literal notranslate"><span class="pre">web/app_dev.php</span></code> or <code class="docutils literal notranslate"><span class="pre">public/index.php</span></code>. If a file like this is found the
+server will automatically start with PHP-FPM enabled. Otherwise the server will
+start without PHP-FPM and will show a <code class="docutils literal notranslate"><span class="pre">Page</span> <span class="pre">not</span> <span class="pre">found</span></code> page when trying to
+access a <code class="docutils literal notranslate"><span class="pre">.php</span></code> file in the browser.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">When an <code class="docutils literal notranslate"><span class="pre">index.html</span></code> and a front controller like e.g. <code class="docutils literal notranslate"><span class="pre">index.php</span></code> are
+both present the server will still start with PHP-FPM enabled but the
+<code class="docutils literal notranslate"><span class="pre">index.html</span></code> will take precedence over the front controller. This means
+when an <code class="docutils literal notranslate"><span class="pre">index.html</span></code> file is present in <code class="docutils literal notranslate"><span class="pre">public</span></code> or <code class="docutils literal notranslate"><span class="pre">web</span></code>, it will be
+displayed instead of the <code class="docutils literal notranslate"><span class="pre">index.php</span></code> which would show e.g. the Symfony
+application.</p>
+</div>
+</div>
+<div class="section" id="enabling-tls">
+<h2>Enabling TLS<a class="headerlink" href="#enabling-tls" title="Permalink to this headline">¶</a></h2>
+<p>Browsing the secure version of your applications locally is important to detect
+problems with mixed content early, and to run libraries that only run in HTTPS.
+Traditionally this has been painful and complicated to set up, but the Symfony
+server automates everything. First, run this command:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> symfony server:ca:install
+</pre></div>
+</td></tr></table></div>
+<p>This command creates a local certificate authority, registers it in your system
+trust store, registers it in Firefox (this is required only for that browser)
+and creates a default certificate for <code class="docutils literal notranslate"><span class="pre">localhost</span></code> and <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>. In other
+words, it does everything for you.</p>
+<p>Before browsing your local application with HTTPS instead of HTTP, restart its
+server stopping and starting it again.</p>
+</div>
+<div class="section" id="different-php-settings-per-project">
+<h2>Different PHP Settings Per Project<a class="headerlink" href="#different-php-settings-per-project" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="selecting-a-different-php-version">
+<h3>Selecting a Different PHP Version<a class="headerlink" href="#selecting-a-different-php-version" title="Permalink to this headline">¶</a></h3>
+<p>If you have multiple PHP versions installed on your computer, you can tell
+Symfony which one to use creating a file called <code class="docutils literal notranslate"><span class="pre">.php-version</span></code> at the project
+root directory:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> my-project/
+
+<span class="c1"># use a specific PHP version</span>
+<span class="gp">$</span> <span class="nb">echo</span> <span class="m">7</span>.2 &gt; .php-version
+
+<span class="c1"># use any PHP 7.x version available</span>
+<span class="gp">$</span> <span class="nb">echo</span> <span class="m">7</span> &gt; .php-version
+</pre></div>
+</td></tr></table></div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The Symfony server traverses the directory structure up to the root
+directory, so you can create a <code class="docutils literal notranslate"><span class="pre">.php-version</span></code> file in some parent
+directory to set the same PHP version for a group of projects under that
+directory.</p>
+</div>
+<p>Run the command below if you don’t remember all the PHP versions installed on your
+computer:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> symfony local:php:list
+
+<span class="go">  # You&#39;ll see all supported SAPIs (CGI, FastCGI, etc.) for each version.</span>
+<span class="go">  # FastCGI (php-fpm) is used when possible; then CGI (which acts as a FastCGI</span>
+<span class="go">  # server as well), and finally, the server falls back to plain CGI.</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="overriding-php-config-options-per-project">
+<h3>Overriding PHP Config Options Per Project<a class="headerlink" href="#overriding-php-config-options-per-project" title="Permalink to this headline">¶</a></h3>
+<p>You can change the value of any PHP runtime config option per project by creating a
+file called <code class="docutils literal notranslate"><span class="pre">php.ini</span></code> at the project root directory. Add only the options you want
+to override:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> my-project/
+
+<span class="c1"># this project only overrides the default PHP timezone</span>
+<span class="gp">$</span> cat php.ini
+<span class="go">[Date]</span>
+<span class="go">date.timezone = Asia/Tokyo</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="running-commands-with-different-php-versions">
+<h3>Running Commands with Different PHP Versions<a class="headerlink" href="#running-commands-with-different-php-versions" title="Permalink to this headline">¶</a></h3>
+<p>When running different PHP versions, it is useful to use the main <code class="docutils literal notranslate"><span class="pre">symfony</span></code>
+command as a wrapper for the <code class="docutils literal notranslate"><span class="pre">php</span></code> command. This allows you to always select
+the most appropriate PHP version according to the project which is running the
+commands. It also loads the env vars automatically, which is important when
+running non-Symfony commands:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># runs the command with the default PHP version</span>
+<span class="gp">$</span> php -r <span class="s2">&quot;...&quot;</span>
+
+<span class="c1"># runs the command with the PHP version selected by the project</span>
+<span class="c1"># (or the default PHP version if the project didn&#39;t select one)</span>
+<span class="gp">$</span> symfony php -r <span class="s2">&quot;...&quot;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="local-domain-names">
+<h2>Local Domain Names<a class="headerlink" href="#local-domain-names" title="Permalink to this headline">¶</a></h2>
+<p>By default, projects are accessible at some random port of the <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>
+local IP. However, sometimes it is preferable to associate a domain name to them:</p>
+<ul class="simple">
+<li>It’s more convenient when you work continuously on the same project because
+port numbers can change but domains don’t;</li>
+<li>The behavior of some applications depend on their domains/subdomains;</li>
+<li>To have stable endpoints, such as the local redirection URL for OAuth2.</li>
+</ul>
+<div class="section" id="setting-up-the-local-proxy">
+<h3>Setting up the Local Proxy<a class="headerlink" href="#setting-up-the-local-proxy" title="Permalink to this headline">¶</a></h3>
+<p>Local domains are possible thanks to a local proxy provided by the Symfony server.
+If this is the first time you run the proxy, you must configure it as follows:</p>
+<ol class="arabic simple">
+<li>Open the <strong>proxy settings</strong> of your operating system:<ul>
+<li><a class="reference external" href="https://www.dummies.com/computers/operating-systems/windows-10/how-to-set-up-a-proxy-in-windows-10/">Proxy settings in Windows</a>;</li>
+<li><a class="reference external" href="https://support.apple.com/guide/mac-help/enter-proxy-server-settings-on-mac-mchlp2591/mac">Proxy settings in macOS</a>;</li>
+<li><a class="reference external" href="https://help.ubuntu.com/stable/ubuntu-help/net-proxy.html.en">Proxy settings in Ubuntu</a>.</li>
+</ul>
+</li>
+<li>Set the following URL as the value of the <strong>Automatic Proxy Configuration</strong>:
+<code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:7080/proxy.pac</span></code></li>
+</ol>
+<p>Now run this command to start the proxy:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> symfony proxy:start
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Some browsers (e.g. Chrome) require to re-apply proxy settings (clicking on
+<code class="docutils literal notranslate"><span class="pre">Re-apply</span> <span class="pre">settings</span></code> button on the <code class="docutils literal notranslate"><span class="pre">chrome://net-internals/#proxy</span></code> page)
+or a full restart after starting the proxy. Otherwise, you’ll see a
+<em>“This webpage is not available”</em> error (<code class="docutils literal notranslate"><span class="pre">ERR_NAME_NOT_RESOLVED</span></code>).</p>
+</div>
+</div>
+<div class="section" id="defining-the-local-domain">
+<h3>Defining the Local Domain<a class="headerlink" href="#defining-the-local-domain" title="Permalink to this headline">¶</a></h3>
+<p>By default, Symfony proposes <code class="docutils literal notranslate"><span class="pre">.wip</span></code> (for <em>Work in Progress</em>) for the local
+domains. You can define a local domain for your project as follows:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> my-project/
+<span class="gp">$</span> symfony proxy:domain:attach my-domain
+</pre></div>
+</td></tr></table></div>
+<p>If you have installed the local proxy as explained in the previous section, you
+can now browse <code class="docutils literal notranslate"><span class="pre">https://my-domain.wip</span></code> to access your local project with the
+new custom domain.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Browse the <a class="reference external" href="http://127.0.0.1:7080">http://127.0.0.1:7080</a> URL to get the full list of local project
+directories, their custom domains, and port numbers.</p>
+</div>
+<p>When running console commands, add the <code class="docutils literal notranslate"><span class="pre">https_proxy</span></code> env var to make custom
+domains work:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nv">https_proxy</span><span class="o">=</span>http://127.0.0.1:7080 curl https://my-domain.wip
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Although env var names are always defined in uppercase, the <code class="docutils literal notranslate"><span class="pre">https_proxy</span></code>
+env var <a class="reference external" href="https://ec.haxx.se/usingcurl/usingcurl-proxies#http_proxy-in-lower-case-only">is treated differently</a> than other env vars and its name must be
+spelled in lowercase.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you prefer to use a different TLD, edit the <code class="docutils literal notranslate"><span class="pre">~/.symfony/proxy.json</span></code>
+file (where <code class="docutils literal notranslate"><span class="pre">~</span></code> means the path to your user directory) and change the
+value of the <code class="docutils literal notranslate"><span class="pre">tld</span></code> option from <code class="docutils literal notranslate"><span class="pre">wip</span></code> to any other TLD.</p>
+</div>
+</div>
+</div>
+<div class="section" id="long-running-commands">
+<h2>Long-Running Commands<a class="headerlink" href="#long-running-commands" title="Permalink to this headline">¶</a></h2>
+<p>Long-running commands, such as the ones that compile front-end web assets, block
+the terminal and you can’t run other commands at the same time. The Symfony
+server provides a <code class="docutils literal notranslate"><span class="pre">run</span></code> command to wrap them as follows:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># compile Webpack assets using Symfony Encore ... but do that in the</span>
+<span class="c1"># background to not block the terminal</span>
+<span class="gp">$</span> symfony run -d yarn encore dev --watch
+
+<span class="c1"># continue working and running other commands...</span>
+
+<span class="c1"># from time to time, check the command logs if you want</span>
+<span class="gp">$</span> symfony server:log
+
+<span class="c1"># and you can also check if the command is still running</span>
+<span class="gp">$</span> symfony server:status
+<span class="go">Web server listening on ...</span>
+<span class="go">Command &quot;yarn ...&quot; running with PID ...</span>
+
+<span class="c1"># stop the web server (and all the associated commands) when you are finished</span>
+<span class="gp">$</span> symfony server:stop
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="docker-integration">
+<h2>Docker Integration<a class="headerlink" href="#docker-integration" title="Permalink to this headline">¶</a></h2>
+<p>The local Symfony server provides full <a class="reference external" href="https://en.wikipedia.org/wiki/Docker_(software)">Docker</a> integration for projects that
+use it.</p>
+<p>When the web server detects that Docker Compose is running for the project, it
+automatically exposes environment variables according to the exposed port and
+the name of the <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> services.</p>
+<p>Consider the following configuration:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># docker-compose.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">database</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">ports</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="nv">3306</span><span class="p p-Indicator">]</span>
+</pre></div>
+</td></tr></table></div>
+<p>The web server detects that a service exposing port <code class="docutils literal notranslate"><span class="pre">3306</span></code> is running for the
+project. It understands that this is a MySQL service and creates environment
+variables accordingly with the service name (<code class="docutils literal notranslate"><span class="pre">database</span></code>) as a prefix:
+<code class="docutils literal notranslate"><span class="pre">DATABASE_URL</span></code>, <code class="docutils literal notranslate"><span class="pre">DATABASE_HOST</span></code>, …</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">docker-compose.yaml</span></code> names do not match Symfony’s conventions, add a
+label to override the environment variables prefix:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># docker-compose.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">db</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">ports</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="nv">3306</span><span class="p p-Indicator">]</span>
+        <span class="l l-Scalar l-Scalar-Plain">labels</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">com.symfony.server.service-prefix</span><span class="p p-Indicator">:</span> <span class="s">&#39;DATABASE&#39;</span>
+</pre></div>
+</td></tr></table></div>
+<p>In this example, the service is named <code class="docutils literal notranslate"><span class="pre">db</span></code>, so environment variables would be
+prefixed with <code class="docutils literal notranslate"><span class="pre">DB_</span></code>, but as the <code class="docutils literal notranslate"><span class="pre">com.symfony.server.service-prefix</span></code> is set
+to <code class="docutils literal notranslate"><span class="pre">DATABASE</span></code>, the web server creates environment variables starting with
+<code class="docutils literal notranslate"><span class="pre">DATABASE_</span></code> instead as expected by the default Symfony configuration.</p>
+<p>Here is the list of supported services with their ports and default Symfony
+prefixes:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="7%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Service</th>
+<th class="head">Port</th>
+<th class="head">Symfony default prefix</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>MySQL</td>
+<td>3306</td>
+<td><code class="docutils literal notranslate"><span class="pre">DATABASE_</span></code></td>
+</tr>
+<tr class="row-odd"><td>PostgreSQL</td>
+<td>5432</td>
+<td><code class="docutils literal notranslate"><span class="pre">DATABASE_</span></code></td>
+</tr>
+<tr class="row-even"><td>Redis</td>
+<td>6379</td>
+<td><code class="docutils literal notranslate"><span class="pre">REDIS_</span></code></td>
+</tr>
+<tr class="row-odd"><td>Memcached</td>
+<td>11211</td>
+<td><code class="docutils literal notranslate"><span class="pre">MEMCACHED_</span></code></td>
+</tr>
+<tr class="row-even"><td>RabbitMQ</td>
+<td>5672</td>
+<td><code class="docutils literal notranslate"><span class="pre">RABBITMQ_</span></code> (set user and pass via Docker <code class="docutils literal notranslate"><span class="pre">RABBITMQ_DEFAULT_USER</span></code> and <code class="docutils literal notranslate"><span class="pre">RABBITMQ_DEFAULT_PASS</span></code> env var)</td>
+</tr>
+<tr class="row-odd"><td>Elasticsearch</td>
+<td>9200</td>
+<td><code class="docutils literal notranslate"><span class="pre">ELASTICSEARCH_</span></code></td>
+</tr>
+<tr class="row-even"><td>MongoDB</td>
+<td>27017</td>
+<td><code class="docutils literal notranslate"><span class="pre">MONGODB_</span></code> (set the database via a Docker <code class="docutils literal notranslate"><span class="pre">MONGO_DATABASE</span></code> env var)</td>
+</tr>
+<tr class="row-odd"><td>Kafka</td>
+<td>9092</td>
+<td><code class="docutils literal notranslate"><span class="pre">KAFKA_</span></code></td>
+</tr>
+<tr class="row-even"><td>MailCatcher</td>
+<td>1025/1080
+or 25/80</td>
+<td><code class="docutils literal notranslate"><span class="pre">MAILER_</span></code></td>
+</tr>
+<tr class="row-odd"><td>Blackfire</td>
+<td>8707</td>
+<td><code class="docutils literal notranslate"><span class="pre">BLACKFIRE_</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>You can open web management interfaces for the services that expose them:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span>$ symfony open:local:webmail
+$ symfony open:local:rabbitmq
+</pre></div>
+</td></tr></table></div>
+<p>Or click on the links in the “Server” section of the web debug toolbar.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">To debug and list all exported environment variables, run <code class="docutils literal notranslate"><span class="pre">symfony</span>
+<span class="pre">var:export</span></code>.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">For some services, the web server also exposes environment variables
+understood by CLI tools related to the service. For instance, running
+<code class="docutils literal notranslate"><span class="pre">symfony</span> <span class="pre">run</span> <span class="pre">psql</span></code> will connect you automatically to the PostgreSQL server
+running in a container without having to specify the username, password, or
+database name.</p>
+</div>
+<p>When Docker services are running, browse a page of your Symfony application and
+check the “Symfony Server” section in the web debug toolbar; you’ll see that
+“Docker Compose” is “Up”.</p>
+</div>
+<div class="section" id="symfonycloud-integration">
+<h2>SymfonyCloud Integration<a class="headerlink" href="#symfonycloud-integration" title="Permalink to this headline">¶</a></h2>
+<p>The local Symfony server provides full, but optional, integration with
+<a class="reference external" href="https://symfony.com/cloud/">SymfonyCloud</a>, a service optimized to run your Symfony applications on the
+cloud. It provides features such as creating environments, backups/snapshots,
+and even access to a copy of the production data from your local machine to help
+debug any issues.</p>
+<p><a class="reference external" href="https://symfony.com/doc/master/cloud/intro.html">Read SymfonyCloud technical docs</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

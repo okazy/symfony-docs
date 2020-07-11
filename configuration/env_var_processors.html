@@ -1,0 +1,1281 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Environment Variable Processors &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Understanding how the Front Controller, Kernel and Environments Work together" href="front_controllers_and_kernel.html" />
+    <link rel="prev" title="Nov 2018 Changes to .env &amp; How to Update" href="dot-env-changes.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../getting_started/index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../page_creation.html">Create your First Page in Symfony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controller.html">Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../templates.html">Creating and Using Templates</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../configuration.html">Configuring Symfony</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-files">Configuration Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-parameters">Configuration Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-environments">Configuration Environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-based-on-environment-variables">Configuration Based on Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#accessing-configuration-parameters">Accessing Configuration Parameters</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../configuration.html#keep-going">Keep Going!</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dot-env-changes.html">Nov 2018 Changes to .env &amp; How to Update</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Environment Variable Processors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="front_controllers_and_kernel.html">Understanding how the Front Controller, Kernel and Environments Work together</a></li>
+<li class="toctree-l4"><a class="reference internal" href="micro_kernel_trait.html">Building your own Framework with the MicroKernelTrait</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multiple_kernels.html">How To Create Symfony Applications with Multiple Kernels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="override_dir_structure.html">How to Override Symfony’s default Directory Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="secrets.html">How to Keep Sensitive Information Secret</a></li>
+<li class="toctree-l4"><a class="reference internal" href="using_parameters_in_dic.html">Using Parameters within a Dependency Injection Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../getting_started/index.html">Getting Started</a> &raquo;</li>
+        
+          <li><a href="../configuration.html">Configuring Symfony</a> &raquo;</li>
+        
+      <li>Environment Variable Processors</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/configuration/env_var_processors.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="environment-variable-processors">
+<span id="env-var-processors"></span><span id="index-0"></span><h1>Environment Variable Processors<a class="headerlink" href="#environment-variable-processors" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="../configuration.html#config-env-vars"><span class="std std-ref">Using env vars to configure Symfony applications</span></a> is a
+common practice to make your applications truly dynamic.</p>
+<p>The main issue of env vars is that their values can only be strings and your
+application may need other data types (integer, boolean, etc.). Symfony solves
+this problem with “env var processors”, which transform the original contents of
+the given environment variables. The following example uses the integer
+processor to turn the value of the <code class="docutils literal notranslate"><span class="pre">HTTP_PORT</span></code> env var into an integer:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">router</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">http_port</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(int:HTTP_PORT)%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/framework.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:router</span> <span class="na">http-port=</span><span class="s">&quot;%env(int:HTTP_PORT)%&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/framework.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;router&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;http_port&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(int:HTTP_PORT)%&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="section" id="built-in-environment-variable-processors">
+<h2>Built-In Environment Variable Processors<a class="headerlink" href="#built-in-environment-variable-processors" title="Permalink to this headline">¶</a></h2>
+<p>Symfony provides the following env var processors:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">env(string:FOO)</span></code></dt>
+<dd><p class="first">Casts <code class="docutils literal notranslate"><span class="pre">FOO</span></code> to a string:</p>
+<div class="last configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">env(SECRET)</span><span class="p p-Indicator">:</span> <span class="s">&#39;some_secret&#39;</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">secret</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(string:SECRET)%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/framework.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;parameters&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;env(SECRET)&quot;</span><span class="nt">&gt;</span>some_secret<span class="nt">&lt;/parameter&gt;</span>
+    <span class="nt">&lt;/parameters&gt;</span>
+
+    <span class="nt">&lt;framework:config</span> <span class="na">secret=</span><span class="s">&quot;%env(string:SECRET)%&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/framework.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;env(SECRET)&#39;</span><span class="p">,</span> <span class="s1">&#39;some_secret&#39;</span><span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;secret&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(string:SECRET)%&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">env(bool:FOO)</span></code></dt>
+<dd><p class="first">Casts <code class="docutils literal notranslate"><span class="pre">FOO</span></code> to a bool (<code class="docutils literal notranslate"><span class="pre">true</span></code> values are <code class="docutils literal notranslate"><span class="pre">'true'</span></code>, <code class="docutils literal notranslate"><span class="pre">'on'</span></code>, <code class="docutils literal notranslate"><span class="pre">'yes'</span></code>
+and all numbers except <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">0.0</span></code>; everything else is <code class="docutils literal notranslate"><span class="pre">false</span></code>):</p>
+<div class="last configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">env(HTTP_METHOD_OVERRIDE)</span><span class="p p-Indicator">:</span> <span class="s">&#39;true&#39;</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">http_method_override</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(bool:HTTP_METHOD_OVERRIDE)%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/framework.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;parameters&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;env(HTTP_METHOD_OVERRIDE)&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/parameter&gt;</span>
+    <span class="nt">&lt;/parameters&gt;</span>
+
+    <span class="nt">&lt;framework:config</span> <span class="na">http-method-override=</span><span class="s">&quot;%env(bool:HTTP_METHOD_OVERRIDE)%&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/framework.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;env(HTTP_METHOD_OVERRIDE)&#39;</span><span class="p">,</span> <span class="s1">&#39;true&#39;</span><span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;http_method_override&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(bool:HTTP_METHOD_OVERRIDE)%&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">env(int:FOO)</span></code></dt>
+<dd>Casts <code class="docutils literal notranslate"><span class="pre">FOO</span></code> to an int.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">env(float:FOO)</span></code></dt>
+<dd>Casts <code class="docutils literal notranslate"><span class="pre">FOO</span></code> to a float.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">env(const:FOO)</span></code></dt>
+<dd><p class="first">Finds the const value named in <code class="docutils literal notranslate"><span class="pre">FOO</span></code>:</p>
+<div class="last configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">env(HEALTH_CHECK_METHOD)</span><span class="p p-Indicator">:</span> <span class="s">&#39;Symfony\Component\HttpFoundation\Request::METHOD_HEAD&#39;</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">access_control</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">path</span><span class="p p-Indicator">:</span> <span class="s">&#39;^/health-check$&#39;</span><span class="p p-Indicator">,</span> <span class="nv">methods</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(const:HEALTH_CHECK_METHOD)%&#39;</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/security.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:security=</span><span class="s">&quot;http://symfony.com/schema/dic/security&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/security</span>
+<span class="s">        https://symfony.com/schema/dic/security/security-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;parameters&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;env(HEALTH_CHECK_METHOD)&quot;</span><span class="nt">&gt;</span>Symfony\Component\HttpFoundation\Request::METHOD_HEAD<span class="nt">&lt;/parameter&gt;</span>
+    <span class="nt">&lt;/parameters&gt;</span>
+
+    <span class="nt">&lt;security:config&gt;</span>
+        <span class="nt">&lt;rule</span> <span class="na">path=</span><span class="s">&quot;^/health-check$&quot;</span> <span class="na">methods=</span><span class="s">&quot;%env(const:HEALTH_CHECK_METHOD)%&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/security:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/security.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;env(HEALTH_CHECK_METHOD)&#39;</span><span class="p">,</span> <span class="s1">&#39;Symfony\Component\HttpFoundation\Request::METHOD_HEAD&#39;</span><span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;access_control&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="s1">&#39;path&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;^/health-check$&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;methods&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(const:HEALTH_CHECK_METHOD)%&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">env(base64:FOO)</span></code></dt>
+<dd>Decodes the content of <code class="docutils literal notranslate"><span class="pre">FOO</span></code>, which is a base64 encoded string.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">env(json:FOO)</span></code></dt>
+<dd><p class="first">Decodes the content of <code class="docutils literal notranslate"><span class="pre">FOO</span></code>, which is a JSON encoded string. It returns
+either an array or <code class="docutils literal notranslate"><span class="pre">null</span></code>:</p>
+<div class="last configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">env(TRUSTED_HOSTS)</span><span class="p p-Indicator">:</span> <span class="s">&#39;[&quot;10.0.0.1&quot;,</span><span class="nv"> </span><span class="s">&quot;10.0.0.2&quot;]&#39;</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">trusted_hosts</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(json:TRUSTED_HOSTS)%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/framework.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;parameters&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;env(TRUSTED_HOSTS)&quot;</span><span class="nt">&gt;</span>[&quot;10.0.0.1&quot;, &quot;10.0.0.2&quot;]<span class="nt">&lt;/parameter&gt;</span>
+    <span class="nt">&lt;/parameters&gt;</span>
+
+    <span class="nt">&lt;framework:config</span> <span class="na">trusted-hosts=</span><span class="s">&quot;%env(json:TRUSTED_HOSTS)%&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/framework.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;env(TRUSTED_HOSTS)&#39;</span><span class="p">,</span> <span class="s1">&#39;[&quot;10.0.0.1&quot;, &quot;10.0.0.2&quot;]&#39;</span><span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;trusted_hosts&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(json:TRUSTED_HOSTS)%&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">env(resolve:FOO)</span></code></dt>
+<dd><p class="first">If the content of <code class="docutils literal notranslate"><span class="pre">FOO</span></code> includes container parameters (with the syntax
+<code class="docutils literal notranslate"><span class="pre">%parameter_name%</span></code>), it replaces the parameters by their values:</p>
+<div class="last configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/sentry.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">env(HOST)</span><span class="p p-Indicator">:</span> <span class="s">&#39;10.0.0.1&#39;</span>
+    <span class="l l-Scalar l-Scalar-Plain">sentry_host</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(HOST)%&#39;</span>
+    <span class="l l-Scalar l-Scalar-Plain">env(SENTRY_DSN)</span><span class="p p-Indicator">:</span> <span class="s">&#39;http://%sentry_host%/project&#39;</span>
+<span class="l l-Scalar l-Scalar-Plain">sentry</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">dsn</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(resolve:SENTRY_DSN)%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/sentry.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;parameters&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;env(HOST)&quot;</span><span class="nt">&gt;</span>10.0.0.1<span class="nt">&lt;/parameter&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;sentry_host&quot;</span><span class="nt">&gt;</span>%env(HOST)%<span class="nt">&lt;/parameter&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;env(SENTRY_DSN)&quot;</span><span class="nt">&gt;</span>http://%sentry_host%/project<span class="nt">&lt;/parameter&gt;</span>
+    <span class="nt">&lt;/parameters&gt;</span>
+
+    <span class="nt">&lt;sentry:config</span> <span class="na">dsn=</span><span class="s">&quot;%env(resolve:SENTRY_DSN)%&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/sentry.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;env(HOST)&#39;</span><span class="p">,</span> <span class="s1">&#39;10.0.0.1&#39;</span><span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;sentry_host&#39;</span><span class="p">,</span> <span class="s1">&#39;%env(HOST)%&#39;</span><span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;env(SENTRY_DSN)&#39;</span><span class="p">,</span> <span class="s1">&#39;http://%sentry_host%/project&#39;</span><span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;sentry&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;dsn&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(resolve:SENTRY_DSN)%&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">env(csv:FOO)</span></code></dt>
+<dd><p class="first">Decodes the content of <code class="docutils literal notranslate"><span class="pre">FOO</span></code>, which is a CSV-encoded string:</p>
+<div class="last highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">env(TRUSTED_HOSTS)</span><span class="p p-Indicator">:</span> <span class="s">&quot;10.0.0.1,</span><span class="nv"> </span><span class="s">10.0.0.2&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+   <span class="l l-Scalar l-Scalar-Plain">trusted_hosts</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(csv:TRUSTED_HOSTS)%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">env(file:FOO)</span></code></dt>
+<dd><p class="first">Returns the contents of a file whose path is the value of the <code class="docutils literal notranslate"><span class="pre">FOO</span></code> env var:</p>
+<div class="last configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">env(AUTH_FILE)</span><span class="p p-Indicator">:</span> <span class="s">&#39;../config/auth.json&#39;</span>
+<span class="l l-Scalar l-Scalar-Plain">google</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(file:AUTH_FILE)%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/framework.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;parameters&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;env(AUTH_FILE)&quot;</span><span class="nt">&gt;</span>../config/auth.json<span class="nt">&lt;/parameter&gt;</span>
+    <span class="nt">&lt;/parameters&gt;</span>
+
+    <span class="nt">&lt;google</span> <span class="na">auth=</span><span class="s">&quot;%env(file:AUTH_FILE)%&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/framework.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;env(AUTH_FILE)&#39;</span><span class="p">,</span> <span class="s1">&#39;../config/auth.json&#39;</span><span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;google&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;auth&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(file:AUTH_FILE)%&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">env(require:FOO)</span></code></dt>
+<dd><p class="first"><code class="docutils literal notranslate"><span class="pre">require()</span></code> the PHP file whose path is the value of the <code class="docutils literal notranslate"><span class="pre">FOO</span></code>
+env var and return the value returned from it.</p>
+<div class="last configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">env(PHP_FILE)</span><span class="p p-Indicator">:</span> <span class="s">&#39;../config/.runtime-evaluated.php&#39;</span>
+<span class="l l-Scalar l-Scalar-Plain">app</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(require:PHP_FILE)%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/framework.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;parameters&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;env(PHP_FILE)&quot;</span><span class="nt">&gt;</span>../config/.runtime-evaluated.php<span class="nt">&lt;/parameter&gt;</span>
+    <span class="nt">&lt;/parameters&gt;</span>
+
+    <span class="nt">&lt;app</span> <span class="na">auth=</span><span class="s">&quot;%env(require:PHP_FILE)%&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/framework.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;env(PHP_FILE)&#39;</span><span class="p">,</span> <span class="s1">&#39;../config/.runtime-evaluated.php&#39;</span><span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;auth&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(require:AUTH_FILE)%&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">env(trim:FOO)</span></code></dt>
+<dd><p class="first">Trims the content of <code class="docutils literal notranslate"><span class="pre">FOO</span></code> env var, removing whitespaces from the beginning
+and end of the string. This is especially useful in combination with the
+<code class="docutils literal notranslate"><span class="pre">file</span></code> processor, as it’ll remove newlines at the end of a file.</p>
+<div class="last configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">env(AUTH_FILE)</span><span class="p p-Indicator">:</span> <span class="s">&#39;../config/auth.json&#39;</span>
+<span class="l l-Scalar l-Scalar-Plain">google</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(trim:file:AUTH_FILE)%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/framework.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;parameters&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;env(AUTH_FILE)&quot;</span><span class="nt">&gt;</span>../config/auth.json<span class="nt">&lt;/parameter&gt;</span>
+    <span class="nt">&lt;/parameters&gt;</span>
+
+    <span class="nt">&lt;google</span> <span class="na">auth=</span><span class="s">&quot;%env(trim:file:AUTH_FILE)%&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/framework.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;env(AUTH_FILE)&#39;</span><span class="p">,</span> <span class="s1">&#39;../config/auth.json&#39;</span><span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;google&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;auth&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(trim:file:AUTH_FILE)%&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">env(key:FOO:BAR)</span></code></dt>
+<dd><p class="first">Retrieves the value associated with the key <code class="docutils literal notranslate"><span class="pre">FOO</span></code> from the array whose
+contents are stored in the <code class="docutils literal notranslate"><span class="pre">BAR</span></code> env var:</p>
+<div class="last configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">env(SECRETS_FILE)</span><span class="p p-Indicator">:</span> <span class="s">&#39;/opt/application/.secrets.json&#39;</span>
+    <span class="l l-Scalar l-Scalar-Plain">database_password</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(key:database_password:json:file:SECRETS_FILE)%&#39;</span>
+    <span class="c1"># if SECRETS_FILE contents are: {&quot;database_password&quot;: &quot;secret&quot;} it returns &quot;secret&quot;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;parameters&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;env(SECRETS_FILE)&quot;</span><span class="nt">&gt;</span>/opt/application/.secrets.json<span class="nt">&lt;/parameter&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;database_password&quot;</span><span class="nt">&gt;</span>%env(key:database_password:json:file:SECRETS_FILE)%<span class="nt">&lt;/parameter&gt;</span>
+    <span class="nt">&lt;/parameters&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;env(SECRETS_FILE)&#39;</span><span class="p">,</span> <span class="s1">&#39;/opt/application/.secrets.json&#39;</span><span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;database_password&#39;</span><span class="p">,</span> <span class="s1">&#39;%env(key:database_password:json:file:SECRETS_FILE)%&#39;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">env(default:fallback_param:BAR)</span></code></dt>
+<dd><p class="first">Retrieves the value of the parameter <code class="docutils literal notranslate"><span class="pre">fallback_param</span></code> when the <code class="docutils literal notranslate"><span class="pre">BAR</span></code> env
+var is not available:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="c1"># if PRIVATE_KEY is not a valid file path, the content of raw_key is returned</span>
+    <span class="l l-Scalar l-Scalar-Plain">private_key</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(default:raw_key:file:PRIVATE_KEY)%&#39;</span>
+    <span class="l l-Scalar l-Scalar-Plain">raw_key</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(PRIVATE_KEY)%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;parameters&gt;</span>
+        <span class="c">&lt;!-- if PRIVATE_KEY is not a valid file path, the content of raw_key is returned --&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;private_key&quot;</span><span class="nt">&gt;</span>%env(default:raw_key:file:PRIVATE_KEY)%<span class="nt">&lt;/parameter&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;raw_key&quot;</span><span class="nt">&gt;</span>%env(PRIVATE_KEY)%<span class="nt">&lt;/parameter&gt;</span>
+    <span class="nt">&lt;/parameters&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+
+<span class="c1">// if PRIVATE_KEY is not a valid file path, the content of raw_key is returned</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;private_key&#39;</span><span class="p">,</span> <span class="s1">&#39;%env(default:raw_key:file:PRIVATE_KEY)%&#39;</span><span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;raw_key&#39;</span><span class="p">,</span> <span class="s1">&#39;%env(PRIVATE_KEY)%&#39;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p class="last">When the fallback parameter is omitted (e.g. <code class="docutils literal notranslate"><span class="pre">env(default::API_KEY)</span></code>), the
+value returned is <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">env(url:FOO)</span></code></dt>
+<dd><p class="first">Parses an absolute URL and returns its components as an associative array.</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># .env</span>
+<span class="nv">MONGODB_URL</span><span class="o">=</span><span class="s2">&quot;mongodb://db_user:db_password@127.0.0.1:27017/db_name&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/mongodb.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">mongo_db_bundle</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">clients</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">hosts</span><span class="p p-Indicator">:</span>
+                <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">host</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(key:host:url:MONGODB_URL)%&#39;</span><span class="p p-Indicator">,</span> <span class="nv">port</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(key:port:url:MONGODB_URL)%&#39;</span> <span class="p p-Indicator">}</span>
+            <span class="l l-Scalar l-Scalar-Plain">username</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(key:user:url:MONGODB_URL)%&#39;</span>
+            <span class="l l-Scalar l-Scalar-Plain">password</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(key:pass:url:MONGODB_URL)%&#39;</span>
+    <span class="l l-Scalar l-Scalar-Plain">connections</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">database_name</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(key:path:url:MONGODB_URL)%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/mongodb.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;mongodb:config&gt;</span>
+        <span class="nt">&lt;mongodb:client</span> <span class="na">name=</span><span class="s">&quot;default&quot;</span> <span class="na">username=</span><span class="s">&quot;%env(key:user:url:MONGODB_URL)%&quot;</span> <span class="na">password=</span><span class="s">&quot;%env(key:pass:url:MONGODB_URL)%&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;mongodb:host</span> <span class="na">host=</span><span class="s">&quot;%env(key:host:url:MONGODB_URL)%&quot;</span> <span class="na">port=</span><span class="s">&quot;%env(key:port:url:MONGODB_URL)%&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/mongodb:client&gt;</span>
+        <span class="nt">&lt;mongodb:connections</span> <span class="na">name=</span><span class="s">&quot;default&quot;</span> <span class="na">database_name=</span><span class="s">&quot;%env(key:path:url:MONGODB_URL)%&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/mongodb:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/mongodb.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;mongodb&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;clients&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;hosts&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="p">[</span>
+                    <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(key:host:url:MONGODB_URL)%&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;port&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(key:port:url:MONGODB_URL)%&#39;</span><span class="p">,</span>
+                <span class="p">],</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(key:user:url:MONGODB_URL)%&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(key:pass:url:MONGODB_URL)%&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;connections&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;database_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(key:path:url:MONGODB_URL)%&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="last admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">In order to ease extraction of the resource from the URL, the leading
+<code class="docutils literal notranslate"><span class="pre">/</span></code> is trimmed from the <code class="docutils literal notranslate"><span class="pre">path</span></code> component.</p>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">env(query_string:FOO)</span></code></dt>
+<dd><p class="first">Parses the query string part of the given URL and returns its components as
+an associative array.</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># .env</span>
+<span class="nv">MONGODB_URL</span><span class="o">=</span><span class="s2">&quot;mongodb://db_user:db_password@127.0.0.1:27017/db_name?timeout=3000&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="last configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/mongodb.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">mongo_db_bundle</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">clients</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+            <span class="l l-Scalar l-Scalar-Plain">connectTimeoutMS</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(int:key:timeout:query_string:MONGODB_URL)%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/mongodb.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;mongodb:config&gt;</span>
+        <span class="nt">&lt;mongodb:client</span> <span class="na">name=</span><span class="s">&quot;default&quot;</span> <span class="na">connectTimeoutMS=</span><span class="s">&quot;%env(int:key:timeout:query_string:MONGODB_URL)%&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/mongodb:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/mongodb.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;mongodb&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;clients&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// ...</span>
+            <span class="s1">&#39;connectTimeoutMS&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(int:key:timeout:query_string:MONGODB_URL)%&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+<p>It is also possible to combine any number of processors:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">env(AUTH_FILE)</span><span class="p p-Indicator">:</span> <span class="s">&quot;%kernel.project_dir%/config/auth.json&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">google</span><span class="p p-Indicator">:</span>
+    <span class="c1"># 1. gets the value of the AUTH_FILE env var</span>
+    <span class="c1"># 2. replaces the values of any config param to get the config path</span>
+    <span class="c1"># 3. gets the content of the file stored in that path</span>
+    <span class="c1"># 4. JSON-decodes the content of the file and returns it</span>
+    <span class="l l-Scalar l-Scalar-Plain">auth</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(json:file:resolve:AUTH_FILE)%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="custom-environment-variable-processors">
+<h2>Custom Environment Variable Processors<a class="headerlink" href="#custom-environment-variable-processors" title="Permalink to this headline">¶</a></h2>
+<p>It’s also possible to add your own processors for environment variables. First,
+create a class that implements
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DependencyInjection/EnvVarProcessorInterface.php" title="Symfony\Component\DependencyInjection\EnvVarProcessorInterface"><span class="pre">EnvVarProcessorInterface</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\EnvVarProcessorInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">LowercasingEnvVarProcessor</span> <span class="k">implements</span> <span class="nx">EnvVarProcessorInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getEnv</span><span class="p">(</span><span class="nv">$prefix</span><span class="p">,</span> <span class="nv">$name</span><span class="p">,</span> <span class="nx">\Closure</span> <span class="nv">$getEnv</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$env</span> <span class="o">=</span> <span class="nv">$getEnv</span><span class="p">(</span><span class="nv">$name</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nb">strtolower</span><span class="p">(</span><span class="nv">$env</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getProvidedTypes</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="s1">&#39;lowercase&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To enable the new processor in the app, register it as a service and
+<a class="reference internal" href="../service_container/tags.html"><span class="doc">tag it</span></a> with the <code class="docutils literal notranslate"><span class="pre">container.env_var_processor</span></code>
+tag. If you’re using the
+<a class="reference internal" href="../service_container.html#service-container-services-load-example"><span class="std std-ref">default services.yaml configuration</span></a>,
+this is already done for you, thanks to <a class="reference internal" href="../service_container.html#services-autoconfigure"><span class="std std-ref">autoconfiguration</span></a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

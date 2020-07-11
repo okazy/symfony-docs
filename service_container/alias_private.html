@@ -1,0 +1,872 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Create Service Aliases and Mark Services as Private &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Defining Services Dependencies Automatically (Autowiring)" href="autowiring.html" />
+    <link rel="prev" title="The Symfony 3.3 DI Container Changes Explained (autowiring, _defaults, etc)" href="3.3-di-changes.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../service_container.html">Service Container</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#fetching-and-using-services">Fetching and using Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#creating-configuring-services-in-the-container">Creating/Configuring Services in the Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#injecting-services-config-into-a-service">Injecting Services/Config into a Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#service-parameters">Service Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#choose-a-specific-service">Choose a Specific Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#binding-arguments-by-name-or-type">Binding Arguments by Name or Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#the-autowire-option">The autowire Option</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#the-autoconfigure-option">The autoconfigure Option</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#linting-service-definitions">Linting Service Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#public-versus-private-services">Public Versus Private Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#importing-many-services-at-once-with-resource">Importing Many Services at once with resource</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#explicitly-configuring-services-and-arguments">Explicitly Configuring Services and Arguments</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../service_container.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="3.3-di-changes.html">The Symfony 3.3 DI Container Changes Explained (autowiring, _defaults, etc)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Create Service Aliases and Mark Services as Private</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#marking-services-as-public-private">Marking Services as Public / Private</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aliasing">Aliasing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#anonymous-services">Anonymous Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deprecating-services">Deprecating Services</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autowiring.html">Defining Services Dependencies Automatically (Autowiring)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calls.html">Service Method Calls and Setter Injection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compiler_passes.html">How to Work with Compiler Passes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configurators.html">How to Configure a Service with a Configurator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug.html">How to Debug the Service Container &amp; List Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="definitions.html">How to work with Service Definition Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expression_language.html">How to Inject Values Based on Complex Expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="factories.html">Using a Factory to Create Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="import.html">How to Import Configuration Files/Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="injection_types.html">Types of Injection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lazy_services.html">Lazy Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_dependencies.html">How to Make Service Arguments/References Optional</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parent_services.html">How to Manage Common Dependencies with Parent Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="request.html">How to Retrieve the Request from the Service Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service_decoration.html">How to Decorate Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service_subscribers_locators.html">Service Subscribers &amp; Locators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shared.html">How to Define Non Shared Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synthetic_services.html">How to Inject Instances into the Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tags.html">How to Work with Service Tags</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../service_container.html">Service Container</a> &raquo;</li>
+        
+      <li>How to Create Service Aliases and Mark Services as Private</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/service_container/alias_private.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-create-service-aliases-and-mark-services-as-private">
+<span id="index-0"></span><h1>How to Create Service Aliases and Mark Services as Private<a class="headerlink" href="#how-to-create-service-aliases-and-mark-services-as-private" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="marking-services-as-public-private">
+<span id="container-private-services"></span><h2>Marking Services as Public / Private<a class="headerlink" href="#marking-services-as-public-private" title="Permalink to this headline">¶</a></h2>
+<p>When defining a service, it can be made to be <em>public</em> or <em>private</em>. If a service
+is <em>public</em>, it means that you can access it directly from the container at runtime.
+For example, the <code class="docutils literal notranslate"><span class="pre">doctrine</span></code> service is a public service:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// only public services can be accessed in this way</span>
+<span class="nv">$doctrine</span> <span class="o">=</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;doctrine&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>But typically, services are accessed using <a class="reference internal" href="../service_container.html#services-constructor-injection"><span class="std std-ref">dependency injection</span></a>.
+And in this case, those services do <em>not</em> need to be public.</p>
+<p id="inlined-private-services">So unless you <em>specifically</em> need to access a service directly from the container
+via <code class="docutils literal notranslate"><span class="pre">$container-&gt;get()</span></code>, the best-practice is to make your services <em>private</em>.
+In fact, All services  are <a class="reference internal" href="../service_container.html#container-public"><span class="std std-ref">private</span></a> by default.</p>
+<p>You can also control the <code class="docutils literal notranslate"><span class="pre">public</span></code> option on a service-by-service basis:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\Service\Foo</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">public</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\Service\Foo&quot;</span> <span class="na">public=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Service\Foo</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$services</span> <span class="o">=</span> <span class="nv">$configurator</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">();</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">Foo</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">public</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p id="services-why-private">Private services are special because they allow the container to optimize whether
+and how they are instantiated. This increases the container’s performance. It also
+gives you better errors: if you try to reference a non-existent service, you will
+get a clear error when you refresh <em>any</em> page, even if the problematic code would
+not have run on that page.</p>
+<p>Now that the service is private, you <em>must not</em> fetch the service directly
+from the container:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">App\Service\Foo</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nx">Foo</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Simply said: A service can be marked as private if you do not want to access
+it directly from your code.</p>
+<p>However, if a service has been marked as private, you can still alias it
+(see below) to access this service (via the alias).</p>
+</div>
+<div class="section" id="aliasing">
+<span id="services-alias"></span><h2>Aliasing<a class="headerlink" href="#aliasing" title="Permalink to this headline">¶</a></h2>
+<p>You may sometimes want to use shortcuts to access some services. You can
+do so by aliasing them and, furthermore, you can even alias non-public
+services.</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">App\Mail\PhpMailer</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">public</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">app.mailer</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">alias</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Mail\PhpMailer</span>
+        <span class="l l-Scalar l-Scalar-Plain">public</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\Mail\PhpMailer&quot;</span> <span class="na">public=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;app.mailer&quot;</span> <span class="na">alias=</span><span class="s">&quot;App\Mail\PhpMailer&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Mail\PhpMailer</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$services</span> <span class="o">=</span> <span class="nv">$configurator</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">();</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">PhpMailer</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">private</span><span class="p">();</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">alias</span><span class="p">(</span><span class="s1">&#39;app.mailer&#39;</span><span class="p">,</span> <span class="nx">PhpMailer</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>This means that when using the container directly, you can access the
+<code class="docutils literal notranslate"><span class="pre">PhpMailer</span></code> service by asking for the <code class="docutils literal notranslate"><span class="pre">app.mailer</span></code> service like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;app.mailer&#39;</span><span class="p">);</span> <span class="c1">// Would return a PhpMailer instance</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>In YAML, you can also use a shortcut to alias a service:</p>
+<div class="last highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">app.mailer</span><span class="p p-Indicator">:</span> <span class="s">&#39;@App\Mail\PhpMailer&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="deprecating-service-aliases">
+<h3>Deprecating Service Aliases<a class="headerlink" href="#deprecating-service-aliases" title="Permalink to this headline">¶</a></h3>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The <code class="docutils literal notranslate"><span class="pre">package</span></code> and <code class="docutils literal notranslate"><span class="pre">version</span></code> options were introduced in Symfony 5.1.
+Prior to 5.1, you had to use <code class="docutils literal notranslate"><span class="pre">deprecated:</span> <span class="pre">true</span></code> or
+<code class="docutils literal notranslate"><span class="pre">deprecated:</span> <span class="pre">'Custom</span> <span class="pre">message'</span></code>.</p>
+</div>
+<p>If you decide to deprecate the use of a service alias (because it is outdated
+or you decided not to maintain it anymore), you can deprecate its definition:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">app.mailer</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">alias</span><span class="p p-Indicator">:</span> <span class="s">&#39;@App\Mail\PhpMailer&#39;</span>
+
+    <span class="c1"># this outputs the following generic deprecation message:</span>
+    <span class="c1"># Since acme/package 1.2: The &quot;app.mailer&quot; service alias is deprecated. You should stop using it, as it will be removed in the future</span>
+    <span class="l l-Scalar l-Scalar-Plain">deprecated</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span> <span class="s">&#39;acme/package&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&#39;1.2&#39;</span>
+
+    <span class="c1"># you can also define a custom deprecation message (%alias_id% placeholder is available)</span>
+    <span class="l l-Scalar l-Scalar-Plain">deprecated</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">package</span><span class="p p-Indicator">:</span> <span class="s">&#39;acme/package&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&#39;1.2&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">message</span><span class="p p-Indicator">:</span> <span class="s">&#39;The</span><span class="nv"> </span><span class="s">&quot;%alias_id%&quot;</span><span class="nv"> </span><span class="s">alias</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">deprecated.</span><span class="nv"> </span><span class="s">Do</span><span class="nv"> </span><span class="s">not</span><span class="nv"> </span><span class="s">use</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">anymore.&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-Instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;app.mailer&quot;</span> <span class="na">alias=</span><span class="s">&quot;App\Mail\PhpMailer&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- this outputs the following generic deprecation message:</span>
+<span class="c">                 Since acme/package 1.2: The &quot;app.mailer&quot; service alias is deprecated. You should stop using it, as it will be removed in the future --&gt;</span>
+            <span class="nt">&lt;deprecated</span> <span class="na">package=</span><span class="s">&quot;acme/package&quot;</span> <span class="na">version=</span><span class="s">&quot;1.2&quot;</span><span class="nt">/&gt;</span>
+
+            <span class="c">&lt;!-- you can also define a custom deprecation message (%alias_id% placeholder is available) --&gt;</span>
+            <span class="nt">&lt;deprecated</span> <span class="na">package=</span><span class="s">&quot;acme/package&quot;</span> <span class="na">version=</span><span class="s">&quot;1.2&quot;</span><span class="nt">&gt;</span>
+                The &quot;%alias_id%&quot; service alias is deprecated. Don&#39;t use it anymore.
+            <span class="nt">&lt;/deprecated&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nv">$container</span>
+    <span class="o">-&gt;</span><span class="na">setAlias</span><span class="p">(</span><span class="s1">&#39;app.mailer&#39;</span><span class="p">,</span> <span class="s1">&#39;App\Mail\PhpMailer&#39;</span><span class="p">)</span>
+
+    <span class="c1">// this outputs the following generic deprecation message:</span>
+    <span class="c1">// Since acme/package 1.2: The &quot;app.mailer&quot; service alias is deprecated. You should stop using it, as it will be removed in the future</span>
+    <span class="o">-&gt;</span><span class="na">setDeprecated</span><span class="p">(</span><span class="s1">&#39;acme/package&#39;</span><span class="p">,</span> <span class="s1">&#39;1.2&#39;</span><span class="p">)</span>
+
+    <span class="c1">// you can also define a custom deprecation message (%alias_id% placeholder is available)</span>
+    <span class="o">-&gt;</span><span class="na">setDeprecated</span><span class="p">(</span>
+        <span class="s1">&#39;acme/package&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;1.2&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;The &quot;%alias_id%&quot; service alias is deprecated. Don\&#39;t use it anymore.&#39;</span>
+    <span class="p">)</span>
+<span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Now, every time this service alias is used, a deprecation warning is triggered,
+advising you to stop or to change your uses of that alias.</p>
+<p>The message is actually a message template, which replaces occurrences of the
+<code class="docutils literal notranslate"><span class="pre">%alias_id%</span></code> placeholder by the service alias id. You <strong>must</strong> have at least
+one occurrence of the <code class="docutils literal notranslate"><span class="pre">%alias_id%</span></code> placeholder in your template.</p>
+</div>
+</div>
+<div class="section" id="anonymous-services">
+<h2>Anonymous Services<a class="headerlink" href="#anonymous-services" title="Permalink to this headline">¶</a></h2>
+<p>In some cases, you may want to prevent a service being used as a dependency of
+other services. This can be achieved by creating an anonymous service. These
+services are like regular services but they don’t define an ID and they are
+created where they are used.</p>
+<p>The following example shows how to inject an anonymous service into another service:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">App\Foo</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="kt">!service</span>
+                <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\AnonymousBar</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;foo&quot;</span> <span class="na">class=</span><span class="s">&quot;App\Foo&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;argument</span> <span class="na">type=</span><span class="s">&quot;service&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;service</span> <span class="na">class=</span><span class="s">&quot;App\AnonymousBar&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/argument&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\AnonymousBar</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Foo</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$services</span> <span class="o">=</span> <span class="nv">$configurator</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">();</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">Foo</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="c1">// In versions earlier to Symfony 5.1 the inline_service() function was called inline()</span>
+        <span class="o">-&gt;</span><span class="na">args</span><span class="p">([</span><span class="nx">inline_service</span><span class="p">(</span><span class="nx">AnonymousBar</span><span class="o">::</span><span class="na">class</span><span class="p">)])</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Anonymous services do <em>NOT</em> inherit the definitions provided from the
+defaults defined in the configuration. So you’ll need to explicitly mark
+service as autowired or autoconfigured when doing an anonymous service
+e.g.: <code class="docutils literal notranslate"><span class="pre">inline_service(Foo::class)-&gt;autowire()-&gt;autoconfigure()</span></code>.</p>
+</div>
+<p>Using an anonymous service as a factory looks like this:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">App\Foo</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">factory</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span> <span class="kt">!service</span> <span class="p p-Indicator">{</span> <span class="nv">class</span><span class="p p-Indicator">:</span> <span class="nv">App\FooFactory</span> <span class="p p-Indicator">},</span> <span class="s">&#39;constructFoo&#39;</span> <span class="p p-Indicator">]</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;foo&quot;</span> <span class="na">class=</span><span class="s">&quot;App\Foo&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;factory</span> <span class="na">method=</span><span class="s">&quot;constructFoo&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;service</span> <span class="na">class=</span><span class="s">&quot;App\FooFactory&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/factory&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\AnonymousBar</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Foo</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$services</span> <span class="o">=</span> <span class="nv">$configurator</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">();</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">Foo</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">factory</span><span class="p">([</span><span class="nx">inline_service</span><span class="p">(</span><span class="nx">AnonymousBar</span><span class="o">::</span><span class="na">class</span><span class="p">),</span> <span class="s1">&#39;constructFoo&#39;</span><span class="p">])</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="deprecating-services">
+<h2>Deprecating Services<a class="headerlink" href="#deprecating-services" title="Permalink to this headline">¶</a></h2>
+<p>Once you have decided to deprecate the use of a service (because it is outdated
+or you decided not to maintain it anymore), you can deprecate its definition:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">App\Service\OldService</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">deprecated</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">The &quot;%service_id%&quot; service is deprecated since vendor-name/package-name 2.8 and will be removed in 3.0.</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-Instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\Service\OldService&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;deprecated&gt;</span>The &quot;%service_id%&quot; service is deprecated since vendor-name/package-name 2.8 and will be removed in 3.0.<span class="nt">&lt;/deprecated&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Service\OldService</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$services</span> <span class="o">=</span> <span class="nv">$configurator</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">();</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">OldService</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">deprecate</span><span class="p">(</span><span class="s1">&#39;The &quot;%service_id%&quot; service is deprecated since vendor-name/package-name 2.8 and will be removed in 3.0.&#39;</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Now, every time this service is used, a deprecation warning is triggered,
+advising you to stop or to change your uses of that service.</p>
+<p>The message is actually a message template, which replaces occurrences of the
+<code class="docutils literal notranslate"><span class="pre">%service_id%</span></code> placeholder by the service’s id. You <strong>must</strong> have at least one
+occurrence of the <code class="docutils literal notranslate"><span class="pre">%service_id%</span></code> placeholder in your template.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The deprecation message is optional. If not set, Symfony will show this default
+message: <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">&quot;%service_id%&quot;</span> <span class="pre">service</span> <span class="pre">is</span> <span class="pre">deprecated.</span> <span class="pre">You</span> <span class="pre">should</span> <span class="pre">stop</span> <span class="pre">using</span> <span class="pre">it,</span>
+<span class="pre">as</span> <span class="pre">it</span> <span class="pre">will</span> <span class="pre">soon</span> <span class="pre">be</span> <span class="pre">removed.</span></code>.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">It is strongly recommended that you define a custom message because the
+default one is too generic. A good message informs when this service was
+deprecated, until when it will be maintained and the alternative services
+to use (if any).</p>
+</div>
+<p>For service decorators (see <a class="reference internal" href="service_decoration.html"><span class="doc">How to Decorate Services</span></a>), if the
+definition does not modify the deprecated status, it will inherit the status from
+the definition that is decorated.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,786 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Create Friendly Configuration for a Bundle &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Load Service Configuration inside a Bundle" href="extension.html" />
+    <link rel="prev" title="Loading Resources" href="../components/config/resources.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../components/index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../components/using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/cache.html">The Cache Component</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../components/config.html">The Config Component</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../components/config.html#installation">Installation</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../components/config.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../components/config/caching.html">Caching based on Resources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/config/definition.html">Defining and Processing Configuration Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../components/config/resources.html">Loading Resources</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">How to Create Friendly Configuration for a Bundle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extension.html">How to Load Service Configuration inside a Bundle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="prepend_extension.html">How to Simplify Configuration of Multiple Bundles</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/dependency_injection.html">The DependencyInjection Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/form.html">The Form Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/process.html">The Process Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/security.html">The Security Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../components/index.html">The Components</a> &raquo;</li>
+        
+          <li><a href="../components/config.html">The Config Component</a> &raquo;</li>
+        
+      <li>How to Create Friendly Configuration for a Bundle</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/bundles/configuration.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-create-friendly-configuration-for-a-bundle">
+<span id="index-0"></span><h1>How to Create Friendly Configuration for a Bundle<a class="headerlink" href="#how-to-create-friendly-configuration-for-a-bundle" title="Permalink to this headline">¶</a></h1>
+<p>If you open your main application configuration directory (usually
+<code class="docutils literal notranslate"><span class="pre">config/packages/</span></code>), you’ll see a number of different files, such as
+<code class="docutils literal notranslate"><span class="pre">framework.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">twig.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">doctrine.yaml</span></code>. Each of these
+configures a specific bundle, allowing you to define options at a high level and
+then let the bundle make all the low-level, complex changes based on your
+settings.</p>
+<p>For example, the following configuration tells the FrameworkBundle to enable the
+form integration, which involves the definition of quite a few services as well
+as integration of other related components:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">form</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:form/&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;form&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="section" id="using-the-bundle-extension">
+<h2>Using the Bundle Extension<a class="headerlink" href="#using-the-bundle-extension" title="Permalink to this headline">¶</a></h2>
+<p>Imagine you are creating a new bundle - AcmeSocialBundle - which provides
+integration with Twitter. To make your bundle configurable to the user, you
+can add some configuration that looks like this:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/acme_social.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">acme_social</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">twitter</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">client_id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">123</span>
+        <span class="l l-Scalar l-Scalar-Plain">client_secret</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">your_secret</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/acme_social.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:acme-social=</span><span class="s">&quot;http://example.org/schema/dic/acme_social&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;acme-social:config&gt;</span>
+        <span class="nt">&lt;acme-social:twitter</span> <span class="na">client-id=</span><span class="s">&quot;123&quot;</span> <span class="na">client-secret=</span><span class="s">&quot;your_secret&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/acme-social:config&gt;</span>
+
+    <span class="c">&lt;!-- ... --&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/acme_social.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;acme_social&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;twitter&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;client_id&#39;</span>     <span class="o">=&gt;</span> <span class="mi">123</span><span class="p">,</span>
+        <span class="s1">&#39;client_secret&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;your_secret&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>The basic idea is that instead of having the user override individual
+parameters, you let the user configure just a few, specifically created,
+options. As the bundle developer, you then parse through that configuration and
+load correct services and parameters inside an “Extension” class.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The root key of your bundle configuration (<code class="docutils literal notranslate"><span class="pre">acme_social</span></code> in the previous
+example) is automatically determined from your bundle name (it’s the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Snake_case">snake case</a> of the bundle name without the <code class="docutils literal notranslate"><span class="pre">Bundle</span></code> suffix ).</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Read more about the extension in <a class="reference internal" href="extension.html"><span class="doc">How to Load Service Configuration inside a Bundle</span></a>.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If a bundle provides an Extension class, then you should <em>not</em> generally
+override any service container parameters from that bundle. The idea
+is that if an Extension class is present, every setting that should be
+configurable should be present in the configuration made available by
+that class. In other words, the extension class defines all the public
+configuration settings for which backward compatibility will be maintained.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">For parameter handling within a dependency injection container see
+<a class="reference internal" href="../configuration/using_parameters_in_dic.html"><span class="doc">Using Parameters within a Dependency Injection Class</span></a>.</p>
+</div>
+<div class="section" id="processing-the-configs-array">
+<h3>Processing the <code class="docutils literal notranslate"><span class="pre">$configs</span></code> Array<a class="headerlink" href="#processing-the-configs-array" title="Permalink to this headline">¶</a></h3>
+<p>First things first, you have to create an extension class as explained in
+<a class="reference internal" href="extension.html"><span class="doc">How to Load Service Configuration inside a Bundle</span></a>.</p>
+<p>Whenever a user includes the <code class="docutils literal notranslate"><span class="pre">acme_social</span></code> key (which is the DI alias) in a
+configuration file, the configuration under it is added to an array of
+configurations and passed to the <code class="docutils literal notranslate"><span class="pre">load()</span></code> method of your extension (Symfony
+automatically converts XML and YAML to an array).</p>
+<p>For the configuration example in the previous section, the array passed to your
+<code class="docutils literal notranslate"><span class="pre">load()</span></code> method will look like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;twitter&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;client_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">123</span><span class="p">,</span>
+            <span class="s1">&#39;client_secret&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;your_secret&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Notice that this is an <em>array of arrays</em>, not just a single flat array of the
+configuration values. This is intentional, as it allows Symfony to parse several
+configuration resources. For example, if <code class="docutils literal notranslate"><span class="pre">acme_social</span></code> appears in another
+configuration file - say <code class="docutils literal notranslate"><span class="pre">config/packages/dev/acme_social.yaml</span></code> - with
+different values beneath it, the incoming array might look like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="c1">// values from config/packages/acme_social.yaml</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;twitter&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;client_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">123</span><span class="p">,</span>
+            <span class="s1">&#39;client_secret&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;your_secret&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+    <span class="c1">// values from config/packages/dev/acme_social.yaml</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;twitter&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;client_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">456</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>The order of the two arrays depends on which one is set first.</p>
+<p>But don’t worry! Symfony’s Config component will help you merge these values,
+provide defaults and give the user validation errors on bad configuration.
+Here’s how it works. Create a <code class="docutils literal notranslate"><span class="pre">Configuration</span></code> class in the
+<code class="docutils literal notranslate"><span class="pre">DependencyInjection</span></code> directory and build a tree that defines the structure
+of your bundle’s configuration.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Configuration</span></code> class to handle the sample configuration looks like:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Acme/SocialBundle/DependencyInjection/Configuration.php</span>
+<span class="k">namespace</span> <span class="nx">Acme\SocialBundle\DependencyInjection</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Config\Definition\Builder\TreeBuilder</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Config\Definition\ConfigurationInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Configuration</span> <span class="k">implements</span> <span class="nx">ConfigurationInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getConfigTreeBuilder</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$treeBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TreeBuilder</span><span class="p">(</span><span class="s1">&#39;acme_social&#39;</span><span class="p">);</span>
+
+        <span class="nv">$treeBuilder</span><span class="o">-&gt;</span><span class="na">getRootNode</span><span class="p">()</span>
+            <span class="o">-&gt;</span><span class="na">children</span><span class="p">()</span>
+                <span class="o">-&gt;</span><span class="na">arrayNode</span><span class="p">(</span><span class="s1">&#39;twitter&#39;</span><span class="p">)</span>
+                    <span class="o">-&gt;</span><span class="na">children</span><span class="p">()</span>
+                        <span class="o">-&gt;</span><span class="na">integerNode</span><span class="p">(</span><span class="s1">&#39;client_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">()</span>
+                        <span class="o">-&gt;</span><span class="na">scalarNode</span><span class="p">(</span><span class="s1">&#39;client_secret&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">()</span>
+                    <span class="o">-&gt;</span><span class="na">end</span><span class="p">()</span>
+                <span class="o">-&gt;</span><span class="na">end</span><span class="p">()</span> <span class="c1">// twitter</span>
+            <span class="o">-&gt;</span><span class="na">end</span><span class="p">()</span>
+        <span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$treeBuilder</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">Configuration</span></code> class can be much more complicated than shown here,
+supporting “prototype” nodes, advanced validation, XML-specific normalization
+and advanced merging. You can read more about this in
+<a class="reference internal" href="../components/config/definition.html"><span class="doc">the Config component documentation</span></a>. You
+can also see it in action by checking out some core Configuration
+classes, such as the one from the <a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/FrameworkBundle/DependencyInjection/Configuration.php">FrameworkBundle Configuration</a> or the
+<a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/TwigBundle/DependencyInjection/Configuration.php">TwigBundle Configuration</a>.</p>
+</div>
+<p>This class can now be used in your <code class="docutils literal notranslate"><span class="pre">load()</span></code> method to merge configurations and
+force validation (e.g. if an additional option was passed, an exception will be
+thrown):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Acme/SocialBundle/DependencyInjection/AcmeSocialExtension.php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">load</span><span class="p">(</span><span class="k">array</span> <span class="nv">$configs</span><span class="p">,</span> <span class="nx">ContainerBuilder</span> <span class="nv">$container</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$configuration</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Configuration</span><span class="p">();</span>
+
+    <span class="nv">$config</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">processConfiguration</span><span class="p">(</span><span class="nv">$configuration</span><span class="p">,</span> <span class="nv">$configs</span><span class="p">);</span>
+
+    <span class="c1">// you now have these 2 config keys</span>
+    <span class="c1">// $config[&#39;twitter&#39;][&#39;client_id&#39;] and $config[&#39;twitter&#39;][&#39;client_secret&#39;]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">processConfiguration()</span></code> method uses the configuration tree you’ve defined
+in the <code class="docutils literal notranslate"><span class="pre">Configuration</span></code> class to validate, normalize and merge all the
+configuration arrays together.</p>
+<p>Now, you can use the <code class="docutils literal notranslate"><span class="pre">$config</span></code> variable to modify a service provided by your bundle.
+For example, imagine your bundle has the following example config:</p>
+<div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- src/Acme/SocialBundle/Resources/config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;acme.social.twitter_client&quot;</span> <span class="na">class=</span><span class="s">&quot;Acme\SocialBundle\TwitterClient&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;argument&gt;&lt;/argument&gt;</span> <span class="c">&lt;!-- will be filled in with client_id dynamically --&gt;</span>
+            <span class="nt">&lt;argument&gt;&lt;/argument&gt;</span> <span class="c">&lt;!-- will be filled in with client_secret dynamically --&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>In your extension, you can load this and dynamically set its arguments:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Acme/SocialBundle/DependencyInjection/AcmeSocialExtension.php</span>
+<span class="c1">// ...</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Config\FileLocator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\XmlFileLoader</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">load</span><span class="p">(</span><span class="k">array</span> <span class="nv">$configs</span><span class="p">,</span> <span class="nx">ContainerBuilder</span> <span class="nv">$container</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XmlFileLoader</span><span class="p">(</span><span class="nv">$container</span><span class="p">,</span> <span class="k">new</span> <span class="nx">FileLocator</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="no">__DIR__</span><span class="p">)</span><span class="o">.</span><span class="s1">&#39;/Resources/config&#39;</span><span class="p">));</span>
+    <span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;services.xml&#39;</span><span class="p">);</span>
+
+    <span class="nv">$configuration</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Configuration</span><span class="p">();</span>
+    <span class="nv">$config</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">processConfiguration</span><span class="p">(</span><span class="nv">$configuration</span><span class="p">,</span> <span class="nv">$configs</span><span class="p">);</span>
+
+    <span class="nv">$definition</span> <span class="o">=</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="na">getDefinition</span><span class="p">(</span><span class="s1">&#39;acme.social.twitter_client&#39;</span><span class="p">);</span>
+    <span class="nv">$definition</span><span class="o">-&gt;</span><span class="na">replaceArgument</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;twitter&#39;</span><span class="p">][</span><span class="s1">&#39;client_id&#39;</span><span class="p">]);</span>
+    <span class="nv">$definition</span><span class="o">-&gt;</span><span class="na">replaceArgument</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;twitter&#39;</span><span class="p">][</span><span class="s1">&#39;client_secret&#39;</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>Instead of calling <code class="docutils literal notranslate"><span class="pre">processConfiguration()</span></code> in your extension each time you
+provide some configuration options, you might want to use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/DependencyInjection/ConfigurableExtension.php" title="Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension"><span class="pre">ConfigurableExtension</span></a></code>
+to do this automatically for you:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Acme/HelloBundle/DependencyInjection/AcmeHelloExtension.php</span>
+<span class="k">namespace</span> <span class="nx">Acme\HelloBundle\DependencyInjection</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">AcmeHelloExtension</span> <span class="k">extends</span> <span class="nx">ConfigurableExtension</span>
+<span class="p">{</span>
+    <span class="c1">// note that this method is called loadInternal and not load</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">loadInternal</span><span class="p">(</span><span class="k">array</span> <span class="nv">$mergedConfig</span><span class="p">,</span> <span class="nx">ContainerBuilder</span> <span class="nv">$container</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="last">This class uses the <code class="docutils literal notranslate"><span class="pre">getConfiguration()</span></code> method to get the Configuration
+instance.</p>
+</div>
+<div class="sidebar">
+<p class="first sidebar-title">Processing the Configuration yourself</p>
+<p>Using the Config component is fully optional. The <code class="docutils literal notranslate"><span class="pre">load()</span></code> method gets an
+array of configuration values. You can instead parse these arrays yourself
+(e.g. by overriding configurations and using <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.isset.php" title="isset"><span class="pre">isset</span></a></code> to check
+for the existence of a value). Be aware that it’ll be very hard to support XML:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">load</span><span class="p">(</span><span class="k">array</span> <span class="nv">$configs</span><span class="p">,</span> <span class="nx">ContainerBuilder</span> <span class="nv">$container</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$config</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="c1">// let resources override the previous set value</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$configs</span> <span class="k">as</span> <span class="nv">$subConfig</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$config</span> <span class="o">=</span> <span class="nb">array_merge</span><span class="p">(</span><span class="nv">$config</span><span class="p">,</span> <span class="nv">$subConfig</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ... now use the flat $config array</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="modifying-the-configuration-of-another-bundle">
+<h2>Modifying the Configuration of Another Bundle<a class="headerlink" href="#modifying-the-configuration-of-another-bundle" title="Permalink to this headline">¶</a></h2>
+<p>If you have multiple bundles that depend on each other, it may be useful to
+allow one <code class="docutils literal notranslate"><span class="pre">Extension</span></code> class to modify the configuration passed to another
+bundle’s <code class="docutils literal notranslate"><span class="pre">Extension</span></code> class. This can be achieved using a prepend extension.
+For more details, see <a class="reference internal" href="prepend_extension.html"><span class="doc">How to Simplify Configuration of Multiple Bundles</span></a>.</p>
+</div>
+<div class="section" id="dump-the-configuration">
+<h2>Dump the Configuration<a class="headerlink" href="#dump-the-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">config:dump-reference</span></code> command dumps the default configuration of a
+bundle in the console using the Yaml format.</p>
+<p>As long as your bundle’s configuration is located in the standard location
+(<code class="docutils literal notranslate"><span class="pre">YourBundle\DependencyInjection\Configuration</span></code>) and does not have
+a constructor it will work automatically. If you
+have something different, your <code class="docutils literal notranslate"><span class="pre">Extension</span></code> class must override the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/DependencyInjection/Extension.php" title="Symfony\Component\HttpKernel\DependencyInjection\Extension::getConfiguration()"><span class="pre">Extension::getConfiguration()</span></a></code>
+method and return an instance of your <code class="docutils literal notranslate"><span class="pre">Configuration</span></code>.</p>
+</div>
+<div class="section" id="supporting-xml">
+<h2>Supporting XML<a class="headerlink" href="#supporting-xml" title="Permalink to this headline">¶</a></h2>
+<p>Symfony allows people to provide the configuration in three different formats:
+Yaml, XML and PHP. Both Yaml and PHP use the same syntax and are supported by
+default when using the Config component. Supporting XML requires you to do some
+more things. But when sharing your bundle with others, it is recommended that
+you follow these steps.</p>
+<div class="section" id="make-your-config-tree-ready-for-xml">
+<h3>Make your Config Tree ready for XML<a class="headerlink" href="#make-your-config-tree-ready-for-xml" title="Permalink to this headline">¶</a></h3>
+<p>The Config component provides some methods by default to allow it to correctly
+process XML configuration. See “<a class="reference internal" href="../components/config/definition.html#component-config-normalization"><span class="std std-ref">Normalization</span></a>” of the
+component documentation. However, you can do some optional things as well, this
+will improve the experience of using XML configuration:</p>
+</div>
+<div class="section" id="choosing-an-xml-namespace">
+<h3>Choosing an XML Namespace<a class="headerlink" href="#choosing-an-xml-namespace" title="Permalink to this headline">¶</a></h3>
+<p>In XML, the <a class="reference external" href="https://en.wikipedia.org/wiki/XML_namespace">XML namespace</a> is used to determine which elements belong to the
+configuration of a specific bundle. The namespace is returned from the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DependencyInjection/Extension/Extension.php" title="Symfony\Component\DependencyInjection\Extension\Extension::getNamespace()"><span class="pre">Extension::getNamespace()</span></a></code>
+method. By convention, the namespace is a URL (it doesn’t have to be a valid
+URL nor does it need to exists). By default, the namespace for a bundle is
+<code class="docutils literal notranslate"><span class="pre">http://example.org/schema/dic/DI_ALIAS</span></code>, where <code class="docutils literal notranslate"><span class="pre">DI_ALIAS</span></code> is the DI alias of
+the extension. You might want to change this to a more professional URL:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Acme/HelloBundle/DependencyInjection/AcmeHelloExtension.php</span>
+
+<span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">AcmeHelloExtension</span> <span class="k">extends</span> <span class="nx">Extension</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getNamespace</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;http://acme_company.com/schema/dic/hello&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="providing-an-xml-schema">
+<h3>Providing an XML Schema<a class="headerlink" href="#providing-an-xml-schema" title="Permalink to this headline">¶</a></h3>
+<p>XML has a very useful feature called <a class="reference external" href="https://en.wikipedia.org/wiki/XML_schema">XML schema</a>. This allows you to
+describe all possible elements and attributes and their values in an XML Schema
+Definition (an XSD file). This XSD file is used by IDEs for auto completion and
+it is used by the Config component to validate the elements.</p>
+<p>In order to use the schema, the XML configuration file must provide an
+<code class="docutils literal notranslate"><span class="pre">xsi:schemaLocation</span></code> attribute pointing to the XSD file for a certain XML
+namespace. This location always starts with the XML namespace. This XML
+namespace is then replaced with the XSD validation base path returned from
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DependencyInjection/Extension/ExtensionInterface.php" title="Symfony\Component\DependencyInjection\Extension\ExtensionInterface::getXsdValidationBasePath()"><span class="pre">Extension::getXsdValidationBasePath()</span></a></code>
+method. This namespace is then followed by the rest of the path from the base
+path to the file itself.</p>
+<p>By convention, the XSD file lives in the <code class="docutils literal notranslate"><span class="pre">Resources/config/schema/</span></code>, but you
+can place it anywhere you like. You should return this path as the base path:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Acme/HelloBundle/DependencyInjection/AcmeHelloExtension.php</span>
+
+<span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">AcmeHelloExtension</span> <span class="k">extends</span> <span class="nx">Extension</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getXsdValidationBasePath</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../Resources/config/schema&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Assuming the XSD file is called <code class="docutils literal notranslate"><span class="pre">hello-1.0.xsd</span></code>, the schema location will be
+<code class="docutils literal notranslate"><span class="pre">https://acme_company.com/schema/dic/hello/hello-1.0.xsd</span></code>:</p>
+<div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/acme_hello.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:acme-hello=</span><span class="s">&quot;http://acme_company.com/schema/dic/hello&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://acme_company.com/schema/dic/hello</span>
+<span class="s">        https://acme_company.com/schema/dic/hello/hello-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;acme-hello:config&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;/acme-hello:config&gt;</span>
+
+    <span class="c">&lt;!-- ... --&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

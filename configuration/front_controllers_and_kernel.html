@@ -1,0 +1,533 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Understanding how the Front Controller, Kernel and Environments Work together &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Building your own Framework with the MicroKernelTrait" href="micro_kernel_trait.html" />
+    <link rel="prev" title="Environment Variable Processors" href="env_var_processors.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../getting_started/index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../page_creation.html">Create your First Page in Symfony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controller.html">Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../templates.html">Creating and Using Templates</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../configuration.html">Configuring Symfony</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-files">Configuration Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-parameters">Configuration Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-environments">Configuration Environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-based-on-environment-variables">Configuration Based on Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#accessing-configuration-parameters">Accessing Configuration Parameters</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../configuration.html#keep-going">Keep Going!</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dot-env-changes.html">Nov 2018 Changes to .env &amp; How to Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="env_var_processors.html">Environment Variable Processors</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Understanding how the Front Controller, Kernel and Environments Work together</a></li>
+<li class="toctree-l4"><a class="reference internal" href="micro_kernel_trait.html">Building your own Framework with the MicroKernelTrait</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multiple_kernels.html">How To Create Symfony Applications with Multiple Kernels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="override_dir_structure.html">How to Override Symfony’s default Directory Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="secrets.html">How to Keep Sensitive Information Secret</a></li>
+<li class="toctree-l4"><a class="reference internal" href="using_parameters_in_dic.html">Using Parameters within a Dependency Injection Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../getting_started/index.html">Getting Started</a> &raquo;</li>
+        
+          <li><a href="../configuration.html">Configuring Symfony</a> &raquo;</li>
+        
+      <li>Understanding how the Front Controller, Kernel and Environments Work together</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/configuration/front_controllers_and_kernel.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="understanding-how-the-front-controller-kernel-and-environments-work-together">
+<span id="index-0"></span><h1>Understanding how the Front Controller, Kernel and Environments Work together<a class="headerlink" href="#understanding-how-the-front-controller-kernel-and-environments-work-together" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="../configuration.html#configuration-environments"><span class="std std-ref">configuration environments</span></a> section
+explained the basics on how Symfony uses environments to run your application
+with different configuration settings. This section will explain a bit more
+in-depth what happens when your application is bootstrapped. To hook into this
+process, you need to understand three parts that work together:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#the-front-controller">The Front Controller</a></li>
+<li><a class="reference internal" href="#the-kernel-class">The Kernel Class</a></li>
+<li><a class="reference internal" href="#the-environments">The Environments</a></li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Usually, you will not need to define your own front controller or
+<code class="docutils literal notranslate"><span class="pre">Kernel</span></code> class as Symfony provides sensible default implementations.
+This article is provided to explain what is going on behind the scenes.</p>
+</div>
+<div class="section" id="the-front-controller">
+<span id="architecture-front-controller"></span><h2>The Front Controller<a class="headerlink" href="#the-front-controller" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Front_Controller_pattern">front controller</a> is a design pattern; it is a section of code that <em>all</em>
+requests served by an application run through.</p>
+<p>In the Symfony Skeleton, this role is taken by the <code class="docutils literal notranslate"><span class="pre">index.php</span></code> file in the
+<code class="docutils literal notranslate"><span class="pre">public/</span></code> directory. This is the very first PHP script executed when a
+request is processed.</p>
+<p>The main purpose of the front controller is to create an instance of the
+<code class="docutils literal notranslate"><span class="pre">Kernel</span></code> (more on that in a second), make it handle the request and return
+the resulting response to the browser.</p>
+<p>Because every request is routed through it, the front controller can be
+used to perform global initialization prior to setting up the kernel or
+to <a class="reference external" href="https://en.wikipedia.org/wiki/Decorator_pattern">decorate</a> the kernel with additional features. Examples include:</p>
+<ul class="simple">
+<li>Configuring the autoloader or adding additional autoloading mechanisms;</li>
+<li>Adding HTTP level caching by wrapping the kernel with an instance of
+<a class="reference internal" href="../http_cache.html#symfony-gateway-cache"><span class="std std-ref">HttpCache</span></a>;</li>
+<li>Enabling the <a class="reference external" href="https://github.com/symfony/debug">Debug component</a>.</li>
+</ul>
+<p>You can choose the front controller that’s used by adding it in the URL, like:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>http://localhost/index.php/some/path/...
+</pre></div>
+</td></tr></table></div>
+<p>As you can see, this URL contains the PHP script to be used as the front
+controller. You can use that to switch to a custom made front controller
+that is located in the <code class="docutils literal notranslate"><span class="pre">public/</span></code> directory.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">You almost never want to show the front controller in the URL. This is
+achieved by configuring the web server, as shown in
+<a class="reference internal" href="../setup/web_server_configuration.html"><span class="doc">Configuring a Web Server</span></a>.</p>
+</div>
+<p>Technically, the <code class="docutils literal notranslate"><span class="pre">bin/console</span></code> script used when running Symfony on the command
+line is also a front controller, only that is not used for web, but for command
+line requests.</p>
+</div>
+<div class="section" id="the-kernel-class">
+<h2>The Kernel Class<a class="headerlink" href="#the-kernel-class" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Kernel.php" title="Symfony\Component\HttpKernel\Kernel"><span class="pre">Kernel</span></a></code> is the core of
+Symfony. It is responsible for setting up all the bundles used by
+your application and providing them with the application’s configuration.
+It then creates the service container before serving requests in its
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/HttpKernelInterface.php" title="Symfony\Component\HttpKernel\HttpKernelInterface::handle()"><span class="pre">handle()</span></a></code>
+method.</p>
+<p>The kernel used in Symfony applications extends from <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Kernel.php" title="Symfony\Component\HttpKernel\Kernel"><span class="pre">Kernel</span></a></code>
+and uses the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/FrameworkBundle/Kernel/MicroKernelTrait.php" title="Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait"><span class="pre">MicroKernelTrait</span></a></code>.
+The <code class="docutils literal notranslate"><span class="pre">Kernel</span></code> class leaves some methods from <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/KernelInterface.php" title="Symfony\Component\HttpKernel\KernelInterface"><span class="pre">KernelInterface</span></a></code>
+unimplemented and the <code class="docutils literal notranslate"><span class="pre">MicroKernelTrait</span></code> defines several abstract methods, so
+you must implement them all:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/KernelInterface.php" title="Symfony\Component\HttpKernel\KernelInterface::registerBundles()"><span class="pre">registerBundles()</span></a></code></dt>
+<dd>It must return an array of all bundles needed to run the application.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/FrameworkBundle/Kernel/MicroKernelTrait.php" title="Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait::configureRoutes()"><span class="pre">configureRoutes()</span></a></code></dt>
+<dd>It adds individual routes or collections of routes to the application (for
+example loading the routes defined in some config file).</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/FrameworkBundle/Kernel/MicroKernelTrait.php" title="Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait::configureContainer()"><span class="pre">configureContainer()</span></a></code></dt>
+<dd>It loads the application configuration from config files or using the
+<code class="docutils literal notranslate"><span class="pre">loadFromExtension()</span></code> method and can also register new container parameters
+and services.</dd>
+</dl>
+<p>To fill these (small) blanks, your application needs to extend the Kernel class
+and use the MicroKernelTrait to implement these methods. Symfony provides by
+default that kernel in the <code class="docutils literal notranslate"><span class="pre">src/Kernel.php</span></code> file.</p>
+<p>This class uses the name of the environment - which is passed to the Kernel’s
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Kernel.php" title="Symfony\Component\HttpKernel\Kernel::__construct()"><span class="pre">constructor</span></a></code>
+method and is available via <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Kernel.php" title="Symfony\Component\HttpKernel\Kernel::getEnvironment()"><span class="pre">getEnvironment()</span></a></code> -
+to decide which bundles to enable. The logic for that is in <code class="docutils literal notranslate"><span class="pre">registerBundles()</span></code>.</p>
+<p>You are free to create your own, alternative or additional <code class="docutils literal notranslate"><span class="pre">Kernel</span></code> variants.
+All you need is to adapt your (or add a new) front controller to make use of the
+new kernel.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The name and location of the <code class="docutils literal notranslate"><span class="pre">Kernel</span></code> is not fixed. When putting
+<a class="reference internal" href="multiple_kernels.html"><span class="doc">multiple kernels into a single application</span></a>,
+it might therefore make sense to add additional sub-directories, for example
+<code class="docutils literal notranslate"><span class="pre">src/admin/AdminKernel.php</span></code> and <code class="docutils literal notranslate"><span class="pre">src/api/ApiKernel.php</span></code>. All that matters
+is that your front controller is able to create an instance of the appropriate kernel.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There’s a lot more the <code class="docutils literal notranslate"><span class="pre">Kernel</span></code> can be used for, for example
+<a class="reference internal" href="override_dir_structure.html"><span class="doc">overriding the default directory structure</span></a>.
+But odds are high that you don’t need to change things like this on the
+fly by having several <code class="docutils literal notranslate"><span class="pre">Kernel</span></code> implementations.</p>
+</div>
+<div class="section" id="debug-mode">
+<span id="index-1"></span><span id="id1"></span><h3>Debug Mode<a class="headerlink" href="#debug-mode" title="Permalink to this headline">¶</a></h3>
+<p>The second argument to the <code class="docutils literal notranslate"><span class="pre">Kernel</span></code> constructor specifies if the application
+should run in “debug mode”. Regardless of the
+<a class="reference internal" href="../configuration.html#configuration-environments"><span class="std std-ref">configuration environment</span></a>, a Symfony
+application can be run with debug mode set to <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<p>This affects many things in the application, such as displaying stacktraces on
+error pages or if cache files are dynamically rebuilt on each request. Though
+not a requirement, debug mode is generally set to <code class="docutils literal notranslate"><span class="pre">true</span></code> for the <code class="docutils literal notranslate"><span class="pre">dev</span></code> and
+<code class="docutils literal notranslate"><span class="pre">test</span></code> environments and <code class="docutils literal notranslate"><span class="pre">false</span></code> for the <code class="docutils literal notranslate"><span class="pre">prod</span></code> environment.</p>
+<p>Similar to <a class="reference internal" href="../configuration.html#selecting-the-active-environment"><span class="std std-ref">configuring the environment</span></a>
+you can also enable/disable the debug mode using <a class="reference internal" href="../configuration.html#config-dot-env"><span class="std std-ref">the .env file</span></a>:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># .env</span>
+<span class="c1"># set it to 1 to enable the debug mode</span>
+<span class="nv">APP_DEBUG</span><span class="o">=</span><span class="m">0</span>
+</pre></div>
+</td></tr></table></div>
+<p>This value can be overridden for commands by passing the <code class="docutils literal notranslate"><span class="pre">APP_DEBUG</span></code> value
+before running them:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># Use the debug mode defined in the .env file</span>
+<span class="gp">$</span> php bin/console command_name
+
+<span class="c1"># Ignore the .env file and enable the debug mode for this command</span>
+<span class="gp">$</span> <span class="nv">APP_DEBUG</span><span class="o">=</span><span class="m">1</span> php bin/console command_name
+</pre></div>
+</td></tr></table></div>
+<p>Internally, the value of the debug mode becomes the <code class="docutils literal notranslate"><span class="pre">kernel.debug</span></code>
+parameter used inside the <a class="reference internal" href="../service_container.html"><span class="doc">service container</span></a>.
+If you look inside the application configuration file, you’ll see the
+parameter used, for example, to turn Twig’s debug mode on:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/twig.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">twig</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">debug</span><span class="p p-Indicator">:</span> <span class="s">&#39;%kernel.debug%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:twig=</span><span class="s">&quot;http://symfony.com/schema/dic/twig&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/twig</span>
+<span class="s">        https://symfony.com/schema/dic/twig/twig-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;twig:config</span> <span class="na">debug=</span><span class="s">&quot;%kernel.debug%&quot;</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;twig&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;debug&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%kernel.debug%&#39;</span><span class="p">,</span>
+    <span class="c1">// ...</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="the-environments">
+<h2>The Environments<a class="headerlink" href="#the-environments" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned above, the <code class="docutils literal notranslate"><span class="pre">Kernel</span></code> has to implement another method -
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/FrameworkBundle/Kernel/MicroKernelTrait.php" title="Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait::configureContainer()"><span class="pre">configureContainer()</span></a></code>.
+This method is responsible for loading the application’s configuration from the
+right <em>environment</em>.</p>
+<p><a class="reference internal" href="../configuration.html#configuration-environments"><span class="std std-ref">Configuration environments</span></a> allow to execute
+the same code using different configuration. Symfony provides three environments
+by default called <code class="docutils literal notranslate"><span class="pre">dev</span></code>, <code class="docutils literal notranslate"><span class="pre">prod</span></code> and <code class="docutils literal notranslate"><span class="pre">test</span></code>.</p>
+<p>More technically, these names are nothing more than strings passed from the
+front controller to the <code class="docutils literal notranslate"><span class="pre">Kernel</span></code>’s constructor. This name can then be used in
+the <code class="docutils literal notranslate"><span class="pre">configureContainer()</span></code> method to decide which configuration files to load.</p>
+<p>Symfony’s default <code class="docutils literal notranslate"><span class="pre">Kernel</span></code> class implements this method by loading first the
+config files found on <code class="docutils literal notranslate"><span class="pre">config/packages/*</span></code> and then, the files found on
+<code class="docutils literal notranslate"><span class="pre">config/packages/ENVIRONMENT_NAME/</span></code>. You are free to implement this method
+differently if you need a more sophisticated way of loading your configuration.</p>
+<div class="section" id="environments-and-the-cache-directory">
+<span id="index-2"></span><h3>Environments and the Cache Directory<a class="headerlink" href="#environments-and-the-cache-directory" title="Permalink to this headline">¶</a></h3>
+<p>Symfony takes advantage of caching in many ways: the application configuration,
+routing configuration, Twig templates and more are cached to PHP objects
+stored in files on the filesystem.</p>
+<p>By default, these cached files are largely stored in the <code class="docutils literal notranslate"><span class="pre">var/cache/</span></code> directory.
+However, each environment caches its own set of files:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span>your-project/
+├─ var/
+│  ├─ cache/
+│  │  ├─ dev/   # cache directory for the *dev* environment
+│  │  └─ prod/  # cache directory for the *prod* environment
+│  ├─ ...
+</pre></div>
+</td></tr></table></div>
+<p>Sometimes, when debugging, it may be helpful to inspect a cached file to
+understand how something is working. When doing so, remember to look in
+the directory of the environment you’re using (most commonly <code class="docutils literal notranslate"><span class="pre">dev/</span></code> while
+developing and debugging). While it can vary, the <code class="docutils literal notranslate"><span class="pre">var/cache/dev/</span></code> directory
+includes the following:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">appDevDebugProjectContainer.php</span></code></dt>
+<dd>The cached “service container” that represents the cached application
+configuration.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">appDevUrlGenerator.php</span></code></dt>
+<dd>The PHP class generated from the routing configuration and used when
+generating URLs.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">appDevUrlMatcher.php</span></code></dt>
+<dd>The PHP class used for route matching - look here to see the compiled regular
+expression logic used to match incoming URLs to different routes.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">twig/</span></code></dt>
+<dd>This directory contains all the cached Twig templates.</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can change the cache directory location and name. For more information
+read the article <a class="reference internal" href="override_dir_structure.html"><span class="doc">How to Override Symfony’s default Directory Structure</span></a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

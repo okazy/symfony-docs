@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Getting Results from your Handler &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Transactional Messages: Handle New Messages After Handling is Done" href="message-recorder.html" />
+    <link rel="prev" title="How to Create Your own Messenger Transport" href="custom-transport.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#creating-a-message-handler">Creating a Message &amp; Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#dispatching-the-message">Dispatching the Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#transports-async-queued-messages">Transports: Async/Queued Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#consuming-messages-running-the-worker">Consuming Messages (Running the Worker)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#retries-failures">Retries &amp; Failures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#transport-configuration">Transport Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#customizing-handlers">Customizing Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#extending-messenger">Extending Messenger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#multiple-buses-command-event-buses">Multiple Buses, Command &amp; Event Buses</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../messenger.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="custom-transport.html">How to Create Your own Messenger Transport</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Getting Results from your Handler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#working-with-command-query-buses">Working with Command &amp; Query Buses</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="message-recorder.html">Transactional Messages: Handle New Messages After Handling is Done</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multiple_buses.html">Multiple Buses</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a> &raquo;</li>
+        
+      <li>Getting Results from your Handler</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/messenger/handler_results.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-results-from-your-handler">
+<span id="index-0"></span><h1>Getting Results from your Handler<a class="headerlink" href="#getting-results-from-your-handler" title="Permalink to this headline">¶</a></h1>
+<p>When a message is handled, the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Middleware/HandleMessageMiddleware.php" title="Symfony\Component\Messenger\Middleware\HandleMessageMiddleware"><span class="pre">HandleMessageMiddleware</span></a></code>
+adds a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Stamp/HandledStamp.php" title="Symfony\Component\Messenger\Stamp\HandledStamp"><span class="pre">HandledStamp</span></a></code> for each object that handled the message.
+You can use this to get the value returned by the handler(s):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Messenger\MessageBusInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Stamp\HandledStamp</span><span class="p">;</span>
+
+<span class="nv">$envelope</span> <span class="o">=</span> <span class="nv">$messageBus</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span><span class="nx">SomeMessage</span><span class="p">());</span>
+
+<span class="c1">// get the value that was returned by the last message handler</span>
+<span class="nv">$handledStamp</span> <span class="o">=</span> <span class="nv">$envelope</span><span class="o">-&gt;</span><span class="na">last</span><span class="p">(</span><span class="nx">HandledStamp</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+<span class="nv">$handledStamp</span><span class="o">-&gt;</span><span class="na">getResult</span><span class="p">();</span>
+
+<span class="c1">// or get info about all of handlers</span>
+<span class="nv">$handledStamps</span> <span class="o">=</span> <span class="nv">$envelope</span><span class="o">-&gt;</span><span class="na">all</span><span class="p">(</span><span class="nx">HandledStamp</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="section" id="working-with-command-query-buses">
+<h2>Working with Command &amp; Query Buses<a class="headerlink" href="#working-with-command-query-buses" title="Permalink to this headline">¶</a></h2>
+<p>The Messenger component can be used in CQRS architectures where command &amp; query
+buses are central pieces of the application. Read Martin Fowler’s
+<a class="reference external" href="https://martinfowler.com/bliki/CQRS.html">article about CQRS</a> to learn more and
+<a class="reference internal" href="multiple_buses.html"><span class="doc">how to configure multiple buses</span></a>.</p>
+<p>As queries are usually synchronous and expected to be handled once,
+getting the result from the handler is a common need.</p>
+<p>A <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/HandleTrait.php" title="Symfony\Component\Messenger\HandleTrait"><span class="pre">HandleTrait</span></a></code> exists to get the result
+of the handler when processing synchronously. It also ensures that exactly one
+handler is registered. The <code class="docutils literal notranslate"><span class="pre">HandleTrait</span></code> can be used in any class that has a
+<code class="docutils literal notranslate"><span class="pre">$messageBus</span></code> property:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Action/ListItems.php</span>
+<span class="k">namespace</span> <span class="nx">App\Action</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Message\ListItemsQuery</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\MessageHandler\ListItemsQueryResult</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\HandleTrait</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\MessageBusInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ListItems</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">HandleTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">MessageBusInterface</span> <span class="nv">$messageBus</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">messageBus</span> <span class="o">=</span> <span class="nv">$messageBus</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="k">new</span> <span class="nx">ListItemsQuery</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">));</span>
+
+        <span class="c1">// Do something with the result</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Creating such a method is optional, but allows type-hinting the result</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="nf">query</span><span class="p">(</span><span class="nx">ListItemsQuery</span> <span class="nv">$query</span><span class="p">)</span><span class="o">:</span> <span class="nx">ListItemsResult</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$query</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Hence, you can use the trait to create command &amp; query bus classes.
+For example, you could create a special <code class="docutils literal notranslate"><span class="pre">QueryBus</span></code> class and inject it
+wherever you need a query bus behavior instead of the <code class="docutils literal notranslate"><span class="pre">MessageBusInterface</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/MessageBus/QueryBus.php</span>
+<span class="k">namespace</span> <span class="nx">App\MessageBus</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Envelope</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\HandleTrait</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\MessageBusInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">QueryBus</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">HandleTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">MessageBusInterface</span> <span class="nv">$messageBus</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">messageBus</span> <span class="o">=</span> <span class="nv">$messageBus</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @param object|Envelope $query</span>
+<span class="sd">     *</span>
+<span class="sd">     * @return mixed The handler returned value</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">query</span><span class="p">(</span><span class="nv">$query</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$query</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Built-in Authentication Providers &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using the form_login Authentication Provider" href="form_login.html" />
+    <link rel="prev" title="How to Migrate a Password Hash" href="password_migration.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../security.html">Security</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../security.html#installation">1) Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#a-create-your-user-class">2a) Create your User Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#b-the-user-provider">2b) The “User Provider”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#c-encoding-passwords">2c) Encoding Passwords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#a-authentication-firewalls">3a) Authentication &amp; Firewalls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#b-authenticating-your-users">3b) Authenticating your Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#denying-access-roles-and-other-authorization">4) Denying Access, Roles and other Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#a-fetching-the-user-object">5a) Fetching the User Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#b-fetching-the-user-from-a-service">5b) Fetching the User from a Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#logging-out">Logging Out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#hierarchical-roles">Hierarchical Roles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#frequently-asked-questions">Frequently Asked Questions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../security.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../security.html#authentication-identifying-logging-in-the-user">Authentication (Identifying/Logging in the User)</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="experimental_authenticators.html">Using the new Authenticator-based Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="form_login_setup.html">How to Build a Login Form</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reset_password.html">How to Add a Reset Password Feature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="json_login_setup.html">How to Build a JSON Authentication Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="guard_authentication.html">Custom Authentication System with Guard (API Token Example)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="password_migration.html">How to Migrate a Password Hash</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Built-in Authentication Providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_provider.html">Security User Providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ldap.html">Authenticating against an LDAP server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="remember_me.html">How to Add “Remember Me” Login Functionality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="impersonating_user.html">How to Impersonate a User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_checkers.html">How to Create and Enable Custom User Checkers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="named_encoders.html">How to Use A Different Password Encoder Algorithm Per User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multiple_guard_authenticators.html">How to Use Multiple Guard Authenticators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="firewall_restriction.html">How to Restrict Firewalls to a Request</a></li>
+<li class="toctree-l4"><a class="reference internal" href="csrf.html">How to Implement CSRF Protection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="custom_authentication_provider.html">How to Create a custom Authentication Provider</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../security.html#authorization-denying-access">Authorization (Denying Access)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../security.html">Security</a> &raquo;</li>
+        
+      <li>Built-in Authentication Providers</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/security/auth_providers.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="built-in-authentication-providers">
+<h1>Built-in Authentication Providers<a class="headerlink" href="#built-in-authentication-providers" title="Permalink to this headline">¶</a></h1>
+<p>If you need to add authentication to your app, we recommend using
+<a class="reference internal" href="guard_authentication.html"><span class="doc">Guard authentication</span></a> because it gives you
+full control over the process.</p>
+<p>But, Symfony also offers a number of built-in authentication providers: systems
+that are easier to implement, but harder to customize. If your authentication
+use-case matches one of these exactly, they’re a great option:</p>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><a class="reference internal" href="form_login.html"><span class="doc">form_login</span></a></li>
+<li><a class="reference internal" href="#security-http-basic"><span class="std std-ref">http_basic</span></a></li>
+<li><a class="reference internal" href="ldap.html"><span class="doc">LDAP via HTTP Basic or Form Login</span></a></li>
+<li><a class="reference internal" href="json_login_setup.html"><span class="doc">json_login</span></a></li>
+<li><a class="reference internal" href="#security-x509"><span class="std std-ref">X.509 Client Certificate Authentication (x509)</span></a></li>
+<li><a class="reference internal" href="#security-remote-user"><span class="std std-ref">REMOTE_USER Based Authentication (remote_user)</span></a></li>
+</ul>
+<div class="section" id="http-basic-authentication">
+<span id="security-http-basic"></span><h2>HTTP Basic Authentication<a class="headerlink" href="#http-basic-authentication" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Basic_access_authentication">HTTP Basic authentication</a> asks credentials (username and password) using a dialog
+in the browser. The credentials are sent without any hashing or encryption, so
+it’s recommended to use it with HTTPS.</p>
+<p>To support HTTP Basic authentication, add the <code class="docutils literal notranslate"><span class="pre">http_basic</span></code> key to your firewall:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">firewalls</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+            <span class="l l-Scalar l-Scalar-Plain">http_basic</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">realm</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Secured Area</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/security.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;srv:container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/security&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:srv=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/security</span>
+<span class="s">        https://symfony.com/schema/dic/security/security-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;config&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="nt">&lt;firewall</span> <span class="na">name=</span><span class="s">&quot;main&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;http-basic</span> <span class="na">realm=</span><span class="s">&quot;Secured Area&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/firewall&gt;</span>
+    <span class="nt">&lt;/config&gt;</span>
+<span class="nt">&lt;/srv:container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/security.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+
+    <span class="s1">&#39;firewalls&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;main&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;http_basic&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;realm&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Secured Area&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>That’s it! Symfony will now be listening for any HTTP basic authentication data.
+To load user information, it will use your configured <a class="reference internal" href="user_provider.html"><span class="doc">user provider</span></a>.</p>
+<p>Note: you cannot use the <a class="reference internal" href="../security.html#security-logging-out"><span class="std std-ref">log out</span></a> with <code class="docutils literal notranslate"><span class="pre">http_basic</span></code>.
+Even if you log out, your browser “remembers” your credentials and will send them
+on every request.</p>
+</div>
+<div class="section" id="x-509-client-certificate-authentication">
+<span id="security-x509"></span><h2>X.509 Client Certificate Authentication<a class="headerlink" href="#x-509-client-certificate-authentication" title="Permalink to this headline">¶</a></h2>
+<p>When using client certificates, your web server is doing all the authentication
+process itself. With Apache, for example, you would use the
+<code class="docutils literal notranslate"><span class="pre">SSLVerifyClient</span> <span class="pre">Require</span></code> directive.</p>
+<p>Enable the x509 authentication for a particular firewall in the security configuration:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">firewalls</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+            <span class="l l-Scalar l-Scalar-Plain">x509</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">provider</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">your_user_provider</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/security.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;srv:container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/security&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:srv=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/security</span>
+<span class="s">        https://symfony.com/schema/dic/security/security-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;config&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="nt">&lt;firewall</span> <span class="na">name=</span><span class="s">&quot;main&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- ... --&gt;</span>
+            <span class="nt">&lt;x509</span> <span class="na">provider=</span><span class="s">&quot;your_user_provider&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/firewall&gt;</span>
+    <span class="nt">&lt;/config&gt;</span>
+<span class="nt">&lt;/srv:container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/security.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+
+    <span class="s1">&#39;firewalls&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;main&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// ...</span>
+            <span class="s1">&#39;x509&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;provider&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;your_user_provider&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>By default, the firewall provides the <code class="docutils literal notranslate"><span class="pre">SSL_CLIENT_S_DN_Email</span></code> variable to
+the user provider, and sets the <code class="docutils literal notranslate"><span class="pre">SSL_CLIENT_S_DN</span></code> as credentials in the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Authentication/Token/PreAuthenticatedToken.php" title="Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken"><span class="pre">PreAuthenticatedToken</span></a></code>.
+You can override these by setting the <code class="docutils literal notranslate"><span class="pre">user</span></code> and the <code class="docutils literal notranslate"><span class="pre">credentials</span></code> keys
+in the x509 firewall configuration respectively.</p>
+<div class="admonition note" id="security-pre-authenticated-user-provider-note">
+<p class="first admonition-title">Note</p>
+<p>An authentication provider will only inform the user provider of the username
+that made the request. You will need to create (or use) a “user provider” that
+is referenced by the <code class="docutils literal notranslate"><span class="pre">provider</span></code> configuration parameter (<code class="docutils literal notranslate"><span class="pre">your_user_provider</span></code>
+in the configuration example). This provider will turn the username into a User
+object of your choice. For more information on creating or configuring a user
+provider, see:</p>
+<ul class="last simple">
+<li><a class="reference internal" href="user_provider.html"><span class="doc">Security User Providers</span></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="remote-user-based-authentication">
+<span id="security-remote-user"></span><h2>REMOTE_USER Based Authentication<a class="headerlink" href="#remote-user-based-authentication" title="Permalink to this headline">¶</a></h2>
+<p>A lot of authentication modules, like <code class="docutils literal notranslate"><span class="pre">auth_kerb</span></code> for Apache, provide the username
+using the <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> environment variable. This variable can be trusted by
+the application since the authentication happened before the request reached it.</p>
+<p>To configure Symfony using the <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> environment variable, enable the
+corresponding firewall in your security configuration:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">firewalls</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+            <span class="l l-Scalar l-Scalar-Plain">remote_user</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">provider</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">your_user_provider</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/security.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; ?&gt;</span>
+<span class="nt">&lt;srv:container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/security&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:srv=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/security</span>
+<span class="s">        https://symfony.com/schema/dic/security/security-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;config&gt;</span>
+        <span class="nt">&lt;firewall</span> <span class="na">name=</span><span class="s">&quot;main&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;remote-user</span> <span class="na">provider=</span><span class="s">&quot;your_user_provider&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/firewall&gt;</span>
+    <span class="nt">&lt;/config&gt;</span>
+<span class="nt">&lt;/srv:container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/security.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;firewalls&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;main&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;remote_user&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;provider&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;your_user_provider&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>The firewall will then provide the <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code> environment variable to
+your user provider. You can change the variable name used by setting the <code class="docutils literal notranslate"><span class="pre">user</span></code>
+key in the <code class="docutils literal notranslate"><span class="pre">remote_user</span></code> firewall configuration.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Just like for X509 authentication, you will need to configure a “user provider”.
+See <a class="reference internal" href="#security-pre-authenticated-user-provider-note"><span class="std std-ref">the previous note</span></a>
+for more information.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,381 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Copying &amp; Referencing Images &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="CSS Preprocessors: Sass, LESS, Stylus, etc." href="css-preprocessors.html" />
+    <link rel="prev" title="Async Code Splitting" href="code-splitting.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../forms.html">Forms</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../frontend.html">Managing CSS and JavaScript</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../frontend.html#webpack-encore">Webpack Encore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../frontend.html#encore-documentation">Encore Documentation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../frontend.html#other-front-end-articles">Other Front-End Articles</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../assetic/index.html">Assetic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html">Installing Encore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simple-example.html">Encore: Setting up your Project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced-config.html">Advanced Webpack Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="babel.html">Configuring Babel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootstrap.html">Using Bootstrap CSS &amp; JS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cdn.html">Using a CDN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code-splitting.html">Async Code Splitting</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Copying &amp; Referencing Images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#referencing-images-from-inside-a-webpacked-javascript-file">Referencing Images from Inside a Webpacked JavaScript File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referencing-image-files-from-a-template">Referencing Image files from a Template</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="css-preprocessors.html">CSS Preprocessors: Sass, LESS, Stylus, etc.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom-loaders-plugins.html">Adding Custom Loaders &amp; Plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dev-server.html">Using webpack-dev-server and HMR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq.html">FAQ and Common Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="legacy-applications.html">jQuery Plugins and Legacy Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="page-specific-assets.html">Creating Page-Specific CSS/JS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="postcss.html">PostCSS and autoprefixing (postcss-loader)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactjs.html">Enabling React.js</a></li>
+<li class="toctree-l3"><a class="reference internal" href="server-data.html">Passing Information from Twig to JavaScript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shared-entry.html">Creating a Shared Commons Entry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sourcemaps.html">Enabling Source Maps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="split-chunks.html">Preventing Duplication by “Splitting” Shared Code into Separate Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="typescript.html">Enabling TypeScript (ts-loader)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="url-loader.html">Inlining files in CSS with Webpack URL Loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="versioning.html">Asset Versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtual-machine.html">Using Encore in a Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vuejs.html">Enabling Vue.js (<code class="docutils literal notranslate"><span class="pre">vue-loader</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../custom_version_strategy.html">How to Use a Custom Version Strategy for Assets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../frontend.html">Managing CSS and JavaScript</a> &raquo;</li>
+        
+      <li>Copying &amp; Referencing Images</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/frontend/encore/copy-files.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="copying-referencing-images">
+<h1>Copying &amp; Referencing Images<a class="headerlink" href="#copying-referencing-images" title="Permalink to this headline">¶</a></h1>
+<p>Need to reference a static file - like the path to an image for an <code class="docutils literal notranslate"><span class="pre">img</span></code> tag?
+That can be tricky if you store your assets outside of the public document root.
+Fortunately, depending on your situation, there is a solution!</p>
+<div class="section" id="referencing-images-from-inside-a-webpacked-javascript-file">
+<h2>Referencing Images from Inside a Webpacked JavaScript File<a class="headerlink" href="#referencing-images-from-inside-a-webpacked-javascript-file" title="Permalink to this headline">¶</a></h2>
+<p>To reference an image tag from inside a JavaScript file, <em>require</em> the file:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// assets/js/app.js</span>
+
+<span class="c1">// returns the final, public path to this file</span>
+<span class="c1">// path is relative to this file - e.g. assets/images/logo.png</span>
+<span class="kr">const</span> <span class="nx">logoPath</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../images/logo.png&#39;</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">html</span> <span class="o">=</span> <span class="sb">`&lt;img src=&quot;</span><span class="si">${</span><span class="nx">logoPath</span><span class="si">}</span><span class="sb">&quot; alt=&quot;ACME logo&quot;&gt;`</span><span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+<p>When you <code class="docutils literal notranslate"><span class="pre">require</span></code> (or <code class="docutils literal notranslate"><span class="pre">import</span></code>) an image file, Webpack copies it into your
+output directory and returns the final, <em>public</em> path to that file.</p>
+</div>
+<div class="section" id="referencing-image-files-from-a-template">
+<h2>Referencing Image files from a Template<a class="headerlink" href="#referencing-image-files-from-a-template" title="Permalink to this headline">¶</a></h2>
+<p>To reference an image file from outside of a JavaScript file that’s processed by
+Webpack - like a template - you can use the <code class="docutils literal notranslate"><span class="pre">copyFiles()</span></code> method to copy those
+files into your final output directory.</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span>// webpack.config.js
+
+Encore
+    // ...
+    .setOutputPath(&#39;public/build/&#39;)
+
+<span class="gi">+     .copyFiles({</span>
+<span class="gi">+         from: &#39;./assets/images&#39;,</span>
+<span class="gi">+</span>
+<span class="gi">+         // optional target path, relative to the output dir</span>
+<span class="gi">+         //to: &#39;images/[path][name].[ext]&#39;,</span>
+<span class="gi">+</span>
+<span class="gi">+         // if versioning is enabled, add the file hash too</span>
+<span class="gi">+         //to: &#39;images/[path][name].[hash:8].[ext]&#39;,</span>
+<span class="gi">+</span>
+<span class="gi">+         // only copy files matching this pattern</span>
+<span class="gi">+         //pattern: /\.(png|jpg|jpeg)$/</span>
+<span class="gi">+     })</span>
+</pre></div>
+</td></tr></table></div>
+<p>This will copy all files from <code class="docutils literal notranslate"><span class="pre">assets/images</span></code> into <code class="docutils literal notranslate"><span class="pre">public/build</span></code> (the output
+path). If you have <a class="reference internal" href="versioning.html"><span class="doc">versioning enabled</span></a>, the copied files will
+include a hash based on their content.</p>
+<p>To render inside Twig, use the <code class="docutils literal notranslate"><span class="pre">asset()</span></code> function:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">{# assets/images/logo.png was copied to public/build/logo.png #}</span>
+<span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">asset</span><span class="o">(</span><span class="s1">&#39;build/logo.png&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="s">&quot;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;ACME logo&quot;</span><span class="p">&gt;</span>
+
+<span class="c">{# assets/images/subdir/logo.png was copied to public/build/subdir/logo.png #}</span>
+<span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">asset</span><span class="o">(</span><span class="s1">&#39;build/subdir/logo.png&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="s">&quot;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;ACME logo&quot;</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Make sure you’ve enabled the <a class="reference internal" href="versioning.html#load-manifest-files"><span class="std std-ref">json_manifest_path</span></a> option,
+which tells the <code class="docutils literal notranslate"><span class="pre">asset()</span></code> function to read the final paths from the <code class="docutils literal notranslate"><span class="pre">manifest.json</span></code>
+file. If you’re not sure what path argument to pass to the <code class="docutils literal notranslate"><span class="pre">asset()</span></code> function,
+find the file in <code class="docutils literal notranslate"><span class="pre">manifest.json</span></code> and use the <em>key</em> as the argument.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,751 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Impersonate a User &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Create and Enable Custom User Checkers" href="user_checkers.html" />
+    <link rel="prev" title="How to Add “Remember Me” Login Functionality" href="remember_me.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../security.html">Security</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../security.html#installation">1) Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#a-create-your-user-class">2a) Create your User Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#b-the-user-provider">2b) The “User Provider”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#c-encoding-passwords">2c) Encoding Passwords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#a-authentication-firewalls">3a) Authentication &amp; Firewalls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#b-authenticating-your-users">3b) Authenticating your Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#denying-access-roles-and-other-authorization">4) Denying Access, Roles and other Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#a-fetching-the-user-object">5a) Fetching the User Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#b-fetching-the-user-from-a-service">5b) Fetching the User from a Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#logging-out">Logging Out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#hierarchical-roles">Hierarchical Roles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#frequently-asked-questions">Frequently Asked Questions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../security.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../security.html#authentication-identifying-logging-in-the-user">Authentication (Identifying/Logging in the User)</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="experimental_authenticators.html">Using the new Authenticator-based Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="form_login_setup.html">How to Build a Login Form</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reset_password.html">How to Add a Reset Password Feature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="json_login_setup.html">How to Build a JSON Authentication Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="guard_authentication.html">Custom Authentication System with Guard (API Token Example)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="password_migration.html">How to Migrate a Password Hash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auth_providers.html">Built-in Authentication Providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_provider.html">Security User Providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ldap.html">Authenticating against an LDAP server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="remember_me.html">How to Add “Remember Me” Login Functionality</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">How to Impersonate a User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_checkers.html">How to Create and Enable Custom User Checkers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="named_encoders.html">How to Use A Different Password Encoder Algorithm Per User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multiple_guard_authenticators.html">How to Use Multiple Guard Authenticators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="firewall_restriction.html">How to Restrict Firewalls to a Request</a></li>
+<li class="toctree-l4"><a class="reference internal" href="csrf.html">How to Implement CSRF Protection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="custom_authentication_provider.html">How to Create a custom Authentication Provider</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../security.html#authorization-denying-access">Authorization (Denying Access)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../security.html">Security</a> &raquo;</li>
+        
+      <li>How to Impersonate a User</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/security/impersonating_user.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-impersonate-a-user">
+<span id="index-0"></span><h1>How to Impersonate a User<a class="headerlink" href="#how-to-impersonate-a-user" title="Permalink to this headline">¶</a></h1>
+<p>Sometimes, it’s useful to be able to switch from one user to another without
+having to log out and log in again (for instance when you are debugging something
+a user sees that you can’t reproduce).</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">User impersonation is not compatible with some authentication mechanisms
+(e.g. <code class="docutils literal notranslate"><span class="pre">REMOTE_USER</span></code>) where the authentication information is expected to be
+sent on each request.</p>
+</div>
+<p>Impersonating the user can be done by activating the <code class="docutils literal notranslate"><span class="pre">switch_user</span></code> firewall
+listener:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">firewalls</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+            <span class="l l-Scalar l-Scalar-Plain">switch_user</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/security.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;srv:container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/security&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:srv=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/security</span>
+<span class="s">        https://symfony.com/schema/dic/security/security-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;config&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="nt">&lt;firewall</span> <span class="na">name=</span><span class="s">&quot;main&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- ... --&gt;</span>
+            <span class="nt">&lt;switch-user/&gt;</span>
+        <span class="nt">&lt;/firewall&gt;</span>
+    <span class="nt">&lt;/config&gt;</span>
+<span class="nt">&lt;/srv:container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/security.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+
+    <span class="s1">&#39;firewalls&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;main&#39;</span><span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// ...</span>
+            <span class="s1">&#39;switch_user&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>To switch to another user, add a query string with the <code class="docutils literal notranslate"><span class="pre">_switch_user</span></code>
+parameter and the username (or whatever field our user provider uses to load users)
+as the value to the current URL:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>http://example.com/somewhere?_switch_user=thomas
+</pre></div>
+</td></tr></table></div>
+<p>To switch back to the original user, use the special <code class="docutils literal notranslate"><span class="pre">_exit</span></code> username:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>http://example.com/somewhere?_switch_user=_exit
+</pre></div>
+</td></tr></table></div>
+<p>This feature is only available to users with a special role called <code class="docutils literal notranslate"><span class="pre">ROLE_ALLOWED_TO_SWITCH</span></code>.
+Using <a class="reference internal" href="../security.html#security-role-hierarchy"><span class="std std-ref">role_hierarchy</span></a> is a great way to give this
+role to the users that need it.</p>
+<div class="section" id="knowing-when-impersonation-is-active">
+<h2>Knowing When Impersonation Is Active<a class="headerlink" href="#knowing-when-impersonation-is-active" title="Permalink to this headline">¶</a></h2>
+<p>You can use the special attribute <code class="docutils literal notranslate"><span class="pre">IS_IMPERSONATOR</span></code> to check if the
+impersonation is active in this session. Use this special role, for
+instance, to show a link to exit impersonation in a template:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">is_granted</span><span class="o">(</span><span class="s1">&#39;IS_IMPERSONATOR&#39;</span><span class="o">)</span> <span class="cp">%}</span>
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">path</span><span class="o">(</span><span class="s1">&#39;homepage&#39;</span><span class="o">,</span> <span class="o">{</span><span class="s1">&#39;_switch_user&#39;</span><span class="o">:</span> <span class="s1">&#39;_exit&#39;</span><span class="o">})</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>Exit impersonation<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The <code class="docutils literal notranslate"><span class="pre">IS_IMPERSONATOR</span></code> was introduced in Symfony 5.1. Use
+<code class="docutils literal notranslate"><span class="pre">ROLE_PREVIOUS_ADMIN</span></code> prior to Symfony 5.1.</p>
+</div>
+</div>
+<div class="section" id="finding-the-original-user">
+<h2>Finding the Original User<a class="headerlink" href="#finding-the-original-user" title="Permalink to this headline">¶</a></h2>
+<p>In some cases, you may need to get the object that represents the impersonator
+user rather than the impersonated user. When a user is impersonated the token
+stored in the token storage will be a <code class="docutils literal notranslate"><span class="pre">SwitchUserToken</span></code> instance. Use the
+following snippet to obtain the original token which gives you access to
+the impersonator user:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Authentication\Token\SwitchUserToken</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Security</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">class</span> <span class="nc">SomeService</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$security</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">Security</span> <span class="nv">$security</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">security</span> <span class="o">=</span> <span class="nv">$security</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">someMethod</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+
+        <span class="nv">$token</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">security</span><span class="o">-&gt;</span><span class="na">getToken</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$token</span> <span class="nx">instanceof</span> <span class="nx">SwitchUserToken</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$impersonatorUser</span> <span class="o">=</span> <span class="nv">$token</span><span class="o">-&gt;</span><span class="na">getOriginalToken</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getUser</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="controlling-the-query-parameter">
+<h2>Controlling the Query Parameter<a class="headerlink" href="#controlling-the-query-parameter" title="Permalink to this headline">¶</a></h2>
+<p>This feature needs to be available only to a restricted group of users.
+By default, access is restricted to users having the <code class="docutils literal notranslate"><span class="pre">ROLE_ALLOWED_TO_SWITCH</span></code>
+role. The name of this role can be modified via the <code class="docutils literal notranslate"><span class="pre">role</span></code> setting. You can
+also adjust the query parameter name via the <code class="docutils literal notranslate"><span class="pre">parameter</span></code> setting:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">firewalls</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+            <span class="l l-Scalar l-Scalar-Plain">switch_user</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{</span> <span class="nv">role</span><span class="p p-Indicator">:</span> <span class="nv">ROLE_ADMIN</span><span class="p p-Indicator">,</span> <span class="nv">parameter</span><span class="p p-Indicator">:</span> <span class="nv">_want_to_be_this_user</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/security.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;srv:container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/security&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:srv=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/security</span>
+<span class="s">        https://symfony.com/schema/dic/security/security-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;config&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="nt">&lt;firewall</span> <span class="na">name=</span><span class="s">&quot;main&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- ... --&gt;</span>
+            <span class="nt">&lt;switch-user</span> <span class="na">role=</span><span class="s">&quot;ROLE_ADMIN&quot;</span> <span class="na">parameter=</span><span class="s">&quot;_want_to_be_this_user&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/firewall&gt;</span>
+    <span class="nt">&lt;/config&gt;</span>
+<span class="nt">&lt;/srv:container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/security.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+
+    <span class="s1">&#39;firewalls&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;main&#39;</span><span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// ...</span>
+            <span class="s1">&#39;switch_user&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ROLE_ADMIN&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;parameter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;_want_to_be_this_user&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="limiting-user-switching">
+<h2>Limiting User Switching<a class="headerlink" href="#limiting-user-switching" title="Permalink to this headline">¶</a></h2>
+<p>If you need more control over user switching, you can use a security voter. First,
+configure <code class="docutils literal notranslate"><span class="pre">switch_user</span></code> to check for some new, custom attribute. This can be
+anything, but <em>cannot</em> start with <code class="docutils literal notranslate"><span class="pre">ROLE_</span></code> (to enforce that only your voter will
+be called):</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">firewalls</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+            <span class="l l-Scalar l-Scalar-Plain">switch_user</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{</span> <span class="nv">role</span><span class="p p-Indicator">:</span> <span class="nv">CAN_SWITCH_USER</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/security.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;srv:container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/security&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:srv=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/security</span>
+<span class="s">        https://symfony.com/schema/dic/security/security-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;config&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="nt">&lt;firewall</span> <span class="na">name=</span><span class="s">&quot;main&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- ... --&gt;</span>
+            <span class="nt">&lt;switch-user</span> <span class="na">role=</span><span class="s">&quot;CAN_SWITCH_USER&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/firewall&gt;</span>
+    <span class="nt">&lt;/config&gt;</span>
+<span class="nt">&lt;/srv:container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/security.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+
+    <span class="s1">&#39;firewalls&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;main&#39;</span><span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// ...</span>
+            <span class="s1">&#39;switch_user&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CAN_SWITCH_USER&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Then, create a voter class that responds to this role and includes whatever custom
+logic you want:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nx">App\Security\Voter</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Authentication\Token\TokenInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Authorization\Voter\Voter</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Security</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\User\UserInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">SwitchToCustomerVoter</span> <span class="k">extends</span> <span class="nx">Voter</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$security</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">Security</span> <span class="nv">$security</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">security</span> <span class="o">=</span> <span class="nv">$security</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">supports</span><span class="p">(</span><span class="nv">$attribute</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">in_array</span><span class="p">(</span><span class="nv">$attribute</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;CAN_SWITCH_USER&#39;</span><span class="p">])</span>
+            <span class="o">&amp;&amp;</span> <span class="nv">$subject</span> <span class="nx">instanceof</span> <span class="nx">UserInterface</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">voteOnAttribute</span><span class="p">(</span><span class="nv">$attribute</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nx">TokenInterface</span> <span class="nv">$token</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$token</span><span class="o">-&gt;</span><span class="na">getUser</span><span class="p">();</span>
+        <span class="c1">// if the user is anonymous or if the subject is not a user, do not grant access</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$user</span> <span class="nx">instanceof</span> <span class="nx">UserInterface</span> <span class="o">||</span> <span class="o">!</span><span class="nv">$subject</span> <span class="nx">instanceof</span> <span class="nx">UserInterface</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// you can still check for ROLE_ALLOWED_TO_SWITCH</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">security</span><span class="o">-&gt;</span><span class="na">isGranted</span><span class="p">(</span><span class="s1">&#39;ROLE_ALLOWED_TO_SWITCH&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// check for any roles you want</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">security</span><span class="o">-&gt;</span><span class="na">isGranted</span><span class="p">(</span><span class="s1">&#39;ROLE_TECH_SUPPORT&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="cm">/*</span>
+<span class="cm">         * or use some custom data from your User object</span>
+<span class="cm">        if ($user-&gt;isAllowedToSwitch()) {</span>
+<span class="cm">            return true;</span>
+<span class="cm">        }</span>
+<span class="cm">        */</span>
+
+        <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That’s it! When switching users, your voter now has full control over whether or
+not this is allowed. If your voter isn’t called, see <a class="reference internal" href="voters.html#declaring-the-voter-as-a-service"><span class="std std-ref">Configuring the Voter</span></a>.</p>
+</div>
+<div class="section" id="events">
+<h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
+<p>The firewall dispatches the <code class="docutils literal notranslate"><span class="pre">security.switch_user</span></code> event right after the impersonation
+is completed. The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Http/Event/SwitchUserEvent.php" title="Symfony\Component\Security\Http\Event\SwitchUserEvent"><span class="pre">SwitchUserEvent</span></a></code> is
+passed to the listener, and you can use this to get the user that you are now impersonating.</p>
+<p>The <a class="reference internal" href="../session/locale_sticky_session.html"><span class="doc">Making the Locale “Sticky” during a User’s Session</span></a> article does not update the locale
+when you impersonate a user. If you <em>do</em> want to be sure to update the locale when
+you switch users, add an event subscriber on this event:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/EventListener/SwitchUserSubscriber.php</span>
+<span class="k">namespace</span> <span class="nx">App\EventListener</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher\EventSubscriberInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Http\Event\SwitchUserEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Http\SecurityEvents</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">SwitchUserSubscriber</span> <span class="k">implements</span> <span class="nx">EventSubscriberInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">onSwitchUser</span><span class="p">(</span><span class="nx">SwitchUserEvent</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">hasSession</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nv">$session</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getSession</span><span class="p">()))</span> <span class="p">{</span>
+            <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span>
+                <span class="s1">&#39;_locale&#39;</span><span class="p">,</span>
+                <span class="c1">// assuming your User has some getLocale() method</span>
+                <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getTargetUser</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getLocale</span><span class="p">()</span>
+            <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getSubscribedEvents</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="c1">// constant for security.switch_user</span>
+            <span class="nx">SecurityEvents</span><span class="o">::</span><span class="na">SWITCH_USER</span> <span class="o">=&gt;</span> <span class="s1">&#39;onSwitchUser&#39;</span><span class="p">,</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That’s it! If you’re using the <a class="reference internal" href="../service_container.html#service-container-services-load-example"><span class="std std-ref">default services.yaml configuration</span></a>,
+Symfony will automatically discover your service and call <code class="docutils literal notranslate"><span class="pre">onSwitchUser</span></code> whenever
+a switch user occurs.</p>
+<p>For more details about event subscribers, see <a class="reference internal" href="../event_dispatcher.html"><span class="doc">Events and Event Listeners</span></a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

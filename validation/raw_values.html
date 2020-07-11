@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Validate Raw Values (Scalar Values and Arrays) &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Sequentially Apply Validation Groups" href="sequence_provider.html" />
+    <link rel="prev" title="How to Apply only a Subset of all Your Validation Constraints (Validation Groups)" href="groups.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../validation.html">Validation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../validation.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validation.html#the-basics-of-validation">The Basics of Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validation.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validation.html#constraints">Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validation.html#constraints-in-form-classes">Constraints in Form Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validation.html#constraint-targets">Constraint Targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validation.html#final-thoughts">Final Thoughts</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../validation.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="custom_constraint.html">How to Create a custom Validation Constraint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="groups.html">How to Apply only a Subset of all Your Validation Constraints (Validation Groups)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Validate Raw Values (Scalar Values and Arrays)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sequence_provider.html">How to Sequentially Apply Validation Groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="severity.html">How to Handle Different Error Levels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="translations.html">How to Translate Validation Constraint Messages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../validation.html">Validation</a> &raquo;</li>
+        
+      <li>How to Validate Raw Values (Scalar Values and Arrays)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/validation/raw_values.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-validate-raw-values-scalar-values-and-arrays">
+<span id="index-0"></span><h1>How to Validate Raw Values (Scalar Values and Arrays)<a class="headerlink" href="#how-to-validate-raw-values-scalar-values-and-arrays" title="Permalink to this headline">¶</a></h1>
+<p>Usually you will be validating entire objects. But sometimes, you just want
+to validate a simple value - like to verify that a string is a valid email
+address. From inside a controller, it looks like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Validator\Constraints</span> <span class="k">as</span> <span class="nx">Assert</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Validator\Validator\ValidatorInterface</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">addEmail</span><span class="p">(</span><span class="nv">$email</span><span class="p">,</span> <span class="nx">ValidatorInterface</span> <span class="nv">$validator</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$emailConstraint</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Assert\Email</span><span class="p">();</span>
+    <span class="c1">// all constraint &quot;options&quot; can be set this way</span>
+    <span class="nv">$emailConstraint</span><span class="o">-&gt;</span><span class="na">message</span> <span class="o">=</span> <span class="s1">&#39;Invalid email address&#39;</span><span class="p">;</span>
+
+    <span class="c1">// use the validator to validate the value</span>
+    <span class="nv">$errors</span> <span class="o">=</span> <span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span>
+        <span class="nv">$email</span><span class="p">,</span>
+        <span class="nv">$emailConstraint</span>
+    <span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">===</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$errors</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1">// ... this IS a valid email address, do something</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// this is *not* a valid email address</span>
+        <span class="nv">$errorMessage</span> <span class="o">=</span> <span class="nv">$errors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">();</span>
+
+        <span class="c1">// ... do something with the error</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>By calling <code class="docutils literal notranslate"><span class="pre">validate()</span></code> on the validator, you can pass in a raw value and
+the constraint object that you want to validate that value against. A full
+list of the available constraints - as well as the full class name for each
+constraint - is available in the <a class="reference internal" href="../reference/constraints.html"><span class="doc">constraints reference</span></a>
+section.</p>
+<p>Validation of arrays is possible using the <code class="docutils literal notranslate"><span class="pre">Collection</span></code> constraint:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Validator\Constraints</span> <span class="k">as</span> <span class="nx">Assert</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Validator\Validation</span><span class="p">;</span>
+
+<span class="nv">$validator</span> <span class="o">=</span> <span class="nx">Validation</span><span class="o">::</span><span class="na">createValidator</span><span class="p">();</span>
+
+<span class="nv">$input</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;first_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Fabien&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;last_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Potencier&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;test@email.tld&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;simple&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;hello&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;eye_color&#39;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s1">&#39;file&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+    <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;tags&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="s1">&#39;slug&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;symfony_doc&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;symfony doc&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">];</span>
+
+<span class="nv">$groups</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Assert\GroupSequence</span><span class="p">([</span><span class="s1">&#39;Default&#39;</span><span class="p">,</span> <span class="s1">&#39;custom&#39;</span><span class="p">]);</span>
+
+<span class="nv">$constraint</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Assert\Collection</span><span class="p">([</span>
+    <span class="c1">// the keys correspond to the keys in the input array</span>
+    <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">Assert\Collection</span><span class="p">([</span>
+        <span class="s1">&#39;first_name&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">Assert\Length</span><span class="p">([</span><span class="s1">&#39;min&#39;</span> <span class="o">=&gt;</span> <span class="mi">101</span><span class="p">]),</span>
+        <span class="s1">&#39;last_name&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">Assert\Length</span><span class="p">([</span><span class="s1">&#39;min&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">]),</span>
+    <span class="p">]),</span>
+    <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">Assert\Email</span><span class="p">(),</span>
+    <span class="s1">&#39;simple&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">Assert\Length</span><span class="p">([</span><span class="s1">&#39;min&#39;</span> <span class="o">=&gt;</span> <span class="mi">102</span><span class="p">]),</span>
+    <span class="s1">&#39;eye_color&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">Assert\Choice</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span>
+    <span class="s1">&#39;file&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">Assert\File</span><span class="p">(),</span>
+    <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">Assert\Length</span><span class="p">([</span><span class="s1">&#39;min&#39;</span> <span class="o">=&gt;</span> <span class="mi">60</span><span class="p">]),</span>
+    <span class="s1">&#39;tags&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">Assert\Optional</span><span class="p">([</span>
+        <span class="k">new</span> <span class="nx">Assert\Type</span><span class="p">(</span><span class="s1">&#39;array&#39;</span><span class="p">),</span>
+        <span class="k">new</span> <span class="nx">Assert\Count</span><span class="p">([</span><span class="s1">&#39;min&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">]),</span>
+        <span class="k">new</span> <span class="nx">Assert\All</span><span class="p">([</span>
+            <span class="k">new</span> <span class="nx">Assert\Collection</span><span class="p">([</span>
+                <span class="s1">&#39;slug&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="k">new</span> <span class="nx">Assert\NotBlank</span><span class="p">(),</span>
+                    <span class="k">new</span> <span class="nx">Assert\Type</span><span class="p">([</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;string&#39;</span><span class="p">])</span>
+                <span class="p">],</span>
+                <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="k">new</span> <span class="nx">Assert\NotBlank</span><span class="p">(),</span>
+                <span class="p">],</span>
+            <span class="p">]),</span>
+            <span class="k">new</span> <span class="nx">CustomUniqueTagValidator</span><span class="p">([</span><span class="s1">&#39;groups&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;custom&#39;</span><span class="p">]),</span>
+        <span class="p">]),</span>
+    <span class="p">]),</span>
+<span class="p">]);</span>
+
+<span class="nv">$violations</span> <span class="o">=</span> <span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="nv">$input</span><span class="p">,</span> <span class="nv">$constraint</span><span class="p">,</span> <span class="nv">$groups</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">validate()</span></code> method returns a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Validator/ConstraintViolationList.php" title="Symfony\Component\Validator\ConstraintViolationList"><span class="pre">ConstraintViolationList</span></a></code>
+object, which acts just like an array of errors. Each error in the collection
+is a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Validator/ConstraintViolation.php" title="Symfony\Component\Validator\ConstraintViolation"><span class="pre">ConstraintViolation</span></a></code> object,
+which holds the error message on its <code class="docutils literal notranslate"><span class="pre">getMessage()</span></code> method.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

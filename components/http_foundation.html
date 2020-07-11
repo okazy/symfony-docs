@@ -1,0 +1,1080 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The HttpFoundation Component &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configuring Sessions and Save Handlers" href="http_foundation/session_configuration.html" />
+    <link rel="prev" title="How to Choose Validation Groups Based on the Submitted Data" href="../form/data_based_validation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cache.html">The Cache Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependency_injection.html">The DependencyInjection Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="form.html">The Form Component</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The HttpFoundation Component</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#request">Request</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#accessing-request-data">Accessing Request Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#identifying-a-request">Identifying a Request</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simulating-a-request">Simulating a Request</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#accessing-the-session">Accessing the Session</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#processing-http-headers">Processing HTTP Headers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#accessing-accept-headers-data">Accessing <code class="docutils literal notranslate"><span class="pre">Accept-*</span></code> Headers Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#anonymizing-ip-addresses">Anonymizing IP Addresses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#accessing-other-data">Accessing other Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overriding-the-request">Overriding the Request</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#response">Response</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sending-the-response">Sending the Response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-cookies">Setting Cookies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#managing-the-http-cache">Managing the HTTP Cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#redirecting-the-user">Redirecting the User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#streaming-a-response">Streaming a Response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#serving-files">Serving Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-a-json-response">Creating a JSON Response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jsonp-callback">JSONP Callback</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#session">Session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#safe-content-preference">Safe Content Preference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#learn-more">Learn More</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="http_foundation/session_configuration.html">Configuring Sessions and Save Handlers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http_foundation/session_php_bridge.html">Integrating with Legacy Sessions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http_foundation/session_testing.html">Testing with Sessions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="http_foundation/sessions.html">Session Management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../controller.html">Controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../controller/argument_value_resolver.html">Extending Action Argument Resolving</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../controller/error_pages.html">How to Customize Error Pages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../controller/forwarding.html">How to Forward Requests to another Controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../controller/service.html">How to Define Controllers as Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../controller/soap_web_service.html">How to Create a SOAP Web Service in a Symfony Controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../controller/upload_file.html">How to Upload Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../session/database.html">Store Sessions in a Database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../session/locale_sticky_session.html">Making the Locale “Sticky” during a User’s Session</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../session/php_bridge.html">Bridge a legacy Application with Symfony Sessions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../session/proxy_examples.html">Session Proxy Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../http_cache/cache_invalidation.html">Cache Invalidation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../http_cache/cache_vary.html">Varying the Response for HTTP Cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../http_cache/esi.html">Working with Edge Side Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../http_cache/expiration.html">HTTP Cache Expiration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../http_cache/ssi.html">Working with Server Side Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../http_cache/validation.html">HTTP Cache Validation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../http_cache/varnish.html">How to Use Varnish to Speed up my Website</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html">The Process Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">The Security Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">The Components</a> &raquo;</li>
+        
+      <li>The HttpFoundation Component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/components/http_foundation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-httpfoundation-component">
+<span id="index-0"></span><h1>The HttpFoundation Component<a class="headerlink" href="#the-httpfoundation-component" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div>The HttpFoundation component defines an object-oriented layer for the HTTP
+specification.</div></blockquote>
+<p>In PHP, the request is represented by some global variables (<code class="docutils literal notranslate"><span class="pre">$_GET</span></code>,
+<code class="docutils literal notranslate"><span class="pre">$_POST</span></code>, <code class="docutils literal notranslate"><span class="pre">$_FILES</span></code>, <code class="docutils literal notranslate"><span class="pre">$_COOKIE</span></code>, <code class="docutils literal notranslate"><span class="pre">$_SESSION</span></code>, …) and the response is
+generated by some functions (<code class="docutils literal notranslate"><span class="pre">echo</span></code>, <code class="docutils literal notranslate"><span class="pre">header()</span></code>, <code class="docutils literal notranslate"><span class="pre">setcookie()</span></code>, …).</p>
+<p>The Symfony HttpFoundation component replaces these default PHP global
+variables and functions by an object-oriented layer.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/http-foundation
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you install this component outside of a Symfony application, you must
+require the <code class="docutils literal notranslate"><span class="pre">vendor/autoload.php</span></code> file in your code to enable the class
+autoloading mechanism provided by Composer. Read
+<a class="reference internal" href="using_components.html"><span class="doc">this article</span></a> for more details.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">This article explains how to use the HttpFoundation features as an
+independent component in any PHP application. In Symfony applications
+everything is already configured and ready to use. Read the <a class="reference internal" href="../controller.html"><span class="doc">Controller</span></a>
+article to learn about how to use these features when creating controllers.</p>
+</div>
+</div>
+<div class="section" id="request">
+<span id="component-http-foundation-request"></span><h2>Request<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h2>
+<p>The most common way to create a request is to base it on the current PHP global
+variables with
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request::createFromGlobals()"><span class="pre">createFromGlobals()</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>which is almost equivalent to the more verbose, but also more flexible,
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request::__construct()"><span class="pre">__construct()</span></a></code> call:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Request</span><span class="p">(</span>
+    <span class="nv">$_GET</span><span class="p">,</span>
+    <span class="nv">$_POST</span><span class="p">,</span>
+    <span class="p">[],</span>
+    <span class="nv">$_COOKIE</span><span class="p">,</span>
+    <span class="nv">$_FILES</span><span class="p">,</span>
+    <span class="nv">$_SERVER</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="section" id="accessing-request-data">
+<span id="id1"></span><h3>Accessing Request Data<a class="headerlink" href="#accessing-request-data" title="Permalink to this headline">¶</a></h3>
+<p>A Request object holds information about the client request. This information
+can be accessed via several public properties:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">request</span></code>: equivalent of <code class="docutils literal notranslate"><span class="pre">$_POST</span></code>;</li>
+<li><code class="docutils literal notranslate"><span class="pre">query</span></code>: equivalent of <code class="docutils literal notranslate"><span class="pre">$_GET</span></code> (<code class="docutils literal notranslate"><span class="pre">$request-&gt;query-&gt;get('name')</span></code>);</li>
+<li><code class="docutils literal notranslate"><span class="pre">cookies</span></code>: equivalent of <code class="docutils literal notranslate"><span class="pre">$_COOKIE</span></code>;</li>
+<li><code class="docutils literal notranslate"><span class="pre">attributes</span></code>: no equivalent - used by your app to store other data (see <a class="reference internal" href="#component-foundation-attributes"><span class="std std-ref">below</span></a>);</li>
+<li><code class="docutils literal notranslate"><span class="pre">files</span></code>: equivalent of <code class="docutils literal notranslate"><span class="pre">$_FILES</span></code>;</li>
+<li><code class="docutils literal notranslate"><span class="pre">server</span></code>: equivalent of <code class="docutils literal notranslate"><span class="pre">$_SERVER</span></code>;</li>
+<li><code class="docutils literal notranslate"><span class="pre">headers</span></code>: mostly equivalent to a subset of <code class="docutils literal notranslate"><span class="pre">$_SERVER</span></code>
+(<code class="docutils literal notranslate"><span class="pre">$request-&gt;headers-&gt;get('User-Agent')</span></code>).</li>
+</ul>
+<p>Each property is a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag"><span class="pre">ParameterBag</span></a></code>
+instance (or a sub-class of), which is a data holder class:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">request</span></code>: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag"><span class="pre">ParameterBag</span></a></code>;</li>
+<li><code class="docutils literal notranslate"><span class="pre">query</span></code>:   <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag"><span class="pre">ParameterBag</span></a></code>;</li>
+<li><code class="docutils literal notranslate"><span class="pre">cookies</span></code>: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag"><span class="pre">ParameterBag</span></a></code>;</li>
+<li><code class="docutils literal notranslate"><span class="pre">attributes</span></code>: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag"><span class="pre">ParameterBag</span></a></code>;</li>
+<li><code class="docutils literal notranslate"><span class="pre">files</span></code>:   <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/FileBag.php" title="Symfony\Component\HttpFoundation\FileBag"><span class="pre">FileBag</span></a></code>;</li>
+<li><code class="docutils literal notranslate"><span class="pre">server</span></code>:  <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ServerBag.php" title="Symfony\Component\HttpFoundation\ServerBag"><span class="pre">ServerBag</span></a></code>;</li>
+<li><code class="docutils literal notranslate"><span class="pre">headers</span></code>: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/HeaderBag.php" title="Symfony\Component\HttpFoundation\HeaderBag"><span class="pre">HeaderBag</span></a></code>.</li>
+</ul>
+<p>All <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag"><span class="pre">ParameterBag</span></a></code> instances have
+methods to retrieve and update their data:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag::all()"><span class="pre">all()</span></a></code></dt>
+<dd>Returns the parameters.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag::keys()"><span class="pre">keys()</span></a></code></dt>
+<dd>Returns the parameter keys.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag::replace()"><span class="pre">replace()</span></a></code></dt>
+<dd>Replaces the current parameters by a new set.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag::add()"><span class="pre">add()</span></a></code></dt>
+<dd>Adds parameters.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag::get()"><span class="pre">get()</span></a></code></dt>
+<dd>Returns a parameter by name.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag::set()"><span class="pre">set()</span></a></code></dt>
+<dd>Sets a parameter by name.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag::has()"><span class="pre">has()</span></a></code></dt>
+<dd>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the parameter is defined.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag::remove()"><span class="pre">remove()</span></a></code></dt>
+<dd>Removes a parameter.</dd>
+</dl>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag"><span class="pre">ParameterBag</span></a></code> instance also
+has some methods to filter the input values:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag::getAlpha()"><span class="pre">getAlpha()</span></a></code></dt>
+<dd>Returns the alphabetic characters of the parameter value;</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag::getAlnum()"><span class="pre">getAlnum()</span></a></code></dt>
+<dd>Returns the alphabetic characters and digits of the parameter value;</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag::getBoolean()"><span class="pre">getBoolean()</span></a></code></dt>
+<dd>Returns the parameter value converted to boolean;</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag::getDigits()"><span class="pre">getDigits()</span></a></code></dt>
+<dd>Returns the digits of the parameter value;</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag::getInt()"><span class="pre">getInt()</span></a></code></dt>
+<dd>Returns the parameter value converted to integer;</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag::filter()"><span class="pre">filter()</span></a></code></dt>
+<dd>Filters the parameter by using the PHP <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.filter-var.php" title="filter_var"><span class="pre">filter_var</span></a></code> function.</dd>
+</dl>
+<p>All getters take up to two arguments: the first one is the parameter name
+and the second one is the default value to return if the parameter does not
+exist:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// the query string is &#39;?foo=bar&#39;</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+<span class="c1">// returns &#39;bar&#39;</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
+<span class="c1">// returns null</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+<span class="c1">// returns &#39;baz&#39;</span>
+</pre></div>
+</div>
+<p>When PHP imports the request query, it handles request parameters like
+<code class="docutils literal notranslate"><span class="pre">foo[bar]=baz</span></code> in a special way as it creates an array. So you can get the
+<code class="docutils literal notranslate"><span class="pre">foo</span></code> parameter and you will get back an array with a <code class="docutils literal notranslate"><span class="pre">bar</span></code> element:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// the query string is &#39;?foo[bar]=baz&#39;</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+<span class="c1">// returns [&#39;bar&#39; =&gt; &#39;baz&#39;]</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;foo[bar]&#39;</span><span class="p">);</span>
+<span class="c1">// returns null</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)[</span><span class="s1">&#39;bar&#39;</span><span class="p">];</span>
+<span class="c1">// returns &#39;baz&#39;</span>
+</pre></div>
+</div>
+<p id="component-foundation-attributes">Thanks to the public <code class="docutils literal notranslate"><span class="pre">attributes</span></code> property, you can store additional data
+in the request, which is also an instance of
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ParameterBag.php" title="Symfony\Component\HttpFoundation\ParameterBag"><span class="pre">ParameterBag</span></a></code>. This is mostly used
+to attach information that belongs to the Request and that needs to be
+accessed from many different points in your application.</p>
+<p>Finally, the raw data sent with the request body can be accessed using
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request::getContent()"><span class="pre">getContent()</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$content</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getContent</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>For instance, this may be useful to process a JSON string sent to the
+application by a remote service using the HTTP POST method.</p>
+</div>
+<div class="section" id="identifying-a-request">
+<h3>Identifying a Request<a class="headerlink" href="#identifying-a-request" title="Permalink to this headline">¶</a></h3>
+<p>In your application, you need a way to identify a request; most of the time,
+this is done via the “path info” of the request, which can be accessed via the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request::getPathInfo()"><span class="pre">getPathInfo()</span></a></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// for a request to http://example.com/blog/index.php/post/hello-world</span>
+<span class="c1">// the path info is &quot;/post/hello-world&quot;</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPathInfo</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="simulating-a-request">
+<h3>Simulating a Request<a class="headerlink" href="#simulating-a-request" title="Permalink to this headline">¶</a></h3>
+<p>Instead of creating a request based on the PHP globals, you can also simulate
+a request:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">create</span><span class="p">(</span>
+    <span class="s1">&#39;/hello-world&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GET&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Fabien&#39;</span><span class="p">]</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request::create()"><span class="pre">create()</span></a></code> method
+creates a request based on a URI, a method and some parameters (the
+query parameters or the request ones depending on the HTTP method); and of
+course, you can also override all other variables as well (by default, Symfony
+creates sensible defaults for all the PHP global variables).</p>
+<p>Based on such a request, you can override the PHP global variables via
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request::overrideGlobals()"><span class="pre">overrideGlobals()</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">overrideGlobals</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can also duplicate an existing request via
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request::duplicate()"><span class="pre">duplicate()</span></a></code> or
+change a bunch of parameters with a single call to
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request::initialize()"><span class="pre">initialize()</span></a></code>.</p>
+</div>
+</div>
+<div class="section" id="accessing-the-session">
+<h3>Accessing the Session<a class="headerlink" href="#accessing-the-session" title="Permalink to this headline">¶</a></h3>
+<p>If you have a session attached to the request, you can access it via the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request::getSession()"><span class="pre">getSession()</span></a></code> method;
+the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request::hasPreviousSession()"><span class="pre">hasPreviousSession()</span></a></code>
+method tells you if the request contains a session which was started in one of
+the previous requests.</p>
+</div>
+<div class="section" id="processing-http-headers">
+<h3>Processing HTTP Headers<a class="headerlink" href="#processing-http-headers" title="Permalink to this headline">¶</a></h3>
+<p>Processing HTTP headers is not a trivial task because of the escaping and white
+space handling of their contents. Symfony provides a
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/HeaderUtils.php" title="Symfony\Component\HttpFoundation\HeaderUtils"><span class="pre">HeaderUtils</span></a></code> class that abstracts
+this complexity and defines some methods for the most common tasks:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\HeaderUtils</span><span class="p">;</span>
+
+<span class="c1">// Splits an HTTP header by one or more separators</span>
+<span class="nx">HeaderUtils</span><span class="o">::</span><span class="na">split</span><span class="p">(</span><span class="s1">&#39;da, en-gb;q=0.8&#39;</span><span class="p">,</span> <span class="s1">&#39;,;&#39;</span><span class="p">);</span>
+<span class="c1">// =&gt; [[&#39;da&#39;], [&#39;en-gb&#39;,&#39;q=0.8&#39;]]</span>
+
+<span class="c1">// Combines an array of arrays into one associative array</span>
+<span class="nx">HeaderUtils</span><span class="o">::</span><span class="na">combine</span><span class="p">([[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;bar&#39;</span><span class="p">]]);</span>
+<span class="c1">// =&gt; [&#39;foo&#39; =&gt; &#39;abc&#39;, &#39;bar&#39; =&gt; true]</span>
+
+<span class="c1">// Joins an associative array into a string for use in an HTTP header</span>
+<span class="nx">HeaderUtils</span><span class="o">::</span><span class="na">toString</span><span class="p">([</span><span class="s1">&#39;foo&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;a b c&#39;</span><span class="p">],</span> <span class="s1">&#39;,&#39;</span><span class="p">);</span>
+<span class="c1">// =&gt; &#39;foo=abc, bar, baz=&quot;a b c&quot;&#39;</span>
+
+<span class="c1">// Encodes a string as a quoted string, if necessary</span>
+<span class="nx">HeaderUtils</span><span class="o">::</span><span class="na">quote</span><span class="p">(</span><span class="s1">&#39;foo &quot;bar&quot;&#39;</span><span class="p">);</span>
+<span class="c1">// =&gt; &#39;&quot;foo \&quot;bar\&quot;&quot;&#39;</span>
+
+<span class="c1">// Decodes a quoted string</span>
+<span class="nx">HeaderUtils</span><span class="o">::</span><span class="na">unquote</span><span class="p">(</span><span class="s1">&#39;&quot;foo \&quot;bar\&quot;&quot;&#39;</span><span class="p">);</span>
+<span class="c1">// =&gt; &#39;foo &quot;bar&quot;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="accessing-accept-headers-data">
+<h3>Accessing <code class="docutils literal notranslate"><span class="pre">Accept-*</span></code> Headers Data<a class="headerlink" href="#accessing-accept-headers-data" title="Permalink to this headline">¶</a></h3>
+<p>You can access basic data extracted from <code class="docutils literal notranslate"><span class="pre">Accept-*</span></code> headers
+by using the following methods:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request::getAcceptableContentTypes()"><span class="pre">getAcceptableContentTypes()</span></a></code></dt>
+<dd>Returns the list of accepted content types ordered by descending quality.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request::getLanguages()"><span class="pre">getLanguages()</span></a></code></dt>
+<dd>Returns the list of accepted languages ordered by descending quality.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request::getCharsets()"><span class="pre">getCharsets()</span></a></code></dt>
+<dd>Returns the list of accepted charsets ordered by descending quality.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request::getEncodings()"><span class="pre">getEncodings()</span></a></code></dt>
+<dd>Returns the list of accepted encodings ordered by descending quality.</dd>
+</dl>
+<p>If you need to get full access to parsed data from <code class="docutils literal notranslate"><span class="pre">Accept</span></code>, <code class="docutils literal notranslate"><span class="pre">Accept-Language</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Accept-Charset</span></code> or <code class="docutils literal notranslate"><span class="pre">Accept-Encoding</span></code>, you can use
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/AcceptHeader.php" title="Symfony\Component\HttpFoundation\AcceptHeader"><span class="pre">AcceptHeader</span></a></code> utility class:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\AcceptHeader</span><span class="p">;</span>
+
+<span class="nv">$acceptHeader</span> <span class="o">=</span> <span class="nx">AcceptHeader</span><span class="o">::</span><span class="na">fromString</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;Accept&#39;</span><span class="p">));</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$acceptHeader</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;text/html&#39;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nv">$item</span> <span class="o">=</span> <span class="nv">$acceptHeader</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;text/html&#39;</span><span class="p">);</span>
+    <span class="nv">$charset</span> <span class="o">=</span> <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getAttribute</span><span class="p">(</span><span class="s1">&#39;charset&#39;</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">);</span>
+    <span class="nv">$quality</span> <span class="o">=</span> <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">getQuality</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// Accept header items are sorted by descending quality</span>
+<span class="nv">$acceptHeaders</span> <span class="o">=</span> <span class="nx">AcceptHeader</span><span class="o">::</span><span class="na">fromString</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;Accept&#39;</span><span class="p">))</span>
+    <span class="o">-&gt;</span><span class="na">all</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The default values that can be optionally included in the <code class="docutils literal notranslate"><span class="pre">Accept-*</span></code> headers
+are also supported:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$acceptHeader</span> <span class="o">=</span> <span class="s1">&#39;text/plain;q=0.5, text/html, text/*;q=0.8, */*;q=0.3&#39;</span><span class="p">;</span>
+<span class="nv">$accept</span> <span class="o">=</span> <span class="nx">AcceptHeader</span><span class="o">::</span><span class="na">fromString</span><span class="p">(</span><span class="nv">$acceptHeader</span><span class="p">);</span>
+
+<span class="nv">$quality</span> <span class="o">=</span> <span class="nv">$accept</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;text/xml&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getQuality</span><span class="p">();</span> <span class="c1">// $quality = 0.8</span>
+<span class="nv">$quality</span> <span class="o">=</span> <span class="nv">$accept</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;application/xml&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getQuality</span><span class="p">();</span> <span class="c1">// $quality = 0.3</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="anonymizing-ip-addresses">
+<h3>Anonymizing IP Addresses<a class="headerlink" href="#anonymizing-ip-addresses" title="Permalink to this headline">¶</a></h3>
+<p>An increasingly common need for applications to comply with user protection
+regulations is to anonymize IP addresses before logging and storing them for
+analysis purposes. Use the <code class="docutils literal notranslate"><span class="pre">anonymize()</span></code> method from the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/IpUtils.php" title="Symfony\Component\HttpFoundation\IpUtils"><span class="pre">IpUtils</span></a></code> to do that:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\IpUtils</span><span class="p">;</span>
+
+<span class="nv">$ipv4</span> <span class="o">=</span> <span class="s1">&#39;123.234.235.236&#39;</span><span class="p">;</span>
+<span class="nv">$anonymousIpv4</span> <span class="o">=</span> <span class="nx">IPUtils</span><span class="o">::</span><span class="na">anonymize</span><span class="p">(</span><span class="nv">$ipv4</span><span class="p">);</span>
+<span class="c1">// $anonymousIpv4 = &#39;123.234.235.0&#39;</span>
+
+<span class="nv">$ipv6</span> <span class="o">=</span> <span class="s1">&#39;2a01:198:603:10:396e:4789:8e99:890f&#39;</span><span class="p">;</span>
+<span class="nv">$anonymousIpv6</span> <span class="o">=</span> <span class="nx">IPUtils</span><span class="o">::</span><span class="na">anonymize</span><span class="p">(</span><span class="nv">$ipv6</span><span class="p">);</span>
+<span class="c1">// $anonymousIpv6 = &#39;2a01:198:603:10::&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="accessing-other-data">
+<h3>Accessing other Data<a class="headerlink" href="#accessing-other-data" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Request</span></code> class has many other methods that you can use to access the
+request information. Have a look at
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request"><span class="pre">the</span> <span class="pre">Request</span> <span class="pre">API</span></a></code>
+for more information about them.</p>
+</div>
+<div class="section" id="overriding-the-request">
+<h3>Overriding the Request<a class="headerlink" href="#overriding-the-request" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Request</span></code> class should not be overridden as it is a data object that
+represents an HTTP message. But when moving from a legacy system, adding
+methods or changing some default behavior might help. In that case, register a
+PHP callable that is able to create an instance of your <code class="docutils literal notranslate"><span class="pre">Request</span></code> class:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">App\Http\SpecialRequest</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+
+<span class="nx">Request</span><span class="o">::</span><span class="na">setFactory</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span>
+    <span class="k">array</span> <span class="nv">$query</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="k">array</span> <span class="nv">$request</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="k">array</span> <span class="nv">$attributes</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="k">array</span> <span class="nv">$cookies</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="k">array</span> <span class="nv">$files</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="k">array</span> <span class="nv">$server</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="nv">$content</span> <span class="o">=</span> <span class="k">null</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">SpecialRequest</span><span class="p">(</span>
+        <span class="nv">$query</span><span class="p">,</span>
+        <span class="nv">$request</span><span class="p">,</span>
+        <span class="nv">$attributes</span><span class="p">,</span>
+        <span class="nv">$cookies</span><span class="p">,</span>
+        <span class="nv">$files</span><span class="p">,</span>
+        <span class="nv">$server</span><span class="p">,</span>
+        <span class="nv">$content</span>
+    <span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="response">
+<span id="component-http-foundation-response"></span><h2>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h2>
+<p>A <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response"><span class="pre">Response</span></a></code> object holds all the
+information that needs to be sent back to the client from a given request. The
+constructor takes up to three arguments: the response content, the status
+code, and an array of HTTP headers:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span>
+    <span class="s1">&#39;Content&#39;</span><span class="p">,</span>
+    <span class="nx">Response</span><span class="o">::</span><span class="na">HTTP_OK</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;content-type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;text/html&#39;</span><span class="p">]</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This information can also be manipulated after the Response object creation:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setContent</span><span class="p">(</span><span class="s1">&#39;Hello World&#39;</span><span class="p">);</span>
+
+<span class="c1">// the headers public attribute is a ResponseHeaderBag</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">);</span>
+
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setStatusCode</span><span class="p">(</span><span class="nx">Response</span><span class="o">::</span><span class="na">HTTP_NOT_FOUND</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When setting the <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> of the Response, you can set the charset,
+but it is better to set it via the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::setCharset()"><span class="pre">setCharset()</span></a></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setCharset</span><span class="p">(</span><span class="s1">&#39;ISO-8859-1&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note that by default, Symfony assumes that your Responses are encoded in
+UTF-8.</p>
+<div class="section" id="sending-the-response">
+<h3>Sending the Response<a class="headerlink" href="#sending-the-response" title="Permalink to this headline">¶</a></h3>
+<p>Before sending the Response, you can optionally call the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::prepare()"><span class="pre">prepare()</span></a></code> method to fix any
+incompatibility with the HTTP specification (e.g. a wrong <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> header):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Sending the response to the client is done by calling the method
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::send()"><span class="pre">send()</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-cookies">
+<h3>Setting Cookies<a class="headerlink" href="#setting-cookies" title="Permalink to this headline">¶</a></h3>
+<p>The response cookies can be manipulated through the <code class="docutils literal notranslate"><span class="pre">headers</span></code> public
+attribute:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Cookie</span><span class="p">;</span>
+
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">setCookie</span><span class="p">(</span><span class="nx">Cookie</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>The
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ResponseHeaderBag.php" title="Symfony\Component\HttpFoundation\ResponseHeaderBag::setCookie()"><span class="pre">setCookie()</span></a></code>
+method takes an instance of
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Cookie.php" title="Symfony\Component\HttpFoundation\Cookie"><span class="pre">Cookie</span></a></code> as an argument.</p>
+<p>You can clear a cookie via the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/ResponseHeaderBag.php" title="Symfony\Component\HttpFoundation\ResponseHeaderBag::clearCookie()"><span class="pre">clearCookie()</span></a></code> method.</p>
+<p>In addition to the <code class="docutils literal notranslate"><span class="pre">Cookie::create()</span></code> method, you can create a <code class="docutils literal notranslate"><span class="pre">Cookie</span></code>
+object from a raw header value using <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Cookie.php" title="Symfony\Component\HttpFoundation\Cookie::fromString()"><span class="pre">fromString()</span></a></code>
+method. You can also use the <code class="docutils literal notranslate"><span class="pre">with*()</span></code> methods to change some Cookie property (or
+to build the entire Cookie using a fluent interface). Each <code class="docutils literal notranslate"><span class="pre">with*()</span></code> method returns
+a new object with the modified property:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$cookie</span> <span class="o">=</span> <span class="nx">Cookie</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">withValue</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">withExpires</span><span class="p">(</span><span class="nb">strtotime</span><span class="p">(</span><span class="s1">&#39;Fri, 20-May-2011 15:25:52 GMT&#39;</span><span class="p">))</span>
+    <span class="o">-&gt;</span><span class="na">withDomain</span><span class="p">(</span><span class="s1">&#39;.example.com&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">withSecure</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The <code class="docutils literal notranslate"><span class="pre">with*()</span></code> methods were introduced in Symfony 5.1.</p>
+</div>
+</div>
+<div class="section" id="managing-the-http-cache">
+<h3>Managing the HTTP Cache<a class="headerlink" href="#managing-the-http-cache" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response"><span class="pre">Response</span></a></code> class has a rich set
+of methods to manipulate the HTTP headers related to the cache:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::setPublic()"><span class="pre">setPublic()</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::setPrivate()"><span class="pre">setPrivate()</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::expire()"><span class="pre">expire()</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::setExpires()"><span class="pre">setExpires()</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::setMaxAge()"><span class="pre">setMaxAge()</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::setSharedMaxAge()"><span class="pre">setSharedMaxAge()</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::setTtl()"><span class="pre">setTtl()</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::setClientTtl()"><span class="pre">setClientTtl()</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::setLastModified()"><span class="pre">setLastModified()</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::setEtag()"><span class="pre">setEtag()</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::setVary()"><span class="pre">setVary()</span></a></code></li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The methods <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::setExpires()"><span class="pre">setExpires()</span></a></code>,
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::setLastModified()"><span class="pre">setLastModified()</span></a></code> and
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::setDate()"><span class="pre">setDate()</span></a></code> accept any
+object that implements <code class="docutils literal notranslate"><span class="pre">\DateTimeInterface</span></code>, including immutable date objects.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::setCache()"><span class="pre">setCache()</span></a></code> method
+can be used to set the most commonly used cache information in one method
+call:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setCache</span><span class="p">([</span>
+    <span class="s1">&#39;must_revalidate&#39;</span>  <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">&#39;no_cache&#39;</span>         <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">&#39;no_store&#39;</span>         <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">&#39;no_transform&#39;</span>     <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">&#39;public&#39;</span>           <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="s1">&#39;private&#39;</span>          <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">&#39;proxy_revalidate&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">&#39;max_age&#39;</span>          <span class="o">=&gt;</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="s1">&#39;s_maxage&#39;</span>         <span class="o">=&gt;</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="s1">&#39;immutable&#39;</span>        <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="s1">&#39;last_modified&#39;</span>    <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">(),</span>
+    <span class="s1">&#39;etag&#39;</span>             <span class="o">=&gt;</span> <span class="s1">&#39;abcdef&#39;</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The <code class="docutils literal notranslate"><span class="pre">must_revalidate</span></code>, <code class="docutils literal notranslate"><span class="pre">no_cache</span></code>, <code class="docutils literal notranslate"><span class="pre">no_store</span></code>, <code class="docutils literal notranslate"><span class="pre">no_transform</span></code> and
+<code class="docutils literal notranslate"><span class="pre">proxy_revalidate</span></code> directives were introduced in Symfony 5.1.</p>
+</div>
+<p>To check if the Response validators (<code class="docutils literal notranslate"><span class="pre">ETag</span></code>, <code class="docutils literal notranslate"><span class="pre">Last-Modified</span></code>) match a
+conditional value specified in the client Request, use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::isNotModified()"><span class="pre">isNotModified()</span></a></code>
+method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">isNotModified</span><span class="p">(</span><span class="nv">$request</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the Response is not modified, it sets the status code to 304 and removes the
+actual response content.</p>
+</div>
+<div class="section" id="redirecting-the-user">
+<span id="redirect-response"></span><h3>Redirecting the User<a class="headerlink" href="#redirecting-the-user" title="Permalink to this headline">¶</a></h3>
+<p>To redirect the client to another URL, you can use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/RedirectResponse.php" title="Symfony\Component\HttpFoundation\RedirectResponse"><span class="pre">RedirectResponse</span></a></code> class:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\RedirectResponse</span><span class="p">;</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RedirectResponse</span><span class="p">(</span><span class="s1">&#39;http://example.com/&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="streaming-a-response">
+<span id="streaming-response"></span><h3>Streaming a Response<a class="headerlink" href="#streaming-a-response" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/StreamedResponse.php" title="Symfony\Component\HttpFoundation\StreamedResponse"><span class="pre">StreamedResponse</span></a></code> class allows
+you to stream the Response back to the client. The response content is
+represented by a PHP callable instead of a string:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\StreamedResponse</span><span class="p">;</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">StreamedResponse</span><span class="p">();</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setCallback</span><span class="p">(</span><span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nb">var_dump</span><span class="p">(</span><span class="s1">&#39;Hello World&#39;</span><span class="p">);</span>
+    <span class="nb">flush</span><span class="p">();</span>
+    <span class="nb">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="nb">var_dump</span><span class="p">(</span><span class="s1">&#39;Hello World&#39;</span><span class="p">);</span>
+    <span class="nb">flush</span><span class="p">();</span>
+<span class="p">});</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">flush()</span></code> function does not flush buffering. If <code class="docutils literal notranslate"><span class="pre">ob_start()</span></code> has
+been called before or the <code class="docutils literal notranslate"><span class="pre">output_buffering</span></code> <code class="docutils literal notranslate"><span class="pre">php.ini</span></code> option is enabled,
+you must call <code class="docutils literal notranslate"><span class="pre">ob_flush()</span></code> before <code class="docutils literal notranslate"><span class="pre">flush()</span></code>.</p>
+<p>Additionally, PHP isn’t the only layer that can buffer output. Your web
+server might also buffer based on its configuration. Some servers, such as
+nginx, let you disable buffering at the config level or by adding a special HTTP
+header in the response:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// disables FastCGI buffering in nginx only for this response</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;X-Accel-Buffering&#39;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="serving-files">
+<span id="component-http-foundation-serving-files"></span><h3>Serving Files<a class="headerlink" href="#serving-files" title="Permalink to this headline">¶</a></h3>
+<p>When sending a file, you must add a <code class="docutils literal notranslate"><span class="pre">Content-Disposition</span></code> header to your
+response. While creating this header for basic file downloads is straightforward,
+using non-ASCII filenames is more involved. The
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/HeaderUtils.php" title="Symfony\Component\HttpFoundation\HeaderUtils::makeDisposition()"><span class="pre">makeDisposition()</span></a></code>
+abstracts the hard work behind a simple API:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\HeaderUtils</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\ResponseHeaderBag</span><span class="p">;</span>
+
+<span class="nv">$fileContent</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span> <span class="c1">// the generated file content</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="nv">$fileContent</span><span class="p">);</span>
+
+<span class="nv">$disposition</span> <span class="o">=</span> <span class="nx">HeaderUtils</span><span class="o">::</span><span class="na">makeDisposition</span><span class="p">(</span>
+    <span class="nx">HeaderUtils</span><span class="o">::</span><span class="na">DISPOSITION_ATTACHMENT</span><span class="p">,</span>
+    <span class="s1">&#39;foo.pdf&#39;</span>
+<span class="p">);</span>
+
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;Content-Disposition&#39;</span><span class="p">,</span> <span class="nv">$disposition</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Alternatively, if you are serving a static file, you can use a
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/BinaryFileResponse.php" title="Symfony\Component\HttpFoundation\BinaryFileResponse"><span class="pre">BinaryFileResponse</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\BinaryFileResponse</span><span class="p">;</span>
+
+<span class="nv">$file</span> <span class="o">=</span> <span class="s1">&#39;path/to/file.txt&#39;</span><span class="p">;</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BinaryFileResponse</span><span class="p">(</span><span class="nv">$file</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">BinaryFileResponse</span></code> will automatically handle <code class="docutils literal notranslate"><span class="pre">Range</span></code> and
+<code class="docutils literal notranslate"><span class="pre">If-Range</span></code> headers from the request. It also supports <code class="docutils literal notranslate"><span class="pre">X-Sendfile</span></code>
+(see for <a class="reference external" href="https://www.nginx.com/resources/wiki/start/topics/examples/xsendfile/">nginx</a> and <a class="reference external" href="https://tn123.org/mod_xsendfile/">Apache</a>). To make use of it, you need to determine
+whether or not the <code class="docutils literal notranslate"><span class="pre">X-Sendfile-Type</span></code> header should be trusted and call
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/BinaryFileResponse.php" title="Symfony\Component\HttpFoundation\BinaryFileResponse::trustXSendfileTypeHeader()"><span class="pre">trustXSendfileTypeHeader()</span></a></code>
+if it should:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nx">BinaryFileResponse</span><span class="o">::</span><span class="na">trustXSendfileTypeHeader</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">BinaryFileResponse</span></code> will only handle <code class="docutils literal notranslate"><span class="pre">X-Sendfile</span></code> if the particular header is present.
+For Apache, this is not the default case.</p>
+<p>To add the header use the <code class="docutils literal notranslate"><span class="pre">mod_headers</span></code> Apache module and add the following to the Apache configuration:</p>
+<div class="last highlight-apache notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nt">&lt;IfModule</span> <span class="s">mod_xsendfile.c</span><span class="nt">&gt;</span>
+  <span class="c"># This is already present somewhere...</span>
+  <span class="nb">XSendFile</span> <span class="k">on</span>
+  <span class="nb">XSendFilePath</span> ...some path...
+
+  <span class="c"># This needs to be added:</span>
+  <span class="nt">&lt;IfModule</span> <span class="s">mod_headers.c</span><span class="nt">&gt;</span>
+    <span class="nb">RequestHeader</span> set X-Sendfile-Type X-Sendfile
+  <span class="nt">&lt;/IfModule&gt;</span>
+<span class="nt">&lt;/IfModule&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>With the <code class="docutils literal notranslate"><span class="pre">BinaryFileResponse</span></code>, you can still set the <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> of the sent file,
+or change its <code class="docutils literal notranslate"><span class="pre">Content-Disposition</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">);</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setContentDisposition</span><span class="p">(</span>
+    <span class="nx">ResponseHeaderBag</span><span class="o">::</span><span class="na">DISPOSITION_ATTACHMENT</span><span class="p">,</span>
+    <span class="s1">&#39;filename.txt&#39;</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>It is possible to delete the file after the request is sent with the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/BinaryFileResponse.php" title="Symfony\Component\HttpFoundation\BinaryFileResponse::deleteFileAfterSend()"><span class="pre">deleteFileAfterSend()</span></a></code> method.
+Please note that this will not work when the <code class="docutils literal notranslate"><span class="pre">X-Sendfile</span></code> header is set.</p>
+<p>If the size of the served file is unknown (e.g. because it’s being generated on the fly,
+or because a PHP stream filter is registered on it, etc.), you can pass a <code class="docutils literal notranslate"><span class="pre">Stream</span></code>
+instance to <code class="docutils literal notranslate"><span class="pre">BinaryFileResponse</span></code>. This will disable <code class="docutils literal notranslate"><span class="pre">Range</span></code> and <code class="docutils literal notranslate"><span class="pre">Content-Length</span></code>
+handling, switching to chunked encoding instead:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\BinaryFileResponse</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\File\Stream</span><span class="p">;</span>
+
+<span class="nv">$stream</span>  <span class="o">=</span> <span class="k">new</span> <span class="nx">Stream</span><span class="p">(</span><span class="s1">&#39;path/to/stream&#39;</span><span class="p">);</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BinaryFileResponse</span><span class="p">(</span><span class="nv">$stream</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you <em>just</em> created the file during this same request, the file <em>may</em> be sent
+without any content. This may be due to cached file stats that return zero for
+the size of the file. To fix this issue, call <code class="docutils literal notranslate"><span class="pre">clearstatcache(true,</span> <span class="pre">$file)</span></code>
+with the path to the binary file.</p>
+</div>
+</div>
+<div class="section" id="creating-a-json-response">
+<span id="component-http-foundation-json-response"></span><h3>Creating a JSON Response<a class="headerlink" href="#creating-a-json-response" title="Permalink to this headline">¶</a></h3>
+<p>Any type of response can be created via the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response"><span class="pre">Response</span></a></code> class by setting the
+right content and headers. A JSON response might look like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">();</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setContent</span><span class="p">(</span><span class="nb">json_encode</span><span class="p">([</span>
+    <span class="s1">&#39;data&#39;</span> <span class="o">=&gt;</span> <span class="mi">123</span><span class="p">,</span>
+<span class="p">]));</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>There is also a helpful <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/JsonResponse.php" title="Symfony\Component\HttpFoundation\JsonResponse"><span class="pre">JsonResponse</span></a></code>
+class, which can make this even easier:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\JsonResponse</span><span class="p">;</span>
+
+<span class="c1">// if you know the data to send when creating the response</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">JsonResponse</span><span class="p">([</span><span class="s1">&#39;data&#39;</span> <span class="o">=&gt;</span> <span class="mi">123</span><span class="p">]);</span>
+
+<span class="c1">// if you don&#39;t know the data to send when creating the response</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">JsonResponse</span><span class="p">();</span>
+<span class="c1">// ...</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setData</span><span class="p">([</span><span class="s1">&#39;data&#39;</span> <span class="o">=&gt;</span> <span class="mi">123</span><span class="p">]);</span>
+
+<span class="c1">// if the data to send is already encoded in JSON</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nx">JsonResponse</span><span class="o">::</span><span class="na">fromJsonString</span><span class="p">(</span><span class="s1">&#39;{ &quot;data&quot;: 123 }&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">JsonResponse</span></code> class sets the <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> header to
+<code class="docutils literal notranslate"><span class="pre">application/json</span></code> and encodes your data to JSON when needed.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p>To avoid XSSI <a class="reference external" href="https://haacked.com/archive/2009/06/25/json-hijacking.aspx/">JSON Hijacking</a>, you should pass an associative array
+as the outer-most array to <code class="docutils literal notranslate"><span class="pre">JsonResponse</span></code> and not an indexed array so
+that the final result is an object (e.g. <code class="docutils literal notranslate"><span class="pre">{&quot;object&quot;:</span> <span class="pre">&quot;not</span> <span class="pre">inside</span> <span class="pre">an</span> <span class="pre">array&quot;}</span></code>)
+instead of an array (e.g. <code class="docutils literal notranslate"><span class="pre">[{&quot;object&quot;:</span> <span class="pre">&quot;inside</span> <span class="pre">an</span> <span class="pre">array&quot;}]</span></code>). Read
+the <a class="reference external" href="https://cheatsheetseries.owasp.org/cheatsheets/AJAX_Security_Cheat_Sheet.html#always-return-json-with-an-object-on-the-outside">OWASP guidelines</a> for more information.</p>
+<p class="last">Only methods that respond to GET requests are vulnerable to XSSI ‘JSON Hijacking’.
+Methods responding to POST requests only remain unaffected.</p>
+</div>
+</div>
+<div class="section" id="jsonp-callback">
+<h3>JSONP Callback<a class="headerlink" href="#jsonp-callback" title="Permalink to this headline">¶</a></h3>
+<p>If you’re using JSONP, you can set the callback function that the data should
+be passed to:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setCallback</span><span class="p">(</span><span class="s1">&#39;handleResponse&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In this case, the <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> header will be <code class="docutils literal notranslate"><span class="pre">text/javascript</span></code> and
+the response content will look like this:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nx">handleResponse</span><span class="p">({</span><span class="s1">&#39;data&#39;</span><span class="o">:</span> <span class="mi">123</span><span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="session">
+<h2>Session<a class="headerlink" href="#session" title="Permalink to this headline">¶</a></h2>
+<p>The session information is in its own document: <a class="reference internal" href="http_foundation/sessions.html"><span class="doc">Session Management</span></a>.</p>
+</div>
+<div class="section" id="safe-content-preference">
+<h2>Safe Content Preference<a class="headerlink" href="#safe-content-preference" title="Permalink to this headline">¶</a></h2>
+<p>Some web sites have a “safe” mode to assist those who don’t want to be exposed
+to content to which they might object. The  <a class="reference external" href="https://tools.ietf.org/html/rfc8674">RFC 8674</a> specification defines a
+way for user agents to ask for safe content to a server.</p>
+<p>The specification does not define what content might be considered objectionable,
+so the concept of “safe” is not precisely defined. Rather, the term is interpreted
+by the server and within the scope of each web site that chooses to act upon this information.</p>
+<p>Symfony offers two methods to interact with this preference:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request::preferSafeContent()"><span class="pre">preferSafeContent()</span></a></code>;</li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::setContentSafe()"><span class="pre">setContentSafe()</span></a></code>;</li>
+</ul>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The <code class="docutils literal notranslate"><span class="pre">preferSafeContent()</span></code> and <code class="docutils literal notranslate"><span class="pre">setContentSafe()</span></code> methods were introduced
+in Symfony 5.1.</p>
+</div>
+<p>The following example shows how to detect if the user agent prefers “safe” content:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">preferSafeContent</span><span class="p">())</span> <span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="nv">$alternativeContent</span><span class="p">);</span>
+    <span class="c1">// this informs the user we respected their preferences</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setContentSafe</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="learn-more">
+<h2>Learn More<a class="headerlink" href="#learn-more" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http_foundation/session_configuration.html">Configuring Sessions and Save Handlers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_foundation/session_php_bridge.html">Integrating with Legacy Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_foundation/session_testing.html">Testing with Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_foundation/sessions.html">Session Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controller.html">Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controller/argument_value_resolver.html">Extending Action Argument Resolving</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controller/error_pages.html">How to Customize Error Pages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controller/forwarding.html">How to Forward Requests to another Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controller/service.html">How to Define Controllers as Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controller/soap_web_service.html">How to Create a SOAP Web Service in a Symfony Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controller/upload_file.html">How to Upload Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session/database.html">Store Sessions in a Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session/locale_sticky_session.html">Making the Locale “Sticky” during a User’s Session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session/php_bridge.html">Bridge a legacy Application with Symfony Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session/proxy_examples.html">Session Proxy Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache/cache_invalidation.html">Cache Invalidation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache/cache_vary.html">Varying the Response for HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache/esi.html">Working with Edge Side Includes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache/expiration.html">HTTP Cache Expiration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache/ssi.html">Working with Server Side Includes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache/validation.html">HTTP Cache Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache/varnish.html">How to Use Varnish to Speed up my Website</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

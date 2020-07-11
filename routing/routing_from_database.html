@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Looking up Routes from a Database: Symfony CMF DynamicRouter &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Symfony versus Flat PHP" href="../introduction/from_flat_php_to_symfony.html" />
+    <link rel="prev" title="How to Create a custom Route Loader" href="custom_route_loader.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../routing.html">Routing</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#creating-routes">Creating Routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#route-parameters">Route Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#route-groups-and-prefixes">Route Groups and Prefixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#getting-the-route-name-and-parameters">Getting the Route Name and Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#special-routes">Special Routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#sub-domain-routing">Sub-Domain Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#localized-routes-i18n">Localized Routes (i18n)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#stateless-routes">Stateless Routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#generating-urls">Generating URLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../routing.html#learn-more-about-routing">Learn more about Routing</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../controller.html">Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_route_loader.html">How to Create a custom Route Loader</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Looking up Routes from a Database: Symfony CMF DynamicRouter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../getting_started/index.html">Getting Started</a> &raquo;</li>
+        
+          <li><a href="../setup.html">Installing &amp; Setting up the Symfony Framework</a> &raquo;</li>
+        
+          <li><a href="../page_creation.html">Create your First Page in Symfony</a> &raquo;</li>
+        
+          <li><a href="../routing.html">Routing</a> &raquo;</li>
+        
+      <li>Looking up Routes from a Database: Symfony CMF DynamicRouter</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/routing/routing_from_database.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="looking-up-routes-from-a-database-symfony-cmf-dynamicrouter">
+<span id="index-0"></span><h1>Looking up Routes from a Database: Symfony CMF DynamicRouter<a class="headerlink" href="#looking-up-routes-from-a-database-symfony-cmf-dynamicrouter" title="Permalink to this headline">¶</a></h1>
+<p>The core Symfony Routing System is excellent at handling complex sets
+of routes. A highly optimized routing cache is dumped during
+deployments.</p>
+<p>However, when working with large amounts of data that each need a nice
+readable URL (e.g. for search engine optimization purposes), the routing
+can get slowed down. Additionally, if routes need to be edited by users,
+the route cache would need to be rebuilt frequently.</p>
+<p>For these cases, the <code class="docutils literal notranslate"><span class="pre">DynamicRouter</span></code> offers an alternative approach:</p>
+<ul class="simple">
+<li>Routes are stored in a database;</li>
+<li>There is a database index on the path field, the lookup scales to huge
+numbers of different routes;</li>
+<li>Writes only affect the index of the database, which is very efficient.</li>
+</ul>
+<p>When all routes are known during deploy time and the number is not too
+high, using a <a class="reference internal" href="custom_route_loader.html"><span class="doc">custom route loader</span></a> is the
+preferred way to add more routes. When working with just one type of
+objects, a slug parameter on the object and the <code class="docutils literal notranslate"><span class="pre">&#64;ParamConverter</span></code>
+annotation work fine (see <a class="reference external" href="https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html">FrameworkExtraBundle</a>) .</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">DynamicRouter</span></code> is useful when you need <code class="docutils literal notranslate"><span class="pre">Route</span></code> objects with
+the full feature set of Symfony. Each route can define a specific
+controller so you can decouple the URL structure from your application
+logic.</p>
+<p>The DynamicRouter comes with built-in support for Doctrine ORM and Doctrine
+PHPCR-ODM but offers the <code class="docutils literal notranslate"><span class="pre">ContentRepositoryInterface</span></code> to write a custom
+loader, e.g. for another database type or a REST API or anything else.</p>
+<p>The DynamicRouter is explained in the <a class="reference external" href="https://symfony.com/doc/current/cmf/bundles/routing/dynamic.html">Symfony CMF documentation</a>.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

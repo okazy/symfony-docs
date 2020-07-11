@@ -1,0 +1,798 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The PropertyAccess Component &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The PropertyInfo Component" href="property_info.html" />
+    <link rel="prev" title="The Process Component" href="process.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cache.html">The Cache Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependency_injection.html">The DependencyInjection Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="form.html">The Form Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html">The Process Component</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The PropertyAccess Component</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-from-arrays">Reading from Arrays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-from-objects">Reading from Objects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#accessing-public-properties">Accessing public Properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-getters">Using Getters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-hassers-issers">Using Hassers/Issers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#accessing-a-non-existing-property-path">Accessing a non Existing Property Path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#magic-get-method">Magic <code class="docutils literal notranslate"><span class="pre">__get()</span></code> Method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#magic-call-method">Magic <code class="docutils literal notranslate"><span class="pre">__call()</span></code> Method</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-to-arrays">Writing to Arrays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-to-objects">Writing to Objects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#writing-to-array-properties">Writing to Array Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#checking-property-paths">Checking Property Paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mixing-objects-and-arrays">Mixing Objects and Arrays</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enable-other-features">Enable other Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">The Security Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">The Components</a> &raquo;</li>
+        
+      <li>The PropertyAccess Component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/components/property_access.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-propertyaccess-component">
+<span id="index-0"></span><h1>The PropertyAccess Component<a class="headerlink" href="#the-propertyaccess-component" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div>The PropertyAccess component provides function to read and write from/to an
+object or array using a simple string notation.</div></blockquote>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/property-access
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you install this component outside of a Symfony application, you must
+require the <code class="docutils literal notranslate"><span class="pre">vendor/autoload.php</span></code> file in your code to enable the class
+autoloading mechanism provided by Composer. Read
+<a class="reference internal" href="using_components.html"><span class="doc">this article</span></a> for more details.</p>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>The entry point of this component is the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyAccess.php" title="Symfony\Component\PropertyAccess\PropertyAccess::createPropertyAccessor()"><span class="pre">createPropertyAccessor()</span></a></code>
+factory. This factory will create a new instance of the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyAccessor.php" title="Symfony\Component\PropertyAccess\PropertyAccessor"><span class="pre">PropertyAccessor</span></a></code> class with the
+default configuration:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\PropertyAccess\PropertyAccess</span><span class="p">;</span>
+
+<span class="nv">$propertyAccessor</span> <span class="o">=</span> <span class="nx">PropertyAccess</span><span class="o">::</span><span class="na">createPropertyAccessor</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reading-from-arrays">
+<h2>Reading from Arrays<a class="headerlink" href="#reading-from-arrays" title="Permalink to this headline">¶</a></h2>
+<p>You can read an array with the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyAccessor.php" title="Symfony\Component\PropertyAccess\PropertyAccessor::getValue()"><span class="pre">getValue()</span></a></code> method.
+This is done using the index notation that is used in PHP:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$person</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;first_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Wouter&#39;</span><span class="p">,</span>
+<span class="p">];</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;[first_name]&#39;</span><span class="p">));</span> <span class="c1">// &#39;Wouter&#39;</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;[age]&#39;</span><span class="p">));</span> <span class="c1">// null</span>
+</pre></div>
+</div>
+<p>As you can see, the method will return <code class="docutils literal notranslate"><span class="pre">null</span></code> if the index does not exist.
+But you can change this behavior with the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyAccessorBuilder.php" title="Symfony\Component\PropertyAccess\PropertyAccessorBuilder::enableExceptionOnInvalidIndex()"><span class="pre">enableExceptionOnInvalidIndex()</span></a></code>
+method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$propertyAccessor</span> <span class="o">=</span> <span class="nx">PropertyAccess</span><span class="o">::</span><span class="na">createPropertyAccessorBuilder</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">enableExceptionOnInvalidIndex</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">getPropertyAccessor</span><span class="p">();</span>
+
+<span class="nv">$person</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;first_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Wouter&#39;</span><span class="p">,</span>
+<span class="p">];</span>
+
+<span class="c1">// instead of returning null, the code now throws an exception of type</span>
+<span class="c1">// Symfony\Component\PropertyAccess\Exception\NoSuchIndexException</span>
+<span class="nv">$value</span> <span class="o">=</span> <span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;[age]&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>You can also use multi dimensional arrays:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$persons</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;first_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Wouter&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;first_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Ryan&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">];</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$persons</span><span class="p">,</span> <span class="s1">&#39;[0][first_name]&#39;</span><span class="p">));</span> <span class="c1">// &#39;Wouter&#39;</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$persons</span><span class="p">,</span> <span class="s1">&#39;[1][first_name]&#39;</span><span class="p">));</span> <span class="c1">// &#39;Ryan&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reading-from-objects">
+<h2>Reading from Objects<a class="headerlink" href="#reading-from-objects" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">getValue()</span></code> method is a very robust method, and you can see all of its
+features when working with objects.</p>
+<div class="section" id="accessing-public-properties">
+<h3>Accessing public Properties<a class="headerlink" href="#accessing-public-properties" title="Permalink to this headline">¶</a></h3>
+<p>To read from properties, use the “dot” notation:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+<span class="nv">$person</span><span class="o">-&gt;</span><span class="na">firstName</span> <span class="o">=</span> <span class="s1">&#39;Wouter&#39;</span><span class="p">;</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;firstName&#39;</span><span class="p">));</span> <span class="c1">// &#39;Wouter&#39;</span>
+
+<span class="nv">$child</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+<span class="nv">$child</span><span class="o">-&gt;</span><span class="na">firstName</span> <span class="o">=</span> <span class="s1">&#39;Bar&#39;</span><span class="p">;</span>
+<span class="nv">$person</span><span class="o">-&gt;</span><span class="na">children</span> <span class="o">=</span> <span class="p">[</span><span class="nv">$child</span><span class="p">];</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;children[0].firstName&#39;</span><span class="p">));</span> <span class="c1">// &#39;Bar&#39;</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Accessing public properties is the last option used by <code class="docutils literal notranslate"><span class="pre">PropertyAccessor</span></code>.
+It tries to access the value using the below methods first before using
+the property directly. For example, if you have a public property that
+has a getter method, it will use the getter.</p>
+</div>
+</div>
+<div class="section" id="using-getters">
+<h3>Using Getters<a class="headerlink" href="#using-getters" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">getValue()</span></code> method also supports reading using getters. The method will
+be created using common naming conventions for getters. It transforms the
+property name to camelCase (<code class="docutils literal notranslate"><span class="pre">first_name</span></code> becomes <code class="docutils literal notranslate"><span class="pre">FirstName</span></code>) and prefixes
+it with <code class="docutils literal notranslate"><span class="pre">get</span></code>. So the actual method becomes <code class="docutils literal notranslate"><span class="pre">getFirstName()</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Person</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$firstName</span> <span class="o">=</span> <span class="s1">&#39;Wouter&#39;</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getFirstName</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">firstName</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;first_name&#39;</span><span class="p">));</span> <span class="c1">// &#39;Wouter&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-hassers-issers">
+<h3>Using Hassers/Issers<a class="headerlink" href="#using-hassers-issers" title="Permalink to this headline">¶</a></h3>
+<p>And it doesn’t even stop there. If there is no getter found, the accessor will
+look for an isser or hasser. This method is created using the same way as
+getters, this means that you can do something like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Person</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$author</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$children</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">isAuthor</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">author</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">hasChildren</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span> <span class="o">!==</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;author&#39;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nb">var_dump</span><span class="p">(</span><span class="s1">&#39;This person is an author&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;children&#39;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nb">var_dump</span><span class="p">(</span><span class="s1">&#39;This person has children&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This will produce: <code class="docutils literal notranslate"><span class="pre">This</span> <span class="pre">person</span> <span class="pre">is</span> <span class="pre">an</span> <span class="pre">author</span></code></p>
+</div>
+<div class="section" id="accessing-a-non-existing-property-path">
+<h3>Accessing a non Existing Property Path<a class="headerlink" href="#accessing-a-non-existing-property-path" title="Permalink to this headline">¶</a></h3>
+<p>By default a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/Exception/NoSuchPropertyException.php" title="Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException"><span class="pre">NoSuchPropertyException</span></a></code>
+is thrown if the property path passed to <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyAccessor.php" title="Symfony\Component\PropertyAccess\PropertyAccessor::getValue()"><span class="pre">getValue()</span></a></code>
+does not exist. You can change this behavior using the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyAccessorBuilder.php" title="Symfony\Component\PropertyAccess\PropertyAccessorBuilder::disableExceptionOnInvalidPropertyPath()"><span class="pre">disableExceptionOnInvalidPropertyPath()</span></a></code>
+method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Person</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$name</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nv">$person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+
+<span class="nv">$propertyAccessor</span> <span class="o">=</span> <span class="nx">PropertyAccess</span><span class="o">::</span><span class="na">createPropertyAccessorBuilder</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">disableExceptionOnInvalidPropertyPath</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">getPropertyAccessor</span><span class="p">();</span>
+
+<span class="c1">// instead of throwing an exception the following code returns null</span>
+<span class="nv">$value</span> <span class="o">=</span> <span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;birthday&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="magic-get-method">
+<h3>Magic <code class="docutils literal notranslate"><span class="pre">__get()</span></code> Method<a class="headerlink" href="#magic-get-method" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">getValue()</span></code> method can also use the magic <code class="docutils literal notranslate"><span class="pre">__get()</span></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Person</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$children</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;Wouter&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="o">...</span><span class="p">],</span>
+    <span class="p">];</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__get</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">[</span><span class="nv">$id</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;Wouter&#39;</span><span class="p">));</span> <span class="c1">// [...]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="magic-call-method">
+<span id="components-property-access-magic-call"></span><h3>Magic <code class="docutils literal notranslate"><span class="pre">__call()</span></code> Method<a class="headerlink" href="#magic-call-method" title="Permalink to this headline">¶</a></h3>
+<p>At last, <code class="docutils literal notranslate"><span class="pre">getValue()</span></code> can use the magic <code class="docutils literal notranslate"><span class="pre">__call()</span></code> method, but you need to
+enable this feature by using <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyAccessorBuilder.php" title="Symfony\Component\PropertyAccess\PropertyAccessorBuilder"><span class="pre">PropertyAccessorBuilder</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Person</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$children</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;wouter&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="o">...</span><span class="p">],</span>
+    <span class="p">];</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__call</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$property</span> <span class="o">=</span> <span class="nb">lcfirst</span><span class="p">(</span><span class="nb">substr</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;get&#39;</span> <span class="o">===</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">[</span><span class="nv">$property</span><span class="p">])</span>
+                <span class="o">?</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">[</span><span class="nv">$property</span><span class="p">]</span>
+                <span class="o">:</span> <span class="k">null</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="s1">&#39;set&#39;</span> <span class="o">===</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$value</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">==</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$args</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">:</span> <span class="k">null</span><span class="p">;</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">[</span><span class="nv">$property</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+
+<span class="c1">// enables PHP __call() magic method</span>
+<span class="nv">$propertyAccessor</span> <span class="o">=</span> <span class="nx">PropertyAccess</span><span class="o">::</span><span class="na">createPropertyAccessorBuilder</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">enableMagicCall</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">getPropertyAccessor</span><span class="p">();</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;wouter&#39;</span><span class="p">));</span> <span class="c1">// [...]</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">__call()</span></code> feature is disabled by default, you can enable it by calling
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyAccessorBuilder.php" title="Symfony\Component\PropertyAccess\PropertyAccessorBuilder::enableMagicCall()"><span class="pre">enableMagicCall()</span></a></code>
+see <a class="reference internal" href="#enable-other-features">Enable other Features</a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="writing-to-arrays">
+<h2>Writing to Arrays<a class="headerlink" href="#writing-to-arrays" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">PropertyAccessor</span></code> class can do more than just read an array, it can
+also write to an array. This can be achieved using the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyAccessor.php" title="Symfony\Component\PropertyAccess\PropertyAccessor::setValue()"><span class="pre">setValue()</span></a></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$person</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;[first_name]&#39;</span><span class="p">,</span> <span class="s1">&#39;Wouter&#39;</span><span class="p">);</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;[first_name]&#39;</span><span class="p">));</span> <span class="c1">// &#39;Wouter&#39;</span>
+<span class="c1">// or</span>
+<span class="c1">// var_dump($person[&#39;first_name&#39;]); // &#39;Wouter&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="writing-to-objects">
+<h2>Writing to Objects<a class="headerlink" href="#writing-to-objects" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">setValue()</span></code> method has the same features as the <code class="docutils literal notranslate"><span class="pre">getValue()</span></code> method. You
+can use setters, the magic <code class="docutils literal notranslate"><span class="pre">__set()</span></code> method or properties to set values:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Person</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$firstName</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$lastName</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$children</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setLastName</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">lastName</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getLastName</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">lastName</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getChildren</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__set</span><span class="p">(</span><span class="nv">$property</span><span class="p">,</span> <span class="nv">$value</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nv">$property</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+
+<span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;firstName&#39;</span><span class="p">,</span> <span class="s1">&#39;Wouter&#39;</span><span class="p">);</span>
+<span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;lastName&#39;</span><span class="p">,</span> <span class="s1">&#39;de Jong&#39;</span><span class="p">);</span> <span class="c1">// setLastName is called</span>
+<span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;children&#39;</span><span class="p">,</span> <span class="p">[</span><span class="k">new</span> <span class="nx">Person</span><span class="p">()]);</span> <span class="c1">// __set is called</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$person</span><span class="o">-&gt;</span><span class="na">firstName</span><span class="p">);</span> <span class="c1">// &#39;Wouter&#39;</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$person</span><span class="o">-&gt;</span><span class="na">getLastName</span><span class="p">());</span> <span class="c1">// &#39;de Jong&#39;</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$person</span><span class="o">-&gt;</span><span class="na">getChildren</span><span class="p">());</span> <span class="c1">// [Person()];</span>
+</pre></div>
+</div>
+<p>You can also use <code class="docutils literal notranslate"><span class="pre">__call()</span></code> to set values but you need to enable the feature,
+see <a class="reference internal" href="#enable-other-features">Enable other Features</a>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Person</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$children</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__call</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nv">$args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$property</span> <span class="o">=</span> <span class="nb">lcfirst</span><span class="p">(</span><span class="nb">substr</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;get&#39;</span> <span class="o">===</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">[</span><span class="nv">$property</span><span class="p">])</span>
+                <span class="o">?</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">[</span><span class="nv">$property</span><span class="p">]</span>
+                <span class="o">:</span> <span class="k">null</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="s1">&#39;set&#39;</span> <span class="o">===</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$value</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">==</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$args</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">:</span> <span class="k">null</span><span class="p">;</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">[</span><span class="nv">$property</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="nv">$person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+
+<span class="c1">// Enable magic __call</span>
+<span class="nv">$propertyAccessor</span> <span class="o">=</span> <span class="nx">PropertyAccess</span><span class="o">::</span><span class="na">createPropertyAccessorBuilder</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">enableMagicCall</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">getPropertyAccessor</span><span class="p">();</span>
+
+<span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;wouter&#39;</span><span class="p">,</span> <span class="p">[</span><span class="o">...</span><span class="p">]);</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$person</span><span class="o">-&gt;</span><span class="na">getWouter</span><span class="p">());</span> <span class="c1">// [...]</span>
+</pre></div>
+</div>
+<div class="section" id="writing-to-array-properties">
+<h3>Writing to Array Properties<a class="headerlink" href="#writing-to-array-properties" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">PropertyAccessor</span></code> class allows to update the content of arrays stored in
+properties through <em>adder</em> and <em>remover</em> methods:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Person</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @var string[]</span>
+<span class="sd">     */</span>
+    <span class="k">private</span> <span class="nv">$children</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getChildren</span><span class="p">()</span><span class="o">:</span> <span class="k">array</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">addChild</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$name</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">[</span><span class="nv">$name</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">removeChild</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$name</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="nb">unset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">[</span><span class="nv">$name</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+<span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;children&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;kevin&#39;</span><span class="p">,</span> <span class="s1">&#39;wouter&#39;</span><span class="p">]);</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$person</span><span class="o">-&gt;</span><span class="na">getChildren</span><span class="p">());</span> <span class="c1">// [&#39;kevin&#39;, &#39;wouter&#39;]</span>
+</pre></div>
+</div>
+<p>The PropertyAccess component checks for methods called <code class="docutils literal notranslate"><span class="pre">add&lt;SingularOfThePropertyName&gt;()</span></code>
+and <code class="docutils literal notranslate"><span class="pre">remove&lt;SingularOfThePropertyName&gt;()</span></code>. Both methods must be defined.
+For instance, in the previous example, the component looks for the <code class="docutils literal notranslate"><span class="pre">addChild()</span></code>
+and <code class="docutils literal notranslate"><span class="pre">removeChild()</span></code> methods to access to the <code class="docutils literal notranslate"><span class="pre">children</span></code> property.
+<a class="reference external" href="https://github.com/symfony/inflector">The Inflector component</a> is used to find the singular of a property name.</p>
+<p>If available, <em>adder</em> and <em>remover</em> methods have priority over a <em>setter</em> method.</p>
+</div>
+</div>
+<div class="section" id="checking-property-paths">
+<h2>Checking Property Paths<a class="headerlink" href="#checking-property-paths" title="Permalink to this headline">¶</a></h2>
+<p>When you want to check whether
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyAccessor.php" title="Symfony\Component\PropertyAccess\PropertyAccessor::getValue()"><span class="pre">getValue()</span></a></code> can
+safely be called without actually calling that method, you can use
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyAccessor.php" title="Symfony\Component\PropertyAccess\PropertyAccessor::isReadable()"><span class="pre">isReadable()</span></a></code> instead:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">isReadable</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;firstName&#39;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The same is possible for <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyAccessor.php" title="Symfony\Component\PropertyAccess\PropertyAccessor::setValue()"><span class="pre">setValue()</span></a></code>:
+Call the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyAccessor.php" title="Symfony\Component\PropertyAccess\PropertyAccessor::isWritable()"><span class="pre">isWritable()</span></a></code>
+method to find out whether a property path can be updated:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">isWritable</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;firstName&#39;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mixing-objects-and-arrays">
+<h2>Mixing Objects and Arrays<a class="headerlink" href="#mixing-objects-and-arrays" title="Permalink to this headline">¶</a></h2>
+<p>You can also mix objects and arrays:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Person</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$firstName</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$children</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setChildren</span><span class="p">(</span><span class="nv">$children</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">children</span> <span class="o">=</span> <span class="nv">$children</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getChildren</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
+
+<span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;children[0]&#39;</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">);</span>
+<span class="c1">// equal to $person-&gt;getChildren()[0] = new Person()</span>
+
+<span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;children[0].firstName&#39;</span><span class="p">,</span> <span class="s1">&#39;Wouter&#39;</span><span class="p">);</span>
+<span class="c1">// equal to $person-&gt;getChildren()[0]-&gt;firstName = &#39;Wouter&#39;</span>
+
+<span class="nb">var_dump</span><span class="p">(</span><span class="s1">&#39;Hello &#39;</span><span class="o">.</span><span class="nv">$propertyAccessor</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$person</span><span class="p">,</span> <span class="s1">&#39;children[0].firstName&#39;</span><span class="p">));</span> <span class="c1">// &#39;Wouter&#39;</span>
+<span class="c1">// equal to $person-&gt;getChildren()[0]-&gt;firstName</span>
+</pre></div>
+</div>
+<div class="section" id="enable-other-features">
+<h3>Enable other Features<a class="headerlink" href="#enable-other-features" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyAccessor.php" title="Symfony\Component\PropertyAccess\PropertyAccessor"><span class="pre">PropertyAccessor</span></a></code> can be
+configured to enable extra features. To do that you could use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyAccessorBuilder.php" title="Symfony\Component\PropertyAccess\PropertyAccessorBuilder"><span class="pre">PropertyAccessorBuilder</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$propertyAccessorBuilder</span> <span class="o">=</span> <span class="nx">PropertyAccess</span><span class="o">::</span><span class="na">createPropertyAccessorBuilder</span><span class="p">();</span>
+
+<span class="c1">// enables magic __call</span>
+<span class="nv">$propertyAccessorBuilder</span><span class="o">-&gt;</span><span class="na">enableMagicCall</span><span class="p">();</span>
+
+<span class="c1">// disables magic __call</span>
+<span class="nv">$propertyAccessorBuilder</span><span class="o">-&gt;</span><span class="na">disableMagicCall</span><span class="p">();</span>
+
+<span class="c1">// checks if magic __call handling is enabled</span>
+<span class="nv">$propertyAccessorBuilder</span><span class="o">-&gt;</span><span class="na">isMagicCallEnabled</span><span class="p">();</span> <span class="c1">// true or false</span>
+
+<span class="c1">// At the end get the configured property accessor</span>
+<span class="nv">$propertyAccessor</span> <span class="o">=</span> <span class="nv">$propertyAccessorBuilder</span><span class="o">-&gt;</span><span class="na">getPropertyAccessor</span><span class="p">();</span>
+
+<span class="c1">// Or all in one</span>
+<span class="nv">$propertyAccessor</span> <span class="o">=</span> <span class="nx">PropertyAccess</span><span class="o">::</span><span class="na">createPropertyAccessorBuilder</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">enableMagicCall</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">getPropertyAccessor</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Or you can pass parameters directly to the constructor (not the recommended way):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$propertyAccessor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PropertyAccessor</span><span class="p">(</span><span class="k">true</span><span class="p">);</span> <span class="c1">// this enables handling of magic __call</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

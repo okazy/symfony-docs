@@ -1,0 +1,645 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The Architecture &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Getting Started" href="../getting_started/index.html" />
+    <link rel="prev" title="Flex: Compose your Application" href="flex_recipes.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Quick Tour</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="the_big_picture.html">The Big Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flex_recipes.html">Flex: Compose your Application</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#add-logging">Add Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#services-autowiring">Services &amp; Autowiring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-services">Creating Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#twig-extension-autoconfiguration">Twig Extension &amp; Autoconfiguration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#blazing-speed-the-cached-container">Blazing Speed: The Cached Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#development-versus-production-environments">Development Versus Production: Environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#environment-variables">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#keep-going">Keep Going!</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">The Quick Tour</a> &raquo;</li>
+        
+      <li>The Architecture</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/quick_tour/the_architecture.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-architecture">
+<h1>The Architecture<a class="headerlink" href="#the-architecture" title="Permalink to this headline">¶</a></h1>
+<p>You are my hero! Who would have thought that you would still be here after the first
+two parts? Your efforts will be well-rewarded soon. The first two parts didn’t look
+too deeply at the architecture of the framework. Because it makes Symfony stand apart
+from the framework crowd, let’s dive into the architecture now.</p>
+<div class="section" id="add-logging">
+<h2>Add Logging<a class="headerlink" href="#add-logging" title="Permalink to this headline">¶</a></h2>
+<p>A new Symfony app is micro: it’s basically just a routing &amp; controller system. But
+thanks to Flex, installing more features is simple.</p>
+<p>Want a logging system? No problem:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require logger
+</pre></div>
+</td></tr></table></div>
+<p>This installs and configures (via a recipe) the powerful <a class="reference external" href="https://github.com/Seldaek/monolog">Monolog</a> library. To
+use the logger in a controller, add a new argument type-hinted with <code class="docutils literal notranslate"><span class="pre">LoggerInterface</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/DefaultController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Psr\Log\LoggerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\Annotation\Route</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">DefaultController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @Route(&quot;/hello/{name}&quot;)</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nx">LoggerInterface</span> <span class="nv">$logger</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$logger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s2">&quot;Saying hello to </span><span class="si">$name</span><span class="s2">!&quot;</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That’s it! The new log message will be written to <code class="docutils literal notranslate"><span class="pre">var/log/dev.log</span></code>. The log
+file path or even a different method of logging can be configured by updating
+one of the config files added by the recipe.</p>
+</div>
+<div class="section" id="services-autowiring">
+<h2>Services &amp; Autowiring<a class="headerlink" href="#services-autowiring" title="Permalink to this headline">¶</a></h2>
+<p>But wait! Something <em>very</em> cool just happened. Symfony read the <code class="docutils literal notranslate"><span class="pre">LoggerInterface</span></code>
+type-hint and automatically figured out that it should pass us the Logger object!
+This is called <em>autowiring</em>.</p>
+<p>Every bit of work that’s done in a Symfony app is done by an <em>object</em>: the Logger
+object logs things and the Twig object renders templates. These objects are called
+<em>services</em> and they are <em>tools</em> that help you build rich features.</p>
+<p>To make life awesome, you can ask Symfony to pass you a service by using a type-hint.
+What other possible classes or interfaces could you use? Find out by running:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console debug:autowiring
+
+<span class="go">  # this is just a *small* sample of the output...</span>
+
+<span class="go">  Describes a logger instance.</span>
+<span class="go">  Psr\Log\LoggerInterface (monolog.logger)</span>
+
+<span class="go">  Request stack that controls the lifecycle of requests.</span>
+<span class="go">  Symfony\Component\HttpFoundation\RequestStack (request_stack)</span>
+
+<span class="go">  Interface for the session.</span>
+<span class="go">  Symfony\Component\HttpFoundation\Session\SessionInterface (session)</span>
+
+<span class="go">  RouterInterface is the interface that all Router classes must implement.</span>
+<span class="go">  Symfony\Component\Routing\RouterInterface (router.default)</span>
+
+<span class="go">  [...]</span>
+</pre></div>
+</td></tr></table></div>
+<p>This is just a short summary of the full list! And as you add more packages, this
+list of tools will grow!</p>
+</div>
+<div class="section" id="creating-services">
+<h2>Creating Services<a class="headerlink" href="#creating-services" title="Permalink to this headline">¶</a></h2>
+<p>To keep your code organized, you can even create your own services! Suppose you
+want to generate a random greeting (e.g. “Hello”, “Yo”, etc). Instead of putting
+this code directly in your controller, create a new class:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/GreetingGenerator.php</span>
+<span class="k">namespace</span> <span class="nx">App</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">GreetingGenerator</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getRandomGreeting</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$greetings</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hey&#39;</span><span class="p">,</span> <span class="s1">&#39;Yo&#39;</span><span class="p">,</span> <span class="s1">&#39;Aloha&#39;</span><span class="p">];</span>
+        <span class="nv">$greeting</span> <span class="o">=</span> <span class="nv">$greetings</span><span class="p">[</span><span class="nb">array_rand</span><span class="p">(</span><span class="nv">$greetings</span><span class="p">)];</span>
+
+        <span class="k">return</span> <span class="nv">$greeting</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Great! You can use this immediately in your controller:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/DefaultController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\GreetingGenerator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Log\LoggerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\Annotation\Route</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">DefaultController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @Route(&quot;/hello/{name}&quot;)</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nx">LoggerInterface</span> <span class="nv">$logger</span><span class="p">,</span> <span class="nx">GreetingGenerator</span> <span class="nv">$generator</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$greeting</span> <span class="o">=</span> <span class="nv">$generator</span><span class="o">-&gt;</span><span class="na">getRandomGreeting</span><span class="p">();</span>
+
+        <span class="nv">$logger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s2">&quot;Saying </span><span class="si">$greeting</span><span class="s2"> to </span><span class="si">$name</span><span class="s2">!&quot;</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That’s it! Symfony will instantiate the <code class="docutils literal notranslate"><span class="pre">GreetingGenerator</span></code> automatically and
+pass it as an argument. But, could we <em>also</em> move the logger logic to <code class="docutils literal notranslate"><span class="pre">GreetingGenerator</span></code>?
+Yes! You can use autowiring inside a service to access <em>other</em> services. The only
+difference is that it’s done in the constructor:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span>// src/GreetingGenerator.php
+<span class="gi">+ use Psr\Log\LoggerInterface;</span>
+
+class GreetingGenerator
+{
+<span class="gi">+     private $logger;</span>
+<span class="gi">+</span>
+<span class="gi">+     public function __construct(LoggerInterface $logger)</span>
+<span class="gi">+     {</span>
+<span class="gi">+         $this-&gt;logger = $logger;</span>
+<span class="gi">+     }</span>
+
+    public function getRandomGreeting()
+    {
+        // ...
+
+ +        $this-&gt;logger-&gt;info(&#39;Using the greeting: &#39;.$greeting);
+
+         return $greeting;
+    }
+}
+</pre></div>
+</td></tr></table></div>
+<p>Yes! This works too: no configuration, no time wasted. Keep coding!</p>
+</div>
+<div class="section" id="twig-extension-autoconfiguration">
+<h2>Twig Extension &amp; Autoconfiguration<a class="headerlink" href="#twig-extension-autoconfiguration" title="Permalink to this headline">¶</a></h2>
+<p>Thanks to Symfony’s service handling, you can <em>extend</em> Symfony in many ways, like
+by creating an event subscriber or a security voter for complex authorization
+rules. Let’s add a new filter to Twig called <code class="docutils literal notranslate"><span class="pre">greet</span></code>. How? Create a class
+that extends <code class="docutils literal notranslate"><span class="pre">AbstractExtension</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Twig/GreetExtension.php</span>
+<span class="k">namespace</span> <span class="nx">App\Twig</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\GreetingGenerator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Twig\Extension\AbstractExtension</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Twig\TwigFilter</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">GreetExtension</span> <span class="k">extends</span> <span class="nx">AbstractExtension</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$greetingGenerator</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">GreetingGenerator</span> <span class="nv">$greetingGenerator</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">greetingGenerator</span> <span class="o">=</span> <span class="nv">$greetingGenerator</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getFilters</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="k">new</span> <span class="nx">TwigFilter</span><span class="p">(</span><span class="s1">&#39;greet&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;greetUser&#39;</span><span class="p">]),</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">greetUser</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$greeting</span> <span class="o">=</span>  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">greetingGenerator</span><span class="o">-&gt;</span><span class="na">getRandomGreeting</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">$greeting</span><span class="s2"> </span><span class="si">$name</span><span class="s2">!&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>After creating just <em>one</em> file, you can use this immediately:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">{# templates/default/index.html.twig #}</span>
+<span class="c">{# Will print something like &quot;Hey Symfony!&quot; #}</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">name</span><span class="o">|</span><span class="nf">greet</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>How does this work? Symfony notices that your class extends <code class="docutils literal notranslate"><span class="pre">AbstractExtension</span></code>
+and so <em>automatically</em> registers it as a Twig extension. This is called autoconfiguration,
+and it works for <em>many</em> many things. Create a class and then extend a base class
+(or implement an interface). Symfony takes care of the rest.</p>
+</div>
+<div class="section" id="blazing-speed-the-cached-container">
+<h2>Blazing Speed: The Cached Container<a class="headerlink" href="#blazing-speed-the-cached-container" title="Permalink to this headline">¶</a></h2>
+<p>After seeing how much Symfony handles automatically, you might be wondering: “Doesn’t
+this hurt performance?” Actually, no! Symfony is blazing fast.</p>
+<p>How is that possible? The service system is managed by a very important object called
+the “container”. Most frameworks have a container, but Symfony’s is unique because
+it’s <em>cached</em>. When you loaded your first page, all of the service information was
+compiled and saved. This means that the autowiring and autoconfiguration features
+add <em>no</em> overhead! It also means that you get <em>great</em> errors: Symfony inspects and
+validates <em>everything</em> when the container is built.</p>
+<p>Now you might be wondering what happens when you update a file and the cache needs
+to rebuild? I like your thinking! It’s smart enough to rebuild on the next page
+load. But that’s really the topic of the next section.</p>
+</div>
+<div class="section" id="development-versus-production-environments">
+<h2>Development Versus Production: Environments<a class="headerlink" href="#development-versus-production-environments" title="Permalink to this headline">¶</a></h2>
+<p>One of a framework’s main jobs is to make debugging easy! And our app is <em>full</em> of
+great tools for this: the web debug toolbar displays at the bottom of the page, errors
+are big, beautiful &amp; explicit, and any configuration cache is automatically rebuilt
+whenever needed.</p>
+<p>But what about when you deploy to production? We will need to hide those tools and
+optimize for speed!</p>
+<p>This is solved by Symfony’s <em>environment</em> system and there are three: <code class="docutils literal notranslate"><span class="pre">dev</span></code>, <code class="docutils literal notranslate"><span class="pre">prod</span></code>
+and <code class="docutils literal notranslate"><span class="pre">test</span></code>. Based on the environment, Symfony loads different files in the <code class="docutils literal notranslate"><span class="pre">config/</span></code>
+directory:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span>config/
+├─ services.yaml
+├─ ...
+└─ packages/
+    ├─ framework.yaml
+    ├─ ...
+    ├─ **dev/**
+        ├─ monolog.yaml
+        └─ ...
+    ├─ **prod/**
+        └─ monolog.yaml
+    └─ **test/**
+        ├─ framework.yaml
+        └─ ...
+└─ routes/
+    ├─ annotations.yaml
+    └─ **dev/**
+        ├─ twig.yaml
+        └─ web_profiler.yaml
+</pre></div>
+</td></tr></table></div>
+<p>This is a <em>powerful</em> idea: by changing one piece of configuration (the environment),
+your app is transformed from a debugging-friendly experience to one that’s optimized
+for speed.</p>
+<p>Oh, how do you change the environment? Change the <code class="docutils literal notranslate"><span class="pre">APP_ENV</span></code> environment variable
+from <code class="docutils literal notranslate"><span class="pre">dev</span></code> to <code class="docutils literal notranslate"><span class="pre">prod</span></code>:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span># .env
+<span class="gd">- APP_ENV=dev</span>
+<span class="gi">+ APP_ENV=prod</span>
+</pre></div>
+</td></tr></table></div>
+<p>But I want to talk more about environment variables next. Change the value back
+to <code class="docutils literal notranslate"><span class="pre">dev</span></code>: debugging tools are great when you’re working locally.</p>
+</div>
+<div class="section" id="environment-variables">
+<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline">¶</a></h2>
+<p>Every app contains configuration that’s different on each server - like database
+connection information or passwords. How should these be stored? In files? Or some
+other way?</p>
+<p>Symfony follows the industry best practice by storing server-based configuration
+as <em>environment</em> variables. This means that Symfony works <em>perfectly</em> with
+Platform as a Service (PaaS) deployment systems as well as Docker.</p>
+<p>But setting environment variables while developing can be a pain. That’s why your
+app automatically loads a <code class="docutils literal notranslate"><span class="pre">.env</span></code> file. The keys in this file then become environment
+variables and are read by your app:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># .env</span>
+<span class="c1">###&gt; symfony/framework-bundle ###</span>
+<span class="nv">APP_ENV</span><span class="o">=</span>dev
+<span class="nv">APP_SECRET</span><span class="o">=</span>cc86c7ca937636d5ddf1b754beb22a10
+<span class="c1">###&lt; symfony/framework-bundle ###</span>
+</pre></div>
+</td></tr></table></div>
+<p>At first, the file doesn’t contain much. But as your app grows, you’ll add more
+configuration as you need it. But, actually, it gets much more interesting! Suppose
+your app needs a database ORM. Let’s install the Doctrine ORM:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require doctrine
+</pre></div>
+</td></tr></table></div>
+<p>Thanks to a new recipe installed by Flex, look at the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file again:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span>###&gt; symfony/framework-bundle ###
+APP_ENV=dev
+APP_SECRET=cc86c7ca937636d5ddf1b754beb22a10
+###&lt; symfony/framework-bundle ###
+
+<span class="gi">+ ###&gt; doctrine/doctrine-bundle ###</span>
+<span class="gi">+ # ...</span>
+<span class="gi">+ DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name</span>
+<span class="gi">+ ###&lt; doctrine/doctrine-bundle ###</span>
+</pre></div>
+</td></tr></table></div>
+<p>The new <code class="docutils literal notranslate"><span class="pre">DATABASE_URL</span></code> environment variable was added <em>automatically</em> and is already
+referenced by the new <code class="docutils literal notranslate"><span class="pre">doctrine.yaml</span></code> configuration file. By combining environment
+variables and Flex, you’re using industry best practices without any extra effort.</p>
+</div>
+<div class="section" id="keep-going">
+<h2>Keep Going!<a class="headerlink" href="#keep-going" title="Permalink to this headline">¶</a></h2>
+<p>Call me crazy, but after reading this part, you should be comfortable with the most
+<em>important</em> parts of Symfony. Everything in Symfony is designed to get out of your
+way so you can keep coding and adding features, all with the speed and quality you
+demand.</p>
+<p>That’s all for the quick tour. From authentication, to forms, to caching, there is
+so much more to discover. Ready to dig into these topics now? Look no further - go
+to the official <a class="reference internal" href="../index.html"><span class="doc">Symfony Documentation</span></a> and pick any guide you want.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

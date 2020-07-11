@@ -1,0 +1,984 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Doctrine Events &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Implement a Registration Form" href="registration_form.html" />
+    <link rel="prev" title="How to Work with Doctrine Associations / Relations" href="associations.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#installing-doctrine">Installing Doctrine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#creating-an-entity-class">Creating an Entity Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#migrations-creating-the-database-tables-schema">Migrations: Creating the Database Tables/Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#migrations-adding-more-fields">Migrations &amp; Adding more Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#persisting-objects-to-the-database">Persisting Objects to the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#validating-objects">Validating Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#fetching-objects-from-the-database">Fetching Objects from the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#automatically-fetching-objects-paramconverter">Automatically Fetching Objects (ParamConverter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#updating-an-object">Updating an Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#deleting-an-object">Deleting an Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#querying-for-objects-the-repository">Querying for Objects: The Repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#relationships-and-associations">Relationships and Associations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#database-testing">Database Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#doctrine-extensions-timestampable-translatable-etc">Doctrine Extensions (Timestampable, Translatable, etc.)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../doctrine.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="associations.html">How to Work with Doctrine Associations / Relations</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Doctrine Events</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#doctrine-lifecycle-callbacks">Doctrine Lifecycle Callbacks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#doctrine-lifecycle-listeners">Doctrine Lifecycle Listeners</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#doctrine-entity-listeners">Doctrine Entity Listeners</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#doctrine-lifecycle-subscribers">Doctrine Lifecycle Subscribers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="registration_form.html">How to Implement a Registration Form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_dql_functions.html">How to Register custom DQL Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dbal.html">How to Use Doctrine DBAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multiple_entity_managers.html">How to Work with multiple Entity Managers and Connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="resolve_target_entity.html">How to Define Relationships with Abstract Classes and Interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reverse_engineering.html">How to Generate Entities from an Existing Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../session/database.html">Store Sessions in a Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/database.html">How to Test Code that Interacts with the Database</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../doctrine.html">Databases and the Doctrine ORM</a> &raquo;</li>
+        
+      <li>Doctrine Events</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/doctrine/events.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="doctrine-events">
+<span id="index-0"></span><h1>Doctrine Events<a class="headerlink" href="#doctrine-events" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://www.doctrine-project.org/">Doctrine</a>, the set of PHP libraries used by Symfony to work with databases,
+provides a lightweight event system to update entities during the application
+execution. These events, called <a class="reference external" href="https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/events.html#lifecycle-events">lifecycle events</a>, allow to perform tasks such
+as <em>“update the createdAt property automatically just before persisting entities
+of this type”</em>.</p>
+<p>Doctrine triggers events before/after performing the most common entity
+operations (e.g. <code class="docutils literal notranslate"><span class="pre">prePersist/postPersist</span></code>, <code class="docutils literal notranslate"><span class="pre">preUpdate/postUpdate</span></code>) and also
+on other common tasks (e.g. <code class="docutils literal notranslate"><span class="pre">loadClassMetadata</span></code>, <code class="docutils literal notranslate"><span class="pre">onClear</span></code>).</p>
+<p>There are different ways to listen to these Doctrine events:</p>
+<ul class="simple">
+<li><strong>Lifecycle callbacks</strong>, they are defined as methods on the entity classes and
+they are called when the events are triggered;</li>
+<li><strong>Lifecycle listeners and subscribers</strong>, they are classes with callback
+methods for one or more events and they are called for all entities;</li>
+<li><strong>Entity listeners</strong>, they are similar to lifecycle listeners, but they are
+called only for the entities of a certain class.</li>
+</ul>
+<p>These are the <strong>drawbacks and advantages</strong> of each one:</p>
+<ul class="simple">
+<li>Callbacks have better performance because they only apply to a single entity
+class, but you can’t reuse the logic for different entities and they don’t
+have access to <a class="reference internal" href="../service_container.html"><span class="doc">Symfony services</span></a>;</li>
+<li>Lifecycle listeners and subscribers can reuse logic among different entities
+and can access Symfony services but their performance is worse because they
+are called for all entities;</li>
+<li>Entity listeners have the same advantages of lifecycle listeners and they have
+better performance because they only apply to a single entity class.</li>
+</ul>
+<p>This article only explains the basics about Doctrine events when using them
+inside a Symfony application. Read the <a class="reference external" href="https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/events.html">official docs about Doctrine events</a>
+to learn everything about them.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">This article covers listeners and subscribers for Doctrine ORM. If you are
+using ODM for MongoDB, read the <a class="reference external" href="https://symfony.com/doc/current/bundles/DoctrineMongoDBBundle/index.html">DoctrineMongoDBBundle documentation</a>.</p>
+</div>
+<div class="section" id="doctrine-lifecycle-callbacks">
+<h2>Doctrine Lifecycle Callbacks<a class="headerlink" href="#doctrine-lifecycle-callbacks" title="Permalink to this headline">¶</a></h2>
+<p>Lifecycle callbacks are defined as methods inside the entity you want to modify.
+For example, suppose you want to set a <code class="docutils literal notranslate"><span class="pre">createdAt</span></code> date column to the current
+date, but only when the entity is first persisted (i.e. inserted). To do so,
+define a callback for the <code class="docutils literal notranslate"><span class="pre">prePersist</span></code> Doctrine event:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>Annotations</em><div class="highlight-php-annotations notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// src/Entity/Product.php</span>
+<span class="k">use</span> <span class="nx">Doctrine\ORM\Mapping</span> <span class="k">as</span> <span class="nx">ORM</span><span class="p">;</span>
+
+<span class="c1">// When using annotations, don&#39;t forget to add @ORM\HasLifecycleCallbacks()</span>
+<span class="c1">// to the class of the entity where you define the callback</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * @ORM\Entity()</span>
+<span class="sd"> * @ORM\HasLifecycleCallbacks()</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">Product</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @ORM\PrePersist</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setCreatedAtValue</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createdAt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/doctrine/Product.orm.yml</span>
+<span class="l l-Scalar l-Scalar-Plain">App\Entity\Product</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">entity</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">lifecycleCallbacks</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">prePersist</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;setCreatedAtValue&#39;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/doctrine/Product.orm.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;doctrine-mapping</span> <span class="na">xmlns=</span><span class="s">&quot;http://doctrine-project.org/schemas/orm/doctrine-mapping&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://doctrine-project.org/schemas/orm/doctrine-mapping</span>
+<span class="s">        https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;entity</span> <span class="na">name=</span><span class="s">&quot;App\Entity\Product&quot;</span><span class="nt">&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+        <span class="nt">&lt;lifecycle-callbacks&gt;</span>
+            <span class="nt">&lt;lifecycle-callback</span> <span class="na">type=</span><span class="s">&quot;prePersist&quot;</span> <span class="na">method=</span><span class="s">&quot;setCreatedAtValue&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/lifecycle-callbacks&gt;</span>
+    <span class="nt">&lt;/entity&gt;</span>
+<span class="nt">&lt;/doctrine-mapping&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Some lifecycle callbacks receive an argument that provides access to
+useful information such as the current entity manager (e.g. the <code class="docutils literal notranslate"><span class="pre">preUpdate</span></code>
+callback receives a <code class="docutils literal notranslate"><span class="pre">PreUpdateEventArgs</span> <span class="pre">$event</span></code> argument).</p>
+</div>
+</div>
+<div class="section" id="doctrine-lifecycle-listeners">
+<span id="doctrine-lifecycle-listener"></span><h2>Doctrine Lifecycle Listeners<a class="headerlink" href="#doctrine-lifecycle-listeners" title="Permalink to this headline">¶</a></h2>
+<p>Lifecycle listeners are defined as PHP classes that listen to a single Doctrine
+event on all the application entities. For example, suppose that you want to
+update some search index whenever a new entity is persisted in the database. To
+do so, define a listener for the <code class="docutils literal notranslate"><span class="pre">postPersist</span></code> Doctrine event:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/EventListener/SearchIndexer.php</span>
+<span class="k">namespace</span> <span class="nx">App\EventListener</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Entity\Product</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\Persistence\Event\LifecycleEventArgs</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">SearchIndexer</span>
+<span class="p">{</span>
+    <span class="c1">// the listener methods receive an argument which gives you access to</span>
+    <span class="c1">// both the entity object of the event and the entity manager itself</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">postPersist</span><span class="p">(</span><span class="nx">LifecycleEventArgs</span> <span class="nv">$args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$entity</span> <span class="o">=</span> <span class="nv">$args</span><span class="o">-&gt;</span><span class="na">getObject</span><span class="p">();</span>
+
+        <span class="c1">// if this listener only applies to certain entity types,</span>
+        <span class="c1">// add some code to check the entity type as early as possible</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$entity</span> <span class="nx">instanceof</span> <span class="nx">Product</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nv">$entityManager</span> <span class="o">=</span> <span class="nv">$args</span><span class="o">-&gt;</span><span class="na">getObjectManager</span><span class="p">();</span>
+        <span class="c1">// ... do something with the Product entity</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The next step is to enable the Doctrine listener in the Symfony application by
+creating a new service for it and <a class="reference internal" href="../service_container/tags.html"><span class="doc">tagging it</span></a>
+with the <code class="docutils literal notranslate"><span class="pre">doctrine.event_listener</span></code> tag:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\EventListener\SearchIndexer</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span>
+                <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&#39;doctrine.event_listener&#39;</span>
+                <span class="c1"># this is the only required option for the lifecycle listener tag</span>
+                <span class="l l-Scalar l-Scalar-Plain">event</span><span class="p p-Indicator">:</span> <span class="s">&#39;postPersist&#39;</span>
+
+                <span class="c1"># listeners can define their priority in case multiple listeners are associated</span>
+                <span class="c1"># to the same event (default priority = 0; higher numbers = listener is run earlier)</span>
+                <span class="l l-Scalar l-Scalar-Plain">priority</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">500</span>
+
+                <span class="c1"># you can also restrict listeners to a specific Doctrine connection</span>
+                <span class="l l-Scalar l-Scalar-Plain">connection</span><span class="p p-Indicator">:</span> <span class="s">&#39;default&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:doctrine=</span><span class="s">&quot;http://symfony.com/schema/dic/doctrine&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;services&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="c">&lt;!--</span>
+<span class="c">            * &#39;event&#39; is the only required option that defines the lifecycle listener</span>
+<span class="c">            * &#39;priority&#39;: used when multiple listeners are associated to the same event</span>
+<span class="c">            *             (default priority = 0; higher numbers = listener is run earlier)</span>
+<span class="c">            * &#39;connection&#39;: restricts the listener to a specific Doctrine connection</span>
+<span class="c">        --&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\EventListener\SearchIndexer&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;doctrine.event_listener&quot;</span>
+                <span class="na">event=</span><span class="s">&quot;postPersist&quot;</span>
+                <span class="na">priority=</span><span class="s">&quot;500&quot;</span>
+                <span class="na">connection=</span><span class="s">&quot;default&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">App\EventListener\SearchIndexer</span><span class="p">;</span>
+
+<span class="c1">// listeners are applied by default to all Doctrine connections</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">autowire</span><span class="p">(</span><span class="nx">SearchIndexer</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addTag</span><span class="p">(</span><span class="s1">&#39;doctrine.event_listener&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="c1">// this is the only required option for the lifecycle listener tag</span>
+        <span class="s1">&#39;event&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;postPersist&#39;</span><span class="p">,</span>
+
+        <span class="c1">// listeners can define their priority in case multiple listeners are associated</span>
+        <span class="c1">// to the same event (default priority = 0; higher numbers = listener is run earlier)</span>
+        <span class="s1">&#39;priority&#39;</span> <span class="o">=&gt;</span> <span class="mi">500</span><span class="p">,</span>
+
+        <span class="c1"># you can also restrict listeners to a specific Doctrine connection</span>
+        <span class="s1">&#39;connection&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span>
+    <span class="p">])</span>
+<span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Symfony loads (and instantiates) Doctrine listeners only when the related
+Doctrine event is actually fired; whereas Doctrine subscribers are always
+loaded (and instantiated) by Symfony, making them less performant.</p>
+</div>
+</div>
+<div class="section" id="doctrine-entity-listeners">
+<h2>Doctrine Entity Listeners<a class="headerlink" href="#doctrine-entity-listeners" title="Permalink to this headline">¶</a></h2>
+<p>Entity listeners are defined as PHP classes that listen to a single Doctrine
+event on a single entity class. For example, suppose that you want to send some
+notifications whenever a <code class="docutils literal notranslate"><span class="pre">User</span></code> entity is modified in the database. To do so,
+define a listener for the <code class="docutils literal notranslate"><span class="pre">postUpdate</span></code> Doctrine event:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/EventListener/UserChangedNotifier.php</span>
+<span class="k">namespace</span> <span class="nx">App\EventListener</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Entity\User</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\Persistence\Event\LifecycleEventArgs</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">UserChangedNotifier</span>
+<span class="p">{</span>
+    <span class="c1">// the entity listener methods receive two arguments:</span>
+    <span class="c1">// the entity instance and the lifecycle event</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">postUpdate</span><span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="nx">LifecycleEventArgs</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ... do something to notify the changes</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The next step is to enable the Doctrine listener in the Symfony application by
+creating a new service for it and <a class="reference internal" href="../service_container/tags.html"><span class="doc">tagging it</span></a>
+with the <code class="docutils literal notranslate"><span class="pre">doctrine.orm.entity_listener</span></code> tag:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\EventListener\UserChangedNotifier</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span>
+                <span class="c1"># these are the options required to define the entity listener</span>
+                <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&#39;doctrine.orm.entity_listener&#39;</span>
+                <span class="l l-Scalar l-Scalar-Plain">event</span><span class="p p-Indicator">:</span> <span class="s">&#39;postUpdate&#39;</span>
+                <span class="l l-Scalar l-Scalar-Plain">entity</span><span class="p p-Indicator">:</span> <span class="s">&#39;App\Entity\User&#39;</span>
+
+                <span class="c1"># these are other options that you may define if needed</span>
+
+                <span class="c1"># set the &#39;lazy&#39; option to TRUE to only instantiate listeners when they are used</span>
+                <span class="c1"># lazy: true</span>
+
+                <span class="c1"># set the &#39;entity_manager&#39; option if the listener is not associated to the default manager</span>
+                <span class="c1"># entity_manager: &#39;custom&#39;</span>
+
+                <span class="c1"># by default, Symfony looks for a method called after the event (e.g. postUpdate())</span>
+                <span class="c1"># if it doesn&#39;t exist, it tries to execute the &#39;__invoke()&#39; method, but you can</span>
+                <span class="c1"># configure a custom method name with the &#39;method&#39; option</span>
+                <span class="c1"># method: &#39;checkUserChanges&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:doctrine=</span><span class="s">&quot;http://symfony.com/schema/dic/doctrine&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;services&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\EventListener\UserChangedNotifier&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!--</span>
+<span class="c">                * These are the options required to define the entity listener:</span>
+<span class="c">                *   * name</span>
+<span class="c">                *   * event</span>
+<span class="c">                *   * entity</span>
+<span class="c">                *</span>
+<span class="c">                * These are other options that you may define if needed:</span>
+<span class="c">                *   * lazy: if TRUE, listeners are only instantiated when they are used</span>
+<span class="c">                *   * entity_manager: define it if the listener is not associated to the default manager</span>
+<span class="c">                *   * method: by default, Symfony looks for a method called after the event (e.g. postUpdate())</span>
+<span class="c">                *           if it doesn&#39;t exist, it tries to execute the &#39;__invoke()&#39; method, but</span>
+<span class="c">                *           you can configure a custom method name with the &#39;method&#39; option</span>
+<span class="c">            --&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;doctrine.orm.entity_listener&quot;</span>
+                <span class="na">event=</span><span class="s">&quot;postUpdate&quot;</span>
+                <span class="na">entity=</span><span class="s">&quot;App\Entity\User&quot;</span>
+                <span class="na">lazy=</span><span class="s">&quot;true&quot;</span>
+                <span class="na">entity_manager=</span><span class="s">&quot;custom&quot;</span>
+                <span class="na">method=</span><span class="s">&quot;checkUserChanges&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">App\Entity\User</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\EventListener\UserChangedNotifier</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">autowire</span><span class="p">(</span><span class="nx">UserChangedNotifier</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addTag</span><span class="p">(</span><span class="s1">&#39;doctrine.orm.entity_listener&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="c1">// These are the options required to define the entity listener:</span>
+        <span class="s1">&#39;event&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;postUpdate&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;entity&#39;</span> <span class="o">=&gt;</span> <span class="nx">User</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+
+        <span class="c1">// These are other options that you may define if needed:</span>
+
+        <span class="c1">// set the &#39;lazy&#39; option to TRUE to only instantiate listeners when they are used</span>
+        <span class="c1">// &#39;lazy&#39; =&gt; true,</span>
+
+        <span class="c1">// set the &#39;entity_manager&#39; option if the listener is not associated to the default manager</span>
+        <span class="c1">// &#39;entity_manager&#39; =&gt; &#39;custom&#39;,</span>
+
+        <span class="c1">// by default, Symfony looks for a method called after the event (e.g. postUpdate())</span>
+        <span class="c1">// if it doesn&#39;t exist, it tries to execute the &#39;__invoke()&#39; method, but you can</span>
+        <span class="c1">// configure a custom method name with the &#39;method&#39; option</span>
+        <span class="c1">// &#39;method&#39; =&gt; &#39;checkUserChanges&#39;,</span>
+    <span class="p">])</span>
+<span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="doctrine-lifecycle-subscribers">
+<h2>Doctrine Lifecycle Subscribers<a class="headerlink" href="#doctrine-lifecycle-subscribers" title="Permalink to this headline">¶</a></h2>
+<p>Lifecycle subscribers are defined as PHP classes that implement the
+<code class="docutils literal notranslate"><span class="pre">Doctrine\Common\EventSubscriber</span></code> interface and which listen to one or more
+Doctrine events on all the application entities. For example, suppose that you
+want to log all the database activity. To do so, define a subscriber for the
+<code class="docutils literal notranslate"><span class="pre">postPersist</span></code>, <code class="docutils literal notranslate"><span class="pre">postRemove</span></code> and <code class="docutils literal notranslate"><span class="pre">postUpdate</span></code> Doctrine events:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/EventListener/DatabaseActivitySubscriber.php</span>
+<span class="k">namespace</span> <span class="nx">App\EventListener</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Entity\Product</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\Common\EventSubscriber</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\ORM\Events</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\Persistence\Event\LifecycleEventArgs</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">DatabaseActivitySubscriber</span> <span class="k">implements</span> <span class="nx">EventSubscriber</span>
+<span class="p">{</span>
+    <span class="c1">// this method can only return the event names; you cannot define a</span>
+    <span class="c1">// custom method name to execute when each event triggers</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getSubscribedEvents</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="nx">Events</span><span class="o">::</span><span class="na">postPersist</span><span class="p">,</span>
+            <span class="nx">Events</span><span class="o">::</span><span class="na">postRemove</span><span class="p">,</span>
+            <span class="nx">Events</span><span class="o">::</span><span class="na">postUpdate</span><span class="p">,</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="c1">// callback methods must be called exactly like the events they listen to;</span>
+    <span class="c1">// they receive an argument of type LifecycleEventArgs, which gives you access</span>
+    <span class="c1">// to both the entity object of the event and the entity manager itself</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">postPersist</span><span class="p">(</span><span class="nx">LifecycleEventArgs</span> <span class="nv">$args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logActivity</span><span class="p">(</span><span class="s1">&#39;persist&#39;</span><span class="p">,</span> <span class="nv">$args</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">postRemove</span><span class="p">(</span><span class="nx">LifecycleEventArgs</span> <span class="nv">$args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logActivity</span><span class="p">(</span><span class="s1">&#39;remove&#39;</span><span class="p">,</span> <span class="nv">$args</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">postUpdate</span><span class="p">(</span><span class="nx">LifecycleEventArgs</span> <span class="nv">$args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logActivity</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="nv">$args</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">function</span> <span class="nf">logActivity</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$action</span><span class="p">,</span> <span class="nx">LifecycleEventArgs</span> <span class="nv">$args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$entity</span> <span class="o">=</span> <span class="nv">$args</span><span class="o">-&gt;</span><span class="na">getObject</span><span class="p">();</span>
+
+        <span class="c1">// if this subscriber only applies to certain entity types,</span>
+        <span class="c1">// add some code to check the entity type as early as possible</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$entity</span> <span class="nx">instanceof</span> <span class="nx">Product</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// ... get the entity information and log it somehow</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The next step is to enable the Doctrine subscriber in the Symfony application by
+creating a new service for it and <a class="reference internal" href="../service_container/tags.html"><span class="doc">tagging it</span></a>
+with the <code class="docutils literal notranslate"><span class="pre">doctrine.event_subscriber</span></code> tag:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\EventListener\DatabaseActivitySubscriber</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">name</span><span class="p p-Indicator">:</span> <span class="s">&#39;doctrine.event_subscriber&#39;</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:doctrine=</span><span class="s">&quot;http://symfony.com/schema/dic/doctrine&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;services&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\EventListener\DatabaseActivitySubscriber&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;doctrine.event_subscriber&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">App\EventListener\DatabaseActivitySubscriber</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">autowire</span><span class="p">(</span><span class="nx">DatabaseActivitySubscriber</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addTag</span><span class="p">(</span><span class="s1">&#39;doctrine.event_subscriber&#39;</span><span class="p">)</span>
+<span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>If you need to associate the subscriber with a specific Doctrine connection, you
+can do it in the service configuration:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\EventListener\DatabaseActivitySubscriber</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">name</span><span class="p p-Indicator">:</span> <span class="s">&#39;doctrine.event_subscriber&#39;</span><span class="p p-Indicator">,</span> <span class="nv">connection</span><span class="p p-Indicator">:</span> <span class="s">&#39;default&#39;</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:doctrine=</span><span class="s">&quot;http://symfony.com/schema/dic/doctrine&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;services&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\EventListener\DatabaseActivitySubscriber&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;doctrine.event_subscriber&quot;</span> <span class="na">connection=</span><span class="s">&quot;default&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">App\EventListener\DatabaseActivitySubscriber</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">autowire</span><span class="p">(</span><span class="nx">DatabaseActivitySubscriber</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addTag</span><span class="p">(</span><span class="s1">&#39;doctrine.event_subscriber&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;connection&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;default&#39;</span><span class="p">])</span>
+<span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Symfony loads (and instantiates) Doctrine subscribers whenever the
+application executes; whereas Doctrine listeners are only loaded when the
+related event is actually fired, making them more performant.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,945 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Security User Providers &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Authenticating against an LDAP server" href="ldap.html" />
+    <link rel="prev" title="Using the form_login Authentication Provider" href="form_login.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../security.html">Security</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../security.html#installation">1) Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#a-create-your-user-class">2a) Create your User Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#b-the-user-provider">2b) The “User Provider”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#c-encoding-passwords">2c) Encoding Passwords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#a-authentication-firewalls">3a) Authentication &amp; Firewalls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#b-authenticating-your-users">3b) Authenticating your Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#denying-access-roles-and-other-authorization">4) Denying Access, Roles and other Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#a-fetching-the-user-object">5a) Fetching the User Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#b-fetching-the-user-from-a-service">5b) Fetching the User from a Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#logging-out">Logging Out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#hierarchical-roles">Hierarchical Roles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#frequently-asked-questions">Frequently Asked Questions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../security.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../security.html#authentication-identifying-logging-in-the-user">Authentication (Identifying/Logging in the User)</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="experimental_authenticators.html">Using the new Authenticator-based Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="form_login_setup.html">How to Build a Login Form</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reset_password.html">How to Add a Reset Password Feature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="json_login_setup.html">How to Build a JSON Authentication Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="guard_authentication.html">Custom Authentication System with Guard (API Token Example)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="password_migration.html">How to Migrate a Password Hash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auth_providers.html">Built-in Authentication Providers</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Security User Providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ldap.html">Authenticating against an LDAP server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="remember_me.html">How to Add “Remember Me” Login Functionality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="impersonating_user.html">How to Impersonate a User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_checkers.html">How to Create and Enable Custom User Checkers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="named_encoders.html">How to Use A Different Password Encoder Algorithm Per User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multiple_guard_authenticators.html">How to Use Multiple Guard Authenticators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="firewall_restriction.html">How to Restrict Firewalls to a Request</a></li>
+<li class="toctree-l4"><a class="reference internal" href="csrf.html">How to Implement CSRF Protection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="custom_authentication_provider.html">How to Create a custom Authentication Provider</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../security.html#authorization-denying-access">Authorization (Denying Access)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../security.html">Security</a> &raquo;</li>
+        
+      <li>Security User Providers</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/security/user_provider.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="security-user-providers">
+<h1>Security User Providers<a class="headerlink" href="#security-user-providers" title="Permalink to this headline">¶</a></h1>
+<p>User providers are PHP classes related to Symfony Security that have two jobs:</p>
+<dl class="docutils">
+<dt><strong>Reload the User from the Session</strong></dt>
+<dd>At the beginning of each request (unless your firewall is <code class="docutils literal notranslate"><span class="pre">stateless</span></code>), Symfony
+loads the <code class="docutils literal notranslate"><span class="pre">User</span></code> object from the session. To make sure it’s not out-of-date,
+the user provider “refreshes it”. The Doctrine user provider, for example,
+queries the database for fresh data. Symfony then checks to see if the user
+has “changed” and de-authenticates the user if they have (see <a class="reference internal" href="#user-session-refresh"><span class="std std-ref">Understanding how Users are Refreshed from the Session</span></a>).</dd>
+<dt><strong>Load the User for some Feature</strong></dt>
+<dd>Some features, like <a class="reference internal" href="impersonating_user.html"><span class="doc">user impersonation</span></a>,
+<a class="reference internal" href="remember_me.html"><span class="doc">Remember Me</span></a> and many of the built-in
+<a class="reference internal" href="auth_providers.html"><span class="doc">authentication providers</span></a>, use the user provider
+to load a User object via its “username” (or email, or whatever field you want).</dd>
+</dl>
+<p>Symfony comes with several built-in user providers:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#security-entity-user-provider"><span class="std std-ref">Entity User Provider</span></a> (loads users from
+a database);</li>
+<li><a class="reference internal" href="#security-ldap-user-provider"><span class="std std-ref">LDAP User Provider</span></a> (loads users from a
+LDAP server);</li>
+<li><a class="reference internal" href="#security-memory-user-provider"><span class="std std-ref">Memory User Provider</span></a> (loads users from
+a configuration file);</li>
+<li><a class="reference internal" href="#security-chain-user-provider"><span class="std std-ref">Chain User Provider</span></a> (merges two or more
+user providers into a new user provider).</li>
+</ul>
+<p>The built-in user providers cover all the needs for most applications, but you
+can also create your own <a class="reference internal" href="#custom-user-provider"><span class="std std-ref">custom user provider</span></a>.</p>
+<div class="section" id="entity-user-provider">
+<span id="security-entity-user-provider"></span><h2>Entity User Provider<a class="headerlink" href="#entity-user-provider" title="Permalink to this headline">¶</a></h2>
+<p>This is the most common user provider for traditional web applications. Users
+are stored in a database and the user provider uses <a class="reference internal" href="../doctrine.html"><span class="doc">Doctrine</span></a>
+to retrieve them:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">providers</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">users</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">entity</span><span class="p p-Indicator">:</span>
+                <span class="c1"># the class of the entity that represents users</span>
+                <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="s">&#39;App\Entity\User&#39;</span>
+                <span class="c1"># the property to query by - e.g. username, email, etc</span>
+                <span class="l l-Scalar l-Scalar-Plain">property</span><span class="p p-Indicator">:</span> <span class="s">&#39;username&#39;</span>
+                <span class="c1"># optional: if you&#39;re using multiple Doctrine entity</span>
+                <span class="c1"># managers, this option defines which one to use</span>
+                <span class="c1"># manager_name: &#39;customer&#39;</span>
+
+    <span class="c1"># ...</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/security.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;srv:container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/security&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:srv=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;config&gt;</span>
+        <span class="nt">&lt;provider</span> <span class="na">name=</span><span class="s">&quot;users&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- &#39;class&#39; is the entity that represents users and &#39;property&#39;</span>
+<span class="c">                 is the entity property to query by - e.g. username, email, etc --&gt;</span>
+            <span class="nt">&lt;entity</span> <span class="na">class=</span><span class="s">&quot;App\Entity\User&quot;</span> <span class="na">property=</span><span class="s">&quot;username&quot;</span><span class="nt">/&gt;</span>
+
+            <span class="c">&lt;!-- optional: if you&#39;re using multiple Doctrine entity</span>
+<span class="c">                 managers, this option defines which one to use --&gt;</span>
+            <span class="c">&lt;!-- &lt;entity class=&quot;App\Entity\User&quot; property=&quot;username&quot;</span>
+<span class="c">                         manager-name=&quot;customer&quot;/&gt; --&gt;</span>
+        <span class="nt">&lt;/provider&gt;</span>
+
+        <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;/config&gt;</span>
+<span class="nt">&lt;/srv:container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/security.php</span>
+<span class="k">use</span> <span class="nx">App\Entity\User</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;providers&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;users&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;entity&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="c1">// the class of the entity that represents users</span>
+                <span class="s1">&#39;class&#39;</span>    <span class="o">=&gt;</span> <span class="nx">User</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+                <span class="c1">// the property to query by - e.g. username, email, etc</span>
+                <span class="s1">&#39;property&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;username&#39;</span><span class="p">,</span>
+                <span class="c1">// optional: if you&#39;re using multiple Doctrine entity</span>
+                <span class="c1">// managers, this option defines which one to use</span>
+                <span class="c1">// &#39;manager_name&#39; =&gt; &#39;customer&#39;,</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+
+    <span class="c1">// ...</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">providers</span></code> section creates a “user provider” called <code class="docutils literal notranslate"><span class="pre">users</span></code> that knows
+how to query from your <code class="docutils literal notranslate"><span class="pre">App\Entity\User</span></code> entity by the <code class="docutils literal notranslate"><span class="pre">username</span></code> property.
+You can choose any name for the user provider, but it’s recommended to pick a
+descriptive name because this will be later used in the firewall configuration.</p>
+<div class="section" id="using-a-custom-query-to-load-the-user">
+<span id="authenticating-someone-with-a-custom-entity-provider"></span><h3>Using a Custom Query to Load the User<a class="headerlink" href="#using-a-custom-query-to-load-the-user" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">entity</span></code> provider can only query from one <em>specific</em> field, specified by
+the <code class="docutils literal notranslate"><span class="pre">property</span></code> config key. If you want a bit more control over this - e.g. you
+want to find a user by <code class="docutils literal notranslate"><span class="pre">email</span></code> <em>or</em> <code class="docutils literal notranslate"><span class="pre">username</span></code>, you can do that by making
+your <code class="docutils literal notranslate"><span class="pre">UserRepository</span></code> implement the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Doctrine/Security/User/UserLoaderInterface.php" title="Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface"><span class="pre">UserLoaderInterface</span></a></code>. This
+interface only requires one method: <code class="docutils literal notranslate"><span class="pre">loadUserByUsername($username)</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Repository/UserRepository.php</span>
+<span class="k">namespace</span> <span class="nx">App\Repository</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Doctrine\ORM\EntityRepository</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">UserRepository</span> <span class="k">extends</span> <span class="nx">EntityRepository</span> <span class="k">implements</span> <span class="nx">UserLoaderInterface</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">loadUserByUsername</span><span class="p">(</span><span class="nv">$usernameOrEmail</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createQuery</span><span class="p">(</span>
+                <span class="s1">&#39;SELECT u</span>
+<span class="s1">                FROM App\Entity\User u</span>
+<span class="s1">                WHERE u.username = :query</span>
+<span class="s1">                OR u.email = :query&#39;</span>
+            <span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;query&#39;</span><span class="p">,</span> <span class="nv">$usernameOrEmail</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">getQuery</span><span class="p">()</span>
+            <span class="o">-&gt;</span><span class="na">getOneOrNullResult</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To finish this, remove the <code class="docutils literal notranslate"><span class="pre">property</span></code> key from the user provider in
+<code class="docutils literal notranslate"><span class="pre">security.yaml</span></code>:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">providers</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">users</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">entity</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Entity\User</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/security.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;srv:container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/security&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:srv=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/security</span>
+<span class="s">        https://symfony.com/schema/dic/security/security-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;config&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="nt">&lt;provider</span> <span class="na">name=</span><span class="s">&quot;users&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;entity</span> <span class="na">class=</span><span class="s">&quot;App\Entity\User&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/provider&gt;</span>
+    <span class="nt">&lt;/config&gt;</span>
+<span class="nt">&lt;/srv:container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/security.php</span>
+<span class="k">use</span> <span class="nx">App\Entity\User</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+
+    <span class="s1">&#39;providers&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;users&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;entity&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="nx">User</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>This tells Symfony to <em>not</em> query automatically for the User. Instead, when
+needed (e.g. because <a class="reference internal" href="impersonating_user.html"><span class="doc">user impersonation</span></a>,
+<a class="reference internal" href="remember_me.html"><span class="doc">Remember Me</span></a>, or some other security feature is
+activated), the <code class="docutils literal notranslate"><span class="pre">loadUserByUsername()</span></code> method on <code class="docutils literal notranslate"><span class="pre">UserRepository</span></code> will be called.</p>
+</div>
+</div>
+<div class="section" id="memory-user-provider">
+<span id="security-memory-user-provider"></span><h2>Memory User Provider<a class="headerlink" href="#memory-user-provider" title="Permalink to this headline">¶</a></h2>
+<p>It’s not recommended to use this provider in real applications because of its
+limitations and how difficult it is to manage users. It may be useful in application
+prototypes and for limited applications that don’t store users in databases.</p>
+<p>This user provider stores all user information in a configuration file,
+including their passwords. That’s why the first step is to configure how these
+users will encode their passwords:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">encoders</span><span class="p p-Indicator">:</span>
+        <span class="c1"># this internal class is used by Symfony to represent in-memory users</span>
+        <span class="l l-Scalar l-Scalar-Plain">Symfony\Component\Security\Core\User\User</span><span class="p p-Indicator">:</span> <span class="s">&#39;auto&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/security.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;srv:container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/security&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:srv=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/security</span>
+<span class="s">        https://symfony.com/schema/dic/security/security-1.0.xsd&quot;</span>
+<span class="nt">&gt;</span>
+    <span class="nt">&lt;config&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="c">&lt;!-- this internal class is used by Symfony to represent in-memory users --&gt;</span>
+        <span class="nt">&lt;encoder</span> <span class="na">class=</span><span class="s">&quot;Symfony\Component\Security\Core\User\User&quot;</span>
+            <span class="na">algorithm=</span><span class="s">&quot;auto&quot;</span>
+        <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/config&gt;</span>
+<span class="nt">&lt;/srv:container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/security.php</span>
+
+<span class="c1">// this internal class is used by Symfony to represent in-memory users</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\User\User</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+    <span class="s1">&#39;encoders&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="nx">User</span><span class="o">::</span><span class="na">class</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;algorithm&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Then, run this command to encode the plain text passwords of your users:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console security:encode-password
+</pre></div>
+</td></tr></table></div>
+<p>Now you can configure all the user information in <code class="docutils literal notranslate"><span class="pre">config/packages/security.yaml</span></code>:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">providers</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">backend_users</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">memory</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">users</span><span class="p p-Indicator">:</span>
+                    <span class="l l-Scalar l-Scalar-Plain">john_admin</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{</span> <span class="nv">password</span><span class="p p-Indicator">:</span> <span class="s">&#39;$2y$13$jxGxc</span><span class="nv"> </span><span class="s">...</span><span class="nv"> </span><span class="s">IuqDju&#39;</span><span class="p p-Indicator">,</span> <span class="nv">roles</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;ROLE_ADMIN&#39;</span><span class="p p-Indicator">]</span> <span class="p p-Indicator">}</span>
+                    <span class="l l-Scalar l-Scalar-Plain">jane_admin</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{</span> <span class="nv">password</span><span class="p p-Indicator">:</span> <span class="s">&#39;$2y$13$PFi1I</span><span class="nv"> </span><span class="s">...</span><span class="nv"> </span><span class="s">rGwXCZ&#39;</span><span class="p p-Indicator">,</span> <span class="nv">roles</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;ROLE_ADMIN&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;ROLE_SUPER_ADMIN&#39;</span><span class="p p-Indicator">]</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">When using a <code class="docutils literal notranslate"><span class="pre">memory</span></code> provider, and not the <code class="docutils literal notranslate"><span class="pre">auto</span></code> algorithm, you have
+to choose an encoding without salt (i.e. <code class="docutils literal notranslate"><span class="pre">bcrypt</span></code>).</p>
+</div>
+</div>
+<div class="section" id="ldap-user-provider">
+<span id="security-ldap-user-provider"></span><h2>LDAP User Provider<a class="headerlink" href="#ldap-user-provider" title="Permalink to this headline">¶</a></h2>
+<p>This user provider requires installing certain dependencies and using some
+special authentication providers, so it’s explained in a separate article:
+<a class="reference internal" href="ldap.html"><span class="doc">Authenticating against an LDAP server</span></a>.</p>
+</div>
+<div class="section" id="chain-user-provider">
+<span id="security-chain-user-provider"></span><h2>Chain User Provider<a class="headerlink" href="#chain-user-provider" title="Permalink to this headline">¶</a></h2>
+<p>This user provider combines two or more of the other provider types (<code class="docutils literal notranslate"><span class="pre">entity</span></code>,
+<code class="docutils literal notranslate"><span class="pre">memory</span></code> and <code class="docutils literal notranslate"><span class="pre">ldap</span></code>) to create a new user provider. The order in which
+providers are configured is important because Symfony will look for users
+starting from the first provider and will keep looking for in the other
+providers until the user is found:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+    <span class="l l-Scalar l-Scalar-Plain">providers</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">backend_users</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">memory</span><span class="p p-Indicator">:</span>
+                <span class="c1"># ...</span>
+
+        <span class="l l-Scalar l-Scalar-Plain">legacy_users</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">entity</span><span class="p p-Indicator">:</span>
+                <span class="c1"># ...</span>
+
+        <span class="l l-Scalar l-Scalar-Plain">users</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">entity</span><span class="p p-Indicator">:</span>
+                <span class="c1"># ...</span>
+
+        <span class="l l-Scalar l-Scalar-Plain">all_users</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">chain</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">providers</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;legacy_users&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;users&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;backend&#39;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="creating-a-custom-user-provider">
+<span id="custom-user-provider"></span><h2>Creating a Custom User Provider<a class="headerlink" href="#creating-a-custom-user-provider" title="Permalink to this headline">¶</a></h2>
+<p>Most applications don’t need to create a custom provider. If you store users in
+a database, a LDAP server or a configuration file, Symfony supports that.
+However, if you’re loading users from a custom location (e.g. via an API or
+legacy database connection), you’ll need to create a custom user provider.</p>
+<p>First, make sure you’ve followed the <a class="reference internal" href="../security.html"><span class="doc">Security Guide</span></a> to create
+your <code class="docutils literal notranslate"><span class="pre">User</span></code> class.</p>
+<p>If you used the <code class="docutils literal notranslate"><span class="pre">make:user</span></code> command to create your <code class="docutils literal notranslate"><span class="pre">User</span></code> class (and you
+answered the questions indicating that you need a custom user provider), that
+command will generate a nice skeleton to get you started:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Security/UserProvider.php</span>
+<span class="k">namespace</span> <span class="nx">App\Security</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Exception\UnsupportedUserException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Exception\UsernameNotFoundException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\User\UserInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\User\UserProviderInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">UserProvider</span> <span class="k">implements</span> <span class="nx">UserProviderInterface</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * Symfony calls this method if you use features like switch_user</span>
+<span class="sd">     * or remember_me.</span>
+<span class="sd">     *</span>
+<span class="sd">     * If you&#39;re not using these features, you do not need to implement</span>
+<span class="sd">     * this method.</span>
+<span class="sd">     *</span>
+<span class="sd">     * @return UserInterface</span>
+<span class="sd">     *</span>
+<span class="sd">     * @throws UsernameNotFoundException if the user is not found</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">loadUserByUsername</span><span class="p">(</span><span class="nv">$username</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Load a User object from your data source or throw UsernameNotFoundException.</span>
+        <span class="c1">// The $username argument may not actually be a username:</span>
+        <span class="c1">// it is whatever value is being returned by the getUsername()</span>
+        <span class="c1">// method in your User class.</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">\Exception</span><span class="p">(</span><span class="s1">&#39;TODO: fill in loadUserByUsername() inside &#39;</span><span class="o">.</span><span class="no">__FILE__</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Refreshes the user after being reloaded from the session.</span>
+<span class="sd">     *</span>
+<span class="sd">     * When a user is logged in, at the beginning of each request, the</span>
+<span class="sd">     * User object is loaded from the session and then this method is</span>
+<span class="sd">     * called. Your job is to make sure the user&#39;s data is still fresh by,</span>
+<span class="sd">     * for example, re-querying for fresh User data.</span>
+<span class="sd">     *</span>
+<span class="sd">     * If your firewall is &quot;stateless: true&quot; (for a pure API), this</span>
+<span class="sd">     * method is not called.</span>
+<span class="sd">     *</span>
+<span class="sd">     * @return UserInterface</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">refreshUser</span><span class="p">(</span><span class="nx">UserInterface</span> <span class="nv">$user</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$user</span> <span class="nx">instanceof</span> <span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">UnsupportedUserException</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">&#39;Invalid user class &quot;%s&quot;.&#39;</span><span class="p">,</span> <span class="nb">get_class</span><span class="p">(</span><span class="nv">$user</span><span class="p">)));</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Return a User object after making sure its data is &quot;fresh&quot;.</span>
+        <span class="c1">// Or throw a UsernameNotFoundException if the user no longer exists.</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">\Exception</span><span class="p">(</span><span class="s1">&#39;TODO: fill in refreshUser() inside &#39;</span><span class="o">.</span><span class="no">__FILE__</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Tells Symfony to use this provider for this User class.</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">supportsClass</span><span class="p">(</span><span class="nv">$class</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">User</span><span class="o">::</span><span class="na">class</span> <span class="o">===</span> <span class="nv">$class</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Most of the work is already done! Read the comments in the code and update the
+TODO sections to finish the user provider. When you’re done, tell Symfony about
+the user provider by adding it in <code class="docutils literal notranslate"><span class="pre">security.yaml</span></code>:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">providers</span><span class="p p-Indicator">:</span>
+        <span class="c1"># the name of your user provider can be anything</span>
+        <span class="l l-Scalar l-Scalar-Plain">your_custom_user_provider</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Security\UserProvider</span>
+</pre></div>
+</td></tr></table></div>
+<p>Lastly, update the <code class="docutils literal notranslate"><span class="pre">config/packages/security.yaml</span></code> file to set the
+<code class="docutils literal notranslate"><span class="pre">provider</span></code> key to <code class="docutils literal notranslate"><span class="pre">your_custom_user_provider</span></code> in all the firewalls which
+will use this custom user provider.</p>
+</div>
+<div class="section" id="understanding-how-users-are-refreshed-from-the-session">
+<span id="user-session-refresh"></span><h2>Understanding how Users are Refreshed from the Session<a class="headerlink" href="#understanding-how-users-are-refreshed-from-the-session" title="Permalink to this headline">¶</a></h2>
+<p>At the end of every request (unless your firewall is <code class="docutils literal notranslate"><span class="pre">stateless</span></code>), your
+<code class="docutils literal notranslate"><span class="pre">User</span></code> object is serialized to the session. At the beginning of the next
+request, it’s deserialized and then passed to your user provider to “refresh” it
+(e.g. Doctrine queries for a fresh user).</p>
+<p>Then, the two User objects (the original from the session and the refreshed User
+object) are “compared” to see if they are “equal”. By default, the core
+<code class="docutils literal notranslate"><span class="pre">AbstractToken</span></code> class compares the return values of the <code class="docutils literal notranslate"><span class="pre">getPassword()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">getSalt()</span></code> and <code class="docutils literal notranslate"><span class="pre">getUsername()</span></code> methods. If any of these are different, your
+user will be logged out. This is a security measure to make sure that malicious
+users can be de-authenticated if core user data changes.</p>
+<p>However, in some cases, this process can cause unexpected authentication problems.
+If you’re having problems authenticating, it could be that you <em>are</em> authenticating
+successfully, but you immediately lose authentication after the first redirect.</p>
+<p>In that case, review the serialization logic (e.g. <code class="docutils literal notranslate"><span class="pre">SerializableInterface</span></code>) if
+you have any, to make sure that all the fields necessary are serialized.</p>
+</div>
+<div class="section" id="comparing-users-manually-with-equatableinterface">
+<h2>Comparing Users Manually with EquatableInterface<a class="headerlink" href="#comparing-users-manually-with-equatableinterface" title="Permalink to this headline">¶</a></h2>
+<p>Or, if you need more control over the “compare users” process, make your User class
+implement <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/User/EquatableInterface.php" title="Symfony\Component\Security\Core\User\EquatableInterface"><span class="pre">EquatableInterface</span></a></code>.
+Then, your <code class="docutils literal notranslate"><span class="pre">isEqualTo()</span></code> method will be called when comparing users.</p>
+</div>
+<div class="section" id="injecting-a-user-provider-in-your-services">
+<h2>Injecting a User Provider in your Services<a class="headerlink" href="#injecting-a-user-provider-in-your-services" title="Permalink to this headline">¶</a></h2>
+<p>Symfony defines several services related to user providers:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console debug:container user.provider
+
+<span class="go">  Select one of the following services to display its information:</span>
+<span class="go">  [0] security.user.provider.in_memory</span>
+<span class="go">  [1] security.user.provider.ldap</span>
+<span class="go">  [2] security.user.provider.chain</span>
+<span class="go">  ...</span>
+</pre></div>
+</td></tr></table></div>
+<p>Most of these services are abstract and cannot be injected in your services.
+Instead, you must inject the normal service that Symfony creates for each of
+your user providers. The names of these services follow this pattern:
+<code class="docutils literal notranslate"><span class="pre">security.user.provider.concrete.&lt;your-provider-name&gt;</span></code>.</p>
+<p>For example, if you are <a class="reference internal" href="form_login_setup.html"><span class="doc">building a form login</span></a>
+and want to inject in your <code class="docutils literal notranslate"><span class="pre">LoginFormAuthenticator</span></code> a user provider of type
+<code class="docutils literal notranslate"><span class="pre">memory</span></code> and called  <code class="docutils literal notranslate"><span class="pre">backend_users</span></code>, do the following:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Security/LoginFormAuthenticator.php</span>
+<span class="k">namespace</span> <span class="nx">App\Security</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\User\InMemoryUserProvider</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">LoginFormAuthenticator</span> <span class="k">extends</span> <span class="nx">AbstractFormLoginAuthenticator</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$userProvider</span><span class="p">;</span>
+
+    <span class="c1">// change the &#39;InMemoryUserProvider&#39; type-hint in the constructor if</span>
+    <span class="c1">// you are injecting a different type of user provider</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">InMemoryUserProvider</span> <span class="nv">$userProvider</span><span class="p">,</span> <span class="cm">/* ... */</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">userProvider</span> <span class="o">=</span> <span class="nv">$userProvider</span><span class="p">;</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then, inject the concrete service created by Symfony for the <code class="docutils literal notranslate"><span class="pre">backend_users</span></code>
+user provider:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\Security\LoginFormAuthenticator</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">$userProvider</span><span class="p p-Indicator">:</span> <span class="s">&#39;@security.user.provider.concrete.backend_users&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

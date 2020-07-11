@@ -1,0 +1,1103 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Creating and Sending Notifications &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to send Chat Messages" href="notifier/chatters.html" />
+    <link rel="prev" title="Migrating an Existing Application to Symfony" href="migration.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating and Sending Notifications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#channels-chatters-texters-email-and-browser">Channels: Chatters, Texters, Email and Browser</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sms-channel">SMS Channel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chat-channel">Chat Channel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#email-channel">Email Channel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-to-use-failover-or-round-robin-transports">Configure to use Failover or Round-Robin Transports</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-sending-notifications">Creating &amp; Sending Notifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-channel-policies">Configuring Channel Policies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#customize-notifications">Customize Notifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#customize-notification-messages">Customize Notification Messages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#disabling-delivery">Disabling Delivery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#learn-more">Learn more</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notifier/chatters.html">How to send Chat Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notifier/texters.html">How to send SMS Messages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Creating and Sending Notifications</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/notifier.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="creating-and-sending-notifications">
+<span id="index-0"></span><h1>Creating and Sending Notifications<a class="headerlink" href="#creating-and-sending-notifications" title="Permalink to this headline">¶</a></h1>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.0: </span>The Notifier component was introduced in Symfony 5.0 as an
+<a class="reference internal" href="contributing/code/experimental.html"><span class="doc">experimental feature</span></a>.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Current web applications use many different channels to send messages to
+the users (e.g. SMS, Slack messages, emails, push notifications, etc.). The
+Notifier component in Symfony is an abstraction on top of all these
+channels. It provides a dynamic way to manage how the messages are sent.
+Get the Notifier installed using:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/notifier
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="channels-chatters-texters-email-and-browser">
+<h2>Channels: Chatters, Texters, Email and Browser<a class="headerlink" href="#channels-chatters-texters-email-and-browser" title="Permalink to this headline">¶</a></h2>
+<p>The notifier component can send notifications to different channels. Each
+channel can integrate with different providers (e.g. Slack or Twilio SMS)
+by using transports.</p>
+<p>The notifier component supports the following channels:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#notifier-sms-channel"><span class="std std-ref">SMS channel</span></a> sends notifications to phones via
+SMS messages;</li>
+<li><a class="reference internal" href="#notifier-chat-channel"><span class="std std-ref">Chat channel</span></a> sends notifications to chat
+services like Slack and Telegram;</li>
+<li><a class="reference internal" href="#notifier-email-channel"><span class="std std-ref">Email channel</span></a> integrates the <a class="reference internal" href="mailer.html"><span class="doc">Symfony Mailer</span></a>;</li>
+<li>Browser channel uses <a class="reference internal" href="controller.html#flash-messages"><span class="std std-ref">flash messages</span></a>.</li>
+</ul>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Use <a class="reference internal" href="configuration/secrets.html"><span class="doc">secrets</span></a> to securily store your
+API’s tokens.</p>
+</div>
+<div class="section" id="sms-channel">
+<span id="notifier-texter-dsn"></span><span id="notifier-sms-channel"></span><h3>SMS Channel<a class="headerlink" href="#sms-channel" title="Permalink to this headline">¶</a></h3>
+<p>The SMS channel uses <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Notifier/Texter.php" title="Symfony\Component\Notifier\Texter"><span class="pre">Texter</span></a></code> classes
+to send SMS messages to mobile phones. This feature requires subscribing to
+a third-party service that sends SMS messages. Symfony provides integration
+with a couple popular SMS services:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="33%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Service</th>
+<th class="head">Package</th>
+<th class="head">DSN</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Twilio</td>
+<td><code class="docutils literal notranslate"><span class="pre">symfony/twilio-notifier</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">twilio://SID:TOKEN&#64;default?from=FROM</span></code></td>
+</tr>
+<tr class="row-odd"><td>Nexmo</td>
+<td><code class="docutils literal notranslate"><span class="pre">symfony/nexmo-notifier</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">nexmo://KEY:SECRET&#64;default?from=FROM</span></code></td>
+</tr>
+<tr class="row-even"><td>OvhCloud</td>
+<td><code class="docutils literal notranslate"><span class="pre">symfony/ovhcloud-notifier</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">ovhcloud://KEY:SECRET&#64;default?from=FROM</span></code></td>
+</tr>
+<tr class="row-odd"><td>Sinch</td>
+<td><code class="docutils literal notranslate"><span class="pre">symfony/sinch-notifier</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">sinch://ACCOUNT_ID:AUTH_TOKEN&#64;default?from=FROM</span></code></td>
+</tr>
+<tr class="row-even"><td>FreeMobile</td>
+<td><code class="docutils literal notranslate"><span class="pre">symfony/freemobile-notifier</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">freemobile://LOGIN:PASS&#64;default?phone=PHONE</span></code></td>
+</tr>
+</tbody>
+</table>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The OvhCloud, Sinch and FreeMobile integrations were introduced in Symfony 5.1.</p>
+</div>
+<p>To enable a texter, add the correct DSN in your <code class="docutils literal notranslate"><span class="pre">.env</span></code> file and
+configure the <code class="docutils literal notranslate"><span class="pre">texter_transports</span></code>:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># .env</span>
+<span class="nv">TWILIO_DSN</span><span class="o">=</span>twilio://SID:TOKEN@default?from<span class="o">=</span>FROM
+</pre></div>
+</td></tr></table></div>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/notifier.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">notifier</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">texter_transports</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">twilio</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(TWILIO_DSN)%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/notifier.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:notifier&gt;</span>
+            <span class="nt">&lt;framework:texter-transport</span> <span class="na">name=</span><span class="s">&quot;twilio&quot;</span><span class="nt">&gt;</span>
+                %env(TWILIO_DSN)%
+            <span class="nt">&lt;/framework:texter-transport&gt;</span>
+        <span class="nt">&lt;/framework:notifier&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/notifier.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;notifier&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;texter_transports&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;twilio&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(TWILIO_DSN)%&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="chat-channel">
+<span id="notifier-chatter-dsn"></span><span id="notifier-chat-channel"></span><h3>Chat Channel<a class="headerlink" href="#chat-channel" title="Permalink to this headline">¶</a></h3>
+<p>The chat channel is used to send chat messages to users by using
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Notifier/Chatter.php" title="Symfony\Component\Notifier\Chatter"><span class="pre">Chatter</span></a></code> classes. Symfony provides
+integration with these chat services:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="35%" />
+<col width="53%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Service</th>
+<th class="head">Package</th>
+<th class="head">DSN</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Slack</td>
+<td><code class="docutils literal notranslate"><span class="pre">symfony/slack-notifier</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">slack://default/ID</span></code></td>
+</tr>
+<tr class="row-odd"><td>Telegram</td>
+<td><code class="docutils literal notranslate"><span class="pre">symfony/telegram-notifier</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">telegram://TOKEN&#64;default?channel=CHAT_ID</span></code></td>
+</tr>
+<tr class="row-even"><td>Mattermost</td>
+<td><code class="docutils literal notranslate"><span class="pre">symfony/mattermost-notifier</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">mattermost://TOKEN&#64;ENDPOINT?channel=CHANNEL</span></code></td>
+</tr>
+<tr class="row-odd"><td>RocketChat</td>
+<td><code class="docutils literal notranslate"><span class="pre">symfony/rocketchat-notifier</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">rocketchat://TOKEN&#64;ENDPOINT?channel=CHANNEL</span></code></td>
+</tr>
+</tbody>
+</table>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The Mattermost and RocketChat integrations were introduced in Symfony
+5.1. The Slack DSN changed in Symfony 5.1 to use Slack Incoming
+Webhooks instead of legacy tokens.</p>
+</div>
+<p>Chatters are configured using the <code class="docutils literal notranslate"><span class="pre">chatter_transports</span></code> setting:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># .env</span>
+<span class="nv">SLACK_DSN</span><span class="o">=</span>slack://default/ID
+</pre></div>
+</td></tr></table></div>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/notifier.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">notifier</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">chatter_transports</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">slack</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(SLACK_DSN)%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/notifier.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:notifier&gt;</span>
+            <span class="nt">&lt;framework:chatter-transport</span> <span class="na">name=</span><span class="s">&quot;slack&quot;</span><span class="nt">&gt;</span>
+                %env(SLACK_DSN)%
+            <span class="nt">&lt;/framework:chatter-transport&gt;</span>
+        <span class="nt">&lt;/framework:notifier&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/notifier.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;notifier&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;chatter_transports&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;slack&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(SLACK_DSN)%&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="email-channel">
+<span id="notifier-email-channel"></span><h3>Email Channel<a class="headerlink" href="#email-channel" title="Permalink to this headline">¶</a></h3>
+<p>The email channel uses the <a class="reference internal" href="mailer.html"><span class="doc">Symfony Mailer</span></a> to send
+notifications using the special
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Twig/Mime/NotificationEmail.php" title="Symfony\Bridge\Twig\Mime\NotificationEmail"><span class="pre">NotificationEmail</span></a></code>. It is
+required to install the Twig bridge along with the Inky and CSS Inliner
+Twig extensions:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/twig-pack twig/cssinliner-extra twig/inky-extra
+</pre></div>
+</td></tr></table></div>
+<p>After this, <a class="reference internal" href="mailer.html#mailer-transport-setup"><span class="std std-ref">configure the mailer</span></a>. You can
+also set the default “from” email address that should be used to send the
+notification emails:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/mailer.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">mailer</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">dsn</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(MAILER_DSN)%&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">envelope</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">sender</span><span class="p p-Indicator">:</span> <span class="s">&#39;notifications@example.com&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/mailer.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:mailer</span>
+            <span class="na">dsn=</span><span class="s">&quot;%env(MAILER_DSN)%&quot;</span>
+        <span class="nt">&gt;</span>
+            <span class="nt">&lt;framework:envelope</span>
+                <span class="na">sender=</span><span class="s">&quot;notifications@example.com&quot;</span>
+            <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/framework:mailer&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/mailer.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;mailer&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;dsn&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(MAILER_DSN)%&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;envelope&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;sender&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;notifications@example.com&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="configure-to-use-failover-or-round-robin-transports">
+<h3>Configure to use Failover or Round-Robin Transports<a class="headerlink" href="#configure-to-use-failover-or-round-robin-transports" title="Permalink to this headline">¶</a></h3>
+<p>Besides configuring one or more separate transports, you can also use the
+special <code class="docutils literal notranslate"><span class="pre">||</span></code> and <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code> characters to implement a failover or round-robin
+transport:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/notifier.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">notifier</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">chatter_transports</span><span class="p p-Indicator">:</span>
+            <span class="c1"># Send notifications to Slack and use Telegram if</span>
+            <span class="c1"># Slack errored</span>
+            <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(SLACK_DSN)%</span><span class="nv"> </span><span class="s">||</span><span class="nv"> </span><span class="s">%env(TELEGRAM_DSN)%&#39;</span>
+
+            <span class="c1"># Send notifications to the next scheduled transport calculated by round robin</span>
+            <span class="l l-Scalar l-Scalar-Plain">roundrobin</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(SLACK_DSN)%</span><span class="nv"> </span><span class="s">&amp;&amp;</span><span class="nv"> </span><span class="s">%env(TELEGRAM_DSN)%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/notifier.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:notifier&gt;</span>
+            <span class="c">&lt;!-- Send notifications to Slack and use Telegram if</span>
+<span class="c">                 Slack errored --&gt;</span>
+            <span class="nt">&lt;framework:chatter-transport</span> <span class="na">name=</span><span class="s">&quot;slack&quot;</span><span class="nt">&gt;</span>
+                %env(SLACK_DSN)% || %env(TELEGRAM_DSN)%
+            <span class="nt">&lt;/framework:chatter-transport&gt;</span>
+
+            <span class="c">&lt;!-- Send notifications to the next scheduled transport</span>
+<span class="c">                 calculated by round robin --&gt;</span>
+            <span class="nt">&lt;framework:chatter-transport</span> <span class="na">name=</span><span class="s">&quot;slack&quot;</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[</span>
+<span class="cp">                %env(SLACK_DSN)% &amp;&amp; %env(TELEGRAM_DSN)%</span>
+<span class="cp">            ]]&gt;</span><span class="nt">&lt;/framework:chatter-transport&gt;</span>
+        <span class="nt">&lt;/framework:notifier&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/notifier.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;notifier&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;chatter_transports&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// Send notifications to Slack and use Telegram if</span>
+            <span class="c1">// Slack errored</span>
+            <span class="s1">&#39;main&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(SLACK_DSN)% || %env(TELEGRAM_DSN)%&#39;</span><span class="p">,</span>
+
+            <span class="c1">// Send notifications to the next scheduled transport calculated by round robin</span>
+            <span class="s1">&#39;roundrobin&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(SLACK_DSN)% &amp;&amp; %env(TELEGRAM_DSN)%&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="creating-sending-notifications">
+<h2>Creating &amp; Sending Notifications<a class="headerlink" href="#creating-sending-notifications" title="Permalink to this headline">¶</a></h2>
+<p>To send a notification, autowire the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Notifier/NotifierInterface.php" title="Symfony\Component\Notifier\NotifierInterface"><span class="pre">NotifierInterface</span></a></code> (service ID
+<code class="docutils literal notranslate"><span class="pre">notifier</span></code>). This class has a <code class="docutils literal notranslate"><span class="pre">send()</span></code> method that allows you to send a
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Notifier/Notification/Notification.php" title="Symfony\Component\Notifier\Notification\Notification"><span class="pre">Notification</span></a></code> to a
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Notifier/Recipient/Recipient.php" title="Symfony\Component\Notifier\Recipient\Recipient"><span class="pre">Recipient</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/InvoiceController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Notifier\Notification\Notification</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Notifier\NotifierInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Notifier\Recipient\AdminRecipient</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">InvoiceController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @Route(&quot;/invoice/create&quot;)</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">(</span><span class="nx">NotifierInterface</span> <span class="nv">$notifier</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+
+        <span class="c1">// Create a Notification that has to be sent</span>
+        <span class="c1">// using the &quot;email&quot; channel</span>
+        <span class="nv">$notification</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Notification</span><span class="p">(</span><span class="s1">&#39;New Invoice&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]))</span>
+            <span class="o">-&gt;</span><span class="na">content</span><span class="p">(</span><span class="s1">&#39;You got a new invoice for 15 EUR.&#39;</span><span class="p">);</span>
+
+        <span class="c1">// The receiver of the Notification</span>
+        <span class="nv">$recipient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AdminRecipient</span><span class="p">(</span>
+            <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getEmail</span><span class="p">(),</span>
+            <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getPhonenumber</span><span class="p">()</span>
+        <span class="p">);</span>
+
+        <span class="c1">// Send the notification to the recipient</span>
+        <span class="nv">$notifier</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$notification</span><span class="p">,</span> <span class="nv">$recipient</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Notification</span></code> is created by using two arguments: the subject and
+channels. The channels specify which channel (or transport) should be used
+to send the notification. For instance, <code class="docutils literal notranslate"><span class="pre">['email',</span> <span class="pre">'sms']</span></code> will send
+both an email and sms notification to the user.</p>
+<p>The default notification also has a <code class="docutils literal notranslate"><span class="pre">content()</span></code> and <code class="docutils literal notranslate"><span class="pre">emoji()</span></code> method to
+set the notification content and icon.</p>
+<p>Symfony provides three types of recipients:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Notifier/Recipient/NoRecipient.php" title="Symfony\Component\Notifier\Recipient\NoRecipient"><span class="pre">NoRecipient</span></a></code></dt>
+<dd>This is the default and is useful when there is no need to have
+information about the receiver. For example, the browser channel uses
+the current requests’s <a class="reference internal" href="controller.html#flash-messages"><span class="std std-ref">session flashbag</span></a>;</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Notifier/Recipient/Recipient.php" title="Symfony\Component\Notifier\Recipient\Recipient"><span class="pre">Recipient</span></a></code></dt>
+<dd>This contains only the email address of the user and can be used for
+messages on the email and browser channel;</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Notifier/Recipient/AdminRecipient.php" title="Symfony\Component\Notifier\Recipient\AdminRecipient"><span class="pre">AdminRecipient</span></a></code></dt>
+<dd>This can contain both email address and phonenumber of the user. This
+recipient can be used for all channels (depending on whether they are
+actually set).</dd>
+</dl>
+<div class="section" id="configuring-channel-policies">
+<h3>Configuring Channel Policies<a class="headerlink" href="#configuring-channel-policies" title="Permalink to this headline">¶</a></h3>
+<p>Instead of specifying the target channels on creation, Symfony also allows
+you to use notification importance levels. Update the configuration to
+specify what channels should be used for specific levels (using
+<code class="docutils literal notranslate"><span class="pre">channel_policy</span></code>):</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/notifier.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">notifier</span><span class="p p-Indicator">:</span>
+        <span class="c1"># ...</span>
+        <span class="l l-Scalar l-Scalar-Plain">channel_policy</span><span class="p p-Indicator">:</span>
+            <span class="c1"># Use SMS, Slack and email for urgent notifications</span>
+            <span class="l l-Scalar l-Scalar-Plain">urgent</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;sms&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;chat/slack&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;email&#39;</span><span class="p p-Indicator">]</span>
+
+            <span class="c1"># Use Slack for highly important notifications</span>
+            <span class="l l-Scalar l-Scalar-Plain">high</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;chat/slack&#39;</span><span class="p p-Indicator">]</span>
+
+            <span class="c1"># Use browser for medium and low notifications</span>
+            <span class="l l-Scalar l-Scalar-Plain">medium</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;browser&#39;</span><span class="p p-Indicator">]</span>
+            <span class="l l-Scalar l-Scalar-Plain">low</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;browser&#39;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/notifier.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:notifier&gt;</span>
+            <span class="c">&lt;!-- ... --&gt;</span>
+
+            <span class="nt">&lt;framework:channel-policy&gt;</span>
+                <span class="c">&lt;!-- Use SMS, Slack and Email for urgent notifications --&gt;</span>
+                <span class="nt">&lt;framework:urgent&gt;</span>sms<span class="nt">&lt;/framework:urgent&gt;</span>
+                <span class="nt">&lt;framework:urgent&gt;</span>chat/slack<span class="nt">&lt;/framework:urgent&gt;</span>
+                <span class="nt">&lt;framework:urgent&gt;</span>email<span class="nt">&lt;/framework:urgent&gt;</span>
+
+                <span class="c">&lt;!-- Use Slack for highly important notifications --&gt;</span>
+                <span class="nt">&lt;framework:high&gt;</span>chat/slack<span class="nt">&lt;/framework:high&gt;</span>
+
+                <span class="c">&lt;!-- Use browser for medium and low notifications --&gt;</span>
+                <span class="nt">&lt;framework:medium&gt;</span>browser<span class="nt">&lt;/framework:medium&gt;</span>
+                <span class="nt">&lt;framework:low&gt;</span>browser<span class="nt">&lt;/framework:low&gt;</span>
+            <span class="nt">&lt;/framework:channel-policy&gt;</span>
+        <span class="nt">&lt;/framework:notifier&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/notifier.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;notifier&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="c1">// ...</span>
+        <span class="s1">&#39;channel_policy&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// Use SMS, Slack and email for urgent notifications</span>
+            <span class="s1">&#39;urgent&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;sms&#39;</span><span class="p">,</span> <span class="s1">&#39;chat/slack&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">],</span>
+
+            <span class="c1">// Use Slack for highly important notifications</span>
+            <span class="s1">&#39;high&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;chat/slack&#39;</span><span class="p">],</span>
+
+            <span class="c1">// Use browser for medium and low notifications</span>
+            <span class="s1">&#39;medium&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;browser&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;low&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;browser&#39;</span><span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Now, whenever the notification’s importance is set to “high”, it will be
+sent using the Slack transport:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">InvoiceController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @Route(&quot;/invoice/create&quot;)</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">invoice</span><span class="p">(</span><span class="nx">NotifierInterface</span> <span class="nv">$notifier</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+
+        <span class="nv">$notification</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Notification</span><span class="p">(</span><span class="s1">&#39;New Invoice&#39;</span><span class="p">))</span>
+            <span class="o">-&gt;</span><span class="na">content</span><span class="p">(</span><span class="s1">&#39;You got a new invoice for 15 EUR.&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">importance</span><span class="p">(</span><span class="nx">Notification</span><span class="o">::</span><span class="na">IMPORTANCE_HIGH</span><span class="p">);</span>
+
+        <span class="nv">$notifier</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$notification</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Recipient</span><span class="p">(</span><span class="s1">&#39;wouter@wouterj.nl&#39;</span><span class="p">));</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="customize-notifications">
+<h2>Customize Notifications<a class="headerlink" href="#customize-notifications" title="Permalink to this headline">¶</a></h2>
+<p>You can extend the <code class="docutils literal notranslate"><span class="pre">Notification</span></code> or <code class="docutils literal notranslate"><span class="pre">Recipient</span></code> base classes to
+customize their behavior. For instance, you can overwrite the
+<code class="docutils literal notranslate"><span class="pre">getChannels()</span></code> method to only return <code class="docutils literal notranslate"><span class="pre">sms</span></code> if the invoice price is
+very high and the recipient has a phone number:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nx">App\Notifier</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Notifier\Notification\Notification</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Notifier\Recipient\Recipient</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">InvoiceNotification</span> <span class="k">extends</span> <span class="nx">Notification</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$price</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$price</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">price</span> <span class="o">=</span> <span class="nv">$price</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getChannels</span><span class="p">(</span><span class="nx">Recipient</span> <span class="nv">$recipient</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">price</span> <span class="o">&gt;</span> <span class="mi">10000</span>
+            <span class="o">&amp;&amp;</span> <span class="nv">$recipient</span> <span class="nx">instanceof</span> <span class="nx">AdminRecipient</span>
+            <span class="o">&amp;&amp;</span> <span class="k">null</span> <span class="o">!==</span> <span class="nv">$recipient</span><span class="o">-&gt;</span><span class="na">getPhone</span><span class="p">()</span>
+        <span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;sms&#39;</span><span class="p">];</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="customize-notification-messages">
+<h3>Customize Notification Messages<a class="headerlink" href="#customize-notification-messages" title="Permalink to this headline">¶</a></h3>
+<p>Each channel has its own notification interface that you can implement to
+customize the notification message. For instance, if you want to modify the
+message based on the chat service, implement
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Notifier/Notification/ChatNotificationInterface.php" title="Symfony\Component\Notifier\Notification\ChatNotificationInterface"><span class="pre">ChatNotificationInterface</span></a></code>
+and its <code class="docutils literal notranslate"><span class="pre">asChatMessage()</span></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Notifier/InvoiceNotification.php</span>
+<span class="k">namespace</span> <span class="nx">App\Notifier</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Notifier\Message\ChatMessage</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Notifier\Notification\ChatNotificationInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Notifier\Notification\Notification</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Notifier\Recipient\Recipient</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">InvoiceNotification</span> <span class="k">extends</span> <span class="nx">Notification</span> <span class="k">implements</span> <span class="nx">ChatNotificationInterface</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$price</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$price</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">price</span> <span class="o">=</span> <span class="nv">$price</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">asChatMessage</span><span class="p">(</span><span class="nx">Recipient</span> <span class="nv">$recipient</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$transport</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span><span class="o">:</span> <span class="o">?</span><span class="nx">ChatMessage</span>
+    <span class="p">{</span>
+        <span class="c1">// Add a custom emoji if the message is sent to Slack</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;slack&#39;</span> <span class="o">===</span> <span class="nv">$transport</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">(</span><span class="k">new</span> <span class="nx">ChatMessage</span><span class="p">(</span><span class="s1">&#39;You\&#39;re invoiced &#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">price</span><span class="o">.</span><span class="s1">&#39; EUR.&#39;</span><span class="p">))</span>
+                <span class="o">-&gt;</span><span class="na">emoji</span><span class="p">(</span><span class="s1">&#39;money&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// If you return null, the Notifier will create the ChatMessage</span>
+        <span class="c1">// based on this notification as it would without this method.</span>
+        <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Notifier/Notification/SmsNotificationInterface.php" title="Symfony\Component\Notifier\Notification\SmsNotificationInterface"><span class="pre">SmsNotificationInterface</span></a></code>
+and
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Notifier/Notification/EmailNotificationInterface.php" title="Symfony\Component\Notifier\Notification\EmailNotificationInterface"><span class="pre">EmailNotificationInterface</span></a></code>
+also exists to modify messages send to those channels.</p>
+</div>
+</div>
+<div class="section" id="disabling-delivery">
+<h2>Disabling Delivery<a class="headerlink" href="#disabling-delivery" title="Permalink to this headline">¶</a></h2>
+<p>While developing (or testing), you may want to disable delivery of notifications
+entirely. You can do this by forcing Notifier to use the <code class="docutils literal notranslate"><span class="pre">NullTransport</span></code> for
+all configured texter and chatter transports only in the <code class="docutils literal notranslate"><span class="pre">dev</span></code> (and/or
+<code class="docutils literal notranslate"><span class="pre">test</span></code>) environment:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/dev/notifier.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">notifier</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">texter_transports</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">twilio</span><span class="p p-Indicator">:</span> <span class="s">&#39;null://null&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">chatter_transports</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">slack</span><span class="p p-Indicator">:</span> <span class="s">&#39;null://null&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="learn-more">
+<h2>Learn more<a class="headerlink" href="#learn-more" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notifier/chatters.html">How to send Chat Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notifier/texters.html">How to send SMS Messages</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

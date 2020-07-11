@@ -1,0 +1,2661 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Messenger: Sync &amp; Queued Message Handling &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to Create Your own Messenger Transport" href="messenger/custom-transport.html" />
+    <link rel="prev" title="Pushing Data to Clients Using the Mercure Protocol" href="mercure.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Messenger: Sync &amp; Queued Message Handling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-message-handler">Creating a Message &amp; Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dispatching-the-message">Dispatching the Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#transports-async-queued-messages">Transports: Async/Queued Messages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#routing-messages-to-a-transport">Routing Messages to a Transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#doctrine-entities-in-messages">Doctrine Entities in Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#handling-messages-synchronously">Handling Messages Synchronously</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-your-own-transport">Creating your Own Transport</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#consuming-messages-running-the-worker">Consuming Messages (Running the Worker)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#deploying-to-production">Deploying to Production</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prioritized-transports">Prioritized Transports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#supervisor-configuration">Supervisor Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#retries-failures">Retries &amp; Failures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#avoiding-retrying">Avoiding Retrying</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#saving-retrying-failed-messages">Saving &amp; Retrying Failed Messages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#transport-configuration">Transport Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#amqp-transport">AMQP Transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#doctrine-transport">Doctrine Transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#redis-transport">Redis Transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#in-memory-transport">In Memory Transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#serializing-messages">Serializing Messages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#customizing-handlers">Customizing Handlers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#manually-configuring-handlers">Manually Configuring Handlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#handler-subscriber-options">Handler Subscriber &amp; Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#binding-handlers-to-different-transports">Binding Handlers to Different Transports</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#extending-messenger">Extending Messenger</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#envelopes-stamps">Envelopes &amp; Stamps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#middleware">Middleware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#middleware-for-doctrine">Middleware for Doctrine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#messenger-events">Messenger Events</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#multiple-buses-command-event-buses">Multiple Buses, Command &amp; Event Buses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#learn-more">Learn more</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="messenger/custom-transport.html">How to Create Your own Messenger Transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="messenger/handler_results.html">Getting Results from your Handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="messenger/message-recorder.html">Transactional Messages: Handle New Messages After Handling is Done</a></li>
+<li class="toctree-l3"><a class="reference internal" href="messenger/multiple_buses.html">Multiple Buses</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Messenger: Sync &amp; Queued Message Handling</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/messenger.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="messenger-sync-queued-message-handling">
+<span id="index-0"></span><h1>Messenger: Sync &amp; Queued Message Handling<a class="headerlink" href="#messenger-sync-queued-message-handling" title="Permalink to this headline">¶</a></h1>
+<p>Messenger provides a message bus with the ability to send messages and then
+handle them immediately in your application or send them through transports
+(e.g. queues) to be handled later. To learn more deeply about it, read the
+<a class="reference internal" href="components/messenger.html"><span class="doc">Messenger component docs</span></a>.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>In applications using <a class="reference internal" href="setup.html#symfony-flex"><span class="std std-ref">Symfony Flex</span></a>, run this command to
+install messenger:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/messenger
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="creating-a-message-handler">
+<h2>Creating a Message &amp; Handler<a class="headerlink" href="#creating-a-message-handler" title="Permalink to this headline">¶</a></h2>
+<p>Messenger centers around two different classes that you’ll create: (1) a message
+class that holds data and (2) a handler(s) class that will be called when that
+message is dispatched. The handler class will read the message class and perform
+some task.</p>
+<p>There are no specific requirements for a message class, except that it can be
+serialized:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Message/SmsNotification.php</span>
+<span class="k">namespace</span> <span class="nx">App\Message</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">SmsNotification</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$content</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$content</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">content</span> <span class="o">=</span> <span class="nv">$content</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getContent</span><span class="p">()</span><span class="o">:</span> <span class="nx">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">content</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p id="messenger-handler">A message handler is a PHP callable, the recommended way to create it is to
+create a class that implements <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Handler/MessageHandlerInterface.php" title="Symfony\Component\Messenger\Handler\MessageHandlerInterface"><span class="pre">MessageHandlerInterface</span></a></code>
+and has an <code class="docutils literal notranslate"><span class="pre">__invoke()</span></code> method that’s type-hinted with the message class (or a
+message interface):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/MessageHandler/SmsNotificationHandler.php</span>
+<span class="k">namespace</span> <span class="nx">App\MessageHandler</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Message\SmsNotification</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Handler\MessageHandlerInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">SmsNotificationHandler</span> <span class="k">implements</span> <span class="nx">MessageHandlerInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">(</span><span class="nx">SmsNotification</span> <span class="nv">$message</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ... do some work - like sending an SMS message!</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Thanks to <a class="reference internal" href="service_container.html#services-autoconfigure"><span class="std std-ref">autoconfiguration</span></a> and the <code class="docutils literal notranslate"><span class="pre">SmsNotification</span></code>
+type-hint, Symfony knows that this handler should be called when an <code class="docutils literal notranslate"><span class="pre">SmsNotification</span></code>
+message is dispatched. Most of the time, this is all you need to do. But you can
+also <a class="reference internal" href="#messenger-handler-config"><span class="std std-ref">manually configure message handlers</span></a>. To
+see all the configured handlers, run:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console debug:messenger
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="dispatching-the-message">
+<h2>Dispatching the Message<a class="headerlink" href="#dispatching-the-message" title="Permalink to this headline">¶</a></h2>
+<p>You’re ready! To dispatch the message (and call the handler), inject the
+<code class="docutils literal notranslate"><span class="pre">message_bus</span></code> service (via the <code class="docutils literal notranslate"><span class="pre">MessageBusInterface</span></code>), like in a controller:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/DefaultController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Message\SmsNotification</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\MessageBusInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">DefaultController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nx">MessageBusInterface</span> <span class="nv">$bus</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// will cause the SmsNotificationHandler to be called</span>
+        <span class="nv">$bus</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span><span class="k">new</span> <span class="nx">SmsNotification</span><span class="p">(</span><span class="s1">&#39;Look! I created a message!&#39;</span><span class="p">));</span>
+
+        <span class="c1">// or use the shortcut</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dispatchMessage</span><span class="p">(</span><span class="k">new</span> <span class="nx">SmsNotification</span><span class="p">(</span><span class="s1">&#39;Look! I created a message!&#39;</span><span class="p">));</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="transports-async-queued-messages">
+<h2>Transports: Async/Queued Messages<a class="headerlink" href="#transports-async-queued-messages" title="Permalink to this headline">¶</a></h2>
+<p>By default, messages are handled as soon as they are dispatched. If you want
+to handle a message asynchronously, you can configure a transport. A transport
+is capable of sending messages (e.g. to a queueing system) and then
+<a class="reference internal" href="#messenger-worker"><span class="std std-ref">receiving them via a worker</span></a>. Messenger supports
+<a class="reference internal" href="#messenger-transports-config"><span class="std std-ref">multiple transports</span></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you want to use a transport that’s not supported, check out the
+<a class="reference external" href="https://github.com/sroze/messenger-enqueue-transport">Enqueue’s transport</a>, which supports things like Kafka and Google Pub/Sub.</p>
+</div>
+<p>A transport is registered using a “DSN”. Thanks to Messenger’s Flex recipe, your
+<code class="docutils literal notranslate"><span class="pre">.env</span></code> file already has a few examples.</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># MESSENGER_TRANSPORT_DSN=amqp://guest:guest@localhost:5672/%2f/messages</span>
+<span class="c1"># MESSENGER_TRANSPORT_DSN=doctrine://default</span>
+<span class="c1"># MESSENGER_TRANSPORT_DSN=redis://localhost:6379/messages</span>
+</pre></div>
+</td></tr></table></div>
+<p>Uncomment whichever transport you want (or set it in <code class="docutils literal notranslate"><span class="pre">.env.local</span></code>). See
+<a class="reference internal" href="#messenger-transports-config"><span class="std std-ref">Transport Configuration</span></a> for more details.</p>
+<p>Next, in <code class="docutils literal notranslate"><span class="pre">config/packages/messenger.yaml</span></code>, let’s define a transport called <code class="docutils literal notranslate"><span class="pre">async</span></code>
+that uses this configuration:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/messenger.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">messenger</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">transports</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">async</span><span class="p p-Indicator">:</span> <span class="s">&quot;%env(MESSENGER_TRANSPORT_DSN)%&quot;</span>
+
+            <span class="c1"># or expanded to configure more options</span>
+            <span class="c1">#async:</span>
+            <span class="c1">#    dsn: &quot;%env(MESSENGER_TRANSPORT_DSN)%&quot;</span>
+            <span class="c1">#    options: []</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/messenger.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:messenger&gt;</span>
+            <span class="nt">&lt;framework:transport</span> <span class="na">name=</span><span class="s">&quot;async&quot;</span><span class="nt">&gt;</span>%env(MESSENGER_TRANSPORT_DSN)%<span class="nt">&lt;/framework:transport&gt;</span>
+
+            <span class="c">&lt;!-- or expanded to configure more options --&gt;</span>
+            <span class="nt">&lt;framework:transport</span> <span class="na">name=</span><span class="s">&quot;async&quot;</span>
+                <span class="na">dsn=</span><span class="s">&quot;%env(MESSENGER_TRANSPORT_DSN)%&quot;</span>
+            <span class="nt">&gt;</span>
+                <span class="nt">&lt;option</span> <span class="na">key=</span><span class="s">&quot;...&quot;</span><span class="nt">&gt;</span>...<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;/framework:transport&gt;</span>
+        <span class="nt">&lt;/framework:messenger&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/messenger.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;messenger&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;transports&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;async&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(MESSENGER_TRANSPORT_DSN)%&#39;</span><span class="p">,</span>
+
+            <span class="c1">// or expanded to configure more options</span>
+            <span class="s1">&#39;async&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+               <span class="s1">&#39;dsn&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(MESSENGER_TRANSPORT_DSN)%&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="p">[]</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="section" id="routing-messages-to-a-transport">
+<span id="messenger-routing"></span><h3>Routing Messages to a Transport<a class="headerlink" href="#routing-messages-to-a-transport" title="Permalink to this headline">¶</a></h3>
+<p>Now that you have a transport configured, instead of handling a message immediately,
+you can configure them to be sent to a transport:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/messenger.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">messenger</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">transports</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">async</span><span class="p p-Indicator">:</span> <span class="s">&quot;%env(MESSENGER_TRANSPORT_DSN)%&quot;</span>
+
+        <span class="l l-Scalar l-Scalar-Plain">routing</span><span class="p p-Indicator">:</span>
+            <span class="c1"># async is whatever name you gave your transport above</span>
+            <span class="s">&#39;App\Message\SmsNotification&#39;</span><span class="p p-Indicator">:</span>  <span class="l l-Scalar l-Scalar-Plain">async</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/messenger.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:messenger&gt;</span>
+            <span class="nt">&lt;framework:routing</span> <span class="na">message-class=</span><span class="s">&quot;App\Message\SmsNotification&quot;</span><span class="nt">&gt;</span>
+                <span class="c">&lt;!-- async is whatever name you gave your transport above --&gt;</span>
+                <span class="nt">&lt;framework:sender</span> <span class="na">service=</span><span class="s">&quot;async&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/framework:routing&gt;</span>
+        <span class="nt">&lt;/framework:messenger&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/messenger.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;messenger&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;routing&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// async is whatever name you gave your transport above</span>
+            <span class="s1">&#39;App\Message\SmsNotification&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;async&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Thanks to this, the <code class="docutils literal notranslate"><span class="pre">App\Message\SmsNotification</span></code> will be sent to the <code class="docutils literal notranslate"><span class="pre">async</span></code>
+transport and its handler(s) will <em>not</em> be called immediately. Any messages not
+matched under <code class="docutils literal notranslate"><span class="pre">routing</span></code> will still be handled immediately.</p>
+<p>You can also route classes by their parent class or interface. Or send messages
+to multiple transports:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/messenger.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">messenger</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">routing</span><span class="p p-Indicator">:</span>
+            <span class="c1"># route all messages that extend this example base class or interface</span>
+            <span class="s">&#39;App\Message\AbstractAsyncMessage&#39;</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">async</span>
+            <span class="s">&#39;App\Message\AsyncMessageInterface&#39;</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">async</span>
+
+            <span class="s">&#39;My\Message\ToBeSentToTwoSenders&#39;</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="nv">async</span><span class="p p-Indicator">,</span> <span class="nv">audit</span><span class="p p-Indicator">]</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/messenger.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:messenger&gt;</span>
+            <span class="c">&lt;!-- route all messages that extend this example base class or interface --&gt;</span>
+            <span class="nt">&lt;framework:routing</span> <span class="na">message-class=</span><span class="s">&quot;App\Message\AbstractAsyncMessage&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;framework:sender</span> <span class="na">service=</span><span class="s">&quot;async&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/framework:routing&gt;</span>
+            <span class="nt">&lt;framework:routing</span> <span class="na">message-class=</span><span class="s">&quot;App\Message\AsyncMessageInterface&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;framework:sender</span> <span class="na">service=</span><span class="s">&quot;async&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/framework:routing&gt;</span>
+            <span class="nt">&lt;framework:routing</span> <span class="na">message-class=</span><span class="s">&quot;My\Message\ToBeSentToTwoSenders&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;framework:sender</span> <span class="na">service=</span><span class="s">&quot;async&quot;</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;framework:sender</span> <span class="na">service=</span><span class="s">&quot;audit&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/framework:routing&gt;</span>
+        <span class="nt">&lt;/framework:messenger&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/messenger.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;messenger&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;routing&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// route all messages that extend this example base class or interface</span>
+            <span class="s1">&#39;App\Message\AbstractAsyncMessage&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;async&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;App\Message\AsyncMessageInterface&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;async&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;My\Message\ToBeSentToTwoSenders&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;async&#39;</span><span class="p">,</span> <span class="s1">&#39;audit&#39;</span><span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="doctrine-entities-in-messages">
+<h3>Doctrine Entities in Messages<a class="headerlink" href="#doctrine-entities-in-messages" title="Permalink to this headline">¶</a></h3>
+<p>If you need to pass a Doctrine entity in a message, it’s better to pass the entity’s
+primary key (or whatever relevant information the handler actually needs, like <code class="docutils literal notranslate"><span class="pre">email</span></code>,
+etc) instead of the object:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Message/NewUserWelcomeEmail.php</span>
+<span class="k">namespace</span> <span class="nx">App\Message</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">NewUserWelcomeEmail</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$userId</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$userId</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">userId</span> <span class="o">=</span> <span class="nv">$userId</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getUserId</span><span class="p">()</span><span class="o">:</span> <span class="nx">int</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">userId</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then, in your handler, you can query for a fresh object:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/MessageHandler/NewUserWelcomeEmailHandler.php</span>
+<span class="k">namespace</span> <span class="nx">App\MessageHandler</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Message\NewUserWelcomeEmail</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Repository\UserRepository</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Handler\MessageHandlerInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">NewUserWelcomeEmailHandler</span> <span class="k">implements</span> <span class="nx">MessageHandlerInterface</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$userRepository</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">UserRepository</span> <span class="nv">$userRepository</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">userRepository</span> <span class="o">=</span> <span class="nv">$userRepository</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">(</span><span class="nx">NewUserWelcomeEmail</span> <span class="nv">$welcomeEmail</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">userRepository</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="nv">$welcomeEmail</span><span class="o">-&gt;</span><span class="na">getUserId</span><span class="p">());</span>
+
+        <span class="c1">// ... send an email!</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This guarantees the entity contains fresh data.</p>
+</div>
+<div class="section" id="handling-messages-synchronously">
+<h3>Handling Messages Synchronously<a class="headerlink" href="#handling-messages-synchronously" title="Permalink to this headline">¶</a></h3>
+<p>If a message doesn’t <a class="reference internal" href="#messenger-routing"><span class="std std-ref">match any routing rules</span></a>, it won’t
+be sent to any transport and will be handled immediately. In some cases (like
+when <a class="reference internal" href="#binding-handlers-to-different-transports">binding handlers to different transports</a>),
+it’s easier or more flexible to handle this explicitly: by creating a <code class="docutils literal notranslate"><span class="pre">sync</span></code>
+transport and “sending” messages there to be handled immediately:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/messenger.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">messenger</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">transports</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ... other transports</span>
+
+            <span class="l l-Scalar l-Scalar-Plain">sync</span><span class="p p-Indicator">:</span> <span class="s">&#39;sync://&#39;</span>
+
+        <span class="l l-Scalar l-Scalar-Plain">routing</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">App\Message\SmsNotification</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">sync</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/messenger.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:messenger&gt;</span>
+            <span class="c">&lt;!-- ... other transports --&gt;</span>
+
+            <span class="nt">&lt;framework:transport</span> <span class="na">name=</span><span class="s">&quot;sync&quot;</span> <span class="na">dsn=</span><span class="s">&quot;sync://&quot;</span><span class="nt">/&gt;</span>
+
+            <span class="nt">&lt;framework:routing</span> <span class="na">message-class=</span><span class="s">&quot;App\Message\SmsNotification&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;framework:sender</span> <span class="na">service=</span><span class="s">&quot;sync&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/framework:routing&gt;</span>
+        <span class="nt">&lt;/framework:messenger&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/messenger.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;messenger&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;transports&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// ... other transports</span>
+
+            <span class="s1">&#39;sync&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;sync://&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;routing&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;App\Message\SmsNotification&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;sync&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="creating-your-own-transport">
+<h3>Creating your Own Transport<a class="headerlink" href="#creating-your-own-transport" title="Permalink to this headline">¶</a></h3>
+<p>You can also create your own transport if you need to send or receive messages
+from something that is not supported. See <a class="reference internal" href="messenger/custom-transport.html"><span class="doc">How to Create Your own Messenger Transport</span></a>.</p>
+</div>
+</div>
+<div class="section" id="consuming-messages-running-the-worker">
+<span id="messenger-worker"></span><h2>Consuming Messages (Running the Worker)<a class="headerlink" href="#consuming-messages-running-the-worker" title="Permalink to this headline">¶</a></h2>
+<p>Once your messages have been routed, in most cases, you’ll need to “consume” them.
+You can do this with the <code class="docutils literal notranslate"><span class="pre">messenger:consume</span></code> command:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console messenger:consume async
+
+<span class="c1"># use -vv to see details about what&#39;s happening</span>
+<span class="gp">$</span> php bin/console messenger:consume async -vv
+</pre></div>
+</td></tr></table></div>
+<p>The first argument is the receiver’s name (or service id if you routed to a
+custom service). By default, the command will run forever: looking for new messages
+on your transport and handling them. This command is called your “worker”.</p>
+<div class="section" id="deploying-to-production">
+<h3>Deploying to Production<a class="headerlink" href="#deploying-to-production" title="Permalink to this headline">¶</a></h3>
+<p>On production, there are a few important things to think about:</p>
+<dl class="docutils">
+<dt><strong>Use Supervisor to keep your worker(s) running</strong></dt>
+<dd>You’ll want one or more “workers” running at all times. To do that, use a
+process control system like <a class="reference internal" href="#messenger-supervisor"><span class="std std-ref">Supervisor</span></a>.</dd>
+<dt><strong>Don’t Let Workers Run Forever</strong></dt>
+<dd>Some services (like Doctrine’s EntityManager) will consume more memory
+over time. So, instead of allowing your worker to run forever, use a flag
+like <code class="docutils literal notranslate"><span class="pre">messenger:consume</span> <span class="pre">--limit=10</span></code> to tell your worker to only handle 10
+messages before exiting (then Supervisor will create a new process). There
+are also other options like <code class="docutils literal notranslate"><span class="pre">--memory-limit=128M</span></code> and <code class="docutils literal notranslate"><span class="pre">--time-limit=3600</span></code>.</dd>
+<dt><strong>Restart Workers on Deploy</strong></dt>
+<dd>Each time you deploy, you’ll need to restart all your worker processes so
+that they see the newly deployed code. To do this, run <code class="docutils literal notranslate"><span class="pre">messenger:stop-workers</span></code>
+on deploy. This will signal to each worker that it should finish the message
+it’s currently handling and shut down gracefully. Then, Supervisor will create
+new worker processes. The command uses the <a class="reference internal" href="cache.html#cache-configuration-with-frameworkbundle"><span class="std std-ref">app</span></a>
+cache internally - so make sure this is configured to use an adapter you like.</dd>
+</dl>
+</div>
+<div class="section" id="prioritized-transports">
+<h3>Prioritized Transports<a class="headerlink" href="#prioritized-transports" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes certain types of messages should have a higher priority and be handled
+before others. To make this possible, you can create multiple transports and route
+different messages to them. For example:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/messenger.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">messenger</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">transports</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">async_priority_high</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">dsn</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(MESSENGER_TRANSPORT_DSN)%&#39;</span>
+                <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
+                    <span class="c1"># queue_name is specific to the doctrine transport</span>
+                    <span class="l l-Scalar l-Scalar-Plain">queue_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">high</span>
+
+                    <span class="c1"># for AMQP send to a separate exchange then queue</span>
+                    <span class="c1">#exchange:</span>
+                    <span class="c1">#    name: high</span>
+                    <span class="c1">#queues:</span>
+                    <span class="c1">#    messages_high: ~</span>
+                    <span class="c1"># or redis try &quot;group&quot;</span>
+            <span class="l l-Scalar l-Scalar-Plain">async_priority_low</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">dsn</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(MESSENGER_TRANSPORT_DSN)%&#39;</span>
+                <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
+                    <span class="l l-Scalar l-Scalar-Plain">queue_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">low</span>
+
+        <span class="l l-Scalar l-Scalar-Plain">routing</span><span class="p p-Indicator">:</span>
+            <span class="s">&#39;App\Message\SmsNotification&#39;</span><span class="p p-Indicator">:</span>  <span class="l l-Scalar l-Scalar-Plain">async_priority_low</span>
+            <span class="s">&#39;App\Message\NewUserWelcomeEmail&#39;</span><span class="p p-Indicator">:</span>  <span class="l l-Scalar l-Scalar-Plain">async_priority_high</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/messenger.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:messenger&gt;</span>
+            <span class="nt">&lt;framework:transport</span> <span class="na">name=</span><span class="s">&quot;async_priority_high&quot;</span> <span class="na">dsn=</span><span class="s">&quot;%env(MESSENGER_TRANSPORT_DSN)%&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;framework:options&gt;</span>
+                    <span class="nt">&lt;framework:queue&gt;</span>
+                        <span class="nt">&lt;framework:name&gt;</span>Queue<span class="nt">&lt;/framework:name&gt;</span>
+                    <span class="nt">&lt;/framework:queue&gt;</span>
+                <span class="nt">&lt;/framework:options&gt;</span>
+            <span class="nt">&lt;/framework:transport&gt;</span>
+            <span class="nt">&lt;framework:transport</span> <span class="na">name=</span><span class="s">&quot;async_priority_low&quot;</span> <span class="na">dsn=</span><span class="s">&quot;%env(MESSENGER_TRANSPORT_DSN)%&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;option</span> <span class="na">key=</span><span class="s">&quot;queue_name&quot;</span><span class="nt">&gt;</span>low<span class="nt">&lt;/option&gt;</span>
+            <span class="nt">&lt;/framework:transport&gt;</span>
+
+            <span class="nt">&lt;framework:routing</span> <span class="na">message-class=</span><span class="s">&quot;App\Message\SmsNotification&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;framework:sender</span> <span class="na">service=</span><span class="s">&quot;async_priority_low&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/framework:routing&gt;</span>
+            <span class="nt">&lt;framework:routing</span> <span class="na">message-class=</span><span class="s">&quot;App\Message\NewUserWelcomeEmail&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;framework:sender</span> <span class="na">service=</span><span class="s">&quot;async_priority_high&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/framework:routing&gt;</span>
+        <span class="nt">&lt;/framework:messenger&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/messenger.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;messenger&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;transports&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;async_priority_high&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;dsn&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(MESSENGER_TRANSPORT_DSN)%&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="s1">&#39;queue_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;high&#39;</span><span class="p">,</span>
+                <span class="p">],</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;async_priority_low&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;dsn&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(MESSENGER_TRANSPORT_DSN)%&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="s1">&#39;queue_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;low&#39;</span><span class="p">,</span>
+                <span class="p">],</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;routing&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;App\Message\SmsNotification&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;async_priority_low&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;App\Message\NewUserWelcomeEmail&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;async_priority_high&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>You can then run individual workers for each transport or instruct one worker
+to handle messages in a priority order:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console messenger:consume async_priority_high async_priority_low
+</pre></div>
+</td></tr></table></div>
+<p>The worker will always first look for messages waiting on <code class="docutils literal notranslate"><span class="pre">async_priority_high</span></code>. If
+there are none, <em>then</em> it will consume messages from <code class="docutils literal notranslate"><span class="pre">async_priority_low</span></code>.</p>
+</div>
+<div class="section" id="supervisor-configuration">
+<span id="messenger-supervisor"></span><h3>Supervisor Configuration<a class="headerlink" href="#supervisor-configuration" title="Permalink to this headline">¶</a></h3>
+<p>Supervisor is a great tool to guarantee that your worker process(es) is
+<em>always</em> running (even if it closes due to failure, hitting a message limit
+or thanks to <code class="docutils literal notranslate"><span class="pre">messenger:stop-workers</span></code>). You can install it on Ubuntu, for
+example, via:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo apt-get install supervisor
+</pre></div>
+</td></tr></table></div>
+<p>Supervisor configuration files typically live in a <code class="docutils literal notranslate"><span class="pre">/etc/supervisor/conf.d</span></code>
+directory. For example, you can create a new <code class="docutils literal notranslate"><span class="pre">messenger-worker.conf</span></code> file
+there to make sure that 2 instances of <code class="docutils literal notranslate"><span class="pre">messenger:consume</span></code> are running at all
+times:</p>
+<div class="highlight-ini notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">;/etc/supervisor/conf.d/messenger-worker.conf</span>
+<span class="k">[program:messenger-consume]</span>
+<span class="na">command</span><span class="o">=</span><span class="s">php /path/to/your/app/bin/console messenger:consume async --time-limit=3600</span>
+<span class="na">user</span><span class="o">=</span><span class="s">ubuntu</span>
+<span class="na">numprocs</span><span class="o">=</span><span class="s">2</span>
+<span class="na">startsecs</span><span class="o">=</span><span class="s">0</span>
+<span class="na">autostart</span><span class="o">=</span><span class="s">true</span>
+<span class="na">autorestart</span><span class="o">=</span><span class="s">true</span>
+<span class="na">process_name</span><span class="o">=</span><span class="s">%(program_name)s_%(process_num)02d</span>
+</pre></div>
+</td></tr></table></div>
+<p>Change the <code class="docutils literal notranslate"><span class="pre">async</span></code> argument to use the name of your transport (or transports)
+and <code class="docutils literal notranslate"><span class="pre">user</span></code> to the Unix user on your server. Next, tell Supervisor to read your
+config and start your workers:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo supervisorctl reread
+
+<span class="gp">$</span> sudo supervisorctl update
+
+<span class="gp">$</span> sudo supervisorctl start messenger-consume:*
+</pre></div>
+</td></tr></table></div>
+<p>See the <a class="reference external" href="http://supervisord.org/">Supervisor docs</a> for more details.</p>
+</div>
+</div>
+<div class="section" id="retries-failures">
+<span id="messenger-retries-failures"></span><h2>Retries &amp; Failures<a class="headerlink" href="#retries-failures" title="Permalink to this headline">¶</a></h2>
+<p>If an exception is thrown while consuming a message from a transport it will
+automatically be re-sent to the transport to be tried again. By default, a message
+will be retried 3 times before being discarded or
+<a class="reference internal" href="#messenger-failure-transport"><span class="std std-ref">sent to the failure transport</span></a>. Each retry
+will also be delayed, in case the failure was due to a temporary issue. All of
+this is configurable for each transport:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/messenger.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">messenger</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">transports</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">async_priority_high</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">dsn</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(MESSENGER_TRANSPORT_DSN)%&#39;</span>
+
+                <span class="c1"># default configuration</span>
+                <span class="l l-Scalar l-Scalar-Plain">retry_strategy</span><span class="p p-Indicator">:</span>
+                    <span class="l l-Scalar l-Scalar-Plain">max_retries</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
+                    <span class="c1"># milliseconds delay</span>
+                    <span class="l l-Scalar l-Scalar-Plain">delay</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
+                    <span class="c1"># causes the delay to be higher before each retry</span>
+                    <span class="c1"># e.g. 1 second delay, 2 seconds, 4 seconds</span>
+                    <span class="l l-Scalar l-Scalar-Plain">multiplier</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+                    <span class="l l-Scalar l-Scalar-Plain">max_delay</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+                    <span class="c1"># override all of this with a service that</span>
+                    <span class="c1"># implements Symfony\Component\Messenger\Retry\RetryStrategyInterface</span>
+                    <span class="c1"># service: null</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/messenger.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:messenger&gt;</span>
+            <span class="nt">&lt;framework:transport</span> <span class="na">name=</span><span class="s">&quot;async_priority_high&quot;</span> <span class="na">dsn=</span><span class="s">&quot;%env(MESSENGER_TRANSPORT_DSN)%?queue_name=high_priority&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;framework:retry-strategy</span> <span class="na">max-retries=</span><span class="s">&quot;3&quot;</span> <span class="na">delay=</span><span class="s">&quot;1000&quot;</span> <span class="na">multiplier=</span><span class="s">&quot;2&quot;</span> <span class="na">max-delay=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/framework:transport&gt;</span>
+        <span class="nt">&lt;/framework:messenger&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/messenger.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;messenger&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;transports&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;async_priority_high&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;dsn&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(MESSENGER_TRANSPORT_DSN)%&#39;</span><span class="p">,</span>
+
+                <span class="c1">// default configuration</span>
+                <span class="s1">&#39;retry_strategy&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="s1">&#39;max_retries&#39;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
+                    <span class="c1">// milliseconds delay</span>
+                    <span class="s1">&#39;delay&#39;</span> <span class="o">=&gt;</span> <span class="mi">1000</span><span class="p">,</span>
+                    <span class="c1">// causes the delay to be higher before each retry</span>
+                    <span class="c1">// e.g. 1 second delay, 2 seconds, 4 seconds</span>
+                    <span class="s1">&#39;multiplier&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="s1">&#39;max_delay&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+                    <span class="c1">// override all of this with a service that</span>
+                    <span class="c1">// implements Symfony\Component\Messenger\Retry\RetryStrategyInterface</span>
+                    <span class="c1">// &#39;service&#39; =&gt; null,</span>
+                <span class="p">],</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="section" id="avoiding-retrying">
+<h3>Avoiding Retrying<a class="headerlink" href="#avoiding-retrying" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes handling a message might fail in a way that you <em>know</em> is permanent
+and should not be retried. If you throw
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Exception/UnrecoverableMessageHandlingException.php" title="Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException"><span class="pre">UnrecoverableMessageHandlingException</span></a></code>,
+the message will not be retried.</p>
+</div>
+<div class="section" id="saving-retrying-failed-messages">
+<span id="messenger-failure-transport"></span><h3>Saving &amp; Retrying Failed Messages<a class="headerlink" href="#saving-retrying-failed-messages" title="Permalink to this headline">¶</a></h3>
+<p>If a message fails it is retried multiple times (<code class="docutils literal notranslate"><span class="pre">max_retries</span></code>) and then will
+be discarded. To avoid this happening, you can instead configure a <code class="docutils literal notranslate"><span class="pre">failure_transport</span></code>:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/messenger.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">messenger</span><span class="p p-Indicator">:</span>
+        <span class="c1"># after retrying, messages will be sent to the &quot;failed&quot; transport</span>
+        <span class="l l-Scalar l-Scalar-Plain">failure_transport</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">failed</span>
+
+        <span class="l l-Scalar l-Scalar-Plain">transports</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ... other transports</span>
+
+            <span class="l l-Scalar l-Scalar-Plain">failed</span><span class="p p-Indicator">:</span> <span class="s">&#39;doctrine://default?queue_name=failed&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/messenger.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="c">&lt;!-- after retrying, messages will be sent to the &quot;failed&quot; transport --&gt;</span>
+        <span class="nt">&lt;framework:messenger</span> <span class="na">failure-transport=</span><span class="s">&quot;failed&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- ... other transports --&gt;</span>
+
+            <span class="nt">&lt;framework:transport</span> <span class="na">name=</span><span class="s">&quot;failed&quot;</span> <span class="na">dsn=</span><span class="s">&quot;doctrine://default?queue_name=failed&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/framework:messenger&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/messenger.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;messenger&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="c1">// after retrying, messages will be sent to the &quot;failed&quot; transport</span>
+        <span class="s1">&#39;failure_transport&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;failed&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;transports&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// ... other transports</span>
+
+            <span class="s1">&#39;failed&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;dsn&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;doctrine://default?queue_name=failed&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>In this example, if handling a message fails 3 times (default <code class="docutils literal notranslate"><span class="pre">max_retries</span></code>),
+it will then be sent to the <code class="docutils literal notranslate"><span class="pre">failed</span></code> transport. While you <em>can</em> use
+<code class="docutils literal notranslate"><span class="pre">messenger:consume</span> <span class="pre">failed</span></code> to consume this like a normal transport, you’ll
+usually want to manually view the messages in the failure transport and choose
+to retry them:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># see all messages in the failure transport</span>
+<span class="gp">$</span> php bin/console messenger:failed:show
+
+<span class="c1"># see details about a specific failure</span>
+<span class="gp">$</span> php bin/console messenger:failed:show <span class="m">20</span> -vv
+
+<span class="c1"># view and retry messages one-by-one</span>
+<span class="gp">$</span> php bin/console messenger:failed:retry -vv
+
+<span class="c1"># retry specific messages</span>
+<span class="gp">$</span> php bin/console messenger:failed:retry <span class="m">20</span> <span class="m">30</span> --force
+
+<span class="c1"># remove a message without retrying it</span>
+<span class="gp">$</span> php bin/console messenger:failed:remove <span class="m">20</span>
+
+<span class="c1"># remove messages without retrying them and show each message before removing it</span>
+<span class="gp">$</span> php bin/console messenger:failed:remove <span class="m">20</span> <span class="m">30</span> --show-messages
+</pre></div>
+</td></tr></table></div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The <code class="docutils literal notranslate"><span class="pre">--show-messages</span></code> option was introduced in Symfony 5.1.</p>
+</div>
+<p>If the message fails again, it will be re-sent back to the failure transport
+due to the normal <a class="reference internal" href="#messenger-retries-failures"><span class="std std-ref">retry rules</span></a>. Once the max
+retry has been hit, the message will be discarded permanently.</p>
+</div>
+</div>
+<div class="section" id="transport-configuration">
+<span id="messenger-transports-config"></span><h2>Transport Configuration<a class="headerlink" href="#transport-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Messenger supports a number of different transport types, each with their own
+options.</p>
+<div class="section" id="amqp-transport">
+<h3>AMQP Transport<a class="headerlink" href="#amqp-transport" title="Permalink to this headline">¶</a></h3>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>Starting from Symfony 5.1, the AMQP transport has moved to a separate package.
+Install it by running:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/amqp-messenger
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">amqp</span></code> transport configuration looks like this:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># .env</span>
+<span class="nv">MESSENGER_TRANSPORT_DSN</span><span class="o">=</span>amqp://guest:guest@localhost:5672/%2f/messages
+</pre></div>
+</td></tr></table></div>
+<p>To use Symfony’s built-in AMQP transport, you need the AMQP PHP extension.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, the transport will automatically create any exchanges, queues and
+binding keys that are needed. That can be disabled, but some functionality
+may not work correctly (like delayed queues).</p>
+</div>
+<p>The transport has a number of other options, including ways to configure
+the exchange, queues binding keys and more. See the documentation on
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Bridge/Amqp/Transport/Connection.php" title="Symfony\Component\Messenger\Bridge\Amqp\Transport\Connection"><span class="pre">Connection</span></a></code>.</p>
+<p>You can also configure AMQP-specific settings on your message by adding
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Bridge/Amqp/Transport/AmqpStamp.php" title="Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpStamp"><span class="pre">AmqpStamp</span></a></code> to
+your Envelope:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpStamp</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$attributes</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="nv">$bus</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span><span class="k">new</span> <span class="nx">SmsNotification</span><span class="p">(),</span> <span class="p">[</span>
+    <span class="k">new</span> <span class="nx">AmqpStamp</span><span class="p">(</span><span class="s1">&#39;custom-routing-key&#39;</span><span class="p">,</span> <span class="nx">AMQP_NOPARAM</span><span class="p">,</span> <span class="nv">$attributes</span><span class="p">)</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">The consumers do not show up in an admin panel as this transport does not rely on
+<code class="docutils literal notranslate"><span class="pre">\AmqpQueue::consume()</span></code> which is blocking. Having a blocking receiver makes
+the <code class="docutils literal notranslate"><span class="pre">--time-limit/--memory-limit</span></code> options of the <code class="docutils literal notranslate"><span class="pre">messenger:consume</span></code> command as well as
+the <code class="docutils literal notranslate"><span class="pre">messenger:stop-workers</span></code> command inefficient, as they all rely on the fact that
+the receiver returns immediately no matter if it finds a message or not. The consume
+worker is responsible for iterating until it receives a message to handle and/or until one
+of the stop conditions is reached. Thus, the worker’s stop logic cannot be reached if it
+is stuck in a blocking call.</p>
+</div>
+</div>
+<div class="section" id="doctrine-transport">
+<h3>Doctrine Transport<a class="headerlink" href="#doctrine-transport" title="Permalink to this headline">¶</a></h3>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>Starting from Symfony 5.1, the Doctrine transport has moved to a separate package.
+Install it by running:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/doctrine-messenger
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>The Doctrine transport can be used to store messages in a database table.</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># .env</span>
+<span class="nv">MESSENGER_TRANSPORT_DSN</span><span class="o">=</span>doctrine://default
+</pre></div>
+</td></tr></table></div>
+<p>The format is <code class="docutils literal notranslate"><span class="pre">doctrine://&lt;connection_name&gt;</span></code>, in case you have multiple connections
+and want to use one other than the “default”. The transport will automatically create
+a table named <code class="docutils literal notranslate"><span class="pre">messenger_messages</span></code>.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The ability to automatically generate a migration for the <code class="docutils literal notranslate"><span class="pre">messenger_messages</span></code>
+table was introduced in Symfony 5.1 and DoctrineBundle 2.1.</p>
+</div>
+<p>Or, to create the table yourself, set the <code class="docutils literal notranslate"><span class="pre">auto_setup</span></code> option to <code class="docutils literal notranslate"><span class="pre">false</span></code> and
+<a class="reference internal" href="doctrine.html#doctrine-creating-the-database-tables-schema"><span class="std std-ref">generate a migration</span></a>.</p>
+<p>The transport has a number of options:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/messenger.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">messenger</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">transports</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">async_priority_high</span><span class="p p-Indicator">:</span> <span class="s">&quot;%env(MESSENGER_TRANSPORT_DSN)%?queue_name=high_priority&quot;</span>
+            <span class="l l-Scalar l-Scalar-Plain">async_normal</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">dsn</span><span class="p p-Indicator">:</span> <span class="s">&quot;%env(MESSENGER_TRANSPORT_DSN)%&quot;</span>
+                <span class="l l-Scalar l-Scalar-Plain">options</span><span class="p p-Indicator">:</span>
+                    <span class="l l-Scalar l-Scalar-Plain">queue_name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">normal_priority</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/messenger.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:messenger&gt;</span>
+            <span class="nt">&lt;framework:transport</span> <span class="na">name=</span><span class="s">&quot;async_priority_high&quot;</span> <span class="na">dsn=</span><span class="s">&quot;%env(MESSENGER_TRANSPORT_DSN)%?queue_name=high_priority&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;framework:transport</span> <span class="na">name=</span><span class="s">&quot;async_priority_low&quot;</span> <span class="na">dsn=</span><span class="s">&quot;%env(MESSENGER_TRANSPORT_DSN)%&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;framework:options&gt;</span>
+                    <span class="nt">&lt;framework:queue&gt;</span>
+                        <span class="nt">&lt;framework:name&gt;</span>normal_priority<span class="nt">&lt;/framework:name&gt;</span>
+                    <span class="nt">&lt;/framework:queue&gt;</span>
+                <span class="nt">&lt;/framework:options&gt;</span>
+            <span class="nt">&lt;/framework:transport&gt;</span>
+        <span class="nt">&lt;/framework:messenger&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/messenger.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;messenger&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;transports&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;async_priority_high&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(MESSENGER_TRANSPORT_DSN)%?queue_name=high_priority&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;async_priority_low&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;dsn&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(MESSENGER_TRANSPORT_DSN)%&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="s1">&#39;queue_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;normal_priority&#39;</span>
+                <span class="p">]</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Options defined under <code class="docutils literal notranslate"><span class="pre">options</span></code> take precedence over ones defined in the DSN.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="47%" />
+<col width="29%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Description</th>
+<th class="head">Default</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>table_name</td>
+<td>Name of the table</td>
+<td>messenger_messages</td>
+</tr>
+<tr class="row-odd"><td>queue_name</td>
+<td>Name of the queue (a column in the
+table, to use one table for
+multiple transports)</td>
+<td>default</td>
+</tr>
+<tr class="row-even"><td>redeliver_timeout</td>
+<td>Timeout before retrying a message
+that’s in the queue but in the
+“handling” state (if a worker died
+for some reason, this will occur,
+eventually you should retry the
+message) - in seconds.</td>
+<td>3600</td>
+</tr>
+<tr class="row-odd"><td>auto_setup</td>
+<td>Whether the table should be created
+automatically during send / get.</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="redis-transport">
+<h3>Redis Transport<a class="headerlink" href="#redis-transport" title="Permalink to this headline">¶</a></h3>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>Starting from Symfony 5.1, the Redis transport has moved to a separate package.
+Install it by running:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/redis-messenger
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>The Redis transport uses <a class="reference external" href="https://redis.io/topics/streams-intro">streams</a> to queue messages.</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># .env</span>
+<span class="nv">MESSENGER_TRANSPORT_DSN</span><span class="o">=</span>redis://localhost:6379/messages
+<span class="c1"># Full DSN Example</span>
+<span class="nv">MESSENGER_TRANSPORT_DSN</span><span class="o">=</span>redis://password@localhost:6379/messages/symfony/consumer?auto_setup<span class="o">=</span>true<span class="p">&amp;</span><span class="nv">serializer</span><span class="o">=</span><span class="m">1</span><span class="p">&amp;</span><span class="nv">stream_max_entries</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">dbindex</span><span class="o">=</span><span class="m">0</span>
+<span class="c1"># Unix Socket Example</span>
+<span class="nv">MESSENGER_TRANSPORT_DSN</span><span class="o">=</span>redis:///var/run/redis.sock
+</pre></div>
+</td></tr></table></div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The Unix socket DSN was introduced in Symfony 5.1.</p>
+</div>
+<p>To use the Redis transport, you will need the Redis PHP extension (&gt;=4.3) and
+a running Redis server (^5.0).</p>
+<p>A number of options can be configured via the DSN or via the <code class="docutils literal notranslate"><span class="pre">options</span></code> key
+under the transport in <code class="docutils literal notranslate"><span class="pre">messenger.yaml</span></code>:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="42%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Description</th>
+<th class="head">Default</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>stream</td>
+<td>The Redis stream name</td>
+<td>messages</td>
+</tr>
+<tr class="row-odd"><td>group</td>
+<td>The Redis consumer group name</td>
+<td>symfony</td>
+</tr>
+<tr class="row-even"><td>consumer</td>
+<td>Consumer name used in Redis</td>
+<td>consumer</td>
+</tr>
+<tr class="row-odd"><td>auto_setup</td>
+<td>Create the Redis group automatically?</td>
+<td>true</td>
+</tr>
+<tr class="row-even"><td>auth</td>
+<td>The Redis password</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>serializer</td>
+<td>How to serialize the final payload
+in Redis (the
+<code class="docutils literal notranslate"><span class="pre">Redis::OPT_SERIALIZER</span></code> option)</td>
+<td><code class="docutils literal notranslate"><span class="pre">Redis::SERIALIZER_PHP</span></code></td>
+</tr>
+<tr class="row-even"><td>stream_max_entries</td>
+<td>The maximum number of entries which
+the stream will be trimmed to. Set
+it to a large enough number to
+avoid losing pending messages</td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code> (which means “no trimming”)</td>
+</tr>
+<tr class="row-odd"><td>tls</td>
+<td>Enable TLS support for the connection</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="in-memory-transport">
+<h3>In Memory Transport<a class="headerlink" href="#in-memory-transport" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">in-memory</span></code> transport does not actually deliver messages. Instead, it
+holds them in memory during the request, which can be useful for testing.
+For example, if you have an <code class="docutils literal notranslate"><span class="pre">async_priority_normal</span></code> transport, you could
+override it in the <code class="docutils literal notranslate"><span class="pre">test</span></code> environment to use this transport:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/test/messenger.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">messenger</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">transports</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">async_priority_normal</span><span class="p p-Indicator">:</span> <span class="s">&#39;in-memory://&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/test/messenger.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:messenger&gt;</span>
+            <span class="nt">&lt;framework:transport</span> <span class="na">name=</span><span class="s">&quot;async_priority_normal&quot;</span> <span class="na">dsn=</span><span class="s">&quot;in-memory://&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/framework:messenger&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/test/messenger.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;messenger&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;transports&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;async_priority_normal&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;dsn&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;in-memory://&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Then, while testing, messages will <em>not</em> be delivered to the real transport.
+Even better, in a test, you can check that exactly one message was sent
+during a request:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// tests/DefaultControllerTest.php</span>
+<span class="k">namespace</span> <span class="nx">App\Tests</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Test\WebTestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Transport\InMemoryTransport</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">DefaultControllerTest</span> <span class="k">extends</span> <span class="nx">WebTestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testSomething</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$client</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="na">createClient</span><span class="p">();</span>
+        <span class="c1">// ...</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">());</span>
+
+        <span class="cm">/* @var InMemoryTransport $transport */</span>
+        <span class="nv">$transport</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;messenger.transport.async_priority_normal&#39;</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertCount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nv">$transport</span><span class="o">-&gt;</span><span class="na">getSent</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All <code class="docutils literal notranslate"><span class="pre">in-memory</span></code> transports will be reset automatically after each test <strong>in</strong>
+test classes extending
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/FrameworkBundle/Test/KernelTestCase.php" title="Symfony\Bundle\FrameworkBundle\Test\KernelTestCase"><span class="pre">KernelTestCase</span></a></code>
+or <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/FrameworkBundle/Test/WebTestCase.php" title="Symfony\Bundle\FrameworkBundle\Test\WebTestCase"><span class="pre">WebTestCase</span></a></code>.</p>
+</div>
+</div>
+<div class="section" id="serializing-messages">
+<h3>Serializing Messages<a class="headerlink" href="#serializing-messages" title="Permalink to this headline">¶</a></h3>
+<p>When messages are sent to (and received from) a transport, they’re serialized
+using PHP’s native <code class="docutils literal notranslate"><span class="pre">serialize()</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">unserialize()</span></code> functions. You can change
+this globally (or for each transport) to a service that implements
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Transport/Serialization/SerializerInterface.php" title="Symfony\Component\Messenger\Transport\Serialization\SerializerInterface"><span class="pre">SerializerInterface</span></a></code>:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/messenger.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">messenger</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">serializer</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">default_serializer</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">messenger.transport.symfony_serializer</span>
+            <span class="l l-Scalar l-Scalar-Plain">symfony_serializer</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">json</span>
+                <span class="l l-Scalar l-Scalar-Plain">context</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{</span> <span class="p p-Indicator">}</span>
+
+        <span class="l l-Scalar l-Scalar-Plain">transports</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">async_priority_normal</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">dsn</span><span class="p p-Indicator">:</span> <span class="c1"># ...</span>
+                <span class="l l-Scalar l-Scalar-Plain">serializer</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">messenger.transport.symfony_serializer</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/messenger.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:messenger&gt;</span>
+            <span class="nt">&lt;framework:serializer</span> <span class="na">default-serializer=</span><span class="s">&quot;messenger.transport.symfony_serializer&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;framework:symfony-serializer</span> <span class="na">format=</span><span class="s">&quot;json&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;framework:context/&gt;</span>
+                <span class="nt">&lt;/framework:symfony-serializer&gt;</span>
+            <span class="nt">&lt;/framework:serializer&gt;</span>
+
+            <span class="nt">&lt;framework:transport</span> <span class="na">name=</span><span class="s">&quot;async_priority_normal&quot;</span> <span class="na">dsn=</span><span class="s">&quot;...&quot;</span> <span class="na">serializer=</span><span class="s">&quot;messenger.transport.symfony_serializer&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/framework:messenger&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/messenger.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;messenger&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;serializer&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;default_serializer&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;messenger.transport.symfony_serializer&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;symfony_serializer&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;format&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;context&#39;</span> <span class="o">=&gt;</span> <span class="p">[],</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;transports&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;async_priority_normal&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;dsn&#39;</span> <span class="o">=&gt;</span> <span class="c1">// ...</span>
+                <span class="s1">&#39;serializer&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;messenger.transport.symfony_serializer&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">messenger.transport.symfony_serializer</span></code> is a built-in service that uses
+the <a class="reference internal" href="serializer.html"><span class="doc">Serializer component</span></a> and can be configured in a few ways.
+If you <em>do</em> choose to use the Symfony serializer, you can control the context
+on a case-by-case basis via the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Stamp/SerializerStamp.php" title="Symfony\Component\Messenger\Stamp\SerializerStamp"><span class="pre">SerializerStamp</span></a></code>
+(see <a class="reference internal" href="#envelopes-stamps">Envelopes &amp; Stamps</a>).</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">When sending/receiving messages to/from another application, you may need
+more control over the serialization process. Using a custom serializer
+provides that control. See <a class="reference external" href="https://symfonycasts.com/screencast/messenger/transport-serializer">SymfonyCasts’ message serializer tutorial</a> for
+details.</p>
+</div>
+</div>
+</div>
+<div class="section" id="customizing-handlers">
+<h2>Customizing Handlers<a class="headerlink" href="#customizing-handlers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="manually-configuring-handlers">
+<span id="messenger-handler-config"></span><h3>Manually Configuring Handlers<a class="headerlink" href="#manually-configuring-handlers" title="Permalink to this headline">¶</a></h3>
+<p>Symfony will normally <a class="reference internal" href="#messenger-handler"><span class="std std-ref">find and register your handler automatically</span></a>.
+But, you can also configure a handler manually - and pass it some extra config -
+by tagging the handler service with <code class="docutils literal notranslate"><span class="pre">messenger.message_handler</span></code></p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">App\MessageHandler\SmsNotificationHandler</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="nv">messenger.message_handler</span><span class="p p-Indicator">]</span>
+
+        <span class="c1"># or configure with options</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span>
+                <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">messenger.message_handler</span>
+                <span class="c1"># only needed if can&#39;t be guessed by type-hint</span>
+                <span class="l l-Scalar l-Scalar-Plain">handles</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Message\SmsNotification</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\MessageHandler\SmsNotificationHandler&quot;</span><span class="nt">&gt;</span>
+             <span class="c">&lt;!-- handles is only needed if it can&#39;t be guessed by type-hint --&gt;</span>
+             <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;messenger.message_handler&quot;</span>
+                  <span class="na">handles=</span><span class="s">&quot;App\Message\SmsNotification&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">App\Message\SmsNotification</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\MessageHandler\SmsNotificationHandler</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="nx">SmsNotificationHandler</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addTag</span><span class="p">(</span><span class="s1">&#39;messenger.message_handler&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="c1">// only needed if can&#39;t be guessed by type-hint</span>
+        <span class="s1">&#39;handles&#39;</span> <span class="o">=&gt;</span> <span class="nx">SmsNotification</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+    <span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Possible options to configure with tags are:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">bus</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">from_transport</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">handles</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">method</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">priority</span></code></li>
+</ul>
+</div>
+<div class="section" id="handler-subscriber-options">
+<h3>Handler Subscriber &amp; Options<a class="headerlink" href="#handler-subscriber-options" title="Permalink to this headline">¶</a></h3>
+<p>A handler class can handle multiple messages or configure itself by implementing
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Handler/MessageSubscriberInterface.php" title="Symfony\Component\Messenger\Handler\MessageSubscriberInterface"><span class="pre">MessageSubscriberInterface</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/MessageHandler/SmsNotificationHandler.php</span>
+<span class="k">namespace</span> <span class="nx">App\MessageHandler</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Message\OtherSmsNotification</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Message\SmsNotification</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Handler\MessageSubscriberInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">SmsNotificationHandler</span> <span class="k">implements</span> <span class="nx">MessageSubscriberInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">(</span><span class="nx">SmsNotification</span> <span class="nv">$message</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">handleOtherSmsNotification</span><span class="p">(</span><span class="nx">OtherSmsNotification</span> <span class="nv">$message</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getHandledMessages</span><span class="p">()</span><span class="o">:</span> <span class="nx">iterable</span>
+    <span class="p">{</span>
+        <span class="c1">// handle this message on __invoke</span>
+        <span class="k">yield</span> <span class="nx">SmsNotification</span><span class="o">::</span><span class="na">class</span><span class="p">;</span>
+
+        <span class="c1">// also handle this message on handleOtherSmsNotification</span>
+        <span class="k">yield</span> <span class="nx">OtherSmsNotification</span><span class="o">::</span><span class="na">class</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;handleOtherSmsNotification&#39;</span><span class="p">,</span>
+            <span class="c1">//&#39;priority&#39; =&gt; 0,</span>
+            <span class="c1">//&#39;bus&#39; =&gt; &#39;messenger.bus.default&#39;,</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="binding-handlers-to-different-transports">
+<h3>Binding Handlers to Different Transports<a class="headerlink" href="#binding-handlers-to-different-transports" title="Permalink to this headline">¶</a></h3>
+<p>Each message can have multiple handlers, and when a message is consumed
+<em>all</em> of its handlers are called. But you can also configure a handler to only
+be called when it’s received from a <em>specific</em> transport. This allows you to
+have a single message where each handler is called by a different “worker”
+that’s consuming a different transport.</p>
+<p>Suppose you have an <code class="docutils literal notranslate"><span class="pre">UploadedImage</span></code> message with two handlers:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">ThumbnailUploadedImageHandler</span></code>: you want this to be handled by
+a transport called <code class="docutils literal notranslate"><span class="pre">image_transport</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">NotifyAboutNewUploadedImageHandler</span></code>: you want this to be handled
+by a transport called <code class="docutils literal notranslate"><span class="pre">async_priority_normal</span></code></li>
+</ul>
+<p>To do this, add the <code class="docutils literal notranslate"><span class="pre">from_transport</span></code> option to each handler. For example:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/MessageHandler/ThumbnailUploadedImageHandler.php</span>
+<span class="k">namespace</span> <span class="nx">App\MessageHandler</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Message\UploadedImage</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Handler\MessageSubscriberInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ThumbnailUploadedImageHandler</span> <span class="k">implements</span> <span class="nx">MessageSubscriberInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">(</span><span class="nx">UploadedImage</span> <span class="nv">$uploadedImage</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// do some thumbnailing</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getHandledMessages</span><span class="p">()</span><span class="o">:</span> <span class="nx">iterable</span>
+    <span class="p">{</span>
+        <span class="k">yield</span> <span class="nx">UploadedImage</span><span class="o">::</span><span class="na">class</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;from_transport&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;image_transport&#39;</span><span class="p">,</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And similarly:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/MessageHandler/NotifyAboutNewUploadedImageHandler.php</span>
+<span class="c1">// ...</span>
+
+<span class="k">class</span> <span class="nc">NotifyAboutNewUploadedImageHandler</span> <span class="k">implements</span> <span class="nx">MessageSubscriberInterface</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getHandledMessages</span><span class="p">()</span><span class="o">:</span> <span class="nx">iterable</span>
+    <span class="p">{</span>
+        <span class="k">yield</span> <span class="nx">UploadedImage</span><span class="o">::</span><span class="na">class</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;from_transport&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;async_priority_normal&#39;</span><span class="p">,</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then, make sure to “route” your message to <em>both</em> transports:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/messenger.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">messenger</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">transports</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">async_priority_normal</span><span class="p p-Indicator">:</span> <span class="c1"># ...</span>
+            <span class="l l-Scalar l-Scalar-Plain">image_transport</span><span class="p p-Indicator">:</span> <span class="c1"># ...</span>
+
+        <span class="l l-Scalar l-Scalar-Plain">routing</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+            <span class="s">&#39;App\Message\UploadedImage&#39;</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="nv">image_transport</span><span class="p p-Indicator">,</span> <span class="nv">async_priority_normal</span><span class="p p-Indicator">]</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/messenger.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:messenger&gt;</span>
+            <span class="nt">&lt;framework:transport</span> <span class="na">name=</span><span class="s">&quot;async_priority_normal&quot;</span> <span class="na">dsn=</span><span class="s">&quot;...&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;framework:transport</span> <span class="na">name=</span><span class="s">&quot;image_transport&quot;</span> <span class="na">dsn=</span><span class="s">&quot;...&quot;</span><span class="nt">/&gt;</span>
+
+            <span class="nt">&lt;framework:routing</span> <span class="na">message-class=</span><span class="s">&quot;App\Message\UploadedImage&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;framework:sender</span> <span class="na">service=</span><span class="s">&quot;image_transport&quot;</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;framework:sender</span> <span class="na">service=</span><span class="s">&quot;async_priority_normal&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/framework:routing&gt;</span>
+        <span class="nt">&lt;/framework:messenger&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/messenger.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;messenger&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;transports&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;async_priority_normal&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;image_transport&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;routing&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;App\Message\UploadedImage&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;image_transport&#39;</span><span class="p">,</span> <span class="s1">&#39;async_priority_normal&#39;</span><span class="p">]</span>
+        <span class="p">]</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>That’s it! You can now consume each transport:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># will only call ThumbnailUploadedImageHandler when handling the message</span>
+<span class="gp">$</span> php bin/console messenger:consume image_transport -vv
+
+<span class="gp">$</span> php bin/console messenger:consume async_priority_normal -vv
+</pre></div>
+</td></tr></table></div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">If a handler does <em>not</em> have <code class="docutils literal notranslate"><span class="pre">from_transport</span></code> config, it will be executed
+on <em>every</em> transport that the message is received from.</p>
+</div>
+</div>
+</div>
+<div class="section" id="extending-messenger">
+<h2>Extending Messenger<a class="headerlink" href="#extending-messenger" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="envelopes-stamps">
+<h3>Envelopes &amp; Stamps<a class="headerlink" href="#envelopes-stamps" title="Permalink to this headline">¶</a></h3>
+<p>A message can be any PHP object. Sometimes, you may need to configure something
+extra about the message - like the way it should be handled inside AMQP or adding
+a delay before the message should be handled. You can do that by adding a “stamp”
+to your message:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Envelope</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\MessageBusInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Stamp\DelayStamp</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nx">MessageBusInterface</span> <span class="nv">$bus</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$bus</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span><span class="k">new</span> <span class="nx">SmsNotification</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">),</span> <span class="p">[</span>
+        <span class="c1">// wait 5 seconds before processing</span>
+        <span class="k">new</span> <span class="nx">DelayStamp</span><span class="p">(</span><span class="mi">5000</span><span class="p">)</span>
+    <span class="p">]);</span>
+
+    <span class="c1">// or explicitly create an Envelope</span>
+    <span class="nv">$bus</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span><span class="k">new</span> <span class="nx">Envelope</span><span class="p">(</span><span class="k">new</span> <span class="nx">SmsNotification</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">),</span> <span class="p">[</span>
+        <span class="k">new</span> <span class="nx">DelayStamp</span><span class="p">(</span><span class="mi">5000</span><span class="p">)</span>
+    <span class="p">]));</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Internally, each message is wrapped in an <code class="docutils literal notranslate"><span class="pre">Envelope</span></code>, which holds the message
+and stamps. You can create this manually or allow the message bus to do it. There
+are a variety of different stamps for different purposes and they’re used internally
+to track information about a message - like the message bus that’s handling it
+or if it’s being retried after failure.</p>
+</div>
+<div class="section" id="middleware">
+<h3>Middleware<a class="headerlink" href="#middleware" title="Permalink to this headline">¶</a></h3>
+<p>What happens when you dispatch a message to a message bus depends on its
+collection of middleware and their order. By default, the middleware configured
+for each bus looks like this:</p>
+<ol class="arabic simple">
+<li><code class="docutils literal notranslate"><span class="pre">add_bus_name_stamp_middleware</span></code> - adds a stamp to record which bus this
+message was dispatched into;</li>
+<li><code class="docutils literal notranslate"><span class="pre">dispatch_after_current_bus</span></code>- see <a class="reference internal" href="messenger/message-recorder.html"><span class="doc">Transactional Messages: Handle New Messages After Handling is Done</span></a>;</li>
+<li><code class="docutils literal notranslate"><span class="pre">failed_message_processing_middleware</span></code> - processes messages that are being
+retried via the <a class="reference internal" href="#messenger-failure-transport"><span class="std std-ref">failure transport</span></a> to make
+them properly function as if they were being received from their original transport;</li>
+<li>Your own collection of <a class="reference internal" href="#middleware">middleware</a>;</li>
+<li><code class="docutils literal notranslate"><span class="pre">send_message</span></code> - if routing is configured for the transport, this sends
+messages to that transport and stops the middleware chain;</li>
+<li><code class="docutils literal notranslate"><span class="pre">handle_message</span></code> - calls the message handler(s) for the given message.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">These middleware names are actually shortcut names. The real service ids
+are prefixed with <code class="docutils literal notranslate"><span class="pre">messenger.middleware.</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">messenger.middleware.handle_message</span></code>).</p>
+</div>
+<p>The middleware are executed when the message is dispatched but <em>also</em> again when
+a message is received via the worker (for messages that were sent to a transport
+to be handled asynchronously). Keep this in mind if you create your own middleware.</p>
+<p>You can add your own middleware to this list, or completely disable the default
+middleware and <em>only</em> include your own:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/messenger.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">messenger</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">buses</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">messenger.bus.default</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">middleware</span><span class="p p-Indicator">:</span>
+                    <span class="c1"># service ids that implement Symfony\Component\Messenger\Middleware\MiddlewareInterface</span>
+                    <span class="p p-Indicator">-</span> <span class="s">&#39;App\Middleware\MyMiddleware&#39;</span>
+                    <span class="p p-Indicator">-</span> <span class="s">&#39;App\Middleware\AnotherMiddleware&#39;</span>
+
+                <span class="c1">#default_middleware: false</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/messenger.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:messenger&gt;</span>
+            <span class="nt">&lt;framework:middleware</span> <span class="na">id=</span><span class="s">&quot;App\Middleware\MyMiddleware&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;framework:middleware</span> <span class="na">id=</span><span class="s">&quot;App\Middleware\AnotherMiddleware&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;framework:bus</span> <span class="na">name=</span><span class="s">&quot;messenger.bus.default&quot;</span> <span class="na">default-middleware=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/framework:messenger&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/messenger.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;messenger&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;buses&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;messenger.bus.default&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;middleware&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="s1">&#39;App\Middleware\MyMiddleware&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;App\Middleware\AnotherMiddleware&#39;</span><span class="p">,</span>
+                <span class="p">],</span>
+                <span class="s1">&#39;default_middleware&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If a middleware service is abstract, a different instance of the service will
+be created per bus.</p>
+</div>
+</div>
+<div class="section" id="middleware-for-doctrine">
+<h3>Middleware for Doctrine<a class="headerlink" href="#middleware-for-doctrine" title="Permalink to this headline">¶</a></h3>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.11: </span>The following Doctrine middleware were introduced in DoctrineBundle 1.11.</p>
+</div>
+<p>If you use Doctrine in your app, a number of optional middleware exist that you
+may want to use:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/messenger.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">messenger</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">buses</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">command_bus</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">middleware</span><span class="p p-Indicator">:</span>
+                    <span class="c1"># each time a message is handled, the Doctrine connection</span>
+                    <span class="c1"># is &quot;pinged&quot; and reconnected if it&#39;s closed. Useful</span>
+                    <span class="c1"># if your workers run for a long time and the database</span>
+                    <span class="c1"># connection is sometimes lost</span>
+                    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">doctrine_ping_connection</span>
+
+                    <span class="c1"># After handling, the Doctrine connection is closed,</span>
+                    <span class="c1"># which can free up database connections in a worker,</span>
+                    <span class="c1"># instead of keeping them open forever</span>
+                    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">doctrine_close_connection</span>
+
+                    <span class="c1"># wraps all handlers in a single Doctrine transaction</span>
+                    <span class="c1"># handlers do not need to call flush() and an error</span>
+                    <span class="c1"># in any handler will cause a rollback</span>
+                    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">doctrine_transaction</span>
+
+                    <span class="c1"># or pass a different entity manager to any</span>
+                    <span class="c1">#- doctrine_transaction: [&#39;custom&#39;]</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/messenger.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:messenger&gt;</span>
+            <span class="nt">&lt;framework:bus</span> <span class="na">name=</span><span class="s">&quot;command_bus&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;framework:middleware</span> <span class="na">id=</span><span class="s">&quot;doctrine_transaction&quot;</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;framework:middleware</span> <span class="na">id=</span><span class="s">&quot;doctrine_ping_connection&quot;</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;framework:middleware</span> <span class="na">id=</span><span class="s">&quot;doctrine_close_connection&quot;</span><span class="nt">/&gt;</span>
+
+                <span class="c">&lt;!-- or pass a different entity manager to any --&gt;</span>
+                <span class="c">&lt;!--</span>
+<span class="c">                &lt;framework:middleware id=&quot;doctrine_transaction&quot;&gt;</span>
+<span class="c">                    &lt;framework:argument&gt;custom&lt;/framework:argument&gt;</span>
+<span class="c">                &lt;/framework:middleware&gt;</span>
+<span class="c">                --&gt;</span>
+            <span class="nt">&lt;/framework:bus&gt;</span>
+        <span class="nt">&lt;/framework:messenger&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/messenger.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;messenger&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;buses&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;command_bus&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;middleware&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="s1">&#39;doctrine_transaction&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;doctrine_ping_connection&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;doctrine_close_connection&#39;</span><span class="p">,</span>
+                    <span class="c1">// Using another entity manager</span>
+                    <span class="p">[</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;doctrine_transaction&#39;</span><span class="p">,</span> <span class="s1">&#39;arguments&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;custom&#39;</span><span class="p">]],</span>
+                <span class="p">],</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="messenger-events">
+<h3>Messenger Events<a class="headerlink" href="#messenger-events" title="Permalink to this headline">¶</a></h3>
+<p>In addition to middleware, Messenger also dispatches several events. You can
+<a class="reference internal" href="event_dispatcher.html"><span class="doc">create an event listener</span></a> to hook into various parts
+of the process. For each, the event class is the event name:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Event/WorkerStartedEvent.php" title="Symfony\Component\Messenger\Event\WorkerStartedEvent"><span class="pre">WorkerStartedEvent</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Event/WorkerMessageReceivedEvent.php" title="Symfony\Component\Messenger\Event\WorkerMessageReceivedEvent"><span class="pre">WorkerMessageReceivedEvent</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Event/SendMessageToTransportsEvent.php" title="Symfony\Component\Messenger\Event\SendMessageToTransportsEvent"><span class="pre">SendMessageToTransportsEvent</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Event/WorkerMessageFailedEvent.php" title="Symfony\Component\Messenger\Event\WorkerMessageFailedEvent"><span class="pre">WorkerMessageFailedEvent</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Event/WorkerMessageHandledEvent.php" title="Symfony\Component\Messenger\Event\WorkerMessageHandledEvent"><span class="pre">WorkerMessageHandledEvent</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Event/WorkerRunningEvent.php" title="Symfony\Component\Messenger\Event\WorkerRunningEvent"><span class="pre">WorkerRunningEvent</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Event/WorkerStoppedEvent.php" title="Symfony\Component\Messenger\Event\WorkerStoppedEvent"><span class="pre">WorkerStoppedEvent</span></a></code></li>
+</ul>
+</div>
+</div>
+<div class="section" id="multiple-buses-command-event-buses">
+<h2>Multiple Buses, Command &amp; Event Buses<a class="headerlink" href="#multiple-buses-command-event-buses" title="Permalink to this headline">¶</a></h2>
+<p>Messenger gives you a single message bus service by default. But, you can configure
+as many as you want, creating “command”, “query” or “event” buses and controlling
+their middleware. See <a class="reference internal" href="messenger/multiple_buses.html"><span class="doc">Multiple Buses</span></a>.</p>
+</div>
+<div class="section" id="learn-more">
+<h2>Learn more<a class="headerlink" href="#learn-more" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="messenger/custom-transport.html">How to Create Your own Messenger Transport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger/handler_results.html">Getting Results from your Handler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger/message-recorder.html">Transactional Messages: Handle New Messages After Handling is Done</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger/multiple_buses.html">Multiple Buses</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

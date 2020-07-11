@@ -1,0 +1,499 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Use Doctrine DBAL &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Work with multiple Entity Managers and Connections" href="multiple_entity_managers.html" />
+    <link rel="prev" title="How to Register custom DQL Functions" href="custom_dql_functions.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#installing-doctrine">Installing Doctrine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#creating-an-entity-class">Creating an Entity Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#migrations-creating-the-database-tables-schema">Migrations: Creating the Database Tables/Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#migrations-adding-more-fields">Migrations &amp; Adding more Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#persisting-objects-to-the-database">Persisting Objects to the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#validating-objects">Validating Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#fetching-objects-from-the-database">Fetching Objects from the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#automatically-fetching-objects-paramconverter">Automatically Fetching Objects (ParamConverter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#updating-an-object">Updating an Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#deleting-an-object">Deleting an Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#querying-for-objects-the-repository">Querying for Objects: The Repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#relationships-and-associations">Relationships and Associations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#database-testing">Database Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doctrine.html#doctrine-extensions-timestampable-translatable-etc">Doctrine Extensions (Timestampable, Translatable, etc.)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../doctrine.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="associations.html">How to Work with Doctrine Associations / Relations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="events.html">Doctrine Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="registration_form.html">How to Implement a Registration Form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_dql_functions.html">How to Register custom DQL Functions</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Use Doctrine DBAL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#registering-custom-mapping-types">Registering custom Mapping Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#registering-custom-mapping-types-in-the-schematool">Registering custom Mapping Types in the SchemaTool</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="multiple_entity_managers.html">How to Work with multiple Entity Managers and Connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="resolve_target_entity.html">How to Define Relationships with Abstract Classes and Interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reverse_engineering.html">How to Generate Entities from an Existing Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../session/database.html">Store Sessions in a Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/database.html">How to Test Code that Interacts with the Database</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../doctrine.html">Databases and the Doctrine ORM</a> &raquo;</li>
+        
+      <li>How to Use Doctrine DBAL</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/doctrine/dbal.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-use-doctrine-dbal">
+<span id="index-0"></span><h1>How to Use Doctrine DBAL<a class="headerlink" href="#how-to-use-doctrine-dbal" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This article is about the Doctrine DBAL. Typically, you’ll work with
+the higher level Doctrine ORM layer, which uses the DBAL behind
+the scenes to actually communicate with the database. To read more about
+the Doctrine ORM, see “<a class="reference internal" href="../doctrine.html"><span class="doc">Databases and the Doctrine ORM</span></a>”.</p>
+</div>
+<p>The <a class="reference external" href="https://www.doctrine-project.org/">Doctrine</a> Database Abstraction Layer (DBAL) is an abstraction layer that
+sits on top of <a class="reference external" href="https://www.php.net/pdo">PDO</a> and offers an intuitive and flexible API for communicating
+with the most popular relational databases. The DBAL library allows you to write
+queries independently of your ORM models, e.g. for building reports or direct
+data manipulations.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Read the official Doctrine <a class="reference external" href="https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/index.html">DBAL Documentation</a> to learn all the details
+and capabilities of Doctrine’s DBAL library.</p>
+</div>
+<p>First, install the Doctrine <code class="docutils literal notranslate"><span class="pre">orm</span></code> <a class="reference internal" href="../setup.html#symfony-packs"><span class="std std-ref">Symfony pack</span></a>:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/orm-pack
+</pre></div>
+</td></tr></table></div>
+<p>Then configure the <code class="docutils literal notranslate"><span class="pre">DATABASE_URL</span></code> environment variable in <code class="docutils literal notranslate"><span class="pre">.env</span></code>:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span># .env (or override DATABASE_URL in .env.local to avoid committing your changes)
+
+# customize this line!
+DATABASE_URL=&quot;mysql://db_user:db_password@127.0.0.1:3306/db_name&quot;
+</pre></div>
+</td></tr></table></div>
+<p>Further things can be configured in <code class="docutils literal notranslate"><span class="pre">config/packages/doctrine.yaml</span></code> - see
+<a class="reference internal" href="../reference/configuration/doctrine.html#reference-dbal-configuration"><span class="std std-ref">Doctrine DBAL Configuration</span></a>. Remove the <code class="docutils literal notranslate"><span class="pre">orm</span></code> key in that file
+if you <em>don’t</em> want to use the Doctrine ORM.</p>
+<p>You can then access the Doctrine DBAL connection by autowiring the <code class="docutils literal notranslate"><span class="pre">Connection</span></code>
+object:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Doctrine\DBAL\Driver\Connection</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">UserController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nx">Connection</span> <span class="nv">$connection</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$users</span> <span class="o">=</span> <span class="nv">$connection</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM users&#39;</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This will pass you the <code class="docutils literal notranslate"><span class="pre">database_connection</span></code> service.</p>
+<div class="section" id="registering-custom-mapping-types">
+<h2>Registering custom Mapping Types<a class="headerlink" href="#registering-custom-mapping-types" title="Permalink to this headline">¶</a></h2>
+<p>You can register custom mapping types through Symfony’s configuration. They
+will be added to all configured connections. For more information on custom
+mapping types, read Doctrine’s <a class="reference external" href="https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/types.html#custom-mapping-types">Custom Mapping Types</a> section of their documentation.</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/doctrine.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">doctrine</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">dbal</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">types</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">custom_first</span><span class="p p-Indicator">:</span>  <span class="l l-Scalar l-Scalar-Plain">App\Type\CustomFirst</span>
+            <span class="l l-Scalar l-Scalar-Plain">custom_second</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Type\CustomSecond</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/doctrine.xml --&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:doctrine=</span><span class="s">&quot;http://symfony.com/schema/dic/doctrine&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/doctrine</span>
+<span class="s">        https://symfony.com/schema/dic/doctrine/doctrine-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;doctrine:config&gt;</span>
+        <span class="nt">&lt;doctrine:dbal&gt;</span>
+            <span class="nt">&lt;doctrine:type</span> <span class="na">name=</span><span class="s">&quot;custom_first&quot;</span> <span class="na">class=</span><span class="s">&quot;App\Type\CustomFirst&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;doctrine:type</span> <span class="na">name=</span><span class="s">&quot;custom_second&quot;</span> <span class="na">class=</span><span class="s">&quot;App\Type\CustomSecond&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/doctrine:dbal&gt;</span>
+    <span class="nt">&lt;/doctrine:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/doctrine.php</span>
+<span class="k">use</span> <span class="nx">App\Type\CustomFirst</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Type\CustomSecond</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;doctrine&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;dbal&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;types&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;custom_first&#39;</span>  <span class="o">=&gt;</span> <span class="nx">CustomFirst</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+            <span class="s1">&#39;custom_second&#39;</span> <span class="o">=&gt;</span> <span class="nx">CustomSecond</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="registering-custom-mapping-types-in-the-schematool">
+<h2>Registering custom Mapping Types in the SchemaTool<a class="headerlink" href="#registering-custom-mapping-types-in-the-schematool" title="Permalink to this headline">¶</a></h2>
+<p>The SchemaTool is used to inspect the database to compare the schema. To
+achieve this task, it needs to know which mapping type needs to be used
+for each database types. Registering new ones can be done through the configuration.</p>
+<p>Now, map the ENUM type (not supported by DBAL by default) to the <code class="docutils literal notranslate"><span class="pre">string</span></code>
+mapping type:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/doctrine.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">doctrine</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">dbal</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">mapping_types</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">enum</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/doctrine.xml --&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:doctrine=</span><span class="s">&quot;http://symfony.com/schema/dic/doctrine&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/doctrine</span>
+<span class="s">        https://symfony.com/schema/dic/doctrine/doctrine-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;doctrine:config&gt;</span>
+        <span class="nt">&lt;doctrine:dbal&gt;</span>
+            <span class="nt">&lt;doctrine:mapping-type</span> <span class="na">name=</span><span class="s">&quot;enum&quot;</span><span class="nt">&gt;</span>string<span class="nt">&lt;/doctrine:mapping-type&gt;</span>
+        <span class="nt">&lt;/doctrine:dbal&gt;</span>
+    <span class="nt">&lt;/doctrine:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/doctrine.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;doctrine&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;dbal&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;mapping_types&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;enum&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

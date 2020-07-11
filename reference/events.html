@@ -1,0 +1,547 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Built-in Symfony Events &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Inflector Component" href="../components/inflector.html" />
+    <link rel="prev" title="The HttpKernel Component" href="../components/http_kernel.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference Documents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="configuration/framework.html">Framework Configuration Reference (FrameworkBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration/doctrine.html">Doctrine Configuration Reference (DoctrineBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration/security.html">Security Configuration Reference (SecurityBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration/swiftmailer.html">Mailer Configuration Reference (SwiftmailerBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration/twig.html">Twig Configuration Reference (TwigBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration/monolog.html">Logging Configuration Reference (MonologBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration/web_profiler.html">Profiler Configuration Reference (WebProfilerBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration/debug.html">Debug Configuration Reference (DebugBundle)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration/kernel.html">Configuring in the Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="forms/types.html">Form Types Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constraints.html">Validation Constraints Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twig_reference.html">Twig Extensions Defined by Symfony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dic_tags.html">Built-in Symfony Service Tags</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Built-in Symfony Events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#kernel-events">Kernel Events</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#kernel-request"><code class="docutils literal notranslate"><span class="pre">kernel.request</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kernel-controller"><code class="docutils literal notranslate"><span class="pre">kernel.controller</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kernel-controller-arguments"><code class="docutils literal notranslate"><span class="pre">kernel.controller_arguments</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kernel-view"><code class="docutils literal notranslate"><span class="pre">kernel.view</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kernel-response"><code class="docutils literal notranslate"><span class="pre">kernel.response</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kernel-finish-request"><code class="docutils literal notranslate"><span class="pre">kernel.finish_request</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kernel-terminate"><code class="docutils literal notranslate"><span class="pre">kernel.terminate</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kernel-exception"><code class="docutils literal notranslate"><span class="pre">kernel.exception</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../components/index.html">The Components</a> &raquo;</li>
+        
+          <li><a href="../components/http_kernel.html">The HttpKernel Component</a> &raquo;</li>
+        
+      <li>Built-in Symfony Events</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/reference/events.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="built-in-symfony-events">
+<h1>Built-in Symfony Events<a class="headerlink" href="#built-in-symfony-events" title="Permalink to this headline">¶</a></h1>
+<p>During the handling of an HTTP request, the Symfony framework (or any
+application using the <a class="reference internal" href="../components/http_kernel.html"><span class="doc">HttpKernel component</span></a>)
+dispatches some <a class="reference internal" href="../event_dispatcher.html"><span class="doc">events</span></a> which you can use to modify
+how the request is handled.</p>
+<div class="section" id="kernel-events">
+<h2>Kernel Events<a class="headerlink" href="#kernel-events" title="Permalink to this headline">¶</a></h2>
+<p>Each event dispatched by the HttpKernel component is a subclass of
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Event/KernelEvent.php" title="Symfony\Component\HttpKernel\Event\KernelEvent"><span class="pre">KernelEvent</span></a></code>, which provides the
+following information:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Event/KernelEvent.php" title="Symfony\Component\HttpKernel\Event\KernelEvent::getRequestType()"><span class="pre">getRequestType()</span></a></code></dt>
+<dd>Returns the <em>type</em> of the request (<code class="docutils literal notranslate"><span class="pre">HttpKernelInterface::MASTER_REQUEST</span></code>
+or <code class="docutils literal notranslate"><span class="pre">HttpKernelInterface::SUB_REQUEST</span></code>).</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Event/KernelEvent.php" title="Symfony\Component\HttpKernel\Event\KernelEvent::getKernel()"><span class="pre">getKernel()</span></a></code></dt>
+<dd>Returns the Kernel handling the request.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Event/KernelEvent.php" title="Symfony\Component\HttpKernel\Event\KernelEvent::getRequest()"><span class="pre">getRequest()</span></a></code></dt>
+<dd>Returns the current <code class="docutils literal notranslate"><span class="pre">Request</span></code> being handled.</dd>
+<dt><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Event/KernelEvent.php" title="Symfony\Component\HttpKernel\Event\KernelEvent::isMasterRequest()"><span class="pre">isMasterRequest()</span></a></code></dt>
+<dd>Checks if this is a master request.</dd>
+</dl>
+<div class="section" id="kernel-request">
+<span id="kernel-core-request"></span><h3><code class="docutils literal notranslate"><span class="pre">kernel.request</span></code><a class="headerlink" href="#kernel-request" title="Permalink to this headline">¶</a></h3>
+<p><strong>Event Class</strong>: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Event/RequestEvent.php" title="Symfony\Component\HttpKernel\Event\RequestEvent"><span class="pre">RequestEvent</span></a></code></p>
+<p>This event is dispatched very early in Symfony, before the controller is
+determined. It’s useful to add information to the Request or return a Response
+early to stop the handling of the request.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Read more on the <a class="reference internal" href="../components/http_kernel.html#component-http-kernel-kernel-request"><span class="std std-ref">kernel.request event</span></a>.</p>
+</div>
+<p>Execute this command to find out which listeners are registered for this event and
+their priorities:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console debug:event-dispatcher kernel.request
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="kernel-controller">
+<h3><code class="docutils literal notranslate"><span class="pre">kernel.controller</span></code><a class="headerlink" href="#kernel-controller" title="Permalink to this headline">¶</a></h3>
+<p><strong>Event Class</strong>: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Event/ControllerEvent.php" title="Symfony\Component\HttpKernel\Event\ControllerEvent"><span class="pre">ControllerEvent</span></a></code></p>
+<p>This event is dispatched after the controller to be executed has been resolved
+but before executing it. It’s useful to initialize things later needed by the
+controller, such as <a class="reference external" href="https://symfony.com/doc/master/bundles/SensioFrameworkExtraBundle/annotations/converters.html">param converters</a>, and even to change the controller
+entirely:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\ControllerEvent</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">onKernelController</span><span class="p">(</span><span class="nx">ControllerEvent</span> <span class="nv">$event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="c1">// the controller can be changed to any PHP callable</span>
+    <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">setController</span><span class="p">(</span><span class="nv">$myCustomController</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Read more on the <a class="reference internal" href="../components/http_kernel.html#component-http-kernel-kernel-controller"><span class="std std-ref">kernel.controller event</span></a>.</p>
+</div>
+<p>Execute this command to find out which listeners are registered for this event and
+their priorities:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console debug:event-dispatcher kernel.controller
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="kernel-controller-arguments">
+<h3><code class="docutils literal notranslate"><span class="pre">kernel.controller_arguments</span></code><a class="headerlink" href="#kernel-controller-arguments" title="Permalink to this headline">¶</a></h3>
+<p><strong>Event Class</strong>: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Event/ControllerArgumentsEvent.php" title="Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent"><span class="pre">ControllerArgumentsEvent</span></a></code></p>
+<p>This event is dispatched just before a controller is called. It’s useful to
+configure the arguments that are going to be passed to the controller.
+Typically, this is used to map URL routing parameters to their corresponding
+named arguments; or pass the current request when the <code class="docutils literal notranslate"><span class="pre">Request</span></code> type-hint is
+found:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">onKernelControllerArguments</span><span class="p">(</span><span class="nx">ControllerArgumentsEvent</span> <span class="nv">$event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="c1">// get controller and request arguments</span>
+    <span class="nv">$namedArguments</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">all</span><span class="p">();</span>
+    <span class="nv">$controllerArguments</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getArguments</span><span class="p">();</span>
+
+    <span class="c1">// set the controller arguments to modify the original arguments or add new ones</span>
+    <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">setArguments</span><span class="p">(</span><span class="nv">$newArguments</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Execute this command to find out which listeners are registered for this event and
+their priorities:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console debug:event-dispatcher kernel.controller_arguments
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="kernel-view">
+<h3><code class="docutils literal notranslate"><span class="pre">kernel.view</span></code><a class="headerlink" href="#kernel-view" title="Permalink to this headline">¶</a></h3>
+<p><strong>Event Class</strong>: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Event/ViewEvent.php" title="Symfony\Component\HttpKernel\Event\ViewEvent"><span class="pre">ViewEvent</span></a></code></p>
+<p>This event is dispatched after the controller has been executed but <em>only</em> if
+the controller does <em>not</em> return a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response"><span class="pre">Response</span></a></code>
+object. It’s useful to transform the returned value (e.g. a string with some
+HTML contents) into the <code class="docutils literal notranslate"><span class="pre">Response</span></code> object needed by Symfony:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\ViewEvent</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">onKernelView</span><span class="p">(</span><span class="nx">ViewEvent</span> <span class="nv">$event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$value</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getControllerResult</span><span class="p">();</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">();</span>
+
+    <span class="c1">// ... somehow customize the Response from the return value</span>
+
+    <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">setResponse</span><span class="p">(</span><span class="nv">$response</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Read more on the <a class="reference internal" href="../components/http_kernel.html#component-http-kernel-kernel-view"><span class="std std-ref">kernel.view event</span></a>.</p>
+</div>
+<p>Execute this command to find out which listeners are registered for this event and
+their priorities:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console debug:event-dispatcher kernel.view
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="kernel-response">
+<h3><code class="docutils literal notranslate"><span class="pre">kernel.response</span></code><a class="headerlink" href="#kernel-response" title="Permalink to this headline">¶</a></h3>
+<p><strong>Event Class</strong>: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Event/ResponseEvent.php" title="Symfony\Component\HttpKernel\Event\ResponseEvent"><span class="pre">ResponseEvent</span></a></code></p>
+<p>This event is dispatched after the controller or any <code class="docutils literal notranslate"><span class="pre">kernel.view</span></code> listener
+returns a <code class="docutils literal notranslate"><span class="pre">Response</span></code> object. It’s useful to modify or replace the response
+before sending it back (e.g. add/modify HTTP headers, add cookies, etc.):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\ResponseEvent</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">onKernelResponse</span><span class="p">(</span><span class="nx">ResponseEvent</span> <span class="nv">$event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+
+    <span class="c1">// ... modify the response object</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Read more on the <a class="reference internal" href="../components/http_kernel.html#component-http-kernel-kernel-response"><span class="std std-ref">kernel.response event</span></a>.</p>
+</div>
+<p>Execute this command to find out which listeners are registered for this event and
+their priorities:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console debug:event-dispatcher kernel.response
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="kernel-finish-request">
+<h3><code class="docutils literal notranslate"><span class="pre">kernel.finish_request</span></code><a class="headerlink" href="#kernel-finish-request" title="Permalink to this headline">¶</a></h3>
+<p><strong>Event Class</strong>: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Event/FinishRequestEvent.php" title="Symfony\Component\HttpKernel\Event\FinishRequestEvent"><span class="pre">FinishRequestEvent</span></a></code></p>
+<p>This event is dispatched after the <code class="docutils literal notranslate"><span class="pre">kernel.response</span></code> event. It’s useful to reset
+the global state of the application (for example, the translator listener resets
+the translator’s locale to the one of the parent request):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\FinishRequestEvent</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">onKernelFinishRequest</span><span class="p">(</span><span class="nx">FinishRequestEvent</span> <span class="nv">$event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">null</span> <span class="o">===</span> <span class="nv">$parentRequest</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">requestStack</span><span class="o">-&gt;</span><span class="na">getParentRequest</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// reset the locale of the subrequest to the locale of the parent request</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">setLocale</span><span class="p">(</span><span class="nv">$parentRequest</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Execute this command to find out which listeners are registered for this event and
+their priorities:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console debug:event-dispatcher kernel.finish_request
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="kernel-terminate">
+<h3><code class="docutils literal notranslate"><span class="pre">kernel.terminate</span></code><a class="headerlink" href="#kernel-terminate" title="Permalink to this headline">¶</a></h3>
+<p><strong>Event Class</strong>: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Event/TerminateEvent.php" title="Symfony\Component\HttpKernel\Event\TerminateEvent"><span class="pre">TerminateEvent</span></a></code></p>
+<p>This event is dispatched after the response has been sent (after the execution
+of the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/HttpKernel.php" title="Symfony\Component\HttpKernel\HttpKernel::handle()"><span class="pre">handle()</span></a></code> method).
+It’s useful to perform slow or complex tasks that don’t need to be completed to
+send the response (e.g. sending emails).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Read more on the <a class="reference internal" href="../components/http_kernel.html#component-http-kernel-kernel-terminate"><span class="std std-ref">kernel.terminate event</span></a>.</p>
+</div>
+<p>Execute this command to find out which listeners are registered for this event and
+their priorities:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console debug:event-dispatcher kernel.terminate
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="kernel-exception">
+<span id="kernel-kernel-exception"></span><h3><code class="docutils literal notranslate"><span class="pre">kernel.exception</span></code><a class="headerlink" href="#kernel-exception" title="Permalink to this headline">¶</a></h3>
+<p><strong>Event Class</strong>: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Event/ExceptionEvent.php" title="Symfony\Component\HttpKernel\Event\ExceptionEvent"><span class="pre">ExceptionEvent</span></a></code></p>
+<p>This event is dispatched as soon as an error occurs during the handling of the
+HTTP request. It’s useful to recover from errors or modify the exception details
+sent as response:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\ExceptionEvent</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">onKernelException</span><span class="p">(</span><span class="nx">ExceptionEvent</span> <span class="nv">$event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$exception</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getThrowable</span><span class="p">();</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">();</span>
+    <span class="c1">// setup the Response object based on the caught exception</span>
+    <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">setResponse</span><span class="p">(</span><span class="nv">$response</span><span class="p">);</span>
+
+    <span class="c1">// you can alternatively set a new Exception</span>
+    <span class="c1">// $exception = new \Exception(&#39;Some special exception&#39;);</span>
+    <span class="c1">// $event-&gt;setThrowable($exception);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The TwigBundle registers an <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/EventListener/ExceptionListener.php" title="Symfony\Component\HttpKernel\EventListener\ExceptionListener"><span class="pre">ExceptionListener</span></a></code>
+that forwards the <code class="docutils literal notranslate"><span class="pre">Request</span></code> to a given controller defined by the
+<code class="docutils literal notranslate"><span class="pre">exception_listener.controller</span></code> parameter.</p>
+</div>
+<p>Symfony uses the following logic to determine the HTTP status code of the
+response:</p>
+<ul class="simple">
+<li>If <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::isClientError()"><span class="pre">isClientError()</span></a></code>,
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::isServerError()"><span class="pre">isServerError()</span></a></code> or
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response::isRedirect()"><span class="pre">isRedirect()</span></a></code> is true,
+then the status code on your <code class="docutils literal notranslate"><span class="pre">Response</span></code> object is used;</li>
+<li>If the original exception implements
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Exception/HttpExceptionInterface.php" title="Symfony\Component\HttpKernel\Exception\HttpExceptionInterface"><span class="pre">HttpExceptionInterface</span></a></code>,
+then <code class="docutils literal notranslate"><span class="pre">getStatusCode()</span></code> is called on the exception and used (the headers
+from <code class="docutils literal notranslate"><span class="pre">getHeaders()</span></code> are also added);</li>
+<li>If both of the above aren’t true, then a 500 status code is used.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you want to overwrite the status code of the exception response, which
+you should not without a good reason, call
+<code class="docutils literal notranslate"><span class="pre">ExceptionEvent::allowCustomResponseCode()</span></code> first and then
+set the status code on the response:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$event</span><span class="o">-&gt;</span><span class="na">allowCustomResponseCode</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;No Content&#39;</span><span class="p">,</span> <span class="mi">204</span><span class="p">);</span>
+<span class="nv">$event</span><span class="o">-&gt;</span><span class="na">setResponse</span><span class="p">(</span><span class="nv">$response</span><span class="p">);</span>
+</pre></div>
+</div>
+<p class="last">The status code sent to the client in the above example will be <code class="docutils literal notranslate"><span class="pre">204</span></code>. If
+<code class="docutils literal notranslate"><span class="pre">$event-&gt;allowCustomResponseCode()</span></code> is omitted, then the kernel will set
+an appropriate status code based on the type of exception thrown.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Read more on the <a class="reference internal" href="../components/http_kernel.html#component-http-kernel-kernel-exception"><span class="std std-ref">kernel.exception event</span></a>.</p>
+</div>
+<p>Execute this command to find out which listeners are registered for this event and
+their priorities:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console debug:event-dispatcher kernel.exception
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

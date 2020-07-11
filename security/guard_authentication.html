@@ -1,0 +1,883 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Custom Authentication System with Guard (API Token Example) &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Migrate a Password Hash" href="password_migration.html" />
+    <link rel="prev" title="How to Build a JSON Authentication Endpoint" href="json_login_setup.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../security.html">Security</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../security.html#installation">1) Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#a-create-your-user-class">2a) Create your User Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#b-the-user-provider">2b) The “User Provider”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#c-encoding-passwords">2c) Encoding Passwords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#a-authentication-firewalls">3a) Authentication &amp; Firewalls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#b-authenticating-your-users">3b) Authenticating your Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#denying-access-roles-and-other-authorization">4) Denying Access, Roles and other Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#a-fetching-the-user-object">5a) Fetching the User Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#b-fetching-the-user-from-a-service">5b) Fetching the User from a Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#logging-out">Logging Out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#hierarchical-roles">Hierarchical Roles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#frequently-asked-questions">Frequently Asked Questions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../security.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../security.html#authentication-identifying-logging-in-the-user">Authentication (Identifying/Logging in the User)</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="experimental_authenticators.html">Using the new Authenticator-based Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="form_login_setup.html">How to Build a Login Form</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reset_password.html">How to Add a Reset Password Feature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="json_login_setup.html">How to Build a JSON Authentication Endpoint</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Custom Authentication System with Guard (API Token Example)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="password_migration.html">How to Migrate a Password Hash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auth_providers.html">Built-in Authentication Providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_provider.html">Security User Providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ldap.html">Authenticating against an LDAP server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="remember_me.html">How to Add “Remember Me” Login Functionality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="impersonating_user.html">How to Impersonate a User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_checkers.html">How to Create and Enable Custom User Checkers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="named_encoders.html">How to Use A Different Password Encoder Algorithm Per User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multiple_guard_authenticators.html">How to Use Multiple Guard Authenticators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="firewall_restriction.html">How to Restrict Firewalls to a Request</a></li>
+<li class="toctree-l4"><a class="reference internal" href="csrf.html">How to Implement CSRF Protection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="custom_authentication_provider.html">How to Create a custom Authentication Provider</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../security.html#authorization-denying-access">Authorization (Denying Access)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../security.html">Security</a> &raquo;</li>
+        
+      <li>Custom Authentication System with Guard (API Token Example)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/security/guard_authentication.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="custom-authentication-system-with-guard-api-token-example">
+<span id="index-0"></span><h1>Custom Authentication System with Guard (API Token Example)<a class="headerlink" href="#custom-authentication-system-with-guard-api-token-example" title="Permalink to this headline">¶</a></h1>
+<p>Guard authentication can be used to:</p>
+<ul class="simple">
+<li><a class="reference internal" href="form_login_setup.html"><span class="doc">Build a Login Form</span></a></li>
+<li>Create an API token authentication system (see below)</li>
+<li><a class="reference external" href="https://github.com/knpuniversity/oauth2-client-bundle#authenticating-with-guard">Social Authentication</a> (or use <a class="reference external" href="https://github.com/hwi/HWIOAuthBundle">HWIOAuthBundle</a> for a robust non-Guard solution)</li>
+<li>Integrate with some proprietary single-sign-on system</li>
+</ul>
+<p>and many more. In this example, we’ll build an API token authentication
+system, so we can learn more about Guard in detail.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">A <a class="reference internal" href="experimental_authenticators.html"><span class="doc">new experimental authenticator-based system</span></a>
+was introduced in Symfony 5.1, which will eventually replace Guards in Symfony 6.0.</p>
+</div>
+<div class="section" id="step-1-prepare-your-user-class">
+<h2>Step 1) Prepare your User Class<a class="headerlink" href="#step-1-prepare-your-user-class" title="Permalink to this headline">¶</a></h2>
+<p>Suppose you want to build an API where your clients will send an <code class="docutils literal notranslate"><span class="pre">X-AUTH-TOKEN</span></code> header
+on each request with their API token. Your job is to read this and find the associated
+user (if any).</p>
+<p>First, make sure you’ve followed the main <a class="reference internal" href="../security.html"><span class="doc">Security Guide</span></a> to
+create your <code class="docutils literal notranslate"><span class="pre">User</span></code> class. Then, to keep things simple, add an <code class="docutils literal notranslate"><span class="pre">apiToken</span></code> property
+directly to your <code class="docutils literal notranslate"><span class="pre">User</span></code> class (the <code class="docutils literal notranslate"><span class="pre">make:entity</span></code> command is a good way to do this):</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span>// src/Entity/User.php
+// ...
+
+class User implements UserInterface
+{
+    // ...
+
+<span class="gi">+     /**</span>
+<span class="gi">+      * @ORM\Column(type=&quot;string&quot;, unique=true, nullable=true)</span>
+<span class="gi">+      */</span>
+<span class="gi">+     private $apiToken;</span>
+
+    // the getter and setter methods
+}
+</pre></div>
+</td></tr></table></div>
+<p>Don’t forget to generate and execute the migration:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console make:migration
+<span class="gp">$</span> php bin/console doctrine:migrations:migrate
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="step-2-create-the-authenticator-class">
+<h2>Step 2) Create the Authenticator Class<a class="headerlink" href="#step-2-create-the-authenticator-class" title="Permalink to this headline">¶</a></h2>
+<p>To create a custom authentication system, create a class and make it implement
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Guard/AuthenticatorInterface.php" title="Symfony\Component\Security\Guard\AuthenticatorInterface"><span class="pre">AuthenticatorInterface</span></a></code>. Or, extend
+the simpler <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Guard/AbstractGuardAuthenticator.php" title="Symfony\Component\Security\Guard\AbstractGuardAuthenticator"><span class="pre">AbstractGuardAuthenticator</span></a></code>.</p>
+<p>This requires you to implement several methods:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Security/TokenAuthenticator.php</span>
+<span class="k">namespace</span> <span class="nx">App\Security</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Entity\User</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\ORM\EntityManagerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\JsonResponse</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Authentication\Token\TokenInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Exception\AuthenticationException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\User\UserInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\User\UserProviderInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Guard\AbstractGuardAuthenticator</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">TokenAuthenticator</span> <span class="k">extends</span> <span class="nx">AbstractGuardAuthenticator</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$em</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">EntityManagerInterface</span> <span class="nv">$em</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">em</span> <span class="o">=</span> <span class="nv">$em</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Called on every request to decide if this authenticator should be</span>
+<span class="sd">     * used for the request. Returning `false` will cause this authenticator</span>
+<span class="sd">     * to be skipped.</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">supports</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;X-AUTH-TOKEN&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Called on every request. Return whatever credentials you want to</span>
+<span class="sd">     * be passed to getUser() as $credentials.</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getCredentials</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;X-AUTH-TOKEN&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getUser</span><span class="p">(</span><span class="nv">$credentials</span><span class="p">,</span> <span class="nx">UserProviderInterface</span> <span class="nv">$userProvider</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">null</span> <span class="o">===</span> <span class="nv">$credentials</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// The token header was empty, authentication fails with HTTP Status</span>
+            <span class="c1">// Code 401 &quot;Unauthorized&quot;</span>
+            <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// if a User is returned, checkCredentials() is called</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">em</span><span class="o">-&gt;</span><span class="na">getRepository</span><span class="p">(</span><span class="nx">User</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">findOneBy</span><span class="p">([</span><span class="s1">&#39;apiToken&#39;</span> <span class="o">=&gt;</span> <span class="nv">$credentials</span><span class="p">])</span>
+        <span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">checkCredentials</span><span class="p">(</span><span class="nv">$credentials</span><span class="p">,</span> <span class="nx">UserInterface</span> <span class="nv">$user</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Check credentials - e.g. make sure the password is valid.</span>
+        <span class="c1">// In case of an API token, no credential check is needed.</span>
+
+        <span class="c1">// Return `true` to cause authentication success</span>
+        <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">onAuthenticationSuccess</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">TokenInterface</span> <span class="nv">$token</span><span class="p">,</span> <span class="nv">$providerKey</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// on success, let the request continue</span>
+        <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">onAuthenticationFailure</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">AuthenticationException</span> <span class="nv">$exception</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="c1">// you may want to customize or obfuscate the message first</span>
+            <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="nb">strtr</span><span class="p">(</span><span class="nv">$exception</span><span class="o">-&gt;</span><span class="na">getMessageKey</span><span class="p">(),</span> <span class="nv">$exception</span><span class="o">-&gt;</span><span class="na">getMessageData</span><span class="p">())</span>
+
+            <span class="c1">// or to translate this message</span>
+            <span class="c1">// $this-&gt;translator-&gt;trans($exception-&gt;getMessageKey(), $exception-&gt;getMessageData())</span>
+        <span class="p">];</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">JsonResponse</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nx">Response</span><span class="o">::</span><span class="na">HTTP_UNAUTHORIZED</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Called when authentication is needed, but it&#39;s not sent</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">start</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">AuthenticationException</span> <span class="nv">$authException</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="c1">// you might translate this message</span>
+            <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Authentication Required&#39;</span>
+        <span class="p">];</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">JsonResponse</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nx">Response</span><span class="o">::</span><span class="na">HTTP_UNAUTHORIZED</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">supportsRememberMe</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Nice work! Each method is explained below: <a class="reference internal" href="#guard-auth-methods"><span class="std std-ref">The Guard Authenticator Methods</span></a>.</p>
+</div>
+<div class="section" id="step-3-configure-the-authenticator">
+<h2>Step 3) Configure the Authenticator<a class="headerlink" href="#step-3-configure-the-authenticator" title="Permalink to this headline">¶</a></h2>
+<p>To finish this, make sure your authenticator is registered as a service. If you’re
+using the <a class="reference internal" href="../service_container.html#service-container-services-load-example"><span class="std std-ref">default services.yaml configuration</span></a>,
+that happens automatically.</p>
+<p>Finally, configure your <code class="docutils literal notranslate"><span class="pre">firewalls</span></code> key in <code class="docutils literal notranslate"><span class="pre">security.yaml</span></code> to use this authenticator:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">firewalls</span><span class="p p-Indicator">:</span>
+        <span class="c1"># ...</span>
+
+        <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">anonymous</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">lazy</span>
+            <span class="l l-Scalar l-Scalar-Plain">logout</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">~</span>
+
+            <span class="l l-Scalar l-Scalar-Plain">guard</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">authenticators</span><span class="p p-Indicator">:</span>
+                    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">App\Security\TokenAuthenticator</span>
+
+            <span class="c1"># if you want, disable storing the user in the session</span>
+            <span class="c1"># stateless: true</span>
+
+            <span class="c1"># ...</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/security.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;srv:container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/security&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:srv=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/security</span>
+<span class="s">        https://symfony.com/schema/dic/security/security-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;config&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="c">&lt;!-- if you want, disable storing the user in the session</span>
+<span class="c">            add &#39;stateless=&quot;true&quot;&#39; to the firewall --&gt;</span>
+        <span class="nt">&lt;firewall</span> <span class="na">name=</span><span class="s">&quot;main&quot;</span> <span class="na">pattern=</span><span class="s">&quot;^/&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;anonymous</span> <span class="na">lazy=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;logout/&gt;</span>
+
+            <span class="nt">&lt;guard&gt;</span>
+                <span class="nt">&lt;authenticator&gt;</span>App\Security\TokenAuthenticator<span class="nt">&lt;/authenticator&gt;</span>
+            <span class="nt">&lt;/guard&gt;</span>
+
+            <span class="c">&lt;!-- ... --&gt;</span>
+        <span class="nt">&lt;/firewall&gt;</span>
+    <span class="nt">&lt;/config&gt;</span>
+<span class="nt">&lt;/srv:container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/security.php</span>
+
+<span class="c1">// ...</span>
+<span class="k">use</span> <span class="nx">App\Security\TokenAuthenticator</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;firewalls&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;main&#39;</span>       <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;pattern&#39;</span>        <span class="o">=&gt;</span> <span class="s1">&#39;^/&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;anonymous&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;lazy&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;logout&#39;</span>         <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+            <span class="s1">&#39;guard&#39;</span>          <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;authenticators&#39;</span>  <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="nx">TokenAuthenticator</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+                <span class="p">],</span>
+            <span class="p">],</span>
+            <span class="c1">// if you want, disable storing the user in the session</span>
+            <span class="c1">// &#39;stateless&#39; =&gt; true,</span>
+            <span class="c1">// ...</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>You did it! You now have a fully-working API token authentication system. If your
+homepage required <code class="docutils literal notranslate"><span class="pre">ROLE_USER</span></code>, then you could test it under different conditions:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># test with no token</span>
+<span class="go">curl http://localhost:8000/</span>
+<span class="c1"># {&quot;message&quot;:&quot;Authentication Required&quot;}</span>
+
+<span class="c1"># test with a bad token</span>
+<span class="go">curl -H &quot;X-AUTH-TOKEN: FAKE&quot; http://localhost:8000/</span>
+<span class="c1"># {&quot;message&quot;:&quot;Username could not be found.&quot;}</span>
+
+<span class="c1"># test with a working token</span>
+<span class="go">curl -H &quot;X-AUTH-TOKEN: REAL&quot; http://localhost:8000/</span>
+<span class="c1"># the homepage controller is executed: the page loads normally</span>
+</pre></div>
+</td></tr></table></div>
+<p>Now, learn more about what each method does.</p>
+</div>
+<div class="section" id="the-guard-authenticator-methods">
+<span id="guard-auth-methods"></span><h2>The Guard Authenticator Methods<a class="headerlink" href="#the-guard-authenticator-methods" title="Permalink to this headline">¶</a></h2>
+<p>Each authenticator needs the following methods:</p>
+<dl class="docutils">
+<dt><strong>supports(Request $request)</strong></dt>
+<dd>This is called on <em>every</em> request and your job is to decide if the
+authenticator should be used for this request (return <code class="docutils literal notranslate"><span class="pre">true</span></code>) or if it
+should be skipped (return <code class="docutils literal notranslate"><span class="pre">false</span></code>).</dd>
+<dt><strong>getCredentials(Request $request)</strong></dt>
+<dd>Your job is to read the token (or whatever your “authentication” information is)
+from the request and return it. These credentials are passed to <code class="docutils literal notranslate"><span class="pre">getUser()</span></code>.</dd>
+<dt><strong>getUser($credentials, UserProviderInterface $userProvider)</strong></dt>
+<dd>The <code class="docutils literal notranslate"><span class="pre">$credentials</span></code> argument is the value returned by <code class="docutils literal notranslate"><span class="pre">getCredentials()</span></code>.
+Your job is to return an object that implements <code class="docutils literal notranslate"><span class="pre">UserInterface</span></code>. If you do,
+then <code class="docutils literal notranslate"><span class="pre">checkCredentials()</span></code> will be called. If you return <code class="docutils literal notranslate"><span class="pre">null</span></code> (or throw
+an <a class="reference internal" href="#guard-customize-error"><span class="std std-ref">AuthenticationException</span></a>) authentication
+will fail.</dd>
+<dt><strong>checkCredentials($credentials, UserInterface $user)</strong></dt>
+<dd>If <code class="docutils literal notranslate"><span class="pre">getUser()</span></code> returns a User object, this method is called. Your job is to
+verify if the credentials are correct. For a login form, this is where you would
+check that the password is correct for the user. To pass authentication, return
+<code class="docutils literal notranslate"><span class="pre">true</span></code>. If you return <code class="docutils literal notranslate"><span class="pre">false</span></code>
+(or throw an <a class="reference internal" href="#guard-customize-error"><span class="std std-ref">AuthenticationException</span></a>),
+authentication will fail.</dd>
+<dt><strong>onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)</strong></dt>
+<dd>This is called after successful authentication and your job is to either
+return a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response"><span class="pre">Response</span></a></code> object
+that will be sent to the client or <code class="docutils literal notranslate"><span class="pre">null</span></code> to continue the request
+(e.g. allow the route/controller to be called like normal). Since this
+is an API where each request authenticates itself, you want to return
+<code class="docutils literal notranslate"><span class="pre">null</span></code>.</dd>
+<dt><strong>onAuthenticationFailure(Request $request, AuthenticationException $exception)</strong></dt>
+<dd>This is called if authentication fails. Your job
+is to return the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response"><span class="pre">Response</span></a></code>
+object that should be sent to the client. The <code class="docutils literal notranslate"><span class="pre">$exception</span></code> will tell you
+<em>what</em> went wrong during authentication.</dd>
+<dt><strong>start(Request $request, AuthenticationException $authException = null)</strong></dt>
+<dd>This is called if the client accesses a URI/resource that requires authentication,
+but no authentication details were sent. Your job is to return a
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response"><span class="pre">Response</span></a></code> object that helps
+the user authenticate (e.g. a 401 response that says “token is missing!”).</dd>
+<dt><strong>supportsRememberMe()</strong></dt>
+<dd>If you want to support “remember me” functionality, return <code class="docutils literal notranslate"><span class="pre">true</span></code> from this method.
+You will still need to activate <code class="docutils literal notranslate"><span class="pre">remember_me</span></code> under your firewall for it to work.
+Since this is a stateless API, you do not want to support “remember me”
+functionality in this example.</dd>
+<dt><strong>createAuthenticatedToken(UserInterface $user, string $providerKey)</strong></dt>
+<dd>If you are implementing the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Guard/AuthenticatorInterface.php" title="Symfony\Component\Security\Guard\AuthenticatorInterface"><span class="pre">AuthenticatorInterface</span></a></code>
+instead of extending the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Guard/AbstractGuardAuthenticator.php" title="Symfony\Component\Security\Guard\AbstractGuardAuthenticator"><span class="pre">AbstractGuardAuthenticator</span></a></code>
+class, you have to implement this method. It will be called
+after a successful authentication to create and return the token (a
+class implementing <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Guard/Token/GuardTokenInterface.php" title="Symfony\Component\Security\Guard\Token\GuardTokenInterface"><span class="pre">GuardTokenInterface</span></a></code>)
+for the user, who was supplied as the first argument.</dd>
+</dl>
+<p>The picture below shows how Symfony calls Guard Authenticator methods:</p>
+<object data="../_images/security/authentication-guard-methods.svg" type="image/svg+xml"></object></div>
+<div class="section" id="customizing-error-messages">
+<span id="guard-customize-error"></span><h2>Customizing Error Messages<a class="headerlink" href="#customizing-error-messages" title="Permalink to this headline">¶</a></h2>
+<p>When <code class="docutils literal notranslate"><span class="pre">onAuthenticationFailure()</span></code> is called, it is passed an <code class="docutils literal notranslate"><span class="pre">AuthenticationException</span></code>
+that describes <em>how</em> authentication failed via its <code class="docutils literal notranslate"><span class="pre">$exception-&gt;getMessageKey()</span></code> (and
+<code class="docutils literal notranslate"><span class="pre">$exception-&gt;getMessageData()</span></code>) method. The message will be different based on <em>where</em>
+authentication fails (i.e. <code class="docutils literal notranslate"><span class="pre">getUser()</span></code> versus <code class="docutils literal notranslate"><span class="pre">checkCredentials()</span></code>).</p>
+<p>But, you can also return a custom message by throwing a
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Exception/CustomUserMessageAuthenticationException.php" title="Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException"><span class="pre">CustomUserMessageAuthenticationException</span></a></code>.
+You can throw this from <code class="docutils literal notranslate"><span class="pre">getCredentials()</span></code>, <code class="docutils literal notranslate"><span class="pre">getUser()</span></code> or <code class="docutils literal notranslate"><span class="pre">checkCredentials()</span></code>
+to cause a failure:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Security/TokenAuthenticator.php</span>
+<span class="c1">// ...</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">TokenAuthenticator</span> <span class="k">extends</span> <span class="nx">AbstractGuardAuthenticator</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getCredentials</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$token</span> <span class="o">==</span> <span class="s1">&#39;ILuvAPIs&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">CustomUserMessageAuthenticationException</span><span class="p">(</span>
+                <span class="s1">&#39;ILuvAPIs is not a real API key: it\&#39;s just a silly phrase&#39;</span>
+            <span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this case, since “ILuvAPIs” is a ridiculous API key, you could include an easter
+egg to return a custom message if someone tries this:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">curl -H &quot;X-AUTH-TOKEN: ILuvAPIs&quot; http://localhost:8000/</span>
+<span class="c1"># {&quot;message&quot;:&quot;ILuvAPIs is not a real API key: it&#39;s just a silly phrase&quot;}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="manually-authenticating-a-user">
+<span id="guard-manual-auth"></span><h2>Manually Authenticating a User<a class="headerlink" href="#manually-authenticating-a-user" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes you might want to manually authenticate a user - like after the user
+completes registration. To do that, use your authenticator and a service called
+<code class="docutils literal notranslate"><span class="pre">GuardAuthenticatorHandler</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/RegistrationController.php</span>
+<span class="c1">// ...</span>
+
+<span class="k">use</span> <span class="nx">App\Security\LoginFormAuthenticator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Guard\GuardAuthenticatorHandler</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">RegistrationController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">register</span><span class="p">(</span><span class="nx">LoginFormAuthenticator</span> <span class="nv">$authenticator</span><span class="p">,</span> <span class="nx">GuardAuthenticatorHandler</span> <span class="nv">$guardHandler</span><span class="p">,</span> <span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+
+        <span class="c1">// after validating the user and saving them to the database</span>
+        <span class="c1">// authenticate the user and use onAuthenticationSuccess on the authenticator</span>
+        <span class="k">return</span> <span class="nv">$guardHandler</span><span class="o">-&gt;</span><span class="na">authenticateUserAndHandleSuccess</span><span class="p">(</span>
+            <span class="nv">$user</span><span class="p">,</span>          <span class="c1">// the User object you just created</span>
+            <span class="nv">$request</span><span class="p">,</span>
+            <span class="nv">$authenticator</span><span class="p">,</span> <span class="c1">// authenticator whose onAuthenticationSuccess you want to use</span>
+            <span class="s1">&#39;main&#39;</span>          <span class="c1">// the name of your firewall in security.yaml</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="avoid-authenticating-the-browser-on-every-request">
+<h2>Avoid Authenticating the Browser on Every Request<a class="headerlink" href="#avoid-authenticating-the-browser-on-every-request" title="Permalink to this headline">¶</a></h2>
+<p>If you create a Guard login system that’s used by a browser and you’re experiencing
+problems with your session or CSRF tokens, the cause could be bad behavior by your
+authenticator. When a Guard authenticator is meant to be used by a browser, you
+should <em>not</em> authenticate the user on <em>every</em> request. In other words, you need to
+make sure the <code class="docutils literal notranslate"><span class="pre">supports()</span></code> method <em>only</em> returns <code class="docutils literal notranslate"><span class="pre">true</span></code> when
+you actually <em>need</em> to authenticate the user. Why? Because, when <code class="docutils literal notranslate"><span class="pre">supports()</span></code>
+returns true (and authentication is ultimately successful), for security purposes,
+the user’s session is “migrated” to a new session id.</p>
+<p>This is an edge-case, and unless you’re having session or CSRF token issues, you
+can ignore this. Here is an example of good and bad behavior:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">supports</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// GOOD behavior: only authenticate (i.e. return true) on a specific route</span>
+    <span class="k">return</span> <span class="s1">&#39;login_route&#39;</span> <span class="o">===</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;_route&#39;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">isMethod</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">);</span>
+
+    <span class="c1">// e.g. your login system authenticates by the user&#39;s IP address</span>
+    <span class="c1">// BAD behavior: So, you decide to *always* return true so that</span>
+    <span class="c1">// you can check the user&#39;s IP address on every request</span>
+    <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The problem occurs when your browser-based authenticator tries to authenticate
+the user on <em>every</em> request - like in the IP address-based example above. There
+are two possible fixes:</p>
+<ol class="arabic simple">
+<li>If you do <em>not</em> need authentication to be stored in the session, set
+<code class="docutils literal notranslate"><span class="pre">stateless:</span> <span class="pre">true</span></code> under your firewall.</li>
+<li>Update your authenticator to avoid authentication if the user is already
+authenticated:</li>
+</ol>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span></span>// src/Security/MyIpAuthenticator.php
+// ...
+
+<span class="gi">+ use Symfony\Component\Security\Core\Security;</span>
+
+class MyIpAuthenticator
+{
+<span class="gi">+     private $security;</span>
+
+<span class="gi">+     public function __construct(Security $security)</span>
+<span class="gi">+     {</span>
+<span class="gi">+         $this-&gt;security = $security;</span>
+<span class="gi">+     }</span>
+
+    public function supports(Request $request)
+    {
+<span class="gi">+         // if there is already an authenticated user (likely due to the session)</span>
+<span class="gi">+         // then return false and skip authentication: there is no need.</span>
+<span class="gi">+         if ($this-&gt;security-&gt;getUser()) {</span>
+<span class="gi">+             return false;</span>
+<span class="gi">+         }</span>
+
+<span class="gi">+         // the user is not logged in, so the authenticator should continue</span>
+<span class="gi">+         return true;</span>
+    }
+}
+</pre></div>
+</td></tr></table></div>
+<p>If you use autowiring, the <code class="docutils literal notranslate"><span class="pre">Security</span></code>  service will automatically be passed to
+your authenticator.</p>
+</div>
+<div class="section" id="frequently-asked-questions">
+<h2>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Can I have Multiple Authenticators?</strong></dt>
+<dd>Yes! But when you do, you’ll need to choose just <em>one</em> authenticator to be your
+“entry_point”. This means you’ll need to choose <em>which</em> authenticator’s <code class="docutils literal notranslate"><span class="pre">start()</span></code>
+method should be called when an anonymous user tries to access a protected resource.
+For more details, see <a class="reference internal" href="multiple_guard_authenticators.html"><span class="doc">How to Use Multiple Guard Authenticators</span></a>.</dd>
+<dt><strong>Can I use this with form_login?</strong></dt>
+<dd>Yes! <code class="docutils literal notranslate"><span class="pre">form_login</span></code> is <em>one</em> way to authenticate a user, so you could use
+it <em>and</em> then add one or more authenticators. Using a guard authenticator doesn’t
+collide with other ways to authenticate.</dd>
+<dt><strong>Can I use this with FOSUserBundle?</strong></dt>
+<dd>Yes! Actually, FOSUserBundle doesn’t handle security: it simply gives you a
+<code class="docutils literal notranslate"><span class="pre">User</span></code> object and some routes and controllers to help with login, registration,
+forgot password, etc. When you use FOSUserBundle, you typically use <code class="docutils literal notranslate"><span class="pre">form_login</span></code>
+to actually authenticate the user. You can continue doing that (see previous
+question) or use the <code class="docutils literal notranslate"><span class="pre">User</span></code> object from FOSUserBundle and create your own
+authenticator(s) (just like in this article).</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How To Create Symfony Applications with Multiple Kernels &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Override Symfony’s default Directory Structure" href="override_dir_structure.html" />
+    <link rel="prev" title="Building your own Framework with the MicroKernelTrait" href="micro_kernel_trait.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../getting_started/index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../page_creation.html">Create your First Page in Symfony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controller.html">Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../templates.html">Creating and Using Templates</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../configuration.html">Configuring Symfony</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-files">Configuration Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-parameters">Configuration Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-environments">Configuration Environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-based-on-environment-variables">Configuration Based on Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#accessing-configuration-parameters">Accessing Configuration Parameters</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../configuration.html#keep-going">Keep Going!</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dot-env-changes.html">Nov 2018 Changes to .env &amp; How to Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="env_var_processors.html">Environment Variable Processors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="front_controllers_and_kernel.html">Understanding how the Front Controller, Kernel and Environments Work together</a></li>
+<li class="toctree-l4"><a class="reference internal" href="micro_kernel_trait.html">Building your own Framework with the MicroKernelTrait</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">How To Create Symfony Applications with Multiple Kernels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="override_dir_structure.html">How to Override Symfony’s default Directory Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="secrets.html">How to Keep Sensitive Information Secret</a></li>
+<li class="toctree-l4"><a class="reference internal" href="using_parameters_in_dic.html">Using Parameters within a Dependency Injection Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../getting_started/index.html">Getting Started</a> &raquo;</li>
+        
+          <li><a href="../configuration.html">Configuring Symfony</a> &raquo;</li>
+        
+      <li>How To Create Symfony Applications with Multiple Kernels</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/configuration/multiple_kernels.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-create-symfony-applications-with-multiple-kernels">
+<span id="index-0"></span><h1>How To Create Symfony Applications with Multiple Kernels<a class="headerlink" href="#how-to-create-symfony-applications-with-multiple-kernels" title="Permalink to this headline">¶</a></h1>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Creating applications with multiple kernels is no longer recommended by
+Symfony. Consider creating multiple small applications instead.</p>
+</div>
+<p>In most Symfony applications, incoming requests are processed by the
+<code class="docutils literal notranslate"><span class="pre">public/index.php</span></code> front controller, which instantiates the <code class="docutils literal notranslate"><span class="pre">src/Kernel.php</span></code>
+class to create the application kernel that loads the bundles and handles the
+request to generate the response.</p>
+<p>This single kernel approach is a convenient default, but Symfony applications
+can define any number of kernels. Whereas
+<a class="reference internal" href="../configuration.html#configuration-environments"><span class="std std-ref">environments</span></a> execute the same application
+with different configurations, kernels can execute different parts of the same
+application.</p>
+<p>These are some of the common use cases for creating multiple kernels:</p>
+<ul class="simple">
+<li>An application that defines an API could define two kernels for performance
+reasons. The first kernel would serve the regular application and the second
+one would only respond to the API requests, loading less bundles and enabling
+less features;</li>
+<li>A highly sensitive application could define two kernels. The first one would
+only load the routes that match the parts of the application exposed publicly.
+The second kernel would load the rest of the application and its access would
+be protected by the web server;</li>
+<li>A micro-services oriented application could define several kernels to
+enable/disable services selectively turning a traditional monolith application
+into several micro-applications.</li>
+</ul>
+<div class="section" id="adding-a-new-kernel-to-the-application">
+<h2>Adding a new Kernel to the Application<a class="headerlink" href="#adding-a-new-kernel-to-the-application" title="Permalink to this headline">¶</a></h2>
+<p>Creating a new kernel in a Symfony application is a three-step process:</p>
+<ol class="arabic simple">
+<li>Create a new front controller to load the new kernel;</li>
+<li>Create the new kernel class;</li>
+<li>Define the configuration loaded by the new kernel.</li>
+</ol>
+<p>The following example shows how to create a new kernel for the API of a given
+Symfony application.</p>
+<div class="section" id="step-1-create-a-new-front-controller">
+<h3>Step 1) Create a new Front Controller<a class="headerlink" href="#step-1-create-a-new-front-controller" title="Permalink to this headline">¶</a></h3>
+<p>Instead of creating the new front controller from scratch, it’s easier to
+duplicate the existing one. For example, create <code class="docutils literal notranslate"><span class="pre">public/api.php</span></code> from
+<code class="docutils literal notranslate"><span class="pre">public/index.php</span></code>.</p>
+<p>Then, update the code of the new front controller to instantiate the new kernel
+class instead of the usual <code class="docutils literal notranslate"><span class="pre">Kernel</span></code> class:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// public/api.php</span>
+<span class="c1">// ...</span>
+<span class="nv">$kernel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ApiKernel</span><span class="p">(</span>
+    <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;APP_ENV&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;dev&#39;</span><span class="p">,</span>
+    <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;APP_DEBUG&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="p">(</span><span class="s1">&#39;prod&#39;</span> <span class="o">!==</span> <span class="p">(</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;APP_ENV&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;dev&#39;</span><span class="p">))</span>
+<span class="p">);</span>
+<span class="c1">// ...</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Another approach is to keep the existing <code class="docutils literal notranslate"><span class="pre">index.php</span></code> front controller, but
+add an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement to load the different kernel based on the URL (e.g.
+if the URL starts with <code class="docutils literal notranslate"><span class="pre">/api</span></code>, use the <code class="docutils literal notranslate"><span class="pre">ApiKernel</span></code>).</p>
+</div>
+</div>
+<div class="section" id="step-2-create-the-new-kernel-class">
+<h3>Step 2) Create the new Kernel Class<a class="headerlink" href="#step-2-create-the-new-kernel-class" title="Permalink to this headline">¶</a></h3>
+<p>Now you need to define the <code class="docutils literal notranslate"><span class="pre">ApiKernel</span></code> class used by the new front controller.
+The easiest way to do this is by duplicating the existing  <code class="docutils literal notranslate"><span class="pre">src/Kernel.php</span></code>
+file and make the needed changes.</p>
+<p>In this example, the <code class="docutils literal notranslate"><span class="pre">ApiKernel</span></code> will load less bundles than the default
+Kernel. Be sure to also change the location of the cache, logs and configuration
+files so they don’t collide with the files from <code class="docutils literal notranslate"><span class="pre">src/Kernel.php</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/ApiKernel.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Config\Loader\LoaderInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Kernel</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ApiKernel</span> <span class="k">extends</span> <span class="nx">Kernel</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">registerBundles</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// load only the bundles strictly needed for the API...</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getCacheDir</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">dirname</span><span class="p">(</span><span class="no">__DIR__</span><span class="p">)</span><span class="o">.</span><span class="s1">&#39;/var/cache/api/&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getEnvironment</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getLogDir</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">dirname</span><span class="p">(</span><span class="no">__DIR__</span><span class="p">)</span><span class="o">.</span><span class="s1">&#39;/var/log/api&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureContainer</span><span class="p">(</span><span class="nx">ContainerBuilder</span> <span class="nv">$container</span><span class="p">,</span> <span class="nx">LoaderInterface</span> <span class="nv">$loader</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// load only the config files strictly needed for the API</span>
+        <span class="nv">$confDir</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getProjectDir</span><span class="p">()</span><span class="o">.</span><span class="s1">&#39;/config&#39;</span><span class="p">;</span>
+        <span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="nv">$confDir</span><span class="o">.</span><span class="s1">&#39;/api/*&#39;</span><span class="o">.</span><span class="nx">self</span><span class="o">::</span><span class="na">CONFIG_EXTS</span><span class="p">,</span> <span class="s1">&#39;glob&#39;</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">is_dir</span><span class="p">(</span><span class="nv">$confDir</span><span class="o">.</span><span class="s1">&#39;/api/&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">environment</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="nv">$confDir</span><span class="o">.</span><span class="s1">&#39;/api/&#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">environment</span><span class="o">.</span><span class="s1">&#39;/**/*&#39;</span><span class="o">.</span><span class="nx">self</span><span class="o">::</span><span class="na">CONFIG_EXTS</span><span class="p">,</span> <span class="s1">&#39;glob&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-3-define-the-kernel-configuration">
+<h3>Step 3) Define the Kernel Configuration<a class="headerlink" href="#step-3-define-the-kernel-configuration" title="Permalink to this headline">¶</a></h3>
+<p>Finally, define the configuration files that the new <code class="docutils literal notranslate"><span class="pre">ApiKernel</span></code> will load.
+According to the above code, this config will live in one or multiple files
+stored in <code class="docutils literal notranslate"><span class="pre">config/api/</span></code> and <code class="docutils literal notranslate"><span class="pre">config/api/ENVIRONMENT_NAME/</span></code> directories.</p>
+<p>The new configuration files can be created from scratch when you load just a few
+bundles, because it will be small. Otherwise, duplicate the existing
+config files in <code class="docutils literal notranslate"><span class="pre">config/packages/</span></code> or better, import them and override the
+needed options.</p>
+</div>
+</div>
+<div class="section" id="executing-commands-with-a-different-kernel">
+<h2>Executing Commands with a Different Kernel<a class="headerlink" href="#executing-commands-with-a-different-kernel" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">bin/console</span></code> script used to run Symfony commands always uses the default
+<code class="docutils literal notranslate"><span class="pre">Kernel</span></code> class to build the application and load the commands. If you need
+to execute console commands using the new kernel, duplicate the <code class="docutils literal notranslate"><span class="pre">bin/console</span></code>
+script and rename it (e.g. <code class="docutils literal notranslate"><span class="pre">bin/api</span></code>).</p>
+<p>Then, replace the <code class="docutils literal notranslate"><span class="pre">Kernel</span></code> instance by your own kernel instance
+(e.g. <code class="docutils literal notranslate"><span class="pre">ApiKernel</span></code>) and now you can execute commands using the new kernel
+(e.g. <code class="docutils literal notranslate"><span class="pre">php</span> <span class="pre">bin/api</span> <span class="pre">cache:clear</span></code>) Now you can use execute commands using the
+new kernel.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The commands available for each console script (e.g. <code class="docutils literal notranslate"><span class="pre">bin/console</span></code> and
+<code class="docutils literal notranslate"><span class="pre">bin/api</span></code>) can differ because they depend on the bundles enabled for each
+kernel, which could be different.</p>
+</div>
+</div>
+<div class="section" id="rendering-templates-defined-in-a-different-kernel">
+<h2>Rendering Templates Defined in a Different Kernel<a class="headerlink" href="#rendering-templates-defined-in-a-different-kernel" title="Permalink to this headline">¶</a></h2>
+<p>If you follow the Symfony Best Practices, the templates of the default kernel
+will be stored in <code class="docutils literal notranslate"><span class="pre">templates/</span></code>. Trying to render those templates in a
+different kernel will result in a <em>There are no registered paths for namespace
+“__main__”</em> error.</p>
+<p>In order to solve this issue, add the following configuration to your kernel:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/api/twig.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">twig</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">paths</span><span class="p p-Indicator">:</span>
+        <span class="c1"># allows to use api/templates/ dir in the ApiKernel</span>
+        <span class="s">&quot;%kernel.project_dir%/api/templates&quot;</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">~</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="running-tests-using-a-different-kernel">
+<h2>Running Tests Using a Different Kernel<a class="headerlink" href="#running-tests-using-a-different-kernel" title="Permalink to this headline">¶</a></h2>
+<p>In Symfony applications, functional tests extend by default from the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/FrameworkBundle/Test/WebTestCase.php" title="Symfony\Bundle\FrameworkBundle\Test\WebTestCase"><span class="pre">WebTestCase</span></a></code> class. Inside that
+class, a method called <code class="docutils literal notranslate"><span class="pre">getKernelClass()</span></code> tries to find the class of the kernel
+to use to run the application during tests. The logic of this method does not
+support multiple kernel applications, so your tests won’t use the right kernel.</p>
+<p>The solution is to create a custom base class for functional tests extending
+from <code class="docutils literal notranslate"><span class="pre">WebTestCase</span></code> class and overriding the <code class="docutils literal notranslate"><span class="pre">getKernelClass()</span></code> method to
+return the fully qualified class name of the kernel to use:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Test\WebTestCase</span><span class="p">;</span>
+
+<span class="c1">// tests needing the ApiKernel to work, now must extend this</span>
+<span class="c1">// ApiTestCase class instead of the default WebTestCase class</span>
+<span class="k">class</span> <span class="nc">ApiTestCase</span> <span class="k">extends</span> <span class="nx">WebTestCase</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getKernelClass</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;App\ApiKernel&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// this is needed because the KernelTestCase class keeps a reference to</span>
+    <span class="c1">// the previously created kernel in its static $kernel property. Thus,</span>
+    <span class="c1">// if your functional tests do not run in isolated processes, a later run</span>
+    <span class="c1">// test for a different kernel will reuse the previously created instance,</span>
+    <span class="c1">// which points to a different kernel</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">tearDown</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">tearDown</span><span class="p">();</span>
+
+        <span class="k">static</span><span class="o">::</span><span class="nv">$class</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-more-kernels-to-the-application">
+<h2>Adding more Kernels to the Application<a class="headerlink" href="#adding-more-kernels-to-the-application" title="Permalink to this headline">¶</a></h2>
+<p>If your application is very complex and you create several kernels, it’s better
+to store them in their own directories instead of messing with lots of files in
+the default <code class="docutils literal notranslate"><span class="pre">src/</span></code> directory:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span>project/
+├─ src/
+│  ├─ ...
+│  └─ Kernel.php
+├─ api/
+│  ├─ ...
+│  └─ ApiKernel.php
+├─ ...
+└─ public/
+    ├─ ...
+    ├─ api.php
+    └─ index.php
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

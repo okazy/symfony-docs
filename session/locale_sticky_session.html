@@ -1,0 +1,477 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Making the Locale “Sticky” during a User’s Session &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Bridge a legacy Application with Symfony Sessions" href="php_bridge.html" />
+    <link rel="prev" title="Sessions" href="../session.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../session.html">Sessions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../session.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../session.html#avoid-starting-sessions-for-anonymous-users">Avoid Starting Sessions for Anonymous Users</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../session.html#more-about-sessions">More about Sessions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="database.html">Store Sessions in a Database</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Making the Locale “Sticky” during a User’s Session</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#creating-a-localesubscriber">Creating a LocaleSubscriber</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-the-locale-based-on-the-user-s-preferences">Setting the Locale Based on the User’s Preferences</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="php_bridge.html">Bridge a legacy Application with Symfony Sessions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proxy_examples.html">Session Proxy Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../session.html">Sessions</a> &raquo;</li>
+        
+      <li>Making the Locale “Sticky” during a User’s Session</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/session/locale_sticky_session.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="making-the-locale-sticky-during-a-user-s-session">
+<span id="index-0"></span><h1>Making the Locale “Sticky” during a User’s Session<a class="headerlink" href="#making-the-locale-sticky-during-a-user-s-session" title="Permalink to this headline">¶</a></h1>
+<p>Symfony stores the locale setting in the Request, which means that this setting
+is not automatically saved (“sticky”) across requests. But, you <em>can</em> store the locale
+in the session, so that it’s used on subsequent requests.</p>
+<div class="section" id="creating-a-localesubscriber">
+<span id="id1"></span><h2>Creating a LocaleSubscriber<a class="headerlink" href="#creating-a-localesubscriber" title="Permalink to this headline">¶</a></h2>
+<p>Create a <a class="reference internal" href="../event_dispatcher.html#events-subscriber"><span class="std std-ref">new event subscriber</span></a>. Typically, <code class="docutils literal notranslate"><span class="pre">_locale</span></code>
+is used as a routing parameter to signify the locale, though you can determine the
+correct locale however you want:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/EventSubscriber/LocaleSubscriber.php</span>
+<span class="k">namespace</span> <span class="nx">App\EventSubscriber</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher\EventSubscriberInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\RequestEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\KernelEvents</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">LocaleSubscriber</span> <span class="k">implements</span> <span class="nx">EventSubscriberInterface</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$defaultLocale</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$defaultLocale</span> <span class="o">=</span> <span class="s1">&#39;en&#39;</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">defaultLocale</span> <span class="o">=</span> <span class="nv">$defaultLocale</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">onKernelRequest</span><span class="p">(</span><span class="nx">RequestEvent</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">hasPreviousSession</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// try to see if the locale has been set as a _locale routing parameter</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$locale</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;_locale&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getSession</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;_locale&#39;</span><span class="p">,</span> <span class="nv">$locale</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// if no explicit locale has been set on this request, use one from the session</span>
+            <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setLocale</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getSession</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;_locale&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">defaultLocale</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getSubscribedEvents</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="c1">// must be registered before (i.e. with a higher priority than) the default Locale listener</span>
+            <span class="nx">KernelEvents</span><span class="o">::</span><span class="na">REQUEST</span> <span class="o">=&gt;</span> <span class="p">[[</span><span class="s1">&#39;onKernelRequest&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">]],</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you’re using the <a class="reference internal" href="../service_container.html#service-container-services-load-example"><span class="std std-ref">default services.yaml configuration</span></a>,
+you’re done! Symfony will automatically know about the event subscriber and call
+the <code class="docutils literal notranslate"><span class="pre">onKernelRequest</span></code> method on each request.</p>
+<p>To see it working, either set the <code class="docutils literal notranslate"><span class="pre">_locale</span></code> key on the session manually (e.g.
+via some “Change Locale” route &amp; controller), or create a route with the <a class="reference internal" href="../translation/locale.html#translation-locale-url"><span class="std std-ref">_locale default</span></a>.</p>
+<div class="sidebar">
+<p class="first sidebar-title">Explicitly Configure the Subscriber</p>
+<p>You can also explicitly configure it, in order to pass in the <a class="reference internal" href="../reference/configuration/framework.html#config-framework-default-locale"><span class="std std-ref">default_locale</span></a>:</p>
+<div class="last configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\EventSubscriber\LocaleSubscriber</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;%kernel.default_locale%&#39;</span><span class="p p-Indicator">]</span>
+        <span class="c1"># uncomment the next line if you are not using autoconfigure</span>
+        <span class="c1"># tags: [kernel.event_subscriber]</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\EventSubscriber\LocaleSubscriber&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;argument&gt;</span>%kernel.default_locale%<span class="nt">&lt;/argument&gt;</span>
+
+            <span class="c">&lt;!-- uncomment the next line if you are not using autoconfigure --&gt;</span>
+            <span class="c">&lt;!-- &lt;tag name=&quot;kernel.event_subscriber&quot;/&gt; --&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">App\EventSubscriber\LocaleSubscriber</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="nx">LocaleSubscriber</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="s1">&#39;%kernel.default_locale%&#39;</span><span class="p">)</span>
+    <span class="c1">// uncomment the next line if you are not using autoconfigure</span>
+    <span class="c1">// -&gt;addTag(&#39;kernel.event_subscriber&#39;);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<p>That’s it! Now celebrate by changing the user’s locale and seeing that it’s
+sticky throughout the request.</p>
+<p>Remember, to get the user’s locale, always use the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request::getLocale()"><span class="pre">Request::getLocale</span></a></code>
+method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// from a controller...</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$locale</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getLocale</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-the-locale-based-on-the-user-s-preferences">
+<h2>Setting the Locale Based on the User’s Preferences<a class="headerlink" href="#setting-the-locale-based-on-the-user-s-preferences" title="Permalink to this headline">¶</a></h2>
+<p>You might want to improve this technique even further and define the locale based on
+the user entity of the logged in user. However, since the <code class="docutils literal notranslate"><span class="pre">LocaleSubscriber</span></code> is called
+before the <code class="docutils literal notranslate"><span class="pre">FirewallListener</span></code>, which is responsible for handling authentication and
+setting the user token on the <code class="docutils literal notranslate"><span class="pre">TokenStorage</span></code>, you have no access to the user
+which is logged in.</p>
+<p>Suppose you have a <code class="docutils literal notranslate"><span class="pre">locale</span></code> property on your <code class="docutils literal notranslate"><span class="pre">User</span></code> entity and
+want to use this as the locale for the given user. To accomplish this,
+you can hook into the login process and update the user’s session with this
+locale value before they are redirected to their first page.</p>
+<p>To do this, you need an event subscriber on the <code class="docutils literal notranslate"><span class="pre">security.interactive_login</span></code>
+event:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/EventSubscriber/UserLocaleSubscriber.php</span>
+<span class="k">namespace</span> <span class="nx">App\EventSubscriber</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher\EventSubscriberInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\SessionInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Http\Event\InteractiveLoginEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Http\SecurityEvents</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * Stores the locale of the user in the session after the</span>
+<span class="sd"> * login. This can be used by the LocaleSubscriber afterwards.</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">UserLocaleSubscriber</span> <span class="k">implements</span> <span class="nx">EventSubscriberInterface</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$session</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">SessionInterface</span> <span class="nv">$session</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span> <span class="o">=</span> <span class="nv">$session</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">onInteractiveLogin</span><span class="p">(</span><span class="nx">InteractiveLoginEvent</span> <span class="nv">$event</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getAuthenticationToken</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getUser</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="k">null</span> <span class="o">!==</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getLocale</span><span class="p">())</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;_locale&#39;</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getLocale</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getSubscribedEvents</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="nx">SecurityEvents</span><span class="o">::</span><span class="na">INTERACTIVE_LOGIN</span> <span class="o">=&gt;</span> <span class="s1">&#39;onInteractiveLogin&#39;</span><span class="p">,</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">In order to update the language immediately after a user has changed
+their language preferences, you also need to update the session when you change
+the <code class="docutils literal notranslate"><span class="pre">User</span></code> entity.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

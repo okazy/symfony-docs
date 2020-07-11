@@ -1,0 +1,555 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installing &amp; Setting up the Symfony Framework &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Create your First Page in Symfony" href="page_creation.html" />
+    <link rel="prev" title="Getting Started" href="getting_started/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">Sessions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installing &amp; Setting up the Symfony Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#technical-requirements">Technical Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-symfony-applications">Creating Symfony Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-symfony-applications">Running Symfony Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-an-existing-symfony-project">Setting up an Existing Symfony Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-packages">Installing Packages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#symfony-packs">Symfony Packs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#checking-security-vulnerabilities">Checking Security Vulnerabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#symfony-lts-versions">Symfony LTS Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-symfony-demo-application">The Symfony Demo application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#start-coding">Start Coding!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#learn-more">Learn More</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="page_creation.html">Create your First Page in Symfony</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup/homestead.html">Using Symfony with Homestead/Vagrant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup/web_server_configuration.html">Configuring a Web Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup/bundles.html">Upgrading a Third-Party Bundle for a Major Symfony Version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup/file_permissions.html">Setting up or Fixing File Permissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup/flex.html">Upgrading Existing Applications to Symfony Flex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup/symfony_server.html">Symfony Local Web Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup/unstable_versions.html">How to Install or Upgrade to the Latest, Unreleased Symfony Version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup/upgrade_major.html">Upgrading a Major Version (e.g. 4.4.0 to 5.0.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup/upgrade_minor.html">Upgrading a Minor Version (e.g. 4.0.0 to 4.1.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup/upgrade_patch.html">Upgrading a Patch Version (e.g. 5.0.0 to 5.0.1)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="getting_started/index.html">Getting Started</a> &raquo;</li>
+        
+      <li>Installing &amp; Setting up the Symfony Framework</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/setup.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installing-setting-up-the-symfony-framework">
+<span id="index-0"></span><h1>Installing &amp; Setting up the Symfony Framework<a class="headerlink" href="#installing-setting-up-the-symfony-framework" title="Permalink to this headline">¶</a></h1>
+<div class="screencast admonition">
+<p class="first admonition-title">Screencast</p>
+<p class="last">Do you prefer video tutorials? Check out the <a class="reference external" href="https://symfonycasts.com/screencast/symfony">Stellar Development with Symfony</a>
+screencast series.</p>
+</div>
+<div class="section" id="technical-requirements">
+<span id="symfony-tech-requirements"></span><h2>Technical Requirements<a class="headerlink" href="#technical-requirements" title="Permalink to this headline">¶</a></h2>
+<p>Before creating your first Symfony application you must:</p>
+<ul class="simple">
+<li>Install PHP 7.2.5 or higher and these PHP extensions (which are installed and
+enabled by default in most PHP 7 installations): <a class="reference external" href="https://www.php.net/book.ctype">Ctype</a>, <a class="reference external" href="https://www.php.net/book.iconv">iconv</a>, <a class="reference external" href="https://www.php.net/book.json">JSON</a>,
+<a class="reference external" href="https://www.php.net/book.pcre">PCRE</a>, <a class="reference external" href="https://www.php.net/book.session">Session</a>, <a class="reference external" href="https://www.php.net/book.simplexml">SimpleXML</a>, and <a class="reference external" href="https://www.php.net/book.tokenizer">Tokenizer</a>;</li>
+<li><a class="reference external" href="https://getcomposer.org/download/">Install Composer</a>, which is used to install PHP packages.</li>
+</ul>
+<p>Optionally, you can also <a class="reference external" href="https://symfony.com/download">install Symfony CLI</a>. This creates a binary called
+<code class="docutils literal notranslate"><span class="pre">symfony</span></code> that provides all the tools you need to develop and run your
+Symfony application locally.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">symfony</span></code> binary also provides a tool to check if your computer meets all
+requirements. Open your console terminal and run this command:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> symfony check:requirements
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Symfony binary is developed internally at Symfony. If you want to
+report a bug or suggest a new feature, please create an issue on
+<a class="reference external" href="https://github.com/symfony/cli">symfony/cli</a>.</p>
+</div>
+</div>
+<div class="section" id="creating-symfony-applications">
+<span id="id1"></span><h2>Creating Symfony Applications<a class="headerlink" href="#creating-symfony-applications" title="Permalink to this headline">¶</a></h2>
+<p>Open your console terminal and run any of these commands to create a new Symfony
+application:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># run this if you are building a traditional web application</span>
+<span class="gp">$</span> symfony new my_project_name --version<span class="o">=</span>next --full
+
+<span class="c1"># run this if you are building a microservice, console application or API</span>
+<span class="gp">$</span> symfony new my_project_name --version<span class="o">=</span>next
+</pre></div>
+</td></tr></table></div>
+<p>The only difference between these two commands is the number of packages
+installed by default. The <code class="docutils literal notranslate"><span class="pre">--full</span></code> option installs all the packages that you
+usually need to build web applications, so the installation size will be bigger.</p>
+<p>If you’re not using the Symfony binary, run these commands to create the new
+Symfony application using Composer:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># run this if you are building a traditional web application</span>
+<span class="gp">$</span> composer create-project symfony/website-skeleton:<span class="s2">&quot;5.2.x@dev&quot;</span> my_project_name
+
+<span class="c1"># run this if you are building a microservice, console application or API</span>
+<span class="gp">$</span> composer create-project symfony/skeleton:<span class="s2">&quot;5.2.x@dev&quot;</span> my_project_name
+</pre></div>
+</td></tr></table></div>
+<p>No matter which command you run to create the Symfony application. All of them
+will create a new <code class="docutils literal notranslate"><span class="pre">my_project_name/</span></code> directory, download some dependencies
+into it and even generate the basic directories and files you’ll need to get
+started. In other words, your new application is ready!</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The project’s cache and logs directory (by default, <code class="docutils literal notranslate"><span class="pre">&lt;project&gt;/var/cache/</span></code>
+and <code class="docutils literal notranslate"><span class="pre">&lt;project&gt;/var/log/</span></code>) must be writable by the web server. If you have
+any issue, read how to <a class="reference internal" href="setup/file_permissions.html"><span class="doc">set up permissions for Symfony applications</span></a>.</p>
+</div>
+</div>
+<div class="section" id="running-symfony-applications">
+<h2>Running Symfony Applications<a class="headerlink" href="#running-symfony-applications" title="Permalink to this headline">¶</a></h2>
+<p>In production, you should install a webserver like Nginx or Apache and
+<a class="reference internal" href="setup/web_server_configuration.html"><span class="doc">configure it to run Symfony</span></a>. This
+method can also be used if you’re not using the Symfony local web server for
+development.</p>
+<p>However for local development, the most convenient way of running Symfony is by
+using the <a class="reference internal" href="setup/symfony_server.html"><span class="doc">local web server</span></a> provided by the
+<code class="docutils literal notranslate"><span class="pre">symfony</span></code> binary. This local server provides among other things support for
+HTTP/2, concurrent requests, TLS/SSL and automatic generation of security
+certificates.</p>
+<p>Open your console terminal, move into your new project directory and start the
+local web server as follows:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> my-project/
+<span class="gp">$</span> symfony server:start
+</pre></div>
+</td></tr></table></div>
+<p>Open your browser and navigate to <code class="docutils literal notranslate"><span class="pre">http://localhost:8000/</span></code>. If everything is
+working, you’ll see a welcome page. Later, when you are finished working, stop
+the server by pressing <code class="docutils literal notranslate"><span class="pre">Ctrl+C</span></code> from your terminal.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The web server works with any PHP application, not only Symfony projects,
+so it’s a very useful generic development tool.</p>
+</div>
+</div>
+<div class="section" id="setting-up-an-existing-symfony-project">
+<span id="install-existing-app"></span><h2>Setting up an Existing Symfony Project<a class="headerlink" href="#setting-up-an-existing-symfony-project" title="Permalink to this headline">¶</a></h2>
+<p>In addition to creating new Symfony projects, you will also work on projects
+already created by other developers. In that case, you only need to get the
+project code and install the dependencies with Composer. Assuming your team uses
+Git, setup your project with the following commands:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># clone the project to download its contents</span>
+<span class="gp">$</span> <span class="nb">cd</span> projects/
+<span class="gp">$</span> git clone ...
+
+<span class="c1"># make Composer install the project&#39;s dependencies into vendor/</span>
+<span class="gp">$</span> <span class="nb">cd</span> my-project/
+<span class="gp">$</span> composer install
+</pre></div>
+</td></tr></table></div>
+<p>You’ll probably also need to customize your <a class="reference internal" href="configuration.html#config-dot-env"><span class="std std-ref">.env file</span></a>
+and do a few other project-specific tasks (e.g. creating a database). When
+working on a existing Symfony application for the first time, it may be useful
+to run this command which displays information about the project:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console about
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="installing-packages">
+<span id="symfony-flex"></span><h2>Installing Packages<a class="headerlink" href="#installing-packages" title="Permalink to this headline">¶</a></h2>
+<p>A common practice when developing Symfony applications is to install packages
+(Symfony calls them <a class="reference internal" href="bundles.html"><span class="doc">bundles</span></a>) that provide ready-to-use
+features. Packages usually require some setup before using them (editing some
+file to enable the bundle, creating some file to add some initial config, etc.)</p>
+<p>Most of the time this setup can be automated and that’s why Symfony includes
+<a class="reference external" href="https://github.com/symfony/flex">Symfony Flex</a>, a tool to simplify the installation/removal of packages in
+Symfony applications. Technically speaking, Symfony Flex is a Composer plugin
+that is installed by default when creating a new Symfony application and which
+<strong>automates the most common tasks of Symfony applications</strong>.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can also <a class="reference internal" href="setup/flex.html"><span class="doc">add Symfony Flex to an existing project</span></a>.</p>
+</div>
+<p>Symfony Flex modifies the behavior of the <code class="docutils literal notranslate"><span class="pre">require</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">remove</span></code> Composer commands to provide advanced features. Consider the
+following example:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> my-project/
+<span class="gp">$</span> composer require logger
+</pre></div>
+</td></tr></table></div>
+<p>If you execute that command in a Symfony application which doesn’t use Flex,
+you’ll see a Composer error explaining that <code class="docutils literal notranslate"><span class="pre">logger</span></code> is not a valid package
+name. However, if the application has Symfony Flex installed, that command
+installs and enables all the packages needed to use the official Symfony logger.</p>
+<p id="recipes-description">This is possible because lots of Symfony packages/bundles define <strong>“recipes”</strong>,
+which are a set of automated instructions to install and enable packages into
+Symfony applications. Flex keeps tracks of the recipes it installed in a
+<code class="docutils literal notranslate"><span class="pre">symfony.lock</span></code> file, which must be committed to your code repository.</p>
+<p>Symfony Flex recipes are contributed by the community and they are stored in
+two public repositories:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/symfony/recipes">Main recipe repository</a>, is a curated list of recipes for high quality and
+maintained packages. Symfony Flex only looks in this repository by default.</li>
+<li><a class="reference external" href="https://github.com/symfony/recipes-contrib">Contrib recipe repository</a>, contains all the recipes created by the
+community. All of them are guaranteed to work, but their associated packages
+could be unmaintained. Symfony Flex will ask your permission before installing
+any of these recipes.</li>
+</ul>
+<p>Read the <a class="reference external" href="https://github.com/symfony/recipes/blob/master/README.rst">Symfony Recipes documentation</a> to learn everything about how to
+create recipes for your own packages.</p>
+<div class="section" id="symfony-packs">
+<span id="id2"></span><h3>Symfony Packs<a class="headerlink" href="#symfony-packs" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes a single feature requires installing several packages and bundles.
+Instead of installing them individually, Symfony provides <strong>packs</strong>, which are
+Composer metapackages that include several dependencies.</p>
+<p>For example, to add debugging features in your application, you can run the
+<code class="docutils literal notranslate"><span class="pre">composer</span> <span class="pre">require</span> <span class="pre">--dev</span> <span class="pre">debug</span></code> command. This installs the <code class="docutils literal notranslate"><span class="pre">symfony/debug-pack</span></code>,
+which in turn installs several packages like <code class="docutils literal notranslate"><span class="pre">symfony/debug-bundle</span></code>,
+<code class="docutils literal notranslate"><span class="pre">symfony/monolog-bundle</span></code>, <code class="docutils literal notranslate"><span class="pre">symfony/var-dumper</span></code>, etc.</p>
+<p>By default, when installing Symfony packs, your <code class="docutils literal notranslate"><span class="pre">composer.json</span></code> file shows the
+pack dependency (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;symfony/debug-pack&quot;:</span> <span class="pre">&quot;^1.0&quot;</span></code>) instead of the actual
+packages installed. To show the packages, add the <code class="docutils literal notranslate"><span class="pre">--unpack</span></code> option when
+installing a pack (e.g. <code class="docutils literal notranslate"><span class="pre">composer</span> <span class="pre">require</span> <span class="pre">debug</span> <span class="pre">--dev</span> <span class="pre">--unpack</span></code>) or run this
+command to unpack the already installed packs: <code class="docutils literal notranslate"><span class="pre">composer</span> <span class="pre">unpack</span> <span class="pre">PACK_NAME</span></code>
+(e.g. <code class="docutils literal notranslate"><span class="pre">composer</span> <span class="pre">unpack</span> <span class="pre">debug</span></code>).</p>
+</div>
+</div>
+<div class="section" id="checking-security-vulnerabilities">
+<span id="security-checker"></span><h2>Checking Security Vulnerabilities<a class="headerlink" href="#checking-security-vulnerabilities" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">symfony</span></code> binary created when you <a class="reference external" href="https://symfony.com/download">install Symfony CLI</a> provides a command to
+check whether your project’s dependencies contain any known security
+vulnerability:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> symfony check:security
+</pre></div>
+</td></tr></table></div>
+<p>A good security practice is to execute this command regularly to be able to
+update or replace compromised dependencies as soon as possible. The security
+check is done locally by fetching the public <a class="reference external" href="https://github.com/FriendsOfPHP/security-advisories">PHP security advisories database</a>,
+so your <code class="docutils literal notranslate"><span class="pre">composer.lock</span></code> file is not sent on the network.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">check:security</span></code> command terminates with a non-zero exit code if
+any of your dependencies is affected by a known security vulnerability.
+This way you can add it to your project build process and your continuous
+integration workflows to make them fail when there are vulnerabilities.</p>
+</div>
+</div>
+<div class="section" id="symfony-lts-versions">
+<h2>Symfony LTS Versions<a class="headerlink" href="#symfony-lts-versions" title="Permalink to this headline">¶</a></h2>
+<p>According to the <a class="reference internal" href="contributing/community/releases.html"><span class="doc">Symfony release process</span></a>,
+“long-term support” (or LTS for short) versions are published every two years.
+Check out the <a class="reference external" href="https://symfony.com/releases">Symfony releases</a> to know which is the latest LTS version.</p>
+<p>By default, the command that creates new Symfony applications uses the latest
+stable version. If you want to use an LTS version, add the <code class="docutils literal notranslate"><span class="pre">--version</span></code> option:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># use the most recent LTS version</span>
+<span class="gp">$</span> symfony new my_project_name --version<span class="o">=</span>lts
+
+<span class="c1"># use the &#39;next&#39; Symfony version to be released (still in development)</span>
+<span class="gp">$</span> symfony new my_project_name --version<span class="o">=</span>next
+
+<span class="c1"># you can also select an exact specific Symfony version</span>
+<span class="gp">$</span> symfony new my_project_name --version<span class="o">=</span><span class="m">4</span>.4
+</pre></div>
+</td></tr></table></div>
+<p>The <code class="docutils literal notranslate"><span class="pre">lts</span></code> and <code class="docutils literal notranslate"><span class="pre">next</span></code> shortcuts are only available when using Symfony to
+create new projects. If you use Composer, you need to tell the exact version:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer create-project symfony/website-skeleton:^4.4 my_project_name
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="the-symfony-demo-application">
+<h2>The Symfony Demo application<a class="headerlink" href="#the-symfony-demo-application" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/symfony/demo">The Symfony Demo Application</a> is a fully-functional application that shows the
+recommended way to develop Symfony applications. It’s a great learning tool for
+Symfony newcomers and its code contains tons of comments and helpful notes.</p>
+<p>Run this command to create a new project based on the Symfony Demo application:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> symfony new my_project_name --demo
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="start-coding">
+<h2>Start Coding!<a class="headerlink" href="#start-coding" title="Permalink to this headline">¶</a></h2>
+<p>With setup behind you, it’s time to <a class="reference internal" href="page_creation.html"><span class="doc">Create your first page in Symfony</span></a>.</p>
+</div>
+<div class="section" id="learn-more">
+<h2>Learn More<a class="headerlink" href="#learn-more" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="setup/homestead.html">Using Symfony with Homestead/Vagrant</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup/web_server_configuration.html">Configuring a Web Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup/bundles.html">Upgrading a Third-Party Bundle for a Major Symfony Version</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup/file_permissions.html">Setting up or Fixing File Permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup/flex.html">Upgrading Existing Applications to Symfony Flex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup/symfony_server.html">Symfony Local Web Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup/unstable_versions.html">How to Install or Upgrade to the Latest, Unreleased Symfony Version</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup/upgrade_major.html">Upgrading a Major Version (e.g. 4.4.0 to 5.0.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup/upgrade_minor.html">Upgrading a Minor Version (e.g. 4.0.0 to 4.1.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup/upgrade_patch.html">Upgrading a Patch Version (e.g. 5.0.0 to 5.0.1)</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

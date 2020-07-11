@@ -1,0 +1,939 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Translate Messages using the ICU MessageFormat &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using Translation in Templates" href="templates.html" />
+    <link rel="prev" title="Translations" href="../translation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../translation.html">Translations</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#basic-translation">Basic Translation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#message-format">Message Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#translations-in-templates">Translations in Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#forcing-the-translator-locale">Forcing the Translator Locale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#extracting-translation-contents-and-updating-catalogs-automatically">Extracting Translation Contents and Updating Catalogs Automatically</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#translation-resource-file-names-and-locations">Translation Resource/File Names and Locations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#handling-the-user-s-locale">Handling the User’s Locale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#fallback-translation-locales">Fallback Translation Locales</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#translating-database-content">Translating Database Content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#debugging-translations">Debugging Translations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../translation.html#summary">Summary</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../translation.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Translate Messages using the ICU MessageFormat</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-icu-message-format">Using the ICU Message Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#message-placeholders">Message Placeholders</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#selecting-different-messages-based-on-a-condition">Selecting Different Messages Based on a Condition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pluralization">Pluralization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#additional-placeholder-functions">Additional Placeholder Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="templates.html">Using Translation in Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locale.html">How to Work with the User’s Locale</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug.html">How to Find Missing or Unused Translation Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lint.html">How to Find Errors in Translation Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xliff.html">The XLIFF format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../translation.html">Translations</a> &raquo;</li>
+        
+      <li>How to Translate Messages using the ICU MessageFormat</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/translation/message_format.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-translate-messages-using-the-icu-messageformat">
+<span id="index-0"></span><h1>How to Translate Messages using the ICU MessageFormat<a class="headerlink" href="#how-to-translate-messages-using-the-icu-messageformat" title="Permalink to this headline">¶</a></h1>
+<p>Messages (i.e. strings) in applications are almost never completely static.
+They contain variables or other complex logic like pluralization. In order to
+handle this, the Translator component supports the <a class="reference external" href="http://userguide.icu-project.org/formatparse/messages">ICU MessageFormat</a> syntax.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can test out examples of the ICU MessageFormatter in this <a class="reference external" href="http://format-message.github.io/icu-message-format-for-translators/">online editor</a>.</p>
+</div>
+<div class="section" id="using-the-icu-message-format">
+<h2>Using the ICU Message Format<a class="headerlink" href="#using-the-icu-message-format" title="Permalink to this headline">¶</a></h2>
+<p>In order to use the ICU Message Format, the message domain has to be
+suffixed with <code class="docutils literal notranslate"><span class="pre">+intl-icu</span></code>:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Normal file name</th>
+<th class="head">ICU Message Format filename</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">messages.en.yaml</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">messages+intl-icu.en.yaml</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">messages.fr_FR.xlf</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">messages+intl-icu.fr_FR.xlf</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">admin.en.yaml</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">admin+intl-icu.en.yaml</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>All messages in this file will now be processed by the
+<code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.messageformatter.php" title="MessageFormatter"><span class="pre">MessageFormatter</span></a></code> during translation.</p>
+</div>
+<div class="section" id="message-placeholders">
+<span id="component-translation-placeholders"></span><h2>Message Placeholders<a class="headerlink" href="#message-placeholders" title="Permalink to this headline">¶</a></h2>
+<p>The basic usage of the MessageFormat allows you to use placeholders (called
+<em>arguments</em> in ICU MessageFormat) in your messages:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># translations/messages+intl-icu.en.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">say_hello</span><span class="p p-Indicator">:</span> <span class="s">&#39;Hello</span><span class="nv"> </span><span class="s">{name}!&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- translations/messages+intl-icu.en.xlf --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;xliff</span> <span class="na">version=</span><span class="s">&quot;1.2&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;urn:oasis:names:tc:xliff:document:1.2&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">source-language=</span><span class="s">&quot;en&quot;</span> <span class="na">datatype=</span><span class="s">&quot;plaintext&quot;</span> <span class="na">original=</span><span class="s">&quot;file.ext&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;body&gt;</span>
+            <span class="nt">&lt;trans-unit</span> <span class="na">id=</span><span class="s">&quot;say_hello&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;source&gt;</span>say_hello<span class="nt">&lt;/source&gt;</span>
+                <span class="nt">&lt;target&gt;</span>Hello {name}!<span class="nt">&lt;/target&gt;</span>
+            <span class="nt">&lt;/trans-unit&gt;</span>
+        <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;/file&gt;</span>
+<span class="nt">&lt;/xliff&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// translations/messages+intl-icu.en.php</span>
+<span class="k">return</span> <span class="p">[</span>
+    <span class="s1">&#39;say_hello&#39;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Hello {name}!&quot;</span><span class="p">,</span>
+<span class="p">];</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">In the previous translation format, placeholders were often wrapped in <code class="docutils literal notranslate"><span class="pre">%</span></code>
+(e.g. <code class="docutils literal notranslate"><span class="pre">%name%</span></code>). This <code class="docutils literal notranslate"><span class="pre">%</span></code> character is no longer valid with the ICU
+MessageFormat syntax, so you must rename your parameters if you are upgrading
+from the previous format.</p>
+</div>
+<p>Everything within the curly braces (<code class="docutils literal notranslate"><span class="pre">{...}</span></code>) is processed by the formatter
+and replaced by its placeholder:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// prints &quot;Hello Fabien!&quot;</span>
+<span class="k">echo</span> <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">trans</span><span class="p">(</span><span class="s1">&#39;say_hello&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Fabien&#39;</span><span class="p">]);</span>
+
+<span class="c1">// prints &quot;Hello Symfony!&quot;</span>
+<span class="k">echo</span> <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">trans</span><span class="p">(</span><span class="s1">&#39;say_hello&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Symfony&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="selecting-different-messages-based-on-a-condition">
+<h2>Selecting Different Messages Based on a Condition<a class="headerlink" href="#selecting-different-messages-based-on-a-condition" title="Permalink to this headline">¶</a></h2>
+<p>The curly brace syntax allows to “modify” the output of the variable. One of
+these functions is the <code class="docutils literal notranslate"><span class="pre">select</span></code> function. It acts like PHP’s <a class="reference external" href="https://www.php.net/control-structures.switch">switch statement</a>
+and allows to use different strings based on the value of the variable. A
+typical usage of this is gender:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># translations/messages+intl-icu.en.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">invitation_title</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">&gt;-</span>
+    <span class="no">{organizer_gender, select,</span>
+        <span class="no">female {{organizer_name} has invited you for her party!}</span>
+        <span class="no">male   {{organizer_name} has invited you for his party!}</span>
+        <span class="no">other  {{organizer_name} have invited you for their party!}</span>
+    <span class="no">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- translations/messages+intl-icu.en.xlf --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;xliff</span> <span class="na">version=</span><span class="s">&quot;1.2&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;urn:oasis:names:tc:xliff:document:1.2&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">source-language=</span><span class="s">&quot;en&quot;</span> <span class="na">datatype=</span><span class="s">&quot;plaintext&quot;</span> <span class="na">original=</span><span class="s">&quot;file.ext&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;body&gt;</span>
+            <span class="nt">&lt;trans-unit</span> <span class="na">id=</span><span class="s">&quot;invitation_title&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;source&gt;</span>invitation_title<span class="nt">&lt;/source&gt;</span>
+                <span class="nt">&lt;target&gt;</span>{organizer_gender, select,
+                    female {{organizer_name} has invited you for her party!}
+                    male {{organizer_name} has invited you for his party!}
+                    other {{organizer_name} have invited you for their party!}
+                }<span class="nt">&lt;/target&gt;</span>
+            <span class="nt">&lt;/trans-unit&gt;</span>
+        <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;/file&gt;</span>
+<span class="nt">&lt;/xliff&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// translations/messages+intl-icu.en.php</span>
+<span class="k">return</span> <span class="p">[</span>
+    <span class="s1">&#39;invitation_title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;{organizer_gender, select,</span>
+<span class="s1">        female {{organizer_name} has invited you for her party!}</span>
+<span class="s1">        male   {{organizer_name} has invited you for his party!}</span>
+<span class="s1">        other  {{organizer_name} have invited you for their party!}</span>
+<span class="s1">    }&#39;</span><span class="p">,</span>
+<span class="p">];</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>This might look very complex. The basic syntax for all functions is
+<code class="docutils literal notranslate"><span class="pre">{variable_name,</span> <span class="pre">function_name,</span> <span class="pre">function_statement}</span></code> (where, as you see
+later, <code class="docutils literal notranslate"><span class="pre">function_statement</span></code> is optional for some functions). In this case,
+the function name is <code class="docutils literal notranslate"><span class="pre">select</span></code> and its statement contains the “cases” of this
+select. This function is applied over the <code class="docutils literal notranslate"><span class="pre">organizer_gender</span></code> variable:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// prints &quot;Ryan has invited you for his party!&quot;</span>
+<span class="k">echo</span> <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">trans</span><span class="p">(</span><span class="s1">&#39;invitation_title&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;organizer_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Ryan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;organizer_gender&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;male&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+
+<span class="c1">// prints &quot;John &amp; Jane have invited you for their party!&quot;</span>
+<span class="k">echo</span> <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">trans</span><span class="p">(</span><span class="s1">&#39;invitation_title&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;organizer_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;John &amp; Jane&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;organizer_gender&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;not_applicable&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">{...}</span></code> syntax alternates between “literal” and “code” mode. This allows
+you to use literal text in the select statements:</p>
+<ol class="arabic simple">
+<li>The first <code class="docutils literal notranslate"><span class="pre">{organizer_gender,</span> <span class="pre">select,</span> <span class="pre">...}</span></code> block starts the “code” mode,
+which means <code class="docutils literal notranslate"><span class="pre">organizer_gender</span></code> is processed as a variable.</li>
+<li>The inner <code class="docutils literal notranslate"><span class="pre">{...</span> <span class="pre">has</span> <span class="pre">invited</span> <span class="pre">you</span> <span class="pre">for</span> <span class="pre">her</span> <span class="pre">party!}</span></code> block brings you back in
+“literal” mode, meaning the text is not processed.</li>
+<li>Inside this block, <code class="docutils literal notranslate"><span class="pre">{organizer_name}</span></code> starts “code” mode again, allowing
+<code class="docutils literal notranslate"><span class="pre">organizer_name</span></code> to be processed as variable.</li>
+</ol>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">While it might seem more logical to only put <code class="docutils literal notranslate"><span class="pre">her</span></code>, <code class="docutils literal notranslate"><span class="pre">his</span></code> or <code class="docutils literal notranslate"><span class="pre">their</span></code>
+in the switch statement, it is better to use “complex arguments” at the
+outermost structure of the message. The strings are in this way better
+readable for translators and, as you can see in the <code class="docutils literal notranslate"><span class="pre">other</span></code> case, other
+parts of the sentence might be influenced by the variables.</p>
+</div>
+</div>
+<div class="section" id="pluralization">
+<span id="component-translation-pluralization"></span><h2>Pluralization<a class="headerlink" href="#pluralization" title="Permalink to this headline">¶</a></h2>
+<p>Another interesting function is <code class="docutils literal notranslate"><span class="pre">plural</span></code>. It allows you to
+handle pluralization in your messages (e.g. <code class="docutils literal notranslate"><span class="pre">There</span> <span class="pre">are</span> <span class="pre">3</span> <span class="pre">apples</span></code> vs
+<code class="docutils literal notranslate"><span class="pre">There</span> <span class="pre">is</span> <span class="pre">one</span> <span class="pre">apple</span></code>). The function looks very similar to the <code class="docutils literal notranslate"><span class="pre">select</span></code> function:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># translations/messages+intl-icu.en.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">num_of_apples</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">&gt;-</span>
+    <span class="no">{apples, plural,</span>
+        <span class="no">=0    {There are no apples}</span>
+        <span class="no">one   {There is one apple...}</span>
+        <span class="no">other {There are # apples!}</span>
+    <span class="no">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- translations/messages+intl-icu.en.xlf --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;xliff</span> <span class="na">version=</span><span class="s">&quot;1.2&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;urn:oasis:names:tc:xliff:document:1.2&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">source-language=</span><span class="s">&quot;en&quot;</span> <span class="na">datatype=</span><span class="s">&quot;plaintext&quot;</span> <span class="na">original=</span><span class="s">&quot;file.ext&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;body&gt;</span>
+            <span class="nt">&lt;trans-unit</span> <span class="na">id=</span><span class="s">&quot;num_of_apples&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;source&gt;</span>num_of_apples<span class="nt">&lt;/source&gt;</span>
+                <span class="nt">&lt;target&gt;</span>{apples, plural, =0 {There are no apples} one {There is one apple...} other {There are # apples!}}<span class="nt">&lt;/target&gt;</span>
+            <span class="nt">&lt;/trans-unit&gt;</span>
+        <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;/file&gt;</span>
+<span class="nt">&lt;/xliff&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// translations/messages+intl-icu.en.php</span>
+<span class="k">return</span> <span class="p">[</span>
+    <span class="s1">&#39;num_of_apples&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;{apples, plural,</span>
+<span class="s1">        =0    {There are no apples}</span>
+<span class="s1">        one   {There is one apple...}</span>
+<span class="s1">        other {There are # apples!}</span>
+<span class="s1">    }&#39;</span><span class="p">,</span>
+<span class="p">];</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Pluralization rules are actually quite complex and differ for each language.
+For instance, Russian uses different plural forms for numbers ending with 1;
+numbers ending with 2, 3 or 4; numbers ending with 5, 6, 7, 8 or 9; and even
+some exceptions of this!</p>
+<p>In order to properly translate this, the possible cases in the <code class="docutils literal notranslate"><span class="pre">plural</span></code>
+function are also different for each language. For instance, Russian has
+<code class="docutils literal notranslate"><span class="pre">one</span></code>, <code class="docutils literal notranslate"><span class="pre">few</span></code>, <code class="docutils literal notranslate"><span class="pre">many</span></code> and <code class="docutils literal notranslate"><span class="pre">other</span></code>, while English has only <code class="docutils literal notranslate"><span class="pre">one</span></code> and
+<code class="docutils literal notranslate"><span class="pre">other</span></code>. The full list of possible cases can be found in Unicode’s
+<a class="reference external" href="http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html">Language Plural Rules</a> document. By prefixing with <code class="docutils literal notranslate"><span class="pre">=</span></code>, you can match exact
+values (like <code class="docutils literal notranslate"><span class="pre">0</span></code> in the above example).</p>
+<p>Usage of this string is the same as with variables and select:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// prints &quot;There is one apple...&quot;</span>
+<span class="k">echo</span> <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">trans</span><span class="p">(</span><span class="s1">&#39;num_of_apples&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;apples&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">]);</span>
+
+<span class="c1">// prints &quot;There are 23 apples!&quot;</span>
+<span class="k">echo</span> <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">trans</span><span class="p">(</span><span class="s1">&#39;num_of_apples&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;apples&#39;</span> <span class="o">=&gt;</span> <span class="mi">23</span><span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can also set an <code class="docutils literal notranslate"><span class="pre">offset</span></code> variable to determine whether the
+pluralization should be offset (e.g. in sentences like <code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">and</span> <span class="pre">#</span> <span class="pre">other</span> <span class="pre">people</span></code>
+/ <code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">and</span> <span class="pre">#</span> <span class="pre">other</span> <span class="pre">person</span></code>).</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>When combining the <code class="docutils literal notranslate"><span class="pre">select</span></code> and <code class="docutils literal notranslate"><span class="pre">plural</span></code> functions, try to still have
+<code class="docutils literal notranslate"><span class="pre">select</span></code> as outermost function:</p>
+<div class="last highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span>{gender_of_host, select,
+    female {
+        {num_guests, plural, offset:1
+        =0    {{host} does not give a party.}
+        =1    {{host} invites {guest} to her party.}
+        =2    {{host} invites {guest} and one other person to her party.}
+        other {{host} invites {guest} and # other people to her party.}}
+    }
+    male {
+        {num_guests, plural, offset:1
+        =0    {{host} does not give a party.}
+        =1    {{host} invites {guest} to his party.}
+        =2    {{host} invites {guest} and one other person to his party.}
+        other {{host} invites {guest} and # other people to his party.}}
+    }
+    other {
+        {num_guests, plural, offset:1
+        =0    {{host} does not give a party.}
+        =1    {{host} invites {guest} to their party.}
+        =2    {{host} invites {guest} and one other person to their party.}
+        other {{host} invites {guest} and # other people to their party.}}
+    }
+}
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="sidebar">
+<p class="first sidebar-title">Using Ranges in Messages</p>
+<p>The pluralization in the legacy Symfony syntax could be used with custom
+ranges (e.g. have a different messages for 0-12, 12-40 and 40+). The ICU
+message format does not have this feature. Instead, this logic should be
+moved to PHP code:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// Instead of</span>
+<span class="nv">$message</span> <span class="o">=</span> <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">trans</span><span class="p">(</span><span class="s1">&#39;balance_message&#39;</span><span class="p">,</span> <span class="nv">$balance</span><span class="p">);</span>
+<span class="c1">// with a message like:</span>
+<span class="c1">// ]-Inf,0]Oops! I&#39;m down|]0,1000]I still have money|]1000,Inf]I have lots of money</span>
+
+<span class="c1">// use three different messages for each range:</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$balance</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$message</span> <span class="o">=</span> <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">trans</span><span class="p">(</span><span class="s1">&#39;no_money_message&#39;</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nv">$balance</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$message</span> <span class="o">=</span> <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">trans</span><span class="p">(</span><span class="s1">&#39;some_money_message&#39;</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nv">$message</span> <span class="o">=</span> <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">trans</span><span class="p">(</span><span class="s1">&#39;lots_of_money_message&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="additional-placeholder-functions">
+<h2>Additional Placeholder Functions<a class="headerlink" href="#additional-placeholder-functions" title="Permalink to this headline">¶</a></h2>
+<p>Besides these, the ICU MessageFormat comes with a couple other interesting functions.</p>
+<div class="section" id="ordinal">
+<h3>Ordinal<a class="headerlink" href="#ordinal" title="Permalink to this headline">¶</a></h3>
+<p>Similar to <code class="docutils literal notranslate"><span class="pre">plural</span></code>, <code class="docutils literal notranslate"><span class="pre">selectordinal</span></code> allows you to use numbers as ordinal scale:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># translations/messages+intl-icu.en.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">finish_place</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">&gt;-</span>
+    <span class="no">You finished {place, selectordinal,</span>
+        <span class="no">one   {#st}</span>
+        <span class="no">two   {#nd}</span>
+        <span class="no">few   {#rd}</span>
+        <span class="no">other {#th}</span>
+    <span class="no">}!</span>
+
+<span class="c1"># when only formatting the number as ordinal (like above), you can also</span>
+<span class="c1"># use the `ordinal` function:</span>
+<span class="l l-Scalar l-Scalar-Plain">finish_place</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">You finished {place, ordinal}!</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- translations/messages+intl-icu.en.xlf --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;xliff</span> <span class="na">version=</span><span class="s">&quot;1.2&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;urn:oasis:names:tc:xliff:document:1.2&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">source-language=</span><span class="s">&quot;en&quot;</span> <span class="na">datatype=</span><span class="s">&quot;plaintext&quot;</span> <span class="na">original=</span><span class="s">&quot;file.ext&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;body&gt;</span>
+            <span class="nt">&lt;trans-unit</span> <span class="na">id=</span><span class="s">&quot;finish_place&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;source&gt;</span>finish_place<span class="nt">&lt;/source&gt;</span>
+                <span class="nt">&lt;target&gt;</span>You finished {place, selectordinal, one {#st} two {#nd} few {#rd} other {#th}}!<span class="nt">&lt;/target&gt;</span>
+            <span class="nt">&lt;/trans-unit&gt;</span>
+
+            <span class="c">&lt;!-- when only formatting the number as ordinal (like</span>
+<span class="c">                 above), you can also use the `ordinal` function: --&gt;</span>
+            <span class="nt">&lt;trans-unit</span> <span class="na">id=</span><span class="s">&quot;finish_place&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;source&gt;</span>finish_place<span class="nt">&lt;/source&gt;</span>
+                <span class="nt">&lt;target&gt;</span>You finished {place, ordinal}!<span class="nt">&lt;/target&gt;</span>
+            <span class="nt">&lt;/trans-unit&gt;</span>
+        <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;/file&gt;</span>
+<span class="nt">&lt;/xliff&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// translations/messages+intl-icu.en.php</span>
+<span class="k">return</span> <span class="p">[</span>
+    <span class="s1">&#39;finish_place&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;You finished {place, selectordinal,</span>
+<span class="s1">        one {#st}</span>
+<span class="s1">        two {#nd}</span>
+<span class="s1">        few {#rd}</span>
+<span class="s1">        other {#th}</span>
+<span class="s1">    }!&#39;</span><span class="p">,</span>
+
+    <span class="c1">// when only formatting the number as ordinal (like above), you can</span>
+    <span class="c1">// also use the `ordinal` function:</span>
+    <span class="s1">&#39;finish_place&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;You finished {place, ordinal}!&#39;</span><span class="p">,</span>
+<span class="p">];</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// prints &quot;You finished 1st!&quot;</span>
+<span class="k">echo</span> <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">trans</span><span class="p">(</span><span class="s1">&#39;finish_place&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;place&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">]);</span>
+
+<span class="c1">// prints &quot;You finished 9th!&quot;</span>
+<span class="k">echo</span> <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">trans</span><span class="p">(</span><span class="s1">&#39;finish_place&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;place&#39;</span> <span class="o">=&gt;</span> <span class="mi">9</span><span class="p">]);</span>
+
+<span class="c1">// prints &quot;You finished 23rd!&quot;</span>
+<span class="k">echo</span> <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">trans</span><span class="p">(</span><span class="s1">&#39;finish_place&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;place&#39;</span> <span class="o">=&gt;</span> <span class="mi">23</span><span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+<p>The possible cases for this are also shown in Unicode’s <a class="reference external" href="http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html">Language Plural Rules</a> document.</p>
+</div>
+<div class="section" id="date-and-time">
+<h3>Date and Time<a class="headerlink" href="#date-and-time" title="Permalink to this headline">¶</a></h3>
+<p>The date and time function allows you to format dates in the target locale
+using the <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.intldateformatter.php" title="IntlDateFormatter"><span class="pre">IntlDateFormatter</span></a></code>:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># translations/messages+intl-icu.en.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">published_at</span><span class="p p-Indicator">:</span> <span class="s">&#39;Published</span><span class="nv"> </span><span class="s">at</span><span class="nv"> </span><span class="s">{publication_date,</span><span class="nv"> </span><span class="s">date}</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">{publication_date,</span><span class="nv"> </span><span class="s">time,</span><span class="nv"> </span><span class="s">short}&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- translations/messages+intl-icu.en.xlf --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;xliff</span> <span class="na">version=</span><span class="s">&quot;1.2&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;urn:oasis:names:tc:xliff:document:1.2&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">source-language=</span><span class="s">&quot;en&quot;</span> <span class="na">datatype=</span><span class="s">&quot;plaintext&quot;</span> <span class="na">original=</span><span class="s">&quot;file.ext&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;body&gt;</span>
+            <span class="nt">&lt;trans-unit</span> <span class="na">id=</span><span class="s">&quot;published_at&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;source&gt;</span>published_at<span class="nt">&lt;/source&gt;</span>
+                <span class="nt">&lt;target&gt;</span>Published at {publication_date, date} - {publication_date, time, short}<span class="nt">&lt;/target&gt;</span>
+            <span class="nt">&lt;/trans-unit&gt;</span>
+        <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;/file&gt;</span>
+<span class="nt">&lt;/xliff&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// translations/messages+intl-icu.en.php</span>
+<span class="k">return</span> <span class="p">[</span>
+    <span class="s1">&#39;published_at&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Published at {publication_date, date} - {publication_date, time, short}&#39;</span><span class="p">,</span>
+<span class="p">];</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>The “function statement” for the <code class="docutils literal notranslate"><span class="pre">time</span></code> and <code class="docutils literal notranslate"><span class="pre">date</span></code> functions can be one of
+<code class="docutils literal notranslate"><span class="pre">short</span></code>, <code class="docutils literal notranslate"><span class="pre">medium</span></code>, <code class="docutils literal notranslate"><span class="pre">long</span></code> or <code class="docutils literal notranslate"><span class="pre">full</span></code>, which correspond to the
+<a class="reference external" href="https://www.php.net/manual/en/class.intldateformatter.php">constants defined by the IntlDateFormatter class</a>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// prints &quot;Published at Jan 25, 2019 - 11:30 AM&quot;</span>
+<span class="k">echo</span> <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">trans</span><span class="p">(</span><span class="s1">&#39;published_at&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;publication_date&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">(</span><span class="s1">&#39;2019-01-25 11:30:00&#39;</span><span class="p">)]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="numbers">
+<h3>Numbers<a class="headerlink" href="#numbers" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">number</span></code> formatter allows you to format numbers using Intl’s <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.numberformatter.php" title="NumberFormatter"><span class="pre">NumberFormatter</span></a></code>:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># translations/messages+intl-icu.en.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">progress</span><span class="p p-Indicator">:</span> <span class="s">&#39;{progress,</span><span class="nv"> </span><span class="s">number,</span><span class="nv"> </span><span class="s">percent}</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">work</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">done&#39;</span>
+<span class="l l-Scalar l-Scalar-Plain">value_of_object</span><span class="p p-Indicator">:</span> <span class="s">&#39;This</span><span class="nv"> </span><span class="s">artifact</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">worth</span><span class="nv"> </span><span class="s">{value,</span><span class="nv"> </span><span class="s">number,</span><span class="nv"> </span><span class="s">currency}&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- translations/messages+intl-icu.en.xlf --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;xliff</span> <span class="na">version=</span><span class="s">&quot;1.2&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;urn:oasis:names:tc:xliff:document:1.2&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">source-language=</span><span class="s">&quot;en&quot;</span> <span class="na">datatype=</span><span class="s">&quot;plaintext&quot;</span> <span class="na">original=</span><span class="s">&quot;file.ext&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;body&gt;</span>
+            <span class="nt">&lt;trans-unit</span> <span class="na">id=</span><span class="s">&quot;progress&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;source&gt;</span>progress<span class="nt">&lt;/source&gt;</span>
+                <span class="nt">&lt;target&gt;</span>{progress, number, percent} of the work is done<span class="nt">&lt;/target&gt;</span>
+            <span class="nt">&lt;/trans-unit&gt;</span>
+
+            <span class="nt">&lt;trans-unit</span> <span class="na">id=</span><span class="s">&quot;value_of_object&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;source&gt;</span>value_of_object<span class="nt">&lt;/source&gt;</span>
+                <span class="nt">&lt;target&gt;</span>This artifact is worth {value, number, currency}<span class="nt">&lt;/target&gt;</span>
+            <span class="nt">&lt;/trans-unit&gt;</span>
+        <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;/file&gt;</span>
+<span class="nt">&lt;/xliff&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// translations/messages+intl-icu.en.php</span>
+<span class="k">return</span> <span class="p">[</span>
+    <span class="s1">&#39;progress&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;{progress, number, percent} of the work is done&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;value_of_object&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;This artifact is worth {value, number, currency}&#39;</span><span class="p">,</span>
+<span class="p">];</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// prints &quot;82% of the work is done&quot;</span>
+<span class="k">echo</span> <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">trans</span><span class="p">(</span><span class="s1">&#39;progress&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;progress&#39;</span> <span class="o">=&gt;</span> <span class="mf">0.82</span><span class="p">]);</span>
+<span class="c1">// prints &quot;100% of the work is done&quot;</span>
+<span class="k">echo</span> <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">trans</span><span class="p">(</span><span class="s1">&#39;progress&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;progress&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">]);</span>
+
+<span class="c1">// prints &quot;This artifact is worth $9,988,776.65&quot;</span>
+<span class="c1">// if we would translate this to i.e. French, the value would be shown as</span>
+<span class="c1">// &quot;9 988 776,65 €&quot;</span>
+<span class="k">echo</span> <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">trans</span><span class="p">(</span><span class="s1">&#39;value_of_object&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="mf">9988776.65</span><span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

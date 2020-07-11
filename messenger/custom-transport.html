@@ -1,0 +1,544 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Create Your own Messenger Transport &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Getting Results from your Handler" href="handler_results.html" />
+    <link rel="prev" title="Messenger: Sync &amp; Queued Message Handling" href="../messenger.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#creating-a-message-handler">Creating a Message &amp; Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#dispatching-the-message">Dispatching the Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#transports-async-queued-messages">Transports: Async/Queued Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#consuming-messages-running-the-worker">Consuming Messages (Running the Worker)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#retries-failures">Retries &amp; Failures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#transport-configuration">Transport Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#customizing-handlers">Customizing Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#extending-messenger">Extending Messenger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../messenger.html#multiple-buses-command-event-buses">Multiple Buses, Command &amp; Event Buses</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../messenger.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to Create Your own Messenger Transport</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-your-transport-factory">Create your Transport Factory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-your-factory">Register your Factory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#use-your-transport">Use your Transport</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="handler_results.html">Getting Results from your Handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="message-recorder.html">Transactional Messages: Handle New Messages After Handling is Done</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multiple_buses.html">Multiple Buses</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a> &raquo;</li>
+        
+      <li>How to Create Your own Messenger Transport</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/messenger/custom-transport.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-create-your-own-messenger-transport">
+<h1>How to Create Your own Messenger Transport<a class="headerlink" href="#how-to-create-your-own-messenger-transport" title="Permalink to this headline">¶</a></h1>
+<p>Once you have written your transport’s sender and receiver, you can register your
+transport factory to be able to use it via a DSN in the Symfony application.</p>
+<div class="section" id="create-your-transport-factory">
+<h2>Create your Transport Factory<a class="headerlink" href="#create-your-transport-factory" title="Permalink to this headline">¶</a></h2>
+<p>You need to give FrameworkBundle the opportunity to create your transport from a
+DSN. You will need a transport factory:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Transport\Sender\SenderInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Transport\Serialization\SerializerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Transport\TransportFactoryInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Transport\TransportInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">YourTransportFactory</span> <span class="k">implements</span> <span class="nx">TransportFactoryInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">createTransport</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$dsn</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">,</span> <span class="nx">SerializerInterface</span> <span class="nv">$serializer</span><span class="p">)</span><span class="o">:</span> <span class="nx">TransportInterface</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">YourTransport</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">supports</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$dsn</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span><span class="o">:</span> <span class="nx">bool</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span> <span class="o">===</span> <span class="nb">strpos</span><span class="p">(</span><span class="nv">$dsn</span><span class="p">,</span> <span class="s1">&#39;my-transport://&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The transport object needs to implement the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Transport/TransportInterface.php" title="Symfony\Component\Messenger\Transport\TransportInterface"><span class="pre">TransportInterface</span></a></code>
+(which combines the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Transport/Sender/SenderInterface.php" title="Symfony\Component\Messenger\Transport\Sender\SenderInterface"><span class="pre">SenderInterface</span></a></code>
+and <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Transport/Receiver/ReceiverInterface.php" title="Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface"><span class="pre">ReceiverInterface</span></a></code>).
+Here is a simplified example of a database transport:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Ramsey\Uuid\Uuid</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Envelope</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Stamp\TransportMessageIdStamp</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Transport\Serialization\PhpSerializer</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Transport\Serialization\SerializerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\Transport\TransportInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">YourTransport</span> <span class="k">implements</span> <span class="nx">TransportInterface</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$db</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$serializer</span><span class="p">;</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @param FakeDatabase $db is used for demo purposes. It is not a real class.</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">FakeDatabase</span> <span class="nv">$db</span><span class="p">,</span> <span class="nx">SerializerInterface</span> <span class="nv">$serializer</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span> <span class="o">=</span> <span class="nv">$db</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">serializer</span> <span class="o">=</span> <span class="nv">$serializer</span> <span class="o">??</span> <span class="k">new</span> <span class="nx">PhpSerializer</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">get</span><span class="p">()</span><span class="o">:</span> <span class="nx">iterable</span>
+    <span class="p">{</span>
+        <span class="c1">// Get a message from &quot;my_queue&quot;</span>
+        <span class="nv">$row</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">createQuery</span><span class="p">(</span>
+                <span class="s1">&#39;SELECT *</span>
+<span class="s1">                FROM my_queue</span>
+<span class="s1">                WHERE (delivered_at IS NULL OR delivered_at &lt; :redeliver_timeout)</span>
+<span class="s1">                AND handled = FALSE&#39;</span>
+            <span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;redeliver_timeout&#39;</span><span class="p">,</span> <span class="k">new</span> <span class="nx">DateTimeImmutable</span><span class="p">(</span><span class="s1">&#39;-5minutes&#39;</span><span class="p">))</span>
+            <span class="o">-&gt;</span><span class="na">getOneOrNullResult</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="k">null</span> <span class="o">===</span> <span class="nv">$row</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">[];</span>
+        <span class="p">}</span>
+
+        <span class="nv">$envelope</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">serializer</span><span class="o">-&gt;</span><span class="na">decode</span><span class="p">([</span>
+            <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;envelope&#39;</span><span class="p">],</span>
+        <span class="p">]);</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="nv">$envelope</span><span class="o">-&gt;</span><span class="na">with</span><span class="p">(</span><span class="k">new</span> <span class="nx">TransportMessageIdStamp</span><span class="p">(</span><span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]))];</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">ack</span><span class="p">(</span><span class="nx">Envelope</span> <span class="nv">$envelope</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="nv">$stamp</span> <span class="o">=</span> <span class="nv">$envelope</span><span class="o">-&gt;</span><span class="na">last</span><span class="p">(</span><span class="nx">TransportMessageIdStamp</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$stamp</span> <span class="nx">instanceof</span> <span class="nx">TransportMessageIdStamp</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">\LogicException</span><span class="p">(</span><span class="s1">&#39;No TransportMessageIdStamp found on the Envelope.&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Mark the message as &quot;handled&quot;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">createQuery</span><span class="p">(</span><span class="s1">&#39;UPDATE my_queue SET handled = TRUE WHERE id = :id&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nv">$stamp</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">())</span>
+            <span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">reject</span><span class="p">(</span><span class="nx">Envelope</span> <span class="nv">$envelope</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="nv">$stamp</span> <span class="o">=</span> <span class="nv">$envelope</span><span class="o">-&gt;</span><span class="na">last</span><span class="p">(</span><span class="nx">TransportMessageIdStamp</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$stamp</span> <span class="nx">instanceof</span> <span class="nx">TransportMessageIdStamp</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">\LogicException</span><span class="p">(</span><span class="s1">&#39;No TransportMessageIdStamp found on the Envelope.&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Delete the message from the &quot;my_queue&quot; table</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">createQuery</span><span class="p">(</span><span class="s1">&#39;DELETE FROM my_queue WHERE id = :id&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nv">$stamp</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">())</span>
+            <span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">send</span><span class="p">(</span><span class="nx">Envelope</span> <span class="nv">$envelope</span><span class="p">)</span><span class="o">:</span> <span class="nx">Envelope</span>
+    <span class="p">{</span>
+        <span class="nv">$encodedMessage</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">serializer</span><span class="o">-&gt;</span><span class="na">encode</span><span class="p">(</span><span class="nv">$envelope</span><span class="p">);</span>
+        <span class="nv">$uuid</span> <span class="o">=</span> <span class="nx">Uuid</span><span class="o">::</span><span class="na">uuid4</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">toString</span><span class="p">();</span>
+
+        <span class="c1">// Add a message to the &quot;my_queue&quot; table</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">createQuery</span><span class="p">(</span>
+                <span class="s1">&#39;INSERT INTO my_queue (id, envelope, delivered_at, handled)</span>
+<span class="s1">                VALUES (:id, :envelope, NULL, FALSE)&#39;</span>
+            <span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">setParameters</span><span class="p">([</span>
+                <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$uuid</span><span class="p">,</span>
+                <span class="s1">&#39;envelope&#39;</span> <span class="o">=&gt;</span> <span class="nv">$encodedMessage</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">],</span>
+            <span class="p">])</span>
+            <span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="nv">$envelope</span><span class="o">-&gt;</span><span class="na">with</span><span class="p">(</span><span class="k">new</span> <span class="nx">TransportMessageIdStamp</span><span class="p">(</span><span class="nv">$uuid</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The implementation above is not runnable code but illustrates how a
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Transport/TransportInterface.php" title="Symfony\Component\Messenger\Transport\TransportInterface"><span class="pre">TransportInterface</span></a></code> could
+be implemented. For real implementations see <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Transport/InMemoryTransport.php" title="Symfony\Component\Messenger\Transport\InMemoryTransport"><span class="pre">InMemoryTransport</span></a></code>
+and <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Messenger/Transport/Doctrine/DoctrineReceiver.php" title="Symfony\Component\Messenger\Transport\Doctrine\DoctrineReceiver"><span class="pre">DoctrineReceiver</span></a></code>.</p>
+</div>
+<div class="section" id="register-your-factory">
+<h2>Register your Factory<a class="headerlink" href="#register-your-factory" title="Permalink to this headline">¶</a></h2>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">Your\Transport\YourTransportFactory</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="nv">messenger.transport_factory</span><span class="p p-Indicator">]</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;Your\Transport\YourTransportFactory&quot;</span><span class="nt">&gt;</span>
+           <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;messenger.transport_factory&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">Your\Transport\YourTransportFactory</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="nx">YourTransportFactory</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setTags</span><span class="p">([</span><span class="s1">&#39;messenger.transport_factory&#39;</span><span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="use-your-transport">
+<h2>Use your Transport<a class="headerlink" href="#use-your-transport" title="Permalink to this headline">¶</a></h2>
+<p>Within the <code class="docutils literal notranslate"><span class="pre">framework.messenger.transports.*</span></code> configuration, create your
+named transport using your own DSN:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/messenger.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">messenger</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">transports</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">yours</span><span class="p p-Indicator">:</span> <span class="s">&#39;my-transport://...&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/messenger.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:messenger&gt;</span>
+            <span class="nt">&lt;framework:transport</span> <span class="na">name=</span><span class="s">&quot;yours&quot;</span> <span class="na">dsn=</span><span class="s">&quot;my-transport://...&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/framework:messenger&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/messenger.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;messenger&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;transports&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;yours&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;my-transport://...&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>In addition of being able to route your messages to the <code class="docutils literal notranslate"><span class="pre">yours</span></code> sender, this
+will give you access to the following services:</p>
+<ol class="arabic simple">
+<li><code class="docutils literal notranslate"><span class="pre">messenger.sender.yours</span></code>: the sender;</li>
+<li><code class="docutils literal notranslate"><span class="pre">messenger.receiver.yours</span></code>: the receiver.</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,1499 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Testing &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to Customize the Bootstrap Process before Running Tests" href="testing/bootstrap.html" />
+    <link rel="prev" title="How to Work with Service Tags" href="service_container/tags.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-phpunit-testing-framework">The PHPUnit Testing Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unit-tests">Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-tests">Functional Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#your-first-functional-test">Your First Functional Test</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-against-different-sets-of-data">Testing against Different Sets of Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-the-test-client">Working with the Test Client</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ajax-requests">AJAX Requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#browsing">Browsing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-internal-objects">Accessing Internal Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-the-container">Accessing the Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logging-in-users-authentication">Logging in Users (Authentication)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-the-profiler-data">Accessing the Profiler Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#redirecting">Redirecting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reporting-exceptions">Reporting Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#the-crawler">The Crawler</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#traversing">Traversing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extracting-information">Extracting Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#links">Links</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#forms">Forms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#adding-and-removing-forms-to-a-collection">Adding and Removing Forms to a Collection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-configuration">Testing Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#customizing-database-url-environment-variables">Customizing Database URL / Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sending-custom-headers">Sending Custom Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#phpunit-configuration">PHPUnit Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#learn-more">Learn more</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/bootstrap.html">How to Customize the Bootstrap Process before Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/database.html">How to Test Code that Interacts with the Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/functional_tests_assertions.html">Functional Test specific Assertions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/http_authentication.html">How to Simulate HTTP Authentication in a Functional Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/insulating_clients.html">How to Test the Interaction of several Clients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/profiling.html">How to Use the Profiler in a Functional Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="components/dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="components/css_selector.html">The CssSelector Component</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Testing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/testing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="testing">
+<span id="index-0"></span><h1>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h1>
+<p>Whenever you write a new line of code, you also potentially add new bugs.
+To build better and more reliable applications, you should test your code
+using both functional and unit tests.</p>
+<div class="section" id="the-phpunit-testing-framework">
+<h2>The PHPUnit Testing Framework<a class="headerlink" href="#the-phpunit-testing-framework" title="Permalink to this headline">¶</a></h2>
+<p>Symfony integrates with an independent library called <a class="reference external" href="https://phpunit.de/">PHPUnit</a> to give you a
+rich testing framework. This article won’t cover PHPUnit itself, which has its
+own excellent <a class="reference external" href="https://phpunit.readthedocs.io/">documentation</a>.</p>
+<p>Before creating your first test, install the <a class="reference external" href="https://symfony.com/components/PHPUnit%20Bridge">PHPUnit Bridge component</a>, which
+wraps the original PHPUnit binary to provide additional features:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require --dev symfony/phpunit-bridge
+</pre></div>
+</td></tr></table></div>
+<p>After the library downloads, try executing PHPUnit by running (the first time
+you run this, it will download PHPUnit itself and make its classes available in
+your app):</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> ./bin/phpunit
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">./bin/phpunit</span></code> command is created by <a class="reference internal" href="setup.html#symfony-flex"><span class="std std-ref">Symfony Flex</span></a>
+when installing the <code class="docutils literal notranslate"><span class="pre">phpunit-bridge</span></code> package. If the command is missing, you
+can remove the package (<code class="docutils literal notranslate"><span class="pre">composer</span> <span class="pre">remove</span> <span class="pre">symfony/phpunit-bridge</span></code>) and install
+it again. Another solution is to remove the project’s <code class="docutils literal notranslate"><span class="pre">symfony.lock</span></code> file and
+run <code class="docutils literal notranslate"><span class="pre">composer</span> <span class="pre">install</span></code> to force the execution of all Symfony Flex recipes.</p>
+</div>
+<p>Each test - whether it’s a unit test or a functional test - is a PHP class
+that should live in the <code class="docutils literal notranslate"><span class="pre">tests/</span></code> directory of your application. If you follow
+this rule, then you can run all of your application’s tests with the same
+command as before.</p>
+<p>PHPUnit is configured by the <code class="docutils literal notranslate"><span class="pre">phpunit.xml.dist</span></code> file in the root of your
+Symfony application.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Code coverage can be generated with the <code class="docutils literal notranslate"><span class="pre">--coverage-*</span></code> options, see the
+help information that is shown when using <code class="docutils literal notranslate"><span class="pre">--help</span></code> for more information.</p>
+</div>
+</div>
+<div class="section" id="unit-tests">
+<span id="index-1"></span><h2>Unit Tests<a class="headerlink" href="#unit-tests" title="Permalink to this headline">¶</a></h2>
+<p>A unit test is a test against a single PHP class, also called a <em>unit</em>. If you
+want to test the overall behavior of your application, see the section about
+<a class="reference internal" href="#functional-tests"><span class="std std-ref">Functional Tests</span></a>.</p>
+<p>Writing Symfony unit tests is no different from writing standard PHPUnit
+unit tests. Suppose, for example, that you have an <em>incredibly</em> simple class
+called <code class="docutils literal notranslate"><span class="pre">Calculator</span></code> in the <code class="docutils literal notranslate"><span class="pre">src/Util/</span></code> directory of the app:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Util/Calculator.php</span>
+<span class="k">namespace</span> <span class="nx">App\Util</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Calculator</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nv">$b</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$a</span> <span class="o">+</span> <span class="nv">$b</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To test this, create a <code class="docutils literal notranslate"><span class="pre">CalculatorTest</span></code> file in the <code class="docutils literal notranslate"><span class="pre">tests/Util</span></code> directory
+of your application:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// tests/Util/CalculatorTest.php</span>
+<span class="k">namespace</span> <span class="nx">App\Tests\Util</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Util\Calculator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">CalculatorTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testAdd</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$calculator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Calculator</span><span class="p">();</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$calculator</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">12</span><span class="p">);</span>
+
+        <span class="c1">// assert that your calculator added the numbers correctly!</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="nv">$result</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By convention, the <code class="docutils literal notranslate"><span class="pre">tests/</span></code> directory should replicate the directory
+of your application for unit tests. So, if you’re testing a class in the
+<code class="docutils literal notranslate"><span class="pre">src/Util/</span></code> directory, put the test in the <code class="docutils literal notranslate"><span class="pre">tests/Util/</span></code>
+directory.</p>
+</div>
+<p>Just like in your real application - autoloading is automatically enabled
+via the <code class="docutils literal notranslate"><span class="pre">vendor/autoload.php</span></code> file (as configured by default in the
+<code class="docutils literal notranslate"><span class="pre">phpunit.xml.dist</span></code> file).</p>
+<p>You can also limit a test run to a directory or a specific test file:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># run all tests of the application</span>
+<span class="gp">$</span> php bin/phpunit
+
+<span class="c1"># run all tests in the Util/ directory</span>
+<span class="gp">$</span> php bin/phpunit tests/Util
+
+<span class="c1"># run tests for the Calculator class</span>
+<span class="gp">$</span> php bin/phpunit tests/Util/CalculatorTest.php
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="functional-tests">
+<span id="index-2"></span><span id="id1"></span><h2>Functional Tests<a class="headerlink" href="#functional-tests" title="Permalink to this headline">¶</a></h2>
+<p>Functional tests check the integration of the different layers of an
+application (from the routing to the views). They are no different from unit
+tests as far as PHPUnit is concerned, but they have a very specific workflow:</p>
+<ul class="simple">
+<li>Make a request;</li>
+<li>Click on a link or submit a form;</li>
+<li>Test the response;</li>
+<li>Rinse and repeat.</li>
+</ul>
+<p>Before creating your first test, install these packages that provide some of the
+utilities used in the functional tests:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require --dev symfony/browser-kit symfony/css-selector
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="your-first-functional-test">
+<h3>Your First Functional Test<a class="headerlink" href="#your-first-functional-test" title="Permalink to this headline">¶</a></h3>
+<p>Functional tests are PHP files that typically live in the <code class="docutils literal notranslate"><span class="pre">tests/Controller</span></code>
+directory of your application. If you want to test the pages handled by your
+<code class="docutils literal notranslate"><span class="pre">PostController</span></code> class, start by creating a new <code class="docutils literal notranslate"><span class="pre">PostControllerTest.php</span></code>
+file that extends a special <code class="docutils literal notranslate"><span class="pre">WebTestCase</span></code> class.</p>
+<p>As an example, a test could look like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// tests/Controller/PostControllerTest.php</span>
+<span class="k">namespace</span> <span class="nx">App\Tests\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Test\WebTestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">PostControllerTest</span> <span class="k">extends</span> <span class="nx">WebTestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testShowPost</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$client</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="na">createClient</span><span class="p">();</span>
+
+        <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;/post/hello-world&#39;</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>To run your functional tests, the <code class="docutils literal notranslate"><span class="pre">WebTestCase</span></code> class needs to know which
+is the application kernel to bootstrap it. The kernel class is usually
+defined in the <code class="docutils literal notranslate"><span class="pre">KERNEL_CLASS</span></code> environment variable (included in the
+default <code class="docutils literal notranslate"><span class="pre">.env.test</span></code> file provided by Symfony):</p>
+<p class="last">If your use case is more complex, you can also override the
+<code class="docutils literal notranslate"><span class="pre">createKernel()</span></code> or <code class="docutils literal notranslate"><span class="pre">getKernelClass()</span></code> methods of your functional test,
+which take precedence over the <code class="docutils literal notranslate"><span class="pre">KERNEL_CLASS</span></code> env var.</p>
+</div>
+<p>In the above example, you validated that the HTTP response was successful. The
+next step is to validate that the page actually contains the expected content.
+The <code class="docutils literal notranslate"><span class="pre">createClient()</span></code> method returns a client, which is like a browser that
+you’ll use to crawl your site:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;/post/hello-world&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">request()</span></code> method (read
+<a class="reference internal" href="#testing-request-method-sidebar"><span class="std std-ref">more about the request method</span></a>)
+returns a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Crawler.php" title="Symfony\Component\DomCrawler\Crawler"><span class="pre">Crawler</span></a></code> object which can
+be used to select elements in the response, click on links and submit forms.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">Crawler</span></code> only works when the response is an XML or an HTML document.
+To get the raw content response, call <code class="docutils literal notranslate"><span class="pre">$client-&gt;getResponse()-&gt;getContent()</span></code>.</p>
+</div>
+<p>The crawler integrates with the <code class="docutils literal notranslate"><span class="pre">symfony/css-selector</span></code> component to give you the
+power of CSS selectors to find content in a page. To install the CSS selector
+component, run:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require --dev symfony/css-selector
+</pre></div>
+</td></tr></table></div>
+<p>Now you can use CSS selectors with the crawler. To assert that the phrase
+“Hello World” is present in the page’s main title, you can use this assertion:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSelectorTextContains</span><span class="p">(</span><span class="s1">&#39;html h1.title&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello World&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This assertion checks if the first element matching the CSS selector contains
+the given text. This assert calls <code class="docutils literal notranslate"><span class="pre">$crawler-&gt;filter('html</span> <span class="pre">h1.title')</span></code>
+internally, which allows you to use CSS selectors to filter any HTML element in
+the page and check for its existence, attributes, text, etc.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">assertSelectorTextContains</span></code> method is not a native PHPUnit assertion and is
+available thanks to the <code class="docutils literal notranslate"><span class="pre">WebTestCase</span></code> class.</p>
+<p>The crawler can also be used to interact with the page. Click on a link by first
+selecting it with the crawler using either an XPath expression or a CSS selector,
+then use the client to click on it:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$link</span> <span class="o">=</span> <span class="nv">$crawler</span>
+    <span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;a:contains(&quot;Greet&quot;)&#39;</span><span class="p">)</span> <span class="c1">// find all links with the text &quot;Greet&quot;</span>
+    <span class="o">-&gt;</span><span class="na">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// select the second link in the list</span>
+    <span class="o">-&gt;</span><span class="na">link</span><span class="p">()</span>
+<span class="p">;</span>
+
+<span class="c1">// and click it</span>
+<span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">click</span><span class="p">(</span><span class="nv">$link</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Submitting a form is very similar: select a form button, optionally override
+some form values and submit the corresponding form:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$form</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">selectButton</span><span class="p">(</span><span class="s1">&#39;submit&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">form</span><span class="p">();</span>
+
+<span class="c1">// set some values</span>
+<span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Lucas&#39;</span><span class="p">;</span>
+<span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;form_name[subject]&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Hey there!&#39;</span><span class="p">;</span>
+
+<span class="c1">// submit the form</span>
+<span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">submit</span><span class="p">(</span><span class="nv">$form</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The form can also handle uploads and contains methods to fill in different types
+of form fields (e.g. <code class="docutils literal notranslate"><span class="pre">select()</span></code> and <code class="docutils literal notranslate"><span class="pre">tick()</span></code>). For details, see the
+<a class="reference internal" href="#forms">Forms</a> section below.</p>
+</div>
+<p>Now that you can navigate through an application, use assertions to test
+that it actually does what you expect it to. Use the Crawler to make assertions
+on the DOM:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// asserts that the response matches a given CSS selector.</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertGreaterThan</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">count</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>Or test against the response content directly if you just want to assert that
+the content contains some text or in case that the response is not an XML/HTML
+document:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertStringContainsString</span><span class="p">(</span>
+    <span class="s1">&#39;Hello World&#39;</span><span class="p">,</span>
+    <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getContent</span><span class="p">()</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>Instead of installing each testing dependency individually, you can use the
+<code class="docutils literal notranslate"><span class="pre">test</span></code> <a class="reference internal" href="setup.html#symfony-packs"><span class="std std-ref">Symfony pack</span></a> to install all those dependencies at once:</p>
+<div class="last highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require --dev symfony/test-pack
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="sidebar" id="index-3">
+<p class="first sidebar-title">Useful Assertions</p>
+<p>To get you started faster, here is a list of the most common and
+useful test assertions:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+
+<span class="c1">// asserts that there is at least one h2 tag with the class &quot;subtitle&quot;</span>
+<span class="c1">// the third argument is an optional message shown on failed tests</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertGreaterThan</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;h2.subtitle&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">count</span><span class="p">(),</span>
+    <span class="s1">&#39;There is at least one subtitle&#39;</span>
+<span class="p">);</span>
+
+<span class="c1">// asserts that there are exactly 4 h2 tags on the page</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertCount</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;h2&#39;</span><span class="p">));</span>
+
+<span class="c1">// asserts that the &quot;Content-Type&quot; header is &quot;application/json&quot;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertResponseHeaderSame</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">);</span>
+<span class="c1">// equivalent to:</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">contains</span><span class="p">(</span>
+    <span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="p">));</span>
+
+<span class="c1">// asserts that the response content contains a string</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertStringContainsString</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getContent</span><span class="p">());</span>
+<span class="c1">// ...or matches a regex</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertRegExp</span><span class="p">(</span><span class="s1">&#39;/foo(bar)?/&#39;</span><span class="p">,</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getContent</span><span class="p">());</span>
+
+<span class="c1">// asserts that the response status code is 2xx</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertResponseIsSuccessful</span><span class="p">();</span>
+<span class="c1">// equivalent to:</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isSuccessful</span><span class="p">());</span>
+
+<span class="c1">// asserts that the response status code is 404 Not Found</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isNotFound</span><span class="p">());</span>
+
+<span class="c1">// asserts a specific status code</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertResponseStatusCodeSame</span><span class="p">(</span><span class="mi">201</span><span class="p">);</span>
+<span class="c1">// HTTP status numbers are available as constants too:</span>
+<span class="c1">// e.g. 201 === Symfony\Component\HttpFoundation\Response::HTTP_CREATED</span>
+<span class="c1">// equivalent to:</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">());</span>
+
+<span class="c1">// asserts that the response is a redirect to /demo/contact</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertResponseRedirects</span><span class="p">(</span><span class="s1">&#39;/demo/contact&#39;</span><span class="p">);</span>
+<span class="c1">// equivalent to:</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isRedirect</span><span class="p">(</span><span class="s1">&#39;/demo/contact&#39;</span><span class="p">));</span>
+<span class="c1">// ...or check that the response is a redirect to any URL</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertResponseRedirects</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="testing-against-different-sets-of-data">
+<span id="testing-data-providers"></span><h2>Testing against Different Sets of Data<a class="headerlink" href="#testing-against-different-sets-of-data" title="Permalink to this headline">¶</a></h2>
+<p>It’s common to have to execute the same test against different sets of data to
+check the multiple conditions code must handle. This is solved with PHPUnit’s
+<a class="reference external" href="https://phpunit.de/manual/current/en/writing-tests-for-phpunit.html#writing-tests-for-phpunit.data-providers">data providers</a>, which work both for unit and functional tests.</p>
+<p>First, add one or more arguments to your test method and use them inside the
+test code. Then, define another method which returns a nested array with the
+arguments to use on each test run. Lastly, add the <code class="docutils literal notranslate"><span class="pre">&#64;dataProvider</span></code> annotation
+to associate both methods:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="sd">/**</span>
+<span class="sd"> * @dataProvider provideUrls</span>
+<span class="sd"> */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">testPageIsSuccessful</span><span class="p">(</span><span class="nv">$url</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$client</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="na">createClient</span><span class="p">();</span>
+    <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isSuccessful</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">provideUrls</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">[</span><span class="s1">&#39;/&#39;</span><span class="p">],</span>
+        <span class="p">[</span><span class="s1">&#39;/blog&#39;</span><span class="p">],</span>
+        <span class="p">[</span><span class="s1">&#39;/contact&#39;</span><span class="p">],</span>
+        <span class="c1">// ...</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="working-with-the-test-client">
+<span id="index-4"></span><h2>Working with the Test Client<a class="headerlink" href="#working-with-the-test-client" title="Permalink to this headline">¶</a></h2>
+<p>The test client simulates an HTTP client like a browser and makes requests
+into your Symfony application:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;/post/hello-world&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">request()</span></code> method takes the HTTP method and a URL as arguments and
+returns a <code class="docutils literal notranslate"><span class="pre">Crawler</span></code> instance.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Hardcoding the request URLs is a best practice for functional tests. If the
+test generates URLs using the Symfony router, it won’t detect any change
+made to the application URLs which may impact the end users.</p>
+</div>
+<div class="sidebar" id="testing-request-method-sidebar">
+<p class="first sidebar-title">More about the <code class="docutils literal notranslate"><span class="pre">request()</span></code> Method:</p>
+<p>The full signature of the <code class="docutils literal notranslate"><span class="pre">request()</span></code> method is:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nx">request</span><span class="p">(</span>
+    <span class="nx">string</span> <span class="nv">$method</span><span class="p">,</span>
+    <span class="nx">string</span> <span class="nv">$uri</span><span class="p">,</span>
+    <span class="k">array</span> <span class="nv">$parameters</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="k">array</span> <span class="nv">$files</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="k">array</span> <span class="nv">$server</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="nx">string</span> <span class="nv">$content</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span>
+    <span class="nx">bool</span> <span class="nv">$changeHistory</span> <span class="o">=</span> <span class="k">true</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">server</span></code> array is the raw values that you’d expect to normally
+find in the PHP <a class="reference external" href="https://www.php.net/manual/en/reserved.variables.server.php">$_SERVER</a> superglobal. For example, to set the
+<code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> and <code class="docutils literal notranslate"><span class="pre">Referer</span></code> HTTP headers, you’d pass the following (mind
+the <code class="docutils literal notranslate"><span class="pre">HTTP_</span></code> prefix for non standard headers):</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span>
+    <span class="s1">&#39;GET&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/post/hello-world&#39;</span><span class="p">,</span>
+    <span class="p">[],</span>
+    <span class="p">[],</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;CONTENT_TYPE&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;HTTP_REFERER&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/foo/bar&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<p>Use the crawler to find DOM elements in the response. These elements can then
+be used to click on links and submit forms:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">clickLink</span><span class="p">(</span><span class="s1">&#39;Go elsewhere...&#39;</span><span class="p">);</span>
+
+<span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">submitForm</span><span class="p">(</span><span class="s1">&#39;validate&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Fabien&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">clickLink()</span></code> and <code class="docutils literal notranslate"><span class="pre">submitForm()</span></code> methods both return a <code class="docutils literal notranslate"><span class="pre">Crawler</span></code> object.
+These methods are the best way to browse your application as it takes care
+of a lot of things for you, like detecting the HTTP method from a form and
+giving you a nice API for uploading files.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">request()</span></code> method can also be used to simulate form submissions directly
+or perform more complex requests. Some useful examples:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// submits a form directly (but using the Crawler is easier!)</span>
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;/submit&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Fabien&#39;</span><span class="p">]);</span>
+
+<span class="c1">// submits a raw JSON string in the request body</span>
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span>
+    <span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/submit&#39;</span><span class="p">,</span>
+    <span class="p">[],</span>
+    <span class="p">[],</span>
+    <span class="p">[</span><span class="s1">&#39;CONTENT_TYPE&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/json&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;{&quot;name&quot;:&quot;Fabien&quot;}&#39;</span>
+<span class="p">);</span>
+
+<span class="c1">// Form submission with a file upload</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\File\UploadedFile</span><span class="p">;</span>
+
+<span class="nv">$photo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UploadedFile</span><span class="p">(</span>
+    <span class="s1">&#39;/path/to/photo.jpg&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;photo.jpg&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;image/jpeg&#39;</span><span class="p">,</span>
+    <span class="k">null</span>
+<span class="p">);</span>
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span>
+    <span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/submit&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Fabien&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;photo&#39;</span> <span class="o">=&gt;</span> <span class="nv">$photo</span><span class="p">]</span>
+<span class="p">);</span>
+
+<span class="c1">// Perform a DELETE request and pass HTTP headers</span>
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span>
+    <span class="s1">&#39;DELETE&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/post/12&#39;</span><span class="p">,</span>
+    <span class="p">[],</span>
+    <span class="p">[],</span>
+    <span class="p">[</span><span class="s1">&#39;PHP_AUTH_USER&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="s1">&#39;PHP_AUTH_PW&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pa$$word&#39;</span><span class="p">]</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Last but not least, you can force each request to be executed in its own PHP
+process to avoid any side effects when working with several clients in the same
+script:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">insulate</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="section" id="ajax-requests">
+<h3>AJAX Requests<a class="headerlink" href="#ajax-requests" title="Permalink to this headline">¶</a></h3>
+<p>The Client provides a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/BrowserKit/AbstractBrowser.php" title="Symfony\Component\BrowserKit\AbstractBrowser::xmlHttpRequest()"><span class="pre">xmlHttpRequest()</span></a></code>
+method, which has the same arguments as the <code class="docutils literal notranslate"><span class="pre">request()</span></code> method, and it’s a
+shortcut to make AJAX requests:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// the required HTTP_X_REQUESTED_WITH header is added automatically</span>
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">xmlHttpRequest</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;/submit&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Fabien&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="browsing">
+<h3>Browsing<a class="headerlink" href="#browsing" title="Permalink to this headline">¶</a></h3>
+<p>The Client supports many operations that can be done in a real browser:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">back</span><span class="p">();</span>
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">forward</span><span class="p">();</span>
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">reload</span><span class="p">();</span>
+
+<span class="c1">// clears all cookies and the history</span>
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">restart</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">back()</span></code> and <code class="docutils literal notranslate"><span class="pre">forward()</span></code> methods skip the redirects that may have
+occurred when requesting a URL, as normal browsers do.</p>
+</div>
+</div>
+<div class="section" id="accessing-internal-objects">
+<h3>Accessing Internal Objects<a class="headerlink" href="#accessing-internal-objects" title="Permalink to this headline">¶</a></h3>
+<p>If you use the client to test your application, you might want to access the
+client’s internal objects:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$history</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getHistory</span><span class="p">();</span>
+<span class="nv">$cookieJar</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getCookieJar</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>You can also get the objects related to the latest request:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// the HttpKernel request instance</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">();</span>
+
+<span class="c1">// the BrowserKit request instance</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getInternalRequest</span><span class="p">();</span>
+
+<span class="c1">// the HttpKernel response instance</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+
+<span class="c1">// the BrowserKit response instance</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getInternalResponse</span><span class="p">();</span>
+
+<span class="c1">// the Crawler instance</span>
+<span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getCrawler</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="accessing-the-container">
+<h3>Accessing the Container<a class="headerlink" href="#accessing-the-container" title="Permalink to this headline">¶</a></h3>
+<p>It’s highly recommended that a functional test only tests the response. But
+under certain very rare circumstances, you might want to access some services
+to write assertions. Given that services are private by default, test classes
+define a property that stores a special container created by Symfony which
+allows fetching both public and all non-removed private services:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// gives access to the same services used in your test, unless you&#39;re using</span>
+<span class="c1">// $client-&gt;insulate() or using real HTTP requests to test your application</span>
+<span class="c1">// don&#39;t forget to call self::bootKernel() before, otherwise, the container</span>
+<span class="c1">// will be empty</span>
+<span class="nv">$container</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$container</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For a list of services available in your application, use the <code class="docutils literal notranslate"><span class="pre">debug:container</span></code>
+command.</p>
+<p>If a private service is <em>never</em> used in your application (outside of your test),
+it is <em>removed</em> from the container and cannot be accessed as described above. In
+that case, you can create a public alias in the <code class="docutils literal notranslate"><span class="pre">test</span></code> environment and access
+it via that alias:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services_test.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># access the service in your test via</span>
+    <span class="c1"># self::$container-&gt;get(&#39;test.App\Test\SomeTestHelper&#39;)</span>
+    <span class="l l-Scalar l-Scalar-Plain">test.App\Test\SomeTestHelper</span><span class="p p-Indicator">:</span>
+        <span class="c1"># the id of the private service</span>
+        <span class="l l-Scalar l-Scalar-Plain">alias</span><span class="p p-Indicator">:</span> <span class="s">&#39;App\Test\SomeTestHelper&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">public</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services_test.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;test.App\Test\SomeTestHelper&quot;</span> <span class="na">alias=</span><span class="s">&quot;App\Test\SomeTestHelper&quot;</span> <span class="na">public=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services_test.php</span>
+<span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Service\MessageGenerator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Updates\SiteUpdateManager</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">alias</span><span class="p">(</span><span class="s1">&#39;test.App\Test\SomeTestHelper&#39;</span><span class="p">,</span> <span class="s1">&#39;App\Test\SomeTestHelper&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">public</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The special container that gives access to private services exists only in
+the <code class="docutils literal notranslate"><span class="pre">test</span></code> environment and is itself a service that you can get from the
+real container using the <code class="docutils literal notranslate"><span class="pre">test.service_container</span></code> id.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If the information you need to check is available from the profiler, use
+it instead.</p>
+</div>
+</div>
+<div class="section" id="logging-in-users-authentication">
+<span id="testing-logging-in-users"></span><h3>Logging in Users (Authentication)<a class="headerlink" href="#logging-in-users-authentication" title="Permalink to this headline">¶</a></h3>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The <code class="docutils literal notranslate"><span class="pre">loginUser()</span></code> method was introduced in Symfony 5.1.</p>
+</div>
+<p>When you want to add functional tests for protected pages, you have to
+first “login” as a user. Reproducing the actual steps - such as
+submitting a login form - make a test very slow. For this reason, Symfony
+provides a <code class="docutils literal notranslate"><span class="pre">loginUser()</span></code> method to simulate logging in in your functional
+tests.</p>
+<p>Instead of login in with real users, it’s recommended to create a user only for
+tests. You can do that with Doctrine <a class="reference internal" href="security.html#user-data-fixture"><span class="std std-ref">data fixtures</span></a>,
+to load the testing users only in the test database.</p>
+<p>After loading users in your database, use your user repository to fetch
+this user and use
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/FrameworkBundle/KernelBrowser.php" title="Symfony\Bundle\FrameworkBundle\KernelBrowser::loginUser()"><span class="pre">$client-&gt;loginUser()</span></a></code>
+to simulate a login request:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// tests/Controller/ProfileControllerTest.php</span>
+<span class="k">namespace</span> <span class="nx">App\Tests\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Repository\UserRepository</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Test\WebTestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ProfileControllerTest</span> <span class="k">extends</span> <span class="nx">WebTestCase</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testVisitingWhileLoggedIn</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$client</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="na">createClient</span><span class="p">();</span>
+        <span class="nv">$userRepository</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nx">UserRepository</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+        <span class="c1">// retrieve the test user</span>
+        <span class="nv">$testUser</span> <span class="o">=</span> <span class="nv">$userRepository</span><span class="o">-&gt;</span><span class="na">findOneByEmail</span><span class="p">(</span><span class="s1">&#39;john.doe@example.com&#39;</span><span class="p">);</span>
+
+        <span class="c1">// simulate $testUser being logged in</span>
+        <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">loginUser</span><span class="p">(</span><span class="nv">$testUser</span><span class="p">);</span>
+
+        <span class="c1">// test e.g. the profile page</span>
+        <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;/profile&#39;</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertResponseIsSuccessful</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSelectorTextContains</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello John!&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can pass any
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/User/UserInterface.php" title="Symfony\Component\Security\Core\User\UserInterface"><span class="pre">UserInterface</span></a></code> instance to
+<code class="docutils literal notranslate"><span class="pre">loginUser()</span></code>. This method creates a special
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bundle/FrameworkBundle/Test/TestBrowserToken.php" title="Symfony\Bundle\FrameworkBundle\Test\TestBrowserToken"><span class="pre">TestBrowserToken</span></a></code> object and
+stores in the session of the test client.</p>
+</div>
+<div class="section" id="accessing-the-profiler-data">
+<h3>Accessing the Profiler Data<a class="headerlink" href="#accessing-the-profiler-data" title="Permalink to this headline">¶</a></h3>
+<p>On each request, you can enable the Symfony profiler to collect data about the
+internal handling of that request. For example, the profiler could be used to
+verify that a given page executes less than a certain number of database
+queries when loading.</p>
+<p>To get the Profiler for the last request, do the following:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// enables the profiler for the very next request</span>
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">enableProfiler</span><span class="p">();</span>
+
+<span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;/profiler&#39;</span><span class="p">);</span>
+
+<span class="c1">// gets the profile</span>
+<span class="nv">$profile</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getProfile</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>For specific details on using the profiler inside a test, see the
+<a class="reference internal" href="testing/profiling.html"><span class="doc">How to Use the Profiler in a Functional Test</span></a> article.</p>
+</div>
+<div class="section" id="redirecting">
+<h3>Redirecting<a class="headerlink" href="#redirecting" title="Permalink to this headline">¶</a></h3>
+<p>When a request returns a redirect response, the client does not follow
+it automatically. You can examine the response and force a redirection
+afterwards with the <code class="docutils literal notranslate"><span class="pre">followRedirect()</span></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">followRedirect</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>If you want the client to automatically follow all redirects, you can
+force them by calling the <code class="docutils literal notranslate"><span class="pre">followRedirects()</span></code> method before performing the request:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">followRedirects</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>If you pass <code class="docutils literal notranslate"><span class="pre">false</span></code> to the <code class="docutils literal notranslate"><span class="pre">followRedirects()</span></code> method, the redirects
+will no longer be followed:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">followRedirects</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reporting-exceptions">
+<h3>Reporting Exceptions<a class="headerlink" href="#reporting-exceptions" title="Permalink to this headline">¶</a></h3>
+<p>Debugging exceptions in functional tests may be difficult because by default
+they are caught and you need to look at the logs to see which exception was
+thrown. Disabling catching of exceptions in the test client allows the exception
+to be reported by PHPUnit:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">catchExceptions</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-crawler">
+<span id="testing-crawler"></span><span id="index-5"></span><h2>The Crawler<a class="headerlink" href="#the-crawler" title="Permalink to this headline">¶</a></h2>
+<p>A Crawler instance is returned each time you make a request with the Client.
+It allows you to traverse HTML documents, select nodes, find links and forms.</p>
+<div class="section" id="traversing">
+<h3>Traversing<a class="headerlink" href="#traversing" title="Permalink to this headline">¶</a></h3>
+<p>Like jQuery, the Crawler has methods to traverse the DOM of an HTML/XML
+document. For example, the following finds all <code class="docutils literal notranslate"><span class="pre">input[type=submit]</span></code> elements,
+selects the last one on the page, and then selects its immediate parent element:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$newCrawler</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;input[type=submit]&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">last</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">parents</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">first</span><span class="p">()</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+<p>Many other methods are also available:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">filter('h1.title')</span></code></dt>
+<dd>Nodes that match the CSS selector.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">filterXpath('h1')</span></code></dt>
+<dd>Nodes that match the XPath expression.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">eq(1)</span></code></dt>
+<dd>Node for the specified index.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">first()</span></code></dt>
+<dd>First node.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">last()</span></code></dt>
+<dd>Last node.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">siblings()</span></code></dt>
+<dd>Siblings.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">nextAll()</span></code></dt>
+<dd>All following siblings.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">previousAll()</span></code></dt>
+<dd>All preceding siblings.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">parents()</span></code></dt>
+<dd>Returns the parent nodes.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">children()</span></code></dt>
+<dd>Returns children nodes.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">reduce($lambda)</span></code></dt>
+<dd>Nodes for which the callable does not return false.</dd>
+</dl>
+<p>Since each of these methods returns a new <code class="docutils literal notranslate"><span class="pre">Crawler</span></code> instance, you can
+narrow down your node selection by chaining the method calls:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span>
+    <span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">reduce</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$node</span><span class="p">,</span> <span class="nv">$i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$node</span><span class="o">-&gt;</span><span class="na">attr</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+    <span class="o">-&gt;</span><span class="na">first</span><span class="p">()</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Use the <code class="docutils literal notranslate"><span class="pre">count()</span></code> function to get the number of nodes stored in a Crawler:
+<code class="docutils literal notranslate"><span class="pre">count($crawler)</span></code></p>
+</div>
+</div>
+<div class="section" id="extracting-information">
+<h3>Extracting Information<a class="headerlink" href="#extracting-information" title="Permalink to this headline">¶</a></h3>
+<p>The Crawler can extract information from the nodes:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DomCrawler\Crawler</span><span class="p">;</span>
+
+<span class="c1">// returns the attribute value for the first node</span>
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">attr</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="p">);</span>
+
+<span class="c1">// returns the node value for the first node</span>
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">text</span><span class="p">();</span>
+
+<span class="c1">// returns the default text if the node does not exist</span>
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">text</span><span class="p">(</span><span class="s1">&#39;Default text content&#39;</span><span class="p">);</span>
+
+<span class="c1">// pass TRUE as the second argument of text() to remove all extra white spaces, including</span>
+<span class="c1">// the internal ones (e.g. &quot;  foo\n  bar    baz \n &quot; is returned as &quot;foo bar baz&quot;)</span>
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">text</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+
+<span class="c1">// extracts an array of attributes for all nodes</span>
+<span class="c1">// (_text returns the node value)</span>
+<span class="c1">// returns an array for each element in crawler,</span>
+<span class="c1">// each with the value and href</span>
+<span class="nv">$info</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">extract</span><span class="p">([</span><span class="s1">&#39;_text&#39;</span><span class="p">,</span> <span class="s1">&#39;href&#39;</span><span class="p">]);</span>
+
+<span class="c1">// executes a lambda for each node and return an array of results</span>
+<span class="nv">$data</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">each</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">Crawler</span> <span class="nv">$node</span><span class="p">,</span> <span class="nv">$i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$node</span><span class="o">-&gt;</span><span class="na">attr</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="links">
+<h3>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">clickLink()</span></code> method to click on the first link that contains the
+given text (or the first clickable image with that <code class="docutils literal notranslate"><span class="pre">alt</span></code> attribute):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$client</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="na">createClient</span><span class="p">();</span>
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;/post/hello-world&#39;</span><span class="p">);</span>
+
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">clickLink</span><span class="p">(</span><span class="s1">&#39;Click here&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If you need access to the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Link.php" title="Symfony\Component\DomCrawler\Link"><span class="pre">Link</span></a></code> object
+that provides helpful methods specific to links (such as <code class="docutils literal notranslate"><span class="pre">getMethod()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">getUri()</span></code>), use the <code class="docutils literal notranslate"><span class="pre">selectLink()</span></code> method instead:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$client</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="na">createClient</span><span class="p">();</span>
+<span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;/post/hello-world&#39;</span><span class="p">);</span>
+
+<span class="nv">$link</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">selectLink</span><span class="p">(</span><span class="s1">&#39;Click here&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">();</span>
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">click</span><span class="p">(</span><span class="nv">$link</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="forms">
+<h3>Forms<a class="headerlink" href="#forms" title="Permalink to this headline">¶</a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">submitForm()</span></code> method to submit the form that contains the given button:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$client</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="na">createClient</span><span class="p">();</span>
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;/post/hello-world&#39;</span><span class="p">);</span>
+
+<span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">submitForm</span><span class="p">(</span><span class="s1">&#39;Add comment&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;comment_form[content]&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>The first argument of <code class="docutils literal notranslate"><span class="pre">submitForm()</span></code> is the text content, <code class="docutils literal notranslate"><span class="pre">id</span></code>, <code class="docutils literal notranslate"><span class="pre">value</span></code> or
+<code class="docutils literal notranslate"><span class="pre">name</span></code> of any <code class="docutils literal notranslate"><span class="pre">&lt;button&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;input</span> <span class="pre">type=&quot;submit&quot;&gt;</span></code> included in the form.
+The second optional argument is used to override the default form field values.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Notice that you select form buttons and not forms as a form can have several
+buttons; if you use the traversing API, keep in mind that you must look for a
+button.</p>
+</div>
+<p>If you need access to the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Form.php" title="Symfony\Component\DomCrawler\Form"><span class="pre">Form</span></a></code> object
+that provides helpful methods specific to forms (such as <code class="docutils literal notranslate"><span class="pre">getUri()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">getValues()</span></code> and <code class="docutils literal notranslate"><span class="pre">getFields()</span></code>) use the <code class="docutils literal notranslate"><span class="pre">selectButton()</span></code> method instead:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$client</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="na">createClient</span><span class="p">();</span>
+<span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;/post/hello-world&#39;</span><span class="p">);</span>
+
+<span class="nv">$buttonCrawlerNode</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">selectButton</span><span class="p">(</span><span class="s1">&#39;submit&#39;</span><span class="p">);</span>
+
+<span class="c1">// select the form that contains this button</span>
+<span class="nv">$form</span> <span class="o">=</span> <span class="nv">$buttonCrawlerNode</span><span class="o">-&gt;</span><span class="na">form</span><span class="p">();</span>
+
+<span class="c1">// you can also pass an array of field values that overrides the default ones</span>
+<span class="nv">$form</span> <span class="o">=</span> <span class="nv">$buttonCrawlerNode</span><span class="o">-&gt;</span><span class="na">form</span><span class="p">([</span>
+    <span class="s1">&#39;my_form[name]&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;Fabien&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;my_form[subject]&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Symfony rocks!&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+
+<span class="c1">// you can pass a second argument to override the form HTTP method</span>
+<span class="nv">$form</span> <span class="o">=</span> <span class="nv">$buttonCrawlerNode</span><span class="o">-&gt;</span><span class="na">form</span><span class="p">([],</span> <span class="s1">&#39;DELETE&#39;</span><span class="p">);</span>
+
+<span class="c1">// submit the Form object</span>
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">submit</span><span class="p">(</span><span class="nv">$form</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The field values can also be passed as a second argument of the <code class="docutils literal notranslate"><span class="pre">submit()</span></code>
+method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">submit</span><span class="p">(</span><span class="nv">$form</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;my_form[name]&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;Fabien&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;my_form[subject]&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Symfony rocks!&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>For more complex situations, use the <code class="docutils literal notranslate"><span class="pre">Form</span></code> instance as an array to set the
+value of each field individually:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// changes the value of a field</span>
+<span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;my_form[name]&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Fabien&#39;</span><span class="p">;</span>
+<span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;my_form[subject]&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Symfony rocks!&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>There is also a nice API to manipulate the values of the fields according to
+their type:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// selects an option or a radio</span>
+<span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;France&#39;</span><span class="p">);</span>
+
+<span class="c1">// ticks a checkbox</span>
+<span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;like_symfony&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">tick</span><span class="p">();</span>
+
+<span class="c1">// uploads a file</span>
+<span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;photo&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">upload</span><span class="p">(</span><span class="s1">&#39;/path/to/lucas.jpg&#39;</span><span class="p">);</span>
+
+<span class="c1">// In the case of a multiple file upload</span>
+<span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;my_form[field][O]&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">upload</span><span class="p">(</span><span class="s1">&#39;/path/to/lucas.jpg&#39;</span><span class="p">);</span>
+<span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;my_form[field][1]&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">upload</span><span class="p">(</span><span class="s1">&#39;/path/to/lisa.jpg&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Instead of hardcoding the form name as part of the field names (e.g.
+<code class="docutils literal notranslate"><span class="pre">my_form[...]</span></code> in previous examples), you can use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Form.php" title="Symfony\Component\DomCrawler\Form::getName()"><span class="pre">getName()</span></a></code> method to get the
+form name.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you purposefully want to select “invalid” select/radio values, see
+<a class="reference internal" href="components/dom_crawler.html#components-dom-crawler-invalid"><span class="std std-ref">Selecting Invalid Choice Values</span></a>.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can get the values that will be submitted by calling the <code class="docutils literal notranslate"><span class="pre">getValues()</span></code>
+method on the <code class="docutils literal notranslate"><span class="pre">Form</span></code> object. The uploaded files are available in a
+separate array returned by <code class="docutils literal notranslate"><span class="pre">getFiles()</span></code>. The <code class="docutils literal notranslate"><span class="pre">getPhpValues()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">getPhpFiles()</span></code> methods also return the submitted values, but in the
+PHP format (it converts the keys with square brackets notation - e.g.
+<code class="docutils literal notranslate"><span class="pre">my_form[subject]</span></code> - to PHP arrays).</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">submit()</span></code> and <code class="docutils literal notranslate"><span class="pre">submitForm()</span></code> methods define optional arguments to
+add custom server parameters and HTTP headers when submitting the form:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">submit</span><span class="p">(</span><span class="nv">$form</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[</span><span class="s1">&#39;HTTP_ACCEPT_LANGUAGE&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;es&#39;</span><span class="p">]);</span>
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">submitForm</span><span class="p">(</span><span class="nv">$button</span><span class="p">,</span> <span class="p">[],</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;HTTP_ACCEPT_LANGUAGE&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;es&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-and-removing-forms-to-a-collection">
+<h4>Adding and Removing Forms to a Collection<a class="headerlink" href="#adding-and-removing-forms-to-a-collection" title="Permalink to this headline">¶</a></h4>
+<p>If you use a <a class="reference internal" href="form/form_collections.html"><span class="doc">Collection of Forms</span></a>,
+you can’t add fields to an existing form with
+<code class="docutils literal notranslate"><span class="pre">$form['task[tags][0][name]']</span> <span class="pre">=</span> <span class="pre">'foo';</span></code>. This results in an error
+<code class="docutils literal notranslate"><span class="pre">Unreachable</span> <span class="pre">field</span> <span class="pre">&quot;…&quot;</span></code> because <code class="docutils literal notranslate"><span class="pre">$form</span></code> can only be used in order to
+set values of existing fields. In order to add new fields, you have to
+add the values to the raw data array:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// gets the form</span>
+<span class="nv">$form</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">form</span><span class="p">();</span>
+
+<span class="c1">// gets the raw values</span>
+<span class="nv">$values</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getPhpValues</span><span class="p">();</span>
+
+<span class="c1">// adds fields to the raw values</span>
+<span class="nv">$values</span><span class="p">[</span><span class="s1">&#39;task&#39;</span><span class="p">][</span><span class="s1">&#39;tags&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
+<span class="nv">$values</span><span class="p">[</span><span class="s1">&#39;task&#39;</span><span class="p">][</span><span class="s1">&#39;tags&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;bar&#39;</span><span class="p">;</span>
+
+<span class="c1">// submits the form with the existing and new values</span>
+<span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">(),</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getUri</span><span class="p">(),</span> <span class="nv">$values</span><span class="p">,</span>
+    <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getPhpFiles</span><span class="p">());</span>
+
+<span class="c1">// the 2 tags have been added to the collection</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;ul.tags &gt; li&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">count</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">task[tags][0][name]</span></code> is the name of a field created
+with JavaScript.</p>
+<p>You can remove an existing field, e.g. a tag:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// gets the values of the form</span>
+<span class="nv">$values</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getPhpValues</span><span class="p">();</span>
+
+<span class="c1">// removes the first tag</span>
+<span class="nb">unset</span><span class="p">(</span><span class="nv">$values</span><span class="p">[</span><span class="s1">&#39;task&#39;</span><span class="p">][</span><span class="s1">&#39;tags&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
+
+<span class="c1">// submits the data</span>
+<span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">(),</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getUri</span><span class="p">(),</span>
+    <span class="nv">$values</span><span class="p">,</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getPhpFiles</span><span class="p">());</span>
+
+<span class="c1">// the tag has been removed</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;ul.tags &gt; li&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">count</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="testing-configuration">
+<span id="index-6"></span><h2>Testing Configuration<a class="headerlink" href="#testing-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The Client used by functional tests creates a Kernel that runs in a special
+<code class="docutils literal notranslate"><span class="pre">test</span></code> environment. Since Symfony loads the <code class="docutils literal notranslate"><span class="pre">config/packages/test/*.yaml</span></code>
+in the <code class="docutils literal notranslate"><span class="pre">test</span></code> environment, you can tweak any of your application’s settings
+specifically for testing.</p>
+<p>For example, by default, the Swift Mailer is configured to <em>not</em> actually
+deliver emails in the <code class="docutils literal notranslate"><span class="pre">test</span></code> environment. You can see this under the <code class="docutils literal notranslate"><span class="pre">swiftmailer</span></code>
+configuration option:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/test/swiftmailer.yaml</span>
+
+<span class="c1"># ...</span>
+<span class="l l-Scalar l-Scalar-Plain">swiftmailer</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">disable_delivery</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/test/swiftmailer.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:swiftmailer=</span><span class="s">&quot;http://symfony.com/schema/dic/swiftmailer&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/swiftmailer</span>
+<span class="s">        https://symfony.com/schema/dic/swiftmailer/swiftmailer-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;swiftmailer:config</span> <span class="na">disable-delivery=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/test/swiftmailer.php</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;swiftmailer&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;disable_delivery&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>You can also use a different environment entirely, or override the default
+debug mode (<code class="docutils literal notranslate"><span class="pre">true</span></code>) by passing each as options to the <code class="docutils literal notranslate"><span class="pre">createClient()</span></code>
+method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$client</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="na">createClient</span><span class="p">([</span>
+    <span class="s1">&#39;environment&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;my_test_env&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;debug&#39;</span>       <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="section" id="customizing-database-url-environment-variables">
+<h3>Customizing Database URL / Environment Variables<a class="headerlink" href="#customizing-database-url-environment-variables" title="Permalink to this headline">¶</a></h3>
+<p>If you need to customize some environment variables for your tests (e.g. the
+<code class="docutils literal notranslate"><span class="pre">DATABASE_URL</span></code> used by Doctrine), you can do that by overriding anything you
+need in your <code class="docutils literal notranslate"><span class="pre">.env.test</span></code> file:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span># .env.test
+DATABASE_URL=&quot;mysql://db_user:db_password@127.0.0.1:3306/db_name_test&quot;
+
+# use SQLITE
+# DATABASE_URL=&quot;sqlite:///%kernel.project_dir%/var/app.db&quot;
+</pre></div>
+</td></tr></table></div>
+<p>This file is automatically read in the <code class="docutils literal notranslate"><span class="pre">test</span></code> environment: any keys here override
+the defaults in <code class="docutils literal notranslate"><span class="pre">.env</span></code>.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Applications created before November 2018 had a slightly different system,
+involving a <code class="docutils literal notranslate"><span class="pre">.env.dist</span></code> file. For information about upgrading, see:
+<a class="reference internal" href="configuration/dot-env-changes.html"><span class="doc">Nov 2018 Changes to .env &amp; How to Update</span></a>.</p>
+</div>
+</div>
+<div class="section" id="sending-custom-headers">
+<h3>Sending Custom Headers<a class="headerlink" href="#sending-custom-headers" title="Permalink to this headline">¶</a></h3>
+<p>If your application behaves according to some HTTP headers, pass them as the
+second argument of <code class="docutils literal notranslate"><span class="pre">createClient()</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$client</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="na">createClient</span><span class="p">([],</span> <span class="p">[</span>
+    <span class="s1">&#39;HTTP_HOST&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;en.example.com&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;HTTP_USER_AGENT&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;MySuperBrowser/1.0&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>You can also override HTTP headers on a per request basis:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[</span>
+    <span class="s1">&#39;HTTP_HOST&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;en.example.com&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;HTTP_USER_AGENT&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;MySuperBrowser/1.0&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The test client is available as a service in the container in the <code class="docutils literal notranslate"><span class="pre">test</span></code>
+environment (or wherever the <a class="reference internal" href="reference/configuration/framework.html#reference-framework-test"><span class="std std-ref">framework.test</span></a>
+option is enabled). This means you can override the service entirely
+if you need to.</p>
+</div>
+</div>
+<div class="section" id="phpunit-configuration">
+<span id="index-7"></span><h3>PHPUnit Configuration<a class="headerlink" href="#phpunit-configuration" title="Permalink to this headline">¶</a></h3>
+<p>Each application has its own PHPUnit configuration, stored in the
+<code class="docutils literal notranslate"><span class="pre">phpunit.xml.dist</span></code> file. You can edit this file to change the defaults or
+create a <code class="docutils literal notranslate"><span class="pre">phpunit.xml</span></code> file to set up a configuration for your local machine
+only.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Store the <code class="docutils literal notranslate"><span class="pre">phpunit.xml.dist</span></code> file in your code repository and ignore
+the <code class="docutils literal notranslate"><span class="pre">phpunit.xml</span></code> file.</p>
+</div>
+<p>By default, only the tests stored in <code class="docutils literal notranslate"><span class="pre">tests/</span></code> are run via the <code class="docutils literal notranslate"><span class="pre">phpunit</span></code> command,
+as configured in the <code class="docutils literal notranslate"><span class="pre">phpunit.xml.dist</span></code> file:</p>
+<div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- phpunit.xml.dist --&gt;</span>
+<span class="nt">&lt;phpunit&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;testsuites&gt;</span>
+        <span class="nt">&lt;testsuite</span> <span class="na">name=</span><span class="s">&quot;Project Test Suite&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;directory&gt;</span>tests<span class="nt">&lt;/directory&gt;</span>
+        <span class="nt">&lt;/testsuite&gt;</span>
+    <span class="nt">&lt;/testsuites&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+<span class="nt">&lt;/phpunit&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>But you can add more directories. For instance, the following
+configuration adds tests from a custom <code class="docutils literal notranslate"><span class="pre">lib/tests</span></code> directory:</p>
+<div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- phpunit.xml.dist --&gt;</span>
+<span class="nt">&lt;phpunit&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;testsuites&gt;</span>
+        <span class="nt">&lt;testsuite</span> <span class="na">name=</span><span class="s">&quot;Project Test Suite&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- ... ---&gt;</span>
+            <span class="nt">&lt;directory&gt;</span>lib/tests<span class="nt">&lt;/directory&gt;</span>
+        <span class="nt">&lt;/testsuite&gt;</span>
+    <span class="nt">&lt;/testsuites&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+<span class="nt">&lt;/phpunit&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>To include other directories in the code coverage, also edit the <code class="docutils literal notranslate"><span class="pre">&lt;filter&gt;</span></code>
+section:</p>
+<div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- phpunit.xml.dist --&gt;</span>
+<span class="nt">&lt;phpunit&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;filter&gt;</span>
+        <span class="nt">&lt;whitelist&gt;</span>
+            <span class="c">&lt;!-- ... --&gt;</span>
+            <span class="nt">&lt;directory&gt;</span>lib<span class="nt">&lt;/directory&gt;</span>
+            <span class="nt">&lt;exclude&gt;</span>
+                <span class="c">&lt;!-- ... --&gt;</span>
+                <span class="nt">&lt;directory&gt;</span>lib/tests<span class="nt">&lt;/directory&gt;</span>
+            <span class="nt">&lt;/exclude&gt;</span>
+        <span class="nt">&lt;/whitelist&gt;</span>
+    <span class="nt">&lt;/filter&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+<span class="nt">&lt;/phpunit&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="learn-more">
+<h2>Learn more<a class="headerlink" href="#learn-more" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="testing/bootstrap.html">How to Customize the Bootstrap Process before Running Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing/database.html">How to Test Code that Interacts with the Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing/functional_tests_assertions.html">Functional Test specific Assertions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing/http_authentication.html">How to Simulate HTTP Authentication in a Functional Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing/insulating_clients.html">How to Test the Interaction of several Clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing/profiling.html">How to Use the Profiler in a Functional Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components/dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components/css_selector.html">The CssSelector Component</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

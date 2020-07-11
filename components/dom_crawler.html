@@ -1,0 +1,921 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The DomCrawler Component &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The CssSelector Component" href="css_selector.html" />
+    <link rel="prev" title="How to Use the Profiler in a Functional Test" href="../testing/profiling.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../testing.html">Testing</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../testing.html#the-phpunit-testing-framework">The PHPUnit Testing Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html#unit-tests">Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html#functional-tests">Functional Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html#testing-against-different-sets-of-data">Testing against Different Sets of Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html#working-with-the-test-client">Working with the Test Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html#the-crawler">The Crawler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html#testing-configuration">Testing Configuration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../testing.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../testing/bootstrap.html">How to Customize the Bootstrap Process before Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/database.html">How to Test Code that Interacts with the Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/functional_tests_assertions.html">Functional Test specific Assertions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/http_authentication.html">How to Simulate HTTP Authentication in a Functional Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/insulating_clients.html">How to Test the Interaction of several Clients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/profiling.html">How to Use the Profiler in a Functional Test</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">The DomCrawler Component</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#learn-more">Learn more</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="css_selector.html">The CssSelector Component</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../testing.html">Testing</a> &raquo;</li>
+        
+      <li>The DomCrawler Component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/components/dom_crawler.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-domcrawler-component">
+<span id="index-0"></span><h1>The DomCrawler Component<a class="headerlink" href="#the-domcrawler-component" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div>The DomCrawler component eases DOM navigation for HTML and XML documents.</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">While possible, the DomCrawler component is not designed for manipulation
+of the DOM or re-dumping HTML/XML.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/dom-crawler
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you install this component outside of a Symfony application, you must
+require the <code class="docutils literal notranslate"><span class="pre">vendor/autoload.php</span></code> file in your code to enable the class
+autoloading mechanism provided by Composer. Read
+<a class="reference internal" href="using_components.html"><span class="doc">this article</span></a> for more details.</p>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">This article explains how to use the DomCrawler features as an independent
+component in any PHP application. Read the <a class="reference internal" href="../testing.html#functional-tests"><span class="std std-ref">Symfony Functional Tests</span></a>
+article to learn about how to use it when creating Symfony tests.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Crawler.php" title="Symfony\Component\DomCrawler\Crawler"><span class="pre">Crawler</span></a></code> class provides methods
+to query and manipulate HTML and XML documents.</p>
+<p>An instance of the Crawler represents a set of <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.domelement.php" title="DOMElement"><span class="pre">DOMElement</span></a></code> objects,
+which are nodes that can be traversed as follows:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DomCrawler\Crawler</span><span class="p">;</span>
+
+<span class="nv">$html</span> <span class="o">=</span> <span class="s">&lt;&lt;&lt;&#39;</span><span class="dl">HTML</span><span class="s">&#39;</span>
+<span class="s">&lt;!DOCTYPE html&gt;</span>
+<span class="s">&lt;html&gt;</span>
+<span class="s">    &lt;body&gt;</span>
+<span class="s">        &lt;p class=&quot;message&quot;&gt;Hello World!&lt;/p&gt;</span>
+<span class="s">        &lt;p&gt;Hello Crawler!&lt;/p&gt;</span>
+<span class="s">    &lt;/body&gt;</span>
+<span class="s">&lt;/html&gt;</span>
+<span class="dl">HTML</span><span class="p">;</span>
+
+<span class="nv">$crawler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Crawler</span><span class="p">(</span><span class="nv">$html</span><span class="p">);</span>
+
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$crawler</span> <span class="k">as</span> <span class="nv">$domElement</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$domElement</span><span class="o">-&gt;</span><span class="na">nodeName</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Specialized <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Link.php" title="Symfony\Component\DomCrawler\Link"><span class="pre">Link</span></a></code>,
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Image.php" title="Symfony\Component\DomCrawler\Image"><span class="pre">Image</span></a></code> and
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Form.php" title="Symfony\Component\DomCrawler\Form"><span class="pre">Form</span></a></code> classes are useful for
+interacting with html links, images and forms as you traverse through the HTML
+tree.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The DomCrawler will attempt to automatically fix your HTML to match the
+official specification. For example, if you nest a <code class="docutils literal notranslate"><span class="pre">&lt;p&gt;</span></code> tag inside
+another <code class="docutils literal notranslate"><span class="pre">&lt;p&gt;</span></code> tag, it will be moved to be a sibling of the parent tag.
+This is expected and is part of the HTML5 spec. But if you’re getting
+unexpected behavior, this could be a cause. And while the DomCrawler
+isn’t meant to dump content, you can see the “fixed” version of your HTML
+by <a class="reference internal" href="#component-dom-crawler-dumping"><span class="std std-ref">dumping it</span></a>.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you need better support for HTML5 contents or want to get rid of the
+inconsistencies of PHP’s DOM extension, install the <a class="reference external" href="https://github.com/Masterminds/html5-php">html5-php library</a>.
+The DomCrawler component will use it automatically when the content has
+an HTML5 doctype.</p>
+</div>
+<div class="section" id="node-filtering">
+<h3>Node Filtering<a class="headerlink" href="#node-filtering" title="Permalink to this headline">¶</a></h3>
+<p>Using XPath expressions, you can select specific nodes within the document:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filterXPath</span><span class="p">(</span><span class="s1">&#39;descendant-or-self::body/p&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">DOMXPath::query</span></code> is used internally to actually perform an XPath query.</p>
+</div>
+<p>If you prefer CSS selectors over XPath, install the CssSelector component.
+It allows you to use jQuery-like selectors to traverse:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;body &gt; p&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>An anonymous function can be used to filter with more complex criteria:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DomCrawler\Crawler</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$crawler</span>
+    <span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;body &gt; p&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">reduce</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">Crawler</span> <span class="nv">$node</span><span class="p">,</span> <span class="nv">$i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// filters every other node</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">});</span>
+</pre></div>
+</div>
+<p>To remove a node the anonymous function must return false.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All filter methods return a new <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Crawler.php" title="Symfony\Component\DomCrawler\Crawler"><span class="pre">Crawler</span></a></code>
+instance with filtered content.</p>
+</div>
+<p>Both the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Crawler.php" title="Symfony\Component\DomCrawler\Crawler::filterXPath()"><span class="pre">filterXPath()</span></a></code> and
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Crawler.php" title="Symfony\Component\DomCrawler\Crawler::filter()"><span class="pre">filter()</span></a></code> methods work with
+XML namespaces, which can be either automatically discovered or registered
+explicitly.</p>
+<p>Consider the XML below:</p>
+<div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;entry</span>
+    <span class="na">xmlns=</span><span class="s">&quot;http://www.w3.org/2005/Atom&quot;</span>
+    <span class="na">xmlns:media=</span><span class="s">&quot;http://search.yahoo.com/mrss/&quot;</span>
+    <span class="na">xmlns:yt=</span><span class="s">&quot;http://gdata.youtube.com/schemas/2007&quot;</span>
+<span class="nt">&gt;</span>
+    <span class="nt">&lt;id&gt;</span>tag:youtube.com,2008:video:kgZRZmEc9j4<span class="nt">&lt;/id&gt;</span>
+    <span class="nt">&lt;yt:accessControl</span> <span class="na">action=</span><span class="s">&quot;comment&quot;</span> <span class="na">permission=</span><span class="s">&quot;allowed&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;yt:accessControl</span> <span class="na">action=</span><span class="s">&quot;videoRespond&quot;</span> <span class="na">permission=</span><span class="s">&quot;moderated&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;media:group&gt;</span>
+        <span class="nt">&lt;media:title</span> <span class="na">type=</span><span class="s">&quot;plain&quot;</span><span class="nt">&gt;</span>Chordates - CrashCourse Biology #24<span class="nt">&lt;/media:title&gt;</span>
+        <span class="nt">&lt;yt:aspectRatio&gt;</span>widescreen<span class="nt">&lt;/yt:aspectRatio&gt;</span>
+    <span class="nt">&lt;/media:group&gt;</span>
+<span class="nt">&lt;/entry&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>This can be filtered with the  <code class="docutils literal notranslate"><span class="pre">Crawler</span></code> without needing to register namespace
+aliases both with <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Crawler.php" title="Symfony\Component\DomCrawler\Crawler::filterXPath()"><span class="pre">filterXPath()</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filterXPath</span><span class="p">(</span><span class="s1">&#39;//default:entry/media:group//yt:aspectRatio&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>and <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Crawler.php" title="Symfony\Component\DomCrawler\Crawler::filter()"><span class="pre">filter()</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;default|entry media|group yt|aspectRatio&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The default namespace is registered with a prefix “default”. It can be
+changed with the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Crawler.php" title="Symfony\Component\DomCrawler\Crawler::setDefaultNamespacePrefix()"><span class="pre">setDefaultNamespacePrefix()</span></a></code>
+method.</p>
+<p class="last">The default namespace is removed when loading the content if it’s the only
+namespace in the document. It’s done to simplify the XPath queries.</p>
+</div>
+<p>Namespaces can be explicitly registered with the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Crawler.php" title="Symfony\Component\DomCrawler\Crawler::registerNamespace()"><span class="pre">registerNamespace()</span></a></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">registerNamespace</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;http://search.yahoo.com/mrss/&#39;</span><span class="p">);</span>
+<span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filterXPath</span><span class="p">(</span><span class="s1">&#39;//m:group//yt:aspectRatio&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Verify if the current node matches a selector:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">matches</span><span class="p">(</span><span class="s1">&#39;p.lorem&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="node-traversing">
+<h3>Node Traversing<a class="headerlink" href="#node-traversing" title="Permalink to this headline">¶</a></h3>
+<p>Access node by its position on the list:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;body &gt; p&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Get the first or last node of the current selection:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;body &gt; p&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">();</span>
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;body &gt; p&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">last</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Get the nodes of the same level as the current selection:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;body &gt; p&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">siblings</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Get the same level nodes after or before the current selection:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;body &gt; p&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">nextAll</span><span class="p">();</span>
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;body &gt; p&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">previousAll</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Get all the child or parent nodes:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">();</span>
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;body &gt; p&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">parents</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Get all the direct child nodes matching a CSS selector:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">(</span><span class="s1">&#39;p.lorem&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Get the first parent (heading toward the document root) of the element that matches the provided selector:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">closest</span><span class="p">(</span><span class="s1">&#39;p.lorem&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All the traversal methods return a new <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Crawler.php" title="Symfony\Component\DomCrawler\Crawler"><span class="pre">Crawler</span></a></code>
+instance.</p>
+</div>
+</div>
+<div class="section" id="accessing-node-values">
+<h3>Accessing Node Values<a class="headerlink" href="#accessing-node-values" title="Permalink to this headline">¶</a></h3>
+<p>Access the node name (HTML tag name) of the first node of the current selection (e.g. “p” or “div”):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// returns the node name (HTML tag name) of the first child element under &lt;body&gt;</span>
+<span class="nv">$tag</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filterXPath</span><span class="p">(</span><span class="s1">&#39;//body/*&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">nodeName</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Access the value of the first node of the current selection:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// if the node does not exist, calling to text() will result in an exception</span>
+<span class="nv">$message</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filterXPath</span><span class="p">(</span><span class="s1">&#39;//body/p&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">text</span><span class="p">();</span>
+
+<span class="c1">// avoid the exception passing an argument that text() returns when node does not exist</span>
+<span class="nv">$message</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filterXPath</span><span class="p">(</span><span class="s1">&#39;//body/p&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">text</span><span class="p">(</span><span class="s1">&#39;Default text content&#39;</span><span class="p">);</span>
+
+<span class="c1">// by default, text() trims white spaces, including the internal ones</span>
+<span class="c1">// (e.g. &quot;  foo\n  bar    baz \n &quot; is returned as &quot;foo bar baz&quot;)</span>
+<span class="c1">// pass FALSE as the second argument to return the original text unchanged</span>
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filterXPath</span><span class="p">(</span><span class="s1">&#39;//body/p&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">text</span><span class="p">(</span><span class="s1">&#39;Default text content&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Access the attribute value of the first node of the current selection:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$class</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filterXPath</span><span class="p">(</span><span class="s1">&#39;//body/p&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">attr</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Extract attribute and/or node values from the list of nodes:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$attributes</span> <span class="o">=</span> <span class="nv">$crawler</span>
+    <span class="o">-&gt;</span><span class="na">filterXpath</span><span class="p">(</span><span class="s1">&#39;//body/p&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">extract</span><span class="p">([</span><span class="s1">&#39;_name&#39;</span><span class="p">,</span> <span class="s1">&#39;_text&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span><span class="p">])</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Special attribute <code class="docutils literal notranslate"><span class="pre">_text</span></code> represents a node value, while <code class="docutils literal notranslate"><span class="pre">_name</span></code>
+represents the element name (the HTML tag name).</p>
+</div>
+<p>Call an anonymous function on each node of the list:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DomCrawler\Crawler</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$nodeValues</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">each</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">Crawler</span> <span class="nv">$node</span><span class="p">,</span> <span class="nv">$i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$node</span><span class="o">-&gt;</span><span class="na">text</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>The anonymous function receives the node (as a Crawler) and the position as arguments.
+The result is an array of values returned by the anonymous function calls.</p>
+<p>When using nested crawler, beware that <code class="docutils literal notranslate"><span class="pre">filterXPath()</span></code> is evaluated in the
+context of the crawler:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filterXPath</span><span class="p">(</span><span class="s1">&#39;parent&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">each</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">Crawler</span> <span class="nv">$parentCrawler</span><span class="p">,</span> <span class="nv">$i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// DON&#39;T DO THIS: direct child can not be found</span>
+    <span class="nv">$subCrawler</span> <span class="o">=</span> <span class="nv">$parentCrawler</span><span class="o">-&gt;</span><span class="na">filterXPath</span><span class="p">(</span><span class="s1">&#39;sub-tag/sub-child-tag&#39;</span><span class="p">);</span>
+
+    <span class="c1">// DO THIS: specify the parent tag too</span>
+    <span class="nv">$subCrawler</span> <span class="o">=</span> <span class="nv">$parentCrawler</span><span class="o">-&gt;</span><span class="na">filterXPath</span><span class="p">(</span><span class="s1">&#39;parent/sub-tag/sub-child-tag&#39;</span><span class="p">);</span>
+    <span class="nv">$subCrawler</span> <span class="o">=</span> <span class="nv">$parentCrawler</span><span class="o">-&gt;</span><span class="na">filterXPath</span><span class="p">(</span><span class="s1">&#39;node()/sub-tag/sub-child-tag&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-the-content">
+<h3>Adding the Content<a class="headerlink" href="#adding-the-content" title="Permalink to this headline">¶</a></h3>
+<p>The crawler supports multiple ways of adding the content:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$crawler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Crawler</span><span class="p">(</span><span class="s1">&#39;&lt;html&gt;&lt;body/&gt;&lt;/html&gt;&#39;</span><span class="p">);</span>
+
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">addHtmlContent</span><span class="p">(</span><span class="s1">&#39;&lt;html&gt;&lt;body/&gt;&lt;/html&gt;&#39;</span><span class="p">);</span>
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">addXmlContent</span><span class="p">(</span><span class="s1">&#39;&lt;root&gt;&lt;node/&gt;&lt;/root&gt;&#39;</span><span class="p">);</span>
+
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">addContent</span><span class="p">(</span><span class="s1">&#39;&lt;html&gt;&lt;body/&gt;&lt;/html&gt;&#39;</span><span class="p">);</span>
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">addContent</span><span class="p">(</span><span class="s1">&#39;&lt;root&gt;&lt;node/&gt;&lt;/root&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;text/xml&#39;</span><span class="p">);</span>
+
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;&lt;html&gt;&lt;body/&gt;&lt;/html&gt;&#39;</span><span class="p">);</span>
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;&lt;root&gt;&lt;node/&gt;&lt;/root&gt;&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Crawler.php" title="Symfony\Component\DomCrawler\Crawler::addHtmlContent()"><span class="pre">addHtmlContent()</span></a></code> and
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Crawler.php" title="Symfony\Component\DomCrawler\Crawler::addXmlContent()"><span class="pre">addXmlContent()</span></a></code> methods
+default to UTF-8 encoding but you can change this behavior with their second
+optional argument.</p>
+<p class="last">The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Crawler.php" title="Symfony\Component\DomCrawler\Crawler::addContent()"><span class="pre">addContent()</span></a></code> method
+guesses the best charset according to the given contents and defaults to
+<code class="docutils literal notranslate"><span class="pre">ISO-8859-1</span></code> in case no charset can be guessed.</p>
+</div>
+<p>As the Crawler’s implementation is based on the DOM extension, it is also able
+to interact with native <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.domdocument.php" title="DOMDocument"><span class="pre">DOMDocument</span></a></code>, <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.domnodelist.php" title="DOMNodeList"><span class="pre">DOMNodeList</span></a></code>
+and <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.domnode.php" title="DOMNode"><span class="pre">DOMNode</span></a></code> objects:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$domDocument</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\DOMDocument</span><span class="p">();</span>
+<span class="nv">$domDocument</span><span class="o">-&gt;</span><span class="na">loadXml</span><span class="p">(</span><span class="s1">&#39;&lt;root&gt;&lt;node/&gt;&lt;node/&gt;&lt;/root&gt;&#39;</span><span class="p">);</span>
+<span class="nv">$nodeList</span> <span class="o">=</span> <span class="nv">$domDocument</span><span class="o">-&gt;</span><span class="na">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;node&#39;</span><span class="p">);</span>
+<span class="nv">$node</span> <span class="o">=</span> <span class="nv">$domDocument</span><span class="o">-&gt;</span><span class="na">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;node&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">item</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">addDocument</span><span class="p">(</span><span class="nv">$domDocument</span><span class="p">);</span>
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">addNodeList</span><span class="p">(</span><span class="nv">$nodeList</span><span class="p">);</span>
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">addNodes</span><span class="p">([</span><span class="nv">$node</span><span class="p">]);</span>
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">addNode</span><span class="p">(</span><span class="nv">$node</span><span class="p">);</span>
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$domDocument</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="sidebar" id="component-dom-crawler-dumping">
+<p class="first sidebar-title">Manipulating and Dumping a <code class="docutils literal notranslate"><span class="pre">Crawler</span></code></p>
+<p>These methods on the <code class="docutils literal notranslate"><span class="pre">Crawler</span></code> are intended to initially populate your
+<code class="docutils literal notranslate"><span class="pre">Crawler</span></code> and aren’t intended to be used to further manipulate a DOM
+(though this is possible). However, since the <code class="docutils literal notranslate"><span class="pre">Crawler</span></code> is a set of
+<code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.domelement.php" title="DOMElement"><span class="pre">DOMElement</span></a></code> objects, you can use any method or property available
+on <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.domelement.php" title="DOMElement"><span class="pre">DOMElement</span></a></code>, <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.domnode.php" title="DOMNode"><span class="pre">DOMNode</span></a></code> or <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/class.domdocument.php" title="DOMDocument"><span class="pre">DOMDocument</span></a></code>.
+For example, you could get the HTML of a <code class="docutils literal notranslate"><span class="pre">Crawler</span></code> with something like
+this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$html</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$crawler</span> <span class="k">as</span> <span class="nv">$domElement</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$html</span> <span class="o">.=</span> <span class="nv">$domElement</span><span class="o">-&gt;</span><span class="na">ownerDocument</span><span class="o">-&gt;</span><span class="na">saveHTML</span><span class="p">(</span><span class="nv">$domElement</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Or you can get the HTML of the first node using
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Crawler.php" title="Symfony\Component\DomCrawler\Crawler::html()"><span class="pre">html()</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// if the node does not exist, calling to html() will result in an exception</span>
+<span class="nv">$html</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">html</span><span class="p">();</span>
+
+<span class="c1">// avoid the exception passing an argument that html() returns when node does not exist</span>
+<span class="nv">$html</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">html</span><span class="p">(</span><span class="s1">&#39;Default &lt;strong&gt;HTML&lt;/strong&gt; content&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Or you can get the outer HTML of the first node using
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Crawler.php" title="Symfony\Component\DomCrawler\Crawler::outerHtml()"><span class="pre">outerHtml()</span></a></code>:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$html</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">outerHtml</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="expression-evaluation">
+<h3>Expression Evaluation<a class="headerlink" href="#expression-evaluation" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">evaluate()</span></code> method evaluates the given XPath expression. The return
+value depends on the XPath expression. If the expression evaluates to a scalar
+value (e.g. HTML attributes), an array of results will be returned. If the
+expression evaluates to a DOM document, a new <code class="docutils literal notranslate"><span class="pre">Crawler</span></code> instance will be
+returned.</p>
+<p>This behavior is best illustrated with examples:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DomCrawler\Crawler</span><span class="p">;</span>
+
+<span class="nv">$html</span> <span class="o">=</span> <span class="s1">&#39;&lt;html&gt;</span>
+<span class="s1">&lt;body&gt;</span>
+<span class="s1">    &lt;span id=&quot;article-100&quot; class=&quot;article&quot;&gt;Article 1&lt;/span&gt;</span>
+<span class="s1">    &lt;span id=&quot;article-101&quot; class=&quot;article&quot;&gt;Article 2&lt;/span&gt;</span>
+<span class="s1">    &lt;span id=&quot;article-102&quot; class=&quot;article&quot;&gt;Article 3&lt;/span&gt;</span>
+<span class="s1">&lt;/body&gt;</span>
+<span class="s1">&lt;/html&gt;&#39;</span><span class="p">;</span>
+
+<span class="nv">$crawler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Crawler</span><span class="p">();</span>
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">addHtmlContent</span><span class="p">(</span><span class="nv">$html</span><span class="p">);</span>
+
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filterXPath</span><span class="p">(</span><span class="s1">&#39;//span[contains(@id, &quot;article-&quot;)]&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">evaluate</span><span class="p">(</span><span class="s1">&#39;substring-after(@id, &quot;-&quot;)&#39;</span><span class="p">);</span>
+<span class="cm">/* Result:</span>
+<span class="cm">[</span>
+<span class="cm">    0 =&gt; &#39;100&#39;,</span>
+<span class="cm">    1 =&gt; &#39;101&#39;,</span>
+<span class="cm">    2 =&gt; &#39;102&#39;,</span>
+<span class="cm">];</span>
+<span class="cm">*/</span>
+
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">evaluate</span><span class="p">(</span><span class="s1">&#39;substring-after(//span[contains(@id, &quot;article-&quot;)]/@id, &quot;-&quot;)&#39;</span><span class="p">);</span>
+<span class="cm">/* Result:</span>
+<span class="cm">[</span>
+<span class="cm">    0 =&gt; &#39;100&#39;,</span>
+<span class="cm">]</span>
+<span class="cm">*/</span>
+
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filterXPath</span><span class="p">(</span><span class="s1">&#39;//span[@class=&quot;article&quot;]&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">evaluate</span><span class="p">(</span><span class="s1">&#39;count(@id)&#39;</span><span class="p">);</span>
+<span class="cm">/* Result:</span>
+<span class="cm">[</span>
+<span class="cm">    0 =&gt; 1.0,</span>
+<span class="cm">    1 =&gt; 1.0,</span>
+<span class="cm">    2 =&gt; 1.0,</span>
+<span class="cm">]</span>
+<span class="cm">*/</span>
+
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">evaluate</span><span class="p">(</span><span class="s1">&#39;count(//span[@class=&quot;article&quot;])&#39;</span><span class="p">);</span>
+<span class="cm">/* Result:</span>
+<span class="cm">[</span>
+<span class="cm">    0 =&gt; 3.0,</span>
+<span class="cm">]</span>
+<span class="cm">*/</span>
+
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">evaluate</span><span class="p">(</span><span class="s1">&#39;//span[1]&#39;</span><span class="p">);</span>
+<span class="c1">// A Symfony\Component\DomCrawler\Crawler instance</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="links">
+<h3>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">filter()</span></code> method to find links by their <code class="docutils literal notranslate"><span class="pre">id</span></code> or <code class="docutils literal notranslate"><span class="pre">class</span></code>
+attributes and use the <code class="docutils literal notranslate"><span class="pre">selectLink()</span></code> method to find links by their content
+(it also finds clickable images with that content in its <code class="docutils literal notranslate"><span class="pre">alt</span></code> attribute).</p>
+<p>Both methods return a <code class="docutils literal notranslate"><span class="pre">Crawler</span></code> instance with just the selected link. Use the
+<code class="docutils literal notranslate"><span class="pre">link()</span></code> method to get the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Link.php" title="Symfony\Component\DomCrawler\Link"><span class="pre">Link</span></a></code> object
+that represents the link:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// first, select the link by id, class or content...</span>
+<span class="nv">$linkCrawler</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;#sign-up&#39;</span><span class="p">);</span>
+<span class="nv">$linkCrawler</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;.user-profile&#39;</span><span class="p">);</span>
+<span class="nv">$linkCrawler</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">selectLink</span><span class="p">(</span><span class="s1">&#39;Log in&#39;</span><span class="p">);</span>
+
+<span class="c1">// ...then, get the Link object:</span>
+<span class="nv">$link</span> <span class="o">=</span> <span class="nv">$linkCrawler</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">();</span>
+
+<span class="c1">// or do all this at once:</span>
+<span class="nv">$link</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;#sign-up&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">();</span>
+<span class="nv">$link</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;.user-profile&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">();</span>
+<span class="nv">$link</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">selectLink</span><span class="p">(</span><span class="s1">&#39;Log in&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Link.php" title="Symfony\Component\DomCrawler\Link"><span class="pre">Link</span></a></code> object has several useful
+methods to get more information about the selected link itself:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// returns the proper URI that can be used to make another request</span>
+<span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$link</span><span class="o">-&gt;</span><span class="na">getUri</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">getUri()</span></code> is especially useful as it cleans the <code class="docutils literal notranslate"><span class="pre">href</span></code> value and
+transforms it into how it should really be processed. For example, for a
+link with <code class="docutils literal notranslate"><span class="pre">href=&quot;#foo&quot;</span></code>, this would return the full URI of the current
+page suffixed with <code class="docutils literal notranslate"><span class="pre">#foo</span></code>. The return from <code class="docutils literal notranslate"><span class="pre">getUri()</span></code> is always a full
+URI that you can act on.</p>
+</div>
+</div>
+<div class="section" id="images">
+<h3>Images<a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h3>
+<p>To find an image by its <code class="docutils literal notranslate"><span class="pre">alt</span></code> attribute, use the <code class="docutils literal notranslate"><span class="pre">selectImage</span></code> method on an
+existing crawler. This returns a <code class="docutils literal notranslate"><span class="pre">Crawler</span></code> instance with just the selected
+image(s). Calling <code class="docutils literal notranslate"><span class="pre">image()</span></code> gives you a special
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Image.php" title="Symfony\Component\DomCrawler\Image"><span class="pre">Image</span></a></code> object:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$imagesCrawler</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">selectImage</span><span class="p">(</span><span class="s1">&#39;Kitten&#39;</span><span class="p">);</span>
+<span class="nv">$image</span> <span class="o">=</span> <span class="nv">$imagesCrawler</span><span class="o">-&gt;</span><span class="na">image</span><span class="p">();</span>
+
+<span class="c1">// or do this all at once</span>
+<span class="nv">$image</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">selectImage</span><span class="p">(</span><span class="s1">&#39;Kitten&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">image</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Image.php" title="Symfony\Component\DomCrawler\Image"><span class="pre">Image</span></a></code> object has the same
+<code class="docutils literal notranslate"><span class="pre">getUri()</span></code> method as <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Link.php" title="Symfony\Component\DomCrawler\Link"><span class="pre">Link</span></a></code>.</p>
+</div>
+<div class="section" id="forms">
+<h3>Forms<a class="headerlink" href="#forms" title="Permalink to this headline">¶</a></h3>
+<p>Special treatment is also given to forms. A <code class="docutils literal notranslate"><span class="pre">selectButton()</span></code> method is
+available on the Crawler which returns another Crawler that matches <code class="docutils literal notranslate"><span class="pre">&lt;button&gt;</span></code>
+or <code class="docutils literal notranslate"><span class="pre">&lt;input</span> <span class="pre">type=&quot;submit&quot;&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;input</span> <span class="pre">type=&quot;button&quot;&gt;</span></code> elements (or an
+<code class="docutils literal notranslate"><span class="pre">&lt;img&gt;</span></code> element inside them). The string given as argument is looked for in
+the <code class="docutils literal notranslate"><span class="pre">id</span></code>, <code class="docutils literal notranslate"><span class="pre">alt</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code>, and <code class="docutils literal notranslate"><span class="pre">value</span></code> attributes and the text content of
+those elements.</p>
+<p>This method is especially useful because you can use it to return
+a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Form.php" title="Symfony\Component\DomCrawler\Form"><span class="pre">Form</span></a></code> object that represents the
+form that the button lives in:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// button example: &lt;button id=&quot;my-super-button&quot; type=&quot;submit&quot;&gt;My super button&lt;/button&gt;</span>
+
+<span class="c1">// you can get button by its label</span>
+<span class="nv">$form</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">selectButton</span><span class="p">(</span><span class="s1">&#39;My super button&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">form</span><span class="p">();</span>
+
+<span class="c1">// or by button id (#my-super-button) if the button doesn&#39;t have a label</span>
+<span class="nv">$form</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">selectButton</span><span class="p">(</span><span class="s1">&#39;my-super-button&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">form</span><span class="p">();</span>
+
+<span class="c1">// or you can filter the whole form, for example a form has a class attribute: &lt;form class=&quot;form-vertical&quot; method=&quot;POST&quot;&gt;</span>
+<span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s1">&#39;.form-vertical&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">form</span><span class="p">();</span>
+
+<span class="c1">// or &quot;fill&quot; the form fields with data</span>
+<span class="nv">$form</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">selectButton</span><span class="p">(</span><span class="s1">&#39;my-super-button&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">form</span><span class="p">([</span>
+    <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Ryan&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Form.php" title="Symfony\Component\DomCrawler\Form"><span class="pre">Form</span></a></code> object has lots of very
+useful methods for working with forms:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getUri</span><span class="p">();</span>
+<span class="nv">$method</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">();</span>
+<span class="nv">$name</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/Form.php" title="Symfony\Component\DomCrawler\Form::getUri()"><span class="pre">getUri()</span></a></code> method does more
+than just return the <code class="docutils literal notranslate"><span class="pre">action</span></code> attribute of the form. If the form method
+is GET, then it mimics the browser’s behavior and returns the <code class="docutils literal notranslate"><span class="pre">action</span></code>
+attribute followed by a query string of all of the form’s values.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The optional <code class="docutils literal notranslate"><span class="pre">formaction</span></code> and <code class="docutils literal notranslate"><span class="pre">formmethod</span></code> button attributes are
+supported. The <code class="docutils literal notranslate"><span class="pre">getUri()</span></code> and <code class="docutils literal notranslate"><span class="pre">getMethod()</span></code> methods take into account
+those attributes to always return the right action and method depending on
+the button used to get the form.</p>
+</div>
+<p>You can virtually set and get values on the form:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// sets values on the form internally</span>
+<span class="nv">$form</span><span class="o">-&gt;</span><span class="na">setValues</span><span class="p">([</span>
+    <span class="s1">&#39;registration[username]&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;symfonyfan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;registration[terms]&#39;</span>    <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">]);</span>
+
+<span class="c1">// gets back an array of values - in the &quot;flat&quot; array like above</span>
+<span class="nv">$values</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getValues</span><span class="p">();</span>
+
+<span class="c1">// returns the values like PHP would see them,</span>
+<span class="c1">// where &quot;registration&quot; is its own array</span>
+<span class="nv">$values</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getPhpValues</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>To work with multi-dimensional fields:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nx">form</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&quot;multi[]&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&quot;multi[]&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&quot;multi[dimensional]&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&quot;multi[dimensional][]&quot;</span> <span class="nx">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&quot;multi[dimensional][]&quot;</span> <span class="nx">value</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&quot;multi[dimensional][]&quot;</span> <span class="nx">value</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="o">/&gt;</span>
+<span class="o">&lt;/</span><span class="nx">form</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Pass an array of values:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// sets a single field</span>
+<span class="nv">$form</span><span class="o">-&gt;</span><span class="na">setValues</span><span class="p">([</span><span class="s1">&#39;multi&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]]);</span>
+
+<span class="c1">// sets multiple fields at once</span>
+<span class="nv">$form</span><span class="o">-&gt;</span><span class="na">setValues</span><span class="p">([</span><span class="s1">&#39;multi&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+    <span class="mi">1</span>             <span class="o">=&gt;</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dimensional&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;an other value&#39;</span><span class="p">,</span>
+<span class="p">]]);</span>
+
+<span class="c1">// tick multiple checkboxes at once</span>
+<span class="nv">$form</span><span class="o">-&gt;</span><span class="na">setValues</span><span class="p">([</span><span class="s1">&#39;multi&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+    <span class="s1">&#39;dimensional&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1">// it uses the input value to determine which checkbox to tick</span>
+<span class="p">]]);</span>
+</pre></div>
+</div>
+<p>This is great, but it gets better! The <code class="docutils literal notranslate"><span class="pre">Form</span></code> object allows you to interact
+with your form like a browser, selecting radio values, ticking checkboxes,
+and uploading files:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;registration[username]&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">&#39;symfonyfan&#39;</span><span class="p">);</span>
+
+<span class="c1">// checks or unchecks a checkbox</span>
+<span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;registration[terms]&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">tick</span><span class="p">();</span>
+<span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;registration[terms]&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">untick</span><span class="p">();</span>
+
+<span class="c1">// selects an option</span>
+<span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;registration[birthday][year]&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="mi">1984</span><span class="p">);</span>
+
+<span class="c1">// selects many options from a &quot;multiple&quot; select</span>
+<span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;registration[interests]&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">([</span><span class="s1">&#39;symfony&#39;</span><span class="p">,</span> <span class="s1">&#39;cookies&#39;</span><span class="p">]);</span>
+
+<span class="c1">// fakes a file upload</span>
+<span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;registration[photo]&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">upload</span><span class="p">(</span><span class="s1">&#39;/path/to/lucas.jpg&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="section" id="using-the-form-data">
+<h4>Using the Form Data<a class="headerlink" href="#using-the-form-data" title="Permalink to this headline">¶</a></h4>
+<p>What’s the point of doing all of this? If you’re testing internally, you
+can grab the information off of your form as if it had just been submitted
+by using the PHP values:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$values</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getPhpValues</span><span class="p">();</span>
+<span class="nv">$files</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getPhpFiles</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>If you’re using an external HTTP client, you can use the form to grab all
+of the information you need to create a POST request for the form:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getUri</span><span class="p">();</span>
+<span class="nv">$method</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">();</span>
+<span class="nv">$values</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getValues</span><span class="p">();</span>
+<span class="nv">$files</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getFiles</span><span class="p">();</span>
+
+<span class="c1">// now use some HTTP client and post using this information</span>
+</pre></div>
+</div>
+<p>One great example of an integrated system that uses all of this is
+the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/BrowserKit/HttpBrowser.php" title="Symfony\Component\BrowserKit\HttpBrowser"><span class="pre">HttpBrowser</span></a></code> provided by
+the <a class="reference internal" href="browser_kit.html"><span class="doc">BrowserKit component</span></a>.
+It understands the Symfony Crawler object and can use it to submit forms
+directly:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\BrowserKit\HttpBrowser</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpClient\HttpClient</span><span class="p">;</span>
+
+<span class="c1">// makes a real request to an external site</span>
+<span class="nv">$browser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpBrowser</span><span class="p">(</span><span class="nx">HttpClient</span><span class="o">::</span><span class="na">create</span><span class="p">());</span>
+<span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$browser</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;https://github.com/login&#39;</span><span class="p">);</span>
+
+<span class="c1">// select the form and fill in some values</span>
+<span class="nv">$form</span> <span class="o">=</span> <span class="nv">$crawler</span><span class="o">-&gt;</span><span class="na">selectButton</span><span class="p">(</span><span class="s1">&#39;Sign in&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">form</span><span class="p">();</span>
+<span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;login&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;symfonyfan&#39;</span><span class="p">;</span>
+<span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;anypass&#39;</span><span class="p">;</span>
+
+<span class="c1">// submits the given form</span>
+<span class="nv">$crawler</span> <span class="o">=</span> <span class="nv">$browser</span><span class="o">-&gt;</span><span class="na">submit</span><span class="p">(</span><span class="nv">$form</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="selecting-invalid-choice-values">
+<span id="components-dom-crawler-invalid"></span><h4>Selecting Invalid Choice Values<a class="headerlink" href="#selecting-invalid-choice-values" title="Permalink to this headline">¶</a></h4>
+<p>By default, choice fields (select, radio) have internal validation activated
+to prevent you from setting invalid values. If you want to be able to set
+invalid values, you can use the  <code class="docutils literal notranslate"><span class="pre">disableValidation()</span></code> method on either
+the whole form or specific field(s):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// disables validation for a specific field</span>
+<span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">disableValidation</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;Invalid value&#39;</span><span class="p">);</span>
+
+<span class="c1">// disables validation for the whole form</span>
+<span class="nv">$form</span><span class="o">-&gt;</span><span class="na">disableValidation</span><span class="p">();</span>
+<span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;Invalid value&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="resolving-a-uri">
+<h3>Resolving a URI<a class="headerlink" href="#resolving-a-uri" title="Permalink to this headline">¶</a></h3>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/UriResolver.php" title="Symfony\Component\DomCrawler\UriResolver"><span class="pre">UriResolver</span></a></code> helper class was added in Symfony 5.1.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DomCrawler/UriResolver.php" title="Symfony\Component\DomCrawler\UriResolver"><span class="pre">UriResolver</span></a></code> class takes an URI
+(relative, absolute, fragment, etc.) and turns it into an absolute URI against
+another given base URI:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DomCrawler\UriResolver</span><span class="p">;</span>
+
+<span class="nx">UriResolver</span><span class="o">::</span><span class="na">resolve</span><span class="p">(</span><span class="s1">&#39;/foo&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost/bar/foo/&#39;</span><span class="p">);</span> <span class="c1">// http://localhost/foo</span>
+<span class="nx">UriResolver</span><span class="o">::</span><span class="na">resolve</span><span class="p">(</span><span class="s1">&#39;?a=b&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost/bar#foo&#39;</span><span class="p">);</span> <span class="c1">// http://localhost/bar?a=b</span>
+<span class="nx">UriResolver</span><span class="o">::</span><span class="na">resolve</span><span class="p">(</span><span class="s1">&#39;../../&#39;</span><span class="p">,</span> <span class="s1">&#39;http://localhost/&#39;</span><span class="p">);</span> <span class="c1">// http://localhost/</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="learn-more">
+<h2>Learn more<a class="headerlink" href="#learn-more" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="../testing.html"><span class="doc">Testing</span></a></li>
+<li><a class="reference internal" href="css_selector.html"><span class="doc">The CssSelector Component</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

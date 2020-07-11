@@ -1,0 +1,1275 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Cache &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Console Commands" href="console.html" />
+    <link rel="prev" title="The Bundle System" href="bundles.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Cache</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-cache-with-frameworkbundle">Configuring Cache with FrameworkBundle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-custom-namespaced-pools">Creating Custom (Namespaced) Pools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-provider-options">Custom Provider Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-cache-chain">Creating a Cache Chain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-cache-tags">Using Cache Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clearing-the-cache">Clearing the Cache</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Cache</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/cache.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cache">
+<span id="index-0"></span><h1>Cache<a class="headerlink" href="#cache" title="Permalink to this headline">¶</a></h1>
+<p>Using a cache is a great way of making your application run quicker. The Symfony cache
+component ships with many adapters to different storages. Every adapter is
+developed for high performance.</p>
+<p>The following example shows a typical usage of the cache:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Contracts\Cache\ItemInterface</span><span class="p">;</span>
+
+<span class="c1">// The callable will only be executed on a cache miss.</span>
+<span class="nv">$value</span> <span class="o">=</span> <span class="nv">$pool</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;my_cache_key&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">ItemInterface</span> <span class="nv">$item</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">expiresAfter</span><span class="p">(</span><span class="mi">3600</span><span class="p">);</span>
+
+    <span class="c1">// ... do some HTTP request or heavy computations</span>
+    <span class="nv">$computedValue</span> <span class="o">=</span> <span class="s1">&#39;foobar&#39;</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="nv">$computedValue</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="k">echo</span> <span class="nv">$value</span><span class="p">;</span> <span class="c1">// &#39;foobar&#39;</span>
+
+<span class="c1">// ... and to remove the cache key</span>
+<span class="nv">$pool</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;my_cache_key&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Symfony supports Cache Contracts, PSR-6/16 and Doctrine Cache interfaces.
+You can read more about these at the <a class="reference internal" href="components/cache.html"><span class="doc">component documentation</span></a>.</p>
+<div class="section" id="configuring-cache-with-frameworkbundle">
+<span id="cache-configuration-with-frameworkbundle"></span><h2>Configuring Cache with FrameworkBundle<a class="headerlink" href="#configuring-cache-with-frameworkbundle" title="Permalink to this headline">¶</a></h2>
+<p>When configuring the cache component there are a few concepts you should know
+of:</p>
+<dl class="docutils">
+<dt><strong>Pool</strong></dt>
+<dd>This is a service that you will interact with. Each pool will always have
+its own namespace and cache items. There is never a conflict between pools.</dd>
+<dt><strong>Adapter</strong></dt>
+<dd>An adapter is a <em>template</em> that you use to create pools.</dd>
+<dt><strong>Provider</strong></dt>
+<dd>A provider is a service that some adapters use to connect to the storage.
+Redis and Memcached are example of such adapters. If a DSN is used as the
+provider then a service is automatically created.</dd>
+</dl>
+<p>There are two pools that are always enabled by default. They are <code class="docutils literal notranslate"><span class="pre">cache.app</span></code> and
+<code class="docutils literal notranslate"><span class="pre">cache.system</span></code>. The system cache is used for things like annotations, serializer,
+and validation. The <code class="docutils literal notranslate"><span class="pre">cache.app</span></code> can be used in your code. You can configure which
+adapter (template) they use by using the <code class="docutils literal notranslate"><span class="pre">app</span></code> and <code class="docutils literal notranslate"><span class="pre">system</span></code> key like:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/cache.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">cache</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">app</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cache.adapter.filesystem</span>
+        <span class="l l-Scalar l-Scalar-Plain">system</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cache.adapter.system</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/cache.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:cache</span> <span class="na">app=</span><span class="s">&quot;cache.adapter.filesystem&quot;</span>
+            <span class="na">system=</span><span class="s">&quot;cache.adapter.system&quot;</span>
+        <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/cache.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;cache&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;app&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cache.adapter.filesystem&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;system&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cache.adapter.system&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>The Cache component comes with a series of adapters pre-configured:</p>
+<ul class="simple">
+<li><a class="reference internal" href="components/cache/adapters/apcu_adapter.html"><span class="doc">cache.adapter.apcu</span></a></li>
+<li><a class="reference internal" href="components/cache/adapters/array_cache_adapter.html"><span class="doc">cache.adapter.array</span></a></li>
+<li><a class="reference internal" href="components/cache/adapters/doctrine_adapter.html"><span class="doc">cache.adapter.doctrine</span></a></li>
+<li><a class="reference internal" href="components/cache/adapters/filesystem_adapter.html"><span class="doc">cache.adapter.filesystem</span></a></li>
+<li><a class="reference internal" href="components/cache/adapters/memcached_adapter.html"><span class="doc">cache.adapter.memcached</span></a></li>
+<li><a class="reference internal" href="components/cache/adapters/pdo_doctrine_dbal_adapter.html"><span class="doc">cache.adapter.pdo</span></a></li>
+<li><a class="reference internal" href="components/cache/adapters/proxy_adapter.html"><span class="doc">cache.adapter.psr6</span></a></li>
+<li><a class="reference internal" href="components/cache/adapters/redis_adapter.html"><span class="doc">cache.adapter.redis</span></a></li>
+</ul>
+<p>Some of these adapters could be configured via shortcuts. Using these shortcuts
+will create pools with service IDs that follow the pattern <code class="docutils literal notranslate"><span class="pre">cache.[type]</span></code>.</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/cache.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">cache</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">directory</span><span class="p p-Indicator">:</span> <span class="s">&#39;%kernel.cache_dir%/pools&#39;</span> <span class="c1"># Only used with cache.adapter.filesystem</span>
+
+        <span class="c1"># service: cache.doctrine</span>
+        <span class="l l-Scalar l-Scalar-Plain">default_doctrine_provider</span><span class="p p-Indicator">:</span> <span class="s">&#39;app.doctrine_cache&#39;</span>
+        <span class="c1"># service: cache.psr6</span>
+        <span class="l l-Scalar l-Scalar-Plain">default_psr6_provider</span><span class="p p-Indicator">:</span> <span class="s">&#39;app.my_psr6_service&#39;</span>
+        <span class="c1"># service: cache.redis</span>
+        <span class="l l-Scalar l-Scalar-Plain">default_redis_provider</span><span class="p p-Indicator">:</span> <span class="s">&#39;redis://localhost&#39;</span>
+        <span class="c1"># service: cache.memcached</span>
+        <span class="l l-Scalar l-Scalar-Plain">default_memcached_provider</span><span class="p p-Indicator">:</span> <span class="s">&#39;memcached://localhost&#39;</span>
+        <span class="c1"># service: cache.pdo</span>
+        <span class="l l-Scalar l-Scalar-Plain">default_pdo_provider</span><span class="p p-Indicator">:</span> <span class="s">&#39;doctrine.dbal.default_connection&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/cache.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="c">&lt;!--</span>
+<span class="c">        default_doctrine_provider: Service: cache.doctrine</span>
+<span class="c">        default_psr6_provider: Service: cache.psr6</span>
+<span class="c">        default_redis_provider: Service: cache.redis</span>
+<span class="c">        default_memcached_provider: Service: cache.memcached</span>
+<span class="c">        default_pdo_provider: Service: cache.pdo</span>
+<span class="c">        --&gt;</span>
+        <span class="c">&lt;!-- &quot;directory&quot; attribute is only used with cache.adapter.filesystem --&gt;</span>
+        <span class="nt">&lt;framework:cache</span> <span class="na">directory=</span><span class="s">&quot;%kernel.cache_dir%/pools&quot;</span>
+            <span class="na">default_doctrine_provider=</span><span class="s">&quot;app.doctrine_cache&quot;</span>
+            <span class="na">default_psr6_provider=</span><span class="s">&quot;app.my_psr6_service&quot;</span>
+            <span class="na">default_redis_provider=</span><span class="s">&quot;redis://localhost&quot;</span>
+            <span class="na">default_memcached_provider=</span><span class="s">&quot;memcached://localhost&quot;</span>
+            <span class="na">default_pdo_provider=</span><span class="s">&quot;doctrine.dbal.default_connection&quot;</span>
+        <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/cache.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;cache&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="c1">// Only used with cache.adapter.filesystem</span>
+        <span class="s1">&#39;directory&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%kernel.cache_dir%/pools&#39;</span><span class="p">,</span>
+
+        <span class="c1">// Service: cache.doctrine</span>
+        <span class="s1">&#39;default_doctrine_provider&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;app.doctrine_cache&#39;</span><span class="p">,</span>
+        <span class="c1">// Service: cache.psr6</span>
+        <span class="s1">&#39;default_psr6_provider&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;app.my_psr6_service&#39;</span><span class="p">,</span>
+        <span class="c1">// Service: cache.redis</span>
+        <span class="s1">&#39;default_redis_provider&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;redis://localhost&#39;</span><span class="p">,</span>
+        <span class="c1">// Service: cache.memcached</span>
+        <span class="s1">&#39;default_memcached_provider&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;memcached://localhost&#39;</span><span class="p">,</span>
+        <span class="c1">// Service: cache.pdo</span>
+        <span class="s1">&#39;default_pdo_provider&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;doctrine.dbal.default_connection&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="creating-custom-namespaced-pools">
+<h2>Creating Custom (Namespaced) Pools<a class="headerlink" href="#creating-custom-namespaced-pools" title="Permalink to this headline">¶</a></h2>
+<p>You can also create more customized pools:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/cache.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">cache</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">default_memcached_provider</span><span class="p p-Indicator">:</span> <span class="s">&#39;memcached://localhost&#39;</span>
+
+        <span class="l l-Scalar l-Scalar-Plain">pools</span><span class="p p-Indicator">:</span>
+            <span class="c1"># creates a &quot;custom_thing.cache&quot; service</span>
+            <span class="c1"># autowireable via &quot;CacheInterface $customThingCache&quot;</span>
+            <span class="c1"># uses the &quot;app&quot; cache configuration</span>
+            <span class="l l-Scalar l-Scalar-Plain">custom_thing.cache</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cache.app</span>
+
+            <span class="c1"># creates a &quot;my_cache_pool&quot; service</span>
+            <span class="c1"># autowireable via &quot;CacheInterface $myCachePool&quot;</span>
+            <span class="l l-Scalar l-Scalar-Plain">my_cache_pool</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cache.adapter.filesystem</span>
+
+            <span class="c1"># uses the default_memcached_provider from above</span>
+            <span class="l l-Scalar l-Scalar-Plain">acme.cache</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cache.adapter.memcached</span>
+
+            <span class="c1"># control adapter&#39;s configuration</span>
+            <span class="l l-Scalar l-Scalar-Plain">foobar.cache</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cache.adapter.memcached</span>
+                <span class="l l-Scalar l-Scalar-Plain">provider</span><span class="p p-Indicator">:</span> <span class="s">&#39;memcached://user:password@example.com&#39;</span>
+
+            <span class="c1"># uses the &quot;foobar.cache&quot; pool as its backend but controls</span>
+            <span class="c1"># the lifetime and (like all pools) has a separate cache namespace</span>
+            <span class="l l-Scalar l-Scalar-Plain">short_cache</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">foobar.cache</span>
+                <span class="l l-Scalar l-Scalar-Plain">default_lifetime</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">60</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/cache.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:cache</span> <span class="na">default-memcached-provider=</span><span class="s">&quot;memcached://localhost&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- creates a &quot;custom_thing.cache&quot; service</span>
+<span class="c">                 autowireable via &quot;CacheInterface $customThingCache&quot;</span>
+<span class="c">                 uses the &quot;app&quot; cache configuration --&gt;</span>
+            <span class="nt">&lt;framework:pool</span> <span class="na">name=</span><span class="s">&quot;custom_thing.cache&quot;</span> <span class="na">adapter=</span><span class="s">&quot;cache.app&quot;</span><span class="nt">/&gt;</span>
+
+            <span class="c">&lt;!-- creates a &quot;my_cache_pool&quot; service</span>
+<span class="c">                 autowireable via &quot;CacheInterface $myCachePool&quot; --&gt;</span>
+            <span class="nt">&lt;framework:pool</span> <span class="na">name=</span><span class="s">&quot;my_cache_pool&quot;</span> <span class="na">adapter=</span><span class="s">&quot;cache.adapter.filesystem&quot;</span><span class="nt">/&gt;</span>
+
+            <span class="c">&lt;!-- uses the default_memcached_provider from above --&gt;</span>
+            <span class="nt">&lt;framework:pool</span> <span class="na">name=</span><span class="s">&quot;acme.cache&quot;</span> <span class="na">adapter=</span><span class="s">&quot;cache.adapter.memcached&quot;</span><span class="nt">/&gt;</span>
+
+            <span class="c">&lt;!-- control adapter&#39;s configuration --&gt;</span>
+            <span class="nt">&lt;framework:pool</span> <span class="na">name=</span><span class="s">&quot;foobar.cache&quot;</span> <span class="na">adapter=</span><span class="s">&quot;cache.adapter.memcached&quot;</span>
+                <span class="na">provider=</span><span class="s">&quot;memcached://user:password@example.com&quot;</span>
+            <span class="nt">/&gt;</span>
+
+            <span class="c">&lt;!-- uses the &quot;foobar.cache&quot; pool as its backend but controls</span>
+<span class="c">                 the lifetime and (like all pools) has a separate cache namespace --&gt;</span>
+            <span class="nt">&lt;framework:pool</span> <span class="na">name=</span><span class="s">&quot;short_cache&quot;</span> <span class="na">adapter=</span><span class="s">&quot;foobar.cache&quot;</span> <span class="na">default-lifetime=</span><span class="s">&quot;60&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/framework:cache&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/cache.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;cache&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;default_memcached_provider&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;memcached://localhost&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;pools&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// creates a &quot;custom_thing.cache&quot; service</span>
+            <span class="c1">// autowireable via &quot;CacheInterface $customThingCache&quot;</span>
+            <span class="c1">// uses the &quot;app&quot; cache configuration</span>
+            <span class="s1">&#39;custom_thing.cache&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;adapter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cache.app&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+
+            <span class="c1">// creates a &quot;my_cache_pool&quot; service</span>
+            <span class="c1">// autowireable via &quot;CacheInterface $myCachePool&quot;</span>
+            <span class="s1">&#39;my_cache_pool&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;adapter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cache.adapter.filesystem&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+
+            <span class="c1">// uses the default_memcached_provider from above</span>
+            <span class="s1">&#39;acme.cache&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;adapter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cache.adapter.memcached&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+
+            <span class="c1">// control adapter&#39;s configuration</span>
+            <span class="s1">&#39;foobar.cache&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;adapter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cache.adapter.memcached&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;provider&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;memcached://user:password@example.com&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+
+            <span class="c1">// uses the &quot;foobar.cache&quot; pool as its backend but controls</span>
+            <span class="c1">// the lifetime and (like all pools) has a separate cache namespace</span>
+            <span class="s1">&#39;short_cache&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;adapter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;foobar.cache&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;default_lifetime&#39;</span> <span class="o">=&gt;</span> <span class="mi">60</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Each pool manages a set of independent cache keys: keys from different pools
+<em>never</em> collide, even if they share the same backend. This is achieved by prefixing
+keys with a namespace that’s generated by hashing the name of the pool, the name
+of the compiled container class and a <a class="reference internal" href="reference/configuration/framework.html#reference-cache-prefix-seed"><span class="std std-ref">configurable seed</span></a>
+that defaults to the project directory.</p>
+<p>Each custom pool becomes a service whose service ID is the name of the pool
+(e.g. <code class="docutils literal notranslate"><span class="pre">custom_thing.cache</span></code>). An autowiring alias is also created for each pool
+using the camel case version of its name - e.g. <code class="docutils literal notranslate"><span class="pre">custom_thing.cache</span></code> can be
+injected automatically by naming the argument <code class="docutils literal notranslate"><span class="pre">$customThingCache</span></code> and type-hinting it
+with either <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Contracts/Cache/CacheInterface.php" title="Symfony\Contracts\Cache\CacheInterface"><span class="pre">CacheInterface</span></a></code> or
+<code class="docutils literal notranslate"><span class="pre">Psr\Cache\CacheItemPoolInterface</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Contracts\Cache\CacheInterface</span><span class="p">;</span>
+
+<span class="c1">// from a controller method</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">listProducts</span><span class="p">(</span><span class="nx">CacheInterface</span> <span class="nv">$customThingCache</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// in a service</span>
+<span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">CacheInterface</span> <span class="nv">$customThingCache</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="custom-provider-options">
+<h2>Custom Provider Options<a class="headerlink" href="#custom-provider-options" title="Permalink to this headline">¶</a></h2>
+<p>Some providers have specific options that can be configured. The
+<a class="reference internal" href="components/cache/adapters/redis_adapter.html"><span class="doc">RedisAdapter</span></a> allows you to
+create providers with the options <code class="docutils literal notranslate"><span class="pre">timeout</span></code>, <code class="docutils literal notranslate"><span class="pre">retry_interval</span></code>. etc. To use these
+options with non-default values you need to create your own <code class="docutils literal notranslate"><span class="pre">\Redis</span></code> provider
+and use that when configuring the pool.</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/cache.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">cache</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">pools</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">cache.my_redis</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cache.adapter.redis</span>
+                <span class="l l-Scalar l-Scalar-Plain">provider</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">app.my_custom_redis_provider</span>
+
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">app.my_custom_redis_provider</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">\Redis</span>
+        <span class="l l-Scalar l-Scalar-Plain">factory</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;Symfony\Component\Cache\Adapter\RedisAdapter&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;createConnection&#39;</span><span class="p p-Indicator">]</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="s">&#39;redis://localhost&#39;</span>
+            <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">retry_interval</span><span class="p p-Indicator">:</span> <span class="nv">2</span><span class="p p-Indicator">,</span> <span class="nv">timeout</span><span class="p p-Indicator">:</span> <span class="nv">10</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/cache.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:cache&gt;</span>
+            <span class="nt">&lt;framework:pool</span> <span class="na">name=</span><span class="s">&quot;cache.my_redis&quot;</span> <span class="na">adapter=</span><span class="s">&quot;cache.adapter.redis&quot;</span> <span class="na">provider=</span><span class="s">&quot;app.my_custom_redis_provider&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/framework:cache&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;app.my_custom_redis_provider&quot;</span> <span class="na">class=</span><span class="s">&quot;\Redis&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;factory</span> <span class="na">class=</span><span class="s">&quot;Symfony\Component\Cache\Adapter\RedisAdapter&quot;</span> <span class="na">method=</span><span class="s">&quot;createConnection&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;argument&gt;</span>redis://localhost<span class="nt">&lt;/argument&gt;</span>
+            <span class="nt">&lt;argument</span> <span class="na">type=</span><span class="s">&quot;collection&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;argument</span> <span class="na">key=</span><span class="s">&quot;retry_interval&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/argument&gt;</span>
+                <span class="nt">&lt;argument</span> <span class="na">key=</span><span class="s">&quot;timeout&quot;</span><span class="nt">&gt;</span>10<span class="nt">&lt;/argument&gt;</span>
+            <span class="nt">&lt;/argument&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/cache.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Cache\Adapter\RedisAdapter</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;cache&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;pools&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;cache.my_redis&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;adapter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cache.adapter.redis&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;provider&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;app.my_custom_redis_provider&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;app.my_custom_redis_provider&#39;</span><span class="p">,</span> <span class="nx">\Redis</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setFactory</span><span class="p">([</span><span class="nx">RedisAdapter</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="s1">&#39;createConnection&#39;</span><span class="p">])</span>
+    <span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="s1">&#39;redis://localhost&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">([</span>
+        <span class="s1">&#39;retry_interval&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s1">&#39;timeout&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span>
+    <span class="p">])</span>
+<span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="creating-a-cache-chain">
+<h2>Creating a Cache Chain<a class="headerlink" href="#creating-a-cache-chain" title="Permalink to this headline">¶</a></h2>
+<p>Different cache adapters have different strengths and weaknesses. Some might be
+really quick but optimized to store small items and some may be able to contain
+a lot of data but are quite slow. To get the best of both worlds you may use a
+chain of adapters.</p>
+<p>A cache chain combines several cache pools into a single one. When storing an
+item in a cache chain, Symfony stores it in all pools sequentially. When
+retrieving an item, Symfony tries to get it from the first pool. If it’s not
+found, it tries the next pools until the item is found or an exception is thrown.
+Because of this behavior, it’s recommended to define the adapters in the chain
+in order from fastest to slowest.</p>
+<p>If an error happens when storing an item in a pool, Symfony stores it in the
+other pools and no exception is thrown. Later, when the item is retrieved,
+Symfony stores the item automatically in all the missing pools.</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/cache.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">cache</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">pools</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">my_cache_pool</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">default_lifetime</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">31536000</span>  <span class="c1"># One year</span>
+                <span class="l l-Scalar l-Scalar-Plain">adapters</span><span class="p p-Indicator">:</span>
+                  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">cache.adapter.array</span>
+                  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">cache.adapter.apcu</span>
+                  <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span><span class="nv">name</span><span class="p p-Indicator">:</span> <span class="nv">cache.adapter.redis</span><span class="p p-Indicator">,</span> <span class="nv">provider</span><span class="p p-Indicator">:</span> <span class="s">&#39;redis://user:password@example.com&#39;</span><span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/cache.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:cache&gt;</span>
+            <span class="nt">&lt;framework:pool</span> <span class="na">name=</span><span class="s">&quot;my_cache_pool&quot;</span> <span class="na">default-lifetime=</span><span class="s">&quot;31536000&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;framework:adapter</span> <span class="na">name=</span><span class="s">&quot;cache.adapter.array&quot;</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;framework:adapter</span> <span class="na">name=</span><span class="s">&quot;cache.adapter.apcu&quot;</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;framework:adapter</span> <span class="na">name=</span><span class="s">&quot;cache.adapter.redis&quot;</span> <span class="na">provider=</span><span class="s">&quot;redis://user:password@example.com&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/framework:pool&gt;</span>
+        <span class="nt">&lt;/framework:cache&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/cache.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;cache&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;pools&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;my_cache_pool&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;default_lifetime&#39;</span> <span class="o">=&gt;</span> <span class="mi">31536000</span><span class="p">,</span> <span class="c1">// One year</span>
+                <span class="s1">&#39;adapters&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="s1">&#39;cache.adapter.array&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;cache.adapter.apcu&#39;</span><span class="p">,</span>
+                    <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cache.adapter.redis&#39;</span><span class="p">,</span> <span class="s1">&#39;provider&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;redis://user:password@example.com&#39;</span><span class="p">],</span>
+                <span class="p">],</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="using-cache-tags">
+<h2>Using Cache Tags<a class="headerlink" href="#using-cache-tags" title="Permalink to this headline">¶</a></h2>
+<p>In applications with many cache keys it could be useful to organize the data stored
+to be able to invalidate the cache more efficiently. One way to achieve that is to
+use cache tags. One or more tags could be added to the cache item. All items with
+the same key could be invalidated with one function call:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Contracts\Cache\ItemInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Contracts\Cache\TagAwareCacheInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">SomeClass</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$myCachePool</span><span class="p">;</span>
+
+    <span class="c1">// using autowiring to inject the cache pool</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">TagAwareCacheInterface</span> <span class="nv">$myCachePool</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">myCachePool</span> <span class="o">=</span> <span class="nv">$myCachePool</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">someMethod</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$value0</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">myCachePool</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;item_0&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">ItemInterface</span> <span class="nv">$item</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">tag</span><span class="p">([</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">]);</span>
+
+            <span class="k">return</span> <span class="s1">&#39;debug&#39;</span><span class="p">;</span>
+        <span class="p">});</span>
+
+        <span class="nv">$value1</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">myCachePool</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;item_1&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">ItemInterface</span> <span class="nv">$item</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$item</span><span class="o">-&gt;</span><span class="na">tag</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+
+            <span class="k">return</span> <span class="s1">&#39;debug&#39;</span><span class="p">;</span>
+        <span class="p">});</span>
+
+        <span class="c1">// Remove all cache keys tagged with &quot;bar&quot;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">myCachePool</span><span class="o">-&gt;</span><span class="na">invalidateTags</span><span class="p">([</span><span class="s1">&#39;bar&#39;</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The cache adapter needs to implement <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Contracts/Cache/TagAwareCacheInterface.php" title="Symfony\Contracts\Cache\TagAwareCacheInterface"><span class="pre">TagAwareCacheInterface</span></a></code>
+to enable this feature. This could be added by using the following configuration.</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/cache.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">cache</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">pools</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">my_cache_pool</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cache.adapter.redis</span>
+                <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/cache.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:cache&gt;</span>
+          <span class="nt">&lt;framework:pool</span> <span class="na">name=</span><span class="s">&quot;my_cache_pool&quot;</span> <span class="na">adapter=</span><span class="s">&quot;cache.adapter.redis&quot;</span> <span class="na">tags=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/framework:cache&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/cache.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Cache\Adapter\ChainAdapter</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Reference</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;cache&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;pools&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;my_cache_pool&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;adapter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cache.adapter.redis&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;tags&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Tags are stored in the same pool by default. This is good in most scenarios. But
+sometimes it might be better to store the tags in a different pool. That could be
+achieved by specifying the adapter.</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/cache.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">cache</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">pools</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">my_cache_pool</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cache.adapter.redis</span>
+                <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">tag_pool</span>
+            <span class="l l-Scalar l-Scalar-Plain">tag_pool</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">adapter</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cache.adapter.apcu</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/cache.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:cache&gt;</span>
+          <span class="nt">&lt;framework:pool</span> <span class="na">name=</span><span class="s">&quot;my_cache_pool&quot;</span> <span class="na">adapter=</span><span class="s">&quot;cache.adapter.redis&quot;</span> <span class="na">tags=</span><span class="s">&quot;tag_pool&quot;</span><span class="nt">/&gt;</span>
+          <span class="nt">&lt;framework:pool</span> <span class="na">name=</span><span class="s">&quot;tag_pool&quot;</span> <span class="na">adapter=</span><span class="s">&quot;cache.adapter.apcu&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/framework:cache&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/cache.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;cache&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;pools&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;my_cache_pool&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;adapter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cache.adapter.redis&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;tags&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;tag_pool&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;tag_pool&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;adapter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cache.adapter.apcu&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The interface <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Contracts/Cache/TagAwareCacheInterface.php" title="Symfony\Contracts\Cache\TagAwareCacheInterface"><span class="pre">TagAwareCacheInterface</span></a></code> is
+autowired to the <code class="docutils literal notranslate"><span class="pre">cache.app</span></code> service.</p>
+</div>
+</div>
+<div class="section" id="clearing-the-cache">
+<h2>Clearing the Cache<a class="headerlink" href="#clearing-the-cache" title="Permalink to this headline">¶</a></h2>
+<p>To clear the cache you can use the <code class="docutils literal notranslate"><span class="pre">bin/console</span> <span class="pre">cache:pool:clear</span> <span class="pre">[pool]</span></code> command.
+That will remove all the entries from your storage and you will have to recalculate
+all the values. You can also group your pools into “cache clearers”. There are 3 cache
+clearers by default:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">cache.global_clearer</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">cache.system_clearer</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">cache.app_clearer</span></code></li>
+</ul>
+<p>The global clearer clears all the cache items in every pool. The system cache clearer
+is used in the <code class="docutils literal notranslate"><span class="pre">bin/console</span> <span class="pre">cache:clear</span></code> command. The app clearer is the default
+clearer.</p>
+<p>To see all available cache pools:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console cache:pool:list
+</pre></div>
+</td></tr></table></div>
+<p>Clear one pool:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console cache:pool:clear my_cache_pool
+</pre></div>
+</td></tr></table></div>
+<p>Clear all custom pools:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console cache:pool:clear cache.app_clearer
+</pre></div>
+</td></tr></table></div>
+<p>Clear all caches everywhere:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console cache:pool:clear cache.global_clearer
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

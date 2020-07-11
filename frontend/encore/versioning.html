@@ -1,0 +1,383 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Asset Versioning &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Using Encore in a Virtual Machine" href="virtual-machine.html" />
+    <link rel="prev" title="Inlining files in CSS with Webpack URL Loader" href="url-loader.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../forms.html">Forms</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../frontend.html">Managing CSS and JavaScript</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../frontend.html#webpack-encore">Webpack Encore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../frontend.html#encore-documentation">Encore Documentation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../frontend.html#other-front-end-articles">Other Front-End Articles</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../assetic/index.html">Assetic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html">Installing Encore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simple-example.html">Encore: Setting up your Project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced-config.html">Advanced Webpack Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="babel.html">Configuring Babel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootstrap.html">Using Bootstrap CSS &amp; JS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cdn.html">Using a CDN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code-splitting.html">Async Code Splitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="copy-files.html">Copying &amp; Referencing Images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="css-preprocessors.html">CSS Preprocessors: Sass, LESS, Stylus, etc.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom-loaders-plugins.html">Adding Custom Loaders &amp; Plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dev-server.html">Using webpack-dev-server and HMR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq.html">FAQ and Common Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="legacy-applications.html">jQuery Plugins and Legacy Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="page-specific-assets.html">Creating Page-Specific CSS/JS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="postcss.html">PostCSS and autoprefixing (postcss-loader)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactjs.html">Enabling React.js</a></li>
+<li class="toctree-l3"><a class="reference internal" href="server-data.html">Passing Information from Twig to JavaScript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shared-entry.html">Creating a Shared Commons Entry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sourcemaps.html">Enabling Source Maps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="split-chunks.html">Preventing Duplication by “Splitting” Shared Code into Separate Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="typescript.html">Enabling TypeScript (ts-loader)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="url-loader.html">Inlining files in CSS with Webpack URL Loader</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Asset Versioning</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#loading-assets-from-entrypoints-json-manifest-json">Loading Assets from <code class="docutils literal notranslate"><span class="pre">entrypoints.json</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">manifest.json</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#learn-more">Learn more</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="virtual-machine.html">Using Encore in a Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vuejs.html">Enabling Vue.js (<code class="docutils literal notranslate"><span class="pre">vue-loader</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../custom_version_strategy.html">How to Use a Custom Version Strategy for Assets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../frontend.html">Managing CSS and JavaScript</a> &raquo;</li>
+        
+      <li>Asset Versioning</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/frontend/encore/versioning.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="asset-versioning">
+<h1>Asset Versioning<a class="headerlink" href="#asset-versioning" title="Permalink to this headline">¶</a></h1>
+<p id="encore-long-term-caching">Tired of deploying and having browser’s cache the old version of your assets?
+By calling <code class="docutils literal notranslate"><span class="pre">enableVersioning()</span></code>, each filename will now include a hash that
+changes whenever the <em>contents</em> of that file change (e.g. <code class="docutils literal notranslate"><span class="pre">app.123abc.js</span></code>
+instead of <code class="docutils literal notranslate"><span class="pre">app.js</span></code>). This allows you to use aggressive caching strategies
+(e.g. a far future <code class="docutils literal notranslate"><span class="pre">Expires</span></code>) because, whenever a file change, its hash will change,
+ignoring any existing cache:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span>// webpack.config.js
+// ...
+
+Encore
+    .setOutputPath(&#39;public/build/&#39;)
+    // ...
+<span class="gi">+     .enableVersioning()</span>
+</pre></div>
+</td></tr></table></div>
+<p>To link to these assets, Encore creates two files <code class="docutils literal notranslate"><span class="pre">entrypoints.json</span></code> and
+<code class="docutils literal notranslate"><span class="pre">manifest.json</span></code>.</p>
+<div class="section" id="loading-assets-from-entrypoints-json-manifest-json">
+<span id="load-manifest-files"></span><h2>Loading Assets from <code class="docutils literal notranslate"><span class="pre">entrypoints.json</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">manifest.json</span></code><a class="headerlink" href="#loading-assets-from-entrypoints-json-manifest-json" title="Permalink to this headline">¶</a></h2>
+<p>Whenever you run Encore, two configuration files are generated: <code class="docutils literal notranslate"><span class="pre">entrypoints.json</span></code>
+and <code class="docutils literal notranslate"><span class="pre">manifest.json</span></code>. Each file is similar, and contains a map to the final, versioned
+filename.</p>
+<p>The first file - <code class="docutils literal notranslate"><span class="pre">entrypoints.json</span></code> - is used by the <code class="docutils literal notranslate"><span class="pre">encore_entry_script_tags()</span></code>
+and <code class="docutils literal notranslate"><span class="pre">encore_entry_link_tags()</span></code> Twig helpers. If you’re using these, then your
+CSS and JavaScript files will render with the new, versioned filename. If you’re
+not using Symfony, your app will need to read this file in a similar way.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">manifest.json</span></code> file is only needed to get the versioned filename of <em>other</em>
+files, like font files or image files (though it also contains information about
+the CSS and JavaScript files):</p>
+<div class="highlight-json notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;build/app.js&quot;</span><span class="p">:</span> <span class="s2">&quot;/build/app.123abc.js&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;build/dashboard.css&quot;</span><span class="p">:</span> <span class="s2">&quot;/build/dashboard.a4bf2d.css&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;build/images/logo.png&quot;</span><span class="p">:</span> <span class="s2">&quot;/build/images/logo.3eed42.png&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>In your app, you need to read this file if you want to be able to link (e.g. via
+an <code class="docutils literal notranslate"><span class="pre">img</span></code> tag) to certain assets. If you’re using Symfony, just activate the
+<code class="docutils literal notranslate"><span class="pre">json_manifest_file</span></code> versioning strategy:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># this file is added automatically when installing Encore with Symfony Flex</span>
+<span class="c1"># config/packages/assets.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">assets</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">json_manifest_path</span><span class="p p-Indicator">:</span> <span class="s">&#39;%kernel.project_dir%/public/build/manifest.json&#39;</span>
+</pre></div>
+</td></tr></table></div>
+<p>That’s it! Be sure to wrap each path in the Twig <code class="docutils literal notranslate"><span class="pre">asset()</span></code> function
+like normal:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">asset</span><span class="o">(</span><span class="s1">&#39;build/images/logo.png&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="s">&quot;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;ACME logo&quot;</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="asset-versioning-and-deployment">
+<h3>Asset Versioning and Deployment<a class="headerlink" href="#asset-versioning-and-deployment" title="Permalink to this headline">¶</a></h3>
+<p>When deploying a new version of your application, versioned assets will include
+a new hash, making the previous assets no longer available. This is usually not
+a problem when deploying applications using a rolling update, blue/green or
+symlink strategies.</p>
+<p>However, even when applying those techniques, there could be a lapse of time
+when some publicly/privately cached response requests the previous version of
+the assets. If your application can’t afford to serve any broken asset, the best
+solution is to use a CDN (or custom made service) that keeps all the old assets
+cached for some time.</p>
+</div>
+</div>
+<div class="section" id="learn-more">
+<h2>Learn more<a class="headerlink" href="#learn-more" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="../../components/asset.html"><span class="doc">The Asset Component</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

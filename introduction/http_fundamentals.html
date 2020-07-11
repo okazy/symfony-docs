@@ -1,0 +1,632 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Symfony and HTTP Fundamentals &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using Symfony with Homestead/Vagrant" href="../setup/homestead.html" />
+    <link rel="prev" title="Symfony versus Flat PHP" href="from_flat_php_to_symfony.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../getting_started/index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../page_creation.html">Create your First Page in Symfony</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../page_creation.html#creating-a-page-route-and-controller">Creating a Page: Route and Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../page_creation.html#annotation-routes">Annotation Routes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../page_creation.html#auto-installing-recipes-with-symfony-flex">Auto-Installing Recipes with Symfony Flex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../page_creation.html#the-bin-console-command">The bin/console Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../page_creation.html#the-web-debug-toolbar-debugging-dream">The Web Debug Toolbar: Debugging Dream</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../page_creation.html#rendering-a-template">Rendering a Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../page_creation.html#checking-out-the-project-structure">Checking out the Project Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../page_creation.html#what-s-next">What’s Next?</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../page_creation.html#go-deeper-with-http-framework-fundamentals">Go Deeper with HTTP &amp; Framework Fundamentals</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="from_flat_php_to_symfony.html">Symfony versus Flat PHP</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Symfony and HTTP Fundamentals</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../controller.html">Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../templates.html">Creating and Using Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration.html">Configuring Symfony</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../getting_started/index.html">Getting Started</a> &raquo;</li>
+        
+          <li><a href="../setup.html">Installing &amp; Setting up the Symfony Framework</a> &raquo;</li>
+        
+          <li><a href="../page_creation.html">Create your First Page in Symfony</a> &raquo;</li>
+        
+      <li>Symfony and HTTP Fundamentals</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/introduction/http_fundamentals.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="symfony-and-http-fundamentals">
+<span id="symfony2-and-http-fundamentals"></span><span id="index-0"></span><h1>Symfony and HTTP Fundamentals<a class="headerlink" href="#symfony-and-http-fundamentals" title="Permalink to this headline">¶</a></h1>
+<p>Great news! While you’re learning Symfony, you’re <em>also</em> learning the fundamentals
+of the <em>web</em>. Symfony is closely modeled after the HTTP Request-Response flow: that
+<em>fundamental</em> paradigm that’s behind almost <em>all</em> communication on the web.</p>
+<p>In this article, you’ll walk through the HTTP fundamentals and find out how these
+are applied throughout Symfony.</p>
+<div class="section" id="requests-and-responses-in-http">
+<h2>Requests and Responses in HTTP<a class="headerlink" href="#requests-and-responses-in-http" title="Permalink to this headline">¶</a></h2>
+<p>HTTP (Hypertext Transfer Protocol) is a text language that allows two machines
+to communicate with each other. For example, when checking for the latest
+<a class="reference external" href="https://xkcd.com/">xkcd</a> comic, the following (approximate) conversation takes place:</p>
+<img alt="../_images/xkcd-full.png" class="align-center" src="../_images/xkcd-full.png" />
+<p>HTTP is the term used to describe this text-based language. The goal of
+your server is <em>always</em> to understand text requests and return text responses.</p>
+<p>Symfony is built from the ground up around that reality. Whether you realize
+it or not, HTTP is something you use every day. With Symfony, you’ll learn
+how to master it.</p>
+<div class="section" id="step-1-the-client-sends-a-request">
+<span id="index-1"></span><h3>Step 1: The Client Sends a Request<a class="headerlink" href="#step-1-the-client-sends-a-request" title="Permalink to this headline">¶</a></h3>
+<p>Every conversation on the web starts with a <em>request</em>. The request is a text
+message created by a client (e.g. a browser, a smartphone app, etc) in a
+special format known as HTTP. The client sends that request to a server,
+and then waits for the response.</p>
+<p>Take a look at the first part of the interaction (the request) between a
+browser and the xkcd web server:</p>
+<img alt="../_images/xkcd-request.png" class="align-center" src="../_images/xkcd-request.png" />
+<p>In HTTP-speak, this HTTP request would actually look something like this:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span>GET / HTTP/1.1
+Host: xkcd.com
+Accept: text/html
+User-Agent: Mozilla/5.0 (Macintosh)
+</pre></div>
+</td></tr></table></div>
+<p>These few lines communicate <em>everything</em> necessary about exactly which
+resource the client is requesting. The first line of an HTTP request is the
+most important, because it contains two important things: the HTTP method (GET)
+and the URI (<code class="docutils literal notranslate"><span class="pre">/</span></code>).</p>
+<p>The URI (e.g. <code class="docutils literal notranslate"><span class="pre">/</span></code>, <code class="docutils literal notranslate"><span class="pre">/contact</span></code>, etc) is the unique address or location
+that identifies the resource the client wants. The HTTP method (e.g. <code class="docutils literal notranslate"><span class="pre">GET</span></code>)
+defines what the client wants to <em>do</em> with the resource. The HTTP methods (also
+known as verbs) define the few common ways that the client can act upon the
+resource - the most common HTTP methods are:</p>
+<dl class="docutils">
+<dt><strong>GET</strong></dt>
+<dd>Retrieve the resource from the server (e.g. when visiting a page);</dd>
+<dt><strong>POST</strong></dt>
+<dd>Create a resource on the server (e.g. when submitting a form);</dd>
+<dt><strong>PUT</strong>/<strong>PATCH</strong></dt>
+<dd>Update the resource on the server (used by APIs);</dd>
+<dt><strong>DELETE</strong></dt>
+<dd>Delete the resource from the server (used by APIs).</dd>
+</dl>
+<p>With this in mind, you can imagine what an HTTP request might look like to
+delete a specific blog post, for example:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>DELETE /blog/15 HTTP/1.1
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There are actually nine HTTP methods defined by the HTTP specification,
+but many of them are not widely used or supported. In reality, many
+modern browsers only support <code class="docutils literal notranslate"><span class="pre">POST</span></code> and <code class="docutils literal notranslate"><span class="pre">GET</span></code> in HTML forms. Various
+others are however supported in <a class="reference external" href="https://en.wikipedia.org/wiki/XMLHttpRequest">XMLHttpRequest</a>.</p>
+</div>
+<p>In addition to the first line, an HTTP request invariably contains other
+lines of information called request <strong>headers</strong>. The headers can supply a wide
+range of information such as the host of the resource being requested (<code class="docutils literal notranslate"><span class="pre">Host</span></code>),
+the response formats the client accepts (<code class="docutils literal notranslate"><span class="pre">Accept</span></code>) and the application the
+client is using to make the request (<code class="docutils literal notranslate"><span class="pre">User-Agent</span></code>). Many other headers exist
+and can be found on Wikipedia’s <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_HTTP_header_fields">List of HTTP header fields</a> article.</p>
+</div>
+<div class="section" id="step-2-the-server-returns-a-response">
+<h3>Step 2: The Server Returns a Response<a class="headerlink" href="#step-2-the-server-returns-a-response" title="Permalink to this headline">¶</a></h3>
+<p>Once a server has received the request, it knows exactly which resource the
+client needs (via the URI) and what the client wants to do with that resource
+(via the method). For example, in the case of a GET request, the server
+prepares the resource and returns it in an HTTP response. Consider the response
+from the xkcd web server:</p>
+<img alt="../_images/xkcd-full.png" class="align-center" src="../_images/xkcd-full.png" />
+<p>Translated into HTTP, the response sent back to the browser will look something
+like this:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span>HTTP/1.1 200 OK
+Date: Sat, 02 Apr 2011 21:05:05 GMT
+Server: lighttpd/1.4.19
+Content-Type: text/html
+
+&lt;html&gt;
+    &lt;!-- ... HTML for the xkcd comic --&gt;
+&lt;/html&gt;
+</pre></div>
+</td></tr></table></div>
+<p>The HTTP response contains the requested resource (the HTML content in this
+case), as well as other information about the response. The first line is
+especially important and contains the HTTP response status code (200 in this
+case).</p>
+<p>The status code communicates the overall outcome of the request back to the
+client. Was the request successful? Was there an error? Different status codes
+exist that indicate success, an error or that the client needs to do something
+(e.g. redirect to another page). Check out the <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes">list of HTTP status codes</a>.</p>
+<p>Like the request, an HTTP response contains additional pieces of information
+known as HTTP headers. The body of the same resource could be returned in multiple
+different formats like HTML, XML or JSON and the <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> header uses
+Internet Media Types like <code class="docutils literal notranslate"><span class="pre">text/html</span></code> to tell the client which format is
+being returned. You can see a <a class="reference external" href="https://www.iana.org/assignments/media-types/media-types.xhtml">List of common media types</a> from IANA.</p>
+<p>Many other headers exist, some of which are very powerful. For example, certain
+headers can be used to create a powerful caching system.</p>
+</div>
+<div class="section" id="requests-responses-and-web-development">
+<h3>Requests, Responses and Web Development<a class="headerlink" href="#requests-responses-and-web-development" title="Permalink to this headline">¶</a></h3>
+<p>This request-response conversation is the fundamental process that drives all
+communication on the web.</p>
+<p>The most important fact is this: regardless of the language you use, the
+type of application you build (web, mobile, JSON API) or the development
+philosophy you follow, the end goal of an application is <strong>always</strong> to understand
+each request and create and return the appropriate response.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">To learn more about the HTTP specification, read the original <a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">HTTP 1.1 RFC</a>
+or the <a class="reference external" href="http://datatracker.ietf.org/wg/httpbis/">HTTP Bis</a>, which is an active effort to clarify the original
+specification.</p>
+</div>
+</div>
+</div>
+<div class="section" id="requests-and-responses-in-php">
+<span id="index-2"></span><h2>Requests and Responses in PHP<a class="headerlink" href="#requests-and-responses-in-php" title="Permalink to this headline">¶</a></h2>
+<p>So how do you interact with the “request” and create a “response” when using
+PHP? In reality, PHP abstracts you a bit from the whole process:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;REQUEST_URI&#39;</span><span class="p">];</span>
+<span class="nv">$foo</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">];</span>
+
+<span class="nb">header</span><span class="p">(</span><span class="s1">&#39;Content-Type: text/html&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s1">&#39;The URI requested is: &#39;</span><span class="o">.</span><span class="nv">$uri</span><span class="p">;</span>
+<span class="k">echo</span> <span class="s1">&#39;The value of the &quot;foo&quot; parameter is: &#39;</span><span class="o">.</span><span class="nv">$foo</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>As strange as it sounds, this small application is in fact taking information
+from the HTTP request and using it to create an HTTP response. Instead of
+parsing the raw HTTP request message, PHP prepares superglobal variables
+(such as <code class="docutils literal notranslate"><span class="pre">$_SERVER</span></code> and <code class="docutils literal notranslate"><span class="pre">$_GET</span></code>) that contain all the information from the
+request. Similarly, instead of returning the HTTP-formatted text response, you
+can use the PHP <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.header.php" title="header"><span class="pre">header</span></a></code> function to create response headers and
+print out the actual content that will be the content portion of the response
+message. PHP will create a true HTTP response and return it to the client:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span>HTTP/1.1 200 OK
+Date: Sat, 03 Apr 2011 02:14:33 GMT
+Server: Apache/2.2.17 (Unix)
+Content-Type: text/html
+
+The URI requested is: /testing?foo=symfony
+The value of the &quot;foo&quot; parameter is: symfony
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="requests-and-responses-in-symfony">
+<h2>Requests and Responses in Symfony<a class="headerlink" href="#requests-and-responses-in-symfony" title="Permalink to this headline">¶</a></h2>
+<p>Symfony provides an alternative to the raw PHP approach via two classes that
+allow you to interact with the HTTP request and response in an easier way.</p>
+<div class="section" id="symfony-request-object">
+<h3>Symfony Request Object<a class="headerlink" href="#symfony-request-object" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php" title="Symfony\Component\HttpFoundation\Request"><span class="pre">Request</span></a></code> class is an
+object-oriented representation of the HTTP request message. With it, you
+have all the request information at your fingertips:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+
+<span class="c1">// the URI being requested (e.g. /about) minus any query parameters</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPathInfo</span><span class="p">();</span>
+
+<span class="c1">// retrieves $_GET and $_POST variables respectively</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">query</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="s1">&#39;default category&#39;</span><span class="p">);</span>
+
+<span class="c1">// retrieves $_SERVER variables</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">server</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;HTTP_HOST&#39;</span><span class="p">);</span>
+
+<span class="c1">// retrieves an instance of UploadedFile identified by &quot;attachment&quot;</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">files</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;attachment&#39;</span><span class="p">);</span>
+
+<span class="c1">// retrieves a $_COOKIE value</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">cookies</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;PHPSESSID&#39;</span><span class="p">);</span>
+
+<span class="c1">// retrieves an HTTP request header, with normalized, lowercase keys</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;content-type&#39;</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getMethod</span><span class="p">();</span>    <span class="c1">// e.g. GET, POST, PUT, DELETE or HEAD</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getLanguages</span><span class="p">();</span> <span class="c1">// an array of languages the client accepts</span>
+</pre></div>
+</div>
+<p>As a bonus, the <code class="docutils literal notranslate"><span class="pre">Request</span></code> class does a lot of work in the background that
+you’ll never need to worry about. For example, the <code class="docutils literal notranslate"><span class="pre">isSecure()</span></code> method
+checks the <em>three</em> different values in PHP that can indicate whether or not
+the user is connecting via a secured connection (i.e. HTTPS).</p>
+</div>
+<div class="section" id="symfony-response-object">
+<h3>Symfony Response Object<a class="headerlink" href="#symfony-response-object" title="Permalink to this headline">¶</a></h3>
+<p>Symfony also provides a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Response.php" title="Symfony\Component\HttpFoundation\Response"><span class="pre">Response</span></a></code>
+class: a PHP representation of an HTTP response message. This allows your
+application to use an object-oriented interface to construct the response that
+needs to be returned to the client:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">();</span>
+
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setContent</span><span class="p">(</span><span class="s1">&#39;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello world!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&#39;</span><span class="p">);</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setStatusCode</span><span class="p">(</span><span class="nx">Response</span><span class="o">::</span><span class="na">HTTP_OK</span><span class="p">);</span>
+
+<span class="c1">// sets a HTTP response header</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;text/html&#39;</span><span class="p">);</span>
+
+<span class="c1">// prints the HTTP headers followed by the content</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>There are also several response <em>sub-classes</em> to help you return
+<a class="reference internal" href="../components/http_foundation.html#component-http-foundation-json-response"><span class="std std-ref">JSON</span></a>,
+<a class="reference internal" href="../components/http_foundation.html#redirect-response"><span class="std std-ref">redirect</span></a>,
+<a class="reference internal" href="../components/http_foundation.html#component-http-foundation-serving-files"><span class="std std-ref">stream file downloads</span></a>
+and more.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">Request</span></code> and <code class="docutils literal notranslate"><span class="pre">Response</span></code> classes are part of a standalone component
+called <a class="reference internal" href="../components/http_foundation.html"><span class="doc">symfony/http-foundation</span></a>
+that you can use in <em>any</em> PHP project. This also contains classes for handling
+sessions, file uploads and more.</p>
+</div>
+<p>If Symfony offered nothing else, you would already have a toolkit for accessing
+request information and an object-oriented interface for creating the response.
+Even as you learn the many powerful features in Symfony, keep in mind that the
+goal of your application is always <em>to interpret a request and create the
+appropriate response based on your application logic</em>.</p>
+</div>
+</div>
+<div class="section" id="the-journey-from-the-request-to-the-response">
+<h2>The Journey from the Request to the Response<a class="headerlink" href="#the-journey-from-the-request-to-the-response" title="Permalink to this headline">¶</a></h2>
+<p>Like HTTP itself, using the <code class="docutils literal notranslate"><span class="pre">Request</span></code> and <code class="docutils literal notranslate"><span class="pre">Response</span></code> objects is pretty
+straightforward. The hard part of building an application is writing what comes in
+between. In other words, the real work comes in writing the code that
+interprets the request information and creates the response.</p>
+<p>Your application probably does many things, like sending emails, handling
+form submissions, saving things to a database, rendering HTML pages and protecting
+content with security. How can you manage all of this and still keep your
+code organized and maintainable? Symfony was created to help you with these
+problems.</p>
+<div class="section" id="the-front-controller">
+<span id="index-3"></span><h3>The Front Controller<a class="headerlink" href="#the-front-controller" title="Permalink to this headline">¶</a></h3>
+<p>Traditionally, applications were built so that each “page” of a site was
+its own physical file (e.g. <code class="docutils literal notranslate"><span class="pre">index.php</span></code>, <code class="docutils literal notranslate"><span class="pre">contact.php</span></code>, etc.).</p>
+<p>There are several problems with this approach, including the inflexibility
+of the URLs (what if you wanted to change <code class="docutils literal notranslate"><span class="pre">blog.php</span></code> to <code class="docutils literal notranslate"><span class="pre">news.php</span></code> without
+breaking all of your links?) and the fact that each file <em>must</em> manually
+include some set of core files so that security, database connections and
+the “look” of the site can remain consistent.</p>
+<p>A much better solution is to use a front controller: a single PHP file that
+handles every request coming into your application. For example:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">/index.php</span></code></td>
+<td>executes <code class="docutils literal notranslate"><span class="pre">index.php</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">/index.php/contact</span></code></td>
+<td>executes <code class="docutils literal notranslate"><span class="pre">index.php</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">/index.php/blog</span></code></td>
+<td>executes <code class="docutils literal notranslate"><span class="pre">index.php</span></code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">By using rewrite rules in your
+<a class="reference internal" href="../setup/web_server_configuration.html"><span class="doc">web server configuration</span></a>,
+the <code class="docutils literal notranslate"><span class="pre">index.php</span></code> won’t be needed and you will have beautiful, clean URLs
+(e.g. <code class="docutils literal notranslate"><span class="pre">/show</span></code>).</p>
+</div>
+<p>Now, every request is handled exactly the same way. Instead of individual URLs
+executing different PHP files, the front controller is <em>always</em> executed,
+and the routing of different URLs to different parts of your application
+is done internally.</p>
+<p>A small front controller might look like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// index.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+<span class="nv">$path</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPathInfo</span><span class="p">();</span> <span class="c1">// the URI path being requested</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$path</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">]))</span> <span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Welcome to the homepage.&#39;</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="s1">&#39;/contact&#39;</span> <span class="o">===</span> <span class="nv">$path</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Contact us&#39;</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Page not found.&#39;</span><span class="p">,</span> <span class="nx">Response</span><span class="o">::</span><span class="na">HTTP_NOT_FOUND</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This is better, but this is still a lot of repeated work! Fortunately, Symfony can
+help once again.</p>
+</div>
+<div class="section" id="the-symfony-application-flow">
+<span id="index-4"></span><h3>The Symfony Application Flow<a class="headerlink" href="#the-symfony-application-flow" title="Permalink to this headline">¶</a></h3>
+<p>A Symfony framework application <em>also</em> uses a front-controller file. But inside,
+<em>Symfony</em> is responsible for handling each incoming request and figuring out what
+to do:</p>
+<object data="../_images/http/request-flow.svg" type="image/svg+xml"></object><p>Incoming requests are interpreted by the <a class="reference internal" href="../routing.html"><span class="doc">Routing component</span></a> and
+passed to PHP functions that return <code class="docutils literal notranslate"><span class="pre">Response</span></code> objects.</p>
+<p>This may not make sense yet, but as you keep reading, you’ll learn about <a class="reference internal" href="../routing.html"><span class="doc">routes</span></a>
+and <a class="reference internal" href="../controller.html"><span class="doc">controllers</span></a>: the two fundamental parts to creating a page.
+But as you go along, don’t forget that no matter <em>how</em> complex your app gets, your
+job is always the same: read information from the Request and use it to create a
+Response.</p>
+</div>
+</div>
+<div class="section" id="summary-the-request-response-flow">
+<h2>Summary: The Request-Response Flow<a class="headerlink" href="#summary-the-request-response-flow" title="Permalink to this headline">¶</a></h2>
+<p>Here’s what we’ve learned so far:</p>
+<ol class="arabic simple">
+<li>A client (e.g. a browser) sends an HTTP request;</li>
+<li>Each request executes the same, single file (called a “front controller”);</li>
+<li>The front controller boots Symfony and passes the request information;</li>
+<li>Internally, Symfony uses <em>routes</em> and <em>controllers</em> to create the Response for
+the page (we’ll learn about these soon!);</li>
+<li>Symfony turns your <code class="docutils literal notranslate"><span class="pre">Response</span></code> object into the text headers and content
+(i.e. the HTTP response), which are sent back to the client.</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

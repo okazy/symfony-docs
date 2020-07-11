@@ -1,0 +1,1385 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The PHPUnit Bridge &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Process Component" href="process.html" />
+    <link rel="prev" title="The OptionsResolver Component" href="options_resolver.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cache.html">The Cache Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependency_injection.html">The DependencyInjection Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="form.html">The Form Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mime.html">The Mime Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options_resolver.html">The OptionsResolver Component</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The PHPUnit Bridge</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-tests-in-parallel">Running Tests in Parallel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trigger-deprecation-notices">Trigger Deprecation Notices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mark-tests-as-legacy">Mark Tests as Legacy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#making-tests-fail">Making Tests Fail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#disabling-the-verbose-output">Disabling the Verbose Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#disabling-the-deprecation-helper">Disabling the Deprecation Helper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deprecation-notices-at-autoloading-time">Deprecation Notices at Autoloading Time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compile-time-deprecations">Compile-time Deprecations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Write Assertions about Deprecations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#display-the-full-stack-trace">Display the Full Stack Trace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-with-multiple-phpunit-versions">Testing with Multiple PHPUnit Versions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#polyfills-for-the-unavailable-methods">Polyfills for the Unavailable Methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#removing-the-void-return-type">Removing the Void Return Type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-namespaced-phpunit-classes">Using Namespaced PHPUnit Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#time-sensitive-tests">Time-sensitive Tests</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#use-case">Use Case</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#clock-mocking">Clock Mocking</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dns-sensitive-tests">DNS-sensitive Tests</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Use Case</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#class-existence-based-tests">Class Existence Based Tests</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Use Case</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modified-phpunit-script">Modified PHPUnit script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#code-coverage-listener">Code Coverage Listener</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Installation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="process.html">The Process Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">The Security Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">The Components</a> &raquo;</li>
+        
+      <li>The PHPUnit Bridge</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/components/phpunit_bridge.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-phpunit-bridge">
+<span id="index-0"></span><h1>The PHPUnit Bridge<a class="headerlink" href="#the-phpunit-bridge" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div>The PHPUnit Bridge provides utilities to report legacy tests and usage of
+deprecated code and helpers for mocking native functions related to time,
+DNS and class existence.</div></blockquote>
+<p>It comes with the following features:</p>
+<ul class="simple">
+<li>Forces the tests to use a consistent locale (<code class="docutils literal notranslate"><span class="pre">C</span></code>) (if you create
+locale-sensitive tests, use PHPUnit’s <code class="docutils literal notranslate"><span class="pre">setLocale()</span></code> method);</li>
+<li>Auto-register <code class="docutils literal notranslate"><span class="pre">class_exists</span></code> to load Doctrine annotations (when used);</li>
+<li>It displays the whole list of deprecated features used in the application;</li>
+<li>Displays the stack trace of a deprecation on-demand;</li>
+<li>Provides a <code class="docutils literal notranslate"><span class="pre">ClockMock</span></code>, <code class="docutils literal notranslate"><span class="pre">DnsMock</span></code> and <code class="docutils literal notranslate"><span class="pre">ClassExistsMock</span></code> classes for tests
+sensitive to time, network or class existence;</li>
+<li>Provides a modified version of PHPUnit that allows 1. separating the
+dependencies of your app from those of phpunit to prevent any unwanted
+constraints to apply; 2. running tests in parallel when a test suite is split
+in several phpunit.xml files; 3. recording and replaying skipped tests;</li>
+<li>It allows to create tests that are compatible with multiple PHPUnit versions
+(because it provides polyfills for missing methods, namespaced aliases for
+non-namespaced classes, etc.).</li>
+</ul>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require --dev symfony/phpunit-bridge
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you install this component outside of a Symfony application, you must
+require the <code class="docutils literal notranslate"><span class="pre">vendor/autoload.php</span></code> file in your code to enable the class
+autoloading mechanism provided by Composer. Read
+<a class="reference internal" href="using_components.html"><span class="doc">this article</span></a> for more details.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The PHPUnit bridge is designed to work with all maintained versions of
+Symfony components, even across different major versions of them. You should
+always use its very latest stable major version to get the most accurate
+deprecation report.</p>
+</div>
+<p>If you plan to <a class="reference internal" href="#write-assertions-about-deprecations"><span class="std std-ref">Deprecation Notices at Autoloading Time</span></a> and use the regular
+PHPUnit script (not the modified PHPUnit script provided by Symfony), you have
+to register a new <a class="reference external" href="https://phpunit.de/manual/current/en/appendixes.configuration.html#appendixes.configuration.test-listeners">test listener</a> called <code class="docutils literal notranslate"><span class="pre">SymfonyTestsListener</span></code>:</p>
+<div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- http://phpunit.de/manual/6.0/en/appendixes.configuration.html --&gt;</span>
+<span class="nt">&lt;phpunit</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:noNamespaceSchemaLocation=</span><span class="s">&quot;https://schema.phpunit.de/6.0/phpunit.xsd&quot;</span>
+<span class="nt">&gt;</span>
+
+    <span class="c">&lt;!-- ... --&gt;</span>
+
+    <span class="nt">&lt;listeners&gt;</span>
+        <span class="nt">&lt;listener</span> <span class="na">class=</span><span class="s">&quot;Symfony\Bridge\PhpUnit\SymfonyTestsListener&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/listeners&gt;</span>
+<span class="nt">&lt;/phpunit&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">This article explains how to use the PhpUnitBridge features as an independent
+component in any PHP application. Read the <a class="reference internal" href="../testing.html"><span class="doc">Testing</span></a> article to learn
+about how to use it in Symfony applications.</p>
+</div>
+<p>Once the component is installed, a <code class="docutils literal notranslate"><span class="pre">simple-phpunit</span></code> script is created in the
+<code class="docutils literal notranslate"><span class="pre">vendor/</span></code> directory to run tests. This script wraps the original PHPUnit binary
+to provide more features:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> my-project/
+<span class="gp">$</span> ./vendor/bin/simple-phpunit
+</pre></div>
+</td></tr></table></div>
+<p>After running your PHPUnit tests, you will get a report similar to this one:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> ./vendor/bin/simple-phpunit
+<span class="go">  PHPUnit by Sebastian Bergmann.</span>
+
+<span class="go">  Configuration read from &lt;your-project&gt;/phpunit.xml.dist</span>
+<span class="go">  .................</span>
+
+<span class="go">  Time: 1.77 seconds, Memory: 5.75Mb</span>
+
+<span class="go">  OK (17 tests, 21 assertions)</span>
+
+<span class="go">  Remaining deprecation notices (2)</span>
+
+<span class="go">  getEntityManager is deprecated since Symfony 2.1. Use getManager instead: 2x</span>
+<span class="go">    1x in DefaultControllerTest::testPublicUrls from App\Tests\Controller</span>
+<span class="go">    1x in BlogControllerTest::testIndex from App\Tests\Controller</span>
+</pre></div>
+</td></tr></table></div>
+<p>The summary includes:</p>
+<dl class="docutils">
+<dt><strong>Unsilenced</strong></dt>
+<dd>Reports deprecation notices that were triggered without the recommended
+<a class="reference external" href="https://www.php.net/manual/en/language.operators.errorcontrol.php">&#64;-silencing operator</a>.</dd>
+<dt><strong>Legacy</strong></dt>
+<dd>Deprecation notices denote tests that explicitly test some legacy features.</dd>
+<dt><strong>Remaining/Other</strong></dt>
+<dd>Deprecation notices are all other (non-legacy) notices, grouped by message,
+test class and method.</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you don’t want to use the <code class="docutils literal notranslate"><span class="pre">simple-phpunit</span></code> script, register the following
+<a class="reference external" href="https://phpunit.de/manual/current/en/extending-phpunit.html#extending-phpunit.PHPUnit_Framework_TestListener">PHPUnit event listener</a> in your PHPUnit configuration file to get the same
+report about deprecations (which is created by a <a class="reference external" href="https://www.php.net/manual/en/book.errorfunc.php">PHP error handler</a>
+called <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/PhpUnit/DeprecationErrorHandler.php" title="Symfony\Bridge\PhpUnit\DeprecationErrorHandler"><span class="pre">DeprecationErrorHandler</span></a></code>):</p>
+<div class="last highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- phpunit.xml.dist --&gt;</span>
+<span class="c">&lt;!-- ... --&gt;</span>
+<span class="nt">&lt;listeners&gt;</span>
+    <span class="nt">&lt;listener</span> <span class="na">class=</span><span class="s">&quot;Symfony\Bridge\PhpUnit\SymfonyTestsListener&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/listeners&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="running-tests-in-parallel">
+<h2>Running Tests in Parallel<a class="headerlink" href="#running-tests-in-parallel" title="Permalink to this headline">¶</a></h2>
+<p>The modified PHPUnit script allows running tests in parallel by providing
+a directory containing multiple test suites with their own <code class="docutils literal notranslate"><span class="pre">phpunit.xml.dist</span></code>.</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">├── tests/</span>
+<span class="go">│   ├── Functional/</span>
+<span class="go">│   │   ├── ...</span>
+<span class="go">│   │   └── phpunit.xml.dist</span>
+<span class="go">│   ├── Unit/</span>
+<span class="go">│   │   ├── ...</span>
+<span class="go">│   │   └── phpunit.xml.dist</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> ./vendor/bin/simple-phpunit tests/
+</pre></div>
+</td></tr></table></div>
+<p>The modified PHPUnit script will recursively go through the provided directory,
+up to a depth of 3 subdirectories or the value specified by the environment variable
+<code class="docutils literal notranslate"><span class="pre">SYMFONY_PHPUNIT_MAX_DEPTH</span></code>, looking for <code class="docutils literal notranslate"><span class="pre">phpunit.xml.dist</span></code> files and then
+running each suite it finds in parallel, collecting their output and displaying
+each test suite’s results in their own section.</p>
+</div>
+<div class="section" id="trigger-deprecation-notices">
+<h2>Trigger Deprecation Notices<a class="headerlink" href="#trigger-deprecation-notices" title="Permalink to this headline">¶</a></h2>
+<p>Deprecation notices can be triggered by using <code class="docutils literal notranslate"><span class="pre">trigger_deprecation</span></code> from
+the <code class="docutils literal notranslate"><span class="pre">symfony/deprecation-contracts</span></code> package:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// indicates something is deprecated since version 1.3 of vendor-name/packagename</span>
+<span class="nx">trigger_deprecation</span><span class="p">(</span><span class="s1">&#39;vendor-name/package-name&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3&#39;</span><span class="p">,</span> <span class="s1">&#39;Your deprecation message&#39;</span><span class="p">);</span>
+
+<span class="c1">// you can also use printf format (all arguments after the message will be used)</span>
+<span class="nx">trigger_deprecation</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3&#39;</span><span class="p">,</span> <span class="s1">&#39;Value &quot;%s&quot; is deprecated, use ...  instead.&#39;</span><span class="p">,</span> <span class="nv">$value</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mark-tests-as-legacy">
+<h2>Mark Tests as Legacy<a class="headerlink" href="#mark-tests-as-legacy" title="Permalink to this headline">¶</a></h2>
+<p>There are three ways to mark a test as legacy:</p>
+<ul class="simple">
+<li>(<strong>Recommended</strong>) Add the <code class="docutils literal notranslate"><span class="pre">&#64;group</span> <span class="pre">legacy</span></code> annotation to its class or method;</li>
+<li>Make its class name start with the <code class="docutils literal notranslate"><span class="pre">Legacy</span></code> prefix;</li>
+<li>Make its method name start with <code class="docutils literal notranslate"><span class="pre">testLegacy*()</span></code> instead of <code class="docutils literal notranslate"><span class="pre">test*()</span></code>.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If your data provider calls code that would usually trigger a deprecation,
+you can prefix its name with <code class="docutils literal notranslate"><span class="pre">provideLegacy</span></code> or <code class="docutils literal notranslate"><span class="pre">getLegacy</span></code> to silence
+these deprecations. If your data provider does not execute deprecated
+code, it is not required to choose a special naming just because the
+test being fed by the data provider is marked as legacy.</p>
+<p class="last">Also be aware that choosing one of the two legacy prefixes will not mark
+tests as legacy that make use of this data provider. You still have to
+mark them as legacy tests explicitly.</p>
+</div>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>In case you need to inspect the stack trace of a particular deprecation
+triggered by your unit tests, you can set the <code class="docutils literal notranslate"><span class="pre">SYMFONY_DEPRECATIONS_HELPER</span></code>
+<a class="reference external" href="https://phpunit.de/manual/current/en/appendixes.configuration.html#appendixes.configuration.php-ini-constants-variables">environment variable</a> to a regular expression that matches this deprecation’s
+message, enclosed with <code class="docutils literal notranslate"><span class="pre">/</span></code>. For example, with:</p>
+<div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- http://phpunit.de/manual/6.0/en/appendixes.configuration.html --&gt;</span>
+<span class="nt">&lt;phpunit</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:noNamespaceSchemaLocation=</span><span class="s">&quot;https://schema.phpunit.de/6.0/phpunit.xsd&quot;</span>
+<span class="nt">&gt;</span>
+
+    <span class="c">&lt;!-- ... --&gt;</span>
+
+    <span class="nt">&lt;php&gt;</span>
+        <span class="nt">&lt;server</span> <span class="na">name=</span><span class="s">&quot;KERNEL_CLASS&quot;</span> <span class="na">value=</span><span class="s">&quot;App\Kernel&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;env</span> <span class="na">name=</span><span class="s">&quot;SYMFONY_DEPRECATIONS_HELPER&quot;</span> <span class="na">value=</span><span class="s">&quot;/foobar/&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/php&gt;</span>
+<span class="nt">&lt;/phpunit&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p><a class="reference external" href="https://phpunit.de">PHPUnit</a> will stop your test suite once a deprecation notice is triggered whose
+message contains the <code class="docutils literal notranslate"><span class="pre">&quot;foobar&quot;</span></code> string.</p>
+<div class="section" id="making-tests-fail">
+<h3>Making Tests Fail<a class="headerlink" href="#making-tests-fail" title="Permalink to this headline">¶</a></h3>
+<p>By default, any non-legacy-tagged or any non-<a class="reference external" href="&#64;-silencingoperator">&#64;-silenced</a>
+deprecation notices will make tests fail. Alternatively, you can configure
+an arbitrary threshold by setting <code class="docutils literal notranslate"><span class="pre">SYMFONY_DEPRECATIONS_HELPER</span></code> to
+<code class="docutils literal notranslate"><span class="pre">max[total]=320</span></code> for instance. It will make the tests fails only if a
+higher number of deprecation notices is reached (<code class="docutils literal notranslate"><span class="pre">0</span></code> is the default
+value).</p>
+<p>You can have even finer-grained control by using other keys of the <code class="docutils literal notranslate"><span class="pre">max</span></code>
+array, which are <code class="docutils literal notranslate"><span class="pre">self</span></code>, <code class="docutils literal notranslate"><span class="pre">direct</span></code>, and <code class="docutils literal notranslate"><span class="pre">indirect</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">SYMFONY_DEPRECATIONS_HELPER</span></code> environment variable accepts a URL-encoded
+string, meaning you can combine thresholds and any other configuration setting,
+like this: <code class="docutils literal notranslate"><span class="pre">SYMFONY_DEPRECATIONS_HELPER=max[total]=42&amp;max[self]=0&amp;verbose=0</span></code></p>
+<div class="section" id="internal-deprecations">
+<h4>Internal deprecations<a class="headerlink" href="#internal-deprecations" title="Permalink to this headline">¶</a></h4>
+<p>When you maintain a library, having the test suite fail as soon as a dependency
+introduces a new deprecation is not desirable, because it shifts the burden of
+fixing that deprecation to any contributor that happens to submit a pull request
+shortly after a new vendor release is made with that deprecation.</p>
+<p>To mitigate this, you can either use tighter requirements, in the hope that
+dependencies will not introduce deprecations in a patch version, or even commit
+the <code class="docutils literal notranslate"><span class="pre">composer.lock</span></code> file, which would create another class of issues.
+Libraries will often use <code class="docutils literal notranslate"><span class="pre">SYMFONY_DEPRECATIONS_HELPER=max[total]=999999</span></code>
+because of this. This has the drawback of allowing contributions that introduce
+deprecations but:</p>
+<ul class="simple">
+<li>forget to fix the deprecated calls if there are any;</li>
+<li>forget to mark appropriate tests with the <code class="docutils literal notranslate"><span class="pre">&#64;group</span> <span class="pre">legacy</span></code> annotations.</li>
+</ul>
+<p>By using <code class="docutils literal notranslate"><span class="pre">SYMFONY_DEPRECATIONS_HELPER=max[self]=0</span></code>, deprecations that are
+triggered outside the <code class="docutils literal notranslate"><span class="pre">vendors</span></code> directory will be accounted for separately,
+while deprecations triggered from a library inside it will not (unless you reach
+999999 of these), giving you the best of both worlds.</p>
+</div>
+<div class="section" id="direct-and-indirect-deprecations">
+<h4>Direct and Indirect Deprecations<a class="headerlink" href="#direct-and-indirect-deprecations" title="Permalink to this headline">¶</a></h4>
+<p>When working on a project, you might be more interested in <code class="docutils literal notranslate"><span class="pre">max[direct]</span></code>.
+Let’s say you want to fix deprecations as soon as they appear. A problem many
+developers experience is that some dependencies they have tend to lag behind
+their own dependencies, meaning they do not fix deprecations as soon as
+possible, which means you should create a pull request on the outdated vendor,
+and ignore these deprecations until your pull request is merged.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">max[direct]</span></code> config allows you to put a threshold on direct deprecations
+only, allowing you to notice when <em>your code</em> is using deprecated APIs, and to
+keep up with the changes. You can still use <code class="docutils literal notranslate"><span class="pre">max[indirect]</span></code> if you want to
+keep indirect deprecations under a given threshold.</p>
+<p>Here is a summary that should help you pick the right configuration:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="69%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Recommended situation</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>max[total]=0</td>
+<td>Recommended for actively maintained projects
+with robust/no dependencies</td>
+</tr>
+<tr class="row-odd"><td>max[direct]=0</td>
+<td>Recommended for projects with dependencies
+that fail to keep up with new deprecations.</td>
+</tr>
+<tr class="row-even"><td>max[self]=0</td>
+<td>Recommended for libraries that use
+the deprecation system themselves and
+cannot afford to use one of the modes above.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="disabling-the-verbose-output">
+<h3>Disabling the Verbose Output<a class="headerlink" href="#disabling-the-verbose-output" title="Permalink to this headline">¶</a></h3>
+<p>By default, the bridge will display a detailed output with the number of
+deprecations and where they arise. If this is too much for you, you can use
+<code class="docutils literal notranslate"><span class="pre">SYMFONY_DEPRECATIONS_HELPER=verbose=0</span></code> to turn the verbose output off.</p>
+</div>
+<div class="section" id="disabling-the-deprecation-helper">
+<h3>Disabling the Deprecation Helper<a class="headerlink" href="#disabling-the-deprecation-helper" title="Permalink to this headline">¶</a></h3>
+<p>Set the <code class="docutils literal notranslate"><span class="pre">SYMFONY_DEPRECATIONS_HELPER</span></code> environment variable to <code class="docutils literal notranslate"><span class="pre">disabled=1</span></code>
+to completely disable the deprecation helper. This is useful to make use of the
+rest of features provided by this component without getting errors or messages
+related to deprecations.</p>
+</div>
+<div class="section" id="deprecation-notices-at-autoloading-time">
+<span id="write-assertions-about-deprecations"></span><h3>Deprecation Notices at Autoloading Time<a class="headerlink" href="#deprecation-notices-at-autoloading-time" title="Permalink to this headline">¶</a></h3>
+<p>By default, the PHPUnit Bridge uses <code class="docutils literal notranslate"><span class="pre">DebugClassLoader</span></code> from the
+<a class="reference external" href="https://github.com/symfony/error-handler">ErrorHandler component</a> to throw deprecation notices at class autoloading
+time. This can be disabled with the <code class="docutils literal notranslate"><span class="pre">debug-class-loader</span></code> option.</p>
+<div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- phpunit.xml.dist --&gt;</span>
+<span class="c">&lt;!-- ... --&gt;</span>
+<span class="nt">&lt;listeners&gt;</span>
+    <span class="nt">&lt;listener</span> <span class="na">class=</span><span class="s">&quot;Symfony\Bridge\PhpUnit\SymfonyTestsListener&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;arguments&gt;</span>
+            <span class="nt">&lt;array&gt;</span>
+                <span class="c">&lt;!-- set this option to 0 to disable the DebugClassLoader integration --&gt;</span>
+                <span class="nt">&lt;element</span> <span class="na">key=</span><span class="s">&quot;debug-class-loader&quot;</span><span class="nt">&gt;&lt;integer&gt;</span>0<span class="nt">&lt;/integer&gt;&lt;/element&gt;</span>
+            <span class="nt">&lt;/array&gt;</span>
+        <span class="nt">&lt;/arguments&gt;</span>
+    <span class="nt">&lt;/listener&gt;</span>
+<span class="nt">&lt;/listeners&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="compile-time-deprecations">
+<h3>Compile-time Deprecations<a class="headerlink" href="#compile-time-deprecations" title="Permalink to this headline">¶</a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">debug:container</span></code> command to list the deprecations generated during
+the compiling and warming up of the container:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> debug:container --deprecations
+</pre></div>
+</td></tr></table></div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The <code class="docutils literal notranslate"><span class="pre">--deprecations</span></code> option was introduced in Symfony 5.1.</p>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Write Assertions about Deprecations<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>When adding deprecations to your code, you might like writing tests that verify
+that they are triggered as required. To do so, the bridge provides the
+<code class="docutils literal notranslate"><span class="pre">expectDeprecation()</span></code> method that you can use on your test methods.
+It requires you to pass the expected message, given in the same format as for
+the <a class="reference external" href="https://phpunit.de/manual/current/en/appendixes.assertions.html#appendixes.assertions.assertStringMatchesFormat">PHPUnit’s assertStringMatchesFormat()</a> method. If you expect more than one
+deprecation message for a given test method, you can use the method several
+times (order matters):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bridge\PhpUnit\ExpectDeprecationTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">ExpectDeprecationTrait</span><span class="p">;</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @group legacy</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testDeprecatedCode</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// test some code that triggers the following deprecation:</span>
+        <span class="c1">// trigger_deprecation(&#39;vendor-name/package-name&#39;, &#39;5.1&#39;, &#39;This &quot;Foo&quot; method is deprecated.&#39;);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">expectDeprecation</span><span class="p">(</span><span class="s1">&#39;Since vendor-name/package-name 5.1: This &quot;%s&quot; method is deprecated&#39;</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
+
+        <span class="c1">// test some code that triggers the following deprecation:</span>
+        <span class="c1">// trigger_deprecation(&#39;vendor-name/package-name&#39;, &#39;4.4&#39;, &#39;The second argument of the &quot;Bar&quot; method is deprecated.&#39;);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">expectDeprecation</span><span class="p">(</span><span class="s1">&#39;Since vendor-name/package-name 4.4: The second argument of the &quot;%s&quot; method is deprecated.&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 5.1: </span>Symfony versions previous to 5.1 also included a <code class="docutils literal notranslate"><span class="pre">&#64;expectedDeprecation</span></code>
+annotation to test deprecations, but it was deprecated in favor of the method.</p>
+</div>
+</div>
+<div class="section" id="display-the-full-stack-trace">
+<h2>Display the Full Stack Trace<a class="headerlink" href="#display-the-full-stack-trace" title="Permalink to this headline">¶</a></h2>
+<p>By default, the PHPUnit Bridge displays only deprecation messages.
+To show the full stack trace related to a deprecation, set the value of <code class="docutils literal notranslate"><span class="pre">SYMFONY_DEPRECATIONS_HELPER</span></code>
+to a regular expression matching the deprecation message.</p>
+<p>For example, if the following deprecation notice is thrown:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span>1x: Doctrine<span class="se">\C</span>ommon<span class="se">\C</span>lassLoader is deprecated.
+  1x in EntityTypeTest::setUp from Symfony<span class="se">\B</span>ridge<span class="se">\D</span>octrine<span class="se">\T</span>ests<span class="se">\F</span>orm<span class="se">\T</span>ype
+</pre></div>
+</td></tr></table></div>
+<p>Running the following command will display the full stack trace:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nv">SYMFONY_DEPRECATIONS_HELPER</span><span class="o">=</span><span class="s1">&#39;/Doctrine\\Common\\ClassLoader is deprecated\./&#39;</span> ./vendor/bin/simple-phpunit
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="testing-with-multiple-phpunit-versions">
+<h2>Testing with Multiple PHPUnit Versions<a class="headerlink" href="#testing-with-multiple-phpunit-versions" title="Permalink to this headline">¶</a></h2>
+<p>When testing a library that has to be compatible with several versions of PHP,
+the test suite cannot use the latest versions of PHPUnit because:</p>
+<ul class="simple">
+<li>PHPUnit 8 deprecated several methods in favor of other methods which are not
+available in older versions (e.g. PHPUnit 4);</li>
+<li>PHPUnit 8 added the <code class="docutils literal notranslate"><span class="pre">void</span></code> return type to the <code class="docutils literal notranslate"><span class="pre">setUp()</span></code> method, which is
+not compatible with PHP 5.5;</li>
+<li>PHPUnit switched to namespaced classes starting from PHPUnit 6, so tests must
+work with and without namespaces.</li>
+</ul>
+<div class="section" id="polyfills-for-the-unavailable-methods">
+<h3>Polyfills for the Unavailable Methods<a class="headerlink" href="#polyfills-for-the-unavailable-methods" title="Permalink to this headline">¶</a></h3>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">simple-phpunit</span></code> script, PHPUnit Bridge injects polyfills for
+most methods of the <code class="docutils literal notranslate"><span class="pre">TestCase</span></code> and <code class="docutils literal notranslate"><span class="pre">Assert</span></code> classes (e.g. <code class="docutils literal notranslate"><span class="pre">expectException()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">expectExceptionMessage()</span></code>, <code class="docutils literal notranslate"><span class="pre">assertContainsEquals()</span></code>, etc.). This allows writing
+test cases using the latest best practices while still remaining compatible with
+older PHPUnit versions.</p>
+</div>
+<div class="section" id="removing-the-void-return-type">
+<h3>Removing the Void Return Type<a class="headerlink" href="#removing-the-void-return-type" title="Permalink to this headline">¶</a></h3>
+<p>When running the <code class="docutils literal notranslate"><span class="pre">simple-phpunit</span></code> script with the <code class="docutils literal notranslate"><span class="pre">SYMFONY_PHPUNIT_REMOVE_RETURN_TYPEHINT</span></code>
+environment variable set to <code class="docutils literal notranslate"><span class="pre">1</span></code>, the PHPUnit bridge will alter the code of
+PHPUnit to remove the return type (introduced in PHPUnit 8) from <code class="docutils literal notranslate"><span class="pre">setUp()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">tearDown()</span></code>, <code class="docutils literal notranslate"><span class="pre">setUpBeforeClass()</span></code> and <code class="docutils literal notranslate"><span class="pre">tearDownAfterClass()</span></code> methods.
+This allows you to write a test compatible with both PHP 5 and PHPUnit 8.</p>
+<p>Alternatively, you can use the trait <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/PhpUnit/SetUpTearDownTrait.php" title="Symfony\Bridge\PhpUnit\SetUpTearDownTrait"><span class="pre">SetUpTearDownTrait</span></a></code>,
+which provides the right signature for the <code class="docutils literal notranslate"><span class="pre">setUp()</span></code>, <code class="docutils literal notranslate"><span class="pre">tearDown()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">setUpBeforeClass()</span></code> and <code class="docutils literal notranslate"><span class="pre">tearDownAfterClass()</span></code> methods and delegates the
+call to the <code class="docutils literal notranslate"><span class="pre">doSetUp()</span></code>, <code class="docutils literal notranslate"><span class="pre">doTearDown()</span></code>, <code class="docutils literal notranslate"><span class="pre">doSetUpBeforeClass()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">doTearDownAfterClass()</span></code> methods:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bridge\PhpUnit\SetUpTearDownTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="c1">// when using the SetUpTearDownTrait, methods like doSetUp() can</span>
+    <span class="c1">// be defined with and without the &#39;void&#39; return type, as you wish</span>
+    <span class="k">use</span> <span class="nx">SetUpTearDownTrait</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="k">function</span> <span class="nf">doSetUp</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">doSetUp</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-namespaced-phpunit-classes">
+<h3>Using Namespaced PHPUnit Classes<a class="headerlink" href="#using-namespaced-phpunit-classes" title="Permalink to this headline">¶</a></h3>
+<p>The PHPUnit bridge adds namespaced class aliases for most of the PHPUnit classes
+declared without namespaces (e.g. <code class="docutils literal notranslate"><span class="pre">PHPUnit_Framework_Assert</span></code>), allowing you to
+always use the namespaced class declaration even when the test is executed with
+PHPUnit 4.</p>
+</div>
+</div>
+<div class="section" id="time-sensitive-tests">
+<h2>Time-sensitive Tests<a class="headerlink" href="#time-sensitive-tests" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="use-case">
+<h3>Use Case<a class="headerlink" href="#use-case" title="Permalink to this headline">¶</a></h3>
+<p>If you have this kind of time-related tests:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Stopwatch\Stopwatch</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testSomething</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$stopwatch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stopwatch</span><span class="p">();</span>
+
+        <span class="nv">$stopwatch</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">(</span><span class="s1">&#39;event_name&#39;</span><span class="p">);</span>
+        <span class="nb">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+        <span class="nv">$duration</span> <span class="o">=</span> <span class="nv">$stopwatch</span><span class="o">-&gt;</span><span class="na">stop</span><span class="p">(</span><span class="s1">&#39;event_name&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getDuration</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="nv">$duration</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You used the <a class="reference internal" href="stopwatch.html"><span class="doc">Symfony Stopwatch Component</span></a> to
+calculate the duration time of your process, here 10 seconds. However, depending
+on the load of the server or the processes running on your local machine, the
+<code class="docutils literal notranslate"><span class="pre">$duration</span></code> could for example be <code class="docutils literal notranslate"><span class="pre">10.000023s</span></code> instead of <code class="docutils literal notranslate"><span class="pre">10s</span></code>.</p>
+<p>This kind of tests are called transient tests: they are failing randomly
+depending on spurious and external circumstances. They are often cause trouble
+when using public continuous integration services like <a class="reference external" href="https://travis-ci.org/">Travis CI</a>.</p>
+</div>
+<div class="section" id="clock-mocking">
+<h3>Clock Mocking<a class="headerlink" href="#clock-mocking" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/PhpUnit/ClockMock.php" title="Symfony\Bridge\PhpUnit\ClockMock"><span class="pre">ClockMock</span></a></code> class provided by this bridge
+allows you to mock the PHP’s built-in time functions <code class="docutils literal notranslate"><span class="pre">time()</span></code>, <code class="docutils literal notranslate"><span class="pre">microtime()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">sleep()</span></code>, <code class="docutils literal notranslate"><span class="pre">usleep()</span></code> and <code class="docutils literal notranslate"><span class="pre">gmdate()</span></code>. Additionally the function <code class="docutils literal notranslate"><span class="pre">date()</span></code>
+is mocked so it uses the mocked time if no timestamp is specified.</p>
+<p>Other functions with an optional timestamp parameter that defaults to <code class="docutils literal notranslate"><span class="pre">time()</span></code>
+will still use the system time instead of the mocked time. This means that you
+may need to change some code in your tests. For example, instead of <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">DateTime()</span></code>,
+you should use <code class="docutils literal notranslate"><span class="pre">DateTime::createFromFormat('U',</span> <span class="pre">time())</span></code> to use the mocked
+<code class="docutils literal notranslate"><span class="pre">time()</span></code> function.</p>
+<p>To use the <code class="docutils literal notranslate"><span class="pre">ClockMock</span></code> class in your test, add the <code class="docutils literal notranslate"><span class="pre">&#64;group</span> <span class="pre">time-sensitive</span></code>
+annotation to its class or methods. This annotation only works when executing
+PHPUnit using the <code class="docutils literal notranslate"><span class="pre">vendor/bin/simple-phpunit</span></code> script or when registering the
+following listener in your PHPUnit configuration:</p>
+<div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- phpunit.xml.dist --&gt;</span>
+<span class="c">&lt;!-- ... --&gt;</span>
+<span class="nt">&lt;listeners&gt;</span>
+    <span class="nt">&lt;listener</span> <span class="na">class=</span><span class="s">&quot;\Symfony\Bridge\PhpUnit\SymfonyTestsListener&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/listeners&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you don’t want to use the <code class="docutils literal notranslate"><span class="pre">&#64;group</span> <span class="pre">time-sensitive</span></code> annotation, you can
+register the <code class="docutils literal notranslate"><span class="pre">ClockMock</span></code> class manually by calling
+<code class="docutils literal notranslate"><span class="pre">ClockMock::register(__CLASS__)</span></code> and <code class="docutils literal notranslate"><span class="pre">ClockMock::withClockMock(true)</span></code>
+before the test and <code class="docutils literal notranslate"><span class="pre">ClockMock::withClockMock(false)</span></code> after the test.</p>
+</div>
+<p>As a result, the following is guaranteed to work and is no longer a transient
+test:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Stopwatch\Stopwatch</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * @group time-sensitive</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testSomething</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$stopwatch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stopwatch</span><span class="p">();</span>
+
+        <span class="nv">$stopwatch</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">(</span><span class="s1">&#39;event_name&#39;</span><span class="p">);</span>
+        <span class="nb">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+        <span class="nv">$duration</span> <span class="o">=</span> <span class="nv">$stopwatch</span><span class="o">-&gt;</span><span class="na">stop</span><span class="p">(</span><span class="s1">&#39;event_name&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getDuration</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="nv">$duration</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And that’s all!</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Time-based function mocking follows the <a class="reference external" href="https://www.php.net/manual/en/language.namespaces.rules.php">PHP namespace resolutions rules</a>
+so “fully qualified function calls” (e.g <code class="docutils literal notranslate"><span class="pre">\time()</span></code>) cannot be mocked.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&#64;group</span> <span class="pre">time-sensitive</span></code> annotation is equivalent to calling
+<code class="docutils literal notranslate"><span class="pre">ClockMock::register(MyTest::class)</span></code>. If you want to mock a function used in a
+different class, do it explicitly using <code class="docutils literal notranslate"><span class="pre">ClockMock::register(MyClass::class)</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// the class that uses the time() function to be mocked</span>
+<span class="k">namespace</span> <span class="nx">App</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyClass</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getTimeInHours</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">time</span><span class="p">()</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// the test that mocks the external time() function explicitly</span>
+<span class="k">namespace</span> <span class="nx">App\Tests</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\MyClass</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bridge\PhpUnit\ClockMock</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * @group time-sensitive</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testGetTimeInHours</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">ClockMock</span><span class="o">::</span><span class="na">register</span><span class="p">(</span><span class="nx">MyClass</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+        <span class="nv">$my</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyClass</span><span class="p">();</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$my</span><span class="o">-&gt;</span><span class="na">getTimeInHours</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nb">time</span><span class="p">()</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span> <span class="nv">$result</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">An added bonus of using the <code class="docutils literal notranslate"><span class="pre">ClockMock</span></code> class is that time passes
+instantly. Using PHP’s <code class="docutils literal notranslate"><span class="pre">sleep(10)</span></code> will make your test wait for 10
+actual seconds (more or less). In contrast, the <code class="docutils literal notranslate"><span class="pre">ClockMock</span></code> class
+advances the internal clock the given number of seconds without actually
+waiting that time, so your test will execute 10 seconds faster.</p>
+</div>
+</div>
+</div>
+<div class="section" id="dns-sensitive-tests">
+<h2>DNS-sensitive Tests<a class="headerlink" href="#dns-sensitive-tests" title="Permalink to this headline">¶</a></h2>
+<p>Tests that make network connections, for example to check the validity of a DNS
+record, can be slow to execute and unreliable due to the conditions of the
+network. For that reason, this component also provides mocks for these PHP
+functions:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.checkdnsrr.php" title="checkdnsrr"><span class="pre">checkdnsrr</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.dns-check-record.php" title="dns_check_record"><span class="pre">dns_check_record</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.getmxrr.php" title="getmxrr"><span class="pre">getmxrr</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.dns-get-mx.php" title="dns_get_mx"><span class="pre">dns_get_mx</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.gethostbyaddr.php" title="gethostbyaddr"><span class="pre">gethostbyaddr</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.gethostbyname.php" title="gethostbyname"><span class="pre">gethostbyname</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.gethostbynamel.php" title="gethostbynamel"><span class="pre">gethostbynamel</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.dns-get-record.php" title="dns_get_record"><span class="pre">dns_get_record</span></a></code></li>
+</ul>
+<div class="section" id="id2">
+<h3>Use Case<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Consider the following example that tests a custom class called <code class="docutils literal notranslate"><span class="pre">DomainValidator</span></code>
+which defines a <code class="docutils literal notranslate"><span class="pre">checkDnsRecord</span></code> option to also validate that a domain is
+associated to a valid host:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">App\Validator\DomainValidator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testEmail</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$validator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DomainValidator</span><span class="p">([</span><span class="s1">&#39;checkDnsRecord&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">]);</span>
+        <span class="nv">$isValid</span> <span class="o">=</span> <span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="s1">&#39;example.com&#39;</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In order to avoid making a real network connection, add the <code class="docutils literal notranslate"><span class="pre">&#64;dns-sensitive</span></code>
+annotation to the class and use the <code class="docutils literal notranslate"><span class="pre">DnsMock::withMockedHosts()</span></code> to configure
+the data you expect to get for the given hosts:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">App\Validator\DomainValidator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bridge\PhpUnit\DnsMock</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * @group dns-sensitive</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">DomainValidatorTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testEmails</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">DnsMock</span><span class="o">::</span><span class="na">withMockedHosts</span><span class="p">([</span>
+            <span class="s1">&#39;example.com&#39;</span> <span class="o">=&gt;</span> <span class="p">[[</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;ip&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1.2.3.4&#39;</span><span class="p">]],</span>
+        <span class="p">]);</span>
+
+        <span class="nv">$validator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DomainValidator</span><span class="p">([</span><span class="s1">&#39;checkDnsRecord&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">]);</span>
+        <span class="nv">$isValid</span> <span class="o">=</span> <span class="nv">$validator</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="s1">&#39;example.com&#39;</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">withMockedHosts()</span></code> method configuration is defined as an array. The keys
+are the mocked hosts and the values are arrays of DNS records in the same format
+returned by <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.dns-get-record.php" title="dns_get_record"><span class="pre">dns_get_record</span></a></code>, so you can simulate diverse network
+conditions:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nx">DnsMock</span><span class="o">::</span><span class="na">withMockedHosts</span><span class="p">([</span>
+    <span class="s1">&#39;example.com&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ip&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1.2.3.4&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="p">[</span>
+            <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;AAAA&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ipv6&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;::12&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="class-existence-based-tests">
+<h2>Class Existence Based Tests<a class="headerlink" href="#class-existence-based-tests" title="Permalink to this headline">¶</a></h2>
+<p>Tests that behave differently depending on existing classes, for example Composer’s
+development dependencies, are often hard to test for the alternate case. For that
+reason, this component also provides mocks for these PHP functions:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.class-exists.php" title="class_exists"><span class="pre">class_exists</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.interface-exists.php" title="interface_exists"><span class="pre">interface_exists</span></a></code></li>
+<li><code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.trait-exists.php" title="trait_exists"><span class="pre">trait_exists</span></a></code></li>
+</ul>
+<div class="section" id="id3">
+<h3>Use Case<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Consider the following example that relies on the <code class="docutils literal notranslate"><span class="pre">Vendor\DependencyClass</span></code> to
+toggle a behavior:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Vendor\DependencyClass</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyClass</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">hello</span><span class="p">()</span><span class="o">:</span> <span class="nx">string</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">class_exists</span><span class="p">(</span><span class="nx">DependencyClass</span><span class="o">::</span><span class="na">class</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="s1">&#39;The dependency behavior.&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="s1">&#39;The default behavior.&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>A regular test case for <code class="docutils literal notranslate"><span class="pre">MyClass</span></code> (assuming the development dependencies
+are installed during tests) would look like:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">MyClass</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyClassTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testHello</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$class</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyClass</span><span class="p">();</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$class</span><span class="o">-&gt;</span><span class="na">hello</span><span class="p">();</span> <span class="c1">// &quot;The dependency behavior.&quot;</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In order to test the default behavior instead use the
+<code class="docutils literal notranslate"><span class="pre">ClassExistsMock::withMockedClasses()</span></code> to configure the expected
+classes, interfaces and/or traits for the code to run:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">MyClass</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Vendor\DependencyClass</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyClassTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testHelloDefault</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">ClassExistsMock</span><span class="o">::</span><span class="na">register</span><span class="p">(</span><span class="nx">MyClass</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+        <span class="nx">ClassExistsMock</span><span class="o">::</span><span class="na">withMockedClasses</span><span class="p">([</span><span class="nx">DependencyClass</span><span class="o">::</span><span class="na">class</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">]);</span>
+
+        <span class="nv">$class</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyClass</span><span class="p">();</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$class</span><span class="o">-&gt;</span><span class="na">hello</span><span class="p">();</span> <span class="c1">// &quot;The default behavior.&quot;</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">&#64;group</span> <span class="pre">time-sensitive</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;group</span> <span class="pre">dns-sensitive</span></code> annotations work
+“by convention” and assume that the namespace of the tested class can be
+obtained just by removing the <code class="docutils literal notranslate"><span class="pre">Tests\</span></code> part from the test namespace. I.e.
+if your test cases fully-qualified class name (FQCN) is
+<code class="docutils literal notranslate"><span class="pre">App\Tests\Watch\DummyWatchTest</span></code>, it assumes the tested class namespace
+is <code class="docutils literal notranslate"><span class="pre">App\Watch</span></code>.</p>
+<p>If this convention doesn’t work for your application, configure the mocked
+namespaces in the <code class="docutils literal notranslate"><span class="pre">phpunit.xml</span></code> file, as done for example in the
+<a class="reference internal" href="http_kernel.html"><span class="doc">HttpKernel Component</span></a>:</p>
+<div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- http://phpunit.de/manual/4.1/en/appendixes.configuration.html --&gt;</span>
+<span class="nt">&lt;phpunit</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:noNamespaceSchemaLocation=</span><span class="s">&quot;https://schema.phpunit.de/4.1/phpunit.xsd&quot;</span>
+<span class="nt">&gt;</span>
+
+    <span class="c">&lt;!-- ... --&gt;</span>
+
+    <span class="nt">&lt;listeners&gt;</span>
+        <span class="nt">&lt;listener</span> <span class="na">class=</span><span class="s">&quot;Symfony\Bridge\PhpUnit\SymfonyTestsListener&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;arguments&gt;</span>
+                <span class="nt">&lt;array&gt;</span>
+                    <span class="nt">&lt;element</span> <span class="na">key=</span><span class="s">&quot;time-sensitive&quot;</span><span class="nt">&gt;&lt;string&gt;</span>Symfony\Component\HttpFoundation<span class="nt">&lt;/string&gt;&lt;/element&gt;</span>
+                <span class="nt">&lt;/array&gt;</span>
+            <span class="nt">&lt;/arguments&gt;</span>
+        <span class="nt">&lt;/listener&gt;</span>
+    <span class="nt">&lt;/listeners&gt;</span>
+<span class="nt">&lt;/phpunit&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Under the hood, a PHPUnit listener injects the mocked functions in the tested
+classes’ namespace. In order to work as expected, the listener has to run before
+the tested class ever runs. By default, the mocked functions are created when the
+annotation are found and the corresponding tests are run. Depending on how your
+tests are constructed, this might be too late. In this case, you will need to declare
+the namespaces of the tested classes in your <code class="docutils literal notranslate"><span class="pre">phpunit.xml.dist</span></code>.</p>
+<div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- phpunit.xml.dist --&gt;</span>
+<span class="c">&lt;!-- ... --&gt;</span>
+<span class="nt">&lt;listeners&gt;</span>
+    <span class="nt">&lt;listener</span> <span class="na">class=</span><span class="s">&quot;Symfony\Bridge\PhpUnit\SymfonyTestsListener&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;arguments&gt;</span>
+                <span class="nt">&lt;array&gt;</span>
+                    <span class="nt">&lt;element</span> <span class="na">key=</span><span class="s">&quot;time-sensitive&quot;</span><span class="nt">&gt;&lt;string&gt;</span>Acme\MyClassTest<span class="nt">&lt;/string&gt;&lt;/element&gt;</span>
+                <span class="nt">&lt;/array&gt;</span>
+            <span class="nt">&lt;/arguments&gt;</span>
+        <span class="nt">&lt;/listener&gt;</span>
+<span class="nt">&lt;/listeners&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="modified-phpunit-script">
+<h2>Modified PHPUnit script<a class="headerlink" href="#modified-phpunit-script" title="Permalink to this headline">¶</a></h2>
+<p>This bridge provides a modified version of PHPUnit that you can call by using
+its <code class="docutils literal notranslate"><span class="pre">bin/simple-phpunit</span></code> command. It has the following features:</p>
+<ul class="simple">
+<li>Works with a standalone vendor directory that doesn’t conflict with yours;</li>
+<li>Does not embed <code class="docutils literal notranslate"><span class="pre">prophecy</span></code> to prevent any conflicts with its dependencies;</li>
+<li>Uses PHPUnit 4.8 when run with PHP &lt;=5.5, PHPUnit 5.7 when run with PHP &gt;=5.6
+and PHPUnit 6.5 when run with PHP &gt;=7.2;</li>
+<li>Collects and replays skipped tests when the <code class="docutils literal notranslate"><span class="pre">SYMFONY_PHPUNIT_SKIPPED_TESTS</span></code>
+env var is defined: the env var should specify a file name that will be used for
+storing skipped tests on a first run, and replay them on the second run;</li>
+<li>Parallelizes test suites execution when given a directory as argument, scanning
+this directory for <code class="docutils literal notranslate"><span class="pre">phpunit.xml.dist</span></code> files up to <code class="docutils literal notranslate"><span class="pre">SYMFONY_PHPUNIT_MAX_DEPTH</span></code>
+levels (specified as an env var, defaults to <code class="docutils literal notranslate"><span class="pre">3</span></code>);</li>
+</ul>
+<p>The script writes the modified PHPUnit it builds in a directory that can be
+configured by the <code class="docutils literal notranslate"><span class="pre">SYMFONY_PHPUNIT_DIR</span></code> env var, or in the same directory as
+the <code class="docutils literal notranslate"><span class="pre">simple-phpunit</span></code> if it is not provided. It’s also possible to set this
+env var in the <code class="docutils literal notranslate"><span class="pre">phpunit.xml.dist</span></code> file.</p>
+<p>By default, these are the PHPUnit versions used depending on the installed PHP versions:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Installed PHP version</th>
+<th class="head">PHPUnit version used by default</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>PHP &lt;= 5.5</td>
+<td>PHPUnit 4.8</td>
+</tr>
+<tr class="row-odd"><td>PHP 5.6</td>
+<td>PHPUnit 5.7</td>
+</tr>
+<tr class="row-even"><td>PHP 7.0</td>
+<td>PHPUnit 6.5</td>
+</tr>
+<tr class="row-odd"><td>PHP 7.1</td>
+<td>PHPUnit 7.5</td>
+</tr>
+<tr class="row-even"><td>PHP &gt;= 7.2</td>
+<td>PHPUnit 8.3</td>
+</tr>
+</tbody>
+</table>
+<p>If you have installed the bridge through Composer, you can run it by calling e.g.:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> vendor/bin/simple-phpunit
+</pre></div>
+</td></tr></table></div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>It’s possible to change the base version of PHPUnit by setting the
+<code class="docutils literal notranslate"><span class="pre">SYMFONY_PHPUNIT_VERSION</span></code> env var in the <code class="docutils literal notranslate"><span class="pre">phpunit.xml.dist</span></code> file (e.g.
+<code class="docutils literal notranslate"><span class="pre">&lt;server</span> <span class="pre">name=&quot;SYMFONY_PHPUNIT_VERSION&quot;</span> <span class="pre">value=&quot;5.5&quot;/&gt;</span></code>). This is the
+preferred method as it can be committed to your version control repository.</p>
+<p class="last">It’s also possible to set <code class="docutils literal notranslate"><span class="pre">SYMFONY_PHPUNIT_VERSION</span></code> as a real env var
+(not defined in a <a class="reference internal" href="../configuration.html#config-dot-env"><span class="std std-ref">dotenv file</span></a>).</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>If you still need to use <code class="docutils literal notranslate"><span class="pre">prophecy</span></code> (but not <code class="docutils literal notranslate"><span class="pre">symfony/yaml</span></code>),
+then set the <code class="docutils literal notranslate"><span class="pre">SYMFONY_PHPUNIT_REMOVE</span></code> env var to <code class="docutils literal notranslate"><span class="pre">symfony/yaml</span></code>.</p>
+<p class="last">It’s also possible to set this env var in the <code class="docutils literal notranslate"><span class="pre">phpunit.xml.dist</span></code> file.</p>
+</div>
+</div>
+<div class="section" id="code-coverage-listener">
+<h2>Code Coverage Listener<a class="headerlink" href="#code-coverage-listener" title="Permalink to this headline">¶</a></h2>
+<p>By default, the code coverage is computed with the following rule: if a line of
+code is executed, then it is marked as covered. The test which executes a
+line of code is therefore marked as “covering the line of code”. This can be
+misleading.</p>
+<p>Consider the following example:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Bar</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">barMethod</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;bar&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Foo</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$bar</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">Bar</span> <span class="nv">$bar</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bar</span> <span class="o">=</span> <span class="nv">$bar</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">fooMethod</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bar</span><span class="o">-&gt;</span><span class="na">barMethod</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="s1">&#39;bar&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">FooTest</span> <span class="k">extends</span> <span class="nx">PHPUnit\Framework\TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">test</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$bar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bar</span><span class="p">();</span>
+        <span class="nv">$foo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="nv">$foo</span><span class="o">-&gt;</span><span class="na">fooMethod</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">FooTest::test</span></code> method executes every single line of code of both <code class="docutils literal notranslate"><span class="pre">Foo</span></code>
+and <code class="docutils literal notranslate"><span class="pre">Bar</span></code> classes, but <code class="docutils literal notranslate"><span class="pre">Bar</span></code> is not truly tested. The <code class="docutils literal notranslate"><span class="pre">CoverageListener</span></code>
+aims to fix this behavior by adding the appropriate <a class="reference external" href="https://phpunit.de/manual/current/en/appendixes.annotations.html#appendixes.annotations.covers">&#64;covers</a> annotation on
+each test class.</p>
+<p>If a test class already defines the <code class="docutils literal notranslate"><span class="pre">&#64;covers</span></code> annotation, this listener does
+nothing. Otherwise, it tries to find the code related to the test by removing
+the <code class="docutils literal notranslate"><span class="pre">Test</span></code> part of the classname: <code class="docutils literal notranslate"><span class="pre">My\Namespace\Tests\FooTest</span></code> -&gt;
+<code class="docutils literal notranslate"><span class="pre">My\Namespace\Foo</span></code>.</p>
+<div class="section" id="id4">
+<h3>Installation<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>Add the following configuration to the <code class="docutils literal notranslate"><span class="pre">phpunit.xml.dist</span></code> file:</p>
+<div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- http://phpunit.de/manual/6.0/en/appendixes.configuration.html --&gt;</span>
+<span class="nt">&lt;phpunit</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:noNamespaceSchemaLocation=</span><span class="s">&quot;https://schema.phpunit.de/6.0/phpunit.xsd&quot;</span>
+<span class="nt">&gt;</span>
+
+    <span class="c">&lt;!-- ... --&gt;</span>
+
+    <span class="nt">&lt;listeners&gt;</span>
+        <span class="nt">&lt;listener</span> <span class="na">class=</span><span class="s">&quot;Symfony\Bridge\PhpUnit\CoverageListener&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/listeners&gt;</span>
+<span class="nt">&lt;/phpunit&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>If the logic used to find the related code is too simple or doesn’t work for
+your application, you can use your own SUT (System Under Test) solver:</p>
+<div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nt">&lt;listeners&gt;</span>
+    <span class="nt">&lt;listener</span> <span class="na">class=</span><span class="s">&quot;Symfony\Bridge\PhpUnit\CoverageListener&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;arguments&gt;</span>
+            <span class="nt">&lt;string&gt;</span>My\Namespace\SutSolver::solve<span class="nt">&lt;/string&gt;</span>
+        <span class="nt">&lt;/arguments&gt;</span>
+    <span class="nt">&lt;/listener&gt;</span>
+<span class="nt">&lt;/listeners&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>The <code class="docutils literal notranslate"><span class="pre">My\Namespace\SutSolver::solve</span></code> can be any PHP callable and receives the
+current test as its first argument.</p>
+<p>Finally, the listener can also display warning messages when the SUT solver does
+not find the SUT:</p>
+<div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nt">&lt;listeners&gt;</span>
+    <span class="nt">&lt;listener</span> <span class="na">class=</span><span class="s">&quot;Symfony\Bridge\PhpUnit\CoverageListener&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;arguments&gt;</span>
+            <span class="nt">&lt;null/&gt;</span>
+            <span class="nt">&lt;boolean&gt;</span>true<span class="nt">&lt;/boolean&gt;</span>
+        <span class="nt">&lt;/arguments&gt;</span>
+    <span class="nt">&lt;/listener&gt;</span>
+<span class="nt">&lt;/listeners&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

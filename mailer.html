@@ -1,0 +1,1252 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Sending Emails with Mailer &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Pushing Data to Clients Using the Mercure Protocol" href="mercure.html" />
+    <link rel="prev" title="How to Configure Monolog to Exclude 404 Errors from the Log" href="logging/monolog_regex_based_excludes.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sending Emails with Mailer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#transport-setup">Transport Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-a-3rd-party-transport">Using a 3rd Party Transport</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-sending-messages">Creating &amp; Sending Messages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#email-addresses">Email Addresses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#message-headers">Message Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#message-contents">Message Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#file-attachments">File Attachments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#embedding-images">Embedding Images</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#handling-sending-failures">Handling Sending Failures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#debugging-emails">Debugging Emails</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#twig-html-css">Twig: HTML &amp; CSS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#html-content">HTML Content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#text-content">Text Content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mailer-twig-embedding-images">Embedding Images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inlining-css-styles">Inlining CSS Styles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-external-css-files">Using External CSS Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#rendering-markdown-content">Rendering Markdown Content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inky-email-templating-language">Inky Email Templating Language</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#signing-and-encrypting-messages">Signing and Encrypting Messages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#signing-messages">Signing Messages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#s-mime-signer">S/MIME Signer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dkim-signer">DKIM Signer</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#encrypting-messages">Encrypting Messages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#multiple-email-transports">Multiple Email Transports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sending-messages-async">Sending Messages Async</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-tags-and-metadata-to-emails">Adding Tags and Metadata to Emails</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development-debugging">Development &amp; Debugging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#disabling-delivery">Disabling Delivery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#always-send-to-the-same-address">Always Send to the same Address</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Sending Emails with Mailer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/mailer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sending-emails-with-mailer">
+<h1>Sending Emails with Mailer<a class="headerlink" href="#sending-emails-with-mailer" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Symfony’s Mailer &amp; <a class="reference internal" href="components/mime.html"><span class="doc">Mime</span></a> components form a <em>powerful</em> system
+for creating and sending emails - complete with support for multipart messages, Twig
+integration, CSS inlining, file attachments and a lot more. Get them installed with:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/mailer
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="transport-setup">
+<span id="mailer-transport-setup"></span><h2>Transport Setup<a class="headerlink" href="#transport-setup" title="Permalink to this headline">¶</a></h2>
+<p>Emails are delivered via a “transport”. Out of the box, you can deliver emails
+over <code class="docutils literal notranslate"><span class="pre">SMTP</span></code> by configuring your <code class="docutils literal notranslate"><span class="pre">.env</span></code> file (the <code class="docutils literal notranslate"><span class="pre">user</span></code>, <code class="docutils literal notranslate"><span class="pre">pass</span></code> and
+<code class="docutils literal notranslate"><span class="pre">port</span></code> parameters are optional):</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># .env</span>
+<span class="nv">MAILER_DSN</span><span class="o">=</span>smtp://user:pass@smtp.example.com:port
+</pre></div>
+</td></tr></table></div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">If you are migrating from Swiftmailer (and the Swiftmailer bundle), be
+warned that the DSN format is different.</p>
+</div>
+<div class="section" id="using-a-3rd-party-transport">
+<h3>Using a 3rd Party Transport<a class="headerlink" href="#using-a-3rd-party-transport" title="Permalink to this headline">¶</a></h3>
+<p>Instead of using your own SMTP server, you can send emails via a 3rd party
+provider. Mailer supports several - install whichever you want:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Service</th>
+<th class="head">Install with</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Amazon SES</td>
+<td><code class="docutils literal notranslate"><span class="pre">composer</span> <span class="pre">require</span> <span class="pre">symfony/amazon-mailer</span></code></td>
+</tr>
+<tr class="row-odd"><td>Gmail</td>
+<td><code class="docutils literal notranslate"><span class="pre">composer</span> <span class="pre">require</span> <span class="pre">symfony/google-mailer</span></code></td>
+</tr>
+<tr class="row-even"><td>MailChimp</td>
+<td><code class="docutils literal notranslate"><span class="pre">composer</span> <span class="pre">require</span> <span class="pre">symfony/mailchimp-mailer</span></code></td>
+</tr>
+<tr class="row-odd"><td>Mailgun</td>
+<td><code class="docutils literal notranslate"><span class="pre">composer</span> <span class="pre">require</span> <span class="pre">symfony/mailgun-mailer</span></code></td>
+</tr>
+<tr class="row-even"><td>Postmark</td>
+<td><code class="docutils literal notranslate"><span class="pre">composer</span> <span class="pre">require</span> <span class="pre">symfony/postmark-mailer</span></code></td>
+</tr>
+<tr class="row-odd"><td>SendGrid</td>
+<td><code class="docutils literal notranslate"><span class="pre">composer</span> <span class="pre">require</span> <span class="pre">symfony/sendgrid-mailer</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Each library includes a <a class="reference internal" href="setup.html#symfony-flex"><span class="std std-ref">Symfony Flex recipe</span></a> that will add
+a configuration example to your <code class="docutils literal notranslate"><span class="pre">.env</span></code> file. For example, suppose you want to
+use SendGrid. First, install it:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/sendgrid-mailer
+</pre></div>
+</td></tr></table></div>
+<p>You’ll now have a new line in your <code class="docutils literal notranslate"><span class="pre">.env</span></code> file that you can uncomment:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># .env</span>
+<span class="nv">MAILER_DSN</span><span class="o">=</span>sendgrid://KEY@default
+</pre></div>
+</td></tr></table></div>
+<p>The <code class="docutils literal notranslate"><span class="pre">MAILER_DSN</span></code> isn’t a <em>real</em> address: it’s a convenient format that
+offloads most of the configuration work to mailer. The <code class="docutils literal notranslate"><span class="pre">sendgrid</span></code> scheme
+activates the SendGrid provider that you just installed, which knows all about
+how to deliver messages via SendGrid. The <em>only</em> part you need to change is the
+<code class="docutils literal notranslate"><span class="pre">KEY</span></code> placeholder.</p>
+<p>Each provider has different environment variables that the Mailer uses to
+configure the <em>actual</em> protocol, address and authentication for delivery. Some
+also have options that can be configured with query parameters at the end of the
+<code class="docutils literal notranslate"><span class="pre">MAILER_DSN</span></code> - like <code class="docutils literal notranslate"><span class="pre">?region=</span></code> for Amazon SES or Mailgun. Some providers support
+sending via <code class="docutils literal notranslate"><span class="pre">http</span></code>, <code class="docutils literal notranslate"><span class="pre">api</span></code> or <code class="docutils literal notranslate"><span class="pre">smtp</span></code>. Symfony chooses the best available
+transport, but you can force to use one:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># .env</span>
+<span class="c1"># force to use SMTP instead of HTTP (which is the default)</span>
+<span class="nv">MAILER_DSN</span><span class="o">=</span>sendgrid+smtp://<span class="nv">$SENDGRID_KEY</span>@default
+</pre></div>
+</td></tr></table></div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Check the <a class="reference internal" href="components/mailer.html#mailer-dsn"><span class="std std-ref">DSN formats</span></a> for all supported providers.</p>
+</div>
+</div>
+</div>
+<div class="section" id="creating-sending-messages">
+<h2>Creating &amp; Sending Messages<a class="headerlink" href="#creating-sending-messages" title="Permalink to this headline">¶</a></h2>
+<p>To send an email, autowire the mailer using
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Mailer/MailerInterface.php" title="Symfony\Component\Mailer\MailerInterface"><span class="pre">MailerInterface</span></a></code> and create an
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Mime/Email.php" title="Symfony\Component\Mime\Email"><span class="pre">Email</span></a></code> object:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/MailerController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Mailer\MailerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Mime\Email</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MailerController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @Route(&quot;/email&quot;)</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sendEmail</span><span class="p">(</span><span class="nx">MailerInterface</span> <span class="nv">$mailer</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$email</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Email</span><span class="p">())</span>
+            <span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;hello@example.com&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;you@example.com&#39;</span><span class="p">)</span>
+            <span class="c1">//-&gt;cc(&#39;cc@example.com&#39;)</span>
+            <span class="c1">//-&gt;bcc(&#39;bcc@example.com&#39;)</span>
+            <span class="c1">//-&gt;replyTo(&#39;fabien@example.com&#39;)</span>
+            <span class="c1">//-&gt;priority(Email::PRIORITY_HIGH)</span>
+            <span class="o">-&gt;</span><span class="na">subject</span><span class="p">(</span><span class="s1">&#39;Time for Symfony Mailer!&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">text</span><span class="p">(</span><span class="s1">&#39;Sending emails is fun again!&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">html</span><span class="p">(</span><span class="s1">&#39;&lt;p&gt;See Twig integration for better HTML integration!&lt;/p&gt;&#39;</span><span class="p">);</span>
+
+        <span class="nv">$mailer</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$email</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That’s it! The message will be sent via the transport you configured.</p>
+<div class="section" id="email-addresses">
+<h3>Email Addresses<a class="headerlink" href="#email-addresses" title="Permalink to this headline">¶</a></h3>
+<p>All the methods that require email addresses (<code class="docutils literal notranslate"><span class="pre">from()</span></code>, <code class="docutils literal notranslate"><span class="pre">to()</span></code>, etc.) accept
+both strings or address objects:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Mime\Address</span><span class="p">;</span>
+
+<span class="nv">$email</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Email</span><span class="p">())</span>
+    <span class="c1">// email address as a simple string</span>
+    <span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;fabien@example.com&#39;</span><span class="p">)</span>
+
+    <span class="c1">// email address as an object</span>
+    <span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="k">new</span> <span class="nx">Address</span><span class="p">(</span><span class="s1">&#39;fabien@example.com&#39;</span><span class="p">))</span>
+
+    <span class="c1">// defining the email address and name as an object</span>
+    <span class="c1">// (email clients will display the name)</span>
+    <span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="k">new</span> <span class="nx">Address</span><span class="p">(</span><span class="s1">&#39;fabien@example.com&#39;</span><span class="p">,</span> <span class="s1">&#39;Fabien&#39;</span><span class="p">))</span>
+
+    <span class="c1">// defining the email address and name as a string</span>
+    <span class="c1">// (the format must match: &#39;Name &lt;email@example.com&gt;&#39;)</span>
+    <span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="nx">Address</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;Fabien Potencier &lt;fabien@example.com&gt;&#39;</span><span class="p">))</span>
+
+    <span class="c1">// ...</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Instead of calling <code class="docutils literal notranslate"><span class="pre">-&gt;from()</span></code> <em>every</em> time you create a new email, you can
+create an <a class="reference internal" href="event_dispatcher.html"><span class="doc">event subscriber</span></a> and listen to the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Mailer/Event/MessageEvent.php" title="Symfony\Component\Mailer\Event\MessageEvent"><span class="pre">MessageEvent</span></a></code> event to set the
+same <code class="docutils literal notranslate"><span class="pre">From</span></code> email to all messages.</p>
+</div>
+<p>Multiple addresses are defined with the <code class="docutils literal notranslate"><span class="pre">addXXX()</span></code> methods:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$email</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Email</span><span class="p">())</span>
+    <span class="o">-&gt;</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;foo@example.com&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addTo</span><span class="p">(</span><span class="s1">&#39;bar@example.com&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addTo</span><span class="p">(</span><span class="s1">&#39;baz@example.com&#39;</span><span class="p">)</span>
+
+    <span class="c1">// ...</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+<p>Alternatively, you can pass multiple addresses to each method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$toAddresses</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;foo@example.com&#39;</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Address</span><span class="p">(</span><span class="s1">&#39;bar@example.com&#39;</span><span class="p">)];</span>
+
+<span class="nv">$email</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Email</span><span class="p">())</span>
+    <span class="o">-&gt;</span><span class="na">to</span><span class="p">(</span><span class="o">...</span><span class="nv">$toAddresses</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">cc</span><span class="p">(</span><span class="s1">&#39;cc1@example.com&#39;</span><span class="p">,</span> <span class="s1">&#39;cc2@example.com&#39;</span><span class="p">)</span>
+
+    <span class="c1">// ...</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="message-headers">
+<h3>Message Headers<a class="headerlink" href="#message-headers" title="Permalink to this headline">¶</a></h3>
+<p>Messages include a number of header fields to describe their contents. Symfony
+sets all the required headers automatically, but you can set your own headers
+too. There are different types of headers (Id header, Mailbox header, Date
+header, etc.) but most of the times you’ll set text headers:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$email</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Email</span><span class="p">())</span>
+    <span class="o">-&gt;</span><span class="na">getHeaders</span><span class="p">()</span>
+        <span class="c1">// this header tells auto-repliers (&quot;email holiday mode&quot;) to not</span>
+        <span class="c1">// reply to this message because it&#39;s an automated email</span>
+        <span class="o">-&gt;</span><span class="na">addTextHeader</span><span class="p">(</span><span class="s1">&#39;X-Auto-Response-Suppress&#39;</span><span class="p">,</span> <span class="s1">&#39;OOF, DR, RN, NRN, AutoReply&#39;</span><span class="p">);</span>
+
+    <span class="c1">// ...</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="message-contents">
+<h3>Message Contents<a class="headerlink" href="#message-contents" title="Permalink to this headline">¶</a></h3>
+<p>The text and HTML contents of the email messages can be strings (usually the
+result of rendering some template) or PHP resources:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$email</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Email</span><span class="p">())</span>
+    <span class="c1">// ...</span>
+    <span class="c1">// simple contents defined as a string</span>
+    <span class="o">-&gt;</span><span class="na">text</span><span class="p">(</span><span class="s1">&#39;Lorem ipsum...&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">html</span><span class="p">(</span><span class="s1">&#39;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&#39;</span><span class="p">)</span>
+
+    <span class="c1">// attach a file stream</span>
+    <span class="o">-&gt;</span><span class="na">text</span><span class="p">(</span><span class="nb">fopen</span><span class="p">(</span><span class="s1">&#39;/path/to/emails/user_signup.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">))</span>
+    <span class="o">-&gt;</span><span class="na">html</span><span class="p">(</span><span class="nb">fopen</span><span class="p">(</span><span class="s1">&#39;/path/to/emails/user_signup.html&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">))</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can also use Twig templates to render the HTML and text contents. Read
+the <a class="reference internal" href="#twig-html-css">Twig: HTML &amp; CSS</a> section later in this article to
+learn more.</p>
+</div>
+</div>
+<div class="section" id="file-attachments">
+<h3>File Attachments<a class="headerlink" href="#file-attachments" title="Permalink to this headline">¶</a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">attachFromPath()</span></code> method to attach files that exist on your file system:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$email</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Email</span><span class="p">())</span>
+    <span class="c1">// ...</span>
+    <span class="o">-&gt;</span><span class="na">attachFromPath</span><span class="p">(</span><span class="s1">&#39;/path/to/documents/terms-of-use.pdf&#39;</span><span class="p">)</span>
+    <span class="c1">// optionally you can tell email clients to display a custom name for the file</span>
+    <span class="o">-&gt;</span><span class="na">attachFromPath</span><span class="p">(</span><span class="s1">&#39;/path/to/documents/privacy.pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;Privacy Policy&#39;</span><span class="p">)</span>
+    <span class="c1">// optionally you can provide an explicit MIME type (otherwise it&#39;s guessed)</span>
+    <span class="o">-&gt;</span><span class="na">attachFromPath</span><span class="p">(</span><span class="s1">&#39;/path/to/documents/contract.doc&#39;</span><span class="p">,</span> <span class="s1">&#39;Contract&#39;</span><span class="p">,</span> <span class="s1">&#39;application/msword&#39;</span><span class="p">)</span>
+    <span class="c1">// you can also use an absolute URL if your PHP config allows getting URLs using fopen()</span>
+    <span class="c1">// (this is not recommended because your application may or may not work depending on PHP config)</span>
+    <span class="o">-&gt;</span><span class="na">attachFromPath</span><span class="p">(</span><span class="s1">&#39;http://example.com/path/to/documents/contract.doc&#39;</span><span class="p">,</span> <span class="s1">&#39;Contract&#39;</span><span class="p">,</span> <span class="s1">&#39;application/msword&#39;</span><span class="p">)</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+<p>Alternatively you can use the <code class="docutils literal notranslate"><span class="pre">attach()</span></code> method to attach contents from a stream:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$email</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Email</span><span class="p">())</span>
+    <span class="c1">// ...</span>
+    <span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nb">fopen</span><span class="p">(</span><span class="s1">&#39;/path/to/documents/contract.doc&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">))</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="embedding-images">
+<h3>Embedding Images<a class="headerlink" href="#embedding-images" title="Permalink to this headline">¶</a></h3>
+<p>If you want to display images inside your email, you must embed them
+instead of adding them as attachments. When using Twig to render the email
+contents, as explained <a class="reference internal" href="#mailer-twig-embedding-images"><span class="std std-ref">later in this article</span></a>,
+the images are embedded automatically. Otherwise, you need to embed them manually.</p>
+<p>First, use the <code class="docutils literal notranslate"><span class="pre">embed()</span></code> or <code class="docutils literal notranslate"><span class="pre">embedFromPath()</span></code> method to add an image from a
+file or stream:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$email</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Email</span><span class="p">())</span>
+    <span class="c1">// ...</span>
+    <span class="c1">// get the image contents from a PHP resource</span>
+    <span class="o">-&gt;</span><span class="na">embed</span><span class="p">(</span><span class="nb">fopen</span><span class="p">(</span><span class="s1">&#39;/path/to/images/logo.png&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">),</span> <span class="s1">&#39;logo&#39;</span><span class="p">)</span>
+    <span class="c1">// get the image contents from an existing file</span>
+    <span class="o">-&gt;</span><span class="na">embedFromPath</span><span class="p">(</span><span class="s1">&#39;/path/to/images/signature.gif&#39;</span><span class="p">,</span> <span class="s1">&#39;footer-signature&#39;</span><span class="p">)</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+<p>The second optional argument of both methods is the image name (“Content-ID” in
+the MIME standard). Its value is an arbitrary string used later to reference the
+images inside the HTML contents:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$email</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Email</span><span class="p">())</span>
+    <span class="c1">// ...</span>
+    <span class="o">-&gt;</span><span class="na">embed</span><span class="p">(</span><span class="nb">fopen</span><span class="p">(</span><span class="s1">&#39;/path/to/images/logo.png&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">),</span> <span class="s1">&#39;logo&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">embedFromPath</span><span class="p">(</span><span class="s1">&#39;/path/to/images/signature.gif&#39;</span><span class="p">,</span> <span class="s1">&#39;footer-signature&#39;</span><span class="p">)</span>
+    <span class="c1">// reference images using the syntax &#39;cid:&#39; + &quot;image embed name&quot;</span>
+    <span class="o">-&gt;</span><span class="na">html</span><span class="p">(</span><span class="s1">&#39;&lt;img src=&quot;cid:logo&quot;&gt; ... &lt;img src=&quot;cid:footer-signature&quot;&gt; ...&#39;</span><span class="p">)</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="handling-sending-failures">
+<h2>Handling Sending Failures<a class="headerlink" href="#handling-sending-failures" title="Permalink to this headline">¶</a></h2>
+<p>Symfony Mailer considers that sending was successful when your transport (SMTP
+server or third-party provider) accepts the mail for further delivery. The message
+can later be lost or not delivered because of some problem in your provider, but
+that’s out of reach for your Symfony application.</p>
+<p>If there’s an error when handing over the email to your transport, Symfony throws
+a <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Mailer/Exception/TransportExceptionInterface.php" title="Symfony\Component\Mailer\Exception\TransportExceptionInterface"><span class="pre">TransportExceptionInterface</span></a></code>.
+Catch that exception to recover from the error or to display some message:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Mailer\Exception\TransportExceptionInterface</span><span class="p">;</span>
+
+<span class="nv">$email</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Email</span><span class="p">();</span>
+<span class="c1">// ...</span>
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nv">$mailer</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$email</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">TransportExceptionInterface</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// some error prevented the email sending; display an</span>
+    <span class="c1">// error message or try to resend the message</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="debugging-emails">
+<h2>Debugging Emails<a class="headerlink" href="#debugging-emails" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Mailer/SentMessage.php" title="Symfony\Component\Mailer\SentMessage"><span class="pre">SentMessage</span></a></code> object returned by the
+<code class="docutils literal notranslate"><span class="pre">send()</span></code> method of the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Mailer/Transport/TransportInterface.php" title="Symfony\Component\Mailer\Transport\TransportInterface"><span class="pre">TransportInterface</span></a></code>
+provides access to the original message (<code class="docutils literal notranslate"><span class="pre">getOriginalMessage()</span></code>) and to some
+debug information (<code class="docutils literal notranslate"><span class="pre">getDebug()</span></code>) such as the HTTP calls done by the HTTP
+transports, which is useful to debug errors.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Some mailer providers change the <code class="docutils literal notranslate"><span class="pre">Message-Id</span></code> when sending the email. The
+<code class="docutils literal notranslate"><span class="pre">getMessageId()</span></code> method from <code class="docutils literal notranslate"><span class="pre">SentMessage</span></code> always returns the definitive
+ID of the message (being the original random ID generated by Symfony or the
+new ID generated by the mailer provider).</p>
+</div>
+<p>The exceptions related to mailer transports (those which implement
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Mailer/Exception/TransportException.php" title="Symfony\Component\Mailer\Exception\TransportException"><span class="pre">TransportException</span></a></code>) also provide
+this debug information via the <code class="docutils literal notranslate"><span class="pre">getDebug()</span></code> method.</p>
+</div>
+<div class="section" id="twig-html-css">
+<span id="mailer-twig"></span><h2>Twig: HTML &amp; CSS<a class="headerlink" href="#twig-html-css" title="Permalink to this headline">¶</a></h2>
+<p>The Mime component integrates with the <a class="reference internal" href="templates.html#twig-language"><span class="std std-ref">Twig template engine</span></a>
+to provide advanced features such as CSS style inlining and support for HTML/CSS
+frameworks to create complex HTML email messages. First, make sure Twig is installed:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/twig-bundle
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="html-content">
+<h3>HTML Content<a class="headerlink" href="#html-content" title="Permalink to this headline">¶</a></h3>
+<p>To define the contents of your email with Twig, use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Twig/Mime/TemplatedEmail.php" title="Symfony\Bridge\Twig\Mime\TemplatedEmail"><span class="pre">TemplatedEmail</span></a></code> class. This class extends
+the normal <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Mime/Email.php" title="Symfony\Component\Mime\Email"><span class="pre">Email</span></a></code> class but adds some new methods
+for Twig templates:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Bridge\Twig\Mime\TemplatedEmail</span><span class="p">;</span>
+
+<span class="nv">$email</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">TemplatedEmail</span><span class="p">())</span>
+    <span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;fabien@example.com&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">to</span><span class="p">(</span><span class="k">new</span> <span class="nx">Address</span><span class="p">(</span><span class="s1">&#39;ryan@example.com&#39;</span><span class="p">))</span>
+    <span class="o">-&gt;</span><span class="na">subject</span><span class="p">(</span><span class="s1">&#39;Thanks for signing up!&#39;</span><span class="p">)</span>
+
+    <span class="c1">// path of the Twig template to render</span>
+    <span class="o">-&gt;</span><span class="na">htmlTemplate</span><span class="p">(</span><span class="s1">&#39;emails/signup.html.twig&#39;</span><span class="p">)</span>
+
+    <span class="c1">// pass variables (name =&gt; value) to the template</span>
+    <span class="o">-&gt;</span><span class="na">context</span><span class="p">([</span>
+        <span class="s1">&#39;expiration_date&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">(</span><span class="s1">&#39;+7 days&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span>
+    <span class="p">])</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+<p>Then, create the template:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">{# templates/emails/signup.html.twig #}</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Welcome <span class="cp">{{</span> <span class="nv">email.toName</span> <span class="cp">}}</span>!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+    You signed up as <span class="cp">{{</span> <span class="nv">username</span> <span class="cp">}}</span> the following email:
+<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">code</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">email.to</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nv">.address</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">code</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>Click here to activate your account<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    (this link is valid until <span class="cp">{{</span> <span class="nv">expiration_date</span><span class="o">|</span><span class="nf">date</span><span class="o">(</span><span class="s1">&#39;F jS&#39;</span><span class="o">)</span> <span class="cp">}}</span>)
+<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>The Twig template has access to any of the parameters passed in the <code class="docutils literal notranslate"><span class="pre">context()</span></code>
+method of the <code class="docutils literal notranslate"><span class="pre">TemplatedEmail</span></code> class and also to a special variable called
+<code class="docutils literal notranslate"><span class="pre">email</span></code>, which is an instance of
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Twig/Mime/WrappedTemplatedEmail.php" title="Symfony\Bridge\Twig\Mime\WrappedTemplatedEmail"><span class="pre">WrappedTemplatedEmail</span></a></code>.</p>
+</div>
+<div class="section" id="text-content">
+<h3>Text Content<a class="headerlink" href="#text-content" title="Permalink to this headline">¶</a></h3>
+<p>When the text content of a <code class="docutils literal notranslate"><span class="pre">TemplatedEmail</span></code> is not explicitly defined, mailer
+will generate it automatically by converting the HTML contents into text. If you
+have <a class="reference external" href="https://github.com/thephpleague/html-to-markdown">league/html-to-markdown</a> installed in your application,
+it uses that to turn HTML into Markdown (so the text email has some visual appeal).
+Otherwise, it applies the <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.strip-tags.php" title="strip_tags"><span class="pre">strip_tags</span></a></code> PHP function to the original
+HTML contents.</p>
+<p>If you want to define the text content yourself, use the <code class="docutils literal notranslate"><span class="pre">text()</span></code> method
+explained in the previous sections or the <code class="docutils literal notranslate"><span class="pre">textTemplate()</span></code> method provided by
+the <code class="docutils literal notranslate"><span class="pre">TemplatedEmail</span></code> class:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gi">+ use Symfony\Bridge\Twig\Mime\TemplatedEmail;</span>
+
+$email = (new TemplatedEmail())
+    // ...
+
+    -&gt;htmlTemplate(&#39;emails/signup.html.twig&#39;)
+<span class="gi">+     -&gt;textTemplate(&#39;emails/signup.txt.twig&#39;)</span>
+    // ...
+;
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="mailer-twig-embedding-images">
+<span id="id1"></span><h3>Embedding Images<a class="headerlink" href="#mailer-twig-embedding-images" title="Permalink to this headline">¶</a></h3>
+<p>Instead of dealing with the <code class="docutils literal notranslate"><span class="pre">&lt;img</span> <span class="pre">src=&quot;cid:</span> <span class="pre">...&quot;&gt;</span></code> syntax explained in the
+previous sections, when using Twig to render email contents you can refer to
+image files as usual. First, to simplify things, define a Twig namespace called
+<code class="docutils literal notranslate"><span class="pre">images</span></code> that points to whatever directory your images are stored in:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/twig.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">twig</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">paths</span><span class="p p-Indicator">:</span>
+        <span class="c1"># point this wherever your images live</span>
+        <span class="s">&#39;%kernel.project_dir%/assets/images&#39;</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">images</span>
+</pre></div>
+</td></tr></table></div>
+<p>Now, use the special <code class="docutils literal notranslate"><span class="pre">email.image()</span></code> Twig helper to embed the images inside
+the email contents:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">{# &#39;@images/&#39; refers to the Twig namespace defined earlier #}</span>
+<span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">email.image</span><span class="o">(</span><span class="s1">&#39;@images/logo.png&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="s">&quot;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;Logo&quot;</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Welcome <span class="cp">{{</span> <span class="nv">email.toName</span> <span class="cp">}}</span>!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="c">{# ... #}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="inlining-css-styles">
+<span id="mailer-inline-css"></span><h3>Inlining CSS Styles<a class="headerlink" href="#inlining-css-styles" title="Permalink to this headline">¶</a></h3>
+<p>Designing the HTML contents of an email is very different from designing a
+normal HTML page. For starters, most email clients only support a subset of all
+CSS features. In addition, popular email clients like Gmail don’t support
+defining styles inside <code class="docutils literal notranslate"><span class="pre">&lt;style&gt;</span> <span class="pre">...</span> <span class="pre">&lt;/style&gt;</span></code> sections and you must <strong>inline
+all the CSS styles</strong>.</p>
+<p>CSS inlining means that every HTML tag must define a <code class="docutils literal notranslate"><span class="pre">style</span></code> attribute with
+all its CSS styles. This can make organizing your CSS a mess. That’s why Twig
+provides a <code class="docutils literal notranslate"><span class="pre">CssInlinerExtension</span></code> that automates everything for you. Install
+it with:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require twig/extra-bundle twig/cssinliner-extra
+</pre></div>
+</td></tr></table></div>
+<p>The extension is enabled automatically. To use it, wrap the entire template
+with the <code class="docutils literal notranslate"><span class="pre">inline_css</span></code> filter:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">apply</span> <span class="nv">inline_css</span> <span class="cp">%}</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+        <span class="c">{# here, define your CSS styles as usual #}</span>
+        <span class="nt">h1</span> <span class="p">{</span>
+            <span class="k">color</span><span class="p">:</span> <span class="mh">#333</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Welcome <span class="cp">{{</span> <span class="nv">email.toName</span> <span class="cp">}}</span>!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="c">{# ... #}</span>
+<span class="cp">{%</span> <span class="k">endapply</span> <span class="cp">%}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="using-external-css-files">
+<h4>Using External CSS Files<a class="headerlink" href="#using-external-css-files" title="Permalink to this headline">¶</a></h4>
+<p>You can also define CSS styles in external files and pass them as
+arguments to the filter:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">apply</span> <span class="nv">inline_css</span><span class="o">(</span><span class="nv">source</span><span class="o">(</span><span class="s1">&#39;@css/email.css&#39;</span><span class="o">))</span> <span class="cp">%}</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Welcome <span class="cp">{{</span> <span class="nv">username</span> <span class="cp">}}</span>!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="c">{# ... #}</span>
+<span class="cp">{%</span> <span class="k">endapply</span> <span class="cp">%}</span>
+</pre></div>
+</td></tr></table></div>
+<p>You can pass unlimited number of arguments to <code class="docutils literal notranslate"><span class="pre">inline_css()</span></code> to load multiple
+CSS files. For this example to work, you also need to define a new Twig namespace
+called <code class="docutils literal notranslate"><span class="pre">css</span></code> that points to the directory where <code class="docutils literal notranslate"><span class="pre">email.css</span></code> lives:</p>
+<div class="highlight-yaml notranslate" id="mailer-css-namespace"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/twig.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">twig</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">paths</span><span class="p p-Indicator">:</span>
+        <span class="c1"># point this wherever your css files live</span>
+        <span class="s">&#39;%kernel.project_dir%/assets/css&#39;</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">css</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="rendering-markdown-content">
+<span id="mailer-markdown"></span><h3>Rendering Markdown Content<a class="headerlink" href="#rendering-markdown-content" title="Permalink to this headline">¶</a></h3>
+<p>Twig provides another extension called <code class="docutils literal notranslate"><span class="pre">MarkdownExtension</span></code> that lets you
+define the email contents using <a class="reference external" href="https://commonmark.org/">Markdown syntax</a>. To use this, install the
+extension and a Markdown conversion library (the extension is compatible with
+several popular libraries):</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># instead of league/commonmark, you can also use erusev/parsedown or michelf/php-markdown</span>
+<span class="gp">$</span> composer require twig/extra-bundle twig/markdown-extra league/commonmark
+</pre></div>
+</td></tr></table></div>
+<p>The extension adds a <code class="docutils literal notranslate"><span class="pre">markdown_to_html</span></code> filter, which you can use to convert parts or
+the entire email contents from Markdown to HTML:</p>
+<div class="highlight-twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">apply</span> <span class="nv">markdown_to_html</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    Welcome </span><span class="cp">{{</span> <span class="nv">email.toName</span> <span class="cp">}}</span><span class="x">!</span>
+<span class="x">    ===========================</span>
+
+<span class="x">    You signed up to our site using the following email:</span>
+<span class="x">    `</span><span class="cp">{{</span> <span class="nv">email.to</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nv">.address</span> <span class="cp">}}</span><span class="x">`</span>
+
+<span class="x">    [Click here to activate your account](</span><span class="cp">{{</span> <span class="nv">url</span><span class="o">(</span><span class="s1">&#39;...&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">)</span>
+<span class="cp">{%</span> <span class="k">endapply</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="inky-email-templating-language">
+<span id="mailer-inky"></span><h3>Inky Email Templating Language<a class="headerlink" href="#inky-email-templating-language" title="Permalink to this headline">¶</a></h3>
+<p>Creating beautifully designed emails that work on every email client is so
+complex that there are HTML/CSS frameworks dedicated to that. One of the most
+popular frameworks is called <a class="reference external" href="https://get.foundation/emails/docs/inky.html">Inky</a>. It defines a syntax based on some simple
+tags which are later transformed into the real HTML code sent to users:</p>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- a simplified example of the Inky syntax --&gt;</span>
+<span class="p">&lt;</span><span class="nt">container</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">row</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">columns</span><span class="p">&gt;</span>This is a column.<span class="p">&lt;/</span><span class="nt">columns</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">row</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">container</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Twig provides integration with Inky via the <code class="docutils literal notranslate"><span class="pre">InkyExtension</span></code>. First, install
+the extension in your application:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require twig/extra-bundle twig/inky-extra
+</pre></div>
+</td></tr></table></div>
+<p>The extension adds an <code class="docutils literal notranslate"><span class="pre">inky_to_html</span></code> filter, which can be used to convert
+parts or the entire email contents from Inky to HTML:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">apply</span> <span class="nv">inky_to_html</span> <span class="cp">%}</span>
+    <span class="p">&lt;</span><span class="nt">container</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">row</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;header&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">columns</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">spacer</span> <span class="na">size</span><span class="o">=</span><span class="s">&quot;16&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">spacer</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;text-center&quot;</span><span class="p">&gt;</span>Welcome <span class="cp">{{</span> <span class="nv">email.toName</span> <span class="cp">}}</span>!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">columns</span><span class="p">&gt;</span>
+
+            <span class="c">{# ... #}</span>
+        <span class="p">&lt;/</span><span class="nt">row</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">container</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endapply</span> <span class="cp">%}</span>
+</pre></div>
+</td></tr></table></div>
+<p>You can combine all filters to create complex email messages:</p>
+<div class="highlight-twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">apply</span> <span class="nv">inky_to_html</span><span class="o">|</span><span class="nf">inline_css</span><span class="o">(</span><span class="nv">source</span><span class="o">(</span><span class="s1">&#39;@css/foundation-emails.css&#39;</span><span class="o">))</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="c">{# ... #}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endapply</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</td></tr></table></div>
+<p>This makes use of the <a class="reference internal" href="#mailer-css-namespace"><span class="std std-ref">css Twig namespace</span></a> we created
+earlier. You could, for example, <a class="reference external" href="https://github.com/foundation/foundation-emails/blob/develop/dist/foundation-emails.css">download the foundation-emails.css file</a>
+directly from GitHub and save it in <code class="docutils literal notranslate"><span class="pre">assets/css</span></code>.</p>
+</div>
+</div>
+<div class="section" id="signing-and-encrypting-messages">
+<h2>Signing and Encrypting Messages<a class="headerlink" href="#signing-and-encrypting-messages" title="Permalink to this headline">¶</a></h2>
+<p>It’s possible to sign and/or encrypt email messages to increase their
+integrity/security. Both options can be combined to encrypt a signed message
+and/or to sign an encrypted message.</p>
+<p>Before signing/encrypting messages, make sure to have:</p>
+<ul class="simple">
+<li>The <a class="reference external" href="https://www.php.net/manual/en/book.openssl.php">OpenSSL PHP extension</a> properly installed and configured;</li>
+<li>A valid <a class="reference external" href="https://en.wikipedia.org/wiki/S/MIME">S/MIME</a> security certificate.</li>
+</ul>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">When using OpenSSL to generate certificates, make sure to add the
+<code class="docutils literal notranslate"><span class="pre">-addtrust</span> <span class="pre">emailProtection</span></code> command option.</p>
+</div>
+<div class="section" id="signing-messages">
+<h3>Signing Messages<a class="headerlink" href="#signing-messages" title="Permalink to this headline">¶</a></h3>
+<p>When signing a message, a cryptographic hash is generated for the entire content
+of the message (including attachments). This hash is added as an attachment so
+the recipient can validate the integrity of the received message. However, the
+contents of the original message are still readable for mailing agents not
+supporting signed messages, so you must also encrypt the message if you want to
+hide its contents.</p>
+<p>You can sign messages using either <code class="docutils literal notranslate"><span class="pre">S/MIME</span></code> or <code class="docutils literal notranslate"><span class="pre">DKIM</span></code>. In both cases, the
+certificate and private key must be <a class="reference external" href="https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail">PEM encoded</a>, and can be either created
+using for example OpenSSL or obtained at an official Certificate Authority (CA).
+The email recipient must have the CA certificate in the list of trusted issuers
+in order to verify the signature.</p>
+<div class="section" id="s-mime-signer">
+<h4>S/MIME Signer<a class="headerlink" href="#s-mime-signer" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/S/MIME">S/MIME</a> is a standard for public key encryption and signing of MIME data. It
+requires using both a certificate and a private key:</p>
+<blockquote>
+<div><p>use SymfonyComponentMimeCryptoSMimeSigner;
+use SymfonyComponentMimeEmail;</p>
+<dl class="docutils">
+<dt>$email = (new Email())</dt>
+<dd>-&gt;from(<a class="reference external" href="mailto:'hello&#37;&#52;&#48;example&#46;com">‘hello<span>&#64;</span>example<span>&#46;</span>com</a>’)
+// …
+-&gt;html(‘…’);</dd>
+</dl>
+<p>$signer = new SMimeSigner(‘/path/to/certificate.crt’, ‘/path/to/certificate-private-key.key’);
+// if the private key has a passphrase, pass it as the third argument
+// new SMimeSigner(‘/path/to/certificate.crt’, ‘/path/to/certificate-private-key.key’, ‘the-passphrase’);</p>
+<p>$signedEmail = $signer-&gt;sign($email);
+// now use the Mailer component to send this $signedEmail instead of the original email</p>
+</div></blockquote>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">SMimeSigner</span></code> class defines other optional arguments to pass
+intermediate certificates and to configure the signing process using a
+bitwise operator options for <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.openssl-pkcs7-sign.php" title="openssl_pkcs7_sign"><span class="pre">openssl_pkcs7_sign</span></a></code> PHP function.</p>
+</div>
+</div>
+<div class="section" id="dkim-signer">
+<h4>DKIM Signer<a class="headerlink" href="#dkim-signer" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="`https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail">DKIM</a> is an email authentication method that affixes a digital signature,
+linked to a domain name, to each outgoing email messages. It requires a private
+key but not a certificate:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Mime\Crypto\DkimSigner</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Mime\Email</span><span class="p">;</span>
+
+<span class="nv">$email</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Email</span><span class="p">())</span>
+    <span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;hello@example.com&#39;</span><span class="p">)</span>
+    <span class="c1">// ...</span>
+    <span class="o">-&gt;</span><span class="na">html</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">);</span>
+
+<span class="c1">// first argument: same as openssl_pkey_get_private(), either a string with the</span>
+<span class="c1">// contents of the private key or the absolute path to it (prefixed with &#39;file://&#39;)</span>
+<span class="c1">// second and third arguments: the domain name and &quot;selector&quot; used to perform a DNS lookup</span>
+<span class="c1">// (the selector is a string used to point to a specific DKIM public key record in your DNS)</span>
+<span class="nv">$signer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DkimSigner</span><span class="p">(</span><span class="s1">&#39;file:///path/to/private-key.key&#39;</span><span class="p">,</span> <span class="s1">&#39;example.com&#39;</span><span class="p">,</span> <span class="s1">&#39;sf&#39;</span><span class="p">);</span>
+<span class="c1">// if the private key has a passphrase, pass it as the fourth argument</span>
+<span class="c1">// new DkimSigner(&#39;file:///path/to/private-key.key&#39;, &#39;example.com&#39;, &#39;sf&#39;, [], &#39;the-passphrase&#39;);</span>
+
+<span class="nv">$signedEmail</span> <span class="o">=</span> <span class="nv">$signer</span><span class="o">-&gt;</span><span class="na">sign</span><span class="p">(</span><span class="nv">$email</span><span class="p">);</span>
+<span class="c1">// now use the Mailer component to send this $signedEmail instead of the original email</span>
+
+<span class="c1">// DKIM signer provides many config options and a helper object to configure them</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Mime\Crypto\DkimOptions</span><span class="p">;</span>
+
+<span class="nv">$signedEmail</span> <span class="o">=</span> <span class="nv">$signer</span><span class="o">-&gt;</span><span class="na">sign</span><span class="p">(</span><span class="nv">$email</span><span class="p">,</span> <span class="p">(</span><span class="k">new</span> <span class="nx">DkimOptions</span><span class="p">())</span>
+    <span class="o">-&gt;</span><span class="na">bodyCanon</span><span class="p">(</span><span class="s1">&#39;relaxed&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">headerCanon</span><span class="p">(</span><span class="s1">&#39;relaxed&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">headersToIgnore</span><span class="p">([</span><span class="s1">&#39;Message-ID&#39;</span><span class="p">])</span>
+    <span class="o">-&gt;</span><span class="na">toArray</span><span class="p">()</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.2: </span>The DKIM signer was introduced in Symfony 5.2.</p>
+</div>
+</div>
+</div>
+<div class="section" id="encrypting-messages">
+<h3>Encrypting Messages<a class="headerlink" href="#encrypting-messages" title="Permalink to this headline">¶</a></h3>
+<p>When encrypting a message, the entire message (including attachments) is
+encrypted using a certificate. Therefore, only the recipients that have the
+corresponding private key can read the original message contents:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Mime\Crypto\SMimeEncrypter</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Mime\Email</span><span class="p">;</span>
+
+<span class="nv">$email</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Email</span><span class="p">())</span>
+    <span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;hello@example.com&#39;</span><span class="p">)</span>
+    <span class="c1">// ...</span>
+    <span class="o">-&gt;</span><span class="na">html</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">);</span>
+
+<span class="nv">$encrypter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SMimeEncrypter</span><span class="p">(</span><span class="s1">&#39;/path/to/certificate.crt&#39;</span><span class="p">);</span>
+<span class="nv">$encryptedEmail</span> <span class="o">=</span> <span class="nv">$encrypter</span><span class="o">-&gt;</span><span class="na">encrypt</span><span class="p">(</span><span class="nv">$email</span><span class="p">);</span>
+<span class="c1">// now use the Mailer component to send this $encryptedEmail instead of the original email</span>
+</pre></div>
+</div>
+<p>You can pass more than one certificate to the <code class="docutils literal notranslate"><span class="pre">SMimeEncrypter()</span></code> constructor
+and it will select the appropriate certificate depending on the <code class="docutils literal notranslate"><span class="pre">To</span></code> option:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$firstEmail</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Email</span><span class="p">())</span>
+    <span class="c1">// ...</span>
+    <span class="o">-&gt;</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;jane@example.com&#39;</span><span class="p">);</span>
+
+<span class="nv">$secondEmail</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Email</span><span class="p">())</span>
+    <span class="c1">// ...</span>
+    <span class="o">-&gt;</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;john@example.com&#39;</span><span class="p">);</span>
+
+<span class="c1">// the second optional argument of SMimeEncrypter defines which encryption algorithm is used</span>
+<span class="c1">// (it must be one of these constants: https://www.php.net/manual/en/openssl.ciphers.php)</span>
+<span class="nv">$encrypter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SMimeEncrypter</span><span class="p">([</span>
+    <span class="c1">// key = email recipient; value = path to the certificate file</span>
+    <span class="s1">&#39;jane@example.com&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/path/to/first-certificate.crt&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;john@example.com&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/path/to/second-certificate.crt&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+
+<span class="nv">$firstEncryptedEmail</span> <span class="o">=</span> <span class="nv">$encrypter</span><span class="o">-&gt;</span><span class="na">encrypt</span><span class="p">(</span><span class="nv">$firstEmail</span><span class="p">);</span>
+<span class="nv">$secondEncryptedEmail</span> <span class="o">=</span> <span class="nv">$encrypter</span><span class="o">-&gt;</span><span class="na">encrypt</span><span class="p">(</span><span class="nv">$secondEmail</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="multiple-email-transports">
+<h2>Multiple Email Transports<a class="headerlink" href="#multiple-email-transports" title="Permalink to this headline">¶</a></h2>
+<p>You may want to use more than one mailer transport for delivery of your messages.
+This can be configured by replacing the <code class="docutils literal notranslate"><span class="pre">dsn</span></code> configuration entry with a
+<code class="docutils literal notranslate"><span class="pre">transports</span></code> entry, like:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/mailer.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">mailer</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">transports</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(MAILER_DSN)%&#39;</span>
+            <span class="l l-Scalar l-Scalar-Plain">alternative</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(MAILER_DSN_IMPORTANT)%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+<p>By default the first transport is used. The other transports can be used by
+adding a text header <code class="docutils literal notranslate"><span class="pre">X-Transport</span></code> to an email:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// Send using first &quot;main&quot; transport ...</span>
+<span class="nv">$mailer</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$email</span><span class="p">);</span>
+
+<span class="c1">// ... or use the &quot;alternative&quot; one</span>
+<span class="nv">$email</span><span class="o">-&gt;</span><span class="na">getHeaders</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addTextHeader</span><span class="p">(</span><span class="s1">&#39;X-Transport&#39;</span><span class="p">,</span> <span class="s1">&#39;alternative&#39;</span><span class="p">);</span>
+<span class="nv">$mailer</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$email</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sending-messages-async">
+<h2>Sending Messages Async<a class="headerlink" href="#sending-messages-async" title="Permalink to this headline">¶</a></h2>
+<p>When you call <code class="docutils literal notranslate"><span class="pre">$mailer-&gt;send($email)</span></code>, the email is sent to the transport immediately.
+To improve performance, you can leverage <a class="reference internal" href="messenger.html"><span class="doc">Messenger</span></a> to send
+the messages later via a Messenger transport.</p>
+<p>Start by following the <a class="reference internal" href="messenger.html"><span class="doc">Messenger</span></a> documentation and configuring
+a transport. Once everything is set up, when you call <code class="docutils literal notranslate"><span class="pre">$mailer-&gt;send()</span></code>, a
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Mailer/Messenger/SendEmailMessage.php" title="Symfony\Component\Mailer\Messenger\SendEmailMessage"><span class="pre">SendEmailMessage</span></a></code> message will
+be dispatched through the default message bus (<code class="docutils literal notranslate"><span class="pre">messenger.default_bus</span></code>). Assuming
+you have a transport called <code class="docutils literal notranslate"><span class="pre">async</span></code>, you can route the message there:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/messenger.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">messenger</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">transports</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">async</span><span class="p p-Indicator">:</span> <span class="s">&quot;%env(MESSENGER_TRANSPORT_DSN)%&quot;</span>
+
+        <span class="l l-Scalar l-Scalar-Plain">routing</span><span class="p p-Indicator">:</span>
+            <span class="s">&#39;Symfony\Component\Mailer\Messenger\SendEmailMessage&#39;</span><span class="p p-Indicator">:</span>  <span class="l l-Scalar l-Scalar-Plain">async</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/messenger.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:messenger&gt;</span>
+            <span class="nt">&lt;framework:routing</span> <span class="na">message-class=</span><span class="s">&quot;Symfony\Component\Mailer\Messenger\SendEmailMessage&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;framework:sender</span> <span class="na">service=</span><span class="s">&quot;async&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/framework:routing&gt;</span>
+        <span class="nt">&lt;/framework:messenger&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/messenger.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;messenger&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;routing&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;Symfony\Component\Mailer\Messenger\SendEmailMessage&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;async&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Thanks to this, instead of being delivered immediately, messages will be sent to
+the transport to be handled later (see <a class="reference internal" href="messenger.html#messenger-worker"><span class="std std-ref">Consuming Messages (Running the Worker)</span></a>).</p>
+</div>
+<div class="section" id="adding-tags-and-metadata-to-emails">
+<h2>Adding Tags and Metadata to Emails<a class="headerlink" href="#adding-tags-and-metadata-to-emails" title="Permalink to this headline">¶</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Mailer/Header/TagHeader.php" title="Symfony\Component\Mailer\Header\TagHeader"><span class="pre">TagHeader</span></a></code> and
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Mailer/Header/MetadataHeader.php" title="Symfony\Component\Mailer\Header\MetadataHeader"><span class="pre">MetadataHeader</span></a></code> classes were
+introduced in Symfony 5.1.</p>
+</div>
+<p>Certain 3rd party transports support email <em>tags</em> and <em>metadata</em>, which can be used
+for grouping, tracking and workflows. You can add those by using the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Mailer/Header/TagHeader.php" title="Symfony\Component\Mailer\Header\TagHeader"><span class="pre">TagHeader</span></a></code> and
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Mailer/Header/MetadataHeader.php" title="Symfony\Component\Mailer\Header\MetadataHeader"><span class="pre">MetadataHeader</span></a></code> classes. If your transport
+supports headers, it will convert them to their appropriate format:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Mailer\Header\MetadataHeader</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Mailer\Header\TagHeader</span><span class="p">;</span>
+
+<span class="nv">$email</span><span class="o">-&gt;</span><span class="na">getHeaders</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">TagHeader</span><span class="p">(</span><span class="s1">&#39;password-reset&#39;</span><span class="p">));</span>
+<span class="nv">$email</span><span class="o">-&gt;</span><span class="na">getHeaders</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">MetadataHeader</span><span class="p">(</span><span class="s1">&#39;Color&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">));</span>
+<span class="nv">$email</span><span class="o">-&gt;</span><span class="na">getHeaders</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">MetadataHeader</span><span class="p">(</span><span class="s1">&#39;Client-ID&#39;</span><span class="p">,</span> <span class="s1">&#39;12345&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>If your transport does not support tags and metadata, they will be added as custom headers:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span>X-Tag: password-reset
+X-Metadata-Color: blue
+X-Metadata-Client-ID: 12345
+</pre></div>
+</td></tr></table></div>
+<p>The following transports currently support tags and metadata:</p>
+<ul class="simple">
+<li>Postmark</li>
+<li>Mailgun</li>
+<li>MailChimp</li>
+</ul>
+</div>
+<div class="section" id="development-debugging">
+<h2>Development &amp; Debugging<a class="headerlink" href="#development-debugging" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="disabling-delivery">
+<h3>Disabling Delivery<a class="headerlink" href="#disabling-delivery" title="Permalink to this headline">¶</a></h3>
+<p>While developing (or testing), you may want to disable delivery of messages entirely.
+You can do this by forcing Mailer to use the <code class="docutils literal notranslate"><span class="pre">NullTransport</span></code> in only the <code class="docutils literal notranslate"><span class="pre">dev</span></code>
+environment:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/dev/mailer.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">mailer</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">dsn</span><span class="p p-Indicator">:</span> <span class="s">&#39;null://null&#39;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you’re using Messenger and routing to a transport, the message will <em>still</em>
+be sent to that transport.</p>
+</div>
+</div>
+<div class="section" id="always-send-to-the-same-address">
+<h3>Always Send to the same Address<a class="headerlink" href="#always-send-to-the-same-address" title="Permalink to this headline">¶</a></h3>
+<p>Instead of disabling delivery entirely, you might want to <em>always</em> send emails to
+a specific address, instead of the <em>real</em> address:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/dev/mailer.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">mailer</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">envelope</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">recipients</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;youremail@example.com&#39;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

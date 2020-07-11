@@ -1,0 +1,906 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Pushing Data to Clients Using the Mercure Protocol &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Messenger: Sync &amp; Queued Message Handling" href="messenger.html" />
+    <link rel="prev" title="Sending Emails with Mailer" href="mailer.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pushing Data to Clients Using the Mercure Protocol</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-the-symfony-component">Installing the Symfony Component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-a-mercure-hub">Running a Mercure Hub</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-usage">Basic Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#publishing">Publishing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#subscribing">Subscribing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#async-dispatching">Async dispatching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#discovery">Discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#authorization">Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generating-programmatically-the-jwt-used-to-publish">Generating Programmatically The JWT Used to Publish</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#web-apis">Web APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#debugging">Debugging</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Pushing Data to Clients Using the Mercure Protocol</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/mercure.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pushing-data-to-clients-using-the-mercure-protocol">
+<span id="index-0"></span><h1>Pushing Data to Clients Using the Mercure Protocol<a class="headerlink" href="#pushing-data-to-clients-using-the-mercure-protocol" title="Permalink to this headline">¶</a></h1>
+<p>Being able to broadcast data in real-time from servers to clients is a
+requirement for many modern web and mobile applications.</p>
+<p>Creating a UI reacting in live to changes made by other users
+(e.g. a user changes the data currently browsed by several other users,
+all UIs are instantly updated),
+notifying the user when <a class="reference internal" href="messenger.html"><span class="doc">an asynchronous job</span></a> has been
+completed or creating chat applications are among the typical use cases
+requiring “push” capabilities.</p>
+<p>Symfony provides a straightforward component, built on top of
+<a class="reference external" href="https://mercure.rocks/spec">the Mercure protocol</a>, specifically designed for this class of use cases.</p>
+<p>Mercure is an open protocol designed from the ground to publish updates from
+server to clients. It is a modern and efficient alternative to timer-based
+polling and to WebSocket.</p>
+<p>Because it is built on top <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events">Server-Sent Events (SSE)</a>, Mercure is supported
+out of the box in most modern browsers (Edge and IE require <a class="reference external" href="https://github.com/Yaffle/EventSource">a polyfill</a>) and
+has <a class="reference external" href="https://mercure.rocks/docs/ecosystem/awesome">high-level implementations</a> in many programming languages.</p>
+<p>Mercure comes with an authorization mechanism,
+automatic re-connection in case of network issues
+with retrieving of lost updates, a presence API,
+“connection-less” push for smartphones and auto-discoverability (a supported
+client can automatically discover and subscribe to updates of a given resource
+thanks to a specific HTTP header).</p>
+<p>All these features are supported in the Symfony integration.</p>
+<p>Unlike WebSocket, which is only compatible with HTTP 1.x,
+Mercure leverages the multiplexing capabilities provided by HTTP/2
+and HTTP/3 (but also supports older versions of HTTP).</p>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=UI1l0JOjLeI">In this recording</a> you can see how a Symfony web API leverages Mercure
+and API Platform to update in live a React app and a mobile app (React Native)
+generated using the API Platform client generator.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installing-the-symfony-component">
+<h3>Installing the Symfony Component<a class="headerlink" href="#installing-the-symfony-component" title="Permalink to this headline">¶</a></h3>
+<p>In applications using <a class="reference internal" href="setup.html#symfony-flex"><span class="std std-ref">Symfony Flex</span></a>, run this command to
+install the Mercure support before using it:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require mercure
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="running-a-mercure-hub">
+<h3>Running a Mercure Hub<a class="headerlink" href="#running-a-mercure-hub" title="Permalink to this headline">¶</a></h3>
+<p>To manage persistent connections, Mercure relies on a Hub: a dedicated server
+that handles persistent SSE connections with the clients.
+The Symfony app publishes the updates to the hub, that will broadcast them to
+clients.</p>
+<img alt="_images/schema.png" src="_images/schema.png" />
+<p>An official and open source (AGPL) implementation of a Hub can be downloaded
+as a static binary from <a class="reference external" href="https://mercure.rocks">Mercure.rocks</a>.</p>
+<p>Run the following command to start it:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> ./mercure --jwt-key<span class="o">=</span><span class="s1">&#39;!ChangeMe!&#39;</span> --addr<span class="o">=</span><span class="s1">&#39;localhost:3000&#39;</span> --allow-anonymous --cors-allowed-origins<span class="o">=</span><span class="s1">&#39;*&#39;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Alternatively to the binary, a Docker image, a Helm chart for Kubernetes
+and a managed, High Availability Hub are also provided by Mercure.rocks.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The <a class="reference external" href="https://api-platform.com/docs/distribution/">API Platform distribution</a> comes with a Docker Compose configuration
+as well as a Helm chart for Kubernetes that are 100% compatible with Symfony,
+and contain a Mercure hub.
+You can copy them in your project, even if you don’t use API Platform.</p>
+</div>
+</div>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>The preferred way to configure the MercureBundle is using
+<a class="reference internal" href="configuration.html"><span class="doc">environment variables</span></a>.</p>
+<p>Set the URL of your hub as the value of the <code class="docutils literal notranslate"><span class="pre">MERCURE_PUBLISH_URL</span></code> env var.
+The <code class="docutils literal notranslate"><span class="pre">.env</span></code> file of your project has been updated by the Flex recipe to
+provide example values.
+Set it to the URL of the Mercure Hub (<code class="docutils literal notranslate"><span class="pre">http://localhost:3000/.well-known/mercure</span></code> by default).</p>
+<p>In addition, the Symfony application must bear a <a class="reference external" href="https://tools.ietf.org/html/rfc7519">JSON Web Token</a> (JWT)
+to the Mercure Hub to be authorized to publish updates.</p>
+<p>This JWT should be stored in the <code class="docutils literal notranslate"><span class="pre">MERCURE_JWT_TOKEN</span></code> environment variable.</p>
+<p>The JWT must be signed with the same secret key as the one used by
+the Hub to verify the JWT (<code class="docutils literal notranslate"><span class="pre">!ChangeMe!</span></code> in our example).
+Its payload must contain at least the following structure to be allowed to
+publish:</p>
+<div class="highlight-json notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;mercure&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;publish&quot;</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Because the array is empty, the Symfony app will only be authorized to publish
+public updates (see the <a class="reference internal" href="#authorization">authorization</a> section for further information).</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The jwt.io website is a convenient way to create and sign JWTs.
+Checkout this <a class="reference external" href="https://jwt.io/#debugger-io?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.iHLdpAEjX4BqCsHJEegxRmO-Y6sMxXwNATrQyRNt3GY">example JWT</a>, that grants publishing rights for all <em>topics</em>
+(notice the star in the array).
+Don’t forget to set your secret key properly in the bottom of the right panel of the form!</p>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p>Don’t put the secret key in <code class="docutils literal notranslate"><span class="pre">MERCURE_JWT_TOKEN</span></code>, it will not work!
+This environment variable must contain a JWT, signed with the secret key.</p>
+<p class="last">Also, be sure to keep both the secret key and the JWTs… secrets!</p>
+</div>
+</div>
+<div class="section" id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="publishing">
+<h3>Publishing<a class="headerlink" href="#publishing" title="Permalink to this headline">¶</a></h3>
+<p>The Mercure Component provides an <code class="docutils literal notranslate"><span class="pre">Update</span></code> value object representing
+the update to publish. It also provides a <code class="docutils literal notranslate"><span class="pre">Publisher</span></code> service to dispatch
+updates to the Hub.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Publisher</span></code> service can be injected using the
+<a class="reference internal" href="service_container/autowiring.html"><span class="doc">autowiring</span></a> in any other
+service, including controllers:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/PublishController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Mercure\PublisherInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Mercure\Update</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">PublishController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">(</span><span class="nx">PublisherInterface</span> <span class="nv">$publisher</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span>
+    <span class="p">{</span>
+        <span class="nv">$update</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Update</span><span class="p">(</span>
+            <span class="s1">&#39;http://example.com/books/1&#39;</span><span class="p">,</span>
+            <span class="nb">json_encode</span><span class="p">([</span><span class="s1">&#39;status&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;OutOfStock&#39;</span><span class="p">])</span>
+        <span class="p">);</span>
+
+        <span class="c1">// The Publisher service is an invokable object</span>
+        <span class="nv">$publisher</span><span class="p">(</span><span class="nv">$update</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;published!&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The first parameter to pass to the <code class="docutils literal notranslate"><span class="pre">Update</span></code> constructor is
+the <strong>topic</strong> being updated. This topic should be an <a class="reference external" href="https://tools.ietf.org/html/rfc3987">IRI</a>
+(Internationalized Resource Identifier, RFC 3987): a unique identifier
+of the resource being dispatched.</p>
+<p>Usually, this parameter contains the original URL of the resource
+transmitted to the client, but it can be any valid <a class="reference external" href="https://tools.ietf.org/html/rfc3987">IRI</a>, it doesn’t
+have to be a URL that exists (similarly to XML namespaces).</p>
+<p>The second parameter of the constructor is the content of the update.
+It can be anything, stored in any format.
+However, serializing the resource in a hypermedia format such as JSON-LD,
+Atom, HTML or XML is recommended.</p>
+</div>
+<div class="section" id="subscribing">
+<h3>Subscribing<a class="headerlink" href="#subscribing" title="Permalink to this headline">¶</a></h3>
+<p>Subscribing to updates in JavaScript is straightforward:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">eventSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventSource</span><span class="p">(</span><span class="s1">&#39;http://localhost:3000/.well-known/mercure?topic=&#39;</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="s1">&#39;http://example.com/books/1&#39;</span><span class="p">));</span>
+<span class="nx">eventSource</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Will be called every time an update is published by the server</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">data</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Mercure also allows to subscribe to several topics,
+and to use URI Templates or the special value <code class="docutils literal notranslate"><span class="pre">*</span></code> (matched by all topics)
+as patterns:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// URL is a built-in JavaScript class to manipulate URLs</span>
+<span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URL</span><span class="p">(</span><span class="s1">&#39;http://localhost:3000/.well-known/mercure&#39;</span><span class="p">);</span>
+<span class="nx">url</span><span class="p">.</span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;topic&#39;</span><span class="p">,</span> <span class="s1">&#39;http://example.com/books/1&#39;</span><span class="p">);</span>
+<span class="c1">// Subscribe to updates of several Book resources</span>
+<span class="nx">url</span><span class="p">.</span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;topic&#39;</span><span class="p">,</span> <span class="s1">&#39;http://example.com/books/2&#39;</span><span class="p">);</span>
+<span class="c1">// All Review resources will match this pattern</span>
+<span class="nx">url</span><span class="p">.</span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;topic&#39;</span><span class="p">,</span> <span class="s1">&#39;http://example.com/reviews/{id}&#39;</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">eventSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventSource</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+<span class="nx">eventSource</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">data</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>Google Chrome DevTools natively integrate a <a class="reference external" href="https://twitter.com/ChromeDevTools/status/562324683194785792">practical UI</a> displaying in live
+the received events:</p>
+<img alt="_images/chrome.png" src="_images/chrome.png" />
+<p>To use it:</p>
+<ul class="last simple">
+<li>open the DevTools</li>
+<li>select the “Network” tab</li>
+<li>click on the request to the Mercure hub</li>
+<li>click on the “EventStream” sub-tab.</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Test if a URI Template match a URL using <a class="reference external" href="https://uri-template-tester.mercure.rocks">the online debugger</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="async-dispatching">
+<h2>Async dispatching<a class="headerlink" href="#async-dispatching" title="Permalink to this headline">¶</a></h2>
+<p>Instead of calling the <code class="docutils literal notranslate"><span class="pre">Publisher</span></code> service directly, you can also let Symfony
+dispatching the updates asynchronously thanks to the provided integration with
+the Messenger component.</p>
+<p>First, be sure <a class="reference internal" href="messenger.html"><span class="doc">to install the Messenger component</span></a>
+and to configure properly a transport (if you don’t, the handler will
+be called synchronously).</p>
+<p>Then, dispatch the Mercure <code class="docutils literal notranslate"><span class="pre">Update</span></code> to the Messenger’s Message Bus,
+it will be handled automatically:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/PublishController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Mercure\Update</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Messenger\MessageBusInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">PublishController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">(</span><span class="nx">MessageBusInterface</span> <span class="nv">$bus</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span>
+    <span class="p">{</span>
+        <span class="nv">$update</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Update</span><span class="p">(</span>
+            <span class="s1">&#39;http://example.com/books/1&#39;</span><span class="p">,</span>
+            <span class="nb">json_encode</span><span class="p">([</span><span class="s1">&#39;status&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;OutOfStock&#39;</span><span class="p">])</span>
+        <span class="p">);</span>
+
+        <span class="c1">// Sync, or async (RabbitMQ, Kafka...)</span>
+        <span class="nv">$bus</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span><span class="nv">$update</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;published!&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="discovery">
+<h2>Discovery<a class="headerlink" href="#discovery" title="Permalink to this headline">¶</a></h2>
+<p>The Mercure protocol comes with a discovery mechanism.
+To leverage it, the Symfony application must expose the URL of the Mercure Hub
+in a <code class="docutils literal notranslate"><span class="pre">Link</span></code> HTTP header.</p>
+<img alt="_images/discovery.png" src="_images/discovery.png" />
+<p>You can create <code class="docutils literal notranslate"><span class="pre">Link</span></code> headers with the <a class="reference internal" href="web_link.html"><span class="doc">WebLink Component</span></a>,
+by using the <code class="docutils literal notranslate"><span class="pre">AbstractController::addLink</span></code> helper method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/DiscoverController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\JsonResponse</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\WebLink\Link</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">DiscoverController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span><span class="o">:</span> <span class="nx">JsonResponse</span>
+    <span class="p">{</span>
+        <span class="c1">// This parameter is automatically created by the MercureBundle</span>
+        <span class="nv">$hubUrl</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getParameter</span><span class="p">(</span><span class="s1">&#39;mercure.default_hub&#39;</span><span class="p">);</span>
+
+        <span class="c1">// Link: &lt;http://localhost:3000/.well-known/mercure&gt;; rel=&quot;mercure&quot;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addLink</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Link</span><span class="p">(</span><span class="s1">&#39;mercure&#39;</span><span class="p">,</span> <span class="nv">$hubUrl</span><span class="p">));</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span>
+            <span class="s1">&#39;@id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/books/1&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;availability&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;https://schema.org/InStock&#39;</span><span class="p">,</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then, this header can be parsed client-side to find the URL of the Hub,
+and to subscribe to it:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// Fetch the original resource served by the Symfony web API</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/books/1&#39;</span><span class="p">)</span> <span class="c1">// Has Link: &lt;http://localhost:3000/.well-known/mercure&gt;; rel=&quot;mercure&quot;</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// Extract the hub URL from the Link header</span>
+        <span class="kr">const</span> <span class="nx">hubUrl</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;Link&#39;</span><span class="p">).</span><span class="nx">match</span><span class="p">(</span><span class="sr">/&lt;([^&gt;]+)&gt;;\s+rel=(?:mercure|&quot;[^&quot;]*mercure[^&quot;]*&quot;)/</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+
+        <span class="c1">// Append the topic(s) to subscribe as query parameter</span>
+        <span class="kr">const</span> <span class="nx">hub</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URL</span><span class="p">(</span><span class="nx">hubUrl</span><span class="p">);</span>
+        <span class="nx">hub</span><span class="p">.</span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;topic&#39;</span><span class="p">,</span> <span class="s1">&#39;http://example.com/books/{id}&#39;</span><span class="p">);</span>
+
+        <span class="c1">// Subscribe to updates</span>
+        <span class="kr">const</span> <span class="nx">eventSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventSource</span><span class="p">(</span><span class="nx">hub</span><span class="p">);</span>
+        <span class="nx">eventSource</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="authorization">
+<h2>Authorization<a class="headerlink" href="#authorization" title="Permalink to this headline">¶</a></h2>
+<p>Mercure also allows to dispatch updates only to authorized clients.
+To do so, mark the update as <strong>private</strong> by setting the third parameter
+of the <code class="docutils literal notranslate"><span class="pre">Update</span></code> constructor to <code class="docutils literal notranslate"><span class="pre">true</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/Publish.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Mercure\PublisherInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Mercure\Update</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">PublishController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">(</span><span class="nx">PublisherInterface</span> <span class="nv">$publisher</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span>
+    <span class="p">{</span>
+        <span class="nv">$update</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Update</span><span class="p">(</span>
+            <span class="s1">&#39;http://example.com/books/1&#39;</span><span class="p">,</span>
+            <span class="nb">json_encode</span><span class="p">([</span><span class="s1">&#39;status&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;OutOfStock&#39;</span><span class="p">]),</span>
+            <span class="k">true</span> <span class="c1">// private</span>
+        <span class="p">);</span>
+
+        <span class="c1">// Publisher&#39;s JWT must contain this topic, a URI template it matches or * in mercure.publish or you&#39;ll get a 401</span>
+        <span class="c1">// Subscriber&#39;s JWT must contain this topic, a URI template it matches or * in mercure.subscribe to receive the update</span>
+        <span class="nv">$publisher</span><span class="p">(</span><span class="nv">$update</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;private update published!&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To subscribe to private updates, subscribers must provide to the Hub
+a JWT containing a topic selector matching by the update’s topic.</p>
+<p>To provide this JWT, the subscriber can use a cookie,
+or a <code class="docutils literal notranslate"><span class="pre">Authorization</span></code> HTTP header.
+Cookies are automatically sent by the browsers when opening an <code class="docutils literal notranslate"><span class="pre">EventSource</span></code> connection.
+Using cookies is the most secure and preferred way when the client is a web browser.
+If the client is not a web browser, then using an authorization header is the way to go.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>The native implementation of EventSource doesn’t allow specifying headers.
+For example, authorization using Bearer token. In order to achieve that, use <a class="reference external" href="https://github.com/Yaffle/EventSource">a polyfill</a></p>
+<div class="last highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">es</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventSourcePolyfill</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s1">&#39;Authorization&#39;</span><span class="o">:</span> <span class="s1">&#39;Bearer &#39;</span> <span class="o">+</span> <span class="nx">token</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>In the following example controller,
+the generated cookie contains a JWT, itself containing the appropriate topic selector.
+This cookie will be automatically sent by the web browser when connecting to the Hub.
+Then, the Hub will verify the validity of the provided JWT, and extract the topic selectors
+from it.</p>
+<p>To generate the JWT, we’ll use the <code class="docutils literal notranslate"><span class="pre">lcobucci/jwt</span></code> library. Install it:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require lcobucci/jwt
+</pre></div>
+</td></tr></table></div>
+<p>And here is the controller:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/DiscoverController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Lcobucci\JWT\Builder</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Lcobucci\JWT\Signer\Hmac\Sha256</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Lcobucci\JWT\Signer\Key</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Cookie</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\WebLink\Link</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">DiscoverController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span>
+    <span class="p">{</span>
+        <span class="nv">$hubUrl</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getParameter</span><span class="p">(</span><span class="s1">&#39;mercure.default_hub&#39;</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addLink</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Link</span><span class="p">(</span><span class="s1">&#39;mercure&#39;</span><span class="p">,</span> <span class="nv">$hubUrl</span><span class="p">));</span>
+
+        <span class="nv">$token</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">Builder</span><span class="p">())</span>
+            <span class="c1">// set other appropriate JWT claims, such as an expiration date</span>
+            <span class="o">-&gt;</span><span class="na">withClaim</span><span class="p">(</span><span class="s1">&#39;mercure&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;subscribe&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s2">&quot;http://example.com/books/1&quot;</span><span class="p">]])</span> <span class="c1">// can also be a URI template, or *</span>
+            <span class="o">-&gt;</span><span class="na">getToken</span><span class="p">(</span><span class="k">new</span> <span class="nx">Sha256</span><span class="p">(),</span> <span class="k">new</span> <span class="nx">Key</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getParameter</span><span class="p">(</span><span class="s1">&#39;mercure_secret_key&#39;</span><span class="p">)));</span> <span class="c1">// don&#39;t forget to set this parameter! Test value: !ChangeMe!</span>
+
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s1">&#39;@id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/demo/books/1&#39;</span><span class="p">,</span> <span class="s1">&#39;availability&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;https://schema.org/InStock&#39;</span><span class="p">]);</span>
+        <span class="nv">$cookie</span> <span class="o">=</span> <span class="nx">Cookie</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;mercureAuthorization&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">withValue</span><span class="p">(</span><span class="nv">$token</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">withPath</span><span class="p">(</span><span class="s1">&#39;/.well-known/mercure&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">withSecure</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">withHttpOnly</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">withSameSite</span><span class="p">(</span><span class="s1">&#39;strict&#39;</span><span class="p">)</span>
+        <span class="p">;</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">setCookie</span><span class="p">(</span><span class="nv">$cookie</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">To use the cookie authentication method, the Symfony app and the Hub
+must be served from the same domain (can be different sub-domains).</p>
+</div>
+</div>
+<div class="section" id="generating-programmatically-the-jwt-used-to-publish">
+<h2>Generating Programmatically The JWT Used to Publish<a class="headerlink" href="#generating-programmatically-the-jwt-used-to-publish" title="Permalink to this headline">¶</a></h2>
+<p>Instead of directly storing a JWT in the configuration,
+you can create a service that will return the token used by
+the <code class="docutils literal notranslate"><span class="pre">Publisher</span></code> object:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Mercure/MyJwtProvider.php</span>
+<span class="k">namespace</span> <span class="nx">App\Mercure</span><span class="p">;</span>
+
+<span class="k">final</span> <span class="k">class</span> <span class="nc">MyJwtProvider</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">()</span><span class="o">:</span> <span class="nx">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;the-JWT&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then, reference this service in the bundle configuration:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/mercure.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">mercure</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">hubs</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://mercure-hub.example.com/.well-known/mercure</span>
+            <span class="l l-Scalar l-Scalar-Plain">jwt_provider</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">App\Mercure\MyJwtProvider</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/mercure.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;config&gt;</span>
+    <span class="nt">&lt;hub</span>
+        <span class="na">name=</span><span class="s">&quot;default&quot;</span>
+        <span class="na">url=</span><span class="s">&quot;https://mercure-hub.example.com/.well-known/mercure&quot;</span>
+        <span class="na">jwt-provider=</span><span class="s">&quot;App\Mercure\MyJwtProvider&quot;</span>
+    <span class="nt">/&gt;</span>
+<span class="nt">&lt;/config&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/mercure.php</span>
+<span class="k">use</span> <span class="nx">App\Mercure\MyJwtProvider</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;mercure&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;hubs&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;https://mercure-hub.example.com/.well-known/mercure&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;jwt_provider&#39;</span> <span class="o">=&gt;</span> <span class="nx">MyJwtProvider</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>This method is especially convenient when using tokens having an expiration
+date, that can be refreshed programmatically.</p>
+</div>
+<div class="section" id="web-apis">
+<h2>Web APIs<a class="headerlink" href="#web-apis" title="Permalink to this headline">¶</a></h2>
+<p>When creating a web API, it’s convenient to be able to instantly push
+new versions of the resources to all connected devices, and to update
+their views.</p>
+<p>API Platform can use the Mercure Component to dispatch updates automatically,
+every time an API resource is created, modified or deleted.</p>
+<p>Start by installing the library using its official recipe:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require api
+</pre></div>
+</td></tr></table></div>
+<p>Then, creating the following entity is enough to get a fully-featured
+hypermedia API, and automatic update broadcasting through the Mercure hub:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Entity/Book.php</span>
+<span class="k">namespace</span> <span class="nx">App\Entity</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">ApiPlatform\Core\Annotation\ApiResource</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\ORM\Mapping</span> <span class="k">as</span> <span class="nx">ORM</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd">* @ApiResource(mercure=true)</span>
+<span class="sd">* @ORM\Entity</span>
+<span class="sd">*/</span>
+<span class="k">class</span> <span class="nc">Book</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @ORM\Id</span>
+<span class="sd">     * @ORM\Column</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="nv">$name</span><span class="p">;</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @ORM\Column</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="nv">$status</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As showcased <a class="reference external" href="https://www.youtube.com/watch?v=UI1l0JOjLeI">in this recording</a>, the API Platform Client Generator also
+allows to scaffold complete React and React Native applications from this API.
+These applications will render the content of Mercure updates in real-time.</p>
+<p>Checkout <a class="reference external" href="https://api-platform.com/docs/core/mercure/">the dedicated API Platform documentation</a> to learn more about
+its Mercure support.</p>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>During functional testing there is no need to send updates to Mercure. They will
+be handled by a stub publisher:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// tests/Functional/Fixtures/PublisherStub.php</span>
+<span class="k">namespace</span> <span class="nx">App\Tests\Functional\Fixtures</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Mercure\PublisherInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Mercure\Update</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">PublisherStub</span> <span class="k">implements</span> <span class="nx">PublisherInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">(</span><span class="nx">Update</span> <span class="nv">$update</span><span class="p">)</span><span class="o">:</span> <span class="nx">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>PublisherStub decorates the default publisher service so no updates are actually
+sent. Here is the PublisherStub implementation:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1"># config/services_test.yaml</span>
+<span class="nx">App\Tests\Functional\Fixtures\PublisherStub</span><span class="o">:</span>
+    <span class="nx">decorates</span><span class="o">:</span> <span class="nx">mercure</span><span class="o">.</span><span class="nx">hub</span><span class="o">.</span><span class="k">default</span><span class="o">.</span><span class="nx">publisher</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="debugging">
+<h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.2: </span>The WebProfiler panel was introduced in MercureBundle 0.2.</p>
+</div>
+<p>Enable the panel in your configuration, as follows:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/mercure.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">mercure</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">enable_profiler</span><span class="p p-Indicator">:</span> <span class="s">&#39;%kernel.debug%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/mercure.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;mercure:config</span> <span class="na">enable_profiler=</span><span class="s">&quot;%kernel.debug%&quot;</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/mercure.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;mercure&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;enable_profiler&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%kernel.debug%&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<img alt="_images/panel.png" src="_images/panel.png" />
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

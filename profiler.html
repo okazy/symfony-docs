@@ -1,0 +1,490 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Profiler &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to Create a custom Data Collector" href="profiler/data_collector.html" />
+    <link rel="prev" title="Performance" href="performance.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Profiler</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accessing-profiling-data-programmatically">Accessing Profiling Data Programmatically</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-collectors">Data Collectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#timing-the-execution-of-the-application">Timing the Execution of the Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enabling-the-profiler-conditionally">Enabling the Profiler Conditionally</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#updating-the-web-debug-toolbar-after-ajax-requests">Updating the Web Debug Toolbar After AJAX Requests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="profiler/data_collector.html">How to Create a custom Data Collector</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Profiler</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/profiler.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="profiler">
+<h1>Profiler<a class="headerlink" href="#profiler" title="Permalink to this headline">¶</a></h1>
+<p>The profiler is a powerful <strong>development tool</strong> that gives detailed information
+about the execution of any request. <strong>Never</strong> enable the profiler in production
+environments as it will lead to major security vulnerabilities in your project.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>In applications using <a class="reference internal" href="setup.html#symfony-flex"><span class="std std-ref">Symfony Flex</span></a>, run this command to
+install the <code class="docutils literal notranslate"><span class="pre">profiler</span></code> <a class="reference internal" href="setup.html#symfony-packs"><span class="std std-ref">Symfony pack</span></a> before using it:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require --dev symfony/profiler-pack
+</pre></div>
+</td></tr></table></div>
+<p>Now, browse any page of your application in the development environment to let
+the profiler collect information. Then, click on any element of the debug
+toolbar injected at the bottom of your pages to open the web interface of the
+Symfony Profiler, which will look like this:</p>
+<img alt="_images/web-interface.png" class="with-browser align-center" src="_images/web-interface.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The debug toolbar is only injected into HTML responses. For other kinds of
+contents (e.g. JSON responses in API requests) the profiler URL is available
+in the <code class="docutils literal notranslate"><span class="pre">X-Debug-Token-Link</span></code> HTTP response header. Browse the <code class="docutils literal notranslate"><span class="pre">/_profiler</span></code>
+URL to see all profiles.</p>
+</div>
+</div>
+<div class="section" id="accessing-profiling-data-programmatically">
+<h2>Accessing Profiling Data Programmatically<a class="headerlink" href="#accessing-profiling-data-programmatically" title="Permalink to this headline">¶</a></h2>
+<p>Most of the times, the profiler information is accessed and analyzed using its
+web-based interface. However, you can also retrieve profiling information
+programmatically thanks to the methods provided by the <code class="docutils literal notranslate"><span class="pre">profiler</span></code> service.</p>
+<p>When the response object is available, use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Profiler/Profiler.php" title="Symfony\Component\HttpKernel\Profiler\Profiler::loadProfileFromResponse()"><span class="pre">loadProfileFromResponse()</span></a></code>
+method to access to its associated profile:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ... $profiler is the &#39;profiler&#39; service</span>
+<span class="nv">$profile</span> <span class="o">=</span> <span class="nv">$profiler</span><span class="o">-&gt;</span><span class="na">loadProfileFromResponse</span><span class="p">(</span><span class="nv">$response</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When the profiler stores data about a request, it also associates a token with it;
+this token is available in the <code class="docutils literal notranslate"><span class="pre">X-Debug-Token</span></code> HTTP header of the response.
+Using this token, you can access the profile of any past response thanks to the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Profiler/Profiler.php" title="Symfony\Component\HttpKernel\Profiler\Profiler::loadProfile()"><span class="pre">loadProfile()</span></a></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$token</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;X-Debug-Token&#39;</span><span class="p">);</span>
+<span class="nv">$profile</span> <span class="o">=</span> <span class="nv">$profiler</span><span class="o">-&gt;</span><span class="na">loadProfile</span><span class="p">(</span><span class="nv">$token</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">When the profiler is enabled but not the web debug toolbar, inspect the page
+with your browser’s developer tools to get the value of the <code class="docutils literal notranslate"><span class="pre">X-Debug-Token</span></code>
+HTTP header.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">profiler</span></code> service also provides the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Profiler/Profiler.php" title="Symfony\Component\HttpKernel\Profiler\Profiler::find()"><span class="pre">find()</span></a></code> method to
+look for tokens based on some criteria:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// gets the latest 10 tokens</span>
+<span class="nv">$tokens</span> <span class="o">=</span> <span class="nv">$profiler</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+
+<span class="c1">// gets the latest 10 tokens for all URL containing /admin/</span>
+<span class="nv">$tokens</span> <span class="o">=</span> <span class="nv">$profiler</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;/admin/&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+
+<span class="c1">// gets the latest 10 tokens for local POST requests</span>
+<span class="nv">$tokens</span> <span class="o">=</span> <span class="nv">$profiler</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+
+<span class="c1">// gets the latest 10 tokens for requests that happened between 2 and 4 days ago</span>
+<span class="nv">$tokens</span> <span class="o">=</span> <span class="nv">$profiler</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;4 days ago&#39;</span><span class="p">,</span> <span class="s1">&#39;2 days ago&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="data-collectors">
+<h2>Data Collectors<a class="headerlink" href="#data-collectors" title="Permalink to this headline">¶</a></h2>
+<p>The profiler gets its information using some services called “data collectors”.
+Symfony comes with several collectors that get information about the request,
+the logger, the routing, the cache, etc.</p>
+<p>Run this command to get the list of collectors actually enabled in your app:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console debug:container --tag<span class="o">=</span>data_collector
+</pre></div>
+</td></tr></table></div>
+<p>You can also <a class="reference internal" href="profiler/data_collector.html"><span class="doc">create your own data collector</span></a> to
+store any data generated by your app and display it in the debug toolbar and the
+profiler web interface.</p>
+</div>
+<div class="section" id="timing-the-execution-of-the-application">
+<span id="profiler-timing-execution"></span><h2>Timing the Execution of the Application<a class="headerlink" href="#timing-the-execution-of-the-application" title="Permalink to this headline">¶</a></h2>
+<p>If you want to measure the time some tasks take in your application, there’s no
+need to create a custom data collector. Instead, use the <a class="reference external" href="https://symfony.com/components/Stopwatch">Stopwatch component</a>
+which provides utilities to profile code and displays the results on the
+“Performance” panel of the Profiler web interface.</p>
+<p>When using <a class="reference internal" href="service_container.html#services-autowire"><span class="std std-ref">autowiring</span></a>, type-hint any argument with
+the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Stopwatch/Stopwatch.php" title="Symfony\Component\Stopwatch\Stopwatch"><span class="pre">Stopwatch</span></a></code> class and Symfony will
+inject the Stopwatch service. Then, use the <code class="docutils literal notranslate"><span class="pre">start()</span></code>, <code class="docutils literal notranslate"><span class="pre">lap()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">stop()</span></code> methods to measure time:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// a user signs up and the timer starts...</span>
+<span class="nv">$stopwatch</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">(</span><span class="s1">&#39;user-sign-up&#39;</span><span class="p">);</span>
+
+<span class="c1">// ...do things to sign up the user...</span>
+<span class="nv">$stopwatch</span><span class="o">-&gt;</span><span class="na">lap</span><span class="p">(</span><span class="s1">&#39;user-sign-up&#39;</span><span class="p">);</span>
+
+<span class="c1">// ...the sign up process is finished</span>
+<span class="nv">$stopwatch</span><span class="o">-&gt;</span><span class="na">stop</span><span class="p">(</span><span class="s1">&#39;user-sign-up&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Consider using a professional profiler such as <a class="reference external" href="https://blackfire.io/docs/introduction?utm_source=symfony&amp;utm_medium=symfonycom_docs&amp;utm_campaign=profiler">Blackfire</a> to measure and
+analyze the execution of your application in detail.</p>
+</div>
+</div>
+<div class="section" id="enabling-the-profiler-conditionally">
+<h2>Enabling the Profiler Conditionally<a class="headerlink" href="#enabling-the-profiler-conditionally" title="Permalink to this headline">¶</a></h2>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">The possibility to use a matcher to enable the profiler conditionally was
+removed in Symfony 4.0.</p>
+</div>
+<p>Symfony Profiler cannot be enabled/disabled conditionally using matchers, because
+that feature was removed in Symfony 4.0. However, you can use the <code class="docutils literal notranslate"><span class="pre">enable()</span></code>
+and <code class="docutils literal notranslate"><span class="pre">disable()</span></code> methods of the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Profiler/Profiler.php" title="Symfony\Component\HttpKernel\Profiler\Profiler"><span class="pre">Profiler</span></a></code>
+class in your controllers to manage the profiler programmatically:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Profiler\Profiler</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">class</span> <span class="nc">DefaultController</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">someMethod</span><span class="p">(</span><span class="o">?</span><span class="nx">Profiler</span> <span class="nv">$profiler</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// $profiler won&#39;t be set if your environment doesn&#39;t have the profiler (like prod, by default)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">null</span> <span class="o">!==</span> <span class="nv">$profiler</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// if it exists, disable the profiler for this particular controller action</span>
+            <span class="nv">$profiler</span><span class="o">-&gt;</span><span class="na">disable</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In order for the profiler to be injected into your controller you need to
+create an alias pointing to the existing <code class="docutils literal notranslate"><span class="pre">profiler</span></code> service:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services_dev.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">Symfony\Component\HttpKernel\Profiler\Profiler</span><span class="p p-Indicator">:</span> <span class="s">&#39;@profiler&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services_dev.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;Symfony\Component\HttpKernel\Profiler\Profiler&quot;</span> <span class="na">alias=</span><span class="s">&quot;profiler&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services_dev.php</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Profiler\Profiler</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setAlias</span><span class="p">(</span><span class="nx">Profiler</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="s1">&#39;profiler&#39;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="updating-the-web-debug-toolbar-after-ajax-requests">
+<h2>Updating the Web Debug Toolbar After AJAX Requests<a class="headerlink" href="#updating-the-web-debug-toolbar-after-ajax-requests" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Single-page_application">Single-page applications</a> (SPA) are web applications that interact with the
+user by dynamically rewriting the current page rather than loading entire new
+pages from a server.</p>
+<p>By default, the debug toolbar displays the information of the initial page load
+and doesn’t refresh after each AJAX request. However, you can set the
+<code class="docutils literal notranslate"><span class="pre">Symfony-Debug-Toolbar-Replace</span></code> header to a value of <code class="docutils literal notranslate"><span class="pre">1</span></code> in the response to
+the AJAX request to force the refresh of the toolbar:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;Symfony-Debug-Toolbar-Replace&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Ideally this header should only be set during development and not for
+production. To do that, create an <a class="reference internal" href="event_dispatcher.html"><span class="doc">event subscriber</span></a>
+and listen to the <a class="reference internal" href="components/http_kernel.html#component-http-kernel-kernel-response"><span class="std std-ref">kernel.response</span></a>
+event:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\ResponseEvent</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">onKernelResponse</span><span class="p">(</span><span class="nx">ResponseEvent</span> <span class="nv">$event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getKernel</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">isDebug</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">isXmlHttpRequest</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;Symfony-Debug-Toolbar-Replace&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

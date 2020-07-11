@@ -1,0 +1,1140 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Service Subscribers &amp; Locators &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Define Non Shared Services" href="shared.html" />
+    <link rel="prev" title="How to Decorate Services" href="service_decoration.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../service_container.html">Service Container</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#fetching-and-using-services">Fetching and using Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#creating-configuring-services-in-the-container">Creating/Configuring Services in the Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#injecting-services-config-into-a-service">Injecting Services/Config into a Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#service-parameters">Service Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#choose-a-specific-service">Choose a Specific Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#binding-arguments-by-name-or-type">Binding Arguments by Name or Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#the-autowire-option">The autowire Option</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#the-autoconfigure-option">The autoconfigure Option</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#linting-service-definitions">Linting Service Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#public-versus-private-services">Public Versus Private Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#importing-many-services-at-once-with-resource">Importing Many Services at once with resource</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../service_container.html#explicitly-configuring-services-and-arguments">Explicitly Configuring Services and Arguments</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../service_container.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="3.3-di-changes.html">The Symfony 3.3 DI Container Changes Explained (autowiring, _defaults, etc)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alias_private.html">How to Create Service Aliases and Mark Services as Private</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autowiring.html">Defining Services Dependencies Automatically (Autowiring)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calls.html">Service Method Calls and Setter Injection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compiler_passes.html">How to Work with Compiler Passes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configurators.html">How to Configure a Service with a Configurator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug.html">How to Debug the Service Container &amp; List Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="definitions.html">How to work with Service Definition Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expression_language.html">How to Inject Values Based on Complex Expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="factories.html">Using a Factory to Create Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="import.html">How to Import Configuration Files/Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="injection_types.html">Types of Injection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lazy_services.html">Lazy Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optional_dependencies.html">How to Make Service Arguments/References Optional</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parent_services.html">How to Manage Common Dependencies with Parent Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="request.html">How to Retrieve the Request from the Service Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="service_decoration.html">How to Decorate Services</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Service Subscribers &amp; Locators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#defining-a-service-subscriber">Defining a Service Subscriber</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#including-services">Including Services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#defining-a-service-locator">Defining a Service Locator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#service-subscriber-trait">Service Subscriber Trait</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="shared.html">How to Define Non Shared Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synthetic_services.html">How to Inject Instances into the Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tags.html">How to Work with Service Tags</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../service_container.html">Service Container</a> &raquo;</li>
+        
+      <li>Service Subscribers &amp; Locators</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/service_container/service_subscribers_locators.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="service-subscribers-locators">
+<span id="service-locators"></span><span id="index-0"></span><h1>Service Subscribers &amp; Locators<a class="headerlink" href="#service-subscribers-locators" title="Permalink to this headline">¶</a></h1>
+<p>Sometimes, a service needs access to several other services without being sure
+that all of them will actually be used. In those cases, you may want the
+instantiation of the services to be lazy. However, that’s not possible using
+the explicit dependency injection since services are not all meant to
+be <code class="docutils literal notranslate"><span class="pre">lazy</span></code> (see <a class="reference internal" href="lazy_services.html"><span class="doc">Lazy Services</span></a>).</p>
+<p>This can typically be the case in your controllers, where you may inject several
+services in the constructor, but the action executed only uses some of them.
+Another example are applications that implement the <a class="reference external" href="https://en.wikipedia.org/wiki/Command_pattern">Command pattern</a>
+using a CommandBus to map command handlers by Command class names and use them
+to handle their respective command when it is asked for:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/CommandBus.php</span>
+<span class="k">namespace</span> <span class="nx">App</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">CommandBus</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @var CommandHandler[]</span>
+<span class="sd">     */</span>
+    <span class="k">private</span> <span class="nv">$handlerMap</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="k">array</span> <span class="nv">$handlerMap</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handlerMap</span> <span class="o">=</span> <span class="nv">$handlerMap</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nx">Command</span> <span class="nv">$command</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$commandClass</span> <span class="o">=</span> <span class="nb">get_class</span><span class="p">(</span><span class="nv">$command</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handlerMap</span><span class="p">[</span><span class="nv">$commandClass</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handlerMap</span><span class="p">[</span><span class="nv">$commandClass</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$command</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$commandBus</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="k">new</span> <span class="nx">FooCommand</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>Considering that only one command is handled at a time, instantiating all the
+other command handlers is unnecessary. A possible solution to lazy-load the
+handlers could be to inject the main dependency injection container.</p>
+<p>However, injecting the entire container is discouraged because it gives too
+broad access to existing services and it hides the actual dependencies of the
+services. Doing so also requires services to be made public, which isn’t the
+case by default in Symfony applications.</p>
+<p><strong>Service Subscribers</strong> are intended to solve this problem by giving access to a
+set of predefined services while instantiating them only when actually needed
+through a <strong>Service Locator</strong>, a separate lazy-loaded container.</p>
+<div class="section" id="defining-a-service-subscriber">
+<h2>Defining a Service Subscriber<a class="headerlink" href="#defining-a-service-subscriber" title="Permalink to this headline">¶</a></h2>
+<p>First, turn <code class="docutils literal notranslate"><span class="pre">CommandBus</span></code> into an implementation of <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Contracts/Service/ServiceSubscriberInterface.php" title="Symfony\Contracts\Service\ServiceSubscriberInterface"><span class="pre">ServiceSubscriberInterface</span></a></code>.
+Use its <code class="docutils literal notranslate"><span class="pre">getSubscribedServices()</span></code> method to include as many services as needed
+in the service subscriber and change the type hint of the container to
+a PSR-11 <code class="docutils literal notranslate"><span class="pre">ContainerInterface</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/CommandBus.php</span>
+<span class="k">namespace</span> <span class="nx">App</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\CommandHandler\BarHandler</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\CommandHandler\FooHandler</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Container\ContainerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Contracts\Service\ServiceSubscriberInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">CommandBus</span> <span class="k">implements</span> <span class="nx">ServiceSubscriberInterface</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$locator</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">ContainerInterface</span> <span class="nv">$locator</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">locator</span> <span class="o">=</span> <span class="nv">$locator</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getSubscribedServices</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="s1">&#39;App\FooCommand&#39;</span> <span class="o">=&gt;</span> <span class="nx">FooHandler</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+            <span class="s1">&#39;App\BarCommand&#39;</span> <span class="o">=&gt;</span> <span class="nx">BarHandler</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nx">Command</span> <span class="nv">$command</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$commandClass</span> <span class="o">=</span> <span class="nb">get_class</span><span class="p">(</span><span class="nv">$command</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">locator</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="nv">$commandClass</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$handler</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">locator</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$commandClass</span><span class="p">);</span>
+
+            <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$command</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If the container does <em>not</em> contain the subscribed services, double-check
+that you have <a class="reference internal" href="../service_container.html#services-autoconfigure"><span class="std std-ref">autoconfigure</span></a> enabled. You
+can also manually add the <code class="docutils literal notranslate"><span class="pre">container.service_subscriber</span></code> tag.</p>
+</div>
+<p>The injected service is an instance of <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DependencyInjection/ServiceLocator.php" title="Symfony\Component\DependencyInjection\ServiceLocator"><span class="pre">ServiceLocator</span></a></code>
+which implements the PSR-11 <code class="docutils literal notranslate"><span class="pre">ContainerInterface</span></code>, but it is also a callable:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$handler</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">locator</span><span class="p">)(</span><span class="nv">$commandClass</span><span class="p">);</span>
+
+<span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$command</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="including-services">
+<h2>Including Services<a class="headerlink" href="#including-services" title="Permalink to this headline">¶</a></h2>
+<p>In order to add a new dependency to the service subscriber, use the
+<code class="docutils literal notranslate"><span class="pre">getSubscribedServices()</span></code> method to add service types to include in the
+service locator:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Psr\Log\LoggerInterface</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getSubscribedServices</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="c1">// ...</span>
+        <span class="nx">LoggerInterface</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Service types can also be keyed by a service name for internal use:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Psr\Log\LoggerInterface</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getSubscribedServices</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="c1">// ...</span>
+        <span class="s1">&#39;logger&#39;</span> <span class="o">=&gt;</span> <span class="nx">LoggerInterface</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When extending a class that also implements <code class="docutils literal notranslate"><span class="pre">ServiceSubscriberInterface</span></code>,
+it’s your responsibility to call the parent when overriding the method. This
+typically happens when extending <code class="docutils literal notranslate"><span class="pre">AbstractController</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Psr\Log\LoggerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getSubscribedServices</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">array_merge</span><span class="p">(</span><span class="k">parent</span><span class="o">::</span><span class="na">getSubscribedServices</span><span class="p">(),</span> <span class="p">[</span>
+            <span class="c1">// ...</span>
+            <span class="s1">&#39;logger&#39;</span> <span class="o">=&gt;</span> <span class="nx">LoggerInterface</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="optional-services">
+<h3>Optional Services<a class="headerlink" href="#optional-services" title="Permalink to this headline">¶</a></h3>
+<p>For optional dependencies, prepend the service type with a <code class="docutils literal notranslate"><span class="pre">?</span></code> to prevent
+errors if there’s no matching service found in the service container:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Psr\Log\LoggerInterface</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getSubscribedServices</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="c1">// ...</span>
+        <span class="s1">&#39;?&#39;</span><span class="o">.</span><span class="nx">LoggerInterface</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Make sure an optional service exists by calling <code class="docutils literal notranslate"><span class="pre">has()</span></code> on the service
+locator before calling the service itself.</p>
+</div>
+</div>
+<div class="section" id="aliased-services">
+<h3>Aliased Services<a class="headerlink" href="#aliased-services" title="Permalink to this headline">¶</a></h3>
+<p>By default, autowiring is used to match a service type to a service from the
+service container. If you don’t use autowiring or need to add a non-traditional
+service as a dependency, use the <code class="docutils literal notranslate"><span class="pre">container.service_subscriber</span></code> tag to map a
+service type to a service.</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">App\CommandBus</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">name</span><span class="p p-Indicator">:</span> <span class="s">&#39;container.service_subscriber&#39;</span><span class="p p-Indicator">,</span> <span class="nv">key</span><span class="p p-Indicator">:</span> <span class="s">&#39;logger&#39;</span><span class="p p-Indicator">,</span> <span class="nv">id</span><span class="p p-Indicator">:</span> <span class="s">&#39;monolog.logger.event&#39;</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\CommandBus&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;container.service_subscriber&quot;</span> <span class="na">key=</span><span class="s">&quot;logger&quot;</span> <span class="na">id=</span><span class="s">&quot;monolog.logger.event&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\CommandBus</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$services</span> <span class="o">=</span> <span class="nv">$configurator</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">();</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">CommandBus</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">tag</span><span class="p">(</span><span class="s1">&#39;container.service_subscriber&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;key&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;logger&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;monolog.logger.event&#39;</span><span class="p">]);</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">key</span></code> attribute can be omitted if the service name internally is the
+same as in the service container.</p>
+</div>
+</div>
+</div>
+<div class="section" id="defining-a-service-locator">
+<h2>Defining a Service Locator<a class="headerlink" href="#defining-a-service-locator" title="Permalink to this headline">¶</a></h2>
+<p>To manually define a service locator, create a new service definition and add
+the <code class="docutils literal notranslate"><span class="pre">container.service_locator</span></code> tag to it. Use the first argument of the
+service definition to pass a collection of services to the service locator:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">app.command_handler_locator</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Symfony\Component\DependencyInjection\ServiceLocator</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span>
+                <span class="l l-Scalar l-Scalar-Plain">App\FooCommand</span><span class="p p-Indicator">:</span> <span class="s">&#39;@app.command_handler.foo&#39;</span>
+                <span class="l l-Scalar l-Scalar-Plain">App\BarCommand</span><span class="p p-Indicator">:</span> <span class="s">&#39;@app.command_handler.bar&#39;</span>
+        <span class="c1"># if you are not using the default service autoconfiguration,</span>
+        <span class="c1"># add the following tag to the service definition:</span>
+        <span class="c1"># tags: [&#39;container.service_locator&#39;]</span>
+
+    <span class="c1"># if the element has no key, the ID of the original service is used</span>
+    <span class="l l-Scalar l-Scalar-Plain">app.another_command_handler_locator</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Symfony\Component\DependencyInjection\ServiceLocator</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span>
+                <span class="p p-Indicator">-</span> <span class="s">&#39;@app.command_handler.baz&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;app.command_handler_locator&quot;</span> <span class="na">class=</span><span class="s">&quot;Symfony\Component\DependencyInjection\ServiceLocator&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;argument</span> <span class="na">type=</span><span class="s">&quot;collection&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;argument</span> <span class="na">key=</span><span class="s">&quot;App\FooCommand&quot;</span> <span class="na">type=</span><span class="s">&quot;service&quot;</span> <span class="na">id=</span><span class="s">&quot;app.command_handler.foo&quot;</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;argument</span> <span class="na">key=</span><span class="s">&quot;App\BarCommand&quot;</span> <span class="na">type=</span><span class="s">&quot;service&quot;</span> <span class="na">id=</span><span class="s">&quot;app.command_handler.bar&quot;</span><span class="nt">/&gt;</span>
+                <span class="c">&lt;!-- if the element has no key, the ID of the original service is used --&gt;</span>
+                <span class="nt">&lt;argument</span> <span class="na">type=</span><span class="s">&quot;service&quot;</span> <span class="na">id=</span><span class="s">&quot;app.command_handler.baz&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/argument&gt;</span>
+            <span class="c">&lt;!--</span>
+<span class="c">                if you are not using the default service autoconfiguration,</span>
+<span class="c">                add the following tag to the service definition:</span>
+<span class="c">                &lt;tag name=&quot;container.service_locator&quot;/&gt;</span>
+<span class="c">            --&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ServiceLocator</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$services</span> <span class="o">=</span> <span class="nv">$configurator</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">();</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;app.command_handler_locator&#39;</span><span class="p">,</span> <span class="nx">ServiceLocator</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="c1">// In versions earlier to Symfony 5.1 the service() function was called ref()</span>
+        <span class="o">-&gt;</span><span class="na">args</span><span class="p">([[</span>
+            <span class="s1">&#39;App\FooCommand&#39;</span> <span class="o">=&gt;</span> <span class="nx">service</span><span class="p">(</span><span class="s1">&#39;app.command_handler.foo&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;App\BarCommand&#39;</span> <span class="o">=&gt;</span> <span class="nx">service</span><span class="p">(</span><span class="s1">&#39;app.command_handler.bar&#39;</span><span class="p">),</span>
+        <span class="p">]])</span>
+        <span class="c1">// if you are not using the default service autoconfiguration,</span>
+        <span class="c1">// add the following tag to the service definition:</span>
+        <span class="c1">// -&gt;tag(&#39;container.service_locator&#39;)</span>
+    <span class="p">;</span>
+
+    <span class="c1">// if the element has no key, the ID of the original service is used</span>
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;app.another_command_handler_locator&#39;</span><span class="p">,</span> <span class="nx">ServiceLocator</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">args</span><span class="p">([[</span>
+            <span class="nx">service</span><span class="p">(</span><span class="s1">&#39;app.command_handler.baz&#39;</span><span class="p">),</span>
+        <span class="p">]])</span>
+    <span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The services defined in the service locator argument must include keys,
+which later become their unique identifiers inside the locator.</p>
+</div>
+<p>Now you can use the service locator by injecting it in any other service:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">App\CommandBus</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;@app.command_handler_locator&#39;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\CommandBus&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;argument</span> <span class="na">type=</span><span class="s">&quot;service&quot;</span> <span class="na">id=</span><span class="s">&quot;app.command_handler_locator&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\CommandBus</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$services</span> <span class="o">=</span> <span class="nv">$configurator</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">();</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">CommandBus</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">args</span><span class="p">([</span><span class="nx">service</span><span class="p">(</span><span class="s1">&#39;app.command_handler_locator&#39;</span><span class="p">)]);</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>In <a class="reference internal" href="compiler_passes.html"><span class="doc">compiler passes</span></a> it’s recommended
+to use the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DependencyInjection/Compiler/ServiceLocatorTagPass.php" title="Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass::register()"><span class="pre">register()</span></a></code>
+method to create the service locators. This will save you some boilerplate and
+will share identical locators among all the services referencing them:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ContainerBuilder</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">process</span><span class="p">(</span><span class="nx">ContainerBuilder</span> <span class="nv">$container</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="nv">$locateableServices</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="c1">// ...</span>
+        <span class="s1">&#39;logger&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;logger&#39;</span><span class="p">),</span>
+    <span class="p">];</span>
+
+    <span class="nv">$myService</span><span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="nx">ServiceLocatorTagPass</span><span class="o">::</span><span class="na">register</span><span class="p">(</span><span class="nv">$container</span><span class="p">,</span> <span class="nv">$locateableServices</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="indexing-the-collection-of-services">
+<h3>Indexing the Collection of Services<a class="headerlink" href="#indexing-the-collection-of-services" title="Permalink to this headline">¶</a></h3>
+<p>Services passed to the service locator can define their own index using an
+arbitrary attribute whose name is defined as <code class="docutils literal notranslate"><span class="pre">index_by</span></code> in the service locator.</p>
+<p>In the following example, the <code class="docutils literal notranslate"><span class="pre">App\Handler\HandlerCollection</span></code> locator receives
+all services tagged with <code class="docutils literal notranslate"><span class="pre">app.handler</span></code> and they are indexed using the value
+of the <code class="docutils literal notranslate"><span class="pre">key</span></code> tag attribute (as defined in the <code class="docutils literal notranslate"><span class="pre">index_by</span></code> locator option):</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">App\Handler\One</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">name</span><span class="p p-Indicator">:</span> <span class="s">&#39;app.handler&#39;</span><span class="p p-Indicator">,</span> <span class="nv">key</span><span class="p p-Indicator">:</span> <span class="s">&#39;handler_one&#39;</span> <span class="p p-Indicator">}</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\Handler\Two</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">tags</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">name</span><span class="p p-Indicator">:</span> <span class="s">&#39;app.handler&#39;</span><span class="p p-Indicator">,</span> <span class="nv">key</span><span class="p p-Indicator">:</span> <span class="s">&#39;handler_two&#39;</span> <span class="p p-Indicator">}</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\HandlerCollection</span><span class="p p-Indicator">:</span>
+        <span class="c1"># inject all services tagged with app.handler as first argument</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="kt">!tagged_locator</span> <span class="p p-Indicator">{</span> <span class="nv">tag</span><span class="p p-Indicator">:</span> <span class="s">&#39;app.handler&#39;</span><span class="p p-Indicator">,</span> <span class="nv">index_by</span><span class="p p-Indicator">:</span> <span class="s">&#39;key&#39;</span> <span class="p p-Indicator">}]</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\Handler\One&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;app.handler&quot;</span> <span class="na">key=</span><span class="s">&quot;handler_one&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\Handler\Two&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;app.handler&quot;</span> <span class="na">key=</span><span class="s">&quot;handler_two&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\HandlerCollection&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- inject all services tagged with app.handler as first argument --&gt;</span>
+            <span class="nt">&lt;argument</span> <span class="na">type=</span><span class="s">&quot;tagged_locator&quot;</span> <span class="na">tag=</span><span class="s">&quot;app.handler&quot;</span> <span class="na">index-by=</span><span class="s">&quot;key&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$services</span> <span class="o">=</span> <span class="nv">$configurator</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">();</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">App\Handler\One</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">tag</span><span class="p">(</span><span class="s1">&#39;app.handler&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;key&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;handler_one&#39;</span><span class="p">])</span>
+    <span class="p">;</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">App\Handler\Two</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">tag</span><span class="p">(</span><span class="s1">&#39;app.handler&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;key&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;handler_two&#39;</span><span class="p">])</span>
+    <span class="p">;</span>
+
+    <span class="nv">$services</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">App\Handler\HandlerCollection</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+        <span class="c1">// inject all services tagged with app.handler as first argument</span>
+        <span class="o">-&gt;</span><span class="na">args</span><span class="p">([</span><span class="nx">tagged_locator</span><span class="p">(</span><span class="s1">&#39;app.handler&#39;</span><span class="p">,</span> <span class="s1">&#39;key&#39;</span><span class="p">)])</span>
+    <span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Inside this locator you can retrieve services by index using the value of the
+<code class="docutils literal notranslate"><span class="pre">key</span></code> attribute. For example, to get the <code class="docutils literal notranslate"><span class="pre">App\Handler\Two</span></code> service:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Handler/HandlerCollection.php</span>
+<span class="k">namespace</span> <span class="nx">App\Handler</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ServiceLocator</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">HandlerCollection</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">ServiceLocator</span> <span class="nv">$locator</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$handlerTwo</span> <span class="o">=</span> <span class="nv">$locator</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;handler_two&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Instead of defining the index in the service definition, you can return its
+value in a method called <code class="docutils literal notranslate"><span class="pre">getDefaultIndexName()</span></code> inside the class associated
+to the service:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Handler/One.php</span>
+<span class="k">namespace</span> <span class="nx">App\Handler</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">One</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getDefaultIndexName</span><span class="p">()</span><span class="o">:</span> <span class="nx">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;handler_one&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you prefer to use another method name, add a <code class="docutils literal notranslate"><span class="pre">default_index_method</span></code>
+attribute to the locator service defining the name of this custom method:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">App\HandlerCollection</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="kt">!tagged_locator</span> <span class="p p-Indicator">{</span> <span class="nv">tag</span><span class="p p-Indicator">:</span> <span class="s">&#39;app.handler&#39;</span><span class="p p-Indicator">,</span> <span class="nv">index_by</span><span class="p p-Indicator">:</span> <span class="s">&#39;key&#39;</span><span class="p p-Indicator">,</span> <span class="nv">default_index_method</span><span class="p p-Indicator">:</span> <span class="s">&#39;myOwnMethodName&#39;</span> <span class="p p-Indicator">}]</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\HandlerCollection&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;argument</span> <span class="na">type=</span><span class="s">&quot;tagged_locator&quot;</span> <span class="na">tag=</span><span class="s">&quot;app.handler&quot;</span> <span class="na">index-by=</span><span class="s">&quot;key&quot;</span> <span class="na">default-index-method=</span><span class="s">&quot;myOwnMethodName&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">namespace</span> <span class="nx">Symfony\Component\DependencyInjection\Loader\Configurator</span><span class="p">;</span>
+
+<span class="k">return</span> <span class="k">function</span><span class="p">(</span><span class="nx">ContainerConfigurator</span> <span class="nv">$configurator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$configurator</span><span class="o">-&gt;</span><span class="na">services</span><span class="p">()</span>
+        <span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nx">App\HandlerCollection</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">args</span><span class="p">([</span><span class="nx">tagged_locator</span><span class="p">(</span><span class="s1">&#39;app.handler&#39;</span><span class="p">,</span> <span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="s1">&#39;myOwnMethodName&#39;</span><span class="p">)])</span>
+    <span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since code should not be responsible for defining how the locators are
+going to be used, a configuration key (<code class="docutils literal notranslate"><span class="pre">key</span></code> in the example above) must
+be set so the custom method may be called as a fallback.</p>
+</div>
+</div>
+</div>
+<div class="section" id="service-subscriber-trait">
+<h2>Service Subscriber Trait<a class="headerlink" href="#service-subscriber-trait" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Contracts/Service/ServiceSubscriberTrait.php" title="Symfony\Contracts\Service\ServiceSubscriberTrait"><span class="pre">ServiceSubscriberTrait</span></a></code> provides an
+implementation for <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Contracts/Service/ServiceSubscriberInterface.php" title="Symfony\Contracts\Service\ServiceSubscriberInterface"><span class="pre">ServiceSubscriberInterface</span></a></code>
+that looks through all methods in your class that have no arguments and a return
+type. It provides a <code class="docutils literal notranslate"><span class="pre">ServiceLocator</span></code> for the services of those return types.
+The service id is <code class="docutils literal notranslate"><span class="pre">__METHOD__</span></code>. This allows you to add dependencies to your
+services based on type-hinted helper methods:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Service/MyService.php</span>
+<span class="k">namespace</span> <span class="nx">App\Service</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Psr\Log\LoggerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\RouterInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Contracts\Service\ServiceSubscriberInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Contracts\Service\ServiceSubscriberTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyService</span> <span class="k">implements</span> <span class="nx">ServiceSubscriberInterface</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">ServiceSubscriberTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">doSomething</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// $this-&gt;router() ...</span>
+        <span class="c1">// $this-&gt;logger() ...</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">function</span> <span class="nf">router</span><span class="p">()</span><span class="o">:</span> <span class="nx">RouterInterface</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="no">__METHOD__</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">function</span> <span class="nf">logger</span><span class="p">()</span><span class="o">:</span> <span class="nx">LoggerInterface</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="no">__METHOD__</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This  allows you to create helper traits like RouterAware, LoggerAware, etc…
+and compose your services with them:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Service/LoggerAware.php</span>
+<span class="k">namespace</span> <span class="nx">App\Service</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Psr\Log\LoggerInterface</span><span class="p">;</span>
+
+<span class="k">trait</span> <span class="nx">LoggerAware</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="nf">logger</span><span class="p">()</span><span class="o">:</span> <span class="nx">LoggerInterface</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="no">__CLASS__</span><span class="o">.</span><span class="s1">&#39;::&#39;</span><span class="o">.</span><span class="no">__FUNCTION__</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// src/Service/RouterAware.php</span>
+<span class="k">namespace</span> <span class="nx">App\Service</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\RouterInterface</span><span class="p">;</span>
+
+<span class="k">trait</span> <span class="nx">RouterAware</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="nf">router</span><span class="p">()</span><span class="o">:</span> <span class="nx">RouterInterface</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="no">__CLASS__</span><span class="o">.</span><span class="s1">&#39;::&#39;</span><span class="o">.</span><span class="no">__FUNCTION__</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// src/Service/MyService.php</span>
+<span class="k">namespace</span> <span class="nx">App\Service</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Contracts\Service\ServiceSubscriberInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Contracts\Service\ServiceSubscriberTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyService</span> <span class="k">implements</span> <span class="nx">ServiceSubscriberInterface</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">ServiceSubscriberTrait</span><span class="p">,</span> <span class="nx">LoggerAware</span><span class="p">,</span> <span class="nx">RouterAware</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">doSomething</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// $this-&gt;router() ...</span>
+        <span class="c1">// $this-&gt;logger() ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">When creating these helper traits, the service id cannot be <code class="docutils literal notranslate"><span class="pre">__METHOD__</span></code>
+as this will include the trait name, not the class name. Instead, use
+<code class="docutils literal notranslate"><span class="pre">__CLASS__.'::'.__FUNCTION__</span></code> as the service id.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

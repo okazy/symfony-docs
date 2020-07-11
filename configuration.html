@@ -1,0 +1,1439 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuring Symfony &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Nov 2018 Changes to .env &amp; How to Update" href="configuration/dot-env-changes.html" />
+    <link rel="prev" title="Upgrading a Patch Version (e.g. 5.0.0 to 5.0.1)" href="setup/upgrade_patch.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="getting_started/index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="page_creation.html">Create your First Page in Symfony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controller.html">Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templates.html">Creating and Using Templates</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Configuring Symfony</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-files">Configuration Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-formats">Configuration Formats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#importing-configuration-files">Importing Configuration Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-parameters">Configuration Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-environments">Configuration Environments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#selecting-the-active-environment">Selecting the Active Environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-a-new-environment">Creating a New Environment</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-based-on-environment-variables">Configuration Based on Environment Variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-environment-variables-in-env-files">Configuring Environment Variables in .env Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overriding-environment-values-via-env-local">Overriding Environment Values via .env.local</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-environment-variables-in-production">Configuring Environment Variables in Production</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#encrypting-environment-variables-secrets">Encrypting Environment Variables (Secrets)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#listing-environment-variables">Listing Environment Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-configuration-parameters">Accessing Configuration Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#keep-going">Keep Going!</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="configuration/dot-env-changes.html">Nov 2018 Changes to .env &amp; How to Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configuration/env_var_processors.html">Environment Variable Processors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configuration/front_controllers_and_kernel.html">Understanding how the Front Controller, Kernel and Environments Work together</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configuration/micro_kernel_trait.html">Building your own Framework with the MicroKernelTrait</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configuration/multiple_kernels.html">How To Create Symfony Applications with Multiple Kernels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configuration/override_dir_structure.html">How to Override Symfony’s default Directory Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configuration/secrets.html">How to Keep Sensitive Information Secret</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configuration/using_parameters_in_dic.html">Using Parameters within a Dependency Injection Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="getting_started/index.html">Getting Started</a> &raquo;</li>
+        
+      <li>Configuring Symfony</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/configuration.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuring-symfony">
+<span id="index-0"></span><h1>Configuring Symfony<a class="headerlink" href="#configuring-symfony" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="configuration-files">
+<h2>Configuration Files<a class="headerlink" href="#configuration-files" title="Permalink to this headline">¶</a></h2>
+<p>Symfony applications are configured with the files stored in the <code class="docutils literal notranslate"><span class="pre">config/</span></code>
+directory, which has this default structure:</p>
+<div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span>your-project/
+├─ config/
+│  ├─ packages/
+│  ├─ bundles.php
+│  ├─ routes.yaml
+│  └─ services.yaml
+├─ ...
+</pre></div>
+</td></tr></table></div>
+<p>The <code class="docutils literal notranslate"><span class="pre">routes.yaml</span></code> file defines the <a class="reference internal" href="routing.html"><span class="doc">routing configuration</span></a>;
+the <code class="docutils literal notranslate"><span class="pre">services.yaml</span></code> file configures the services of the
+<a class="reference internal" href="service_container.html"><span class="doc">service container</span></a>; the <code class="docutils literal notranslate"><span class="pre">bundles.php</span></code> file enables/
+disables packages in your application.</p>
+<p>You’ll be working mostly in the <code class="docutils literal notranslate"><span class="pre">config/packages/</span></code> directory. This directory
+stores the configuration of every package installed in your application.
+Packages (also called “bundles” in Symfony and “plugins/modules” in other
+projects) add ready-to-use features to your projects.</p>
+<p>When using <a class="reference internal" href="setup.html#symfony-flex"><span class="std std-ref">Symfony Flex</span></a>, which is enabled by default in
+Symfony applications, packages update the <code class="docutils literal notranslate"><span class="pre">bundles.php</span></code> file and create new
+files in <code class="docutils literal notranslate"><span class="pre">config/packages/</span></code> automatically during their installation. For
+example, this is the default file created by the “API Platform” package:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/api_platform.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">api_platform</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">mapping</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">paths</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;%kernel.project_dir%/src/Entity&#39;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</td></tr></table></div>
+<p>Splitting the configuration into lots of small files is intimidating for some
+Symfony newcomers. However, you’ll get used to them quickly and you rarely need
+to change these files after package installation</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">To learn about all the available configuration options, check out the
+<a class="reference internal" href="reference/index.html"><span class="doc">Symfony Configuration Reference</span></a> or run the
+<code class="docutils literal notranslate"><span class="pre">config:dump-reference</span></code> command.</p>
+</div>
+<div class="section" id="configuration-formats">
+<h3>Configuration Formats<a class="headerlink" href="#configuration-formats" title="Permalink to this headline">¶</a></h3>
+<p>Unlike other frameworks, Symfony doesn’t impose a specific format on you to
+configure your applications. Symfony lets you choose between YAML, XML and PHP
+and throughout the Symfony documentation, all configuration examples will be
+shown in these three formats.</p>
+<p>There isn’t any practical difference between formats. In fact, Symfony
+transforms and caches all of them into PHP before running the application, so
+there’s not even any performance difference between them.</p>
+<p>YAML is used by default when installing packages because it’s concise and very
+readable. These are the main advantages and disadvantages of each format:</p>
+<ul class="simple">
+<li><strong>YAML</strong>: simple, clean and readable, but not all IDEs support autocompletion
+and validation for it. <a class="reference internal" href="components/yaml/yaml_format.html"><span class="doc">Learn the YAML syntax</span></a>;</li>
+<li><strong>XML</strong>:autocompleted/validated by most IDEs and is parsed natively by PHP,
+but sometimes it generates configuration considered too verbose. <a class="reference external" href="https://en.wikipedia.org/wiki/XML">Learn the XML syntax</a>;</li>
+<li><strong>PHP</strong>: very powerful and it allows you to create dynamic configuration, but the
+resulting configuration is less readable than the other formats.</li>
+</ul>
+</div>
+<div class="section" id="importing-configuration-files">
+<h3>Importing Configuration Files<a class="headerlink" href="#importing-configuration-files" title="Permalink to this headline">¶</a></h3>
+<p>Symfony loads configuration files using the <a class="reference internal" href="components/config.html"><span class="doc">Config component</span></a>, which provides advanced features such as importing other
+configuration files, even if they use a different format:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">imports</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">resource</span><span class="p p-Indicator">:</span> <span class="s">&#39;legacy_config.php&#39;</span> <span class="p p-Indicator">}</span>
+    <span class="c1"># ignore_errors silently discards errors if the loaded file doesn&#39;t exist</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">resource</span><span class="p p-Indicator">:</span> <span class="s">&#39;my_config_file.xml&#39;</span><span class="p p-Indicator">,</span> <span class="nv">ignore_errors</span><span class="p p-Indicator">:</span> <span class="nv">true</span> <span class="p p-Indicator">}</span>
+    <span class="c1"># glob expressions are also supported to load multiple files</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">resource</span><span class="p p-Indicator">:</span> <span class="s">&#39;/etc/myapp/*.yaml&#39;</span> <span class="p p-Indicator">}</span>
+
+<span class="c1"># ...</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;imports&gt;</span>
+        <span class="nt">&lt;import</span> <span class="na">resource=</span><span class="s">&quot;legacy_config.php&quot;</span><span class="nt">/&gt;</span>
+        <span class="c">&lt;!-- ignore_errors silently discards errors if the loaded file doesn&#39;t exist --&gt;</span>
+        <span class="nt">&lt;import</span> <span class="na">resource=</span><span class="s">&quot;my_config_file.yaml&quot;</span> <span class="na">ignore-errors=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+        <span class="c">&lt;!-- glob expressions are also supported to load multiple files --&gt;</span>
+        <span class="nt">&lt;import</span> <span class="na">resource=</span><span class="s">&quot;/etc/myapp/*.yaml&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/imports&gt;</span>
+
+    <span class="c">&lt;!-- ... --&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;legacy_config.xml&#39;</span><span class="p">);</span>
+<span class="c1">// the third optional argument of import() is &#39;ignore_errors&#39;, which</span>
+<span class="c1">// silently discards errors if the loaded file doesn&#39;t exist</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;my_config_file.yaml&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+<span class="c1">// glob expressions are also supported to load multiple files</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;/etc/myapp/*.yaml&#39;</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="configuration-parameters">
+<span id="config-parameters-yml"></span><span id="config-parameter-intro"></span><span id="id1"></span><h2>Configuration Parameters<a class="headerlink" href="#configuration-parameters" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes the same configuration value is used in several configuration files.
+Instead of repeating it, you can define it as a “parameter”, which is like a
+reusable configuration value. By convention, parameters are defined under the
+<code class="docutils literal notranslate"><span class="pre">parameters</span></code> key in the <code class="docutils literal notranslate"><span class="pre">config/services.yaml</span></code> file:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="c1"># the parameter name is an arbitrary string (the &#39;app.&#39; prefix is recommended</span>
+    <span class="c1"># to better differentiate your parameters from Symfony parameters).</span>
+    <span class="l l-Scalar l-Scalar-Plain">app.admin_email</span><span class="p p-Indicator">:</span> <span class="s">&#39;something@example.com&#39;</span>
+
+    <span class="c1"># boolean parameters</span>
+    <span class="l l-Scalar l-Scalar-Plain">app.enable_v2_protocol</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+
+    <span class="c1"># array/collection parameters</span>
+    <span class="l l-Scalar l-Scalar-Plain">app.supported_locales</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;en&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;es&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;fr&#39;</span><span class="p p-Indicator">]</span>
+
+    <span class="c1"># binary content parameters (encode the contents with base64_encode())</span>
+    <span class="l l-Scalar l-Scalar-Plain">app.some_parameter</span><span class="p p-Indicator">:</span> <span class="kt">!!binary</span> <span class="l l-Scalar l-Scalar-Plain">VGhpcyBpcyBhIEJlbGwgY2hhciAH</span>
+
+    <span class="c1"># PHP constants as parameter values</span>
+    <span class="l l-Scalar l-Scalar-Plain">app.some_constant</span><span class="p p-Indicator">:</span> <span class="kt">!php/const</span> <span class="l l-Scalar l-Scalar-Plain">GLOBAL_CONSTANT</span>
+    <span class="l l-Scalar l-Scalar-Plain">app.another_constant</span><span class="p p-Indicator">:</span> <span class="kt">!php/const</span> <span class="l l-Scalar l-Scalar-Plain">App\Entity\BlogPost::MAX_ITEMS</span>
+
+<span class="c1"># ...</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;parameters&gt;</span>
+        <span class="c">&lt;!-- the parameter name is an arbitrary string (the &#39;app.&#39; prefix is recommended</span>
+<span class="c">             to better differentiate your parameters from Symfony parameters). --&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;app.admin_email&quot;</span><span class="nt">&gt;</span>something@example.com<span class="nt">&lt;/parameter&gt;</span>
+
+        <span class="c">&lt;!-- boolean parameters --&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;app.enable_v2_protocol&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/parameter&gt;</span>
+        <span class="c">&lt;!-- if you prefer to store the boolean value as a string in the parameter --&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;app.enable_v2_protocol&quot;</span> <span class="na">type=</span><span class="s">&quot;string&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/parameter&gt;</span>
+
+        <span class="c">&lt;!-- array/collection parameters --&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;app.supported_locales&quot;</span> <span class="na">type=</span><span class="s">&quot;collection&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;parameter&gt;</span>en<span class="nt">&lt;/parameter&gt;</span>
+            <span class="nt">&lt;parameter&gt;</span>es<span class="nt">&lt;/parameter&gt;</span>
+            <span class="nt">&lt;parameter&gt;</span>fr<span class="nt">&lt;/parameter&gt;</span>
+        <span class="nt">&lt;/parameter&gt;</span>
+
+        <span class="c">&lt;!-- binary content parameters (encode the contents with base64_encode()) --&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;app.some_parameter&quot;</span> <span class="na">type=</span><span class="s">&quot;binary&quot;</span><span class="nt">&gt;</span>VGhpcyBpcyBhIEJlbGwgY2hhciAH<span class="nt">&lt;/parameter&gt;</span>
+
+        <span class="c">&lt;!-- PHP constants as parameter values --&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;app.some_constant&quot;</span> <span class="na">type=</span><span class="s">&quot;constant&quot;</span><span class="nt">&gt;</span>GLOBAL_CONSTANT<span class="nt">&lt;/parameter&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;app.another_constant&quot;</span> <span class="na">type=</span><span class="s">&quot;constant&quot;</span><span class="nt">&gt;</span>App\Entity\BlogPost::MAX_ITEMS<span class="nt">&lt;/parameter&gt;</span>
+    <span class="nt">&lt;/parameters&gt;</span>
+
+    <span class="c">&lt;!-- ... --&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="c1">// the parameter name is an arbitrary string (the &#39;app.&#39; prefix is recommended</span>
+<span class="c1">// to better differentiate your parameters from Symfony parameters).</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;app.admin_email&#39;</span><span class="p">,</span> <span class="s1">&#39;something@example.com&#39;</span><span class="p">);</span>
+
+<span class="c1">// boolean parameters</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;app.enable_v2_protocol&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+
+<span class="c1">// array/collection parameters</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;app.supported_locales&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;en&#39;</span><span class="p">,</span> <span class="s1">&#39;es&#39;</span><span class="p">,</span> <span class="s1">&#39;fr&#39;</span><span class="p">]);</span>
+
+<span class="c1">// binary content parameters (use the PHP escape sequences)</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;app.some_parameter&#39;</span><span class="p">,</span> <span class="s1">&#39;This is a Bell char: \x07&#39;</span><span class="p">);</span>
+
+<span class="c1">// PHP constants as parameter values</span>
+<span class="k">use</span> <span class="nx">App\Entity\BlogPost</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;app.some_constant&#39;</span><span class="p">,</span> <span class="nx">GLOBAL_CONSTANT</span><span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;app.another_constant&#39;</span><span class="p">,</span> <span class="nx">BlogPost</span><span class="o">::</span><span class="na">MAX_ITEMS</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p>When using XML configuration, the values between <code class="docutils literal notranslate"><span class="pre">&lt;parameter&gt;</span></code> tags are
+not trimmed. This means that the value of the following parameter will be
+<code class="docutils literal notranslate"><span class="pre">'\n</span>&#160;&#160;&#160; <span class="pre">something&#64;example.com\n'</span></code>:</p>
+<div class="last highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;app.admin_email&quot;</span><span class="nt">&gt;</span>
+    something@example.com
+<span class="nt">&lt;/parameter&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Once defined, you can reference this parameter value from any other
+configuration file using a special syntax: wrap the parameter name in two <code class="docutils literal notranslate"><span class="pre">%</span></code>
+(e.g. <code class="docutils literal notranslate"><span class="pre">%app.admin_email%</span></code>):</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/some_package.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">some_package</span><span class="p p-Indicator">:</span>
+    <span class="c1"># any string surrounded by two % is replaced by that parameter value</span>
+    <span class="l l-Scalar l-Scalar-Plain">email_address</span><span class="p p-Indicator">:</span> <span class="s">&#39;%app.admin_email%&#39;</span>
+
+    <span class="c1"># ...</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/some_package.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony</span>
+<span class="s">        https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="c">&lt;!-- any string surrounded by two % is replaced by that parameter value --&gt;</span>
+    <span class="nt">&lt;some-package:config</span> <span class="na">email-address=</span><span class="s">&quot;%app.admin_email%&quot;</span><span class="nt">&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;/some-package:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/some_package.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;some_package&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// any string surrounded by two % is replaced by that parameter value</span>
+    <span class="s1">&#39;email_address&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%app.admin_email%&#39;</span><span class="p">,</span>
+
+    <span class="c1">// ...</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If some parameter value includes the <code class="docutils literal notranslate"><span class="pre">%</span></code> character, you need to escape it
+by adding another <code class="docutils literal notranslate"><span class="pre">%</span></code> so Symfony doesn’t consider it a reference to a
+parameter name:</p>
+<div class="last configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="c1"># Parsed as &#39;https://symfony.com/?foo=%s&amp;amp;bar=%d&#39;</span>
+    <span class="l l-Scalar l-Scalar-Plain">url_pattern</span><span class="p p-Indicator">:</span> <span class="s">&#39;https://symfony.com/?foo=%%s&amp;amp;bar=%%d&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="nt">&lt;parameters&gt;</span>
+    <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;url_pattern&quot;</span><span class="nt">&gt;</span>http://symfony.com/?foo=%%s<span class="ni">&amp;amp;</span>bar=%%d<span class="nt">&lt;/parameter&gt;</span>
+<span class="nt">&lt;/parameters&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;url_pattern&#39;</span><span class="p">,</span> <span class="s1">&#39;http://symfony.com/?foo=%%s&amp;amp;bar=%%d&#39;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Due to the way in which parameters are resolved, you cannot use them
+to build paths in imports dynamically. This means that something like
+the following doesn’t work:</p>
+<div class="last configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">imports</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span> <span class="nv">resource</span><span class="p p-Indicator">:</span> <span class="s">&#39;%kernel.project_dir%/somefile.yaml&#39;</span> <span class="p p-Indicator">}</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;imports&gt;</span>
+        <span class="nt">&lt;import</span> <span class="na">resource=</span><span class="s">&quot;%kernel.project_dir%/somefile.yaml&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/imports&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;%kernel.project_dir%/somefile.yaml&#39;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<p>Configuration parameters are very common in Symfony applications. Some packages
+even define their own parameters (e.g. when installing the translation package,
+a new <code class="docutils literal notranslate"><span class="pre">locale</span></code> parameter is added to the <code class="docutils literal notranslate"><span class="pre">config/services.yaml</span></code> file).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Later in this article you can read how to
+<a class="reference internal" href="#configuration-accessing-parameters"><span class="std std-ref">get configuration parameters in controllers and services</span></a>.</p>
+</div>
+</div>
+<div class="section" id="configuration-environments">
+<span id="page-creation-prod-cache-clear"></span><span id="page-creation-environments"></span><span id="index-1"></span><span id="id2"></span><h2>Configuration Environments<a class="headerlink" href="#configuration-environments" title="Permalink to this headline">¶</a></h2>
+<p>You have just one application, but whether you realize it or not, you need it
+to behave differently at different times:</p>
+<ul class="simple">
+<li>While <strong>developing</strong>, you want to log everything and expose nice debugging tools;</li>
+<li>After deploying to <strong>production</strong>, you want that same application to be
+optimized for speed and only log errors.</li>
+</ul>
+<p>The files stored in <code class="docutils literal notranslate"><span class="pre">config/packages/</span></code> are used by Symfony to configure the
+<a class="reference internal" href="service_container.html"><span class="doc">application services</span></a>. In other words, you can change
+the application behavior by changing which configuration files are loaded.
+That’s the idea of Symfony’s <strong>configuration environments</strong>.</p>
+<p>A typical Symfony application begins with three environments: <code class="docutils literal notranslate"><span class="pre">dev</span></code> (for local
+development), <code class="docutils literal notranslate"><span class="pre">prod</span></code> (for production servers) and <code class="docutils literal notranslate"><span class="pre">test</span></code> (for
+<a class="reference internal" href="testing.html"><span class="doc">automated tests</span></a>). When running the application, Symfony loads
+the configuration files in this order (the last files can override the values
+set in the previous ones):</p>
+<ol class="arabic simple">
+<li><code class="docutils literal notranslate"><span class="pre">config/packages/*.yaml</span></code> (and <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> and <code class="docutils literal notranslate"><span class="pre">*.php</span></code> files too);</li>
+<li><code class="docutils literal notranslate"><span class="pre">config/packages/&lt;environment-name&gt;/*.yaml</span></code> (and <code class="docutils literal notranslate"><span class="pre">*.xml</span></code> and <code class="docutils literal notranslate"><span class="pre">*.php</span></code> files too);</li>
+<li><code class="docutils literal notranslate"><span class="pre">config/packages/services.yaml</span></code> (and <code class="docutils literal notranslate"><span class="pre">services.xml</span></code> and <code class="docutils literal notranslate"><span class="pre">services.php</span></code> files too);</li>
+</ol>
+<p>Take the <code class="docutils literal notranslate"><span class="pre">framework</span></code> package, installed by default, as an example:</p>
+<ul class="simple">
+<li>First, <code class="docutils literal notranslate"><span class="pre">config/packages/framework.yaml</span></code> is loaded in all environments and
+it configures the framework with some options;</li>
+<li>In the <strong>prod</strong> environment, nothing extra will be set as there is no
+<code class="docutils literal notranslate"><span class="pre">config/packages/prod/framework.yaml</span></code> file;</li>
+<li>In the <strong>dev</strong> environment, there is no file either (
+<code class="docutils literal notranslate"><span class="pre">config/packages/dev/framework.yaml</span></code> does not exist).</li>
+<li>In the <strong>test</strong> environment, the <code class="docutils literal notranslate"><span class="pre">config/packages/test/framework.yaml</span></code> file
+is loaded to override some of the settings previously configured in
+<code class="docutils literal notranslate"><span class="pre">config/packages/framework.yaml</span></code>.</li>
+</ul>
+<p>In reality, each environment differs only somewhat from others. This means that
+all environments share a large base of common configuration, which is put in
+files directly in the <code class="docutils literal notranslate"><span class="pre">config/packages/</span></code> directory.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">See the <code class="docutils literal notranslate"><span class="pre">configureContainer()</span></code> method of
+<a class="reference internal" href="configuration/front_controllers_and_kernel.html"><span class="doc">the Kernel class</span></a> to
+learn everything about the loading order of configuration files.</p>
+</div>
+<div class="section" id="selecting-the-active-environment">
+<span id="id3"></span><h3>Selecting the Active Environment<a class="headerlink" href="#selecting-the-active-environment" title="Permalink to this headline">¶</a></h3>
+<p>Symfony applications come with a file called <code class="docutils literal notranslate"><span class="pre">.env</span></code> located at the project
+root directory. This file is used to define the value of environment variables
+and it’s explained in detail <a class="reference internal" href="#config-dot-env"><span class="std std-ref">later in this article</span></a>.</p>
+<p>Open the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file (or better, the <code class="docutils literal notranslate"><span class="pre">.env.local</span></code> file if you created one)
+and edit the value of the <code class="docutils literal notranslate"><span class="pre">APP_ENV</span></code> variable to change the environment in
+which the application runs. For example, to run the application in production:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># .env (or .env.local)</span>
+<span class="nv">APP_ENV</span><span class="o">=</span>prod
+</pre></div>
+</td></tr></table></div>
+<p>This value is used both for the web and for the console commands. However, you
+can override it for commands by setting the <code class="docutils literal notranslate"><span class="pre">APP_ENV</span></code> value before running them:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># Use the environment defined in the .env file</span>
+<span class="gp">$</span> php bin/console command_name
+
+<span class="c1"># Ignore the .env file and run this command in production</span>
+<span class="gp">$</span> <span class="nv">APP_ENV</span><span class="o">=</span>prod php bin/console command_name
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="creating-a-new-environment">
+<h3>Creating a New Environment<a class="headerlink" href="#creating-a-new-environment" title="Permalink to this headline">¶</a></h3>
+<p>The default three environments provided by Symfony are enough for most projects,
+but you can define your own environments too. For example, this is how you can
+define a <code class="docutils literal notranslate"><span class="pre">staging</span></code> environment where the client can test the project before
+going to production:</p>
+<ol class="arabic simple">
+<li>Create a configuration directory with the same name as the environment (in
+this case, <code class="docutils literal notranslate"><span class="pre">config/packages/staging/</span></code>);</li>
+<li>Add the needed configuration files in <code class="docutils literal notranslate"><span class="pre">config/packages/staging/</span></code> to
+define the behavior of the new environment. Symfony loads the
+<code class="docutils literal notranslate"><span class="pre">config/packages/*.yaml</span></code> files first, so you only need to configure the
+differences to those files;</li>
+<li>Select the <code class="docutils literal notranslate"><span class="pre">staging</span></code> environment using the <code class="docutils literal notranslate"><span class="pre">APP_ENV</span></code> env var as explained
+in the previous section.</li>
+</ol>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">It’s common for environments to be similar to each other, so you can
+use <a class="reference external" href="https://en.wikipedia.org/wiki/Symbolic_link">symbolic links</a> between <code class="docutils literal notranslate"><span class="pre">config/packages/&lt;environment-name&gt;/</span></code>
+directories to reuse the same configuration.</p>
+</div>
+</div>
+</div>
+<div class="section" id="configuration-based-on-environment-variables">
+<span id="config-env-vars"></span><h2>Configuration Based on Environment Variables<a class="headerlink" href="#configuration-based-on-environment-variables" title="Permalink to this headline">¶</a></h2>
+<p>Using <a class="reference external" href="https://en.wikipedia.org/wiki/Environment_variable">environment variables</a> (or “env vars” for short) is a common practice to
+configure options that depend on where the application is run (e.g. the database
+credentials are usually different in production versus your local machine). If
+the values are sensitive, you can even <a class="reference internal" href="configuration/secrets.html"><span class="doc">encrypt them as secrets</span></a>.</p>
+<p>You can reference environment variables using the special syntax
+<code class="docutils literal notranslate"><span class="pre">%env(ENV_VAR_NAME)%</span></code>. The values of these options are resolved at runtime
+(only once per request, to not impact performance).</p>
+<p>This example shows how you could configure the database connection using an env var:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/doctrine.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">doctrine</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">dbal</span><span class="p p-Indicator">:</span>
+        <span class="c1"># by convention the env var names are always uppercase</span>
+        <span class="l l-Scalar l-Scalar-Plain">url</span><span class="p p-Indicator">:</span> <span class="s">&#39;%env(resolve:DATABASE_URL)%&#39;</span>
+    <span class="c1"># ...</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/doctrine.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:doctrine=</span><span class="s">&quot;http://symfony.com/schema/dic/doctrine&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/doctrine</span>
+<span class="s">        https://symfony.com/schema/dic/doctrine/doctrine-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;doctrine:config&gt;</span>
+        <span class="c">&lt;!-- by convention the env var names are always uppercase --&gt;</span>
+        <span class="nt">&lt;doctrine:dbal</span> <span class="na">url=</span><span class="s">&quot;%env(resolve:DATABASE_URL)%&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/doctrine:config&gt;</span>
+
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/doctrine.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;doctrine&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;dbal&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="c1">// by convention the env var names are always uppercase</span>
+        <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%env(resolve:DATABASE_URL)%&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">The values of env vars can only be strings, but Symfony includes some
+<a class="reference internal" href="configuration/env_var_processors.html"><span class="doc">env var processors</span></a> to transform
+their contents (e.g. to turn a string value into an integer).</p>
+</div>
+<p>To define the value of an env var, you have several options:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#config-dot-env"><span class="std std-ref">Add the value to a .env file</span></a>;</li>
+<li><a class="reference internal" href="#configuration-secrets"><span class="std std-ref">Encrypt the value as a secret</span></a>;</li>
+<li>Set the value as a real environment variable in your shell or your web server.</li>
+</ul>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Some hosts - like SymfonyCloud - offer easy <a class="reference external" href="https://symfony.com/doc/master/cloud/cookbooks/env.html">utilities to manage env vars</a>
+in production.</p>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p>Beware that dumping the contents of the <code class="docutils literal notranslate"><span class="pre">$_SERVER</span></code> and <code class="docutils literal notranslate"><span class="pre">$_ENV</span></code> variables
+or outputting the <code class="docutils literal notranslate"><span class="pre">phpinfo()</span></code> contents will display the values of the
+environment variables, exposing sensitive information such as the database
+credentials.</p>
+<p class="last">The values of the env vars are also exposed in the web interface of the
+<a class="reference internal" href="profiler.html"><span class="doc">Symfony profiler</span></a>. In practice this shouldn’t be a
+problem because the web profiler must <strong>never</strong> be enabled in production.</p>
+</div>
+<div class="section" id="configuring-environment-variables-in-env-files">
+<span id="config-dot-env"></span><span id="configuration-env-var-in-dev"></span><h3>Configuring Environment Variables in .env Files<a class="headerlink" href="#configuring-environment-variables-in-env-files" title="Permalink to this headline">¶</a></h3>
+<p>Instead of defining env vars in your shell or your web server, Symfony provides
+a convenient way to define them inside a <code class="docutils literal notranslate"><span class="pre">.env</span></code> (with a leading dot) file
+located at the root of your project.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">.env</span></code> file is read and parsed on every request and its env vars are added
+to the <code class="docutils literal notranslate"><span class="pre">$_ENV</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">$_SERVER</span></code> PHP variables. Any existing env vars are <em>never</em>
+overwritten by the values defined in <code class="docutils literal notranslate"><span class="pre">.env</span></code>, so you can combine both.</p>
+<p>For example, to define the <code class="docutils literal notranslate"><span class="pre">DATABASE_URL</span></code> env var shown earlier in this article,
+you can add:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># .env</span>
+<span class="nv">DATABASE_URL</span><span class="o">=</span><span class="s2">&quot;mysql://db_user:db_password@127.0.0.1:3306/db_name&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<p>This file should be committed to your repository and (due to that fact) should
+only contain “default” values that are good for local development. This file
+should not contain production values.</p>
+<p>In addition to your own env vars, this <code class="docutils literal notranslate"><span class="pre">.env</span></code> file also contains the env vars
+defined by the third-party packages installed in your application (they are
+added automatically by <a class="reference internal" href="setup.html#symfony-flex"><span class="std std-ref">Symfony Flex</span></a> when installing packages).</p>
+<div class="section" id="env-file-syntax">
+<h4>.env File Syntax<a class="headerlink" href="#env-file-syntax" title="Permalink to this headline">¶</a></h4>
+<p>Add comments by prefixing them with <code class="docutils literal notranslate"><span class="pre">#</span></code>:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># database credentials</span>
+<span class="nv">DB_USER</span><span class="o">=</span>root
+<span class="nv">DB_PASS</span><span class="o">=</span>pass <span class="c1"># this is the secret password</span>
+</pre></div>
+</td></tr></table></div>
+<p>Use environment variables in values by prefixing variables with <code class="docutils literal notranslate"><span class="pre">$</span></code>:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nv">DB_USER</span><span class="o">=</span>root
+<span class="nv">DB_PASS</span><span class="o">=</span><span class="si">${</span><span class="nv">DB_USER</span><span class="si">}</span>pass <span class="c1"># include the user as a password prefix</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">The order is important when some env var depends on the value of other env
+vars. In the above example, <code class="docutils literal notranslate"><span class="pre">DB_PASS</span></code> must be defined after <code class="docutils literal notranslate"><span class="pre">DB_USER</span></code>.
+Moreover, if you define multiple <code class="docutils literal notranslate"><span class="pre">.env</span></code> files and put <code class="docutils literal notranslate"><span class="pre">DB_PASS</span></code> first,
+its value will depend on the <code class="docutils literal notranslate"><span class="pre">DB_USER</span></code> value defined in other files
+instead of the value defined in this file.</p>
+</div>
+<p>Define a default value in case the environment variable is not set:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nv">DB_USER</span><span class="o">=</span>
+<span class="nv">DB_PASS</span><span class="o">=</span><span class="si">${</span><span class="nv">DB_USER</span><span class="k">:-</span><span class="nv">root</span><span class="si">}</span>pass <span class="c1"># results in DB_PASS=rootpass</span>
+</pre></div>
+</td></tr></table></div>
+<p>Embed commands via <code class="docutils literal notranslate"><span class="pre">$()</span></code> (not supported on Windows):</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nv">START_TIME</span><span class="o">=</span><span class="k">$(</span>date<span class="k">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Using <code class="docutils literal notranslate"><span class="pre">$()</span></code> might not work depending on your shell.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>As a <code class="docutils literal notranslate"><span class="pre">.env</span></code> file is a regular shell script, you can <code class="docutils literal notranslate"><span class="pre">source</span></code> it in
+your own shell scripts:</p>
+<div class="last highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">source</span> .env
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+</div>
+<div class="section" id="overriding-environment-values-via-env-local">
+<span id="configuration-multiple-env-files"></span><h3>Overriding Environment Values via .env.local<a class="headerlink" href="#overriding-environment-values-via-env-local" title="Permalink to this headline">¶</a></h3>
+<p>If you need to override an environment value (e.g. to a different value on your
+local machine), you can do that in a <code class="docutils literal notranslate"><span class="pre">.env.local</span></code> file:</p>
+<div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># .env.local</span>
+<span class="nv">DATABASE_URL</span><span class="o">=</span><span class="s2">&quot;mysql://root:@127.0.0.1:3306/my_database_name&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<p>This file should be ignored by git and should <em>not</em> be committed to your repository.
+Several other <code class="docutils literal notranslate"><span class="pre">.env</span></code> files are available to set environment variables in <em>just</em>
+the right situation:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">.env</span></code>: defines the default values of the env vars needed by the application;</li>
+<li><code class="docutils literal notranslate"><span class="pre">.env.local</span></code>: overrides the default values for all environments but only on
+the machine which contains the file. This file should not be committed to the
+repository and it’s ignored in the <code class="docutils literal notranslate"><span class="pre">test</span></code> environment (because tests should
+produce the same results for everyone);</li>
+<li><code class="docutils literal notranslate"><span class="pre">.env.&lt;environment&gt;</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">.env.test</span></code>): overrides env vars only for one
+environment but for all machines (these files <em>are</em> committed);</li>
+<li><code class="docutils literal notranslate"><span class="pre">.env.&lt;environment&gt;.local</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">.env.test.local</span></code>): defines machine-specific
+env var overrides only for one environment. It’s similar to <code class="docutils literal notranslate"><span class="pre">.env.local</span></code>,
+but the overrides only apply to one environment.</li>
+</ul>
+<p><em>Real</em> environment variables always win over env vars created by any of the
+<code class="docutils literal notranslate"><span class="pre">.env</span></code> files.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">.env</span></code> and <code class="docutils literal notranslate"><span class="pre">.env.&lt;environment&gt;</span></code> files should be committed to the
+repository because they are the same for all developers and machines. However,
+the env files ending in <code class="docutils literal notranslate"><span class="pre">.local</span></code> (<code class="docutils literal notranslate"><span class="pre">.env.local</span></code> and <code class="docutils literal notranslate"><span class="pre">.env.&lt;environment&gt;.local</span></code>)
+<strong>should not be committed</strong> because only you will use them. In fact, the
+<code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file that comes with Symfony prevents them from being committed.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Applications created before November 2018 had a slightly different system,
+involving a <code class="docutils literal notranslate"><span class="pre">.env.dist</span></code> file. For information about upgrading, see:
+<a class="reference internal" href="configuration/dot-env-changes.html"><span class="doc">Nov 2018 Changes to .env &amp; How to Update</span></a>.</p>
+</div>
+</div>
+<div class="section" id="configuring-environment-variables-in-production">
+<span id="configuration-env-var-in-prod"></span><h3>Configuring Environment Variables in Production<a class="headerlink" href="#configuring-environment-variables-in-production" title="Permalink to this headline">¶</a></h3>
+<p>In production, the <code class="docutils literal notranslate"><span class="pre">.env</span></code> files are also parsed and loaded on each request. So
+the easiest way to define env vars is by deploying a <code class="docutils literal notranslate"><span class="pre">.env.local</span></code> file to your
+production server(s) with your production values.</p>
+<p>To improve performance, you can optionally run the <code class="docutils literal notranslate"><span class="pre">dump-env</span></code> command (available
+in <a class="reference internal" href="setup.html#symfony-flex"><span class="std std-ref">Symfony Flex</span></a> 1.2 or later):</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># parses ALL .env files and dumps their final values to .env.local.php</span>
+<span class="gp">$</span> composer dump-env prod
+</pre></div>
+</td></tr></table></div>
+<p>After running this command, Symfony will load the <code class="docutils literal notranslate"><span class="pre">.env.local.php</span></code> file to
+get the environment variables and will not spend time parsing the <code class="docutils literal notranslate"><span class="pre">.env</span></code> files.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Update your deployment tools/workflow to run the <code class="docutils literal notranslate"><span class="pre">dump-env</span></code> command after
+each deploy to improve the application performance.</p>
+</div>
+</div>
+<div class="section" id="encrypting-environment-variables-secrets">
+<span id="configuration-secrets"></span><h3>Encrypting Environment Variables (Secrets)<a class="headerlink" href="#encrypting-environment-variables-secrets" title="Permalink to this headline">¶</a></h3>
+<p>Instead of defining a real environment variable or adding it to a <code class="docutils literal notranslate"><span class="pre">.env</span></code> file,
+if the value of a variable is sensitive (e.g. an API key or a database password),
+you can encrypt the value using the <a class="reference internal" href="configuration/secrets.html"><span class="doc">secrets management system</span></a>.</p>
+</div>
+<div class="section" id="listing-environment-variables">
+<h3>Listing Environment Variables<a class="headerlink" href="#listing-environment-variables" title="Permalink to this headline">¶</a></h3>
+<p>Regardless of how you set environment variables, you can see a full list with
+their values by running:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console debug:container --env-vars
+
+<span class="go">---------------- ----------------- ---------------------------------------------</span>
+<span class="go"> Name             Default value     Real value</span>
+<span class="go">---------------- ----------------- ---------------------------------------------</span>
+<span class="go"> APP_SECRET       n/a               &quot;471a62e2d601a8952deb186e44186cb3&quot;</span>
+<span class="go"> FOO              &quot;[1, &quot;2.5&quot;, 3]&quot;   n/a</span>
+<span class="go"> BAR              null              n/a</span>
+<span class="go">---------------- ----------------- ---------------------------------------------</span>
+
+<span class="c1"># you can also filter the list of env vars by name:</span>
+<span class="gp">$</span> php bin/console debug:container --env-vars foo
+
+<span class="c1"># run this command to show all the details for a specific env var:</span>
+<span class="gp">$</span> php bin/console debug:container --env-var<span class="o">=</span>FOO
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="accessing-configuration-parameters">
+<span id="configuration-accessing-parameters"></span><h2>Accessing Configuration Parameters<a class="headerlink" href="#accessing-configuration-parameters" title="Permalink to this headline">¶</a></h2>
+<p>Controllers and services can access all the configuration parameters. This
+includes both the <a class="reference internal" href="#configuration-parameters"><span class="std std-ref">parameters defined by yourself</span></a>
+and the parameters created by packages/bundles. Run the following command to see
+all the parameters that exist in your application:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console debug:container --parameters
+</pre></div>
+</td></tr></table></div>
+<p>In controllers extending from the <a class="reference internal" href="controller.html#the-base-controller-class-services"><span class="std std-ref">AbstractController</span></a>,
+use the <code class="docutils literal notranslate"><span class="pre">getParameter()</span></code> helper:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/UserController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">UserController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$projectDir</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getParameter</span><span class="p">(</span><span class="s1">&#39;kernel.project_dir&#39;</span><span class="p">);</span>
+        <span class="nv">$adminEmail</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getParameter</span><span class="p">(</span><span class="s1">&#39;app.admin_email&#39;</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In services and controllers not extending from <code class="docutils literal notranslate"><span class="pre">AbstractController</span></code>, inject
+the parameters as arguments of their constructors. You must inject them
+explicitly because <a class="reference internal" href="service_container/autowiring.html"><span class="doc">service autowiring</span></a>
+doesn’t work for parameters:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">app.contents_dir</span><span class="p p-Indicator">:</span> <span class="s">&#39;...&#39;</span>
+
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">App\Service\MessageGenerator</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">$contentsDir</span><span class="p p-Indicator">:</span> <span class="s">&#39;%app.contents_dir%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;parameters&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">key=</span><span class="s">&quot;app.contents_dir&quot;</span><span class="nt">&gt;</span>...<span class="nt">&lt;/parameter&gt;</span>
+    <span class="nt">&lt;/parameters&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">&quot;App\Service\MessageGenerator&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;argument</span> <span class="na">key=</span><span class="s">&quot;$contentsDir&quot;</span><span class="nt">&gt;</span>%app.contents_dir%<span class="nt">&lt;/argument&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">App\Service\MessageGenerator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Reference</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;app.contents_dir&#39;</span><span class="p">,</span> <span class="s1">&#39;...&#39;</span><span class="p">);</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">getDefinition</span><span class="p">(</span><span class="nx">MessageGenerator</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setArgument</span><span class="p">(</span><span class="s1">&#39;$contentsDir&#39;</span><span class="p">,</span> <span class="s1">&#39;%app.contents_dir%&#39;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>If you inject the same parameters over and over again, use the
+<code class="docutils literal notranslate"><span class="pre">services._defaults.bind</span></code> option instead. The arguments defined in that option are
+injected automatically whenever a service constructor or controller action
+defines an argument with that exact name. For example, to inject the value of the
+<a class="reference internal" href="reference/configuration/kernel.html#configuration-kernel-project-directory"><span class="std std-ref">kernel.project_dir parameter</span></a>
+whenever a service/controller defines a <code class="docutils literal notranslate"><span class="pre">$projectDir</span></code> argument, use this:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">_defaults</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">bind</span><span class="p p-Indicator">:</span>
+            <span class="c1"># pass this value to any $projectDir argument for any service</span>
+            <span class="c1"># that&#39;s created in this file (including controller arguments)</span>
+            <span class="l l-Scalar l-Scalar-Plain">$projectDir</span><span class="p p-Indicator">:</span> <span class="s">&#39;%kernel.project_dir%&#39;</span>
+
+    <span class="c1"># ...</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/services.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;services&gt;</span>
+        <span class="nt">&lt;defaults</span> <span class="na">autowire=</span><span class="s">&quot;true&quot;</span> <span class="na">autoconfigure=</span><span class="s">&quot;true&quot;</span> <span class="na">public=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- pass this value to any $projectDir argument for any service</span>
+<span class="c">                 that&#39;s created in this file (including controller arguments) --&gt;</span>
+            <span class="nt">&lt;bind</span> <span class="na">key=</span><span class="s">&quot;$projectDir&quot;</span><span class="nt">&gt;</span>%kernel.project_dir%<span class="nt">&lt;/bind&gt;</span>
+        <span class="nt">&lt;/defaults&gt;</span>
+
+        <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;/services&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/services.php</span>
+<span class="k">use</span> <span class="nx">App\Controller\LuckyController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Log\LoggerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Reference</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="nx">LuckyController</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setPublic</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setBindings</span><span class="p">([</span>
+        <span class="c1">// pass this value to any $projectDir argument for any service</span>
+        <span class="c1">// that&#39;s created in this file (including controller arguments)</span>
+        <span class="s1">&#39;$projectDir&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%kernel.project_dir%&#39;</span><span class="p">,</span>
+    <span class="p">])</span>
+<span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Read the article about <a class="reference internal" href="service_container.html#services-binding"><span class="std std-ref">binding arguments by name and/or type</span></a>
+to learn more about this powerful feature.</p>
+</div>
+<p>Finally, if some service needs access to lots of parameters, instead of
+injecting each of them individually, you can inject all the application
+parameters at once by type-hinting any of its constructor arguments with the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/DependencyInjection/ParameterBag/ContainerBagInterface.php" title="Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface"><span class="pre">ContainerBagInterface</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Service/MessageGenerator.php</span>
+<span class="k">namespace</span> <span class="nx">App\Service</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MessageGenerator</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$params</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">ContainerBagInterface</span> <span class="nv">$params</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">params</span> <span class="o">=</span> <span class="nv">$params</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">someMethod</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// get any container parameter from $this-&gt;params, which stores all of them</span>
+        <span class="nv">$sender</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">params</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;mailer_sender&#39;</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="keep-going">
+<h2>Keep Going!<a class="headerlink" href="#keep-going" title="Permalink to this headline">¶</a></h2>
+<p>Congratulations! You’ve tackled the basics of Symfony. Next, learn about <em>each</em>
+part of Symfony individually by following the guides. Check out:</p>
+<ul class="simple">
+<li><a class="reference internal" href="forms.html"><span class="doc">Forms</span></a></li>
+<li><a class="reference internal" href="doctrine.html"><span class="doc">Databases and the Doctrine ORM</span></a></li>
+<li><a class="reference internal" href="service_container.html"><span class="doc">Service Container</span></a></li>
+<li><a class="reference internal" href="security.html"><span class="doc">Security</span></a></li>
+<li><a class="reference internal" href="mailer.html"><span class="doc">Sending Emails with Mailer</span></a></li>
+<li><a class="reference internal" href="logging.html"><span class="doc">Logging</span></a></li>
+</ul>
+<p>And all the other topics related to configuration:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="configuration/dot-env-changes.html">Nov 2018 Changes to .env &amp; How to Update</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration/env_var_processors.html">Environment Variable Processors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration/front_controllers_and_kernel.html">Understanding how the Front Controller, Kernel and Environments Work together</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration/micro_kernel_trait.html">Building your own Framework with the MicroKernelTrait</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration/multiple_kernels.html">How To Create Symfony Applications with Multiple Kernels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration/override_dir_structure.html">How to Override Symfony’s default Directory Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration/secrets.html">How to Keep Sensitive Information Secret</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration/using_parameters_in_dic.html">Using Parameters within a Dependency Injection Class</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

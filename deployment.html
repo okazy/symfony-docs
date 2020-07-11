@@ -1,0 +1,477 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Deploy a Symfony Application &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to Configure Symfony to Work behind a Load Balancer or a Reverse Proxy" href="deployment/proxies.html" />
+    <link rel="prev" title="How to Test Code that Interacts with the Database" href="testing/database.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to Deploy a Symfony Application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#symfony-deployment-basics">Symfony Deployment Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">How to Deploy a Symfony Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-file-transfer">Basic File Transfer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-source-control">Using Source Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-platforms-as-a-service">Using Platforms as a Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-build-scripts-and-other-tools">Using Build Scripts and other Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#common-post-deployment-tasks">Common Post-Deployment Tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a-check-requirements">A) Check Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#b-configure-your-environment-variables">B) Configure your Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c-install-update-your-vendors">C) Install/Update your Vendors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#d-clear-your-symfony-cache">D) Clear your Symfony Cache</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#e-other-things">E) Other Things!</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#application-lifecycle-continuous-integration-qa-etc">Application Lifecycle: Continuous Integration, QA, etc.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#deployments-not-using-the-composer-json-file">Deployments not Using the <code class="docutils literal notranslate"><span class="pre">composer.json</span></code> File</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#learn-more">Learn More</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment/proxies.html">How to Configure Symfony to Work behind a Load Balancer or a Reverse Proxy</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>How to Deploy a Symfony Application</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/deployment.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-deploy-a-symfony-application">
+<span id="how-to-deploy-a-symfony2-application"></span><span id="index-0"></span><h1>How to Deploy a Symfony Application<a class="headerlink" href="#how-to-deploy-a-symfony-application" title="Permalink to this headline">¶</a></h1>
+<p>Deploying a Symfony application can be a complex and varied task depending on
+the setup and the requirements of your application. This article is not a step-
+by-step guide, but is a general list of the most common requirements and ideas
+for deployment.</p>
+<div class="section" id="symfony-deployment-basics">
+<span id="symfony2-deployment-basics"></span><h2>Symfony Deployment Basics<a class="headerlink" href="#symfony-deployment-basics" title="Permalink to this headline">¶</a></h2>
+<p>The typical steps taken while deploying a Symfony application include:</p>
+<ol class="arabic simple">
+<li>Upload your code to the production server;</li>
+<li>Install your vendor dependencies (typically done via Composer and may be done
+before uploading);</li>
+<li>Running database migrations or similar tasks to update any changed data structures;</li>
+<li>Clearing (and optionally, warming up) your cache.</li>
+</ol>
+<p>A deployment may also include other tasks, such as:</p>
+<ul class="simple">
+<li>Tagging a particular version of your code as a release in your source control
+repository;</li>
+<li>Creating a temporary staging area to build your updated setup “offline”;</li>
+<li>Running any tests available to ensure code and/or server stability;</li>
+<li>Removal of any unnecessary files from the <code class="docutils literal notranslate"><span class="pre">public/</span></code> directory to keep your
+production environment clean;</li>
+<li>Clearing of external cache systems (like <a class="reference external" href="http://memcached.org/">Memcached</a> or <a class="reference external" href="https://redis.io/">Redis</a>).</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h2>How to Deploy a Symfony Application<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>There are several ways you can deploy a Symfony application. Start with a few
+basic deployment strategies and build up from there.</p>
+<div class="section" id="basic-file-transfer">
+<h3>Basic File Transfer<a class="headerlink" href="#basic-file-transfer" title="Permalink to this headline">¶</a></h3>
+<p>The most basic way of deploying an application is copying the files manually
+via FTP/SCP (or similar method). This has its disadvantages as you lack control
+over the system as the upgrade progresses. This method also requires you
+to take some manual steps after transferring the files (see <a class="reference internal" href="#common-post-deployment-tasks">Common Post-Deployment Tasks</a>)</p>
+</div>
+<div class="section" id="using-source-control">
+<h3>Using Source Control<a class="headerlink" href="#using-source-control" title="Permalink to this headline">¶</a></h3>
+<p>If you’re using source control (e.g. Git or SVN), you can simplify by having
+your live installation also be a copy of your repository. When you’re ready to
+upgrade, fetch the latest updates from your source control
+system. When using Git, a common approach is to create a tag for each release
+and check out the appropriate tag on deployment (see <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Basics-Tagging">Git Tagging</a>).</p>
+<p>This makes updating your files <em>easier</em>, but you still need to worry about
+manually taking other steps (see <a class="reference internal" href="#common-post-deployment-tasks">Common Post-Deployment Tasks</a>).</p>
+</div>
+<div class="section" id="using-platforms-as-a-service">
+<h3>Using Platforms as a Service<a class="headerlink" href="#using-platforms-as-a-service" title="Permalink to this headline">¶</a></h3>
+<p>Using a Platform as a Service (PaaS) can be a great way to deploy your Symfony
+app quickly. There are many PaaS - below are a few that work well with Symfony:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://symfony.com/doc/master/cloud/intro.html">Symfony Cloud</a></li>
+<li><a class="reference external" href="https://devcenter.heroku.com/articles/deploying-symfony4">Heroku</a></li>
+<li><a class="reference external" href="https://docs.platform.sh/frameworks/symfony.html">Platform.sh</a></li>
+<li><a class="reference external" href="https://azure.microsoft.com/en-us/develop/php/">Azure</a></li>
+<li><a class="reference external" href="https://help.fortrabbit.com/install-symfony-4-uni">fortrabbit</a></li>
+<li><a class="reference external" href="https://www.clever-cloud.com/doc/php/tutorial-symfony/">Clever Cloud</a></li>
+<li><a class="reference external" href="https://doc.scalingo.com/languages/php/symfony">Scalingo</a></li>
+</ul>
+</div>
+<div class="section" id="using-build-scripts-and-other-tools">
+<h3>Using Build Scripts and other Tools<a class="headerlink" href="#using-build-scripts-and-other-tools" title="Permalink to this headline">¶</a></h3>
+<p>There are also tools to help ease the pain of deployment. Some of them have been
+specifically tailored to the requirements of Symfony.</p>
+<dl class="docutils">
+<dt><a class="reference external" href="https://github.com/EasyCorp/easy-deploy-bundle">EasyDeployBundle</a></dt>
+<dd>A Symfony bundle that adds deploy tools to your application.</dd>
+<dt><a class="reference external" href="https://deployer.org/">Deployer</a></dt>
+<dd>This is another native PHP rewrite of Capistrano, with some ready recipes for
+Symfony.</dd>
+<dt><a class="reference external" href="https://ansistrano.com/">Ansistrano</a></dt>
+<dd>An Ansible role that allows you to configure a powerful deploy via YAML files.</dd>
+<dt><a class="reference external" href="https://github.com/andres-montanez/Magallanes">Magallanes</a></dt>
+<dd>This Capistrano-like deployment tool is built in PHP, and may be easier
+for PHP developers to extend for their needs.</dd>
+<dt><a class="reference external" href="http://www.fabfile.org/">Fabric</a></dt>
+<dd>This Python-based library provides a basic suite of operations for executing
+local or remote shell commands and uploading/downloading files.</dd>
+<dt><a class="reference external" href="https://capistranorb.com/">Capistrano</a> with <a class="reference external" href="https://github.com/capistrano/symfony/">Symfony plugin</a></dt>
+<dd><a class="reference external" href="https://capistranorb.com/">Capistrano</a> is a remote server automation and deployment tool written in Ruby.
+<a class="reference external" href="https://github.com/capistrano/symfony/">Symfony plugin</a> is a plugin to ease Symfony related tasks, inspired by <a class="reference external" href="https://github.com/everzet/capifony">Capifony</a>
+(which works only with Capistrano 2).</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="common-post-deployment-tasks">
+<h2>Common Post-Deployment Tasks<a class="headerlink" href="#common-post-deployment-tasks" title="Permalink to this headline">¶</a></h2>
+<p>After deploying your actual source code, there are a number of common things
+you’ll need to do:</p>
+<div class="section" id="a-check-requirements">
+<h3>A) Check Requirements<a class="headerlink" href="#a-check-requirements" title="Permalink to this headline">¶</a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">check:requirements</span></code> command to check if your server meets the
+<a class="reference internal" href="setup.html#symfony-tech-requirements"><span class="std std-ref">technical requirements for running Symfony applications</span></a>.</p>
+</div>
+<div class="section" id="b-configure-your-environment-variables">
+<span id="b-configure-your-app-config-parameters-yml-file"></span><h3>B) Configure your Environment Variables<a class="headerlink" href="#b-configure-your-environment-variables" title="Permalink to this headline">¶</a></h3>
+<p>Most Symfony applications read their configuration from environment variables.
+While developing locally, you’ll usually store these in <code class="docutils literal notranslate"><span class="pre">.env</span></code> and <code class="docutils literal notranslate"><span class="pre">.env.local</span></code>
+(for local overrides). On production, you have two options:</p>
+<ol class="arabic simple">
+<li>Create “real” environment variables. How you set environment variables, depends
+on your setup: they can be set at the command line, in your Nginx configuration,
+or via other methods provided by your hosting service.</li>
+<li>Or, create a <code class="docutils literal notranslate"><span class="pre">.env.local</span></code> file just like your local development (see note below)</li>
+</ol>
+<p>There is no significant advantage to either of the two options: use whatever is
+most natural in your hosting environment.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you use the <code class="docutils literal notranslate"><span class="pre">.env.*</span></code> files on production, you may need to move your
+<code class="docutils literal notranslate"><span class="pre">symfony/dotenv</span></code> dependency from <code class="docutils literal notranslate"><span class="pre">require-dev</span></code> to <code class="docutils literal notranslate"><span class="pre">require</span></code> in <code class="docutils literal notranslate"><span class="pre">composer.json</span></code>:</p>
+<div class="last highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/dotenv
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="c-install-update-your-vendors">
+<h3>C) Install/Update your Vendors<a class="headerlink" href="#c-install-update-your-vendors" title="Permalink to this headline">¶</a></h3>
+<p>Your vendors can be updated before transferring your source code (i.e.
+update the <code class="docutils literal notranslate"><span class="pre">vendor/</span></code> directory, then transfer that with your source
+code) or afterwards on the server. Either way, update your vendors
+as you normally do:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer install --no-dev --optimize-autoloader
+</pre></div>
+</td></tr></table></div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">--optimize-autoloader</span></code> flag improves Composer’s autoloader performance
+significantly by building a “class map”. The <code class="docutils literal notranslate"><span class="pre">--no-dev</span></code> flag ensures that
+development packages are not installed in the production environment.</p>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">If you get a “class not found” error during this step, you may need to
+run <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">APP_ENV=prod</span></code> (or <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">SYMFONY_ENV=prod</span></code> if you’re not
+using <a class="reference internal" href="setup.html#symfony-flex"><span class="std std-ref">Symfony Flex</span></a>) before running this command so
+that the <code class="docutils literal notranslate"><span class="pre">post-install-cmd</span></code> scripts run in the <code class="docutils literal notranslate"><span class="pre">prod</span></code> environment.</p>
+</div>
+</div>
+<div class="section" id="d-clear-your-symfony-cache">
+<h3>D) Clear your Symfony Cache<a class="headerlink" href="#d-clear-your-symfony-cache" title="Permalink to this headline">¶</a></h3>
+<p>Make sure you clear and warm-up your Symfony cache:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nv">APP_ENV</span><span class="o">=</span>prod <span class="nv">APP_DEBUG</span><span class="o">=</span><span class="m">0</span> php bin/console cache:clear
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="e-other-things">
+<h3>E) Other Things!<a class="headerlink" href="#e-other-things" title="Permalink to this headline">¶</a></h3>
+<p>There may be lots of other things that you need to do, depending on your
+setup:</p>
+<ul class="simple">
+<li>Running any database migrations</li>
+<li>Clearing your APCu cache</li>
+<li>Add/edit CRON jobs</li>
+<li><a class="reference internal" href="frontend/encore/faq.html#how-do-i-deploy-my-encore-assets"><span class="std std-ref">Building and minifying your assets</span></a> with Webpack Encore</li>
+<li>Pushing assets to a CDN</li>
+<li>…</li>
+</ul>
+</div>
+</div>
+<div class="section" id="application-lifecycle-continuous-integration-qa-etc">
+<h2>Application Lifecycle: Continuous Integration, QA, etc.<a class="headerlink" href="#application-lifecycle-continuous-integration-qa-etc" title="Permalink to this headline">¶</a></h2>
+<p>While this article covers the technical details of deploying, the full lifecycle
+of taking code from development up to production may have more steps:
+deploying to staging, QA (Quality Assurance), running tests, etc.</p>
+<p>The use of staging, testing, QA, continuous integration, database migrations
+and the capability to roll back in case of failure are all strongly advised. There
+are simple and more complex tools and one can make the deployment as easy
+(or sophisticated) as your environment requires.</p>
+<p>Don’t forget that deploying your application also involves updating any dependency
+(typically via Composer), migrating your database, clearing your cache and
+other potential things like pushing assets to a CDN (see <a class="reference internal" href="#common-post-deployment-tasks">Common Post-Deployment Tasks</a>).</p>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="deployments-not-using-the-composer-json-file">
+<h3>Deployments not Using the <code class="docutils literal notranslate"><span class="pre">composer.json</span></code> File<a class="headerlink" href="#deployments-not-using-the-composer-json-file" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="reference/configuration/kernel.html#configuration-kernel-project-directory"><span class="std std-ref">project root directory</span></a>
+(whose value is used via the <code class="docutils literal notranslate"><span class="pre">kernel.project_dir</span></code> parameter and the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Kernel.php" title="Symfony\Component\HttpKernel\Kernel::getProjectDir()"><span class="pre">getProjectDir()</span></a></code> method) is
+calculated automatically by Symfony as the directory where the main
+<code class="docutils literal notranslate"><span class="pre">composer.json</span></code> file is stored.</p>
+<p>In deployments not using the <code class="docutils literal notranslate"><span class="pre">composer.json</span></code> file, you’ll need to override the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/Kernel.php" title="Symfony\Component\HttpKernel\Kernel::getProjectDir()"><span class="pre">getProjectDir()</span></a></code> method
+<a class="reference internal" href="reference/configuration/kernel.html#configuration-kernel-project-directory"><span class="std std-ref">as explained in this section</span></a>.</p>
+</div>
+</div>
+<div class="section" id="learn-more">
+<h2>Learn More<a class="headerlink" href="#learn-more" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="deployment/proxies.html">How to Configure Symfony to Work behind a Load Balancer or a Reverse Proxy</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

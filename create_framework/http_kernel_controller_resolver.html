@@ -1,0 +1,466 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The HttpKernel Component: the Controller Resolver &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Separation of Concerns" href="separation_of_concerns.html" />
+    <link rel="prev" title="Templating" href="templating.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Create your own PHP Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="front_controller.html">The Front Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html">The Routing Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templating.html">Templating</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The HttpKernel Component: the Controller Resolver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="separation_of_concerns.html">The Separation of Concerns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit_testing.html">Unit Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel_httpkernelinterface.html">The HttpKernel Component: HttpKernelInterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel_httpkernel_class.html">The HttpKernel Component: The HttpKernel Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependency_injection.html">The DependencyInjection Component</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Create your own PHP Framework</a> &raquo;</li>
+        
+      <li>The HttpKernel Component: the Controller Resolver</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/create_framework/http_kernel_controller_resolver.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-httpkernel-component-the-controller-resolver">
+<h1>The HttpKernel Component: the Controller Resolver<a class="headerlink" href="#the-httpkernel-component-the-controller-resolver" title="Permalink to this headline">¶</a></h1>
+<p>You might think that our framework is already pretty solid and you are
+probably right. But let’s see how we can improve it nonetheless.</p>
+<p>Right now, all our examples use procedural code, but remember that controllers
+can be any valid PHP callbacks. Let’s convert our controller to a proper
+class:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LeapYearController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">is_leap_year</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">)))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Yep, this is a leap year!&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Nope, this is not a leap year.&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Update the route definition accordingly:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;leap_year&#39;</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Routing\Route</span><span class="p">(</span><span class="s1">&#39;/is_leap_year/{year}&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;year&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+    <span class="s1">&#39;_controller&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="k">new</span> <span class="nx">LeapYearController</span><span class="p">(),</span> <span class="s1">&#39;index&#39;</span><span class="p">],</span>
+<span class="p">]));</span>
+</pre></div>
+</div>
+<p>The move is pretty straightforward and makes a lot of sense as soon as you
+create more pages but you might have noticed a non-desirable side effect…
+The <code class="docutils literal notranslate"><span class="pre">LeapYearController</span></code> class is <em>always</em> instantiated, even if the
+requested URL does not match the <code class="docutils literal notranslate"><span class="pre">leap_year</span></code> route. This is bad for one main
+reason: performance wise, all controllers for all routes must now be
+instantiated for every request. It would be better if controllers were
+lazy-loaded so that only the controller associated with the matched route is
+instantiated.</p>
+<p>To solve this issue, and a bunch more, let’s install and use the HttpKernel
+component:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/http-kernel
+</pre></div>
+</td></tr></table></div>
+<p>The HttpKernel component has many interesting features, but the ones we need
+right now are the <em>controller resolver</em> and <em>argument resolver</em>. A controller resolver knows how to
+determine the controller to execute and the argument resolver determines the arguments to pass to it,
+based on a Request object. All controller resolvers implement the following interface:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nx">Symfony\Component\HttpKernel\Controller</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="k">interface</span> <span class="nx">ControllerResolverInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getController</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">getController()</span></code> method relies on the same convention as the one we
+have defined earlier: the <code class="docutils literal notranslate"><span class="pre">_controller</span></code> request attribute must contain the
+controller associated with the Request. Besides the built-in PHP callbacks,
+<code class="docutils literal notranslate"><span class="pre">getController()</span></code> also supports strings composed of a class name followed by
+two colons and a method name as a valid callback, like ‘class::method’:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;leap_year&#39;</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Routing\Route</span><span class="p">(</span><span class="s1">&#39;/is_leap_year/{year}&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;year&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+    <span class="s1">&#39;_controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;LeapYearController::index&#39;</span><span class="p">,</span>
+<span class="p">]));</span>
+</pre></div>
+</div>
+<p>To make this code work, modify the framework code to use the controller
+resolver from HttpKernel:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel</span><span class="p">;</span>
+
+<span class="nv">$controllerResolver</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpKernel\Controller\ControllerResolver</span><span class="p">();</span>
+<span class="nv">$argumentResolver</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpKernel\Controller\ArgumentResolver</span><span class="p">();</span>
+
+<span class="nv">$controller</span> <span class="o">=</span> <span class="nv">$controllerResolver</span><span class="o">-&gt;</span><span class="na">getController</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="nv">$arguments</span> <span class="o">=</span> <span class="nv">$argumentResolver</span><span class="o">-&gt;</span><span class="na">getArguments</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$controller</span><span class="p">);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">call_user_func_array</span><span class="p">(</span><span class="nv">$controller</span><span class="p">,</span> <span class="nv">$arguments</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As an added bonus, the controller resolver properly handles the error
+management for you: when you forget to define a <code class="docutils literal notranslate"><span class="pre">_controller</span></code> attribute
+for a Route for instance.</p>
+</div>
+<p>Now, let’s see how the controller arguments are guessed. <code class="docutils literal notranslate"><span class="pre">getArguments()</span></code>
+introspects the controller signature to determine which arguments to pass to
+it by using the native PHP <a class="reference external" href="https://www.php.net/reflection">reflection</a>. This method is defined in the
+following interface:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nx">Symfony\Component\HttpKernel\Controller</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="k">interface</span> <span class="nx">ArgumentResolverInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getArguments</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nv">$controller</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">index()</span></code> method needs the Request object as an argument.
+<code class="docutils literal notranslate"><span class="pre">getArguments()</span></code> knows when to inject it properly if it is type-hinted
+correctly:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+
+<span class="c1">// won&#39;t work</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>More interesting, <code class="docutils literal notranslate"><span class="pre">getArguments()</span></code> is also able to inject any Request
+attribute; if the argument has the same name as the corresponding
+attribute:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nv">$year</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also inject the Request and some attributes at the same time (as the
+matching is done on the argument name or a type hint, the arguments order does
+not matter):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nv">$year</span><span class="p">)</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nv">$year</span><span class="p">,</span> <span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, you can also define default values for any argument that matches an
+optional attribute of the Request:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nv">$year</span> <span class="o">=</span> <span class="mi">2012</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s inject the <code class="docutils literal notranslate"><span class="pre">$year</span></code> request attribute for our controller:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LeapYearController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nv">$year</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">is_leap_year</span><span class="p">(</span><span class="nv">$year</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Yep, this is a leap year!&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Nope, this is not a leap year.&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The resolvers also take care of validating the controller callable and its
+arguments. In case of a problem, it throws an exception with a nice message
+explaining the problem (the controller class does not exist, the method is not
+defined, an argument has no matching attribute, …).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">With the great flexibility of the default controller resolver and argument
+resolver, you might wonder why someone would want to create another one
+(why would there be an interface if not?). Two examples: in Symfony,
+<code class="docutils literal notranslate"><span class="pre">getController()</span></code> is enhanced to support <a class="reference internal" href="../controller/service.html"><span class="doc">controllers as services</span></a>;
+and <code class="docutils literal notranslate"><span class="pre">getArguments()</span></code> provides an extension point to alter or enhance
+the resolving of arguments.</p>
+</div>
+<p>Let’s conclude with the new version of our framework:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/web/front.php</span>
+<span class="k">require_once</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing</span><span class="p">;</span>
+
+<span class="k">function</span> <span class="nf">render_template</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nb">extract</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">all</span><span class="p">(),</span> <span class="nx">EXTR_SKIP</span><span class="p">);</span>
+    <span class="nb">ob_start</span><span class="p">();</span>
+    <span class="k">include</span> <span class="nb">sprintf</span><span class="p">(</span><span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../src/pages/%s.php&#39;</span><span class="p">,</span> <span class="nv">$_route</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="nb">ob_get_clean</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+<span class="nv">$routes</span> <span class="o">=</span> <span class="k">include</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../src/app.php&#39;</span><span class="p">;</span>
+
+<span class="nv">$context</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Routing\RequestContext</span><span class="p">();</span>
+<span class="nv">$context</span><span class="o">-&gt;</span><span class="na">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="nv">$matcher</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Routing\Matcher\UrlMatcher</span><span class="p">(</span><span class="nv">$routes</span><span class="p">,</span> <span class="nv">$context</span><span class="p">);</span>
+
+<span class="nv">$controllerResolver</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpKernel\Controller\ControllerResolver</span><span class="p">();</span>
+<span class="nv">$argumentResolver</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpKernel\Controller\ArgumentResolver</span><span class="p">();</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$matcher</span><span class="o">-&gt;</span><span class="na">match</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPathInfo</span><span class="p">()));</span>
+
+    <span class="nv">$controller</span> <span class="o">=</span> <span class="nv">$controllerResolver</span><span class="o">-&gt;</span><span class="na">getController</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="nv">$arguments</span> <span class="o">=</span> <span class="nv">$argumentResolver</span><span class="o">-&gt;</span><span class="na">getArguments</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$controller</span><span class="p">);</span>
+
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nb">call_user_func_array</span><span class="p">(</span><span class="nv">$controller</span><span class="p">,</span> <span class="nv">$arguments</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Routing\Exception\ResourceNotFoundException</span> <span class="nv">$exception</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Not Found&#39;</span><span class="p">,</span> <span class="mi">404</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$exception</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;An error occurred&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Think about it once more: our framework is more robust and more flexible than
+ever and it still has less than 50 lines of code.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

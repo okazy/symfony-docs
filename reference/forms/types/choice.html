@@ -1,0 +1,1640 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ChoiceType Field (select drop-downs, radio buttons &amp; checkboxes) &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="EntityType Field" href="entity.html" />
+    <link rel="prev" title="ColorType Field" href="color.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../forms.html">Forms</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../forms.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../forms.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../forms.html#building-forms">Building Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../forms.html#rendering-forms">Rendering Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../forms.html#processing-forms">Processing Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../forms.html#validating-forms">Validating Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../forms.html#other-common-form-features">Other Common Form Features</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../forms.html#learn-more">Learn more</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../types.html">Form Types Reference</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="text.html">TextType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="textarea.html">TextareaType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="email.html">EmailType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="integer.html">IntegerType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="money.html">MoneyType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="number.html">NumberType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="password.html">PasswordType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="percent.html">PercentType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="search.html">SearchType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="url.html">UrlType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="range.html">RangeType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tel.html">TelType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="color.html">ColorType Field</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ChoiceType Field (select drop-downs, radio buttons &amp; checkboxes)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="entity.html">EntityType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="country.html">CountryType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="language.html">LanguageType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="locale.html">LocaleType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="timezone.html">TimezoneType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="currency.html">CurrencyType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="date.html">DateType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dateinterval.html">DateIntervalType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="datetime.html">DateTimeType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="time.html">TimeType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="birthday.html">BirthdayType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="week.html">WeekType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="checkbox.html">CheckboxType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="file.html">FileType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="radio.html">RadioType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="collection.html">CollectionType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="repeated.html">RepeatedType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hidden.html">HiddenType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="button.html">ButtonType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reset.html">ResetType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="submit.html">SubmitType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="form.html">FormType Field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../types.html#supported-field-types">Supported Field Types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../controller/upload_file.html">How to Upload Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../security/csrf.html">How to Implement CSRF Protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/form_dependencies.html">How to Access Services or Config from Inside a Form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/create_custom_field_type.html">How to Create a Custom Form Field Type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/data_transformers.html">How to Use Data Transformers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/data_mappers.html">When and How to Use Data Mappers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/create_form_type_extension.html">How to Create a Form Type Extension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/type_guesser.html">Creating a custom Type Guesser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/bootstrap4.html">Bootstrap 4 Form Theme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/form_customization.html">How to Customize Form Rendering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/form_themes.html">How to Work with Form Themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/events.html">Form Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/dynamic_form_modification.html">How to Dynamically Modify Forms Using Form Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/validation_groups.html">How to Define the Validation Groups to Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/validation_group_service_resolver.html">How to Dynamically Configure Form Validation Groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/button_based_validation.html">How to Choose Validation Groups Based on the Clicked Button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/disabling_validation.html">How to Disable the Validation of Submitted Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/direct_submit.html">How to Use the submit() Function to Handle Form Submissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/embedded.html">How to Embed Forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/form_collections.html">How to Embed a Collection of Forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/inherit_data_option.html">How to Reduce Code Duplication with “inherit_data”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/multiple_buttons.html">How to Submit a Form with Multiple Buttons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/unit_testing.html">How to Unit Test your Forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/use_empty_data.html">How to Configure empty Data for a Form Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../form/without_class.html">How to Use a Form without a Data Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../forms.html">Forms</a> &raquo;</li>
+        
+          <li><a href="../types.html">Form Types Reference</a> &raquo;</li>
+        
+      <li>ChoiceType Field (select drop-downs, radio buttons &amp; checkboxes)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/reference/forms/types/choice.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="choicetype-field-select-drop-downs-radio-buttons-checkboxes">
+<span id="index-0"></span><h1>ChoiceType Field (select drop-downs, radio buttons &amp; checkboxes)<a class="headerlink" href="#choicetype-field-select-drop-downs-radio-buttons-checkboxes" title="Permalink to this headline">¶</a></h1>
+<p>A multi-purpose field used to allow the user to “choose” one or more options.
+It can be rendered as a <code class="docutils literal notranslate"><span class="pre">select</span></code> tag, radio buttons, or checkboxes.</p>
+<p>To use this field, you must specify <em>either</em> <code class="docutils literal notranslate"><span class="pre">choices</span></code> or <code class="docutils literal notranslate"><span class="pre">choice_loader</span></code> option.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Rendered as</td>
+<td>can be various tags (see below)</td>
+</tr>
+<tr class="row-even"><td>Options</td>
+<td><ul class="first last simple">
+<li><a class="reference internal" href="#choices">choices</a></li>
+<li><a class="reference internal" href="#choice-attr">choice_attr</a></li>
+<li><a class="reference internal" href="#choice-filter">choice_filter</a></li>
+<li><a class="reference internal" href="#choice-label">choice_label</a></li>
+<li><a class="reference internal" href="#choice-loader">choice_loader</a></li>
+<li><a class="reference internal" href="#choice-name">choice_name</a></li>
+<li><a class="reference internal" href="#choice-translation-domain">choice_translation_domain</a></li>
+<li><a class="reference internal" href="#choice-value">choice_value</a></li>
+<li><a class="reference internal" href="#expanded">expanded</a></li>
+<li><a class="reference internal" href="#group-by">group_by</a></li>
+<li><a class="reference internal" href="#multiple">multiple</a></li>
+<li><a class="reference internal" href="#placeholder">placeholder</a></li>
+<li><a class="reference internal" href="#preferred-choices">preferred_choices</a></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>Overridden
+options</td>
+<td><ul class="first last simple">
+<li><a class="reference internal" href="#compound">compound</a></li>
+<li><a class="reference internal" href="#empty-data">empty_data</a></li>
+<li><a class="reference internal" href="#error-bubbling">error_bubbling</a></li>
+<li><a class="reference internal" href="#trim">trim</a></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td>Inherited
+options</td>
+<td><ul class="first last simple">
+<li><a class="reference internal" href="#attr">attr</a></li>
+<li><a class="reference internal" href="#by-reference">by_reference</a></li>
+<li><a class="reference internal" href="#data">data</a></li>
+<li><a class="reference internal" href="#disabled">disabled</a></li>
+<li><a class="reference internal" href="#error-mapping">error_mapping</a></li>
+<li><a class="reference internal" href="#help">help</a></li>
+<li><a class="reference internal" href="#help-attr">help_attr</a></li>
+<li><a class="reference internal" href="#help-html">help_html</a></li>
+<li><a class="reference internal" href="#inherit-data">inherit_data</a></li>
+<li><a class="reference internal" href="#label">label</a></li>
+<li><a class="reference internal" href="#label-attr">label_attr</a></li>
+<li><a class="reference internal" href="#label-format">label_format</a></li>
+<li><a class="reference internal" href="#mapped">mapped</a></li>
+<li><a class="reference internal" href="#required">required</a></li>
+<li><a class="reference internal" href="#row-attr">row_attr</a></li>
+<li><a class="reference internal" href="#translation-domain">translation_domain</a></li>
+<li><a class="reference internal" href="#label-translation-parameters">label_translation_parameters</a></li>
+<li><a class="reference internal" href="#attr-translation-parameters">attr_translation_parameters</a></li>
+<li><a class="reference internal" href="#help-translation-parameters">help_translation_parameters</a></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>Parent type</td>
+<td><a class="reference internal" href="form.html"><span class="doc">FormType</span></a></td>
+</tr>
+<tr class="row-even"><td>Class</td>
+<td><code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/Extension/Core/Type/ChoiceType.php" title="Symfony\Component\Form\Extension\Core\Type\ChoiceType"><span class="pre">ChoiceType</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>The full list of options defined and inherited by this form type is
+available running this command in your app:</p>
+<div class="last highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># replace &#39;FooType&#39; by the class name of your form type</span>
+<span class="gp">$</span> php bin/console debug:form FooType
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="example-usage">
+<h2>Example Usage<a class="headerlink" href="#example-usage" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way to use this field is to define the <code class="docutils literal notranslate"><span class="pre">choices</span></code> option to specify
+the choices as an associative array where the keys are the labels displayed to
+end users and the array values are the internal values used in the form field:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\ChoiceType</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;isAttending&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;choices&#39;</span>  <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;Maybe&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+        <span class="s1">&#39;Yes&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="s1">&#39;No&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>This will create a <code class="docutils literal notranslate"><span class="pre">select</span></code> drop-down like this:</p>
+<img alt="../../../_images/choice-example1.png" class="align-center" src="../../../_images/choice-example1.png" />
+<p>If the user selects <code class="docutils literal notranslate"><span class="pre">No</span></code>, the form will return <code class="docutils literal notranslate"><span class="pre">false</span></code> for this field. Similarly,
+if the starting data for this field is <code class="docutils literal notranslate"><span class="pre">true</span></code>, then <code class="docutils literal notranslate"><span class="pre">Yes</span></code> will be auto-selected.
+In other words, the <strong>choice</strong> of each item is the value you want to get/set in PHP
+code, while the <strong>key</strong> is the <strong>label</strong> that will be shown to the user.</p>
+</div>
+<div class="section" id="advanced-example-with-objects">
+<h2>Advanced Example (with Objects!)<a class="headerlink" href="#advanced-example-with-objects" title="Permalink to this headline">¶</a></h2>
+<p>This field has a <em>lot</em> of options and most control how the field is displayed. In
+this example, the underlying data is some <code class="docutils literal notranslate"><span class="pre">Category</span></code> object that has a <code class="docutils literal notranslate"><span class="pre">getName()</span></code>
+method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">App\Entity\Category</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\ChoiceType</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;choices&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="k">new</span> <span class="nx">Category</span><span class="p">(</span><span class="s1">&#39;Cat1&#39;</span><span class="p">),</span>
+        <span class="k">new</span> <span class="nx">Category</span><span class="p">(</span><span class="s1">&#39;Cat2&#39;</span><span class="p">),</span>
+        <span class="k">new</span> <span class="nx">Category</span><span class="p">(</span><span class="s1">&#39;Cat3&#39;</span><span class="p">),</span>
+        <span class="k">new</span> <span class="nx">Category</span><span class="p">(</span><span class="s1">&#39;Cat4&#39;</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="c1">// &quot;name&quot; is a property path, meaning Symfony will look for a public</span>
+    <span class="c1">// property or a public method like &quot;getName()&quot; to define the input</span>
+    <span class="c1">// string value that will be submitted by the form</span>
+    <span class="s1">&#39;choice_value&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span>
+    <span class="c1">// a callback to return the label for a given choice</span>
+    <span class="c1">// if a placeholder is used, its empty value (null) may be passed but</span>
+    <span class="c1">// its label is defined by its own &quot;placeholder&quot; option</span>
+    <span class="s1">&#39;choice_label&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="o">?</span><span class="nx">Category</span> <span class="nv">$category</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$category</span> <span class="o">?</span> <span class="nb">strtoupper</span><span class="p">(</span><span class="nv">$category</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">())</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="c1">// returns the html attributes for each option input (may be radio/checkbox)</span>
+    <span class="s1">&#39;choice_attr&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="o">?</span><span class="nx">Category</span> <span class="nv">$category</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$category</span> <span class="o">?</span> <span class="p">[</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;category_&#39;</span><span class="o">.</span><span class="nb">strtolower</span><span class="p">(</span><span class="nv">$category</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">())]</span> <span class="o">:</span> <span class="p">[];</span>
+    <span class="p">},</span>
+    <span class="c1">// every option can use a string property path or any callable that get</span>
+    <span class="c1">// passed each choice as argument, but it may not be needed</span>
+    <span class="s1">&#39;group_by&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// randomly assign things into 2 groups</span>
+        <span class="k">return</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">?</span> <span class="s1">&#39;Group A&#39;</span> <span class="o">:</span> <span class="s1">&#39;Group B&#39;</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="c1">// a callback to return whether a category is preferred</span>
+    <span class="s1">&#39;preferred_choices&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="o">?</span><span class="nx">Category</span> <span class="nv">$category</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$category</span> <span class="o">&amp;&amp;</span> <span class="mi">100</span> <span class="o">&lt;</span> <span class="nv">$category</span><span class="o">-&gt;</span><span class="na">getArticleCounts</span><span class="p">();</span>
+    <span class="p">},</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>You can also customize the <a class="reference internal" href="#choice-name">choice_name</a> of each choice. You can learn more
+about all of these options in the sections below.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">The <em>placeholder</em> is a specific field, when the choices are optional the
+first item in the list must be empty, so the user can unselect.
+Be sure to always handle the empty choice <code class="docutils literal notranslate"><span class="pre">null</span></code> when using callbacks.</p>
+</div>
+</div>
+<div class="section" id="select-tag-checkboxes-or-radio-buttons">
+<span id="forms-reference-choice-tags"></span><h2>Select Tag, Checkboxes or Radio Buttons<a class="headerlink" href="#select-tag-checkboxes-or-radio-buttons" title="Permalink to this headline">¶</a></h2>
+<p>This field may be rendered as one of several HTML fields, depending
+on the <code class="docutils literal notranslate"><span class="pre">expanded</span></code> and <code class="docutils literal notranslate"><span class="pre">multiple</span></code> options:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="69%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Element Type</th>
+<th class="head">Expanded</th>
+<th class="head">Multiple</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>select tag</td>
+<td><code class="docutils literal notranslate"><span class="pre">false</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">false</span></code></td>
+</tr>
+<tr class="row-odd"><td>select tag (with <code class="docutils literal notranslate"><span class="pre">multiple</span></code> attribute)</td>
+<td><code class="docutils literal notranslate"><span class="pre">false</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">true</span></code></td>
+</tr>
+<tr class="row-even"><td>radio buttons</td>
+<td><code class="docutils literal notranslate"><span class="pre">true</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">false</span></code></td>
+</tr>
+<tr class="row-odd"><td>checkboxes</td>
+<td><code class="docutils literal notranslate"><span class="pre">true</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">true</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="customizing-each-option-s-text-label">
+<h2>Customizing each Option’s Text (Label)<a class="headerlink" href="#customizing-each-option-s-text-label" title="Permalink to this headline">¶</a></h2>
+<p>Normally, the array key of each item in the <code class="docutils literal notranslate"><span class="pre">choices</span></code> option is used as the
+text that’s shown to the user. But that can be completely customized via the
+<a class="reference internal" href="#choice-label">choice_label</a> option. Check it out for more details.</p>
+</div>
+<div class="section" id="grouping-options">
+<span id="form-choices-simple-grouping"></span><h2>Grouping Options<a class="headerlink" href="#grouping-options" title="Permalink to this headline">¶</a></h2>
+<p>You can group the <code class="docutils literal notranslate"><span class="pre">&lt;option&gt;</span></code> elements of a <code class="docutils literal notranslate"><span class="pre">&lt;select&gt;</span></code> into <code class="docutils literal notranslate"><span class="pre">&lt;optgroup&gt;</span></code>
+by passing a multi-dimensional <code class="docutils literal notranslate"><span class="pre">choices</span></code> array:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\ChoiceType</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;stockStatus&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;choices&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;Main Statuses&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;Yes&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;stock_yes&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;No&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;stock_no&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;Out of Stock Statuses&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;Backordered&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;stock_backordered&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Discontinued&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;stock_discontinued&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<img alt="../../../_images/choice-example4.png" class="align-center" src="../../../_images/choice-example4.png" />
+<p>To get fancier, use the <a class="reference internal" href="#group-by">group_by</a> option instead.</p>
+</div>
+<div class="section" id="field-options">
+<h2>Field Options<a class="headerlink" href="#field-options" title="Permalink to this headline">¶</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/ChoiceList/ChoiceList.php" title="Symfony\Component\Form\ChoiceList\ChoiceList"><span class="pre">ChoiceList</span></a></code> class was
+introduced in Symfony 5.1, to help configuring choices options.</p>
+</div>
+<div class="section" id="choices">
+<h3>choices<a class="headerlink" href="#choices" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">array</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">[]</span></code></p>
+<p>This is the most basic way to specify the choices that should be used
+by this field. The <code class="docutils literal notranslate"><span class="pre">choices</span></code> option is an array, where the array key
+is the item’s label and the array value is the item’s value:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\ChoiceType</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;inStock&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;choices&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;In Stock&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="s1">&#39;Out of Stock&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>If there are choice values that are not scalar or the stringified
+representation is not unique Symfony will use incrementing integers
+as values. When the form gets submitted the correct values with the
+correct types will be assigned to the model.</p>
+</div>
+<div class="section" id="choice-attr">
+<h3><code class="docutils literal notranslate"><span class="pre">choice_attr</span></code><a class="headerlink" href="#choice-attr" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">array</span></code>, <code class="docutils literal notranslate"><span class="pre">callable</span></code>, <code class="docutils literal notranslate"><span class="pre">string</span></code> or <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyPath.php" title="Symfony\Component\PropertyAccess\PropertyPath"><span class="pre">PropertyPath</span></a></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">[]</span></code></p>
+<p>Use this to add additional HTML attributes to each choice. This can be
+an associative array where the keys match the choice keys and the values
+are the attributes for each choice, a callable or a property path
+(just like <a class="reference internal" href="#choice-label">choice_label</a>).</p>
+<p>If an array, the keys of the <code class="docutils literal notranslate"><span class="pre">choices</span></code> array must be used as keys:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\ChoiceType</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;attending&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;choices&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;Yes&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="s1">&#39;No&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+        <span class="s1">&#39;Maybe&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;choice_attr&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$choice</span><span class="p">,</span> <span class="nv">$key</span><span class="p">,</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// adds a class like attending_yes, attending_no, etc</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;attending_&#39;</span><span class="o">.</span><span class="nb">strtolower</span><span class="p">(</span><span class="nv">$key</span><span class="p">)];</span>
+    <span class="p">},</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>When defining a custom type, you should use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/ChoiceList/ChoiceList.php" title="Symfony\Component\Form\ChoiceList\ChoiceList"><span class="pre">ChoiceList</span></a></code> class helper:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">App\Entity\Category</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\ChoiceList\ChoiceList</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;choices&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;choice_label&#39;</span> <span class="o">=&gt;</span> <span class="nx">ChoiceList</span><span class="o">::</span><span class="na">attr</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="o">?</span><span class="nx">Category</span> <span class="nv">$category</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$category</span> <span class="o">?</span> <span class="p">[</span><span class="s1">&#39;data-uuid&#39;</span> <span class="o">=&gt;</span> <span class="nv">$category</span><span class="o">-&gt;</span><span class="na">getUuid</span><span class="p">()]</span> <span class="o">:</span> <span class="p">[];</span>
+    <span class="p">}),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p class="last">See the <a class="reference internal" href="#reference-form-choice-loader"><span class="std std-ref">“choice_loader” option documentation</span></a>.</p>
+</div>
+</div>
+<div class="section" id="choice-filter">
+<h3><code class="docutils literal notranslate"><span class="pre">choice_filter</span></code><a class="headerlink" href="#choice-filter" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">callable</span></code>, <code class="docutils literal notranslate"><span class="pre">string</span></code> or <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyPath.php" title="Symfony\Component\PropertyAccess\PropertyPath"><span class="pre">PropertyPath</span></a></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">null</span></code></p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The <code class="docutils literal notranslate"><span class="pre">choice_filter</span></code> option has been introduced in Symfony 5.1.</p>
+</div>
+<p>When using predefined choice types from Symfony core or vendor libraries (i.e.
+<a class="reference internal" href="country.html"><span class="doc">CountryType</span></a>) this option lets you
+define a callable that takes each choice as the only argument and must return
+<code class="docutils literal notranslate"><span class="pre">true</span></code> to keep it or <code class="docutils literal notranslate"><span class="pre">false</span></code> to discard it:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/AddressType.php</span>
+<span class="k">namespace</span> <span class="nx">App\Form\Type</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\AbstractType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\CountryType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\FormBuilderInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\OptionsResolver\OptionsResolver</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">AddressType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$resolver</span>
+            <span class="o">-&gt;</span><span class="na">setDefaults</span><span class="p">([</span>
+                <span class="c1">// enable this type to accept a limited set of countries</span>
+                <span class="s1">&#39;allowed_countries&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+            <span class="p">])</span>
+        <span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">buildForm</span><span class="p">(</span><span class="nx">FormBuilderInterface</span> <span class="nv">$builder</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$allowedCountries</span> <span class="o">=</span> <span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;allowed_countries&#39;</span><span class="p">];</span>
+
+        <span class="nv">$builder</span>
+            <span class="c1">// ...</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="nx">CountryType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+                <span class="c1">// if the AddressType &quot;allowed_countries&quot; option is passed,</span>
+                <span class="c1">// use it to create a filter</span>
+                <span class="s1">&#39;choice_filter&#39;</span> <span class="o">=&gt;</span> <span class="nv">$allowedCountries</span> <span class="o">?</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$countryCode</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$allowedCountries</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nb">in_array</span><span class="p">(</span><span class="nv">$countryCode</span><span class="p">,</span> <span class="nv">$allowedCountries</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+                <span class="p">}</span> <span class="o">:</span> <span class="k">null</span><span class="p">,</span>
+
+            <span class="p">])</span>
+        <span class="p">;</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>The option can be a callable or a property path when choices are objects:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$builder</span>
+    <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+        <span class="c1">// ...</span>
+        <span class="s1">&#39;choice_filter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;isSelectable&#39;</span><span class="p">,</span>
+    <span class="p">])</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>Considering this <code class="docutils literal notranslate"><span class="pre">AddressType</span></code> could be an entry of a <code class="docutils literal notranslate"><span class="pre">CollectionType</span></code>
+you should use the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/ChoiceList/ChoiceList.php" title="Symfony\Component\Form\ChoiceList\ChoiceList"><span class="pre">ChoiceList</span></a></code>
+class helper to enable caching:</p>
+<div class="last highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Form/Type/AddressType.php</span>
+<span class="c1">// ...</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\ChoiceList\ChoiceList</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="s1">&#39;choice_filter&#39;</span> <span class="o">=&gt;</span> <span class="nv">$allowedCountries</span> <span class="o">?</span> <span class="nx">ChoiceList</span><span class="o">::</span><span class="na">filter</span><span class="p">(</span>
+    <span class="c1">// pass the type as first argument</span>
+    <span class="nv">$this</span><span class="p">,</span>
+    <span class="k">function</span> <span class="p">(</span><span class="nv">$countryCode</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$allowedCountries</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">in_array</span><span class="p">(</span><span class="nv">$countryCode</span><span class="p">,</span> <span class="nv">$allowedCountries</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="c1">// pass the option that makes the filter &quot;vary&quot; to compute a unique hash</span>
+    <span class="nv">$allowedCountries</span>
+<span class="p">)</span> <span class="o">:</span> <span class="k">null</span><span class="p">,</span>
+<span class="c1">// ...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="choice-label">
+<span id="reference-form-choice-label"></span><h3><code class="docutils literal notranslate"><span class="pre">choice_label</span></code><a class="headerlink" href="#choice-label" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code>, <code class="docutils literal notranslate"><span class="pre">callable</span></code>, <code class="docutils literal notranslate"><span class="pre">false</span></code> or <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyPath.php" title="Symfony\Component\PropertyAccess\PropertyPath"><span class="pre">PropertyPath</span></a></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">null</span></code></p>
+<p>By default, the array key of each item in the <code class="docutils literal notranslate"><span class="pre">choices</span></code> option is used as the
+text that’s shown to the user. The <code class="docutils literal notranslate"><span class="pre">choice_label</span></code> option allows you to take
+more control:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\ChoiceType</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;attending&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;choices&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;yes&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="s1">&#39;no&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+        <span class="s1">&#39;maybe&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;choice_label&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$choice</span><span class="p">,</span> <span class="nv">$key</span><span class="p">,</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">true</span> <span class="o">===</span> <span class="nv">$choice</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="s1">&#39;Definitely!&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nb">strtoupper</span><span class="p">(</span><span class="nv">$key</span><span class="p">);</span>
+
+        <span class="c1">// or if you want to translate some key</span>
+        <span class="c1">//return &#39;form.choice.&#39;.$key;</span>
+    <span class="p">},</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>This method is called for <em>each</em> choice, passing you the <code class="docutils literal notranslate"><span class="pre">$choice</span></code> and
+<code class="docutils literal notranslate"><span class="pre">$key</span></code> from the choices array (additional <code class="docutils literal notranslate"><span class="pre">$value</span></code> is related to <a class="reference internal" href="#choice-value">choice_value</a>).
+This will give you:</p>
+<img alt="../../../_images/choice-example2.png" class="align-center" src="../../../_images/choice-example2.png" />
+<p>If your choice values are objects, then <code class="docutils literal notranslate"><span class="pre">choice_label</span></code> can also be a
+<a class="reference internal" href="form.html#reference-form-option-property-path"><span class="std std-ref">property path</span></a>. Imagine you have some
+<code class="docutils literal notranslate"><span class="pre">Status</span></code> class with a <code class="docutils literal notranslate"><span class="pre">getDisplayName()</span></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\ChoiceType</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;attending&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;choices&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="k">new</span> <span class="nx">Status</span><span class="p">(</span><span class="nx">Status</span><span class="o">::</span><span class="na">YES</span><span class="p">),</span>
+        <span class="k">new</span> <span class="nx">Status</span><span class="p">(</span><span class="nx">Status</span><span class="o">::</span><span class="na">NO</span><span class="p">),</span>
+        <span class="k">new</span> <span class="nx">Status</span><span class="p">(</span><span class="nx">Status</span><span class="o">::</span><span class="na">MAYBE</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;choice_label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;displayName&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>If set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, all the tag labels will be discarded for radio or checkbox
+inputs. You can also return <code class="docutils literal notranslate"><span class="pre">false</span></code> from the callable to discard certain labels.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>When defining a custom type, you should use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/ChoiceList/ChoiceList.php" title="Symfony\Component\Form\ChoiceList\ChoiceList"><span class="pre">ChoiceList</span></a></code> class helper:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\ChoiceList\ChoiceList</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;choices&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;choice_label&#39;</span> <span class="o">=&gt;</span> <span class="nx">ChoiceList</span><span class="o">::</span><span class="na">label</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;displayName&#39;</span><span class="p">),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p class="last">See the <a class="reference internal" href="#reference-form-choice-loader"><span class="std std-ref">“choice_loader” option documentation</span></a>.</p>
+</div>
+</div>
+<div class="section" id="choice-loader">
+<span id="reference-form-choice-loader"></span><h3>choice_loader<a class="headerlink" href="#choice-loader" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/ChoiceList/Loader/ChoiceLoaderInterface.php" title="Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface"><span class="pre">ChoiceLoaderInterface</span></a></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">choice_loader</span></code> option can be used instead of the <code class="docutils literal notranslate"><span class="pre">choices</span></code> option. It
+allows to create a list lazily or partially when fetching only the choices for a
+set of submitted values (i.e. querying a search engine like <code class="docutils literal notranslate"><span class="pre">ElasticSearch</span></code>
+can be a heavy process).</p>
+<p>You can use an instance of <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/ChoiceList/Loader/CallbackChoiceLoader.php" title="Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader"><span class="pre">CallbackChoiceLoader</span></a></code>
+if you want to take advantage of lazy loading:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">App\StaticClass</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\ChoiceType</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;loaded_choices&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;choice_loader&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">CallbackChoiceLoader</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">StaticClass</span><span class="o">::</span><span class="na">getConstants</span><span class="p">();</span>
+    <span class="p">}),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>This will cause the call of <code class="docutils literal notranslate"><span class="pre">StaticClass::getConstants()</span></code> to not happen if the
+request is redirected and if there is no pre set or submitted data. Otherwise
+the choice options would need to be resolved thus triggering the callback.</p>
+<p>When you’re defining a custom choice type that may be reused in many fields
+(like entries of a collection) or reused in multiple forms at once, you
+should use the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/ChoiceList/ChoiceList.php" title="Symfony\Component\Form\ChoiceList\ChoiceList"><span class="pre">ChoiceList</span></a></code>
+static methods to wrap the loader and make the choice list cacheable for
+better performance:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">App\Form\ChoiceList\CustomChoiceLoader</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\StaticClass</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\AbstractType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\ChoiceList\ChoiceList</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\ChoiceType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\OptionsResolver\Options</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\OptionsResolver\OptionsResolver</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ConstantsType</span> <span class="k">extends</span> <span class="nx">AbstractType</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getExtendedTypes</span><span class="p">()</span><span class="o">:</span> <span class="nx">iterable</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefaults</span><span class="p">([</span>
+            <span class="c1">// the example below will create a CallbackChoiceLoader from the callable</span>
+            <span class="s1">&#39;choice_loader&#39;</span> <span class="o">=&gt;</span> <span class="nx">ChoiceList</span><span class="o">::</span><span class="na">lazy</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">StaticClass</span><span class="o">::</span><span class="na">getConstants</span><span class="p">();</span>
+            <span class="p">}),</span>
+
+            <span class="c1">// you can pass your own loader as well, depending on other options</span>
+            <span class="s1">&#39;some_key&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+            <span class="s1">&#39;choice_loader&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Options</span> <span class="nv">$options</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">ChoiceList</span><span class="o">::</span><span class="na">loader</span><span class="p">(</span>
+                    <span class="c1">// pass the instance of the type or type extension which is</span>
+                    <span class="c1">// currently configuring the choice list as first argument</span>
+                    <span class="nv">$this</span><span class="p">,</span>
+                    <span class="c1">// pass the other option to the loader</span>
+                    <span class="k">new</span> <span class="nx">CustomChoiceLoader</span><span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;some_key&#39;</span><span class="p">]),</span>
+                    <span class="c1">// ensure the type stores a loader per key</span>
+                    <span class="c1">// by using the special third argument &quot;$vary&quot;</span>
+                    <span class="c1">// an array containing anything that &quot;changes&quot; the loader</span>
+                    <span class="p">[</span><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;some_key&#39;</span><span class="p">]]</span>
+                <span class="p">);</span>
+            <span class="p">},</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="choice-name">
+<h3><code class="docutils literal notranslate"><span class="pre">choice_name</span></code><a class="headerlink" href="#choice-name" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">callable</span></code>, <code class="docutils literal notranslate"><span class="pre">string</span></code> or <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyPath.php" title="Symfony\Component\PropertyAccess\PropertyPath"><span class="pre">PropertyPath</span></a></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">null</span></code></p>
+<p>Controls the internal field name of the choice. You normally don’t care about this,
+but in some advanced cases, you might. For example, this “name” becomes the index
+of the choice views in the template and is used as part of the field name
+attribute.</p>
+<p>This can be a callable or a property path. See <a class="reference internal" href="#choice-label">choice_label</a> for similar usage.
+By default, the choice key or an incrementing integer may be used (starting at <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>When defining a custom type, you should use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/ChoiceList/ChoiceList.php" title="Symfony\Component\Form\ChoiceList\ChoiceList"><span class="pre">ChoiceList</span></a></code> class helper:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\ChoiceList\ChoiceList</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;choices&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;choice_name&#39;</span> <span class="o">=&gt;</span> <span class="nx">ChoiceList</span><span class="o">::</span><span class="na">fieldName</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p class="last">See the <a class="reference internal" href="#reference-form-choice-loader"><span class="std std-ref">“choice_loader” option documentation</span></a>.</p>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">The configured value must be a valid form name. Make sure to only return
+valid names when using a callable. Valid form names must be composed of
+letters, digits, underscores, dashes and colons and must not start with
+a dash or a colon.</p>
+</div>
+</div>
+<div class="section" id="choice-translation-domain">
+<h3><code class="docutils literal notranslate"><span class="pre">choice_translation_domain</span></code><a class="headerlink" href="#choice-translation-domain" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code>, <code class="docutils literal notranslate"><span class="pre">boolean</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code></p>
+<p>This option determines if the choice values should be translated and in which
+translation domain.</p>
+<p>The values of the <code class="docutils literal notranslate"><span class="pre">choice_translation_domain</span></code> option can be <code class="docutils literal notranslate"><span class="pre">true</span></code> (reuse the current
+translation domain), <code class="docutils literal notranslate"><span class="pre">false</span></code> (disable translation), <code class="docutils literal notranslate"><span class="pre">null</span></code> (uses the parent translation
+domain or the default domain) or a string which represents the exact translation
+domain to use.</p>
+</div>
+<div class="section" id="choice-value">
+<h3><code class="docutils literal notranslate"><span class="pre">choice_value</span></code><a class="headerlink" href="#choice-value" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">callable</span></code>, <code class="docutils literal notranslate"><span class="pre">string</span></code> or <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyPath.php" title="Symfony\Component\PropertyAccess\PropertyPath"><span class="pre">PropertyPath</span></a></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">null</span></code></p>
+<p>Returns the string “value” for each choice, which must be unique across all choices.
+This is used in the <code class="docutils literal notranslate"><span class="pre">value</span></code> attribute in HTML and submitted in the POST/PUT requests.
+You don’t normally need to worry about this, but it might be handy when processing
+an API request (since you can configure the value that will be sent in the API request).</p>
+<p>This can be a callable or a property path. By default, the choices are used if they
+can be casted to strings. Otherwise an incrementing integer is used (starting at <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p>
+<p>If you pass a callable, it will receive one argument: the choice itself. When using
+the <a class="reference internal" href="entity.html"><span class="doc">EntityType Field</span></a>, the argument will be the entity object
+for each choice or <code class="docutils literal notranslate"><span class="pre">null</span></code> in a placeholder is used, which you need to handle:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;choice_value&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="o">?</span><span class="nx">MyOptionEntity</span> <span class="nv">$entity</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$entity</span> <span class="o">?</span> <span class="nv">$entity</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">()</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>When defining a custom type, you should use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/ChoiceList/ChoiceList.php" title="Symfony\Component\Form\ChoiceList\ChoiceList"><span class="pre">ChoiceList</span></a></code> class helper:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\ChoiceList\ChoiceList</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;choices&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;choice_value&#39;</span> <span class="o">=&gt;</span> <span class="nx">ChoiceList</span><span class="o">::</span><span class="na">value</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;uuid&#39;</span><span class="p">),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p class="last">See the <a class="reference internal" href="#reference-form-choice-loader"><span class="std std-ref">“choice_loader” option documentation</span></a>.</p>
+</div>
+</div>
+<div class="section" id="expanded">
+<h3><code class="docutils literal notranslate"><span class="pre">expanded</span></code><a class="headerlink" href="#expanded" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<p>If set to true, radio buttons or checkboxes will be rendered (depending
+on the <code class="docutils literal notranslate"><span class="pre">multiple</span></code> value). If false, a select element will be rendered.</p>
+</div>
+<div class="section" id="group-by">
+<h3><code class="docutils literal notranslate"><span class="pre">group_by</span></code><a class="headerlink" href="#group-by" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code>, <code class="docutils literal notranslate"><span class="pre">callable</span></code> or <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyPath.php" title="Symfony\Component\PropertyAccess\PropertyPath"><span class="pre">PropertyPath</span></a></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">null</span></code></p>
+<p>You can group the <code class="docutils literal notranslate"><span class="pre">&lt;option&gt;</span></code> elements of a <code class="docutils literal notranslate"><span class="pre">&lt;select&gt;</span></code> into <code class="docutils literal notranslate"><span class="pre">&lt;optgroup&gt;</span></code>
+by passing a multi-dimensional array to <code class="docutils literal notranslate"><span class="pre">choices</span></code>. See the
+<a class="reference internal" href="#form-choices-simple-grouping"><span class="std std-ref">Grouping Options</span></a> section about that.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">group_by</span></code> option is an alternative way to group choices, which gives you
+a bit more flexibility.</p>
+<p>Take the following example:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\ChoiceType</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;publishAt&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;choices&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;now&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">(</span><span class="s1">&#39;now&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;tomorrow&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">(</span><span class="s1">&#39;+1 day&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;1 week&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">(</span><span class="s1">&#39;+1 week&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;1 month&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">(</span><span class="s1">&#39;+1 month&#39;</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;group_by&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$choice</span><span class="p">,</span> <span class="nv">$key</span><span class="p">,</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$choice</span> <span class="o">&lt;=</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">(</span><span class="s1">&#39;+3 days&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="s1">&#39;Soon&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="s1">&#39;Later&#39;</span><span class="p">;</span>
+    <span class="p">},</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>This groups the dates that are within 3 days into “Soon” and everything else into
+a “Later” <code class="docutils literal notranslate"><span class="pre">&lt;optgroup&gt;</span></code>:</p>
+<img alt="../../../_images/choice-example5.png" class="align-center" src="../../../_images/choice-example5.png" />
+<p>If you return <code class="docutils literal notranslate"><span class="pre">null</span></code>, the option won’t be grouped. You can also pass a string
+“property path” that will be called to get the group. See the <a class="reference internal" href="#choice-label">choice_label</a> for
+details about using a property path.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>When defining a custom type, you should use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/ChoiceList/ChoiceList.php" title="Symfony\Component\Form\ChoiceList\ChoiceList"><span class="pre">ChoiceList</span></a></code> class helper:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\ChoiceList\ChoiceList</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;choices&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;group_by&#39;</span> <span class="o">=&gt;</span> <span class="nx">ChoiceList</span><span class="o">::</span><span class="na">groupBy</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;category&#39;</span><span class="p">),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p class="last">See the <a class="reference internal" href="#reference-form-choice-loader"><span class="std std-ref">“choice_loader” option documentation</span></a>.</p>
+</div>
+</div>
+<div class="section" id="multiple">
+<h3><code class="docutils literal notranslate"><span class="pre">multiple</span></code><a class="headerlink" href="#multiple" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<p>If true, the user will be able to select multiple options (as opposed
+to choosing just one option). Depending on the value of the <code class="docutils literal notranslate"><span class="pre">expanded</span></code>
+option, this will render either a select tag or checkboxes if true and
+a select tag or radio buttons if false. The returned value will be an array.</p>
+</div>
+<div class="section" id="placeholder">
+<h3><code class="docutils literal notranslate"><span class="pre">placeholder</span></code><a class="headerlink" href="#placeholder" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> or <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p>
+<p>This option determines whether or not a special “empty” option (e.g. “Choose
+an option”) will appear at the top of a select widget. This option only
+applies if the <code class="docutils literal notranslate"><span class="pre">multiple</span></code> option is set to false.</p>
+<ul>
+<li><p class="first">Add an empty value with “Choose an option” as the text:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\ChoiceType</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;states&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;placeholder&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Choose an option&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Guarantee that no “empty” value option is displayed:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\ChoiceType</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;states&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;placeholder&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>If you leave the <code class="docutils literal notranslate"><span class="pre">placeholder</span></code> option unset, then a blank (with no text)
+option will automatically be added if and only if the <code class="docutils literal notranslate"><span class="pre">required</span></code> option
+is false:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\ChoiceType</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="c1">// a blank (with no text) option will be added</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;states&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;required&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="preferred-choices">
+<h3><code class="docutils literal notranslate"><span class="pre">preferred_choices</span></code><a class="headerlink" href="#preferred-choices" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">array</span></code>, <code class="docutils literal notranslate"><span class="pre">callable</span></code>, <code class="docutils literal notranslate"><span class="pre">string</span></code> or <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/PropertyAccess/PropertyPath.php" title="Symfony\Component\PropertyAccess\PropertyPath"><span class="pre">PropertyPath</span></a></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">[]</span></code></p>
+<p>This option allows you to display certain choices at the top of your list with a
+visual separator between them and the complete list of options. If you have a
+form of languages, you can list the most popular on top, like Bork and Pirate:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\ChoiceType</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;language&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;choices&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;English&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Spanish&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;es&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Bork&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;muppets&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Pirate&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;arr&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;preferred_choices&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;muppets&#39;</span><span class="p">,</span> <span class="s1">&#39;arr&#39;</span><span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>This options can also be a callback function to give you more flexibility. This might
+be especially useful if your values are objects:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\ChoiceType</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;publishAt&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;choices&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;now&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">(</span><span class="s1">&#39;now&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;tomorrow&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">(</span><span class="s1">&#39;+1 day&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;1 week&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">(</span><span class="s1">&#39;+1 week&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;1 month&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">(</span><span class="s1">&#39;+1 month&#39;</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;preferred_choices&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$choice</span><span class="p">,</span> <span class="nv">$key</span><span class="p">,</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// prefer options within 3 days</span>
+        <span class="k">return</span> <span class="nv">$choice</span> <span class="o">&lt;=</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">(</span><span class="s1">&#39;+3 days&#39;</span><span class="p">);</span>
+    <span class="p">},</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>This will “prefer” the “now” and “tomorrow” choices only:</p>
+<img alt="../../../_images/choice-example3.png" class="align-center" src="../../../_images/choice-example3.png" />
+<p>Finally, if your values are objects, you can also specify a property path string
+on the object that will return true or false.</p>
+<p>The preferred choices are only meaningful when rendering a <code class="docutils literal notranslate"><span class="pre">select</span></code> element
+(i.e. <code class="docutils literal notranslate"><span class="pre">expanded</span></code> false). The preferred choices and normal choices are separated
+visually by a set of dotted lines (i.e. <code class="docutils literal notranslate"><span class="pre">-------------------</span></code>). This can be customized
+when rendering the field:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>Twig</em><div class="highlight-twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">form_widget</span><span class="o">(</span><span class="nv">form.publishAt</span><span class="o">,</span> <span class="o">{</span> <span class="s1">&#39;separator&#39;</span><span class="o">:</span> <span class="s1">&#39;=====&#39;</span> <span class="o">})</span> <span class="cp">}}</span><span class="x"></span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="o">&lt;?=</span> <span class="nv">$view</span><span class="p">[</span><span class="s1">&#39;form&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">widget</span><span class="p">(</span><span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;publishAt&#39;</span><span class="p">],</span> <span class="p">[</span>
+    <span class="s1">&#39;separator&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;=====&#39;</span><span class="p">,</span>
+<span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>When defining a custom type, you should use the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Form/ChoiceList/ChoiceList.php" title="Symfony\Component\Form\ChoiceList\ChoiceList"><span class="pre">ChoiceList</span></a></code> class helper:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\ChoiceList\ChoiceList</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;choices&#39;</span><span class="p">,</span> <span class="nx">ChoiceType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;preferred_choices&#39;</span> <span class="o">=&gt;</span> <span class="nx">ChoiceList</span><span class="o">::</span><span class="na">preferred</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;taggedAsFavorite&#39;</span><span class="p">),</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p class="last">See the <a class="reference internal" href="#reference-form-choice-loader"><span class="std std-ref">“choice_loader” option documentation</span></a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="overridden-options">
+<h2>Overridden Options<a class="headerlink" href="#overridden-options" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="compound">
+<h3>compound<a class="headerlink" href="#compound" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: same value as <code class="docutils literal notranslate"><span class="pre">expanded</span></code> option</p>
+<p>This option specifies if a form is compound. The value is by default
+overridden by the value of the <code class="docutils literal notranslate"><span class="pre">expanded</span></code> option.</p>
+</div>
+<div class="section" id="empty-data">
+<h3><code class="docutils literal notranslate"><span class="pre">empty_data</span></code><a class="headerlink" href="#empty-data" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">mixed</span></code></p>
+<p>The actual default value of this option depends on other field options:</p>
+<ul class="simple">
+<li>If <code class="docutils literal notranslate"><span class="pre">multiple</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code> and <code class="docutils literal notranslate"><span class="pre">expanded</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code>, then <code class="docutils literal notranslate"><span class="pre">''</span></code>
+(empty string);</li>
+<li>Otherwise <code class="docutils literal notranslate"><span class="pre">[]</span></code> (empty array).</li>
+</ul>
+<p>This option determines what value the field will <em>return</em> when the submitted
+value is empty (or missing). It does not set an initial value if none is
+provided when the form is rendered in a view.</p>
+<p>This means it helps you handling form submission with blank fields. For
+example, if you want the <code class="docutils literal notranslate"><span class="pre">name</span></code> field to be explicitly set to <code class="docutils literal notranslate"><span class="pre">John</span> <span class="pre">Doe</span></code>
+when no value is selected, you can do it like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;required&#39;</span>   <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">&#39;empty_data&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;John Doe&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>This will still render an empty text box, but upon submission the <code class="docutils literal notranslate"><span class="pre">John</span> <span class="pre">Doe</span></code>
+value will be set. Use the <code class="docutils literal notranslate"><span class="pre">data</span></code> or <code class="docutils literal notranslate"><span class="pre">placeholder</span></code> options to show this
+initial value in the rendered form.</p>
+<p>If a form is compound, you can set <code class="docutils literal notranslate"><span class="pre">empty_data</span></code> as an array, object or
+closure. See the <a class="reference internal" href="../../../form/use_empty_data.html"><span class="doc">How to Configure empty Data for a Form Class</span></a> article for more details about
+these options.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you want to set the <code class="docutils literal notranslate"><span class="pre">empty_data</span></code> option for your entire form class,
+see the <a class="reference internal" href="../../../form/use_empty_data.html"><span class="doc">How to Configure empty Data for a Form Class</span></a> article.</p>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last"><a class="reference internal" href="../../../form/data_transformers.html"><span class="doc">Form data transformers</span></a> will still be
+applied to the <code class="docutils literal notranslate"><span class="pre">empty_data</span></code> value. This means that an empty string will
+be cast to <code class="docutils literal notranslate"><span class="pre">null</span></code>. Use a custom data transformer if you explicitly want
+to return the empty string.</p>
+</div>
+</div>
+<div class="section" id="error-bubbling">
+<h3>error_bubbling<a class="headerlink" href="#error-bubbling" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<p>Set that error on this field must be attached to the field instead of
+the parent field (the form in most cases).</p>
+</div>
+<div class="section" id="trim">
+<h3><code class="docutils literal notranslate"><span class="pre">trim</span></code><a class="headerlink" href="#trim" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<p>Trimming is disabled by default because the selected value or values must match
+the given choice values exactly (and they could contain whitespaces).</p>
+</div>
+</div>
+<div class="section" id="inherited-options">
+<h2>Inherited Options<a class="headerlink" href="#inherited-options" title="Permalink to this headline">¶</a></h2>
+<p>These options inherit from the <a class="reference internal" href="form.html"><span class="doc">FormType</span></a>:</p>
+<div class="section" id="attr">
+<h3><code class="docutils literal notranslate"><span class="pre">attr</span></code><a class="headerlink" href="#attr" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">array</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">[]</span></code></p>
+<p>If you want to add extra attributes to an HTML field representation
+you can use the <code class="docutils literal notranslate"><span class="pre">attr</span></code> option. It’s an associative array with HTML attributes
+as keys. This can be useful when you need to set a custom class for some widget:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="nx">TextareaType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;attr&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;tinymce&#39;</span><span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Use the <code class="docutils literal notranslate"><span class="pre">row_attr</span></code> option if you want to add these attributes to the
+the <a class="reference internal" href="../../../form/form_customization.html#form-rendering-basics"><span class="std std-ref">form type row</span></a> element.</p>
+</div>
+</div>
+<div class="section" id="by-reference">
+<h3><code class="docutils literal notranslate"><span class="pre">by_reference</span></code><a class="headerlink" href="#by-reference" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">true</span></code></p>
+<p>In most cases, if you have an <code class="docutils literal notranslate"><span class="pre">author</span></code> field, then you expect <code class="docutils literal notranslate"><span class="pre">setAuthor()</span></code>
+to be called on the underlying object. In some cases, however, <code class="docutils literal notranslate"><span class="pre">setAuthor()</span></code>
+may <em>not</em> be called. Setting <code class="docutils literal notranslate"><span class="pre">by_reference</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code> ensures that the setter is
+called in all cases.</p>
+<p>To explain this further, here’s a simple example:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\EmailType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\FormType</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\TextType</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$builder</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createFormBuilder</span><span class="p">(</span><span class="nv">$article</span><span class="p">);</span>
+<span class="nv">$builder</span>
+    <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="nx">TextType</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span>
+        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="nx">FormType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;by_reference&#39;</span> <span class="o">=&gt;</span> <span class="o">?</span><span class="p">])</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="nx">TextType</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="nx">EmailType</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">by_reference</span></code> is true, the following takes place behind the scenes
+when you call <code class="docutils literal notranslate"><span class="pre">submit()</span></code> (or <code class="docutils literal notranslate"><span class="pre">handleRequest()</span></code>) on the form:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$article</span><span class="o">-&gt;</span><span class="na">setTitle</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">);</span>
+<span class="nv">$article</span><span class="o">-&gt;</span><span class="na">getAuthor</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">);</span>
+<span class="nv">$article</span><span class="o">-&gt;</span><span class="na">getAuthor</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setEmail</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">setAuthor()</span></code> is not called. The author is modified by reference.</p>
+<p>If you set <code class="docutils literal notranslate"><span class="pre">by_reference</span></code> to false, submitting looks like this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$article</span><span class="o">-&gt;</span><span class="na">setTitle</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">);</span>
+<span class="nv">$author</span> <span class="o">=</span> <span class="k">clone</span> <span class="nv">$article</span><span class="o">-&gt;</span><span class="na">getAuthor</span><span class="p">();</span>
+<span class="nv">$author</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">);</span>
+<span class="nv">$author</span><span class="o">-&gt;</span><span class="na">setEmail</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">);</span>
+<span class="nv">$article</span><span class="o">-&gt;</span><span class="na">setAuthor</span><span class="p">(</span><span class="nv">$author</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>So, all that <code class="docutils literal notranslate"><span class="pre">by_reference=false</span></code> really does is that it clones the object,
+which enforces the framework to call the setter on the parent object.</p>
+<p>Similarly, if you’re using the <a class="reference internal" href="collection.html"><span class="doc">CollectionType</span></a>
+field where your underlying collection data is an object (like with
+Doctrine’s <code class="docutils literal notranslate"><span class="pre">ArrayCollection</span></code>), then <code class="docutils literal notranslate"><span class="pre">by_reference</span></code> must be set to <code class="docutils literal notranslate"><span class="pre">false</span></code>
+if you need the adder and remover (e.g. <code class="docutils literal notranslate"><span class="pre">addAuthor()</span></code> and <code class="docutils literal notranslate"><span class="pre">removeAuthor()</span></code>)
+to be called.</p>
+</div>
+<div class="section" id="data">
+<h3><code class="docutils literal notranslate"><span class="pre">data</span></code><a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">mixed</span></code> <strong>default</strong>: Defaults to field of the underlying structure.</p>
+<p>When you create a form, each field initially displays the value of the
+corresponding property of the form’s domain data (e.g. if you bind an object to
+the form). If you want to override this initial value for the form or
+an individual field, you can set it in the data option:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\Form\Extension\Core\Type\HiddenType</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">,</span> <span class="nx">HiddenType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;data&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;abcdef&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">data</span></code> option <em>always</em> overrides the value taken from the domain data
+(object) when rendering. This means the object value is also overridden when
+the form edits an already persisted object, causing it to lose its
+persisted value when the form is submitted.</p>
+</div>
+</div>
+<div class="section" id="disabled">
+<h3><code class="docutils literal notranslate"><span class="pre">disabled</span></code><a class="headerlink" href="#disabled" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code>  <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<p>If you don’t want a user to modify the value of a field, you can set the
+disabled option to true. Any submitted value will be ignored.</p>
+</div>
+<div class="section" id="error-mapping">
+<h3><code class="docutils literal notranslate"><span class="pre">error_mapping</span></code><a class="headerlink" href="#error-mapping" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">array</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">[]</span></code></p>
+<p>This option allows you to modify the target of a validation error.</p>
+<p>Imagine you have a custom method named <code class="docutils literal notranslate"><span class="pre">matchingCityAndZipCode()</span></code> that validates
+whether the city and zip code match. Unfortunately, there is no <code class="docutils literal notranslate"><span class="pre">matchingCityAndZipCode</span></code>
+field in your form, so all that Symfony can do is display the error on top
+of the form.</p>
+<p>With customized error mapping, you can do better: map the error to the city
+field so that it displays above it:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefaults</span><span class="p">([</span>
+        <span class="s1">&#39;error_mapping&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;matchingCityAndZipCode&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;city&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here are the rules for the left and the right side of the mapping:</p>
+<ul class="simple">
+<li>The left side contains property paths;</li>
+<li>If the violation is generated on a property or method of a class, its
+path is the <code class="docutils literal notranslate"><span class="pre">propertyName</span></code>;</li>
+<li>If the violation is generated on an entry of an <code class="docutils literal notranslate"><span class="pre">array</span></code> or <code class="docutils literal notranslate"><span class="pre">ArrayAccess</span></code>
+object, the property path is <code class="docutils literal notranslate"><span class="pre">[indexName]</span></code>;</li>
+<li>You can construct nested property paths by concatenating them, separating
+properties by dots. For example: <code class="docutils literal notranslate"><span class="pre">addresses[work].matchingCityAndZipCode</span></code>;</li>
+<li>The right side contains the names of fields in the form.</li>
+</ul>
+<p>By default, errors for any property that is not mapped will bubble up to the
+parent form. You can use the dot (<code class="docutils literal notranslate"><span class="pre">.</span></code>) on the left side to map errors of all
+unmapped properties to a particular field. For instance, to map all these
+errors to the <code class="docutils literal notranslate"><span class="pre">city</span></code> field, use:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefaults</span><span class="p">([</span>
+    <span class="s1">&#39;error_mapping&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;.&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;city&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="help">
+<h3>help<a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: null</p>
+<p>Allows you to define a help message for the form field, which by default is
+rendered below the field:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;zipCode&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;help&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;The ZIP/Postal code for your credit card\&#39;s billing address.&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="help-attr">
+<h3>help_attr<a class="headerlink" href="#help-attr" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">array</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">[]</span></code></p>
+<p>Sets the HTML attributes for the element used to display the help message of the
+form field. Its value is an associative array with HTML attribute names as keys.
+These attributes can also be set in the template:</p>
+<div class="highlight-twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">form_help</span><span class="o">(</span><span class="nv">form.name</span><span class="o">,</span> <span class="s1">&#39;Your name&#39;</span><span class="o">,</span> <span class="o">{</span>
+    <span class="s1">&#39;help_attr&#39;</span><span class="o">:</span> <span class="o">{</span><span class="s1">&#39;class&#39;</span><span class="o">:</span> <span class="s1">&#39;CUSTOM_LABEL_CLASS&#39;</span><span class="o">}</span>
+<span class="o">})</span> <span class="cp">}}</span><span class="x"></span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="help-html">
+<h3>help_html<a class="headerlink" href="#help-html" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">bool</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<p>By default, the contents of the <code class="docutils literal notranslate"><span class="pre">help</span></code> option are escaped before rendering
+them in the template. Set this option to <code class="docutils literal notranslate"><span class="pre">true</span></code> to not escape them, which is
+useful when the help contains HTML elements.</p>
+</div>
+<div class="section" id="inherit-data">
+<h3><code class="docutils literal notranslate"><span class="pre">inherit_data</span></code><a class="headerlink" href="#inherit-data" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<p>This option determines if the form will inherit data from its parent form.
+This can be useful if you have a set of fields that are duplicated across
+multiple forms. See <a class="reference internal" href="../../../form/inherit_data_option.html"><span class="doc">How to Reduce Code Duplication with “inherit_data”</span></a>.</p>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">When a field has the <code class="docutils literal notranslate"><span class="pre">inherit_data</span></code> option set, it uses the data of
+the parent form as is. This means that
+<a class="reference internal" href="../../../form/data_transformers.html"><span class="doc">Data Transformers</span></a> won’t be
+applied to that field.</p>
+</div>
+</div>
+<div class="section" id="label">
+<h3><code class="docutils literal notranslate"><span class="pre">label</span></code><a class="headerlink" href="#label" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: The label is “guessed” from the field name</p>
+<p>Sets the label that will be used when rendering the field. Setting to false
+will suppress the label. The label can also be directly set inside the template:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>Twig</em><div class="highlight-twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">form_label</span><span class="o">(</span><span class="nv">form.name</span><span class="o">,</span> <span class="s1">&#39;Your name&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x"></span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$view</span><span class="p">[</span><span class="s1">&#39;form&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">label</span><span class="p">(</span>
+    <span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Your name&#39;</span>
+<span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="label-attr">
+<h3><code class="docutils literal notranslate"><span class="pre">label_attr</span></code><a class="headerlink" href="#label-attr" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">array</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">[]</span></code></p>
+<p>Sets the HTML attributes for the <code class="docutils literal notranslate"><span class="pre">&lt;label&gt;</span></code> element, which will be used
+when rendering the label for the field. It’s an associative array with HTML
+attribute as a key. This attributes can also be directly set inside the
+template:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>Twig</em><div class="highlight-twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">form_label</span><span class="o">(</span><span class="nv">form.name</span><span class="o">,</span> <span class="s1">&#39;Your name&#39;</span><span class="o">,</span> <span class="o">{</span>
+    <span class="s1">&#39;label_attr&#39;</span><span class="o">:</span> <span class="o">{</span><span class="s1">&#39;class&#39;</span><span class="o">:</span> <span class="s1">&#39;CUSTOM_LABEL_CLASS&#39;</span><span class="o">}</span>
+<span class="o">})</span> <span class="cp">}}</span><span class="x"></span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$view</span><span class="p">[</span><span class="s1">&#39;form&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">label</span><span class="p">(</span>
+    <span class="nv">$form</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Your name&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;label_attr&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CUSTOM_LABEL_CLASS&#39;</span><span class="p">]]</span>
+<span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="label-format">
+<h3><code class="docutils literal notranslate"><span class="pre">label_format</span></code><a class="headerlink" href="#label-format" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">null</span></code></p>
+<p>Configures the string used as the label of the field, in case the <code class="docutils literal notranslate"><span class="pre">label</span></code>
+option was not set. This is useful when using
+<a class="reference internal" href="../../../translation.html#translation-real-vs-keyword-messages"><span class="std std-ref">keyword translation messages</span></a>.</p>
+<p>If you’re using keyword translation messages as labels, you often end up having
+multiple keyword messages for the same label (e.g. <code class="docutils literal notranslate"><span class="pre">profile_address_street</span></code>,
+<code class="docutils literal notranslate"><span class="pre">invoice_address_street</span></code>). This is because the label is built for each “path”
+to a field. To avoid duplicated keyword messages, you can configure the label
+format to a static value, like:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$profileFormBuilder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;address&#39;</span><span class="p">,</span> <span class="nx">AddressType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;label_format&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;form.address.%name%&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+
+<span class="nv">$invoiceFormBuilder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;invoice&#39;</span><span class="p">,</span> <span class="nx">AddressType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;label_format&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;form.address.%name%&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>This option is inherited by the child types. With the code above, the label of
+the <code class="docutils literal notranslate"><span class="pre">street</span></code> field of both forms will use the <code class="docutils literal notranslate"><span class="pre">form.address.street</span></code> keyword
+message.</p>
+<p>Two variables are available in the label format:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">%id%</span></code></dt>
+<dd>A unique identifier for the field, consisting of the complete path to the
+field and the field name (e.g. <code class="docutils literal notranslate"><span class="pre">profile_address_street</span></code>);</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">%name%</span></code></dt>
+<dd>The field name (e.g. <code class="docutils literal notranslate"><span class="pre">street</span></code>).</dd>
+</dl>
+<p>The default value (<code class="docutils literal notranslate"><span class="pre">null</span></code>) results in a
+<a class="reference internal" href="../../twig_reference.html#reference-twig-humanize-filter"><span class="std std-ref">“humanized” version</span></a> of the field name.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">label_format</span></code> option is evaluated in the form theme. Make sure to
+update your templates in case you
+<a class="reference internal" href="../../../form/form_customization.html"><span class="doc">customized form theming</span></a>.</p>
+</div>
+</div>
+<div class="section" id="mapped">
+<h3><code class="docutils literal notranslate"><span class="pre">mapped</span></code><a class="headerlink" href="#mapped" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code>  <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">true</span></code></p>
+<p>If you wish the field to be ignored when reading or writing to the object,
+you can set the <code class="docutils literal notranslate"><span class="pre">mapped</span></code> option to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</div>
+<div class="section" id="required">
+<h3><code class="docutils literal notranslate"><span class="pre">required</span></code><a class="headerlink" href="#required" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">true</span></code></p>
+<p>If true, an <a class="reference external" href="http://diveintohtml5.info/forms.html">HTML5 required attribute</a> will be rendered. The corresponding
+<code class="docutils literal notranslate"><span class="pre">label</span></code> will also render with a <code class="docutils literal notranslate"><span class="pre">required</span></code> class.</p>
+<p>This is superficial and independent of validation. At best, if you let
+Symfony guess your field type, then the value of this option will be guessed
+from your validation information.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The required option also affects how empty data for each field is
+handled. For more details, see the <a class="reference internal" href="#empty-data">empty_data</a> option.</p>
+</div>
+</div>
+<div class="section" id="row-attr">
+<h3>row_attr<a class="headerlink" href="#row-attr" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">array</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">[]</span></code></p>
+<p>An associative array of the HTML attributes added to the element which is used
+to render the <a class="reference internal" href="../../../form/form_customization.html#form-rendering-basics"><span class="std std-ref">form type row</span></a>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="nx">TextareaType</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;row_attr&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;text-editor&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;...&#39;</span><span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Use the <code class="docutils literal notranslate"><span class="pre">attr</span></code> option if you want to add these attributes to the
+the <a class="reference internal" href="../../../form/form_customization.html#form-rendering-basics"><span class="std std-ref">form type widget</span></a> element.</p>
+</div>
+</div>
+<div class="section" id="translation-domain">
+<h3>translation_domain<a class="headerlink" href="#translation-domain" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">string</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">messages</span></code></p>
+<p>In case <a class="reference internal" href="#choice-translation-domain">choice_translation_domain</a> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">null</span></code>, this
+configures the exact translation domain that will be used for any labels or
+options that are rendered for this field.</p>
+</div>
+<div class="section" id="label-translation-parameters">
+<h3>label_translation_parameters<a class="headerlink" href="#label-translation-parameters" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">array</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">[]</span></code></p>
+<p>The content of the <a class="reference internal" href="#label">label</a> option is translated before displaying it, so it
+can contain <a class="reference internal" href="../../../translation/message_format.html#component-translation-placeholders"><span class="std std-ref">translation placeholders</span></a>.
+This option defines the values used to replace those placeholders.</p>
+<p>Given this translation message:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># translations/messages.en.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">form.order.id</span><span class="p p-Indicator">:</span> <span class="s">&#39;Identifier</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">order</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">%company%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+<p>You can specify the placeholder values as follows:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;form.order.id&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;label_translation_parameters&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;%company%&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ACME Inc.&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">label_translation_parameters</span></code> option of children fields is merged with
+the same option of their parents, so children can reuse and/or override any of
+the parent placeholders.</p>
+</div>
+<div class="section" id="attr-translation-parameters">
+<h3>attr_translation_parameters<a class="headerlink" href="#attr-translation-parameters" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">array</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">[]</span></code></p>
+<p>The content of the <code class="docutils literal notranslate"><span class="pre">title</span></code> and <code class="docutils literal notranslate"><span class="pre">placeholder</span></code> values defined in the <a class="reference internal" href="#attr">attr</a>
+option is translated before displaying it, so it can contain
+<a class="reference internal" href="../../../translation/message_format.html#component-translation-placeholders"><span class="std std-ref">translation placeholders</span></a>. This
+option defines the values used to replace those placeholders.</p>
+<p>Given this translation message:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># translations/messages.en.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">form.order.id.placeholder</span><span class="p p-Indicator">:</span> <span class="s">&#39;Enter</span><span class="nv"> </span><span class="s">unique</span><span class="nv"> </span><span class="s">identifier</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">order</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">%company%&#39;</span>
+<span class="l l-Scalar l-Scalar-Plain">form.order.id.title</span><span class="p p-Indicator">:</span> <span class="s">&#39;This</span><span class="nv"> </span><span class="s">will</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">reference</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">communications</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">%company%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+<p>You can specify the placeholder values as follows:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;attr&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;placeholder&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;form.order.id.placeholder&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;form.order.id.title&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;attr_translation_parameters&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;%company%&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ACME Inc.&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">attr_translation_parameters</span></code> option of children fields is merged with the
+same option of their parents, so children can reuse and/or override any of the
+parent placeholders.</p>
+</div>
+<div class="section" id="help-translation-parameters">
+<h3>help_translation_parameters<a class="headerlink" href="#help-translation-parameters" title="Permalink to this headline">¶</a></h3>
+<p><strong>type</strong>: <code class="docutils literal notranslate"><span class="pre">array</span></code> <strong>default</strong>: <code class="docutils literal notranslate"><span class="pre">[]</span></code></p>
+<p>The content of the <a class="reference internal" href="#help">help</a> option is translated before displaying it, so it
+can contain <a class="reference internal" href="../../../translation/message_format.html#component-translation-placeholders"><span class="std std-ref">translation placeholders</span></a>.
+This option defines the values used to replace those placeholders.</p>
+<p>Given this translation message:</p>
+<div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># translations/messages.en.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">form.order.id.help</span><span class="p p-Indicator">:</span> <span class="s">&#39;This</span><span class="nv"> </span><span class="s">will</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">reference</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">communications</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">%company%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+<p>You can specify the placeholder values as follows:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;help&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;form.order.id.help&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;help_translation_parameters&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;%company%&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ACME Inc.&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">help_translation_parameters</span></code> option of children fields is merged with the
+same option of their parents, so children can reuse and/or override any of the
+parent placeholders.</p>
+</div>
+</div>
+<div class="section" id="field-variables">
+<h2>Field Variables<a class="headerlink" href="#field-variables" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="13%" />
+<col width="61%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Variable</th>
+<th class="head">Type</th>
+<th class="head">Usage</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>multiple</td>
+<td><code class="docutils literal notranslate"><span class="pre">boolean</span></code></td>
+<td>The value of the <a class="reference internal" href="#multiple">multiple</a> option.</td>
+</tr>
+<tr class="row-odd"><td>expanded</td>
+<td><code class="docutils literal notranslate"><span class="pre">boolean</span></code></td>
+<td>The value of the <a class="reference internal" href="#expanded">expanded</a> option.</td>
+</tr>
+<tr class="row-even"><td>preferred_choices</td>
+<td><code class="docutils literal notranslate"><span class="pre">array</span></code></td>
+<td>A nested array containing the <code class="docutils literal notranslate"><span class="pre">ChoiceView</span></code> objects of
+choices which should be presented to the user with priority.</td>
+</tr>
+<tr class="row-odd"><td>choices</td>
+<td><code class="docutils literal notranslate"><span class="pre">array</span></code></td>
+<td>A nested array containing the <code class="docutils literal notranslate"><span class="pre">ChoiceView</span></code> objects of
+the remaining choices.</td>
+</tr>
+<tr class="row-even"><td>separator</td>
+<td><code class="docutils literal notranslate"><span class="pre">string</span></code></td>
+<td>The separator to use between choice groups.</td>
+</tr>
+<tr class="row-odd"><td>placeholder</td>
+<td><code class="docutils literal notranslate"><span class="pre">mixed</span></code></td>
+<td>The empty value if not already in the list, otherwise
+<code class="docutils literal notranslate"><span class="pre">null</span></code>.</td>
+</tr>
+<tr class="row-even"><td>choice_translation_domain</td>
+<td><code class="docutils literal notranslate"><span class="pre">mixed</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">boolean</span></code>, <code class="docutils literal notranslate"><span class="pre">null</span></code> or <code class="docutils literal notranslate"><span class="pre">string</span></code> to determine if the value
+should be translated.</td>
+</tr>
+<tr class="row-odd"><td>is_selected</td>
+<td><code class="docutils literal notranslate"><span class="pre">callable</span></code></td>
+<td>A callable which takes a <code class="docutils literal notranslate"><span class="pre">ChoiceView</span></code> and the selected value(s)
+and returns whether the choice is in the selected value(s).</td>
+</tr>
+<tr class="row-even"><td>placeholder_in_choices</td>
+<td><code class="docutils literal notranslate"><span class="pre">boolean</span></code></td>
+<td>Whether the empty value is in the choice list.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">It’s significantly faster to use the <a class="reference internal" href="../../../form/form_customization.html#form-twig-selectedchoice"><span class="std std-ref">selectedchoice(selected_value)</span></a>
+test instead when using Twig.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

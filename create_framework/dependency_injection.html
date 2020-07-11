@@ -1,0 +1,512 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The DependencyInjection Component &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="The HttpKernel Component: The HttpKernel Class" href="http_kernel_httpkernel_class.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Create your own PHP Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="front_controller.html">The Front Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html">The Routing Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templating.html">Templating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel_controller_resolver.html">The HttpKernel Component: the Controller Resolver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="separation_of_concerns.html">The Separation of Concerns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit_testing.html">Unit Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel_httpkernelinterface.html">The HttpKernel Component: HttpKernelInterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel_httpkernel_class.html">The HttpKernel Component: The HttpKernel Class</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The DependencyInjection Component</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Create your own PHP Framework</a> &raquo;</li>
+        
+      <li>The DependencyInjection Component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/create_framework/dependency_injection.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-dependencyinjection-component">
+<h1>The DependencyInjection Component<a class="headerlink" href="#the-dependencyinjection-component" title="Permalink to this headline">¶</a></h1>
+<p>In the previous chapter, we emptied the <code class="docutils literal notranslate"><span class="pre">Simplex\Framework</span></code> class by
+extending the <code class="docutils literal notranslate"><span class="pre">HttpKernel</span></code> class from the eponymous component. Seeing this
+empty class, you might be tempted to move some code from the front controller
+to it:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/src/Simplex/Framework.php</span>
+<span class="k">namespace</span> <span class="nx">Simplex</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher\EventDispatcher</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\RequestStack</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Framework</span> <span class="k">extends</span> <span class="nx">HttpKernel\HttpKernel</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$routes</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$context</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Routing\RequestContext</span><span class="p">();</span>
+        <span class="nv">$matcher</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Routing\Matcher\UrlMatcher</span><span class="p">(</span><span class="nv">$routes</span><span class="p">,</span> <span class="nv">$context</span><span class="p">);</span>
+        <span class="nv">$requestStack</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RequestStack</span><span class="p">();</span>
+
+        <span class="nv">$controllerResolver</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpKernel\Controller\ControllerResolver</span><span class="p">();</span>
+        <span class="nv">$argumentResolver</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HttpKernel\Controller\ArgumentResolver</span><span class="p">();</span>
+
+        <span class="nv">$dispatcher</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventDispatcher</span><span class="p">();</span>
+        <span class="nv">$dispatcher</span><span class="o">-&gt;</span><span class="na">addSubscriber</span><span class="p">(</span><span class="k">new</span> <span class="nx">HttpKernel\EventListener\ErrorListener</span><span class="p">(</span>
+            <span class="s1">&#39;Calendar\Controller\ErrorController::exception&#39;</span>
+        <span class="p">));</span>
+        <span class="nv">$dispatcher</span><span class="o">-&gt;</span><span class="na">addSubscriber</span><span class="p">(</span><span class="k">new</span> <span class="nx">HttpKernel\EventListener\RouterListener</span><span class="p">(</span><span class="nv">$matcher</span><span class="p">,</span> <span class="nv">$requestStack</span><span class="p">));</span>
+        <span class="nv">$dispatcher</span><span class="o">-&gt;</span><span class="na">addSubscriber</span><span class="p">(</span><span class="k">new</span> <span class="nx">HttpKernel\EventListener\ResponseListener</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">));</span>
+        <span class="nv">$dispatcher</span><span class="o">-&gt;</span><span class="na">addSubscriber</span><span class="p">(</span><span class="k">new</span> <span class="nx">StringResponseListener</span><span class="p">());</span>
+
+        <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">(</span><span class="nv">$dispatcher</span><span class="p">,</span> <span class="nv">$controllerResolver</span><span class="p">,</span> <span class="nv">$requestStack</span><span class="p">,</span> <span class="nv">$argumentResolver</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The front controller code would become more concise:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/web/front.php</span>
+<span class="k">require_once</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+<span class="nv">$routes</span> <span class="o">=</span> <span class="k">include</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../src/app.php&#39;</span><span class="p">;</span>
+
+<span class="nv">$framework</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Simplex\Framework</span><span class="p">(</span><span class="nv">$routes</span><span class="p">);</span>
+
+<span class="nv">$framework</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Having a concise front controller allows you to have several front controllers
+for a single application. Why would it be useful? To allow having different
+configuration for the development environment and the production one for
+instance. In the development environment, you might want to have error
+reporting turned on and errors displayed in the browser to ease debugging:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nb">ini_set</span><span class="p">(</span><span class="s1">&#39;display_errors&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="nb">error_reporting</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>… but you certainly won’t want that same configuration on the production
+environment. Having two different front controllers gives you the opportunity
+to have a slightly different configuration for each of them.</p>
+<p>So, moving code from the front controller to the framework class makes our
+framework more configurable, but at the same time, it introduces a lot of
+issues:</p>
+<ul class="simple">
+<li>We are not able to register custom listeners anymore as the dispatcher is
+not available outside the Framework class (a workaround could be the
+adding of a <code class="docutils literal notranslate"><span class="pre">Framework::getEventDispatcher()</span></code> method);</li>
+<li>We have lost the flexibility we had before; you cannot change the
+implementation of the <code class="docutils literal notranslate"><span class="pre">UrlMatcher</span></code> or of the <code class="docutils literal notranslate"><span class="pre">ControllerResolver</span></code>
+anymore;</li>
+<li>Related to the previous point, we cannot test our framework without much
+effort anymore as it’s impossible to mock internal objects;</li>
+<li>We cannot change the charset passed to <code class="docutils literal notranslate"><span class="pre">ResponseListener</span></code> anymore (a
+workaround could be to pass it as a constructor argument).</li>
+</ul>
+<p>The previous code did not exhibit the same issues because we used dependency
+injection; all dependencies of our objects were injected into their
+constructors (for instance, the event dispatchers were injected into the
+framework so that we had total control of its creation and configuration).</p>
+<p>Does it mean that we have to make a choice between flexibility, customization,
+ease of testing and not to copy and paste the same code into each application
+front controller? As you might expect, there is a solution. We can solve all
+these issues and some more by using the Symfony dependency injection
+container:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/dependency-injection
+</pre></div>
+</td></tr></table></div>
+<p>Create a new file to host the dependency injection container configuration:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/src/container.php</span>
+<span class="k">use</span> <span class="nx">Simplex\Framework</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Reference</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing</span><span class="p">;</span>
+
+<span class="nv">$containerBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DependencyInjection\ContainerBuilder</span><span class="p">();</span>
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;context&#39;</span><span class="p">,</span> <span class="nx">Routing\RequestContext</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;matcher&#39;</span><span class="p">,</span> <span class="nx">Routing\Matcher\UrlMatcher</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setArguments</span><span class="p">([</span><span class="nv">$routes</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;context&#39;</span><span class="p">)])</span>
+<span class="p">;</span>
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;request_stack&#39;</span><span class="p">,</span> <span class="nx">HttpFoundation\RequestStack</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;controller_resolver&#39;</span><span class="p">,</span> <span class="nx">HttpKernel\Controller\ControllerResolver</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;argument_resolver&#39;</span><span class="p">,</span> <span class="nx">HttpKernel\Controller\ArgumentResolver</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;listener.router&#39;</span><span class="p">,</span> <span class="nx">HttpKernel\EventListener\RouterListener</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setArguments</span><span class="p">([</span><span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;matcher&#39;</span><span class="p">),</span> <span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;request_stack&#39;</span><span class="p">)])</span>
+<span class="p">;</span>
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;listener.response&#39;</span><span class="p">,</span> <span class="nx">HttpKernel\EventListener\ResponseListener</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setArguments</span><span class="p">([</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">])</span>
+<span class="p">;</span>
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;listener.exception&#39;</span><span class="p">,</span> <span class="nx">HttpKernel\EventListener\ErrorListener</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setArguments</span><span class="p">([</span><span class="s1">&#39;Calendar\Controller\ErrorController::exception&#39;</span><span class="p">])</span>
+<span class="p">;</span>
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;dispatcher&#39;</span><span class="p">,</span> <span class="nx">EventDispatcher\EventDispatcher</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addMethodCall</span><span class="p">(</span><span class="s1">&#39;addSubscriber&#39;</span><span class="p">,</span> <span class="p">[</span><span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;listener.router&#39;</span><span class="p">)])</span>
+    <span class="o">-&gt;</span><span class="na">addMethodCall</span><span class="p">(</span><span class="s1">&#39;addSubscriber&#39;</span><span class="p">,</span> <span class="p">[</span><span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;listener.response&#39;</span><span class="p">)])</span>
+    <span class="o">-&gt;</span><span class="na">addMethodCall</span><span class="p">(</span><span class="s1">&#39;addSubscriber&#39;</span><span class="p">,</span> <span class="p">[</span><span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;listener.exception&#39;</span><span class="p">)])</span>
+<span class="p">;</span>
+<span class="nv">$containerBuilder</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="nx">Framework</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setArguments</span><span class="p">([</span>
+        <span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;dispatcher&#39;</span><span class="p">),</span>
+        <span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;controller_resolver&#39;</span><span class="p">),</span>
+        <span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;request_stack&#39;</span><span class="p">),</span>
+        <span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;argument_resolver&#39;</span><span class="p">),</span>
+    <span class="p">])</span>
+<span class="p">;</span>
+
+<span class="k">return</span> <span class="nv">$containerBuilder</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The goal of this file is to configure your objects and their dependencies.
+Nothing is instantiated during this configuration step. This is purely a
+static description of the objects you need to manipulate and how to create
+them. Objects will be created on-demand when you access them from the
+container or when the container needs them to create other objects.</p>
+<p>For instance, to create the router listener, we tell Symfony that its class
+name is <code class="docutils literal notranslate"><span class="pre">Symfony\Component\HttpKernel\EventListener\RouterListener</span></code> and
+that its constructor takes a matcher object (<code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">Reference('matcher')</span></code>). As
+you can see, each object is referenced by a name, a string that uniquely
+identifies each object. The name allows us to get an object and to reference
+it in other object definitions.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, every time you get an object from the container, it returns
+the exact same instance. That’s because a container manages your “global”
+objects.</p>
+</div>
+<p>The front controller is now only about wiring everything together:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/web/front.php</span>
+<span class="k">require_once</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+
+<span class="nv">$routes</span> <span class="o">=</span> <span class="k">include</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../src/app.php&#39;</span><span class="p">;</span>
+<span class="nv">$container</span> <span class="o">=</span> <span class="k">include</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../src/container.php&#39;</span><span class="p">;</span>
+
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">createFromGlobals</span><span class="p">();</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+
+<span class="nv">$response</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>As all the objects are now created in the dependency injection container, the
+framework code should be the previous simple version:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// example.com/src/Simplex/Framework.php</span>
+<span class="k">namespace</span> <span class="nx">Simplex</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\HttpKernel</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Framework</span> <span class="k">extends</span> <span class="nx">HttpKernel</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you want a light alternative for your container, consider <a class="reference external" href="https://github.com/silexphp/Pimple">Pimple</a>, a
+simple dependency injection container in about 60 lines of PHP code.</p>
+</div>
+<p>Now, here is how you can register a custom listener in the front controller:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">use</span> <span class="nx">Simplex\StringResponseListener</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;listener.string_response&#39;</span><span class="p">,</span> <span class="nx">StringResponseListener</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">getDefinition</span><span class="p">(</span><span class="s1">&#39;dispatcher&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addMethodCall</span><span class="p">(</span><span class="s1">&#39;addSubscriber&#39;</span><span class="p">,</span> <span class="p">[</span><span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;listener.string_response&#39;</span><span class="p">)])</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+<p>Beside describing your objects, the dependency injection container can also be
+configured via parameters. Let’s create one that defines if we are in debug
+mode or not:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="na">getParameter</span><span class="p">(</span><span class="s1">&#39;debug&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>These parameters can be used when defining object definitions. Let’s make the
+charset configurable:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;listener.response&#39;</span><span class="p">,</span> <span class="nx">HttpKernel\EventListener\ResponseListener</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setArguments</span><span class="p">([</span><span class="s1">&#39;%charset%&#39;</span><span class="p">])</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+<p>After this change, you must set the charset before using the response listener
+object:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;charset&#39;</span><span class="p">,</span> <span class="s1">&#39;UTF-8&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Instead of relying on the convention that the routes are defined by the
+<code class="docutils literal notranslate"><span class="pre">$routes</span></code> variables, let’s use a parameter again:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="s1">&#39;matcher&#39;</span><span class="p">,</span> <span class="nx">Routing\Matcher\UrlMatcher</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setArguments</span><span class="p">([</span><span class="s1">&#39;%routes%&#39;</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Reference</span><span class="p">(</span><span class="s1">&#39;context&#39;</span><span class="p">)])</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+<p>And the related change in the front controller:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">setParameter</span><span class="p">(</span><span class="s1">&#39;routes&#39;</span><span class="p">,</span> <span class="k">include</span> <span class="no">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../src/app.php&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We have barely scratched the surface of what you can do with the
+container: from class names as parameters, to overriding existing object
+definitions, from shared service support to dumping a container to a plain PHP class,
+and much more. The Symfony dependency injection container is really powerful
+and is able to manage any kind of PHP class.</p>
+<p>Don’t yell at me if you don’t want to use a dependency injection container in
+your framework. If you don’t like it, don’t use it. It’s your framework, not
+mine.</p>
+<p>This is (already) the last chapter of this book on creating a framework on top
+of the Symfony components. I’m aware that many topics have not been covered
+in great details, but hopefully it gives you enough information to get started
+on your own and to better understand how the Symfony framework works
+internally.</p>
+<p>Have fun!</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

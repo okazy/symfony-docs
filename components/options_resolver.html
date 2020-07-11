@@ -1,0 +1,1184 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The OptionsResolver Component &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The PHPUnit Bridge" href="phpunit_bridge.html" />
+    <link rel="prev" title="The Mime Component" href="mime.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="using_components.html">How to Install and Use the Symfony Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asset.html">The Asset Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="browser_kit.html">The BrowserKit Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cache.html">The Cache Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">The Config Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="console.html">The Console Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html">The Contracts Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="css_selector.html">The CssSelector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependency_injection.html">The DependencyInjection Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dom_crawler.html">The DomCrawler Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event_dispatcher.html">The EventDispatcher Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expression_language.html">The ExpressionLanguage Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem.html">The Filesystem Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="finder.html">The Finder Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="form.html">The Form Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_foundation.html">The HttpFoundation Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http_kernel.html">The HttpKernel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inflector.html">The Inflector Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intl.html">The Intl Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ldap.html">The Ldap Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lock.html">The Lock Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailer.html">The Mailer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messenger.html">The Messenger Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mime.html">The Mime Component</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The OptionsResolver Component</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#required-options">Required Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#type-validation">Type Validation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#value-validation">Value Validation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option-normalization">Option Normalization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#default-values-that-depend-on-another-option">Default Values that Depend on another Option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#options-without-default-values">Options without Default Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nested-options">Nested Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deprecating-the-option">Deprecating the Option</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#chaining-option-configurations">Chaining Option Configurations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#performance-tweaks">Performance Tweaks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="phpunit_bridge.html">The PHPUnit Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html">The Process Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="property_access.html">The PropertyAccess Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="property_info.html">The PropertyInfo Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psr7.html">The PSR-7 Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">The Security Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serializer.html">The Serializer Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stopwatch.html">The Stopwatch Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string.html">The String Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uid.html">The UID Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="validator.html">The Validator Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_dumper.html">The VarDumper Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="var_exporter.html">The VarExporter Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflow.html">The Workflow Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yaml.html">The Yaml Component</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">The Components</a> &raquo;</li>
+        
+      <li>The OptionsResolver Component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/components/options_resolver.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-optionsresolver-component">
+<span id="index-0"></span><h1>The OptionsResolver Component<a class="headerlink" href="#the-optionsresolver-component" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div>The OptionsResolver component is an improved replacement for the
+<code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.array-replace.php" title="array_replace"><span class="pre">array_replace</span></a></code> PHP function. It allows you to create an
+options system with required options, defaults, validation (type, value),
+normalization and more.</div></blockquote>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require symfony/options-resolver
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you install this component outside of a Symfony application, you must
+require the <code class="docutils literal notranslate"><span class="pre">vendor/autoload.php</span></code> file in your code to enable the class
+autoloading mechanism provided by Composer. Read
+<a class="reference internal" href="using_components.html"><span class="doc">this article</span></a> for more details.</p>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Imagine you have a <code class="docutils literal notranslate"><span class="pre">Mailer</span></code> class which has four options: <code class="docutils literal notranslate"><span class="pre">host</span></code>,
+<code class="docutils literal notranslate"><span class="pre">username</span></code>, <code class="docutils literal notranslate"><span class="pre">password</span></code> and <code class="docutils literal notranslate"><span class="pre">port</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$options</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="k">array</span> <span class="nv">$options</span> <span class="o">=</span> <span class="p">[])</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">options</span> <span class="o">=</span> <span class="nv">$options</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When accessing the <code class="docutils literal notranslate"><span class="pre">$options</span></code>, you need to add some boilerplate code to
+check which options are set:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sendMail</span><span class="p">(</span><span class="nv">$from</span><span class="p">,</span> <span class="nv">$to</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$mail</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span>
+
+        <span class="nv">$mail</span><span class="o">-&gt;</span><span class="na">setHost</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;smtp.example.org&#39;</span><span class="p">);</span>
+        <span class="nv">$mail</span><span class="o">-&gt;</span><span class="na">setUsername</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;user&#39;</span><span class="p">);</span>
+        <span class="nv">$mail</span><span class="o">-&gt;</span><span class="na">setPassword</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;pa$$word&#39;</span><span class="p">);</span>
+        <span class="nv">$mail</span><span class="o">-&gt;</span><span class="na">setPort</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">[</span><span class="s1">&#39;port&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="mi">25</span><span class="p">);</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Also, the default values of the options are buried in the business logic of your
+code. Use the <code class="docutils literal notranslate"><a class="reference external" href="https://www.php.net/manual/en/function.array-replace.php" title="array_replace"><span class="pre">array_replace</span></a></code> to fix that:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="k">array</span> <span class="nv">$options</span> <span class="o">=</span> <span class="p">[])</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">options</span> <span class="o">=</span> <span class="nb">array_replace</span><span class="p">([</span>
+            <span class="s1">&#39;host&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;smtp.example.org&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pa$$word&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;port&#39;</span>     <span class="o">=&gt;</span> <span class="mi">25</span><span class="p">,</span>
+        <span class="p">],</span> <span class="nv">$options</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now all four options are guaranteed to be set, but you could still make an error
+like the following when using the <code class="docutils literal notranslate"><span class="pre">Mailer</span></code> class:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$mailer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mailer</span><span class="p">([</span>
+    <span class="s1">&#39;usernme&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;johndoe&#39;</span><span class="p">,</span>  <span class="c1">// &#39;username&#39; is wrongly spelled as &#39;usernme&#39;</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>No error will be shown. In the best case, the bug will appear during testing,
+but the developer will spend time looking for the problem. In the worst case,
+the bug might not appear until it’s deployed to the live system.</p>
+<p>Fortunately, the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver"><span class="pre">OptionsResolver</span></a></code>
+class helps you to fix this problem:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\OptionsResolver\OptionsResolver</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="k">array</span> <span class="nv">$options</span> <span class="o">=</span> <span class="p">[])</span>
+    <span class="p">{</span>
+        <span class="nv">$resolver</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OptionsResolver</span><span class="p">();</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefaults</span><span class="p">([</span>
+            <span class="s1">&#39;host&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;smtp.example.org&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pa$$word&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;port&#39;</span>     <span class="o">=&gt;</span> <span class="mi">25</span><span class="p">,</span>
+        <span class="p">]);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">options</span> <span class="o">=</span> <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">resolve</span><span class="p">(</span><span class="nv">$options</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Like before, all options will be guaranteed to be set. Additionally, an
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/Exception/UndefinedOptionsException.php" title="Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException"><span class="pre">UndefinedOptionsException</span></a></code>
+is thrown if an unknown option is passed:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$mailer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mailer</span><span class="p">([</span>
+    <span class="s1">&#39;usernme&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;johndoe&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+
+<span class="c1">// UndefinedOptionsException: The option &quot;usernme&quot; does not exist.</span>
+<span class="c1">// Defined options are: &quot;host&quot;, &quot;password&quot;, &quot;port&quot;, &quot;username&quot;</span>
+</pre></div>
+</div>
+<p>The rest of your code can access the values of the options without boilerplate
+code:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sendMail</span><span class="p">(</span><span class="nv">$from</span><span class="p">,</span> <span class="nv">$to</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$mail</span> <span class="o">=</span> <span class="o">...</span><span class="p">;</span>
+        <span class="nv">$mail</span><span class="o">-&gt;</span><span class="na">setHost</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]);</span>
+        <span class="nv">$mail</span><span class="o">-&gt;</span><span class="na">setUsername</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]);</span>
+        <span class="nv">$mail</span><span class="o">-&gt;</span><span class="na">setPassword</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]);</span>
+        <span class="nv">$mail</span><span class="o">-&gt;</span><span class="na">setPort</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">[</span><span class="s1">&#39;port&#39;</span><span class="p">]);</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It’s a good practice to split the option configuration into a separate method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="k">array</span> <span class="nv">$options</span> <span class="o">=</span> <span class="p">[])</span>
+    <span class="p">{</span>
+        <span class="nv">$resolver</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OptionsResolver</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">configureOptions</span><span class="p">(</span><span class="nv">$resolver</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">options</span> <span class="o">=</span> <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">resolve</span><span class="p">(</span><span class="nv">$options</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefaults</span><span class="p">([</span>
+            <span class="s1">&#39;host&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;smtp.example.org&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;username&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;pa$$word&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;port&#39;</span>       <span class="o">=&gt;</span> <span class="mi">25</span><span class="p">,</span>
+            <span class="s1">&#39;encryption&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>First, your code becomes easier to read, especially if the constructor does more
+than processing options. Second, sub-classes may now override the
+<code class="docutils literal notranslate"><span class="pre">configureOptions()</span></code> method to adjust the configuration of the options:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">GoogleMailer</span> <span class="k">extends</span> <span class="nx">Mailer</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">configureOptions</span><span class="p">(</span><span class="nv">$resolver</span><span class="p">);</span>
+
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefaults</span><span class="p">([</span>
+            <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;smtp.google.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;encryption&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ssl&#39;</span><span class="p">,</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="required-options">
+<h3>Required Options<a class="headerlink" href="#required-options" title="Permalink to this headline">¶</a></h3>
+<p>If an option must be set by the caller, pass that option to
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::setRequired()"><span class="pre">setRequired()</span></a></code>.
+For example, to make the <code class="docutils literal notranslate"><span class="pre">host</span></code> option required, you can do:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setRequired</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you omit a required option, a
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/Exception/MissingOptionsException.php" title="Symfony\Component\OptionsResolver\Exception\MissingOptionsException"><span class="pre">MissingOptionsException</span></a></code>
+will be thrown:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$mailer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mailer</span><span class="p">();</span>
+
+<span class="c1">// MissingOptionsException: The required option &quot;host&quot; is missing.</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::setRequired()"><span class="pre">setRequired()</span></a></code>
+method accepts a single name or an array of option names if you have more than
+one required option:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setRequired</span><span class="p">([</span><span class="s1">&#39;host&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::isRequired()"><span class="pre">isRequired()</span></a></code> to find
+out if an option is required. You can use
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::getRequiredOptions()"><span class="pre">getRequiredOptions()</span></a></code> to
+retrieve the names of all required options:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">GoogleMailer</span> <span class="k">extends</span> <span class="nx">Mailer</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">configureOptions</span><span class="p">(</span><span class="nv">$resolver</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">isRequired</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="c1">// ...</span>
+        <span class="p">}</span>
+
+        <span class="nv">$requiredOptions</span> <span class="o">=</span> <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">getRequiredOptions</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you want to check whether a required option is still missing from the default
+options, you can use <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::isMissing()"><span class="pre">isMissing()</span></a></code>.
+The difference between this and <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::isRequired()"><span class="pre">isRequired()</span></a></code>
+is that this method will return false if a required option has already
+been set:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setRequired</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">GoogleMailer</span> <span class="k">extends</span> <span class="nx">Mailer</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">configureOptions</span><span class="p">(</span><span class="nv">$resolver</span><span class="p">);</span>
+
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">isRequired</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">);</span>
+        <span class="c1">// =&gt; true</span>
+
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">isMissing</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">);</span>
+        <span class="c1">// =&gt; true</span>
+
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefault</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">,</span> <span class="s1">&#39;smtp.google.com&#39;</span><span class="p">);</span>
+
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">isRequired</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">);</span>
+        <span class="c1">// =&gt; true</span>
+
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">isMissing</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">);</span>
+        <span class="c1">// =&gt; false</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::getMissingOptions()"><span class="pre">getMissingOptions()</span></a></code> method
+lets you access the names of all missing options.</p>
+</div>
+<div class="section" id="type-validation">
+<h3>Type Validation<a class="headerlink" href="#type-validation" title="Permalink to this headline">¶</a></h3>
+<p>You can run additional checks on the options to make sure they were passed
+correctly. To validate the types of the options, call
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::setAllowedTypes()"><span class="pre">setAllowedTypes()</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+
+        <span class="c1">// specify one allowed type</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setAllowedTypes</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">);</span>
+
+        <span class="c1">// specify multiple allowed types</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setAllowedTypes</span><span class="p">(</span><span class="s1">&#39;port&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;null&#39;</span><span class="p">,</span> <span class="s1">&#39;int&#39;</span><span class="p">]);</span>
+
+        <span class="c1">// check all items in an array recursively for a type</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setAllowedTypes</span><span class="p">(</span><span class="s1">&#39;dates&#39;</span><span class="p">,</span> <span class="s1">&#39;DateTime[]&#39;</span><span class="p">);</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setAllowedTypes</span><span class="p">(</span><span class="s1">&#39;ports&#39;</span><span class="p">,</span> <span class="s1">&#39;int[]&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can pass any type for which an <code class="docutils literal notranslate"><span class="pre">is_&lt;type&gt;()</span></code> function is defined in PHP.
+You may also pass fully qualified class or interface names (which is checked
+using <code class="docutils literal notranslate"><span class="pre">instanceof</span></code>). Additionally, you can validate all items in an array
+recursively by suffixing the type with <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p>
+<p>If you pass an invalid option now, an
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/Exception/InvalidOptionsException.php" title="Symfony\Component\OptionsResolver\Exception\InvalidOptionsException"><span class="pre">InvalidOptionsException</span></a></code>
+is thrown:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$mailer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mailer</span><span class="p">([</span>
+    <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="mi">25</span><span class="p">,</span>
+<span class="p">]);</span>
+
+<span class="c1">// InvalidOptionsException: The option &quot;host&quot; with value &quot;25&quot; is</span>
+<span class="c1">// expected to be of type &quot;string&quot;, but is of type &quot;int&quot;</span>
+</pre></div>
+</div>
+<p>In sub-classes, you can use <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::addAllowedTypes()"><span class="pre">addAllowedTypes()</span></a></code>
+to add additional allowed types without erasing the ones already set.</p>
+</div>
+<div class="section" id="value-validation">
+<h3>Value Validation<a class="headerlink" href="#value-validation" title="Permalink to this headline">¶</a></h3>
+<p>Some options can only take one of a fixed list of predefined values. For
+example, suppose the <code class="docutils literal notranslate"><span class="pre">Mailer</span></code> class has a <code class="docutils literal notranslate"><span class="pre">transport</span></code> option which can be
+one of <code class="docutils literal notranslate"><span class="pre">sendmail</span></code>, <code class="docutils literal notranslate"><span class="pre">mail</span></code> and <code class="docutils literal notranslate"><span class="pre">smtp</span></code>. Use the method
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::setAllowedValues()"><span class="pre">setAllowedValues()</span></a></code>
+to verify that the passed option contains one of these values:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefault</span><span class="p">(</span><span class="s1">&#39;transport&#39;</span><span class="p">,</span> <span class="s1">&#39;sendmail&#39;</span><span class="p">);</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setAllowedValues</span><span class="p">(</span><span class="s1">&#39;transport&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;sendmail&#39;</span><span class="p">,</span> <span class="s1">&#39;mail&#39;</span><span class="p">,</span> <span class="s1">&#39;smtp&#39;</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you pass an invalid transport, an
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/Exception/InvalidOptionsException.php" title="Symfony\Component\OptionsResolver\Exception\InvalidOptionsException"><span class="pre">InvalidOptionsException</span></a></code>
+is thrown:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$mailer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mailer</span><span class="p">([</span>
+    <span class="s1">&#39;transport&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;send-mail&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+
+<span class="c1">// InvalidOptionsException: The option &quot;transport&quot; with value &quot;send-mail&quot;</span>
+<span class="c1">// is invalid. Accepted values are: &quot;sendmail&quot;, &quot;mail&quot;, &quot;smtp&quot;</span>
+</pre></div>
+</div>
+<p>For options with more complicated validation schemes, pass a closure which
+returns <code class="docutils literal notranslate"><span class="pre">true</span></code> for acceptable values and <code class="docutils literal notranslate"><span class="pre">false</span></code> for invalid values:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setAllowedValues</span><span class="p">(</span><span class="s1">&#39;transport&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// return true or false</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>In sub-classes, you can use <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::addAllowedValues()"><span class="pre">addAllowedValues()</span></a></code>
+to add additional allowed values without erasing the ones already set.</p>
+</div>
+<div class="section" id="option-normalization">
+<h3>Option Normalization<a class="headerlink" href="#option-normalization" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes, option values need to be normalized before you can use them. For
+instance, assume that the <code class="docutils literal notranslate"><span class="pre">host</span></code> should always start with <code class="docutils literal notranslate"><span class="pre">http://</span></code>. To do
+that, you can write normalizers. Normalizers are executed after validating an
+option. You can configure a normalizer by calling
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::setNormalizer()"><span class="pre">setNormalizer()</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\OptionsResolver\Options</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setNormalizer</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Options</span> <span class="nv">$options</span><span class="p">,</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;http://&#39;</span> <span class="o">!==</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nv">$value</span> <span class="o">=</span> <span class="s1">&#39;http://&#39;</span><span class="o">.</span><span class="nv">$value</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="nv">$value</span><span class="p">;</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The normalizer receives the actual <code class="docutils literal notranslate"><span class="pre">$value</span></code> and returns the normalized form.
+You see that the closure also takes an <code class="docutils literal notranslate"><span class="pre">$options</span></code> parameter. This is useful
+if you need to use other options during normalization:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setNormalizer</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Options</span> <span class="nv">$options</span><span class="p">,</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;http://&#39;</span> <span class="o">!==</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="s1">&#39;https://&#39;</span> <span class="o">!==</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;ssl&#39;</span> <span class="o">===</span> <span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;encryption&#39;</span><span class="p">])</span> <span class="p">{</span>
+                    <span class="nv">$value</span> <span class="o">=</span> <span class="s1">&#39;https://&#39;</span><span class="o">.</span><span class="nv">$value</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="nv">$value</span> <span class="o">=</span> <span class="s1">&#39;http://&#39;</span><span class="o">.</span><span class="nv">$value</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="nv">$value</span><span class="p">;</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To normalize a new allowed value in sub-classes that are being normalized
+in parent classes use <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::addNormalizer()"><span class="pre">addNormalizer()</span></a></code>.
+This way, the <code class="docutils literal notranslate"><span class="pre">$value</span></code> argument will receive the previously normalized
+value, otherwise you can prepend the new normalizer by passing <code class="docutils literal notranslate"><span class="pre">true</span></code> as
+third argument.</p>
+</div>
+<div class="section" id="default-values-that-depend-on-another-option">
+<h3>Default Values that Depend on another Option<a class="headerlink" href="#default-values-that-depend-on-another-option" title="Permalink to this headline">¶</a></h3>
+<p>Suppose you want to set the default value of the <code class="docutils literal notranslate"><span class="pre">port</span></code> option based on the
+encryption chosen by the user of the <code class="docutils literal notranslate"><span class="pre">Mailer</span></code> class. More precisely, you want
+to set the port to <code class="docutils literal notranslate"><span class="pre">465</span></code> if SSL is used and to <code class="docutils literal notranslate"><span class="pre">25</span></code> otherwise.</p>
+<p>You can implement this feature by passing a closure as the default value of
+the <code class="docutils literal notranslate"><span class="pre">port</span></code> option. The closure receives the options as argument. Based on
+these options, you can return the desired default value:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\OptionsResolver\Options</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefault</span><span class="p">(</span><span class="s1">&#39;encryption&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">);</span>
+
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefault</span><span class="p">(</span><span class="s1">&#39;port&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Options</span> <span class="nv">$options</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;ssl&#39;</span> <span class="o">===</span> <span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;encryption&#39;</span><span class="p">])</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="mi">465</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="mi">25</span><span class="p">;</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">The argument of the callable must be type hinted as <code class="docutils literal notranslate"><span class="pre">Options</span></code>. Otherwise,
+the callable itself is considered as the default value of the option.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The closure is only executed if the <code class="docutils literal notranslate"><span class="pre">port</span></code> option isn’t set by the user
+or overwritten in a sub-class.</p>
+</div>
+<p>A previously set default value can be accessed by adding a second argument to
+the closure:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefaults</span><span class="p">([</span>
+            <span class="s1">&#39;encryption&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+            <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;example.org&#39;</span><span class="p">,</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">GoogleMailer</span> <span class="k">extends</span> <span class="nx">Mailer</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">configureOptions</span><span class="p">(</span><span class="nv">$resolver</span><span class="p">);</span>
+
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefault</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Options</span> <span class="nv">$options</span><span class="p">,</span> <span class="nv">$previousValue</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;ssl&#39;</span> <span class="o">===</span> <span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;encryption&#39;</span><span class="p">])</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="s1">&#39;secure.example.org&#39;</span>
+            <span class="p">}</span>
+
+            <span class="c1">// Take default value configured in the base class</span>
+            <span class="k">return</span> <span class="nv">$previousValue</span><span class="p">;</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As seen in the example, this feature is mostly useful if you want to reuse the
+default values set in parent classes in sub-classes.</p>
+</div>
+<div class="section" id="options-without-default-values">
+<h3>Options without Default Values<a class="headerlink" href="#options-without-default-values" title="Permalink to this headline">¶</a></h3>
+<p>In some cases, it is useful to define an option without setting a default value.
+This is useful if you need to know whether or not the user <em>actually</em> set
+an option or not. For example, if you set the default value for an option,
+it’s not possible to know whether the user passed this value or if it comes
+from the default:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefault</span><span class="p">(</span><span class="s1">&#39;port&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sendMail</span><span class="p">(</span><span class="nv">$from</span><span class="p">,</span> <span class="nv">$to</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Is this the default value or did the caller of the class really</span>
+        <span class="c1">// set the port to 25?</span>
+        <span class="k">if</span> <span class="p">(</span><span class="mi">25</span> <span class="o">===</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">[</span><span class="s1">&#39;port&#39;</span><span class="p">])</span> <span class="p">{</span>
+            <span class="c1">// ...</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can use <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::setDefined()"><span class="pre">setDefined()</span></a></code>
+to define an option without setting a default value. Then the option will only
+be included in the resolved options if it was actually passed to
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::resolve()"><span class="pre">resolve()</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefined</span><span class="p">(</span><span class="s1">&#39;port&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sendMail</span><span class="p">(</span><span class="nv">$from</span><span class="p">,</span> <span class="nv">$to</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">array_key_exists</span><span class="p">(</span><span class="s1">&#39;port&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">echo</span> <span class="s1">&#39;Set!&#39;</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">echo</span> <span class="s1">&#39;Not Set!&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$mailer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mailer</span><span class="p">();</span>
+<span class="nv">$mailer</span><span class="o">-&gt;</span><span class="na">sendMail</span><span class="p">(</span><span class="nv">$from</span><span class="p">,</span> <span class="nv">$to</span><span class="p">);</span>
+<span class="c1">// =&gt; Not Set!</span>
+
+<span class="nv">$mailer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mailer</span><span class="p">([</span>
+    <span class="s1">&#39;port&#39;</span> <span class="o">=&gt;</span> <span class="mi">25</span><span class="p">,</span>
+<span class="p">]);</span>
+<span class="nv">$mailer</span><span class="o">-&gt;</span><span class="na">sendMail</span><span class="p">(</span><span class="nv">$from</span><span class="p">,</span> <span class="nv">$to</span><span class="p">);</span>
+<span class="c1">// =&gt; Set!</span>
+</pre></div>
+</div>
+<p>You can also pass an array of option names if you want to define multiple
+options in one go:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefined</span><span class="p">([</span><span class="s1">&#39;port&#39;</span><span class="p">,</span> <span class="s1">&#39;encryption&#39;</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The methods <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::isDefined()"><span class="pre">isDefined()</span></a></code>
+and <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::getDefinedOptions()"><span class="pre">getDefinedOptions()</span></a></code>
+let you find out which options are defined:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">GoogleMailer</span> <span class="k">extends</span> <span class="nx">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">configureOptions</span><span class="p">(</span><span class="nv">$resolver</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">isDefined</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="c1">// One of the following was called:</span>
+
+            <span class="c1">// $resolver-&gt;setDefault(&#39;host&#39;, ...);</span>
+            <span class="c1">// $resolver-&gt;setRequired(&#39;host&#39;);</span>
+            <span class="c1">// $resolver-&gt;setDefined(&#39;host&#39;);</span>
+        <span class="p">}</span>
+
+        <span class="nv">$definedOptions</span> <span class="o">=</span> <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">getDefinedOptions</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="nested-options">
+<h3>Nested Options<a class="headerlink" href="#nested-options" title="Permalink to this headline">¶</a></h3>
+<p>Suppose you have an option named <code class="docutils literal notranslate"><span class="pre">spool</span></code> which has two sub-options <code class="docutils literal notranslate"><span class="pre">type</span></code>
+and <code class="docutils literal notranslate"><span class="pre">path</span></code>. Instead of defining it as a simple array of values, you can pass a
+closure as the default value of the <code class="docutils literal notranslate"><span class="pre">spool</span></code> option with a
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver"><span class="pre">OptionsResolver</span></a></code> argument. Based on
+this instance, you can define the options under <code class="docutils literal notranslate"><span class="pre">spool</span></code> and its desired
+default value:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefault</span><span class="p">(</span><span class="s1">&#39;spool&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$spoolResolver</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$spoolResolver</span><span class="o">-&gt;</span><span class="na">setDefaults</span><span class="p">([</span>
+                <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;file&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;path&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/path/to/spool&#39;</span><span class="p">,</span>
+            <span class="p">]);</span>
+            <span class="nv">$spoolResolver</span><span class="o">-&gt;</span><span class="na">setAllowedValues</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="s1">&#39;memory&#39;</span><span class="p">]);</span>
+            <span class="nv">$spoolResolver</span><span class="o">-&gt;</span><span class="na">setAllowedTypes</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sendMail</span><span class="p">(</span><span class="nv">$from</span><span class="p">,</span> <span class="nv">$to</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;memory&#39;</span> <span class="o">===</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">[</span><span class="s1">&#39;spool&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">])</span> <span class="p">{</span>
+            <span class="c1">// ...</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$mailer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mailer</span><span class="p">([</span>
+    <span class="s1">&#39;spool&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;memory&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>Nested options also support required options, validation (type, value) and
+normalization of their values. If the default value of a nested option depends
+on another option defined in the parent level, add a second <code class="docutils literal notranslate"><span class="pre">Options</span></code> argument
+to the closure to access to them:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefault</span><span class="p">(</span><span class="s1">&#39;sandbox&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefault</span><span class="p">(</span><span class="s1">&#39;spool&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$spoolResolver</span><span class="p">,</span> <span class="nx">Options</span> <span class="nv">$parent</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$spoolResolver</span><span class="o">-&gt;</span><span class="na">setDefaults</span><span class="p">([</span>
+                <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="nv">$parent</span><span class="p">[</span><span class="s1">&#39;sandbox&#39;</span><span class="p">]</span> <span class="o">?</span> <span class="s1">&#39;memory&#39;</span> <span class="o">:</span> <span class="s1">&#39;file&#39;</span><span class="p">,</span>
+                <span class="c1">// ...</span>
+            <span class="p">]);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">The arguments of the closure must be type hinted as <code class="docutils literal notranslate"><span class="pre">OptionsResolver</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Options</span></code> respectively. Otherwise, the closure itself is considered as the
+default value of the option.</p>
+</div>
+<p>In same way, parent options can access to the nested options as normal arrays:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefault</span><span class="p">(</span><span class="s1">&#39;spool&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$spoolResolver</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$spoolResolver</span><span class="o">-&gt;</span><span class="na">setDefaults</span><span class="p">([</span>
+                <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;file&#39;</span><span class="p">,</span>
+                <span class="c1">// ...</span>
+            <span class="p">]);</span>
+        <span class="p">});</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">setDefault</span><span class="p">(</span><span class="s1">&#39;profiling&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Options</span> <span class="nv">$options</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="s1">&#39;file&#39;</span> <span class="o">===</span> <span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;spool&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">];</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The fact that an option is defined as nested means that you must pass
+an array of values to resolve it at runtime.</p>
+</div>
+</div>
+<div class="section" id="deprecating-the-option">
+<h3>Deprecating the Option<a class="headerlink" href="#deprecating-the-option" title="Permalink to this headline">¶</a></h3>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The signature of the <code class="docutils literal notranslate"><span class="pre">setDeprecated()</span></code> method changed from
+<code class="docutils literal notranslate"><span class="pre">setDeprecated(string</span> <span class="pre">$option,</span> <span class="pre">?string</span> <span class="pre">$message)</span></code> to
+<code class="docutils literal notranslate"><span class="pre">setDeprecated(string</span> <span class="pre">$option,</span> <span class="pre">string</span> <span class="pre">$package,</span> <span class="pre">string</span> <span class="pre">$version,</span> <span class="pre">$message)</span></code>
+in Symfony 5.1.</p>
+</div>
+<p>Once an option is outdated or you decided not to maintain it anymore, you can
+deprecate it using the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::setDeprecated()"><span class="pre">setDeprecated()</span></a></code>
+method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$resolver</span>
+    <span class="o">-&gt;</span><span class="na">setDefined</span><span class="p">([</span><span class="s1">&#39;hostname&#39;</span><span class="p">,</span> <span class="s1">&#39;host&#39;</span><span class="p">])</span>
+
+    <span class="c1">// this outputs the following generic deprecation message:</span>
+    <span class="c1">// Since acme/package 1.2: The option &quot;hostname&quot; is deprecated.</span>
+    <span class="o">-&gt;</span><span class="na">setDeprecated</span><span class="p">(</span><span class="s1">&#39;hostname&#39;</span><span class="p">,</span> <span class="s1">&#39;acme/package&#39;</span><span class="p">,</span> <span class="s1">&#39;1.2&#39;</span><span class="p">)</span>
+
+    <span class="c1">// you can also pass a custom deprecation message (%name% placeholder is available)</span>
+    <span class="o">-&gt;</span><span class="na">setDeprecated</span><span class="p">(</span>
+        <span class="s1">&#39;hostname&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;acme/package&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;1.2&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;The option &quot;hostname&quot; is deprecated, use &quot;host&quot; instead.&#39;</span>
+    <span class="p">)</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The deprecation message will be triggered only if the option is being used
+somewhere, either its value is provided by the user or the option is evaluated
+within closures of lazy options and normalizers.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When using an option deprecated by you in your own library, you can pass
+<code class="docutils literal notranslate"><span class="pre">false</span></code> as the second argument of the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/Options.php" title="Symfony\Component\OptionsResolver\Options::offsetGet()"><span class="pre">offsetGet()</span></a></code> method
+to not trigger the deprecation warning.</p>
+</div>
+<p>Instead of passing the message, you may also pass a closure which returns
+a string (the deprecation message) or an empty string to ignore the deprecation.
+This closure is useful to only deprecate some of the allowed types or values of
+the option:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$resolver</span>
+    <span class="o">-&gt;</span><span class="na">setDefault</span><span class="p">(</span><span class="s1">&#39;encryption&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setDefault</span><span class="p">(</span><span class="s1">&#39;port&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">setAllowedTypes</span><span class="p">(</span><span class="s1">&#39;port&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;null&#39;</span><span class="p">,</span> <span class="s1">&#39;int&#39;</span><span class="p">])</span>
+    <span class="o">-&gt;</span><span class="na">setDeprecated</span><span class="p">(</span><span class="s1">&#39;port&#39;</span><span class="p">,</span> <span class="s1">&#39;acme/package&#39;</span><span class="p">,</span> <span class="s1">&#39;1.2&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Options</span> <span class="nv">$options</span><span class="p">,</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">null</span> <span class="o">===</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="s1">&#39;Passing &quot;null&quot; to option &quot;port&quot; is deprecated, pass an integer instead.&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// deprecation may also depend on another option</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;ssl&#39;</span> <span class="o">===</span> <span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;encryption&#39;</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="mi">456</span> <span class="o">!==</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="s1">&#39;Passing a different port than &quot;456&quot; when the &quot;encryption&quot; option is set to &quot;ssl&quot; is deprecated.&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="p">})</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Deprecation based on the value is triggered only when the option is provided
+by the user.</p>
+</div>
+<p>This closure receives as argument the value of the option after validating it
+and before normalizing it when the option is being resolved.</p>
+</div>
+<div class="section" id="chaining-option-configurations">
+<h3>Chaining Option Configurations<a class="headerlink" href="#chaining-option-configurations" title="Permalink to this headline">¶</a></h3>
+<p>In many cases you may need to define multiple configurations for each option.
+For example, suppose the <code class="docutils literal notranslate"><span class="pre">InvoiceMailer</span></code> class has an <code class="docutils literal notranslate"><span class="pre">host</span></code> option that is required
+and a <code class="docutils literal notranslate"><span class="pre">transport</span></code> option which can be one of <code class="docutils literal notranslate"><span class="pre">sendmail</span></code>, <code class="docutils literal notranslate"><span class="pre">mail</span></code> and <code class="docutils literal notranslate"><span class="pre">smtp</span></code>.
+You can improve the readability of the code avoiding to duplicate option name for
+each configuration using the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::define()"><span class="pre">define()</span></a></code>
+method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">InvoiceMailer</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">define</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">required</span><span class="p">()</span>
+            <span class="o">-&gt;</span><span class="na">default</span><span class="p">(</span><span class="s1">&#39;smtp.example.org&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">allowedTypes</span><span class="p">(</span><span class="s1">&#39;string&#39;</span><span class="p">);</span>
+        <span class="nv">$resolver</span><span class="o">-&gt;</span><span class="na">define</span><span class="p">(</span><span class="s1">&#39;transport&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">required</span><span class="p">()</span>
+            <span class="o">-&gt;</span><span class="na">default</span><span class="p">(</span><span class="s1">&#39;transport&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">allowedValues</span><span class="p">([</span><span class="s1">&#39;sendmail&#39;</span><span class="p">,</span> <span class="s1">&#39;mail&#39;</span><span class="p">,</span> <span class="s1">&#39;smtp&#39;</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 5.1: </span>The <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver::define()"><span class="pre">define()</span></a></code> method
+was introduced in Symfony 5.1.</p>
+</div>
+</div>
+<div class="section" id="performance-tweaks">
+<h3>Performance Tweaks<a class="headerlink" href="#performance-tweaks" title="Permalink to this headline">¶</a></h3>
+<p>With the current implementation, the <code class="docutils literal notranslate"><span class="pre">configureOptions()</span></code> method will be
+called for every single instance of the <code class="docutils literal notranslate"><span class="pre">Mailer</span></code> class. Depending on the
+amount of option configuration and the number of created instances, this may add
+noticeable overhead to your application. If that overhead becomes a problem, you
+can change your code to do the configuration only once per class:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="nv">$resolversByClass</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="k">protected</span> <span class="nv">$options</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="k">array</span> <span class="nv">$options</span> <span class="o">=</span> <span class="p">[])</span>
+    <span class="p">{</span>
+        <span class="c1">// What type of Mailer is this, a Mailer, a GoogleMailer, ... ?</span>
+        <span class="nv">$class</span> <span class="o">=</span> <span class="nb">get_class</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+
+        <span class="c1">// Was configureOptions() executed before for this class?</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="nv">$resolversByClass</span><span class="p">[</span><span class="nv">$class</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="nx">self</span><span class="o">::</span><span class="nv">$resolversByClass</span><span class="p">[</span><span class="nv">$class</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OptionsResolver</span><span class="p">();</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">configureOptions</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="nv">$resolversByClass</span><span class="p">[</span><span class="nv">$class</span><span class="p">]);</span>
+        <span class="p">}</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">options</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$resolversByClass</span><span class="p">[</span><span class="nv">$class</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">resolve</span><span class="p">(</span><span class="nv">$options</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">configureOptions</span><span class="p">(</span><span class="nx">OptionsResolver</span> <span class="nv">$resolver</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now the <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/OptionsResolver/OptionsResolver.php" title="Symfony\Component\OptionsResolver\OptionsResolver"><span class="pre">OptionsResolver</span></a></code> instance
+will be created once per class and reused from that on. Be aware that this may
+lead to memory leaks in long-running applications, if the default options contain
+references to objects or object graphs. If that’s the case for you, implement a
+method <code class="docutils literal notranslate"><span class="pre">clearOptionsConfig()</span></code> and call it periodically:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">Mailer</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="nv">$resolversByClass</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">clearOptionsConfig</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">self</span><span class="o">::</span><span class="nv">$resolversByClass</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That’s it! You now have all the tools and knowledge needed to process
+options in your code.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

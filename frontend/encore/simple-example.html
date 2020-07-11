@@ -1,0 +1,700 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Encore: Setting up your Project &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Advanced Webpack Config" href="advanced-config.html" />
+    <link rel="prev" title="Installing Encore" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../forms.html">Forms</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../frontend.html">Managing CSS and JavaScript</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../frontend.html#webpack-encore">Webpack Encore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../frontend.html#encore-documentation">Encore Documentation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../frontend.html#other-front-end-articles">Other Front-End Articles</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../assetic/index.html">Assetic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html">Installing Encore</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Encore: Setting up your Project</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuring-encore-webpack">Configuring Encore/Webpack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#requiring-javascript-modules">Requiring JavaScript Modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-import-and-export-statements">The import and export Statements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#page-specific-javascript-or-css-multiple-entries">Page-Specific JavaScript or CSS (Multiple Entries)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-sass-less-stylus">Using Sass/LESS/Stylus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compiling-only-a-css-file">Compiling Only a CSS File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#keep-going">Keep Going!</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="advanced-config.html">Advanced Webpack Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="babel.html">Configuring Babel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootstrap.html">Using Bootstrap CSS &amp; JS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cdn.html">Using a CDN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code-splitting.html">Async Code Splitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="copy-files.html">Copying &amp; Referencing Images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="css-preprocessors.html">CSS Preprocessors: Sass, LESS, Stylus, etc.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom-loaders-plugins.html">Adding Custom Loaders &amp; Plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dev-server.html">Using webpack-dev-server and HMR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="faq.html">FAQ and Common Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="legacy-applications.html">jQuery Plugins and Legacy Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="page-specific-assets.html">Creating Page-Specific CSS/JS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="postcss.html">PostCSS and autoprefixing (postcss-loader)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reactjs.html">Enabling React.js</a></li>
+<li class="toctree-l3"><a class="reference internal" href="server-data.html">Passing Information from Twig to JavaScript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shared-entry.html">Creating a Shared Commons Entry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sourcemaps.html">Enabling Source Maps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="split-chunks.html">Preventing Duplication by “Splitting” Shared Code into Separate Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="typescript.html">Enabling TypeScript (ts-loader)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="url-loader.html">Inlining files in CSS with Webpack URL Loader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="versioning.html">Asset Versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtual-machine.html">Using Encore in a Virtual Machine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vuejs.html">Enabling Vue.js (<code class="docutils literal notranslate"><span class="pre">vue-loader</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../custom_version_strategy.html">How to Use a Custom Version Strategy for Assets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../frontend.html">Managing CSS and JavaScript</a> &raquo;</li>
+        
+      <li>Encore: Setting up your Project</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/frontend/encore/simple-example.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="encore-setting-up-your-project">
+<h1>Encore: Setting up your Project<a class="headerlink" href="#encore-setting-up-your-project" title="Permalink to this headline">¶</a></h1>
+<p>After <a class="reference internal" href="installation.html"><span class="doc">installing Encore</span></a>, your app already has one
+CSS and one JS file, organized into an <code class="docutils literal notranslate"><span class="pre">assets/</span></code> directory:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">assets/js/app.js</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">assets/css/app.css</span></code></li>
+</ul>
+<p>With Encore, think of your <code class="docutils literal notranslate"><span class="pre">app.js</span></code> file like a standalone JavaScript
+application: it will <em>require</em> all of the dependencies it needs (e.g. jQuery or React),
+<em>including</em> any CSS. Your <code class="docutils literal notranslate"><span class="pre">app.js</span></code> file is already doing this with a JavaScript
+<code class="docutils literal notranslate"><span class="pre">import</span></code> statement:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// assets/js/app.js</span>
+<span class="c1">// ...</span>
+
+<span class="kr">import</span> <span class="s1">&#39;../css/app.css&#39;</span><span class="p">;</span>
+
+<span class="c1">// var $ = require(&#39;jquery&#39;);</span>
+</pre></div>
+</td></tr></table></div>
+<p>Encore’s job (via Webpack) is simple: to read and follow <em>all</em> of the <code class="docutils literal notranslate"><span class="pre">require()</span></code>
+statements and create one final <code class="docutils literal notranslate"><span class="pre">app.js</span></code> (and <code class="docutils literal notranslate"><span class="pre">app.css</span></code>) that contains <em>everything</em>
+your app needs. Encore can do a lot more: minify files, pre-process Sass/LESS,
+support React, Vue.js, etc.</p>
+<div class="section" id="configuring-encore-webpack">
+<h2>Configuring Encore/Webpack<a class="headerlink" href="#configuring-encore-webpack" title="Permalink to this headline">¶</a></h2>
+<p>Everything in Encore is configured via a <code class="docutils literal notranslate"><span class="pre">webpack.config.js</span></code> file at the root
+of your project. It already holds the basic config you need:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// webpack.config.js</span>
+<span class="kd">var</span> <span class="nx">Encore</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;@symfony/webpack-encore&#39;</span><span class="p">);</span>
+
+<span class="nx">Encore</span>
+    <span class="c1">// directory where compiled assets will be stored</span>
+    <span class="p">.</span><span class="nx">setOutputPath</span><span class="p">(</span><span class="s1">&#39;public/build/&#39;</span><span class="p">)</span>
+    <span class="c1">// public path used by the web server to access the output path</span>
+    <span class="p">.</span><span class="nx">setPublicPath</span><span class="p">(</span><span class="s1">&#39;/build&#39;</span><span class="p">)</span>
+
+    <span class="p">.</span><span class="nx">addEntry</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;./assets/js/app.js&#39;</span><span class="p">)</span>
+
+    <span class="c1">// ...</span>
+<span class="p">;</span>
+
+<span class="c1">// ...</span>
+</pre></div>
+</td></tr></table></div>
+<p>The <em>key</em> part is <code class="docutils literal notranslate"><span class="pre">addEntry()</span></code>: this tells Encore to load the <code class="docutils literal notranslate"><span class="pre">assets/js/app.js</span></code>
+file and follow <em>all</em> of the <code class="docutils literal notranslate"><span class="pre">require()</span></code> statements. It will then package everything
+together and - thanks to the first <code class="docutils literal notranslate"><span class="pre">app</span></code> argument - output final <code class="docutils literal notranslate"><span class="pre">app.js</span></code> and
+<code class="docutils literal notranslate"><span class="pre">app.css</span></code> files into the <code class="docutils literal notranslate"><span class="pre">public/build</span></code> directory.</p>
+<p id="encore-build-assets">To build the assets, run:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># compile assets once</span>
+<span class="gp">$</span> yarn encore dev
+
+<span class="c1"># or, recompile assets automatically when files change</span>
+<span class="gp">$</span> yarn encore dev --watch
+
+<span class="c1"># on deploy, create a production build</span>
+<span class="gp">$</span> yarn encore production
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Stop and restart <code class="docutils literal notranslate"><span class="pre">encore</span></code> each time you update your <code class="docutils literal notranslate"><span class="pre">webpack.config.js</span></code> file.</p>
+</div>
+<p>Congrats! You now have three new files:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">public/build/app.js</span></code> (holds all the JavaScript for your “app” entry)</li>
+<li><code class="docutils literal notranslate"><span class="pre">public/build/app.css</span></code> (holds all the CSS for your “app” entry)</li>
+<li><code class="docutils literal notranslate"><span class="pre">public/build/runtime.js</span></code> (a file that helps Webpack do its job)</li>
+</ul>
+<p>Next, include these in your base layout file. Two Twig helpers from WebpackEncoreBundle
+can do most of the work for you:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">{# templates/base.html.twig #}</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="cp">{%</span> <span class="k">block</span> <span class="nv">stylesheets</span> <span class="cp">%}</span>
+            <span class="c">{# &#39;app&#39; must match the first argument to addEntry() in webpack.config.js #}</span>
+            <span class="cp">{{</span> <span class="nv">encore_entry_link_tags</span><span class="o">(</span><span class="s1">&#39;app&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+
+            <span class="c">&lt;!-- Renders a link tag (if your module requires any CSS)</span>
+<span class="c">                 &lt;link rel=&quot;stylesheet&quot; href=&quot;/build/app.css&quot;&gt; --&gt;</span>
+        <span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+
+        <span class="cp">{%</span> <span class="k">block</span> <span class="nv">javascripts</span> <span class="cp">%}</span>
+            <span class="cp">{{</span> <span class="nv">encore_entry_script_tags</span><span class="o">(</span><span class="s1">&#39;app&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+
+            <span class="c">&lt;!-- Renders app.js &amp; a webpack runtime.js file</span>
+<span class="c">                &lt;script src=&quot;/build/runtime.js&quot;&gt;&lt;/script&gt;</span>
+<span class="c">                &lt;script src=&quot;/build/app.js&quot;&gt;&lt;/script&gt; --&gt;</span>
+        <span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p id="encore-entrypointsjson-simple-description">That’s it! When you refresh your page, all of the JavaScript from
+<code class="docutils literal notranslate"><span class="pre">assets/js/app.js</span></code> - as well as any other JavaScript files it included - will
+be executed. All the CSS files that were required will also be displayed.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">encore_entry_link_tags()</span></code> and <code class="docutils literal notranslate"><span class="pre">encore_entry_script_tags()</span></code> functions
+read from an <code class="docutils literal notranslate"><span class="pre">entrypoints.json</span></code> file that’s generated by Encore to know the exact
+filename(s) to render. This file is <em>especially</em> useful because you can
+<a class="reference internal" href="versioning.html"><span class="doc">enable versioning</span></a> or
+<a class="reference internal" href="cdn.html"><span class="doc">point assets to a CDN</span></a> without making <em>any</em> changes to your
+template: the paths in <code class="docutils literal notranslate"><span class="pre">entrypoints.json</span></code> will always be the final, correct paths.</p>
+<p>If you’re <em>not</em> using Symfony, you can ignore the <code class="docutils literal notranslate"><span class="pre">entrypoints.json</span></code> file and
+point to the final, built file directly. <code class="docutils literal notranslate"><span class="pre">entrypoints.json</span></code> is only required for
+some optional features.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.21.0: </span>The <code class="docutils literal notranslate"><span class="pre">encore_entry_link_tags()</span></code> comes from WebpackEncoreBundle and relies
+on a feature in Encore that was first introduced in version 0.21.0. Previously,
+the <code class="docutils literal notranslate"><span class="pre">asset()</span></code> function was used to point directly to the file.</p>
+</div>
+</div>
+<div class="section" id="requiring-javascript-modules">
+<h2>Requiring JavaScript Modules<a class="headerlink" href="#requiring-javascript-modules" title="Permalink to this headline">¶</a></h2>
+<p>Webpack is a module bundler, which means that you can <code class="docutils literal notranslate"><span class="pre">require</span></code> other JavaScript
+files. First, create a file that exports a function:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// assets/js/greet.js</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="sb">`Yo yo </span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb"> - welcome to Encore!`</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+<p>We’ll use jQuery to print this message on the page. Install it via:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> yarn add jquery --dev
+</pre></div>
+</td></tr></table></div>
+<p>Great! Use <code class="docutils literal notranslate"><span class="pre">require()</span></code> to import <code class="docutils literal notranslate"><span class="pre">jquery</span></code> and <code class="docutils literal notranslate"><span class="pre">greet.js</span></code>:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span>// assets/js/app.js
+// ...
+
+<span class="gi">+ // loads the jquery package from node_modules</span>
+<span class="gi">+ var $ = require(&#39;jquery&#39;);</span>
+
+<span class="gi">+ // import the function from greet.js (the .js extension is optional)</span>
+<span class="gi">+ // ./ (or ../) means to look for a local file</span>
+<span class="gi">+ var greet = require(&#39;./greet&#39;);</span>
+
+<span class="gi">+ $(document).ready(function() {</span>
+<span class="gi">+     $(&#39;body&#39;).prepend(&#39;&lt;h1&gt;&#39;+greet(&#39;jill&#39;)+&#39;&lt;/h1&gt;&#39;);</span>
+<span class="gi">+ });</span>
+</pre></div>
+</td></tr></table></div>
+<p>That’s it! If you previously ran <code class="docutils literal notranslate"><span class="pre">encore</span> <span class="pre">dev</span> <span class="pre">--watch</span></code>, your final, built files
+have already been updated: jQuery and <code class="docutils literal notranslate"><span class="pre">greet.js</span></code> have been automatically
+added to the output file (<code class="docutils literal notranslate"><span class="pre">app.js</span></code>). Refresh to see the message!</p>
+</div>
+<div class="section" id="the-import-and-export-statements">
+<h2>The import and export Statements<a class="headerlink" href="#the-import-and-export-statements" title="Permalink to this headline">¶</a></h2>
+<p>Instead of using <code class="docutils literal notranslate"><span class="pre">require()</span></code> and <code class="docutils literal notranslate"><span class="pre">module.exports</span></code> like shown above, JavaScript
+provides an alternate syntax based on the <a class="reference external" href="https://hacks.mozilla.org/2015/08/es6-in-depth-modules/">ECMAScript 6 modules</a> that includes
+the ability to use dynamic imports.</p>
+<p>To export values using the alternate syntax, use <code class="docutils literal notranslate"><span class="pre">export</span></code>:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span>// assets/js/greet.js
+<span class="gd">- module.exports = function(name) {</span>
+<span class="gi">+ export default function(name) {</span>
+    return `Yo yo ${name} - welcome to Encore!`;
+};
+</pre></div>
+</td></tr></table></div>
+<p>To import values, use <code class="docutils literal notranslate"><span class="pre">import</span></code>:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span>// assets/js/app.js
+<span class="gd">- require(&#39;../css/app.css&#39;);</span>
+<span class="gi">+ import &#39;../css/app.css&#39;;</span>
+
+<span class="gd">- var $ = require(&#39;jquery&#39;);</span>
+<span class="gi">+ import $ from &#39;jquery&#39;;</span>
+
+<span class="gd">- var greet = require(&#39;./greet&#39;);</span>
+<span class="gi">+ import greet from &#39;./greet&#39;;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="page-specific-javascript-or-css-multiple-entries">
+<span id="multiple-javascript-entries"></span><h2>Page-Specific JavaScript or CSS (Multiple Entries)<a class="headerlink" href="#page-specific-javascript-or-css-multiple-entries" title="Permalink to this headline">¶</a></h2>
+<p>So far, you only have one final JavaScript file: <code class="docutils literal notranslate"><span class="pre">app.js</span></code>. For small applications
+or SPA’s (Single Page Applications), that might be fine! However, as your app grows,
+you may want to have page-specific JavaScript or CSS (e.g. checkout, account,
+etc.). To handle this, create a new “entry” JavaScript file for each page:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// assets/js/checkout.js</span>
+<span class="c1">// custom code for your checkout page</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// assets/js/account.js</span>
+<span class="c1">// custom code for your account page</span>
+</pre></div>
+</td></tr></table></div>
+<p>Next, use <code class="docutils literal notranslate"><span class="pre">addEntry()</span></code> to tell Webpack to read these two new files when it builds:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span>// webpack.config.js
+Encore
+    // ...
+    .addEntry(&#39;app&#39;, &#39;./assets/js/app.js&#39;)
+<span class="gi">+     .addEntry(&#39;checkout&#39;, &#39;./assets/js/checkout.js&#39;)</span>
+<span class="gi">+     .addEntry(&#39;account&#39;, &#39;./assets/js/account.js&#39;)</span>
+    // ...
+</pre></div>
+</td></tr></table></div>
+<p>And because you just changed the <code class="docutils literal notranslate"><span class="pre">webpack.config.js</span></code> file, make sure to stop
+and restart Encore:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> yarn run encore dev --watch
+</pre></div>
+</td></tr></table></div>
+<p>Webpack will now output a new <code class="docutils literal notranslate"><span class="pre">checkout.js</span></code> file and a new <code class="docutils literal notranslate"><span class="pre">account.js</span></code> file
+in your build directory. And, if any of those files require/import CSS, Webpack
+will <em>also</em> output <code class="docutils literal notranslate"><span class="pre">checkout.css</span></code> and <code class="docutils literal notranslate"><span class="pre">account.css</span></code> files.</p>
+<p>Finally, include the <code class="docutils literal notranslate"><span class="pre">script</span></code> and <code class="docutils literal notranslate"><span class="pre">link</span></code> tags on the individual pages where
+you need them:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span>{# templates/.../checkout.html.twig #}
+{% extends &#39;base.html.twig&#39; %}
+
+<span class="gi">+ {% block stylesheets %}</span>
+<span class="gi">+     {{ parent() }}</span>
+<span class="gi">+     {{ encore_entry_link_tags(&#39;checkout&#39;) }}</span>
+<span class="gi">+ {% endblock %}</span>
+
+<span class="gi">+ {% block javascripts %}</span>
+<span class="gi">+     {{ parent() }}</span>
+<span class="gi">+     {{ encore_entry_script_tags(&#39;checkout&#39;) }}</span>
+<span class="gi">+ {% endblock %}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Now, the checkout page will contain all the JavaScript and CSS for the <code class="docutils literal notranslate"><span class="pre">app</span></code> entry
+(because this is included in <code class="docutils literal notranslate"><span class="pre">base.html.twig</span></code> and there is the <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">parent()</span> <span class="pre">}}</span></code> call)
+<em>and</em> your <code class="docutils literal notranslate"><span class="pre">checkout</span></code> entry.</p>
+<p>See <a class="reference internal" href="page-specific-assets.html"><span class="doc">Creating Page-Specific CSS/JS</span></a> for more details. To avoid duplicating
+the same code in different entry files, see <a class="reference internal" href="split-chunks.html"><span class="doc">Preventing Duplication by “Splitting” Shared Code into Separate Files</span></a>.</p>
+</div>
+<div class="section" id="using-sass-less-stylus">
+<h2>Using Sass/LESS/Stylus<a class="headerlink" href="#using-sass-less-stylus" title="Permalink to this headline">¶</a></h2>
+<p>You’ve already mastered the basics of Encore. Nice! But, there are <em>many</em> more
+features that you can opt into if you need them. For example, instead of using plain
+CSS you can also use Sass, LESS or Stylus. To use Sass, rename the <code class="docutils literal notranslate"><span class="pre">app.css</span></code>
+file to <code class="docutils literal notranslate"><span class="pre">app.scss</span></code> and update the <code class="docutils literal notranslate"><span class="pre">import</span></code> statement:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span>// assets/js/app.js
+<span class="gd">- import &#39;../css/app.css&#39;;</span>
+<span class="gi">+ import &#39;../css/app.scss&#39;;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Then, tell Encore to enable the Sass pre-processor:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span>// webpack.config.js
+Encore
+    // ...
+
+<span class="gi">+    .enableSassLoader()</span>
+;
+</pre></div>
+</td></tr></table></div>
+<p>Because you just changed your <code class="docutils literal notranslate"><span class="pre">webpack.config.js</span></code> file, you’ll need to restart
+Encore. When you do, you’ll see an error!</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;</span>   Error: Install sass-loader <span class="p">&amp;</span> node-sass to use enableSassLoader()
+<span class="gp">&gt;</span>     yarn add sass-loader@<span class="se">^8</span>.0.0 node-sass --dev
+</pre></div>
+</td></tr></table></div>
+<p>Encore supports many features. But, instead of forcing all of them on you, when
+you need a feature, Encore will tell you what you need to install. Run:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> yarn add sass-loader@^8.0.0 node-sass --dev
+<span class="gp">$</span> yarn encore dev --watch
+</pre></div>
+</td></tr></table></div>
+<p>Your app now supports Sass. Encore also supports LESS and Stylus. See
+<a class="reference internal" href="css-preprocessors.html"><span class="doc">CSS Preprocessors: Sass, LESS, Stylus, etc.</span></a>.</p>
+</div>
+<div class="section" id="compiling-only-a-css-file">
+<h2>Compiling Only a CSS File<a class="headerlink" href="#compiling-only-a-css-file" title="Permalink to this headline">¶</a></h2>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Using <code class="docutils literal notranslate"><span class="pre">addStyleEntry()</span></code> is supported, but not recommended. A better option
+is to follow the pattern above: use <code class="docutils literal notranslate"><span class="pre">addEntry()</span></code> to point to a JavaScript
+file, then require the CSS needed from inside of that.</p>
+</div>
+<p>If you want to only compile a CSS file, that’s possible via <code class="docutils literal notranslate"><span class="pre">addStyleEntry()</span></code>:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// webpack.config.js</span>
+<span class="nx">Encore</span>
+    <span class="c1">// ...</span>
+
+    <span class="p">.</span><span class="nx">addStyleEntry</span><span class="p">(</span><span class="s1">&#39;some_page&#39;</span><span class="p">,</span> <span class="s1">&#39;./assets/css/some_page.css&#39;</span><span class="p">)</span>
+<span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+<p>This will output a new <code class="docutils literal notranslate"><span class="pre">some_page.css</span></code>.</p>
+</div>
+<div class="section" id="keep-going">
+<h2>Keep Going!<a class="headerlink" href="#keep-going" title="Permalink to this headline">¶</a></h2>
+<p>Encore supports many more features! For a full list of what you can do, see
+<a class="reference external" href="https://github.com/symfony/webpack-encore/blob/master/index.js">Encore’s index.js file</a>. Or, go back to <a class="reference internal" href="../../frontend.html#encore-toc"><span class="std std-ref">list of Encore articles</span></a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,566 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Sessions &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Making the Locale “Sticky” during a User’s Session" href="session/locale_sticky_session.html" />
+    <link rel="prev" title="How to Force HTTPS or HTTP for different URLs" href="security/force_https.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sessions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-usage">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#avoid-starting-sessions-for-anonymous-users">Avoid Starting Sessions for Anonymous Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#more-about-sessions">More about Sessions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="session/database.html">Store Sessions in a Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session/locale_sticky_session.html">Making the Locale “Sticky” during a User’s Session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session/php_bridge.html">Bridge a legacy Application with Symfony Sessions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session/proxy_examples.html">Session Proxy Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Sessions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/session.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sessions">
+<h1>Sessions<a class="headerlink" href="#sessions" title="Permalink to this headline">¶</a></h1>
+<p>Symfony provides a session object and several utilities that you can use to
+store information about the user between requests.</p>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>Sessions are provided by the <a class="reference external" href="https://symfony.com/components/HttpFoundation">HttpFoundation component</a>, which is included in
+all Symfony applications, no matter how you installed it. Before using the
+sessions, check their default configuration:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">session</span><span class="p p-Indicator">:</span>
+        <span class="c1"># enables the support of sessions in the app</span>
+        <span class="l l-Scalar l-Scalar-Plain">enabled</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+        <span class="c1"># ID of the service used for session storage.</span>
+        <span class="c1"># NULL means that Symfony uses PHP default session mechanism</span>
+        <span class="l l-Scalar l-Scalar-Plain">handler_id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+        <span class="c1"># improves the security of the cookies used for sessions</span>
+        <span class="l l-Scalar l-Scalar-Plain">cookie_secure</span><span class="p p-Indicator">:</span> <span class="s">&#39;auto&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">cookie_samesite</span><span class="p p-Indicator">:</span> <span class="s">&#39;lax&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/framework.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="c">&lt;!--</span>
+<span class="c">            enabled: enables the support of sessions in the app</span>
+<span class="c">            handler-id: ID of the service used for session storage</span>
+<span class="c">                        NULL means that Symfony uses PHP default session mechanism</span>
+<span class="c">            cookie-secure and cookie-samesite: improves the security of the cookies used for sessions</span>
+<span class="c">        --&gt;</span>
+        <span class="nt">&lt;framework:session</span> <span class="na">enabled=</span><span class="s">&quot;true&quot;</span>
+                           <span class="na">handler-id=</span><span class="s">&quot;null&quot;</span>
+                           <span class="na">cookie-secure=</span><span class="s">&quot;auto&quot;</span>
+                           <span class="na">cookie-samesite=</span><span class="s">&quot;lax&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/framework.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;session&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="c1">// enables the support of sessions in the app</span>
+        <span class="s1">&#39;enabled&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="c1">// ID of the service used for session storage</span>
+        <span class="c1">// NULL means that Symfony uses PHP default session mechanism</span>
+        <span class="s1">&#39;handler_id&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+        <span class="c1">// improves the security of the cookies used for sessions</span>
+        <span class="s1">&#39;cookie_secure&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;cookie_samesite&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;lax&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Setting the <code class="docutils literal notranslate"><span class="pre">handler_id</span></code> config option to <code class="docutils literal notranslate"><span class="pre">null</span></code> means that Symfony will
+use the native PHP session mechanism. The session metadata files will be stored
+outside of the Symfony application, in a directory controlled by PHP. Although
+this usually simplify things, some session expiration related options may not
+work as expected if other applications that write to the same directory have
+short max lifetime settings.</p>
+<p>If you prefer, you can use the <code class="docutils literal notranslate"><span class="pre">session.handler.native_file</span></code> service as
+<code class="docutils literal notranslate"><span class="pre">handler_id</span></code> to let Symfony manage the sessions itself. Another useful option
+is <code class="docutils literal notranslate"><span class="pre">save_path</span></code>, which defines the directory where Symfony will store the
+session metadata files:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/framework.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">session</span><span class="p p-Indicator">:</span>
+        <span class="c1"># ...</span>
+        <span class="l l-Scalar l-Scalar-Plain">handler_id</span><span class="p p-Indicator">:</span> <span class="s">&#39;session.handler.native_file&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">save_path</span><span class="p p-Indicator">:</span> <span class="s">&#39;%kernel.project_dir%/var/sessions/%kernel.environment%&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/framework.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:framework=</span><span class="s">&quot;http://symfony.com/schema/dic/symfony&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/symfony https://symfony.com/schema/dic/symfony/symfony-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;framework:config&gt;</span>
+        <span class="nt">&lt;framework:session</span> <span class="na">enabled=</span><span class="s">&quot;true&quot;</span>
+                           <span class="na">handler-id=</span><span class="s">&quot;session.handler.native_file&quot;</span>
+                           <span class="na">save-path=</span><span class="s">&quot;%kernel.project_dir%/var/sessions/%kernel.environment%&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/framework:config&gt;</span>
+<span class="nt">&lt;/container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/framework.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;framework&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;session&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="c1">// ...</span>
+        <span class="s1">&#39;handler_id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;session.handler.native_file&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;save_path&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%kernel.project_dir%/var/sessions/%kernel.environment%&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>Check out the Symfony config reference to learn more about the other available
+<a class="reference internal" href="reference/configuration/framework.html#config-framework-session"><span class="std std-ref">Session configuration options</span></a>. You can also
+<a class="reference internal" href="session/database.html"><span class="doc">store sessions in a database</span></a>.</p>
+</div>
+<div class="section" id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<p>Symfony provides a session service that is injected in your services and
+controllers if you type-hint an argument with
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/SessionInterface.php" title="Symfony\Component\HttpFoundation\Session\SessionInterface"><span class="pre">SessionInterface</span></a></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\SessionInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">SomeService</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$session</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">SessionInterface</span> <span class="nv">$session</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span> <span class="o">=</span> <span class="nv">$session</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">someMethod</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// stores an attribute in the session for later reuse</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;attribute-name&#39;</span><span class="p">,</span> <span class="s1">&#39;attribute-value&#39;</span><span class="p">);</span>
+
+        <span class="c1">// gets an attribute by name</span>
+        <span class="nv">$foo</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+
+        <span class="c1">// the second argument is the value returned when the attribute doesn&#39;t exist</span>
+        <span class="nv">$filters</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;filters&#39;</span><span class="p">,</span> <span class="p">[]);</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Every <code class="docutils literal notranslate"><span class="pre">SessionInterface</span></code> implementation is supported. If you have your
+own implementation, type-hint this in the argument instead.</p>
+</div>
+<p>Stored attributes remain in the session for the remainder of that user’s session.
+By default, session attributes are key-value pairs managed with the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Attribute/AttributeBag.php" title="Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag"><span class="pre">AttributeBag</span></a></code>
+class.</p>
+<p>If your application needs are complex, you may prefer to use
+<a class="reference internal" href="components/http_foundation/sessions.html#namespaced-attributes"><span class="std std-ref">namespaced session attributes</span></a> which are managed with the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Attribute/NamespacedAttributeBag.php" title="Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag"><span class="pre">NamespacedAttributeBag</span></a></code>
+class. Before using them, override the <code class="docutils literal notranslate"><span class="pre">session</span></code> service definition to replace
+the default <code class="docutils literal notranslate"><span class="pre">AttributeBag</span></code> by the <code class="docutils literal notranslate"><span class="pre">NamespacedAttributeBag</span></code>:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/services.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">session</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">public</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Symfony\Component\HttpFoundation\Session\Session</span>
+    <span class="l l-Scalar l-Scalar-Plain">arguments</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;@session.storage&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;@session.namespacedattributebag&#39;</span><span class="p p-Indicator">]</span>
+
+<span class="l l-Scalar l-Scalar-Plain">session.namespacedattributebag</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">class</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="avoid-starting-sessions-for-anonymous-users">
+<span id="session-avoid-start"></span><h2>Avoid Starting Sessions for Anonymous Users<a class="headerlink" href="#avoid-starting-sessions-for-anonymous-users" title="Permalink to this headline">¶</a></h2>
+<p>Sessions are automatically started whenever you read, write or even check for
+the existence of data in the session. This may hurt your application performance
+because all users will receive a session cookie. In order to prevent that, you
+must <em>completely</em> avoid accessing the session.</p>
+<p>For example, if your templates include some code to display the
+<a class="reference internal" href="controller.html#flash-messages"><span class="std std-ref">flash messages</span></a>, sessions will start even if the user
+is not logged in and even if you haven’t created any flash messages. To avoid
+this behavior, add a check before trying to access the flash messages:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">{# this check prevents starting a session when there are no flash messages #}</span>
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">app.request.hasPreviousSession</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">for</span> <span class="nv">message</span> <span class="k">in</span> <span class="nv">app.flashes</span><span class="o">(</span><span class="s1">&#39;notice&#39;</span><span class="o">)</span> <span class="cp">%}</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;flash-notice&quot;</span><span class="p">&gt;</span>
+            <span class="cp">{{</span> <span class="nv">message</span> <span class="cp">}}</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="more-about-sessions">
+<h2>More about Sessions<a class="headerlink" href="#more-about-sessions" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="session/database.html">Store Sessions in a Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session/locale_sticky_session.html">Making the Locale “Sticky” during a User’s Session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session/php_bridge.html">Bridge a legacy Application with Symfony Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session/proxy_examples.html">Session Proxy Examples</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

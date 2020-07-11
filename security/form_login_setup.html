@@ -1,0 +1,942 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to Build a Login Form &mdash; Symfony Framework Documentation  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/rtd_custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to Add a Reset Password Feature" href="reset_password.html" />
+    <link rel="prev" title="Using the new Authenticator-based Security" href="experimental_authenticators.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #f0f0f0" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/symfony-logo.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick_tour/index.html">The Quick Tour</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../best_practices.html">The Symfony Framework Best Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bundles.html">The Bundle System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console.html">Console Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctrine.html">Databases and the Doctrine ORM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">How to Deploy a Symfony Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../email.html">Swift Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event_dispatcher.html">Events and Event Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Managing CSS and JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_cache.html">HTTP Cache</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../http_client.html">HTTP Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mailer.html">Sending Emails with Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mercure.html">Pushing Data to Clients Using the Mercure Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../messenger.html">Messenger: Sync &amp; Queued Message Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migrating an Existing Application to Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notifier.html">Creating and Sending Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler.html">Profiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../security.html">Security</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../security.html#installation">1) Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#a-create-your-user-class">2a) Create your User Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#b-the-user-provider">2b) The “User Provider”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#c-encoding-passwords">2c) Encoding Passwords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#a-authentication-firewalls">3a) Authentication &amp; Firewalls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#b-authenticating-your-users">3b) Authenticating your Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#denying-access-roles-and-other-authorization">4) Denying Access, Roles and other Authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#a-fetching-the-user-object">5a) Fetching the User Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#b-fetching-the-user-from-a-service">5b) Fetching the User from a Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#logging-out">Logging Out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#hierarchical-roles">Hierarchical Roles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security.html#frequently-asked-questions">Frequently Asked Questions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../security.html#learn-more">Learn More</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../security.html#authentication-identifying-logging-in-the-user">Authentication (Identifying/Logging in the User)</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="experimental_authenticators.html">Using the new Authenticator-based Security</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">How to Build a Login Form</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reset_password.html">How to Add a Reset Password Feature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="json_login_setup.html">How to Build a JSON Authentication Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="guard_authentication.html">Custom Authentication System with Guard (API Token Example)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="password_migration.html">How to Migrate a Password Hash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auth_providers.html">Built-in Authentication Providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_provider.html">Security User Providers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ldap.html">Authenticating against an LDAP server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="remember_me.html">How to Add “Remember Me” Login Functionality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="impersonating_user.html">How to Impersonate a User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_checkers.html">How to Create and Enable Custom User Checkers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="named_encoders.html">How to Use A Different Password Encoder Algorithm Per User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multiple_guard_authenticators.html">How to Use Multiple Guard Authenticators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="firewall_restriction.html">How to Restrict Firewalls to a Request</a></li>
+<li class="toctree-l4"><a class="reference internal" href="csrf.html">How to Implement CSRF Protection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="custom_authentication_provider.html">How to Create a custom Authentication Provider</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../security.html#authorization-denying-access">Authorization (Denying Access)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../session.html">Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup.html">Installing &amp; Setting up the Symfony Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../serializer.html">How to Use the Serializer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service_container.html">Service Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../translation.html">Translations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../validation.html">Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web_link.html">Asset Preloading and Resource Hints with HTTP/2 and WebLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/index.html">The Components</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference Documents</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../create_framework/index.html">Create your own PHP Framework</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Symfony Framework Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../security.html">Security</a> &raquo;</li>
+        
+      <li>How to Build a Login Form</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/security/form_login_setup.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-build-a-login-form">
+<h1>How to Build a Login Form<a class="headerlink" href="#how-to-build-a-login-form" title="Permalink to this headline">¶</a></h1>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">If you’re looking for the <code class="docutils literal notranslate"><span class="pre">form_login</span></code> firewall option, see
+<a class="reference internal" href="form_login.html"><span class="doc">Using the form_login Authentication Provider</span></a>.</p>
+</div>
+<p>Ready to create a login form? First, make sure you’ve followed the main
+<a class="reference internal" href="../security.html"><span class="doc">Security Guide</span></a> to install security and create your <code class="docutils literal notranslate"><span class="pre">User</span></code>
+class.</p>
+<div class="section" id="generating-the-login-form">
+<h2>Generating the Login Form<a class="headerlink" href="#generating-the-login-form" title="Permalink to this headline">¶</a></h2>
+<p>Creating a powerful login form can be bootstrapped with the <code class="docutils literal notranslate"><span class="pre">make:auth</span></code> command from
+<a class="reference external" href="https://symfony.com/doc/current/bundles/SymfonyMakerBundle/index.html">MakerBundle</a>. Depending on your setup, you may be asked different questions
+and your generated code may be slightly different:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console make:auth
+
+<span class="go">What style of authentication do you want? [Empty authenticator]:</span>
+<span class="go"> [0] Empty authenticator</span>
+<span class="go"> [1] Login form authenticator</span>
+<span class="gp">&gt;</span> 1
+
+<span class="go">The class name of the authenticator to create (e.g. AppCustomAuthenticator):</span>
+<span class="gp">&gt;</span> LoginFormAuthenticator
+
+<span class="go">Choose a name for the controller class (e.g. SecurityController) [SecurityController]:</span>
+<span class="gp">&gt;</span> SecurityController
+
+<span class="go">Do you want to generate a &#39;/logout&#39; URL? (yes/no) [yes]:</span>
+<span class="gp">&gt;</span> yes
+
+<span class="go"> created: src/Security/LoginFormAuthenticator.php</span>
+<span class="go"> updated: config/packages/security.yaml</span>
+<span class="go"> created: src/Controller/SecurityController.php</span>
+<span class="go"> created: templates/security/login.html.twig</span>
+</pre></div>
+</td></tr></table></div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.8: </span>Support for login form authentication was added to <code class="docutils literal notranslate"><span class="pre">make:auth</span></code> in MakerBundle 1.8.</p>
+</div>
+<p>This generates the following: 1) login/logout routes &amp; controller, 2) a template that
+renders the login form, 3) a <a class="reference internal" href="guard_authentication.html"><span class="doc">Guard authenticator</span></a>
+class that processes the login submit and 4) updates the main security config file.</p>
+<p><strong>Step 1.</strong> The <code class="docutils literal notranslate"><span class="pre">/login</span></code>/<code class="docutils literal notranslate"><span class="pre">/logout</span></code> routes &amp; controller:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/SecurityController.php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\Annotation\Route</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Http\Authentication\AuthenticationUtils</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">SecurityController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @Route(&quot;/login&quot;, name=&quot;app_login&quot;)</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">(</span><span class="nx">AuthenticationUtils</span> <span class="nv">$authenticationUtils</span><span class="p">)</span><span class="o">:</span> <span class="nx">Response</span>
+    <span class="p">{</span>
+        <span class="c1">// if ($this-&gt;getUser()) {</span>
+        <span class="c1">//     return $this-&gt;redirectToRoute(&#39;target_path&#39;);</span>
+        <span class="c1">// }</span>
+
+        <span class="c1">// get the login error if there is one</span>
+        <span class="nv">$error</span> <span class="o">=</span> <span class="nv">$authenticationUtils</span><span class="o">-&gt;</span><span class="na">getLastAuthenticationError</span><span class="p">();</span>
+        <span class="c1">// last username entered by the user</span>
+        <span class="nv">$lastUsername</span> <span class="o">=</span> <span class="nv">$authenticationUtils</span><span class="o">-&gt;</span><span class="na">getLastUsername</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;security/login.html.twig&#39;</span><span class="p">,</span> <span class="p">[</span>
+            <span class="s1">&#39;last_username&#39;</span> <span class="o">=&gt;</span> <span class="nv">$lastUsername</span><span class="p">,</span>
+            <span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="nv">$error</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @Route(&quot;/logout&quot;, name=&quot;app_logout&quot;)</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">logout</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">\LogicException</span><span class="p">(</span><span class="s1">&#39;This method can be blank - it will be intercepted by the logout key on your firewall.&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Edit the <code class="docutils literal notranslate"><span class="pre">security.yaml</span></code> file in order to declare the <code class="docutils literal notranslate"><span class="pre">/logout</span></code> path:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">providers</span><span class="p p-Indicator">:</span>
+        <span class="c1"># ...</span>
+        <span class="l l-Scalar l-Scalar-Plain">logout</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">path</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">app_logout</span>
+            <span class="c1"># where to redirect after logout</span>
+            <span class="c1"># target: app_any_route</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/security.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; charset=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;srv:container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/security&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:srv=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/security</span>
+<span class="s">        https://symfony.com/schema/dic/security/security-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;config&gt;</span>
+        <span class="nt">&lt;rule</span> <span class="na">path=</span><span class="s">&quot;^/login$&quot;</span> <span class="na">role=</span><span class="s">&quot;IS_AUTHENTICATED_ANONYMOUSLY&quot;</span><span class="nt">/&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;/config&gt;</span>
+<span class="nt">&lt;/srv:container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/security.php</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+    <span class="s1">&#39;access_control&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="s1">&#39;path&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;^/login&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;roles&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;IS_AUTHENTICATED_ANONYMOUSLY&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="c1">// ...</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p><strong>Step 2.</strong> The template has very little to do with security: it just generates
+a traditional HTML form that submits to <code class="docutils literal notranslate"><span class="pre">/login</span></code>:</p>
+<div class="highlight-html+twig notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s1">&#39;base.html.twig&#39;</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>Log in!<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">body</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="p">&gt;</span>
+    <span class="cp">{%</span> <span class="k">if</span> <span class="nv">error</span> <span class="cp">%}</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-danger&quot;</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">error.messageKey</span><span class="o">|</span><span class="nf">trans</span><span class="o">(</span><span class="nv">error.messageData</span><span class="o">,</span> <span class="s1">&#39;security&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+
+    <span class="cp">{%</span> <span class="k">if</span> <span class="nv">app.user</span> <span class="cp">%}</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mb-3&quot;</span><span class="p">&gt;</span>
+            You are logged in as <span class="cp">{{</span> <span class="nv">app.user.username</span> <span class="cp">}}</span>, <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">path</span><span class="o">(</span><span class="s1">&#39;app_logout&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>Logout<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+
+    <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;h3 mb-3 font-weight-normal&quot;</span><span class="p">&gt;</span>Please sign in<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;inputEmail&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sr-only&quot;</span><span class="p">&gt;</span>Email<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;email&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">last_username</span> <span class="cp">}}</span><span class="s">&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;email&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;inputEmail&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-control&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Email&quot;</span> <span class="na">required</span> <span class="na">autofocus</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;inputPassword&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sr-only&quot;</span><span class="p">&gt;</span>Password<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;password&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;password&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;inputPassword&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-control&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Password&quot;</span> <span class="na">required</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;_csrf_token&quot;</span>
+           <span class="na">value</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">csrf_token</span><span class="o">(</span><span class="s1">&#39;authenticate&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="s">&quot;</span>
+    <span class="p">&gt;</span>
+
+    <span class="c">{#</span>
+<span class="c">        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.</span>
+<span class="c">        See https://symfony.com/doc/current/security/remember_me.html</span>
+
+<span class="c">        &lt;div class=&quot;checkbox mb-3&quot;&gt;</span>
+<span class="c">            &lt;label&gt;</span>
+<span class="c">                &lt;input type=&quot;checkbox&quot; name=&quot;_remember_me&quot;&gt; Remember me</span>
+<span class="c">            &lt;/label&gt;</span>
+<span class="c">        &lt;/div&gt;</span>
+<span class="c">    #}</span>
+
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-lg btn-primary&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="p">&gt;</span>
+        Sign in
+    <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Step 3.</strong> The Guard authenticator processes the form submit:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Security/LoginFormAuthenticator.php</span>
+<span class="k">namespace</span> <span class="nx">App\Security</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Entity\User</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Doctrine\ORM\EntityManagerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\RedirectResponse</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Routing\Generator\UrlGeneratorInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Authentication\Token\TokenInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\Security</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\User\UserInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Core\User\UserProviderInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Csrf\CsrfToken</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Csrf\CsrfTokenManagerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Guard\PasswordAuthenticatedInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Http\Util\TargetPathTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">LoginFormAuthenticator</span> <span class="k">extends</span> <span class="nx">AbstractFormLoginAuthenticator</span> <span class="k">implements</span> <span class="nx">PasswordAuthenticatedInterface</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TargetPathTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">const</span> <span class="no">LOGIN_ROUTE</span> <span class="o">=</span> <span class="s1">&#39;app_login&#39;</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="nv">$entityManager</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$urlGenerator</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$csrfTokenManager</span><span class="p">;</span>
+    <span class="k">private</span> <span class="nv">$passwordEncoder</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">EntityManagerInterface</span> <span class="nv">$entityManager</span><span class="p">,</span> <span class="nx">UrlGeneratorInterface</span> <span class="nv">$urlGenerator</span><span class="p">,</span> <span class="nx">CsrfTokenManagerInterface</span> <span class="nv">$csrfTokenManager</span><span class="p">,</span> <span class="nx">UserPasswordEncoderInterface</span> <span class="nv">$passwordEncoder</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">entityManager</span> <span class="o">=</span> <span class="nv">$entityManager</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">urlGenerator</span> <span class="o">=</span> <span class="nv">$urlGenerator</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">csrfTokenManager</span> <span class="o">=</span> <span class="nv">$csrfTokenManager</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">passwordEncoder</span> <span class="o">=</span> <span class="nv">$passwordEncoder</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">supports</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="na">LOGIN_ROUTE</span> <span class="o">===</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;_route&#39;</span><span class="p">)</span>
+            <span class="o">&amp;&amp;</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">isMethod</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getCredentials</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$credentials</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;csrf_token&#39;</span> <span class="o">=&gt;</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;_csrf_token&#39;</span><span class="p">),</span>
+        <span class="p">];</span>
+        <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getSession</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span>
+            <span class="nx">Security</span><span class="o">::</span><span class="na">LAST_USERNAME</span><span class="p">,</span>
+            <span class="nv">$credentials</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span>
+        <span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$credentials</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getUser</span><span class="p">(</span><span class="nv">$credentials</span><span class="p">,</span> <span class="nx">UserProviderInterface</span> <span class="nv">$userProvider</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$token</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CsrfToken</span><span class="p">(</span><span class="s1">&#39;authenticate&#39;</span><span class="p">,</span> <span class="nv">$credentials</span><span class="p">[</span><span class="s1">&#39;csrf_token&#39;</span><span class="p">]);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">csrfTokenManager</span><span class="o">-&gt;</span><span class="na">isTokenValid</span><span class="p">(</span><span class="nv">$token</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">InvalidCsrfTokenException</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">entityManager</span><span class="o">-&gt;</span><span class="na">getRepository</span><span class="p">(</span><span class="nx">User</span><span class="o">::</span><span class="na">class</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">findOneBy</span><span class="p">([</span><span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="nv">$credentials</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]]);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// fail authentication with a custom error</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">CustomUserMessageAuthenticationException</span><span class="p">(</span><span class="s1">&#39;Email could not be found.&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$user</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">checkCredentials</span><span class="p">(</span><span class="nv">$credentials</span><span class="p">,</span> <span class="nx">UserInterface</span> <span class="nv">$user</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">passwordEncoder</span><span class="o">-&gt;</span><span class="na">isPasswordValid</span><span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="nv">$credentials</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Used to upgrade (rehash) the user&#39;s password automatically over time.</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getPassword</span><span class="p">(</span><span class="nv">$credentials</span><span class="p">)</span><span class="o">:</span> <span class="o">?</span><span class="nx">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$credentials</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">onAuthenticationSuccess</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">TokenInterface</span> <span class="nv">$token</span><span class="p">,</span> <span class="nv">$providerKey</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$targetPath</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getTargetPath</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getSession</span><span class="p">(),</span> <span class="nv">$providerKey</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nx">RedirectResponse</span><span class="p">(</span><span class="nv">$targetPath</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// For example : return new RedirectResponse($this-&gt;urlGenerator-&gt;generate(&#39;some_route&#39;));</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">\Exception</span><span class="p">(</span><span class="s1">&#39;TODO: provide a valid redirect inside &#39;</span><span class="o">.</span><span class="no">__FILE__</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">getLoginUrl</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">urlGenerator</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">LOGIN_ROUTE</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Step 4.</strong> Updates the main security config file to enable the Guard authenticator:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># config/packages/security.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+    <span class="c1"># ...</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">firewalls</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
+            <span class="c1"># ...</span>
+            <span class="l l-Scalar l-Scalar-Plain">guard</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">authenticators</span><span class="p p-Indicator">:</span>
+                    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">App\Security\LoginFormAuthenticator</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- config/packages/security.xml --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot; charset=&quot;UTF-8&quot; ?&gt;</span>
+<span class="nt">&lt;srv:container</span> <span class="na">xmlns=</span><span class="s">&quot;http://symfony.com/schema/dic/security&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:srv=</span><span class="s">&quot;http://symfony.com/schema/dic/services&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://symfony.com/schema/dic/services</span>
+<span class="s">        https://symfony.com/schema/dic/services/services-1.0.xsd</span>
+<span class="s">        http://symfony.com/schema/dic/security</span>
+<span class="s">        https://symfony.com/schema/dic/security/security-1.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;config&gt;</span>
+        <span class="c">&lt;!-- ... --&gt;</span>
+        <span class="nt">&lt;firewall</span> <span class="na">name=</span><span class="s">&quot;main&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- ... --&gt;</span>
+            <span class="nt">&lt;guard&gt;</span>
+                <span class="nt">&lt;authenticator</span> <span class="na">class=</span><span class="s">&quot;App\Security\LoginFormAuthenticator&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/guard&gt;</span>
+        <span class="nt">&lt;/firewall&gt;</span>
+    <span class="nt">&lt;/config&gt;</span>
+<span class="nt">&lt;/srv:container&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// config/packages/security.php</span>
+<span class="k">use</span> <span class="nx">App\Security\LoginFormAuthenticator</span><span class="p">;</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="na">loadFromExtension</span><span class="p">(</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+    <span class="s1">&#39;firewalls&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;main&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// ...,</span>
+            <span class="s1">&#39;guard&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;authenticators&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="nx">LoginFormAuthenticator</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+                <span class="p">]</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="finishing-the-login-form">
+<h2>Finishing the Login Form<a class="headerlink" href="#finishing-the-login-form" title="Permalink to this headline">¶</a></h2>
+<p>Woh. The <code class="docutils literal notranslate"><span class="pre">make:auth</span></code> command just did a <em>lot</em> of work for you. But, you’re not done
+yet. First, go to <code class="docutils literal notranslate"><span class="pre">/login</span></code> to see the new login form. Feel free to customize this
+however you want.</p>
+<p>When you submit the form, the <code class="docutils literal notranslate"><span class="pre">LoginFormAuthenticator</span></code> will intercept the request,
+read the email (or whatever field you’re using) &amp; password from the form, find the
+<code class="docutils literal notranslate"><span class="pre">User</span></code> object, validate the CSRF token and check the password.</p>
+<p>But, depending on your setup, you’ll need to finish one or more TODOs before the
+whole process works. You will <em>at least</em> need to fill in <em>where</em> you want your user to
+be redirected after success:</p>
+<div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span>// src/Security/LoginFormAuthenticator.php
+
+// ...
+public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+{
+    // ...
+
+<span class="gd">-     throw new \Exception(&#39;TODO: provide a valid redirect inside &#39;.__FILE__);</span>
+<span class="gi">+     // redirect to some &quot;app_homepage&quot; route - of wherever you want</span>
+<span class="gi">+     return new RedirectResponse($this-&gt;urlGenerator-&gt;generate(&#39;app_homepage&#39;));</span>
+}
+</pre></div>
+</td></tr></table></div>
+<p>Unless you have any other TODOs in that file, that’s it! If you’re loading users
+from the database, make sure you’ve loaded some <a class="reference internal" href="../testing/database.html#doctrine-fixtures"><span class="std std-ref">dummy users</span></a>.
+Then, try to login.</p>
+<p>If you’re successful, the web debug toolbar will tell you who you are and what roles
+you have:</p>
+<img alt="../_images/symfony_loggedin_wdt.png" class="align-center" src="../_images/symfony_loggedin_wdt.png" />
+<p>The Guard authentication system is powerful, and you can customize your authenticator
+class to do whatever you need. To learn more about what the individual methods do,
+see <a class="reference internal" href="guard_authentication.html"><span class="doc">Custom Authentication System with Guard (API Token Example)</span></a>.</p>
+</div>
+<div class="section" id="controlling-error-messages">
+<h2>Controlling Error Messages<a class="headerlink" href="#controlling-error-messages" title="Permalink to this headline">¶</a></h2>
+<p>You can cause authentication to fail with a custom message at any step by throwing
+a custom <code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/Exception/CustomUserMessageAuthenticationException.php" title="Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException"><span class="pre">CustomUserMessageAuthenticationException</span></a></code>.
+This is an easy way to control the error message.</p>
+<p>But in some cases, like if you return <code class="docutils literal notranslate"><span class="pre">false</span></code> from <code class="docutils literal notranslate"><span class="pre">checkCredentials()</span></code>, you
+may see an error that comes from the core of Symfony - like <code class="docutils literal notranslate"><span class="pre">Invalid</span> <span class="pre">credentials.</span></code>.</p>
+<p>To customize this message, you could throw a <code class="docutils literal notranslate"><span class="pre">CustomUserMessageAuthenticationException</span></code>
+instead. Or, you can <a class="reference internal" href="../translation.html"><span class="doc">translate</span></a> the message through the <code class="docutils literal notranslate"><span class="pre">security</span></code>
+domain:</p>
+<div class="configuration-block">
+<ul class="simple">
+<li><em>XML</em><div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&lt;!-- translations/security.en.xlf --&gt;</span>
+<span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;xliff</span> <span class="na">version=</span><span class="s">&quot;1.2&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;urn:oasis:names:tc:xliff:document:1.2&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">source-language=</span><span class="s">&quot;en&quot;</span> <span class="na">datatype=</span><span class="s">&quot;plaintext&quot;</span> <span class="na">original=</span><span class="s">&quot;file.ext&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;body&gt;</span>
+            <span class="nt">&lt;trans-unit</span> <span class="na">id=</span><span class="s">&quot;Invalid credentials.&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;source&gt;</span>Invalid credentials.<span class="nt">&lt;/source&gt;</span>
+                <span class="nt">&lt;target&gt;</span>The password you entered was invalid!<span class="nt">&lt;/target&gt;</span>
+            <span class="nt">&lt;/trans-unit&gt;</span>
+        <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;/file&gt;</span>
+<span class="nt">&lt;/xliff&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>YAML</em><div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># translations/security.en.yaml</span>
+<span class="s">&#39;Invalid</span><span class="nv"> </span><span class="s">credentials.&#39;</span><span class="p p-Indicator">:</span> <span class="s">&#39;The</span><span class="nv"> </span><span class="s">password</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">entered</span><span class="nv"> </span><span class="s">was</span><span class="nv"> </span><span class="s">invalid!&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><em>PHP</em><div class="highlight-php notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// translations/security.en.php</span>
+<span class="k">return</span> <span class="p">[</span>
+    <span class="s1">&#39;Invalid credentials.&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;The password you entered was invalid!&#39;</span><span class="p">,</span>
+<span class="p">];</span>
+</pre></div>
+</td></tr></table></div>
+</li>
+</ul>
+</div>
+<p>If the message isn’t translated, make sure you’ve installed the <code class="docutils literal notranslate"><span class="pre">translator</span></code>
+and try clearing your cache:</p>
+<div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> php bin/console cache:clear
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="redirecting-to-the-last-accessed-page-with-targetpathtrait">
+<h2>Redirecting to the Last Accessed Page with <code class="docutils literal notranslate"><span class="pre">TargetPathTrait</span></code><a class="headerlink" href="#redirecting-to-the-last-accessed-page-with-targetpathtrait" title="Permalink to this headline">¶</a></h2>
+<p>The last request URI is stored in a session variable named
+<code class="docutils literal notranslate"><span class="pre">_security.&lt;your</span> <span class="pre">providerKey&gt;.target_path</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">_security.main.target_path</span></code>
+if the name of your firewall is <code class="docutils literal notranslate"><span class="pre">main</span></code>). Most of the times you don’t have to
+deal with this low level session variable. However, the
+<code class="docutils literal notranslate"><a class="reference external" href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Http/Util/TargetPathTrait.php" title="Symfony\Component\Security\Http\Util\TargetPathTrait"><span class="pre">TargetPathTrait</span></a></code> utility
+can be used to read (like in the example above) or set this value manually.</p>
+<p>When the user tries to access a restricted page, they are being redirected to
+the login page. At that point target path will be set. After a successful login,
+the user will be redirected to this previously set target path.</p>
+<p>If you also want to apply this behavior to public pages, you can create an
+<a class="reference internal" href="../event_dispatcher.html"><span class="doc">event subscriber</span></a> to set the target path manually
+whenever the user browses a page:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nx">App\EventSubscriber</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Symfony\Component\EventDispatcher\EventSubscriberInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\SessionInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\RequestEvent</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\KernelEvents</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\Security\Http\Util\TargetPathTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">RequestSubscriber</span> <span class="k">implements</span> <span class="nx">EventSubscriberInterface</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TargetPathTrait</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="nv">$session</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">SessionInterface</span> <span class="nv">$session</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span> <span class="o">=</span> <span class="nv">$session</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">onKernelRequest</span><span class="p">(</span><span class="nx">RequestEvent</span> <span class="nv">$event</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="o">!</span><span class="nv">$event</span><span class="o">-&gt;</span><span class="na">isMasterRequest</span><span class="p">()</span>
+            <span class="o">||</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">isXmlHttpRequest</span><span class="p">()</span>
+            <span class="o">||</span> <span class="s1">&#39;app_login&#39;</span> <span class="o">===</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;_route&#39;</span><span class="p">)</span>
+        <span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">saveTargetPath</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="p">,</span> <span class="s1">&#39;main&#39;</span><span class="p">,</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getUri</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getSubscribedEvents</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="nx">KernelEvents</span><span class="o">::</span><span class="na">REQUEST</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;onKernelRequest&#39;</span><span class="p">]</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
