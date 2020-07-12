@@ -1,7 +1,19 @@
 .. _symfony2-documentation:
 
-Symfony Documentation
-=====================
+[非公式] Symfony 日本語ドキュメント
+============================================
+
+初めに
+----------
+
+非公式の Symfony 日本語ドキュメントです。
+Symfony の公式ドキュメントを日本語へ翻訳していきます。
+正確な最新の情報は `Symfony の公式ドキュメント <https://symfony.com/doc/current/index.html>`_ をご確認ください。
+
+こちらのドキュメントも `GitHub <https://github.com/okazy/symfony-docs>`_ で管理しています。
+Issue や Pull request でのご指摘、ご協力をいただけますと幸いです。
+
+サンプルコードを含む本ドキュメントも公式ドキュメントの `Creative Commons BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0/>`_ ライセンスに従います。
 
 Quick Tour
 ----------

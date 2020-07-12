@@ -59,8 +59,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'Symfony Framework Documentation'
-copyright = ''
+project = '[Unofficial] Symfony Framework Documentation (ja)'
+copyright = 'This work, including the code samples, is licensed under a Creative Commons BY-SA 3.0 license.'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
