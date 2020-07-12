@@ -42,24 +42,8 @@ jobs:
             -   name: "Build documentation"
                 run: make -C _build SPHINXOPTS="-nqW -j auto" html
 
-            -   name: "Deploy Configuration"
-                run: |
-                    mkdir ~/.ssh
-                    ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-                    echo "${{ secrets.MY_ACTIONS_DEPLOY_KEY }}" > ~/.ssh/id_rsa
-                    chmod 400 ~/.ssh/id_rsa
-
-            -   name: "Push"
-                env:
-                    GITHUB_USER: "builduser"
-                    GITHUB_EMAIL: "hideki518c@gmail.com"
-                run: |
-                    git config --local user.name "${GITHUB_USER}"
-                    git config --local user.email "${GITHUB_EMAIL}"
-                    git remote set-url origin git@github.com:${GITHUB_REPOSITORY}.git
-                    cp -rf _build/html/* ./
-                    rm -rf .github
-                    touch .nojekyll
-                    git add --all
-                    git commit -m "auto rebuilding site"
-                    git push origin HEAD:gh-pages --force
+            - name: "Deploy GitHub Pages"
+                uses: peaceiris/actions-gh-pages@v3
+                with:
+                    deploy_key: ${{ secrets.MY_ACTIONS_DEPLOY_KEY }}
+                    publish_dir: ./_build/html
