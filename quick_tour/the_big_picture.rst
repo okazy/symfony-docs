@@ -1,29 +1,26 @@
-The Big Picture
+全体像
 ===============
 
-Start using Symfony in 10 minutes! Really! That's all you need to understand the
-most important concepts and start building a real project!
+10分でSymfonyを使い始めましょう！最も重要な概念を理解し、プロジェクトの構築を開始するには本当にこれだけです。
 
-If you've used a web framework before, you should feel right at home with
-Symfony. If not, welcome to a whole new way of developing web applications. Symfony
-*embraces* best practices, keeps backwards compatibility (Yes! Upgrading is always
-safe & easy!) and offers long-term support.
+以前にWebフレームワークを利用していた場合は、Symfonyに親しみやすいはずです。
+そうでない場合は、全く新しいWebアプリケーションの開発方法へようこそ。
+Symfonyはベストプラクティスを採用し、安全簡単にアップグレードができる後方互換性、そして長期的なサポートを提供します。
 
 .. _installing-symfony2:
 
-Downloading Symfony
--------------------
+Symfonyのダウンロード
+---------------------
 
-First, make sure you've installed `Composer`_ and have PHP 7.1.3 or higher.
+まずは `Composer`_ がインストールされており、PHP7.1.3以降がインストールされていることを確認してください。
 
-Ready? In a terminal, run:
+準備が整ったらターミナルで次を実行:
 
 .. code-block:: terminal
 
     $ composer create-project symfony/skeleton quick_tour
 
-This creates a new ``quick_tour/`` directory with a small, but powerful new
-Symfony application:
+これにより、最小で強力なSymfonyアプリケーションの ``quick_tour/`` ディレクトリが作成されます。:
 
 .. code-block:: text
 
@@ -39,32 +36,30 @@ Symfony application:
     ├─ var/
     └─ vendor/
 
-Can we already load the project in a browser? Yes! You can setup
-:doc:`Nginx or Apache </setup/web_server_configuration>` and configure their
-document root to be the ``public/`` directory. But, for development, it's better
-to :doc:`install the Symfony local web server </setup/symfony_server>` and run
-it as follows:
+すでにブラウザでプロジェクトをロードできますか? はい!
+:doc:`Nginx またはApache </setup/web_server_configuration>` をセットアップし、 ``public/`` ディレクトリをドキュメントルートに設定します。
+しかし、開発のためには :doc:`SymfonyのローカルWebサーバをインストール </setup/symfony_server>` して次のように実行することをお勧めします。:
 
 .. code-block:: terminal
 
     $ symfony server:start
 
-Try your new app by going to ``http://localhost:8000`` in a browser!
+ブラウザで ``http://localhost:8000`` へアクセスして新しいアプリケーションを試してみましょう！:
 
 .. image:: /_images/quick_tour/no_routes_page.png
    :align: center
    :class: with-browser
 
-Fundamentals: Route, Controller, Response
+基礎: ルート、コントローラ、レスポンス
 -----------------------------------------
 
-Our project only has about 15 files, but it's ready to become a sleek API, a robust
-web app, or a microservice. Symfony starts small, but scales with you.
+プロジェクトには約15個のファイルしかありませんが、洗練されたAPI、堅牢なWebアプリ、またはマイクロサービスの準備ができています。
+Symfonyは小さなものから始まりますが、あなたと共にスケールします。
 
-But before we go too far, let's dig into the fundamentals by building our first page.
+しかし先に進む前に、最初のページを作成して基本を掘り下げましょう。
 
-Start in ``config/routes.yaml``: this is where *we* can define the URL to our new
-page. Uncomment the example that already lives in the file:
+``config/routes.yaml`` で始めます。ここで新しいページのURLを定義できます。
+ファイルに既に存在する例のコメントアウトを外します。:
 
 .. code-block:: yaml
 
@@ -73,12 +68,12 @@ page. Uncomment the example that already lives in the file:
         path: /
         controller: 'App\Controller\DefaultController::index'
 
-This is called a *route*: it defines the URL to your page (``/``) and the "controller":
-the *function* that will be called whenever anyone goes to this URL. That function
-doesn't exist yet, so let's create it!
+これは *ルート* と呼ばれます。
+それはページ (``/``) のURLと "controller" を定義します。
+このURLにアクセスしたときに呼び出される *関数* です。
+その関数はまだ存在しないので、作成しましょう！
 
-In ``src/Controller``, create a new ``DefaultController`` class and an ``index``
-method inside::
+``src/Controller`` に新しい ``DefaultController`` クラスと ``index`` メソッドを作成します。::
 
     // src/Controller/DefaultController.php
     namespace App\Controller;
@@ -93,14 +88,13 @@ method inside::
         }
     }
 
-That's it! Try going to the homepage: ``http://localhost:8000/``. Symfony sees
-that the URL matches our route and then executes the new ``index()`` method.
+これだけです！ホームページ ``http://localhost:8000/`` にアクセスしてみましょう。
+SymfonyはURLがルートと一致することを確認し、新しい ``index()`` メソッドを実行します。
 
-A controller is just a normal function with *one* rule: it must return a Symfony
-``Response`` object. But that response can contain anything: simple text, JSON or
-a full HTML page.
+コントローラは、1つのルールを持つ通常の関数で、Symfony ``Response`` オブジェクトを返す必要があります。
+ただし、そのレスポンスには、単純なテキスト、JSON、または完全なHTMLページなど、何でも含めることができます。
 
-But the routing system is *much* more powerful. So let's make the route more interesting:
+しかし、ルーティングシステムはるかに強力です。ルートをもっと面白くしましょう。:
 
 .. code-block:: diff
 
@@ -110,8 +104,8 @@ But the routing system is *much* more powerful. So let's make the route more int
     +     path: /hello/{name}
         controller: 'App\Controller\DefaultController::index'
 
-The URL to this page has changed: it is *now* ``/hello/*``: the ``{name}`` acts
-like a wildcard that matches anything. And it gets better! Update the controller too:
+このページのURLが変更され、今 ``/hello/*`` となり、 ``{name}`` は全てに一致するワイルドカードのように機能します。
+そしてそれは良くなります！コントローラも更新します。:
 
 .. code-block:: diff
 
@@ -130,17 +124,17 @@ like a wildcard that matches anything. And it gets better! Update the controller
         }
     }
 
-Try the page out by going to ``http://localhost:8000/hello/Symfony``. You should
-see: Hello Symfony! The value of the ``{name}`` in the URL is available as a ``$name``
-argument in your controller.
+``http://localhost:8000/hello/Symfony`` にアクセスして、ページを試してください。
+あなたは ``Hello Symfony!`` を確認できるでしょう。
+URLの ``{name}`` の値は、コントローラーの ``$name`` 引数として使用できます。
 
-But this can be even simpler! So let's install annotations support:
+しかし、さらに簡単になる可能性があります。アノテーションサポートをインストールしましょう。:
 
 .. code-block:: terminal
 
     $ composer require annotations
 
-Now, comment-out the YAML route by adding the ``#`` character:
+次に、 ``#`` の文字を追加してYAMLルートをコメントアウトします。:
 
 .. code-block:: yaml
 
@@ -149,7 +143,7 @@ Now, comment-out the YAML route by adding the ``#`` character:
     #     path: /hello/{name}
     #     controller: 'App\Controller\DefaultController::index'
 
-Instead, add the route *right above* the controller method:
+代わりに、コントローラーメソッドの *真上* にルートを追加します。:
 
 .. code-block:: diff
 
@@ -169,9 +163,10 @@ Instead, add the route *right above* the controller method:
          }
     }
 
-This works just like before! But by using annotations, the route and controller
-live right next to each other. Need another page? Add another route and method
-in ``DefaultController``::
+これは以前と同じように機能します！
+しかし、アノテーションを使用することにより、ルートとコントローラーは互いに隣接して存在します。
+別のページが必要ですか？
+``DefaultController`` に別のルートとメソッドを追加します。::
 
     // src/Controller/DefaultController.php
     namespace App\Controller;
@@ -192,9 +187,10 @@ in ``DefaultController``::
         }
     }
 
-Routing can do *even* more, but we'll save that for another time! Right now, our
-app needs more features! Like a template engine, logging, debugging tools and more.
+ルーティングは *さらに* いろいろなことができますが、それは別の機会にとっておきましょう！
+まさに今、アプリにはさらに多くの機能が必要です！
+テンプレートエンジンやロギング、デバッグツールなどのように。
 
-Keep reading with :doc:`/quick_tour/flex_recipes`.
+:doc:`/quick_tour/flex_recipes` へ読み進めてください。
 
 .. _`Composer`: https://getcomposer.org/

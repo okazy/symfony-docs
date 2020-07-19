@@ -15,10 +15,10 @@ Issue や Pull request でのご指摘、ご協力をいただけますと幸い
 
 サンプルコードを含む本ドキュメントも公式ドキュメントの `Creative Commons BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0/>`_ ライセンスに従います。
 
-Quick Tour
-----------
+クイックツアー
+--------------
 
-Get started fast with the Symfony :doc:`Quick Tour <quick_tour/index>`:
+Symfony :doc:`クイックツアー <quick_tour/index>`: を今すぐ始めよう
 
 .. toctree::
     :hidden:
