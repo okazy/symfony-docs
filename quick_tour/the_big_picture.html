@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>The Big Picture &mdash; [Unofficial] Symfony Framework Documentation (ja)  documentation</title>
+  <title>全体像 &mdash; [Unofficial] Symfony Framework Documentation (ja)  documentation</title>
   
 
   
@@ -88,9 +88,9 @@
             
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">The Quick Tour</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">The Big Picture</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#downloading-symfony">Downloading Symfony</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fundamentals-route-controller-response">Fundamentals: Route, Controller, Response</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">全体像</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#symfony">Symfonyのダウンロード</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">基礎: ルート、コントローラ、レスポンス</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="flex_recipes.html">Flex: Compose your Application</a></li>
@@ -193,7 +193,7 @@
         
           <li><a href="index.html">The Quick Tour</a> &raquo;</li>
         
-      <li>The Big Picture</li>
+      <li>全体像</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -212,23 +212,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="the-big-picture">
-<h1>The Big Picture<a class="headerlink" href="#the-big-picture" title="Permalink to this headline">¶</a></h1>
-<p>Start using Symfony in 10 minutes! Really! That’s all you need to understand the
-most important concepts and start building a real project!</p>
-<p>If you’ve used a web framework before, you should feel right at home with
-Symfony. If not, welcome to a whole new way of developing web applications. Symfony
-<em>embraces</em> best practices, keeps backwards compatibility (Yes! Upgrading is always
-safe &amp; easy!) and offers long-term support.</p>
-<div class="section" id="downloading-symfony">
-<span id="installing-symfony2"></span><h2>Downloading Symfony<a class="headerlink" href="#downloading-symfony" title="Permalink to this headline">¶</a></h2>
-<p>First, make sure you’ve installed <a class="reference external" href="https://getcomposer.org/">Composer</a> and have PHP 7.1.3 or higher.</p>
-<p>Ready? In a terminal, run:</p>
+  <div class="section" id="id1">
+<h1>全体像<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>10分でSymfonyを使い始めましょう！最も重要な概念を理解し、プロジェクトの構築を開始するには本当にこれだけです。</p>
+<p>以前にWebフレームワークを利用していた場合は、Symfonyに親しみやすいはずです。
+そうでない場合は、全く新しいWebアプリケーションの開発方法へようこそ。
+Symfonyはベストプラクティスを採用し、安全簡単にアップグレードができる後方互換性、そして長期的なサポートを提供します。</p>
+<div class="section" id="symfony">
+<span id="installing-symfony2"></span><h2>Symfonyのダウンロード<a class="headerlink" href="#symfony" title="Permalink to this headline">¶</a></h2>
+<p>まずは <a class="reference external" href="https://getcomposer.org/">Composer</a> がインストールされており、PHP7.1.3以降がインストールされていることを確認してください。</p>
+<p>準備が整ったらターミナルで次を実行:</p>
 <div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer create-project symfony/skeleton quick_tour
 </pre></div>
 </td></tr></table></div>
-<p>This creates a new <code class="docutils literal notranslate"><span class="pre">quick_tour/</span></code> directory with a small, but powerful new
-Symfony application:</p>
+<p>これにより、最小で強力なSymfonyアプリケーションの <code class="docutils literal notranslate"><span class="pre">quick_tour/</span></code> ディレクトリが作成されます。:</p>
 <div class="highlight-text notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -252,24 +249,22 @@ Symfony application:</p>
 └─ vendor/
 </pre></div>
 </td></tr></table></div>
-<p>Can we already load the project in a browser? Yes! You can setup
-<a class="reference internal" href="../setup/web_server_configuration.html"><span class="doc">Nginx or Apache</span></a> and configure their
-document root to be the <code class="docutils literal notranslate"><span class="pre">public/</span></code> directory. But, for development, it’s better
-to <a class="reference internal" href="../setup/symfony_server.html"><span class="doc">install the Symfony local web server</span></a> and run
-it as follows:</p>
+<p>すでにブラウザでプロジェクトをロードできますか? はい!
+<a class="reference internal" href="../setup/web_server_configuration.html"><span class="doc">Nginx またはApache</span></a> をセットアップし、 <code class="docutils literal notranslate"><span class="pre">public/</span></code> ディレクトリをドキュメントルートに設定します。
+しかし、開発のためには <a class="reference internal" href="../setup/symfony_server.html"><span class="doc">SymfonyのローカルWebサーバをインストール</span></a> して次のように実行することをお勧めします。:</p>
 <div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> symfony server:start
 </pre></div>
 </td></tr></table></div>
-<p>Try your new app by going to <code class="docutils literal notranslate"><span class="pre">http://localhost:8000</span></code> in a browser!</p>
+<p>ブラウザで <code class="docutils literal notranslate"><span class="pre">http://localhost:8000</span></code> へアクセスして新しいアプリケーションを試してみましょう！:</p>
 <img alt="../_images/no_routes_page.png" class="with-browser align-center" src="../_images/no_routes_page.png" />
 </div>
-<div class="section" id="fundamentals-route-controller-response">
-<h2>Fundamentals: Route, Controller, Response<a class="headerlink" href="#fundamentals-route-controller-response" title="Permalink to this headline">¶</a></h2>
-<p>Our project only has about 15 files, but it’s ready to become a sleek API, a robust
-web app, or a microservice. Symfony starts small, but scales with you.</p>
-<p>But before we go too far, let’s dig into the fundamentals by building our first page.</p>
-<p>Start in <code class="docutils literal notranslate"><span class="pre">config/routes.yaml</span></code>: this is where <em>we</em> can define the URL to our new
-page. Uncomment the example that already lives in the file:</p>
+<div class="section" id="id2">
+<h2>基礎: ルート、コントローラ、レスポンス<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>プロジェクトには約15個のファイルしかありませんが、洗練されたAPI、堅牢なWebアプリ、またはマイクロサービスの準備ができています。
+Symfonyは小さなものから始まりますが、あなたと共にスケールします。</p>
+<p>しかし先に進む前に、最初のページを作成して基本を掘り下げましょう。</p>
+<p><code class="docutils literal notranslate"><span class="pre">config/routes.yaml</span></code> で始めます。ここで新しいページのURLを定義できます。
+ファイルに既に存在する例のコメントアウトを外します。:</p>
 <div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -279,11 +274,11 @@ page. Uncomment the example that already lives in the file:</p>
     <span class="l l-Scalar l-Scalar-Plain">controller</span><span class="p p-Indicator">:</span> <span class="s">&#39;App\Controller\DefaultController::index&#39;</span>
 </pre></div>
 </td></tr></table></div>
-<p>This is called a <em>route</em>: it defines the URL to your page (<code class="docutils literal notranslate"><span class="pre">/</span></code>) and the “controller”:
-the <em>function</em> that will be called whenever anyone goes to this URL. That function
-doesn’t exist yet, so let’s create it!</p>
-<p>In <code class="docutils literal notranslate"><span class="pre">src/Controller</span></code>, create a new <code class="docutils literal notranslate"><span class="pre">DefaultController</span></code> class and an <code class="docutils literal notranslate"><span class="pre">index</span></code>
-method inside:</p>
+<p>これは <em>ルート</em> と呼ばれます。
+それはページ (<code class="docutils literal notranslate"><span class="pre">/</span></code>) のURLと “controller” を定義します。
+このURLにアクセスしたときに呼び出される <em>関数</em> です。
+その関数はまだ存在しないので、作成しましょう！</p>
+<p><code class="docutils literal notranslate"><span class="pre">src/Controller</span></code> に新しい <code class="docutils literal notranslate"><span class="pre">DefaultController</span></code> クラスと <code class="docutils literal notranslate"><span class="pre">index</span></code> メソッドを作成します。:</p>
 <div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/DefaultController.php</span>
 <span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
 
@@ -298,12 +293,11 @@ method inside:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>That’s it! Try going to the homepage: <code class="docutils literal notranslate"><span class="pre">http://localhost:8000/</span></code>. Symfony sees
-that the URL matches our route and then executes the new <code class="docutils literal notranslate"><span class="pre">index()</span></code> method.</p>
-<p>A controller is just a normal function with <em>one</em> rule: it must return a Symfony
-<code class="docutils literal notranslate"><span class="pre">Response</span></code> object. But that response can contain anything: simple text, JSON or
-a full HTML page.</p>
-<p>But the routing system is <em>much</em> more powerful. So let’s make the route more interesting:</p>
+<p>これだけです！ホームページ <code class="docutils literal notranslate"><span class="pre">http://localhost:8000/</span></code> にアクセスしてみましょう。
+SymfonyはURLがルートと一致することを確認し、新しい <code class="docutils literal notranslate"><span class="pre">index()</span></code> メソッドを実行します。</p>
+<p>コントローラは、1つのルールを持つ通常の関数で、Symfony <code class="docutils literal notranslate"><span class="pre">Response</span></code> オブジェクトを返す必要があります。
+ただし、そのレスポンスには、単純なテキスト、JSON、または完全なHTMLページなど、何でも含めることができます。</p>
+<p>しかし、ルーティングシステムはるかに強力です。ルートをもっと面白くしましょう。:</p>
 <div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -315,8 +309,8 @@ a full HTML page.</p>
     controller: &#39;App\Controller\DefaultController::index&#39;
 </pre></div>
 </td></tr></table></div>
-<p>The URL to this page has changed: it is <em>now</em> <code class="docutils literal notranslate"><span class="pre">/hello/*</span></code>: the <code class="docutils literal notranslate"><span class="pre">{name}</span></code> acts
-like a wildcard that matches anything. And it gets better! Update the controller too:</p>
+<p>このページのURLが変更され、今 <code class="docutils literal notranslate"><span class="pre">/hello/*</span></code> となり、 <code class="docutils literal notranslate"><span class="pre">{name}</span></code> は全てに一致するワイルドカードのように機能します。
+そしてそれは良くなります！コントローラも更新します。:</p>
 <div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -346,14 +340,14 @@ class DefaultController
 }
 </pre></div>
 </td></tr></table></div>
-<p>Try the page out by going to <code class="docutils literal notranslate"><span class="pre">http://localhost:8000/hello/Symfony</span></code>. You should
-see: Hello Symfony! The value of the <code class="docutils literal notranslate"><span class="pre">{name}</span></code> in the URL is available as a <code class="docutils literal notranslate"><span class="pre">$name</span></code>
-argument in your controller.</p>
-<p>But this can be even simpler! So let’s install annotations support:</p>
+<p><code class="docutils literal notranslate"><span class="pre">http://localhost:8000/hello/Symfony</span></code> にアクセスして、ページを試してください。
+あなたは <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">Symfony!</span></code> を確認できるでしょう。
+URLの <code class="docutils literal notranslate"><span class="pre">{name}</span></code> の値は、コントローラーの <code class="docutils literal notranslate"><span class="pre">$name</span></code> 引数として使用できます。</p>
+<p>しかし、さらに簡単になる可能性があります。アノテーションサポートをインストールしましょう。:</p>
 <div class="highlight-terminal notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> composer require annotations
 </pre></div>
 </td></tr></table></div>
-<p>Now, comment-out the YAML route by adding the <code class="docutils literal notranslate"><span class="pre">#</span></code> character:</p>
+<p>次に、 <code class="docutils literal notranslate"><span class="pre">#</span></code> の文字を追加してYAMLルートをコメントアウトします。:</p>
 <div class="highlight-yaml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -363,7 +357,7 @@ argument in your controller.</p>
 <span class="c1">#     controller: &#39;App\Controller\DefaultController::index&#39;</span>
 </pre></div>
 </td></tr></table></div>
-<p>Instead, add the route <em>right above</em> the controller method:</p>
+<p>代わりに、コントローラーメソッドの <em>真上</em> にルートを追加します。:</p>
 <div class="highlight-diff notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -395,9 +389,10 @@ class DefaultController
 }
 </pre></div>
 </td></tr></table></div>
-<p>This works just like before! But by using annotations, the route and controller
-live right next to each other. Need another page? Add another route and method
-in <code class="docutils literal notranslate"><span class="pre">DefaultController</span></code>:</p>
+<p>これは以前と同じように機能します！
+しかし、アノテーションを使用することにより、ルートとコントローラーは互いに隣接して存在します。
+別のページが必要ですか？
+<code class="docutils literal notranslate"><span class="pre">DefaultController</span></code> に別のルートとメソッドを追加します。:</p>
 <div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="c1">// src/Controller/DefaultController.php</span>
 <span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
 
@@ -418,9 +413,10 @@ in <code class="docutils literal notranslate"><span class="pre">DefaultControlle
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Routing can do <em>even</em> more, but we’ll save that for another time! Right now, our
-app needs more features! Like a template engine, logging, debugging tools and more.</p>
-<p>Keep reading with <a class="reference internal" href="flex_recipes.html"><span class="doc">Flex: Compose your Application</span></a>.</p>
+<p>ルーティングは <em>さらに</em> いろいろなことができますが、それは別の機会にとっておきましょう！
+まさに今、アプリにはさらに多くの機能が必要です！
+テンプレートエンジンやロギング、デバッグツールなどのように。</p>
+<p><a class="reference internal" href="flex_recipes.html"><span class="doc">Flex: Compose your Application</span></a> へ読み進めてください。</p>
 </div>
 </div>
 
